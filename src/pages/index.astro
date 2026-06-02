@@ -6,6 +6,72 @@ const colors = {
 	deepNavy: '#0a0e27',
 	cream: '#fef9f3'
 };
+
+// 言語の初期値（URLパラメータで変更可能）
+const lang = Astro.url.searchParams.get('lang') || 'ja';
+
+// 多言語コンテンツ
+const content = {
+	ja: {
+		navWork: 'ワーク',
+		navAbout: 'について',
+		navContact: 'お問い合わせ',
+		heroTitle: 'デジタル体験を',
+		heroAccent: 'つくる',
+		heroDesc: '私たちは、アイデアを美しいデジタル現実に変える、洗練されたソリューションを創造します。最新のデザインと先端技術で、あなたのビジョンを実現します。',
+		btnWork: 'ワークを見る',
+		btnContact: 'お問い合わせ',
+		featureDesign: 'デザイン卓越性',
+		featureDesignDesc: '美しさと機能性を融合させた、思慮深くデザインされた作品。忘れられないデジタル体験を創造します。',
+		featureTech: '最新技術',
+		featureTechDesc: '最新技術とベストプラクティスで構築。パフォーマンス、スケーラビリティ、信頼性を実現します。',
+		featureInnovation: 'イノベーション',
+		featureInnovationDesc: 'トレンドを先取りし、常に新しい可能性を探求。最先端のソリューションをお届けします。',
+		footerDesc: 'デザイン＆テクノロジー スタジオ',
+		footerEmail: 'メール',
+		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+	},
+	en: {
+		navWork: 'Work',
+		navAbout: 'About',
+		navContact: 'Contact',
+		heroTitle: 'Crafting Digital',
+		heroAccent: 'Experiences',
+		heroDesc: 'We create elegant, innovative solutions that transform ideas into beautiful digital realities. Specializing in modern design and cutting-edge technology.',
+		btnWork: 'Explore Our Work',
+		btnContact: 'Get In Touch',
+		featureDesign: 'Design Excellence',
+		featureDesignDesc: 'Thoughtfully crafted designs that blend aesthetics with functionality, creating memorable digital experiences.',
+		featureTech: 'Modern Technology',
+		featureTechDesc: 'Built with the latest technologies and best practices, ensuring performance, scalability, and reliability.',
+		featureInnovation: 'Innovation Driven',
+		featureInnovationDesc: 'We stay ahead of trends, continuously exploring new possibilities to deliver cutting-edge solutions.',
+		footerDesc: 'Innovative Design & Technology Studio',
+		footerEmail: 'Email',
+		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+	},
+	zh: {
+		navWork: '作品',
+		navAbout: '关于',
+		navContact: '联系',
+		heroTitle: '打造数字',
+		heroAccent: '体验',
+		heroDesc: '我们创建优雅、创新的解决方案，将创意转化为美丽的数字现实。专注于现代设计和尖端技术。',
+		btnWork: '查看作品',
+		btnContact: '联系我们',
+		featureDesign: '设计卓越',
+		featureDesignDesc: '精心设计的作品，融美学与功能性于一体，创造难忘的数字体验。',
+		featureTech: '现代技术',
+		featureTechDesc: '采用最新技术和最佳实践构建，确保性能、可扩展性和可靠性。',
+		featureInnovation: '创新驱动',
+		featureInnovationDesc: '我们走在潮流前沿，不断探索新的可能性，提供尖端解决方案。',
+		footerDesc: '创新设计和科技工作室',
+		footerEmail: '邮件',
+		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+	}
+};
+
+const t = content[lang] || content.ja;
 ---
 
 <!DOCTYPE html>
@@ -314,15 +380,22 @@ const colors = {
 		</style>
 	</head>
 	<body>
+		<!-- 言語スイッチャー -->
+		<div style="position: fixed; top: 15px; right: 20px; z-index: 200; display: flex; gap: 10px;">
+			<a href="?lang=ja" style="padding: 6px 12px; background-color: ${lang === 'ja' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'ja' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">日本語</a>
+			<a href="?lang=en" style="padding: 6px 12px; background-color: ${lang === 'en' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'en' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">English</a>
+			<a href="?lang=zh" style="padding: 6px 12px; background-color: ${lang === 'zh' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'zh' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">中文</a>
+		</div>
+
 		<!-- ナビゲーション -->
 		<nav>
 			<div class="logo">
 				<span class="logo-mark">&</span>LAB TOKYO
 			</div>
 			<ul>
-				<li><a href="#work">Work</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li><a href="#work">${t.navWork}</a></li>
+				<li><a href="#about">${t.navAbout}</a></li>
+				<li><a href="#contact">${t.navContact}</a></li>
 			</ul>
 		</nav>
 
@@ -330,16 +403,15 @@ const colors = {
 		<section class="hero">
 			<div class="hero-content">
 				<h1>
-					<span class="hero-title">Crafting Digital</span>
-					<span class="hero-accent">Experiences</span>
+					<span class="hero-title">${t.heroTitle}</span>
+					<span class="hero-accent">${t.heroAccent}</span>
 				</h1>
 				<p>
-					We create elegant, innovative solutions that transform ideas into beautiful digital realities.
-					Specializing in modern design and cutting-edge technology.
+					${t.heroDesc}
 				</p>
 				<div class="cta-buttons">
-					<a href="#work" class="btn btn-primary">Explore Our Work</a>
-					<a href="#contact" class="btn btn-secondary">Get In Touch</a>
+					<a href="#work" class="btn btn-primary">${t.btnWork}</a>
+					<a href="#contact" class="btn btn-secondary">${t.btnContact}</a>
 				</div>
 			</div>
 		</section>
@@ -349,23 +421,23 @@ const colors = {
 			<div class="features-grid">
 				<div class="feature-card">
 					<div class="feature-icon">🎨</div>
-					<h3>Design Excellence</h3>
+					<h3>${t.featureDesign}</h3>
 					<p>
-						Thoughtfully crafted designs that blend aesthetics with functionality, creating memorable digital experiences.
+						${t.featureDesignDesc}
 					</p>
 				</div>
 				<div class="feature-card">
 					<div class="feature-icon">⚡</div>
-					<h3>Modern Technology</h3>
+					<h3>${t.featureTech}</h3>
 					<p>
-						Built with the latest technologies and best practices, ensuring performance, scalability, and reliability.
+						${t.featureTechDesc}
 					</p>
 				</div>
 				<div class="feature-card">
 					<div class="feature-icon">🚀</div>
-					<h3>Innovation Driven</h3>
+					<h3>${t.featureInnovation}</h3>
 					<p>
-						We stay ahead of trends, continuously exploring new possibilities to deliver cutting-edge solutions.
+						${t.featureInnovationDesc}
 					</p>
 				</div>
 			</div>
@@ -374,14 +446,14 @@ const colors = {
 		<!-- フッター -->
 		<footer id="contact">
 			<p><strong>&LAB TOKYO</strong></p>
-			<p>Innovative Design & Technology Studio</p>
+			<p>${t.footerDesc}</p>
 			<div class="footer-links">
-				<a href="mailto:info@andlabtokyo.com">Email</a>
+				<a href="mailto:info@andlabtokyo.com">${t.footerEmail}</a>
 				<a href="#">Instagram</a>
 				<a href="#">Twitter</a>
 			</div>
 			<div class="copyright">
-				<p>&copy; 2026 &LAB TOKYO. All rights reserved.</p>
+				<p>&copy; ${t.footerCopyright}</p>
 			</div>
 		</footer>
 	</body>
