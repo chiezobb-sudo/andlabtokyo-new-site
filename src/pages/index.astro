@@ -1,73 +1,126 @@
 ---
-// &LAB TOKYO - デザインカラー
-const colors = {
-	terracotta: '#d4923f',
-	warmPink: '#d97d7d',
-	deepNavy: '#0a0e27',
-	cream: '#fef9f3'
-};
-
-// 言語の初期値（URLパラメータで変更可能）
 const lang = Astro.url.searchParams.get('lang') || 'ja';
 
-// 多言語コンテンツ
 const content = {
 	ja: {
-		navWork: 'ワーク',
-		navAbout: 'について',
+		navLessons: 'レッスン',
+		navHacco: 'Hacco LAB',
+		navAbout: '私について',
+		navBlog: 'ブログ',
 		navContact: 'お問い合わせ',
-		heroTitle: 'デジタル体験を',
-		heroAccent: 'つくる',
-		heroDesc: '私たちは、アイデアを美しいデジタル現実に変える、洗練されたソリューションを創造します。最新のデザインと先端技術で、あなたのビジョンを実現します。',
-		btnWork: 'ワークを見る',
+		heroTagline: '細胞から整える、',
+		heroAccent: 'リビングフードのある暮らし',
+		heroSub: '人間は食べたものでできている',
+		heroDesc: '東京・外苑前。ローフードと発酵の料理教室。\n酵素と栄養を活かした食で、内側から美しく健やかに。',
+		btnLesson: 'レッスンを見る',
 		btnContact: 'お問い合わせ',
-		featureDesign: 'デザイン卓越性',
-		featureDesignDesc: '美しさと機能性を融合させた、思慮深くデザインされた作品。忘れられないデジタル体験を創造します。',
-		featureTech: '最新技術',
-		featureTechDesc: '最新技術とベストプラクティスで構築。パフォーマンス、スケーラビリティ、信頼性を実現します。',
-		featureInnovation: 'イノベーション',
-		featureInnovationDesc: 'トレンドを先取りし、常に新しい可能性を探求。最先端のソリューションをお届けします。',
-		footerDesc: 'デザイン＆テクノロジー スタジオ',
-		footerEmail: 'メール',
-		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+		conceptTitle: '&LAB TOKYOとは',
+		conceptText: '&LAB TOKYOは、ローフードと発酵を専門とする料理教室です。48℃以下の調理で酵素・栄養を最大限に保ちながら、日本の発酵文化も取り入れた独自のプログラムをご提供しています。ELLE Gourmet認定クリエイターである安藤千英が、少人数・丁寧にお伝えします。',
+		service1Title: 'ローフード',
+		service1Desc: '48℃以下の調理で酵素と栄養素を壊さずに保持。体の中から美しく整える、生きた食材のチカラを学びます。',
+		service2Title: 'Hacco LAB（発酵）',
+		service2Desc: '麹・味噌・醤油など、日本の伝統的な発酵文化を現代の暮らしに。腸から健康をデザインします。',
+		service3Title: 'ローチョコレート',
+		service3Desc: '日本ローチョコレーティエ協会公認。カカオの栄養を活かしたローチョコの世界をご体験ください。',
+		lessonTitle: 'レッスン概要',
+		lessonFeature1: '少人数制',
+		lessonFeature1Desc: '1〜4名の少人数で丁寧にお伝えします',
+		lessonFeature2: '初心者歓迎',
+		lessonFeature2Desc: '初めての方・お子様も安心してご参加いただけます',
+		lessonFeature3: '対面・オンライン',
+		lessonFeature3Desc: '東京・外苑前教室またはオンラインで受講可能',
+		lessonFeature4: '入会費なし',
+		lessonFeature4Desc: '¥8,000〜。気軽にスタートできます',
+		mediaTitle: 'メディア掲載',
+		mediaDesc: 'ELLE Gourmet認定クリエイター。ライフスタイル誌・企業レシピ開発など多数実績があります。',
+		contactTitle: 'お問い合わせ',
+		contactDesc: 'レッスンのご予約・ご質問はこちらから。\n3日以内にご返信いたします。',
+		contactBtn: 'お問い合わせフォームへ',
+		footerDesc: 'ローフード＆発酵の料理教室\n東京・外苑前',
+		footerNav: 'ナビゲーション',
+		footerSocial: 'SNS',
+		footerEmail: 'info@andlabtokyo.com',
+		copyright: '© 2026 &LAB TOKYO. All rights reserved.',
 	},
 	en: {
-		navWork: 'Work',
+		navLessons: 'Lessons',
+		navHacco: 'Hacco LAB',
 		navAbout: 'About',
+		navBlog: 'Blog',
 		navContact: 'Contact',
-		heroTitle: 'Crafting Digital',
-		heroAccent: 'Experiences',
-		heroDesc: 'We create elegant, innovative solutions that transform ideas into beautiful digital realities. Specializing in modern design and cutting-edge technology.',
-		btnWork: 'Explore Our Work',
-		btnContact: 'Get In Touch',
-		featureDesign: 'Design Excellence',
-		featureDesignDesc: 'Thoughtfully crafted designs that blend aesthetics with functionality, creating memorable digital experiences.',
-		featureTech: 'Modern Technology',
-		featureTechDesc: 'Built with the latest technologies and best practices, ensuring performance, scalability, and reliability.',
-		featureInnovation: 'Innovation Driven',
-		featureInnovationDesc: 'We stay ahead of trends, continuously exploring new possibilities to deliver cutting-edge solutions.',
-		footerDesc: 'Innovative Design & Technology Studio',
-		footerEmail: 'Email',
-		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+		heroTagline: 'Nourish from the inside,',
+		heroAccent: 'Live with Living Food',
+		heroSub: 'You are what you eat',
+		heroDesc: 'Raw food & fermentation cooking school in Gaienmae, Tokyo.\nBeautiful and healthy from within, with enzyme-rich food.',
+		btnLesson: 'View Lessons',
+		btnContact: 'Contact Us',
+		conceptTitle: 'About &LAB TOKYO',
+		conceptText: '&LAB TOKYO is a cooking school specializing in raw food and fermentation. We offer unique programs combining cooking below 48°C to preserve enzymes and nutrients, with Japanese fermentation traditions. ELLE Gourmet-certified creator Chie Ando teaches in small, personal classes.',
+		service1Title: 'Raw Food',
+		service1Desc: 'Cooking below 48°C preserves enzymes and nutrients. Learn the power of living ingredients to nourish your body from within.',
+		service2Title: 'Hacco LAB (Fermentation)',
+		service2Desc: 'Bring Japanese fermentation traditions — koji, miso, soy sauce — into modern life. Design your health from the gut.',
+		service3Title: 'Raw Chocolate',
+		service3Desc: 'Certified by the Japan Raw Chocolatier Association. Experience the world of raw chocolate that preserves the nutrition of cacao.',
+		lessonTitle: 'Lesson Overview',
+		lessonFeature1: 'Small Classes',
+		lessonFeature1Desc: 'Intimate groups of 1-4 students',
+		lessonFeature2: 'Beginners Welcome',
+		lessonFeature2Desc: 'Suitable for beginners and children',
+		lessonFeature3: 'In-Person & Online',
+		lessonFeature3Desc: 'Attend at our Gaienmae studio or online',
+		lessonFeature4: 'No Membership Fee',
+		lessonFeature4Desc: 'From ¥8,000. Easy to get started',
+		mediaTitle: 'Media Features',
+		mediaDesc: 'ELLE Gourmet-certified creator. Featured in lifestyle magazines and corporate recipe development.',
+		contactTitle: 'Contact',
+		contactDesc: 'For lesson bookings and inquiries.\nWe respond within 3 business days.',
+		contactBtn: 'Go to Contact Form',
+		footerDesc: 'Raw Food & Fermentation Cooking School\nGaienmae, Tokyo',
+		footerNav: 'Navigation',
+		footerSocial: 'Social Media',
+		footerEmail: 'info@andlabtokyo.com',
+		copyright: '© 2026 &LAB TOKYO. All rights reserved.',
 	},
 	zh: {
-		navWork: '作品',
-		navAbout: '关于',
+		navLessons: '课程',
+		navHacco: 'Hacco LAB',
+		navAbout: '关于我',
+		navBlog: '博客',
 		navContact: '联系',
-		heroTitle: '打造数字',
-		heroAccent: '体验',
-		heroDesc: '我们创建优雅、创新的解决方案，将创意转化为美丽的数字现实。专注于现代设计和尖端技术。',
-		btnWork: '查看作品',
+		heroTagline: '从细胞开始调整，',
+		heroAccent: '活食生活',
+		heroSub: '人如其食',
+		heroDesc: '东京・外苑前。生食与发酵料理教室。\n用富含酶的食物，由内而外滋养身体。',
+		btnLesson: '查看课程',
 		btnContact: '联系我们',
-		featureDesign: '设计卓越',
-		featureDesignDesc: '精心设计的作品，融美学与功能性于一体，创造难忘的数字体验。',
-		featureTech: '现代技术',
-		featureTechDesc: '采用最新技术和最佳实践构建，确保性能、可扩展性和可靠性。',
-		featureInnovation: '创新驱动',
-		featureInnovationDesc: '我们走在潮流前沿，不断探索新的可能性，提供尖端解决方案。',
-		footerDesc: '创新设计和科技工作室',
-		footerEmail: '邮件',
-		footerCopyright: '2026 &LAB TOKYO. All rights reserved.',
+		conceptTitle: '关于&LAB TOKYO',
+		conceptText: '&LAB TOKYO是专注于生食和发酵的料理教室。通过48℃以下烹饪保留酶和营养素，同时融入日本发酵文化，提供独特的课程。ELLE Gourmet认证创作者安藤千英以小班形式亲切教授。',
+		service1Title: '生食料理',
+		service1Desc: '48℃以下烹饪保留酶和营养素。学习活食材的力量，由内而外整顿身体。',
+		service2Title: 'Hacco LAB（发酵）',
+		service2Desc: '将麹、味噌、酱油等日本传统发酵文化融入现代生活。从肠道开始设计健康。',
+		service3Title: '生巧克力',
+		service3Desc: '日本生巧克力师协会认证。体验保留可可营养的生巧克力世界。',
+		lessonTitle: '课程概要',
+		lessonFeature1: '小班制',
+		lessonFeature1Desc: '1〜4人小班，细心指导',
+		lessonFeature2: '欢迎初学者',
+		lessonFeature2Desc: '初学者和儿童均可放心参加',
+		lessonFeature3: '线下・线上',
+		lessonFeature3Desc: '可在东京外苑前教室或线上参加',
+		lessonFeature4: '无入会费',
+		lessonFeature4Desc: '¥8,000起。轻松开始',
+		mediaTitle: '媒体报道',
+		mediaDesc: 'ELLE Gourmet认证创作者。在生活方式杂志和企业食谱开发方面有丰富经验。',
+		contactTitle: '联系我们',
+		contactDesc: '课程预约及咨询请点击此处。\n3个工作日内回复。',
+		contactBtn: '前往联系表单',
+		footerDesc: '生食&发酵料理教室\n东京・外苑前',
+		footerNav: '导航',
+		footerSocial: '社交媒体',
+		footerEmail: 'info@andlabtokyo.com',
+		copyright: '© 2026 &LAB TOKYO. All rights reserved.',
 	}
 };
 
@@ -75,386 +128,628 @@ const t = content[lang] || content.ja;
 ---
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang={lang === 'ja' ? 'ja' : lang === 'zh' ? 'zh' : 'en'}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<title>&LAB TOKYO - Innovative Design Studio</title>
-		<meta name="description" content="&LAB TOKYO - A modern design and technology studio creating elegant digital experiences." />
-		<style define:vars={colors}>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
+		<title>&LAB TOKYO | ローフード＆発酵の料理教室・東京外苑前</title>
+		<meta name="description" content="東京・外苑前のローフード＆発酵料理教室。少人数・丁寧なレッスンで、細胞から整えるリビングフードのある暮らしをご提案します。" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+		<style>
+			:root {
+				--terracotta: #d4923f;
+				--warm-pink: #d97d7d;
+				--deep-navy: #0a0e27;
+				--cream: #fef9f3;
+				--warm-gray: #f5f0ea;
+				--text-main: #2a2520;
+				--text-light: #7a6f65;
 			}
 
-			html {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-				scroll-behavior: smooth;
-			}
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+
+			html { scroll-behavior: smooth; }
 
 			body {
+				font-family: 'Noto Sans JP', sans-serif;
 				background-color: var(--cream);
-				color: var(--deepNavy);
-				line-height: 1.6;
+				color: var(--text-main);
+				line-height: 1.8;
 			}
 
-			/* ナビゲーション */
+			/* ---- 言語スイッチャー ---- */
+			.lang-switcher {
+				position: fixed;
+				top: 16px;
+				right: 24px;
+				z-index: 300;
+				display: flex;
+				gap: 8px;
+			}
+			.lang-switcher a {
+				padding: 5px 12px;
+				font-size: 0.78rem;
+				font-weight: 500;
+				text-decoration: none;
+				border-radius: 20px;
+				border: 1px solid var(--terracotta);
+				transition: all 0.2s;
+			}
+			.lang-switcher a.active {
+				background: var(--terracotta);
+				color: var(--cream);
+			}
+			.lang-switcher a:not(.active) {
+				color: var(--terracotta);
+				background: transparent;
+			}
+			.lang-switcher a:hover:not(.active) {
+				background: rgba(212,146,63,0.1);
+			}
+
+			/* ---- ナビゲーション ---- */
 			nav {
+				position: sticky;
+				top: 0;
+				z-index: 200;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 2rem 3rem;
-				background-color: var(--cream);
-				border-bottom: 1px solid rgba(10, 14, 39, 0.1);
-				position: sticky;
-				top: 0;
-				z-index: 100;
+				padding: 1.4rem 3rem;
+				background: rgba(254,249,243,0.95);
+				backdrop-filter: blur(8px);
+				border-bottom: 1px solid rgba(212,146,63,0.15);
 			}
-
 			.logo {
-				font-size: 1.8rem;
+				font-family: 'Noto Serif JP', serif;
+				font-size: 1.5rem;
 				font-weight: 700;
-				letter-spacing: 2px;
-				color: var(--deepNavy);
+				letter-spacing: 3px;
+				color: var(--deep-navy);
+				text-decoration: none;
 			}
-
-			.logo-mark {
-				color: var(--terracotta);
-				font-weight: 900;
-			}
-
+			.logo-amp { color: var(--terracotta); }
 			nav ul {
 				display: flex;
 				list-style: none;
 				gap: 2.5rem;
 			}
-
 			nav a {
 				text-decoration: none;
-				color: var(--deepNavy);
-				font-size: 0.95rem;
-				font-weight: 500;
-				transition: color 0.3s ease;
-				border-bottom: 2px solid transparent;
+				color: var(--text-main);
+				font-size: 0.9rem;
+				font-weight: 400;
+				letter-spacing: 0.5px;
+				transition: color 0.2s;
+				position: relative;
 			}
-
-			nav a:hover {
-				color: var(--terracotta);
-				border-bottom-color: var(--terracotta);
+			nav a::after {
+				content: '';
+				position: absolute;
+				left: 0; bottom: -3px;
+				width: 0; height: 1px;
+				background: var(--terracotta);
+				transition: width 0.3s;
 			}
+			nav a:hover { color: var(--terracotta); }
+			nav a:hover::after { width: 100%; }
 
-			/* ヒーロー領域 */
+			/* ---- ヒーロー ---- */
 			.hero {
-				height: 100vh;
+				position: relative;
+				min-height: 92vh;
+				display: flex;
+				align-items: center;
+				background: linear-gradient(160deg, var(--cream) 55%, rgba(212,146,63,0.08) 100%);
+				padding: 5rem 3rem;
+				overflow: hidden;
+			}
+			.hero-bg-circle {
+				position: absolute;
+				border-radius: 50%;
+				pointer-events: none;
+			}
+			.hero-bg-circle.c1 {
+				width: 500px; height: 500px;
+				background: radial-gradient(circle, rgba(217,125,125,0.07) 0%, transparent 70%);
+				top: -100px; right: -80px;
+			}
+			.hero-bg-circle.c2 {
+				width: 350px; height: 350px;
+				background: radial-gradient(circle, rgba(212,146,63,0.07) 0%, transparent 70%);
+				bottom: 0; left: 5%;
+			}
+			.hero-inner {
+				max-width: 720px;
+				position: relative;
+				z-index: 1;
+			}
+			.hero-eyebrow {
+				font-size: 0.82rem;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+				color: var(--terracotta);
+				margin-bottom: 1.5rem;
+				font-weight: 500;
+			}
+			.hero h1 {
+				font-family: 'Noto Serif JP', serif;
+				font-size: clamp(2rem, 5vw, 3.6rem);
+				line-height: 1.4;
+				font-weight: 300;
+				color: var(--deep-navy);
+				margin-bottom: 0.5rem;
+			}
+			.hero h1 .accent {
+				color: var(--terracotta);
+				font-weight: 700;
+				display: block;
+			}
+			.hero-sub {
+				font-family: 'Noto Serif JP', serif;
+				font-size: 1rem;
+				color: var(--text-light);
+				margin: 1rem 0 1.8rem;
+				font-style: italic;
+			}
+			.hero-desc {
+				font-size: 1rem;
+				color: var(--text-main);
+				opacity: 0.8;
+				margin-bottom: 2.5rem;
+				white-space: pre-line;
+				line-height: 2;
+			}
+			.cta-group {
+				display: flex;
+				gap: 1.2rem;
+				flex-wrap: wrap;
+			}
+			.btn {
+				display: inline-block;
+				padding: 0.9rem 2.2rem;
+				font-size: 0.9rem;
+				font-weight: 500;
+				letter-spacing: 1px;
+				text-decoration: none;
+				border-radius: 2px;
+				transition: all 0.3s;
+				cursor: pointer;
+			}
+			.btn-primary {
+				background: var(--terracotta);
+				color: var(--cream);
+				border: 2px solid var(--terracotta);
+			}
+			.btn-primary:hover {
+				background: var(--warm-pink);
+				border-color: var(--warm-pink);
+				transform: translateY(-2px);
+				box-shadow: 0 8px 20px rgba(217,125,125,0.25);
+			}
+			.btn-outline {
+				background: transparent;
+				color: var(--deep-navy);
+				border: 2px solid var(--deep-navy);
+			}
+			.btn-outline:hover {
+				background: var(--deep-navy);
+				color: var(--cream);
+				transform: translateY(-2px);
+			}
+
+			/* ---- セクション共通 ---- */
+			section { padding: 6rem 3rem; }
+			.section-label {
+				font-size: 0.78rem;
+				letter-spacing: 4px;
+				text-transform: uppercase;
+				color: var(--terracotta);
+				margin-bottom: 1rem;
+				font-weight: 500;
+			}
+			.section-title {
+				font-family: 'Noto Serif JP', serif;
+				font-size: clamp(1.6rem, 3vw, 2.4rem);
+				font-weight: 400;
+				color: var(--deep-navy);
+				margin-bottom: 2rem;
+				line-height: 1.5;
+			}
+			.divider {
+				width: 48px;
+				height: 2px;
+				background: var(--terracotta);
+				margin: 1.5rem 0 2.5rem;
+			}
+
+			/* ---- コンセプト ---- */
+			.concept {
+				background: white;
+			}
+			.concept-inner {
+				max-width: 1100px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 5rem;
+				align-items: center;
+			}
+			.concept-image-placeholder {
+				background: linear-gradient(135deg, rgba(212,146,63,0.12), rgba(217,125,125,0.12));
+				border-radius: 4px;
+				height: 420px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				text-align: center;
-				background: linear-gradient(135deg, var(--cream) 0%, rgba(212, 146, 63, 0.05) 100%);
-				padding: 4rem 2rem;
-				position: relative;
-				overflow: hidden;
+				color: var(--text-light);
+				font-size: 0.9rem;
+				border: 1px dashed rgba(212,146,63,0.3);
+				flex-direction: column;
+				gap: 1rem;
+			}
+			.concept-text p {
+				color: var(--text-main);
+				opacity: 0.85;
+				line-height: 2;
+				font-size: 0.98rem;
 			}
 
-			.hero::before {
-				content: '';
-				position: absolute;
-				width: 400px;
-				height: 400px;
-				background: radial-gradient(circle, rgba(217, 125, 125, 0.1) 0%, transparent 70%);
-				border-radius: 50%;
-				top: -100px;
-				right: -100px;
-				z-index: 0;
+			/* ---- サービス ---- */
+			.services {
+				background: var(--warm-gray);
+			}
+			.services-inner { max-width: 1100px; margin: 0 auto; }
+			.services-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 2rem;
+				margin-top: 3rem;
+			}
+			.service-card {
+				background: white;
+				padding: 2.5rem 2rem;
+				border-radius: 4px;
+				border-top: 3px solid var(--terracotta);
+				transition: transform 0.3s, box-shadow 0.3s;
+			}
+			.service-card:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 16px 40px rgba(10,14,39,0.08);
+			}
+			.service-icon { font-size: 2.2rem; margin-bottom: 1.2rem; }
+			.service-card h3 {
+				font-family: 'Noto Serif JP', serif;
+				font-size: 1.15rem;
+				color: var(--deep-navy);
+				margin-bottom: 1rem;
+			}
+			.service-card p {
+				font-size: 0.9rem;
+				color: var(--text-light);
+				line-height: 1.9;
 			}
 
-			.hero::after {
-				content: '';
-				position: absolute;
-				width: 300px;
-				height: 300px;
-				background: radial-gradient(circle, rgba(212, 146, 63, 0.08) 0%, transparent 70%);
-				border-radius: 50%;
-				bottom: -50px;
-				left: -50px;
-				z-index: 0;
+			/* ---- レッスン概要 ---- */
+			.lessons { background: white; }
+			.lessons-inner { max-width: 1100px; margin: 0 auto; }
+			.lessons-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+				margin-top: 3rem;
 			}
-
-			.hero-content {
-				z-index: 1;
-				max-width: 900px;
-			}
-
-			.hero h1 {
-				font-size: clamp(2.5rem, 8vw, 5rem);
-				line-height: 1.2;
-				margin-bottom: 1.5rem;
-				letter-spacing: -1px;
-			}
-
-			.hero-title {
-				color: var(--deepNavy);
-			}
-
-			.hero-accent {
-				color: var(--terracotta);
-				display: block;
-				margin-top: 0.5rem;
-			}
-
-			.hero p {
-				font-size: 1.2rem;
-				color: var(--deepNavy);
-				opacity: 0.75;
-				margin-bottom: 3rem;
-				max-width: 600px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-
-			.cta-buttons {
+			.lesson-item {
 				display: flex;
 				gap: 1.5rem;
-				justify-content: center;
-				flex-wrap: wrap;
+				align-items: flex-start;
+				padding: 1.8rem;
+				background: var(--warm-gray);
+				border-radius: 4px;
 			}
-
-			.btn {
-				padding: 1rem 2.5rem;
+			.lesson-num {
+				font-family: 'Noto Serif JP', serif;
+				font-size: 2rem;
+				color: var(--terracotta);
+				opacity: 0.5;
+				line-height: 1;
+				flex-shrink: 0;
+				width: 2rem;
+			}
+			.lesson-item h4 {
 				font-size: 1rem;
-				font-weight: 600;
-				border: 2px solid;
-				border-radius: 4px;
-				cursor: pointer;
-				text-decoration: none;
-				display: inline-block;
-				transition: all 0.3s ease;
-				text-transform: uppercase;
-				letter-spacing: 1px;
+				font-weight: 500;
+				color: var(--deep-navy);
+				margin-bottom: 0.4rem;
+			}
+			.lesson-item p {
+				font-size: 0.88rem;
+				color: var(--text-light);
 			}
 
-			.btn-primary {
-				background-color: var(--terracotta);
+			/* ---- メディア ---- */
+			.media {
+				background: var(--deep-navy);
 				color: var(--cream);
-				border-color: var(--terracotta);
-			}
-
-			.btn-primary:hover {
-				background-color: var(--warmPink);
-				border-color: var(--warmPink);
-				transform: translateY(-2px);
-				box-shadow: 0 10px 25px rgba(217, 125, 125, 0.2);
-			}
-
-			.btn-secondary {
-				background-color: transparent;
-				color: var(--deepNavy);
-				border-color: var(--deepNavy);
-			}
-
-			.btn-secondary:hover {
-				background-color: var(--deepNavy);
-				color: var(--cream);
-				transform: translateY(-2px);
-			}
-
-			/* フィーチャー */
-			.features {
-				padding: 6rem 3rem;
-				background-color: white;
-			}
-
-			.features-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 3rem;
-				max-width: 1200px;
-				margin: 0 auto;
-			}
-
-			.feature-card {
-				padding: 2rem;
-				border-radius: 4px;
-				border-left: 4px solid var(--terracotta);
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
-				background-color: var(--cream);
-			}
-
-			.feature-card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 15px 35px rgba(10, 14, 39, 0.1);
-			}
-
-			.feature-icon {
-				font-size: 2.5rem;
-				margin-bottom: 1rem;
-			}
-
-			.feature-card h3 {
-				color: var(--deepNavy);
-				margin-bottom: 1rem;
-				font-size: 1.3rem;
-			}
-
-			.feature-card p {
-				color: var(--deepNavy);
-				opacity: 0.7;
-				line-height: 1.8;
-			}
-
-			/* フッター */
-			footer {
-				background-color: var(--deepNavy);
-				color: var(--cream);
-				padding: 3rem;
 				text-align: center;
-				border-top: 3px solid var(--terracotta);
 			}
-
-			footer p {
-				margin-bottom: 1rem;
-				opacity: 0.9;
-			}
-
-			.footer-links {
+			.media .section-title { color: var(--cream); }
+			.media .divider { margin: 1.5rem auto 2.5rem; }
+			.media p { opacity: 0.8; max-width: 600px; margin: 0 auto 2rem; }
+			.media-logos {
 				display: flex;
 				justify-content: center;
-				gap: 2rem;
-				margin: 1.5rem 0;
+				gap: 3rem;
+				flex-wrap: wrap;
+				opacity: 0.5;
+				font-size: 0.85rem;
+				letter-spacing: 2px;
 			}
 
-			.footer-links a {
+			/* ---- お問い合わせ ---- */
+			.contact {
+				background: var(--warm-gray);
+				text-align: center;
+			}
+			.contact-inner { max-width: 600px; margin: 0 auto; }
+			.contact p {
+				color: var(--text-light);
+				white-space: pre-line;
+				margin-bottom: 2.5rem;
+				line-height: 2;
+			}
+
+			/* ---- フッター ---- */
+			footer {
+				background: var(--deep-navy);
+				color: var(--cream);
+				padding: 4rem 3rem 2rem;
+				border-top: 3px solid var(--terracotta);
+			}
+			.footer-inner {
+				max-width: 1100px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: 2fr 1fr 1fr;
+				gap: 4rem;
+				padding-bottom: 3rem;
+				border-bottom: 1px solid rgba(254,249,243,0.1);
+			}
+			.footer-logo {
+				font-family: 'Noto Serif JP', serif;
+				font-size: 1.4rem;
+				letter-spacing: 3px;
+				margin-bottom: 1rem;
+			}
+			.footer-logo .amp { color: var(--terracotta); }
+			.footer-desc {
+				font-size: 0.88rem;
+				opacity: 0.65;
+				white-space: pre-line;
+				line-height: 1.9;
+			}
+			footer h4 {
+				font-size: 0.78rem;
+				letter-spacing: 3px;
+				text-transform: uppercase;
 				color: var(--terracotta);
+				margin-bottom: 1.2rem;
+			}
+			footer ul {
+				list-style: none;
+				display: flex;
+				flex-direction: column;
+				gap: 0.7rem;
+			}
+			footer ul a {
+				color: rgba(254,249,243,0.7);
 				text-decoration: none;
-				transition: opacity 0.3s ease;
+				font-size: 0.88rem;
+				transition: color 0.2s;
+			}
+			footer ul a:hover { color: var(--terracotta); }
+			.footer-bottom {
+				max-width: 1100px;
+				margin: 2rem auto 0;
+				text-align: center;
+				font-size: 0.8rem;
+				opacity: 0.4;
 			}
 
-			.footer-links a:hover {
-				opacity: 0.7;
+			/* ---- レスポンシブ ---- */
+			@media (max-width: 900px) {
+				nav { padding: 1.2rem 1.5rem; }
+				nav ul { gap: 1.5rem; }
+				.hero { padding: 4rem 1.5rem; }
+				.concept-inner { grid-template-columns: 1fr; gap: 3rem; }
+				.services-grid { grid-template-columns: 1fr; }
+				.lessons-grid { grid-template-columns: 1fr; }
+				.footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+				section { padding: 4rem 1.5rem; }
 			}
-
-			.copyright {
-				margin-top: 2rem;
-				padding-top: 2rem;
-				border-top: 1px solid rgba(254, 249, 243, 0.2);
-				opacity: 0.7;
-				font-size: 0.9rem;
-			}
-
-			/* レスポンシブ */
-			@media (max-width: 768px) {
-				nav {
-					flex-direction: column;
-					padding: 1.5rem;
-					gap: 1.5rem;
-				}
-
-				nav ul {
-					flex-direction: column;
-					gap: 1rem;
-					text-align: center;
-				}
-
-				.cta-buttons {
-					flex-direction: column;
-					align-items: center;
-				}
-
-				.btn {
-					width: 100%;
-					max-width: 300px;
-				}
-
-				.features {
-					padding: 3rem 1.5rem;
-				}
-
-				footer {
-					padding: 2rem 1.5rem;
-				}
+			@media (max-width: 600px) {
+				nav ul { display: none; }
+				.lang-switcher { top: 12px; right: 12px; }
 			}
 		</style>
 	</head>
 	<body>
+
 		<!-- 言語スイッチャー -->
-		<div style="position: fixed; top: 15px; right: 20px; z-index: 200; display: flex; gap: 10px;">
-			<a href="?lang=ja" style="padding: 6px 12px; background-color: ${lang === 'ja' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'ja' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">日本語</a>
-			<a href="?lang=en" style="padding: 6px 12px; background-color: ${lang === 'en' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'en' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">English</a>
-			<a href="?lang=zh" style="padding: 6px 12px; background-color: ${lang === 'zh' ? 'var(--terracotta)' : 'var(--cream)'}; color: ${lang === 'zh' ? 'var(--cream)' : 'var(--deepNavy)'}; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--terracotta);">中文</a>
+		<div class="lang-switcher">
+			<a href="?lang=ja" class={lang === 'ja' ? 'active' : ''}>日本語</a>
+			<a href="?lang=en" class={lang === 'en' ? 'active' : ''}>EN</a>
+			<a href="?lang=zh" class={lang === 'zh' ? 'active' : ''}>中文</a>
 		</div>
 
 		<!-- ナビゲーション -->
 		<nav>
-			<div class="logo">
-				<span class="logo-mark">&</span>LAB TOKYO
-			</div>
+			<a href="/" class="logo"><span class="logo-amp">&</span>LAB TOKYO</a>
 			<ul>
-				<li><a href="#work">${t.navWork}</a></li>
-				<li><a href="#about">${t.navAbout}</a></li>
-				<li><a href="#contact">${t.navContact}</a></li>
+				<li><a href="#lessons">{t.navLessons}</a></li>
+				<li><a href="#hacco">{t.navHacco}</a></li>
+				<li><a href="#about">{t.navAbout}</a></li>
+				<li><a href="#contact">{t.navContact}</a></li>
 			</ul>
 		</nav>
 
 		<!-- ヒーロー -->
 		<section class="hero">
-			<div class="hero-content">
+			<div class="hero-bg-circle c1"></div>
+			<div class="hero-bg-circle c2"></div>
+			<div class="hero-inner">
+				<p class="hero-eyebrow">Raw Food &amp; Fermentation · Tokyo Gaienmae</p>
 				<h1>
-					<span class="hero-title">${t.heroTitle}</span>
-					<span class="hero-accent">${t.heroAccent}</span>
+					{t.heroTagline}
+					<span class="accent">{t.heroAccent}</span>
 				</h1>
-				<p>
-					${t.heroDesc}
-				</p>
-				<div class="cta-buttons">
-					<a href="#work" class="btn btn-primary">${t.btnWork}</a>
-					<a href="#contact" class="btn btn-secondary">${t.btnContact}</a>
+				<p class="hero-sub">— {t.heroSub} —</p>
+				<p class="hero-desc">{t.heroDesc}</p>
+				<div class="cta-group">
+					<a href="#lessons" class="btn btn-primary">{t.btnLesson}</a>
+					<a href="#contact" class="btn btn-outline">{t.btnContact}</a>
 				</div>
 			</div>
 		</section>
 
-		<!-- フィーチャー -->
-		<section class="features" id="work">
-			<div class="features-grid">
-				<div class="feature-card">
-					<div class="feature-icon">🎨</div>
-					<h3>${t.featureDesign}</h3>
-					<p>
-						${t.featureDesignDesc}
-					</p>
+		<!-- コンセプト -->
+		<section class="concept" id="about">
+			<div class="concept-inner">
+				<div class="concept-image-placeholder">
+					<span style="font-size:2rem">📷</span>
+					<span>写真を追加予定</span>
 				</div>
-				<div class="feature-card">
-					<div class="feature-icon">⚡</div>
-					<h3>${t.featureTech}</h3>
-					<p>
-						${t.featureTechDesc}
-					</p>
+				<div class="concept-text">
+					<p class="section-label">Concept</p>
+					<h2 class="section-title">{t.conceptTitle}</h2>
+					<div class="divider"></div>
+					<p>{t.conceptText}</p>
 				</div>
-				<div class="feature-card">
-					<div class="feature-icon">🚀</div>
-					<h3>${t.featureInnovation}</h3>
-					<p>
-						${t.featureInnovationDesc}
-					</p>
+			</div>
+		</section>
+
+		<!-- サービス -->
+		<section class="services" id="lessons">
+			<div class="services-inner">
+				<p class="section-label">Services</p>
+				<h2 class="section-title">レッスン＆プログラム</h2>
+				<div class="services-grid">
+					<div class="service-card">
+						<div class="service-icon">🌿</div>
+						<h3>{t.service1Title}</h3>
+						<p>{t.service1Desc}</p>
+					</div>
+					<div class="service-card" id="hacco">
+						<div class="service-icon">🍶</div>
+						<h3>{t.service2Title}</h3>
+						<p>{t.service2Desc}</p>
+					</div>
+					<div class="service-card">
+						<div class="service-icon">🍫</div>
+						<h3>{t.service3Title}</h3>
+						<p>{t.service3Desc}</p>
+					</div>
 				</div>
+			</div>
+		</section>
+
+		<!-- レッスン概要 -->
+		<section class="lessons">
+			<div class="lessons-inner">
+				<p class="section-label">Lesson Info</p>
+				<h2 class="section-title">{t.lessonTitle}</h2>
+				<div class="divider"></div>
+				<div class="lessons-grid">
+					<div class="lesson-item">
+						<span class="lesson-num">01</span>
+						<div>
+							<h4>{t.lessonFeature1}</h4>
+							<p>{t.lessonFeature1Desc}</p>
+						</div>
+					</div>
+					<div class="lesson-item">
+						<span class="lesson-num">02</span>
+						<div>
+							<h4>{t.lessonFeature2}</h4>
+							<p>{t.lessonFeature2Desc}</p>
+						</div>
+					</div>
+					<div class="lesson-item">
+						<span class="lesson-num">03</span>
+						<div>
+							<h4>{t.lessonFeature3}</h4>
+							<p>{t.lessonFeature3Desc}</p>
+						</div>
+					</div>
+					<div class="lesson-item">
+						<span class="lesson-num">04</span>
+						<div>
+							<h4>{t.lessonFeature4}</h4>
+							<p>{t.lessonFeature4Desc}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- メディア -->
+		<section class="media">
+			<p class="section-label" style="color: rgba(212,146,63,0.8)">Media</p>
+			<h2 class="section-title">{t.mediaTitle}</h2>
+			<div class="divider"></div>
+			<p>{t.mediaDesc}</p>
+			<div class="media-logos">
+				<span>ELLE Gourmet</span>
+				<span>雑誌掲載多数</span>
+				<span>企業レシピ開発</span>
+			</div>
+		</section>
+
+		<!-- お問い合わせ -->
+		<section class="contact" id="contact">
+			<div class="contact-inner">
+				<p class="section-label">Contact</p>
+				<h2 class="section-title">{t.contactTitle}</h2>
+				<div class="divider" style="margin-left: auto; margin-right: auto;"></div>
+				<p>{t.contactDesc}</p>
+				<a href="mailto:info@andlabtokyo.com" class="btn btn-primary">{t.contactBtn}</a>
 			</div>
 		</section>
 
 		<!-- フッター -->
-		<footer id="contact">
-			<p><strong>&LAB TOKYO</strong></p>
-			<p>${t.footerDesc}</p>
-			<div class="footer-links">
-				<a href="mailto:info@andlabtokyo.com">${t.footerEmail}</a>
-				<a href="#">Instagram</a>
-				<a href="#">Twitter</a>
+		<footer>
+			<div class="footer-inner">
+				<div>
+					<div class="footer-logo"><span class="amp">&</span>LAB TOKYO</div>
+					<p class="footer-desc">{t.footerDesc}</p>
+					<p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.6;">{t.footerEmail}</p>
+				</div>
+				<div>
+					<h4>{t.footerNav}</h4>
+					<ul>
+						<li><a href="#lessons">{t.navLessons}</a></li>
+						<li><a href="#hacco">{t.navHacco}</a></li>
+						<li><a href="#about">{t.navAbout}</a></li>
+						<li><a href="#contact">{t.navContact}</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4>{t.footerSocial}</h4>
+					<ul>
+						<li><a href="#" target="_blank">Instagram</a></li>
+						<li><a href="#" target="_blank">YouTube</a></li>
+						<li><a href="#" target="_blank">TikTok</a></li>
+						<li><a href="#" target="_blank">X (Twitter)</a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="copyright">
-				<p>&copy; ${t.footerCopyright}</p>
+			<div class="footer-bottom">
+				<p>{t.copyright}</p>
 			</div>
 		</footer>
+
 	</body>
 </html>
