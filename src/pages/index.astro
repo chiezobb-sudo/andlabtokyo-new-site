@@ -1,379 +1,194 @@
 ---
 const lang = Astro.url.searchParams.get('lang') || 'ja';
-const t = {
-  ja: {
-    navItems: [
-      { label: 'レッスン', href: '/lessons' },
-      { label: 'Hacco LAB', href: '/hacco' },
-      { label: 'ブログ', href: '/blog' },
-      { label: '安藤千英', href: '/about' },
-    ],
-    navCta: '体験レッスン',
-    heroEye: 'Raw Food × Fermentation · Tokyo',
-    h1a: 'これからの私を、',
-    h1b: '美しく「醸す」。',
-    heroSub: '細胞からデザインする、一生モノの心と体。',
-    heroCta: '&LABの世界へ',
-    heroCtaGhost: 'まずは体験レッスン',
-    conceptEye: 'About &LAB TOKYO',
-    conceptH: '美しさを、\n自ら「つくる」人へ。',
-    conceptBody: '&LAB TOKYOは、東京・渋谷を拠点とする「発酵×ローフード」のクロス理論でライフスタイルを進化させるラボです。\n\n単なる「料理」ではありません。細胞から目覚めるような生きたエネルギー（酵素）を取り入れ、古来の知恵である「発酵」で内側から美しさを醸成する。\n\n経営者、専門職、自分自身の可能性を信じるすべての女性へ。あなたが持つ本来の輝きを、最大化させる場所でありたい。',
-    conceptCredit: 'ELLE gourmet認定料理家　安藤千英',
-    conceptLink: '安藤千英について →',
-    progsEye: 'Programs',
-    progsH: '3つのプログラムで、\n内側から整える。',
-    progs: [
-      { eye: '01 Raw Food', h: 'ローフード', body: '48℃以下の調理で酵素・栄養を壊さない。生きた食材のチカラで細胞から整えます。', href: '/lessons', img: '/hero-food.jpg' },
-      { eye: '02 Fermentation', h: 'Hacco LAB', body: '麹・味噌・醤油など日本の発酵文化を現代の暮らしへ。腸から美しさをデザインします。', href: '/hacco', img: '/koji.jpg' },
-      { eye: '03 Raw Chocolate', h: 'ローチョコレート', body: '日本ローチョコレーティエ協会公認。カカオの栄養を活かした、大人のための甘さ。', href: '/lessons', img: '/raw-chocolate.jpg' },
-    ],
-    blogEye: 'Journal',
-    blogH: '食と発酵の、\n知恵と実践。',
-    blogLink: 'すべての記事を見る →',
-    posts: [
-      { cat: 'Raw Food', title: '酵素を壊さない調理の5つの基本', date: '2026.05.20', href: '/blog' },
-      { cat: 'Hacco LAB', title: '自家製麹の作り方｜初心者でも失敗しない方法', date: '2026.05.10', href: '/blog' },
-      { cat: 'Lifestyle', title: '忙しい経営者が「食」で自分を整える方法', date: '2026.04.28', href: '/blog' },
-    ],
-    ctaEye: 'First Step',
-    ctaH: '忙しさを、輝きに変える。',
-    ctaBody: '経営者・専門職・自分を更新し続けたいすべての女性のための\n発酵×ローフード ライフスタイル・ラボ',
-    ctaBtn: '体験レッスンを予約する',
-    ctaSub: 'お問い合わせ・ご質問はこちら →',
-    footerTag: 'Raw Food × Fermentation\nLifestyle Lab · Tokyo Shibuya',
-    footerMenuLabel: 'Menu',
-    footerFollowLabel: 'Follow',
-    copyright: '© 2026 &LAB TOKYO. All rights reserved.',
-  },
-  en: {
-    navItems: [
-      { label: 'Lessons', href: '/lessons' },
-      { label: 'Hacco LAB', href: '/hacco' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'About Chie', href: '/about' },
-    ],
-    navCta: 'Trial Lesson',
-    heroEye: 'Raw Food × Fermentation · Tokyo',
-    h1a: 'Transform yourself,',
-    h1b: 'beautifully.',
-    heroSub: 'Designing body & mind from the cellular level.',
-    heroCta: 'Enter &LAB World',
-    heroCtaGhost: 'Book a Trial Lesson',
-    conceptEye: 'About &LAB TOKYO',
-    conceptH: 'For those who\ncreate their own beauty.',
-    conceptBody: '&LAB TOKYO is a lifestyle lab in Shibuya, Tokyo, evolving your life through the cross-theory of fermentation × raw food.\n\nWe go beyond "cooking." We invite living enzymes that awaken cells, and cultivate inner beauty through the ancient wisdom of fermentation.\n\nFor executives, professionals, and every woman who believes in her own potential.',
-    conceptCredit: 'ELLE gourmet Certified Chef  Chie Ando',
-    conceptLink: 'About Chie Ando →',
-    progsEye: 'Programs',
-    progsH: 'Three programs,\none beautiful transformation.',
-    progs: [
-      { eye: '01 Raw Food', h: 'Raw Food', body: 'Cooking below 48°C preserves enzymes. Nourish cells with living ingredients.', href: '/lessons', img: '/hero-food.jpg' },
-      { eye: '02 Fermentation', h: 'Hacco LAB', body: 'Bringing Japanese fermentation traditions into modern life. Design beauty from the gut.', href: '/hacco', img: '/koji.jpg' },
-      { eye: '03 Raw Chocolate', h: 'Raw Chocolate', body: 'Japan Raw Chocolatier Association certified. Sophisticated sweetness that nourishes.', href: '/lessons', img: '/raw-chocolate.jpg' },
-    ],
-    blogEye: 'Journal',
-    blogH: 'Wisdom & practice\nof food and fermentation.',
-    blogLink: 'View all articles →',
-    posts: [
-      { cat: 'Raw Food', title: '5 Basics of Enzyme-Preserving Cooking', date: '2026.05.20', href: '/blog' },
-      { cat: 'Hacco LAB', title: 'How to Make Homemade Koji', date: '2026.05.10', href: '/blog' },
-      { cat: 'Lifestyle', title: 'How Busy Executives Use Food to Thrive', date: '2026.04.28', href: '/blog' },
-    ],
-    ctaEye: 'First Step',
-    ctaH: 'Turn your busy life into brilliance.',
-    ctaBody: 'A fermentation × raw food lifestyle lab\nfor executives, professionals, and women who keep reinventing themselves.',
-    ctaBtn: 'Book a Trial Lesson',
-    ctaSub: 'Questions & inquiries →',
-    footerTag: 'Raw Food × Fermentation\nLifestyle Lab · Tokyo Shibuya',
-    footerMenuLabel: 'Menu',
-    footerFollowLabel: 'Follow',
-    copyright: '© 2026 &LAB TOKYO. All rights reserved.',
-  },
-}[lang] || {};
 ---
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&LAB TOKYO | 発酵×ローフード ライフスタイル・ラボ 東京渋谷</title>
-  <meta name="description" content="東京・渋谷。経営者・専門職女性のための発酵×ローフード ライフスタイル・ラボ。ELLE gourmet認定料理家・安藤千英が、細胞から整える一生モノの食と美を伝えます。" />
+  <title>安藤千英 | &LAB TOKYO — 発酵×ローフード 東京・渋谷</title>
+  <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。医師監修書籍、国内外の受講生実績。体験レッスン受付中。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink:   #0c0a08;
-      --ink2:  #181411;
-      --ink3:  #221e1a;
-      --gold:  #c8a96e;
-      --gold2: #e8d5b0;
-      --muted: #7a6f62;
-      --cream: #f2ede4;
-      --white: #fdfaf5;
+      --ink:  #0c0a08;
+      --ink2: #161210;
+      --ink3: #201c18;
+      --gold: #c8a96e;
+      --gold2:#e8d5b0;
+      --muted:#7a6f62;
+      --cream:#f2ede4;
+      --white:#fdfaf5;
     }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--ink);
-      color: var(--cream);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Noto Sans JP',sans-serif;background:var(--ink);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;}
 
-    /* ─── Lang ─── */
-    .lang {
-      position: fixed; top: 0; right: 0; z-index: 600;
-      display: flex;
-    }
-    .lang a {
-      padding: 10px 13px; font-size: .7rem; letter-spacing: 1px;
-      text-decoration: none; color: var(--muted);
-      background: var(--ink); transition: color .2s;
-      border-left: 1px solid rgba(200,169,110,.1);
-    }
-    .lang a.on { color: var(--gold); }
-    .lang a:hover { color: var(--gold2); }
+    /* Lang */
+    .lang{position:fixed;top:0;right:0;z-index:600;display:flex;}
+    .lang a{padding:10px 13px;font-size:.7rem;letter-spacing:1px;text-decoration:none;color:var(--muted);background:var(--ink);border-left:1px solid rgba(200,169,110,.1);transition:color .2s;}
+    .lang a.on{color:var(--gold);}
+    .lang a:hover{color:var(--gold2);}
 
-    /* ─── Nav ─── */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 500;
-      height: 66px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 3rem;
-      background: rgba(12,10,8,.9);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(200,169,110,.1);
-    }
-    .nav-logo img { height: 36px; width: auto; }
-    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none; font-size: .8rem; letter-spacing: 1.5px;
-      color: rgba(242,237,228,.5); transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-cta {
-      padding: .5rem 1.4rem !important;
-      border: 1px solid rgba(200,169,110,.45) !important;
-      color: var(--gold) !important;
-      border-radius: 1px;
-    }
-    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+    /* Nav */
+    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(12,10,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.1);}
+    .nav-logo img{height:36px;width:auto;}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+    .nav-links a{text-decoration:none;font-size:.8rem;letter-spacing:1.5px;color:rgba(242,237,228,.5);transition:color .2s;}
+    .nav-links a:hover{color:var(--gold);}
+    .nav-cta{padding:.5rem 1.4rem!important;border:1px solid rgba(200,169,110,.45)!important;color:var(--gold)!important;border-radius:1px;}
+    .nav-cta:hover{background:var(--gold)!important;color:var(--ink)!important;}
 
-    /* ─── Hero ─── */
-    .hero {
-      position: relative; height: 100vh; min-height: 600px;
-      display: flex; align-items: flex-end; overflow: hidden;
-    }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(12,10,8,.9) 0%, rgba(12,10,8,.35) 50%, rgba(12,10,8,.1) 100%);
-    }
-    .hero-body { position: relative; z-index: 1; padding: 0 5vw 8vh; max-width: 800px; }
-    .eyebrow {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .75rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.8rem;
-    }
-    h1 {
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 200;
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
-      line-height: 1.4; color: var(--white); letter-spacing: .5px;
-    }
-    h1 em { font-style: normal; color: var(--gold2); }
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-style: italic;
-      color: rgba(242,237,228,.6);
-      margin: 1.2rem 0 2.8rem; letter-spacing: .5px;
-    }
-    .btns { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .btn-gold {
-      display: inline-block; padding: .85rem 2.4rem;
-      background: var(--gold); color: var(--ink);
-      font-size: .8rem; letter-spacing: 2px; text-transform: uppercase;
-      text-decoration: none; border-radius: 1px;
-      transition: background .25s, transform .2s;
-    }
-    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
-    .btn-ghost {
-      display: inline-block; padding: .85rem 2.4rem;
-      border: 1px solid rgba(242,237,228,.3); color: rgba(242,237,228,.65);
-      font-size: .8rem; letter-spacing: 2px; text-transform: uppercase;
-      text-decoration: none; border-radius: 1px;
-      transition: border-color .25s, color .25s, transform .2s;
-    }
-    .btn-ghost:hover { border-color: var(--gold2); color: var(--gold2); transform: translateY(-2px); }
+    /* Hero — プロ写真メイン */
+    .hero{position:relative;height:100vh;min-height:640px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+    .hero-left{position:relative;display:flex;flex-direction:column;justify-content:center;padding:120px 5vw 80px 5vw;background:var(--ink2);z-index:1;}
+    .hero-right{position:relative;overflow:hidden;}
+    .hero-right img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--ink2) 0%,transparent 30%);}
+    .hero-tag{font-family:'Cormorant Garamond',serif;font-size:.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;}
+    .hero h1{font-family:'Noto Serif JP',serif;font-weight:200;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.5;color:var(--white);margin-bottom:1rem;}
+    .hero h1 em{font-style:normal;color:var(--gold2);display:block;font-size:1.2em;}
+    .hero-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:3px;color:var(--muted);margin-bottom:.5rem;}
+    .hero-title{font-size:.82rem;color:rgba(242,237,228,.4);letter-spacing:2px;margin-bottom:2.5rem;}
+    .hero-desc{font-size:.88rem;color:rgba(242,237,228,.6);line-height:2;margin-bottom:3rem;max-width:420px;}
+    .btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-gold{display:inline-block;padding:.85rem 2rem;background:var(--gold);color:var(--ink);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:1px;transition:background .25s,transform .2s;font-weight:500;}
+    .btn-gold:hover{background:var(--gold2);transform:translateY(-2px);}
+    .btn-ghost{display:inline-block;padding:.85rem 2rem;border:1px solid rgba(242,237,228,.25);color:rgba(242,237,228,.6);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:1px;transition:all .25s;}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
 
-    /* ─── Mosaic ─── */
-    .mosaic {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr 1fr;
-      grid-template-rows: 260px 260px;
-      gap: 3px;
-    }
-    .mos { position: relative; overflow: hidden; background: var(--ink2); }
-    .mos.tall { grid-row: span 2; }
-    .mos img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; display: block; }
-    .mos:hover img { transform: scale(1.04); }
-    .mos::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,10,8,.45) 0%, transparent 55%); }
-    .mos-tag {
-      position: absolute; bottom: 1.4rem; left: 1.4rem; z-index: 1;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .68rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--gold);
-    }
+    /* Credentials strip */
+    .cred-strip{background:var(--ink3);padding:1.8rem 5vw;border-top:1px solid rgba(200,169,110,.1);border-bottom:1px solid rgba(200,169,110,.1);}
+    .cred-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center;}
+    .cred-item{display:flex;align-items:center;gap:.8rem;font-size:.75rem;color:var(--muted);letter-spacing:1px;white-space:nowrap;}
+    .cred-item span.dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;}
 
-    /* ─── Section base ─── */
-    .sec { padding: 8rem 5vw; }
-    .sec-eye {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .7rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.4rem;
-    }
-    .sec-h2 {
-      font-family: 'Noto Serif JP', serif; font-weight: 200;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      line-height: 1.55; color: var(--white); white-space: pre-line;
-    }
-    .rule { width: 36px; height: 1px; background: var(--gold); margin: 2rem 0 2.8rem; }
+    /* Section base */
+    .sec{padding:8rem 5vw;}
+    .sec-eye{font-family:'Cormorant Garamond',serif;font-size:.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;}
+    .sec-h2{font-family:'Noto Serif JP',serif;font-weight:200;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.55;color:var(--white);}
+    .rule{width:36px;height:1px;background:var(--gold);margin:2rem 0 2.8rem;}
+    .inner{max-width:1160px;margin:0 auto;}
 
-    /* ─── Concept ─── */
-    .concept { background: var(--ink2); }
-    .concept-grid {
-      max-width: 1160px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-    }
-    .concept-img { position: relative; border-radius: 2px; overflow: hidden; }
-    .concept-img img { width: 100%; height: 500px; object-fit: cover; object-position: top; display: block; }
-    .concept-img::before {
-      content: ''; position: absolute; inset: -6px;
-      border: 1px solid rgba(200,169,110,.18); border-radius: 2px;
-      z-index: 1; pointer-events: none;
-    }
-    .concept-text p { font-size: .92rem; color: rgba(242,237,228,.65); white-space: pre-line; line-height: 2.1; }
-    .concept-credit { margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-size: .82rem; letter-spacing: 2px; color: var(--gold); }
-    .concept-link { display: inline-block; margin-top: 2rem; font-size: .8rem; color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color .2s; }
-    .concept-link:hover { color: var(--gold); }
+    /* Story */
+    .story{background:var(--ink2);}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+    .story-img{position:relative;overflow:hidden;border-radius:2px;}
+    .story-img img{width:100%;height:500px;object-fit:cover;object-position:center top;display:block;}
+    .story-img::before{content:'';position:absolute;inset:-8px;border:1px solid rgba(200,169,110,.2);border-radius:2px;z-index:1;pointer-events:none;}
+    .story-body p{font-size:.92rem;color:rgba(242,237,228,.65);line-height:2.2;margin-bottom:1.5rem;}
+    .story-body p strong{color:var(--gold2);font-weight:400;}
+    .story-link{display:inline-block;margin-top:1rem;font-size:.78rem;color:var(--muted);text-decoration:none;letter-spacing:1px;border-bottom:1px solid rgba(122,111,98,.3);padding-bottom:2px;transition:color .2s,border-color .2s;}
+    .story-link:hover{color:var(--gold);border-color:var(--gold);}
 
-    /* ─── Programs ─── */
-    .programs { background: var(--ink); }
-    .programs-inner { max-width: 1160px; margin: 0 auto; }
-    .prog-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; margin-top: 4rem;
-    }
-    .prog {
-      position: relative; overflow: hidden;
-      height: 440px; cursor: pointer;
-      text-decoration: none;
-    }
-    .prog img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; display: block; }
-    .prog:hover img { transform: scale(1.06); }
-    .prog-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(12,10,8,.85) 0%, rgba(12,10,8,.2) 100%);
-      transition: background .3s;
-    }
-    .prog:hover .prog-overlay { background: linear-gradient(to top, rgba(12,10,8,.9) 0%, rgba(12,10,8,.35) 100%); }
-    .prog-body {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 2.5rem 2rem;
-    }
-    .prog-eye {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .65rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: .8rem;
-    }
-    .prog h3 {
-      font-family: 'Noto Serif JP', serif; font-weight: 300;
-      font-size: 1.3rem; color: var(--white); margin-bottom: .8rem;
-    }
-    .prog p { font-size: .8rem; color: rgba(242,237,228,.55); line-height: 1.8; }
-    .prog-arrow {
-      position: absolute; top: 2rem; right: 2rem;
-      width: 32px; height: 32px;
-      border: 1px solid rgba(200,169,110,.3); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); font-size: .8rem;
-      opacity: 0; transition: opacity .3s;
-    }
-    .prog:hover .prog-arrow { opacity: 1; }
+    /* For whom */
+    .forwhom{background:var(--ink);}
+    .forwhom-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:4rem;}
+    .whom-list{list-style:none;display:flex;flex-direction:column;gap:1.2rem;}
+    .whom-list li{display:flex;align-items:flex-start;gap:1rem;font-size:.9rem;color:rgba(242,237,228,.7);line-height:1.8;}
+    .whom-list li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:.1rem;}
+    .forwhom-right{background:var(--ink2);padding:3rem;border:1px solid rgba(200,169,110,.12);}
+    .forwhom-right .label{font-family:'Cormorant Garamond',serif;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+    .forwhom-right p{font-size:.88rem;color:rgba(242,237,228,.55);line-height:2;}
 
-    /* ─── Blog ─── */
-    .blog-sec { background: var(--ink2); }
-    .blog-inner { max-width: 1160px; margin: 0 auto; }
-    .blog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
-    .blog-link { font-size: .78rem; color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color .2s; }
-    .blog-link:hover { color: var(--gold); }
-    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
-    .post {
-      background: var(--ink3); padding: 2.5rem 2rem;
-      text-decoration: none; color: inherit;
-      border-bottom: 2px solid transparent;
-      transition: border-color .3s, background .3s;
-      display: block;
-    }
-    .post:hover { border-bottom-color: var(--gold); background: var(--ink2); }
-    .post-cat {
-      font-size: .65rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .post h4 { font-family: 'Noto Serif JP', serif; font-weight: 300; font-size: 1rem; color: var(--white); line-height: 1.65; margin-bottom: 1.5rem; }
-    .post-date { font-size: .72rem; color: var(--muted); letter-spacing: 1px; }
+    /* Cross Theory */
+    .theory{background:var(--ink3);text-align:center;padding:8rem 5vw;}
+    .theory-formula{display:flex;align-items:center;justify-content:center;gap:2rem;margin:4rem 0;flex-wrap:wrap;}
+    .theory-block{padding:2.5rem 3rem;border:1px solid rgba(200,169,110,.2);}
+    .theory-block .label{font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+    .theory-block h3{font-family:'Noto Serif JP',serif;font-weight:200;font-size:1.6rem;color:var(--white);}
+    .theory-op{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(200,169,110,.4);}
+    .theory-result{margin-top:1rem;padding:2rem 4rem;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.3);}
+    .theory-result h3{font-family:'Noto Serif JP',serif;font-weight:300;font-size:1.3rem;color:var(--gold2);}
+    .theory-body{max-width:640px;margin:2rem auto 0;font-size:.88rem;color:rgba(242,237,228,.5);line-height:2;}
 
-    /* ─── CTA ─── */
-    .cta { background: var(--ink3); text-align: center; padding: 9rem 5vw; position: relative; overflow: hidden; }
-    .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,169,110,.05) 0%, transparent 70%); }
-    .cta-inner { position: relative; max-width: 640px; margin: 0 auto; }
-    .cta-body { font-size: .88rem; color: rgba(242,237,228,.5); white-space: pre-line; line-height: 2.1; margin: 2rem 0 3rem; }
-    .cta-sub { display: block; margin-top: 1.6rem; font-size: .75rem; color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color .2s; }
-    .cta-sub:hover { color: var(--gold); }
+    /* Programs */
+    .programs{background:var(--ink2);}
+    .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
+    .prog{position:relative;overflow:hidden;height:480px;text-decoration:none;display:block;}
+    .prog img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block;}
+    .prog:hover img{transform:scale(1.05);}
+    .prog-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,8,.9) 0%,rgba(12,10,8,.2) 100%);transition:background .3s;}
+    .prog:hover .prog-ov{background:linear-gradient(to top,rgba(12,10,8,.95) 0%,rgba(12,10,8,.4) 100%);}
+    .prog-body{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 2rem;}
+    .prog-eye{font-family:'Cormorant Garamond',serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
+    .prog h3{font-family:'Noto Serif JP',serif;font-weight:300;font-size:1.2rem;color:var(--white);margin-bottom:.8rem;}
+    .prog-detail{font-size:.78rem;color:rgba(242,237,228,.5);line-height:1.9;margin-bottom:1rem;}
+    .prog-meta{font-size:.72rem;color:var(--gold);letter-spacing:1px;}
 
-    /* ─── Footer ─── */
-    footer {
-      background: #080604; padding: 5rem 5vw 2.5rem;
-      border-top: 1px solid rgba(200,169,110,.12);
-    }
-    .footer-grid {
-      max-width: 1160px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 5rem; padding-bottom: 3.5rem;
-      border-bottom: 1px solid rgba(242,237,228,.05);
-    }
-    .footer-logo img { height: 38px; margin-bottom: 1.4rem; }
-    .footer-tag { font-size: .82rem; color: var(--muted); white-space: pre-line; line-height: 1.9; }
-    .footer-col h5 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .65rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.3rem;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
-    .footer-col a { text-decoration: none; font-size: .83rem; color: rgba(242,237,228,.35); transition: color .2s; }
-    .footer-col a:hover { color: var(--gold); }
-    .footer-copy { max-width: 1160px; margin: 2.5rem auto 0; text-align: center; font-size: .7rem; color: rgba(242,237,228,.18); letter-spacing: 1px; }
+    /* Book + Credentials */
+    .credentials{background:var(--ink);}
+    .cred-grid{display:grid;grid-template-columns:280px 1fr;gap:6rem;align-items:center;}
+    .book-cover{position:relative;}
+    .book-cover img{width:100%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+    .cred-list{display:flex;flex-direction:column;gap:2rem;}
+    .cred-item-lg{display:flex;gap:1.5rem;align-items:flex-start;padding-bottom:2rem;border-bottom:1px solid rgba(200,169,110,.08);}
+    .cred-item-lg:last-child{border-bottom:none;padding-bottom:0;}
+    .cred-icon{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:rgba(200,169,110,.3);font-style:italic;flex-shrink:0;width:2rem;}
+    .cred-text h4{font-size:.9rem;color:var(--gold2);margin-bottom:.4rem;font-weight:400;}
+    .cred-text p{font-size:.82rem;color:var(--muted);line-height:1.8;}
 
-    /* ─── Responsive ─── */
-    @media (max-width: 960px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
-      .hero-body { padding: 0 1.5rem 7vh; }
-      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; }
-      .concept-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .concept-img img { height: 340px; }
-      .prog-grid { grid-template-columns: 1fr; }
-      .prog { height: 320px; }
-      .blog-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .sec { padding: 5rem 1.5rem; }
-      .blog-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    /* Testimonials */
+    .testimonials{background:var(--ink2);}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:4rem;}
+    .testi{background:var(--ink3);padding:2.5rem 2rem;}
+    .testi-img{width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:top;margin-bottom:1.5rem;border:1px solid rgba(200,169,110,.2);}
+    .testi-quote{font-family:'Noto Serif JP',serif;font-weight:300;font-size:.95rem;color:rgba(242,237,228,.8);line-height:1.9;margin-bottom:1.5rem;font-style:italic;}
+    .testi-name{font-size:.75rem;color:var(--gold);letter-spacing:2px;}
+    .testi-role{font-size:.72rem;color:var(--muted);margin-top:.3rem;}
+
+    /* Blog */
+    .blog-sec{background:var(--ink);}
+    .blog-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;}
+    .blog-link{font-size:.78rem;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s;}
+    .blog-link:hover{color:var(--gold);}
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;}
+    .post{background:var(--ink2);padding:2.5rem 2rem;text-decoration:none;color:inherit;border-bottom:2px solid transparent;transition:border-color .3s,background .3s;display:block;}
+    .post:hover{border-bottom-color:var(--gold);background:var(--ink3);}
+    .post-cat{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-family:'Cormorant Garamond',serif;}
+    .post h4{font-family:'Noto Serif JP',serif;font-weight:300;font-size:.98rem;color:var(--white);line-height:1.7;margin-bottom:1.5rem;}
+    .post-date{font-size:.72rem;color:var(--muted);letter-spacing:1px;}
+
+    /* CTA */
+    .cta-sec{background:var(--ink3);text-align:center;padding:9rem 5vw;position:relative;overflow:hidden;}
+    .cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,169,110,.06) 0%,transparent 70%);}
+    .cta-inner{position:relative;max-width:660px;margin:0 auto;}
+    .cta-body{font-size:.88rem;color:rgba(242,237,228,.5);line-height:2.2;margin:2rem 0 3rem;white-space:pre-line;}
+    .cta-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;}
+    .cta-note{margin-top:1.5rem;font-size:.75rem;color:var(--muted);}
+
+    /* Footer */
+    footer{background:#060504;padding:5rem 5vw 2.5rem;border-top:1px solid rgba(200,169,110,.12);}
+    .footer-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:5rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(242,237,228,.05);}
+    .footer-logo img{height:38px;margin-bottom:1.4rem;}
+    .footer-tag{font-size:.82rem;color:var(--muted);line-height:1.9;}
+    .footer-col h5{font-family:'Cormorant Garamond',serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem;}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+    .footer-col a{text-decoration:none;font-size:.83rem;color:rgba(242,237,228,.35);transition:color .2s;}
+    .footer-col a:hover{color:var(--gold);}
+    .footer-copy{max-width:1160px;margin:2.5rem auto 0;text-align:center;font-size:.7rem;color:rgba(242,237,228,.18);letter-spacing:1px;}
+
+    /* Responsive */
+    @media(max-width:960px){
+      nav{padding:0 1.5rem;}
+      .nav-links{display:none;}
+      .hero{grid-template-columns:1fr;height:auto;}
+      .hero-left{padding:100px 1.5rem 3rem;}
+      .hero-right{height:50vh;}
+      .hero-right::after{background:linear-gradient(to bottom,var(--ink2) 0%,transparent 30%);}
+      .story-grid,.cred-grid,.forwhom-grid{grid-template-columns:1fr;gap:3rem;}
+      .story-img img{height:340px;}
+      .prog-grid{grid-template-columns:1fr;}
+      .prog{height:320px;}
+      .testi-grid{grid-template-columns:1fr;}
+      .blog-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;gap:2.5rem;}
+      .sec{padding:5rem 1.5rem;}
+      .blog-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+      .theory-formula{gap:1rem;}
+      .theory-block{padding:1.5rem 2rem;}
     }
   </style>
 </head>
@@ -390,138 +205,320 @@ const t = {
   <nav>
     <a href="/" class="nav-logo"><img src="/logo.png" alt="&LAB TOKYO" /></a>
     <ul class="nav-links">
-      {t.navItems.map(item => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-      <li><a href="/lessons" class="nav-cta">{t.navCta}</a></li>
+      <li><a href="/lessons">レッスン</a></li>
+      <li><a href="/hacco">Hacco LAB</a></li>
+      <li><a href="/about">安藤千英</a></li>
+      <li><a href="/blog">ブログ</a></li>
+      <li><a href="mailto:info@andlabtokyo.com" class="nav-cta">体験レッスン</a></li>
     </ul>
   </nav>
 
-  <!-- ヒーロー：全画面サラダ -->
+  <!-- ① HERO — 「発酵創家 安藤千英」を主役に -->
   <section class="hero">
-    <div class="hero-bg">
-      <img src="/hero-food.jpg" alt="&LAB TOKYO ローフード" />
-    </div>
-    <div class="hero-body">
-      <p class="eyebrow">{t.heroEye}</p>
-      <h1>{t.h1a}<br /><em>{t.h1b}</em></h1>
-      <p class="hero-sub">{t.heroSub}</p>
+    <div class="hero-left">
+      <p class="hero-tag">Fermentation Creator · Tokyo Shibuya</p>
+      <p class="hero-name">安藤 千英　Chie Ando</p>
+      <p class="hero-title">ELLE gourmet認定料理家　/ 発酵×ローフード研究家</p>
+      <h1>
+        これからの私を、
+        <em>美しく「醸す」。</em>
+      </h1>
+      <p class="hero-desc">
+        細胞からデザインする、一生モノの心と体。<br />
+        経営者・専門職・自分を更新し続けたいすべての女性へ。<br />
+        発酵×ローフードのクロス理論で、あなたの本来の輝きを取り戻す。
+      </p>
       <div class="btns">
-        <a href="/lessons" class="btn-gold">{t.heroCta}</a>
-        <a href="/lessons" class="btn-ghost">{t.heroCtaGhost}</a>
+        <a href="mailto:info@andlabtokyo.com" class="btn-gold">体験レッスンを予約する</a>
+        <a href="/about" class="btn-ghost">安藤千英について</a>
       </div>
+    </div>
+    <div class="hero-right">
+      <img src="/chie-main.jpg" alt="発酵創家 安藤千英" />
     </div>
   </section>
 
-  <!-- モザイクグリッド -->
-  <div class="mosaic">
-    <div class="mos">
-      <img src="/green-smoothie.jpg" alt="グリーンスムージー" />
-    </div>
-    <div class="mos tall">
-      <img src="/lesson-table.jpg" alt="レッスン" />
-      <span class="mos-tag">Our World</span>
-    </div>
-    <div class="mos">
-      <img src="/koji.jpg" alt="麹" />
-    </div>
-    <div class="mos">
-      <img src="/raw-chocolate.jpg" alt="ローチョコレート" />
+  <!-- Credentials strip -->
+  <div class="cred-strip">
+    <div class="cred-inner">
+      <div class="cred-item"><span class="dot"></span>ELLE gourmet認定クリエイター</div>
+      <div class="cred-item"><span class="dot"></span>医師監修書籍「&RAW LIVING」著者</div>
+      <div class="cred-item"><span class="dot"></span>循環器内科医・内科医が受講</div>
+      <div class="cred-item"><span class="dot"></span>国際受講生：米・墨・香港ほか</div>
+      <div class="cred-item"><span class="dot"></span>東京・渋谷 / オンライン対応</div>
     </div>
   </div>
 
-  <!-- コンセプト -->
-  <section class="sec concept" id="about">
-    <div class="concept-grid">
-      <div class="concept-img">
-        <img src="/chie-portrait.jpg" alt="安藤千英" />
-      </div>
-      <div>
-        <p class="sec-eye">{t.conceptEye}</p>
-        <h2 class="sec-h2">{t.conceptH}</h2>
-        <div class="rule"></div>
-        <p class="concept-text">{t.conceptBody}</p>
-        <p class="concept-credit">{t.conceptCredit}</p>
-        <a href="/about" class="concept-link">{t.conceptLink}</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- プログラム -->
-  <section class="sec programs">
-    <div class="programs-inner">
-      <p class="sec-eye">{t.progsEye}</p>
-      <h2 class="sec-h2">{t.progsH}</h2>
-      <div class="prog-grid">
-        {t.progs.map(p => (
-          <a href={p.href} class="prog">
-            <img src={p.img} alt={p.h} />
-            <div class="prog-overlay"></div>
-            <span class="prog-arrow">→</span>
-            <div class="prog-body">
-              <p class="prog-eye">{p.eye}</p>
-              <h3>{p.h}</h3>
-              <p>{p.body}</p>
-            </div>
+  <!-- ② STORY — WHY -->
+  <section class="sec story">
+    <div class="inner">
+      <div class="story-grid">
+        <div class="story-img">
+          <img src="/chie-speaking.jpg" alt="安藤千英 講演" />
+        </div>
+        <div class="story-body">
+          <p class="sec-eye">My Story</p>
+          <h2 class="sec-h2">なぜ、私は食を伝えるのか。</h2>
+          <div class="rule"></div>
+          <p>
+            10年前の4月。娘が台所の熱湯を頭からかぶる大火傷を負いました。
+            長期入院、複数回の手術。私は<strong>キッチンに立てなくなった。</strong>
+          </p>
+          <p>
+            そこから食を学び直しました。マクロビ、ローフード、発酵。
+            食べることが娘を、そして私自身を、内側から再生させていった。
+          </p>
+          <p>
+            40代になったとき、更年期という新しい岐路に立ちました。
+            そのとき改めて気づいたのです——<strong>「細胞から整える食」は、一生モノの武器だ</strong>、と。
+          </p>
+          <p>
+            忙しい女性が、食から自分を取り戻せる場所をつくりたい。
+            それが&LAB TOKYOの原点です。
+          </p>
+          <a href="https://note.com/chieando/n/naa6e962de57b" target="_blank" class="story-link">
+            全文をnoteで読む →
           </a>
-        ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ブログ -->
+  <!-- ③ FOR WHOM — ターゲット明確化 -->
+  <section class="sec forwhom">
+    <div class="inner">
+      <p class="sec-eye">For Whom</p>
+      <h2 class="sec-h2">こんな女性のための場所です。</h2>
+      <div class="forwhom-grid">
+        <ul class="whom-list">
+          <li>毎日忙しく、自分の体を後回しにしてきた経営者・専門職</li>
+          <li>更年期や体調の変化を感じ、食から根本的に変えたい</li>
+          <li>「料理が苦手」「難しそう」と思っていたけれど興味はある</li>
+          <li>海外からでも学べる、グローバルなコンテンツを求めている</li>
+          <li>ダイエットや美容だけでなく、一生使える知識がほしい</li>
+          <li>認定資格を取得して、自分のビジネスや活動に活かしたい</li>
+        </ul>
+        <div class="forwhom-right">
+          <p class="label">Lesson Style</p>
+          <p>
+            少人数制（1〜4名）で丁寧に。<br />
+            初心者・お子様も歓迎。<br /><br />
+            <strong style="color:var(--gold2)">東京・渋谷の教室</strong> または<br />
+            <strong style="color:var(--gold2)">オンライン</strong>（国内外対応）<br /><br />
+            ¥8,000〜 入会費なし。<br />
+            まずは1回の体験から。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ CROSS THEORY — 独自理論を視覚化 -->
+  <section class="theory">
+    <div class="inner">
+      <p class="sec-eye">The &LAB Theory</p>
+      <h2 class="sec-h2">2つの知恵のかけ算。</h2>
+      <div class="theory-formula">
+        <div class="theory-block">
+          <p class="label">Raw Food</p>
+          <h3>ローフード</h3>
+        </div>
+        <span class="theory-op">×</span>
+        <div class="theory-block">
+          <p class="label">Fermentation</p>
+          <h3>発酵</h3>
+        </div>
+        <span class="theory-op">=</span>
+        <div class="theory-result">
+          <p class="label" style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;">Living Food</p>
+          <h3>細胞から整う、<br />一生モノの美</h3>
+        </div>
+      </div>
+      <p class="theory-body">
+        48℃以下の調理で酵素・栄養を壊さないローフードと、<br />
+        腸内環境を整える日本の発酵文化を掛け合わせる。<br />
+        これが&LAB TOKYOが提唱するクロス理論です。
+      </p>
+    </div>
+  </section>
+
+  <!-- ⑤ PROGRAMS -->
+  <section class="sec programs">
+    <div class="inner">
+      <p class="sec-eye">Programs</p>
+      <h2 class="sec-h2">3つのプログラム。</h2>
+    </div>
+    <div class="prog-grid">
+      <a href="/lessons" class="prog">
+        <img src="/hero-food.jpg" alt="ローフード" />
+        <div class="prog-ov"></div>
+        <div class="prog-body">
+          <p class="prog-eye">Program 01</p>
+          <h3>ローフード</h3>
+          <p class="prog-detail">48℃以下の調理で酵素を活かす。体験〜マイスター資格まで段階的に学べます。</p>
+          <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 初心者OK</p>
+        </div>
+      </a>
+      <a href="/hacco" class="prog">
+        <img src="/koji.jpg" alt="Hacco LAB 発酵" />
+        <div class="prog-ov"></div>
+        <div class="prog-body">
+          <p class="prog-eye">Program 02</p>
+          <h3>Hacco LAB（発酵）</h3>
+          <p class="prog-detail">麹・味噌・醤油など日本の発酵文化。発酵プランナー資格取得コースあり。</p>
+          <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 国際対応</p>
+        </div>
+      </a>
+      <a href="/lessons" class="prog">
+        <img src="/raw-chocolate.jpg" alt="ローチョコレート" />
+        <div class="prog-ov"></div>
+        <div class="prog-body">
+          <p class="prog-eye">Program 03</p>
+          <h3>ローチョコレート</h3>
+          <p class="prog-detail">日本ローチョコレーティエ協会公認。カカオの栄養を活かした、大人の甘さ。</p>
+          <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 資格取得可</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ⑥ BOOK + CREDENTIALS — 信頼の証拠 -->
+  <section class="sec credentials">
+    <div class="inner">
+      <div class="cred-grid">
+        <div class="book-cover">
+          <img src="/book-cover.jpg" alt="&RAW LIVING ローフードの教科書" />
+        </div>
+        <div>
+          <p class="sec-eye">Credentials</p>
+          <h2 class="sec-h2">信頼の、根拠があります。</h2>
+          <div class="rule"></div>
+          <div class="cred-list">
+            <div class="cred-item-lg">
+              <span class="cred-icon">01</span>
+              <div class="cred-text">
+                <h4>医師監修書籍「&RAW LIVING」著者</h4>
+                <p>循環器内科医・吉田和弘医師の監修のもと出版。Amazonにて好評発売中。</p>
+              </div>
+            </div>
+            <div class="cred-item-lg">
+              <span class="cred-icon">02</span>
+              <div class="cred-text">
+                <h4>ELLE gourmet認定クリエイター</h4>
+                <p>フランス発のプレミアム食専門誌に認定された、日本でも数少ない料理家。</p>
+              </div>
+            </div>
+            <div class="cred-item-lg">
+              <span class="cred-icon">03</span>
+              <div class="cred-text">
+                <h4>医師・経営者・海外プロが選ぶ教室</h4>
+                <p>循環器内科医2名がローフードマイスター資格を取得。米・墨・香港からも受講。</p>
+              </div>
+            </div>
+            <div class="cred-item-lg">
+              <span class="cred-icon">04</span>
+              <div class="cred-text">
+                <h4>企業レシピ開発・メディア掲載多数</h4>
+                <p>DIC・Kuvingsほか複数企業のレシピ開発実績。ライフスタイル誌にも掲載。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ TESTIMONIALS — 受講生の声 -->
+  <section class="sec testimonials">
+    <div class="inner">
+      <p class="sec-eye">Testimonials</p>
+      <h2 class="sec-h2">受講生の声。</h2>
+      <div class="testi-grid">
+        <div class="testi">
+          <img src="/chie-speaking.jpg" alt="櫻庭千穂さん" class="testi-img" />
+          <p class="testi-quote">「発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました」</p>
+          <p class="testi-name">櫻庭 千穂さん</p>
+          <p class="testi-role">内科医 / ドクターズカフェ オーナー・那須高原</p>
+        </div>
+        <div class="testi">
+          <img src="/student-oscar.jpg" alt="オスカーさん" class="testi-img" />
+          <p class="testi-quote">「アメリカ・メキシコからオンラインで参加。KojiとUmamiのメカニズムを動画・テキスト・体験で学び、大興奮！これほど素晴らしい体験は初めてです」</p>
+          <p class="testi-name">Oscar さん</p>
+          <p class="testi-role">アメリカ・メキシコ在住</p>
+        </div>
+        <div class="testi">
+          <img src="/chie-portrait.jpg" alt="吉田和弘医師" class="testi-img" />
+          <p class="testi-quote">「循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートしていただきました。医師として自信を持っておすすめします」</p>
+          <p class="testi-name">吉田 和弘 医師</p>
+          <p class="testi-role">循環器内科医 / 書籍「&RAW LIVING」医学監修</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ BLOG -->
   <section class="sec blog-sec">
-    <div class="blog-inner">
+    <div class="inner">
       <div class="blog-header">
         <div>
-          <p class="sec-eye">{t.blogEye}</p>
-          <h2 class="sec-h2">{t.blogH}</h2>
+          <p class="sec-eye">Journal</p>
+          <h2 class="sec-h2">食と発酵の、知恵と実践。</h2>
         </div>
-        <a href="/blog" class="blog-link">{t.blogLink}</a>
+        <a href="/blog" class="blog-link">すべての記事を見る →</a>
       </div>
       <div class="blog-grid">
-        {t.posts.map(post => (
-          <a href={post.href} class="post">
-            <p class="post-cat">{post.cat}</p>
-            <h4>{post.title}</h4>
-            <p class="post-date">{post.date}</p>
-          </a>
-        ))}
+        <a href="/blog" class="post">
+          <p class="post-cat">Raw Food</p>
+          <h4>酵素を壊さない調理の5つの基本。なぜ48℃なのか</h4>
+          <p class="post-date">2026.05.20</p>
+        </a>
+        <a href="/blog" class="post">
+          <p class="post-cat">Hacco LAB</p>
+          <h4>自家製麹の作り方。初心者でも失敗しないポイント</h4>
+          <p class="post-date">2026.05.10</p>
+        </a>
+        <a href="/blog" class="post">
+          <p class="post-cat">更年期 × 食</p>
+          <h4>40代から始める「細胞から整える」ローフード習慣</h4>
+          <p class="post-date">2026.04.28</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta" id="contact">
+  <!-- ⑨ CTA — 2つだけ -->
+  <section class="cta-sec" id="contact">
     <div class="cta-inner">
-      <p class="sec-eye">{t.ctaEye}</p>
-      <h2 class="sec-h2">{t.ctaH}</h2>
-      <div class="rule" style="margin: 2rem auto;"></div>
-      <p class="cta-body">{t.ctaBody}</p>
-      <div class="btns" style="justify-content: center;">
-        <a href="mailto:info@andlabtokyo.com" class="btn-gold">{t.ctaBtn}</a>
+      <p class="sec-eye">First Step</p>
+      <h2 class="sec-h2">忙しさを、輝きに変える。</h2>
+      <div class="rule" style="margin:2rem auto;"></div>
+      <p class="cta-body">まずは1回の体験から。{"\n"}東京・渋谷またはオンラインで、あなたのペースで始められます。</p>
+      <div class="cta-btns">
+        <a href="mailto:info@andlabtokyo.com" class="btn-gold">体験レッスンを予約する</a>
+        <a href="mailto:info@andlabtokyo.com" class="btn-ghost">お問い合わせ・ご質問</a>
       </div>
-      <a href="mailto:info@andlabtokyo.com" class="cta-sub">{t.ctaSub}</a>
+      <p class="cta-note">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
     </div>
   </section>
 
-  <!-- フッター -->
+  <!-- Footer -->
   <footer>
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="/logo.png" alt="&LAB TOKYO" /></div>
-        <p class="footer-tag">{t.footerTag}</p>
+        <p class="footer-tag">発酵創家 安藤千英<br />Raw Food × Fermentation<br />Lifestyle Lab · Tokyo Shibuya</p>
       </div>
       <div class="footer-col">
-        <h5>{t.footerMenuLabel}</h5>
+        <h5>Menu</h5>
         <ul>
-          {t.navItems.map(item => (
-            <li><a href={item.href}>{item.label}</a></li>
-          ))}
+          <li><a href="/lessons">レッスン</a></li>
+          <li><a href="/hacco">Hacco LAB</a></li>
+          <li><a href="/about">安藤千英について</a></li>
+          <li><a href="/blog">ブログ</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>{t.footerFollowLabel}</h5>
+        <h5>Follow</h5>
         <ul>
           <li><a href="#" target="_blank">Instagram</a></li>
           <li><a href="#" target="_blank">YouTube</a></li>
@@ -530,7 +527,7 @@ const t = {
         </ul>
       </div>
     </div>
-    <p class="footer-copy">{t.copyright}</p>
+    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
   </footer>
 
 </body>
