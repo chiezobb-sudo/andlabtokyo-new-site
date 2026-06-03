@@ -249,6 +249,18 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </div>
 
+  <!-- モザイクグリッド -->
+  <div style="display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:260px 260px;gap:3px;background:var(--ink);">
+    <div style="overflow:hidden;"><img src="/mosaic-drinks.jpg" alt="ローフードジュース" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" /></div>
+    <div style="overflow:hidden;grid-row:span 2;position:relative;">
+      <img src="/prog-rawfood.jpg" alt="手毬寿司ローフード" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,8,.5) 0%,transparent 60%);"></div>
+      <span style="position:absolute;bottom:1.4rem;left:1.4rem;font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:#c8a96e;">Our World</span>
+    </div>
+    <div style="overflow:hidden;"><img src="/koji.jpg" alt="麹 発酵" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+    <div style="overflow:hidden;"><img src="/prog-chocolate.jpg" alt="ローチョコレート" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" /></div>
+  </div>
+
   <!-- ② STORY — WHY -->
   <section class="sec story">
     <div class="inner">
@@ -350,7 +362,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
     <div class="prog-grid">
       <a href="/lessons" class="prog">
-        <img src="/hero-food.jpg" alt="ローフード" />
+        <img src="/prog-rawfood.jpg" alt="ローフード" />
         <div class="prog-ov"></div>
         <div class="prog-body">
           <p class="prog-eye">Program 01</p>
@@ -370,7 +382,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         </div>
       </a>
       <a href="/lessons" class="prog">
-        <img src="/raw-chocolate.jpg" alt="ローチョコレート" />
+        <img src="/prog-chocolate.jpg" alt="ローチョコレート" />
         <div class="prog-ov"></div>
         <div class="prog-body">
           <p class="prog-eye">Program 03</p>
