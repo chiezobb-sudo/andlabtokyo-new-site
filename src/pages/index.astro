@@ -7,793 +7,493 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>安藤千英 | &LAB TOKYO — 発酵×ローフード 東京・渋谷</title>
-  <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。医師監修書籍、国内外の受講生実績。体験レッスン受付中。" />
+  <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。少人数制・初心者歓迎・¥8,000〜・入会費なし。体験レッスン受付中。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       &LAB TOKYO — デザイントークン
-       背景: 白・温かいクリーム系 / Shopifyカラーパレット参考
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ━━━━━━━━━━━━━━━━━━━
+       カラートークン（指示書準拠）
+    ━━━━━━━━━━━━━━━━━━━ */
     :root {
-      /* 背景（白・クリーム系） */
-      --bg-base:   #FAFAF8;   /* メイン背景（温かい白） */
-      --bg-raised: #F5F1EB;   /* セクション段差A（クリーム） */
-      --bg-card:   #EDE7DE;   /* セクション段差B（ベージュ） */
-      --bg-dark:   #714329;   /* ダークセクション（深いテラコッタ） */
-      --bg-nav:    rgba(250,250,248,.96);
+      --bg0:  #1A1715;
+      --bg1:  #1E1B19;
+      --bg2:  #24211E;
+      --bg3:  #2A2622;
 
-      /* アクセント（テラコッタブラウン + ロゴグリーン） */
-      --amber:     #714329;   /* プライマリアクセント（ボタン・下線） */
-      --amber-lt:  #8B5534;   /* ホバー */
-      --amber-mid: #B08463;   /* ミディアム */
-      --amber-dim: rgba(113,67,41,.2); /* ボーダー */
-      --leaf:      #4E8A18;   /* ロゴグリーン（ダーク葉） */
-      --leaf-lt:   #6AAD22;   /* ロゴグリーン（ライト） */
+      --txt:  #F3EEE5;
+      --txth: #FAF5EC;
+      --txts: #C0B6A8;
+      --txtn: #D6CFC4;
+      --div:  rgba(243,238,229,.12);
 
-      /* テキスト（濃いブラウン系） */
-      --txt-head:  #1A0F08;   /* 見出し（ほぼ黒） */
-      --txt-body:  #2C1F14;   /* 本文 */
-      --txt-sub:   #7B6A5A;   /* サブテキスト */
-      --txt-nav:   #3D2A1A;   /* ナビゲーション */
-      --txt-btn:   #FAFAF8;   /* CTAボタン文字（白） */
+      --cta:  #C47A3A;
+      --ctah: #D68B4A;
+      --ctat: #12100F;
 
-      /* フォント — 2種のみ */
-      --f-head: 'Cormorant Garamond', 'Noto Sans JP', serif;
-      --f-body: 'Noto Sans JP', sans-serif;
+      --leaf: #4E8A18;
+
+      --f-h: 'Cormorant Garamond', 'Noto Sans JP', serif;
+      --f-b: 'Noto Sans JP', sans-serif;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: var(--f-body);
+      font-family: var(--f-b);
       font-weight: 400;
-      background: var(--bg-base);
-      color: var(--txt-body);
+      background: var(--bg0);
+      color: var(--txt);
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
     }
 
-    /* ━━ 言語切替（ナビ内右端に統合） ━━ */
-    .lang { display: flex; align-items: center; gap: 0; margin-left: .8rem; }
-    .lang a {
-      padding: 6px 10px;
-      font-family: var(--f-body);
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .5px;
-      text-decoration: none;
-      color: var(--txt-sub);
-      border-left: 1px solid rgba(113,67,41,.15);
-      transition: color .2s;
-    }
-    .lang a:first-child { border-left: none; }
-    .lang a.on  { color: var(--amber); font-weight: 700; }
-    .lang a:hover { color: var(--amber); }
-
-    /* ━━ ナビゲーション ━━ */
+    /* ━━ ナビ ━━ */
     nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 500;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.8rem;
-      background: var(--bg-nav);
+      position: fixed; inset: 0 0 auto 0; z-index: 500;
+      height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(26,23,21,.93);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(113,67,41,.12);
+      border-bottom: 1px solid var(--div);
     }
-    .nav-logo img { height: 44px; width: auto; }
-    .nav-right { display: flex; align-items: center; }
-    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-logo img { height: 42px; width: auto; }
+    .nav-right { display: flex; align-items: center; gap: 0; }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
     .nav-links a {
-      font-family: var(--f-body);
-      font-size: .875rem;
-      font-weight: 500;
-      letter-spacing: .5px;
-      text-decoration: none;
-      color: var(--txt-nav);
+      font-size: .875rem; font-weight: 500;
+      text-decoration: none; color: var(--txtn);
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--amber-lt); }
+    .nav-links a:hover { color: var(--cta); }
     .nav-cta {
-      padding: .5rem 1.4rem !important;
-      border: 1px solid var(--amber-dim) !important;
-      color: var(--amber) !important;
-      border-radius: 2px;
+      display: inline-block; margin-left: 1.5rem;
+      padding: .5rem 1.4rem;
+      background: var(--cta); color: var(--ctat);
+      font-size: .875rem; font-weight: 700;
+      text-decoration: none; border-radius: 2px;
+      transition: background .2s;
     }
-    .nav-cta:hover {
-      background: var(--amber) !important;
-      color: var(--txt-btn) !important;
+    .nav-cta:hover { background: var(--ctah); }
+    .lang {
+      display: flex; align-items: center;
+      margin-left: 1.2rem;
+      border-left: 1px solid var(--div);
+      padding-left: 1rem;
     }
+    .lang a {
+      font-size: .72rem; font-weight: 500;
+      text-decoration: none; color: var(--txts);
+      padding: 4px 8px;
+      transition: color .2s;
+    }
+    .lang a.on { color: var(--cta); font-weight: 700; }
+    .lang a:hover { color: var(--txtn); }
 
-    /* ━━ Hero ━━ */
+    /* ━━ Hero ━━
+       portrait主役 — きれいすぎる左右分割にしない
+    ━━ */
     .hero {
       position: relative;
-      height: 100vh;
-      min-height: 640px;
-      display: grid;
-      grid-template-columns: 52% 48%;
+      min-height: 100vh;
+      display: flex; align-items: flex-end;
       overflow: hidden;
+      padding-top: 66px;
     }
-    .hero-left {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 120px 4vw 7vh 5vw;
-      background: var(--bg-base);
-      z-index: 1;
-    }
-    .hero-right { position: relative; overflow: hidden; }
-    .hero-right img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: top center; display: block;
-    }
-    .hero-right::after {
-      content: '';
+    .hero-photo {
       position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--bg-base) 0%, transparent 22%);
+      z-index: 0;
     }
-
-    .hero-tag {
-      font-family: var(--f-head);
-      font-size: .8rem;
-      font-weight: 400;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 2rem;
-    }
-    .hero h1 {
-      font-family: var(--f-head);
-      font-weight: 600;
-      font-size: clamp(2rem, 3.6vw, 3.2rem);
-      line-height: 1.45;
-      color: var(--txt-head);
-      margin-bottom: 1.2rem;
-      letter-spacing: .3px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--leaf);
+    .hero-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 70% top;
       display: block;
     }
-    .hero-name {
-      font-family: var(--f-head);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 2.5px;
-      color: var(--txt-sub);
-      margin-bottom: .4rem;
+    .hero-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right,  rgba(26,23,21,.88) 0%, rgba(26,23,21,.55) 50%, rgba(26,23,21,.1) 100%),
+        linear-gradient(to top,    rgba(26,23,21,.6)  0%, transparent 40%);
     }
-    .hero-title {
-      font-family: var(--f-body);
-      font-size: .82rem;
-      font-weight: 400;
-      color: var(--txt-sub);
-      letter-spacing: .5px;
-      margin-bottom: 2.8rem;
+    .hero-body {
+      position: relative; z-index: 1;
+      max-width: 560px;
+      padding: 0 5vw 7vh;
+    }
+    .hero-eyebrow {
+      font-family: var(--f-h);
+      font-size: .78rem; font-weight: 400;
+      letter-spacing: 3.5px; text-transform: uppercase;
+      color: var(--cta); margin-bottom: 2rem;
+    }
+    .hero-name {
+      font-family: var(--f-h);
+      font-size: 1rem; font-weight: 400;
+      letter-spacing: 2px; color: var(--txts);
+      margin-bottom: .3rem;
+    }
+    .hero-role {
+      font-size: .82rem; font-weight: 400;
+      color: var(--txts); margin-bottom: 2.5rem;
+    }
+    .hero h1 {
+      font-family: var(--f-b);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      line-height: 1.4; color: var(--txth);
+      margin-bottom: .8rem;
+    }
+    .hero h1 span {
+      color: var(--leaf);
+      font-weight: 700;
+    }
+    .hero-sub {
+      font-family: var(--f-h);
+      font-size: 1rem; font-style: italic;
+      color: var(--txts); margin-bottom: 2rem;
     }
     .hero-desc {
-      font-family: var(--f-body);
-      font-size: .95rem;
-      font-weight: 400;
-      color: var(--txt-body);
-      line-height: 1.95;
-      margin-bottom: 3rem;
-      max-width: 400px;
+      font-size: .95rem; font-weight: 400;
+      color: var(--txt); line-height: 1.9;
+      margin-bottom: 2.8rem;
     }
-
-    /* ━━ ボタン ━━ */
-    .btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-gold {
+    .hero-cta {
       display: inline-block;
-      padding: .9rem 2.2rem;
-      background: var(--amber);
-      color: var(--txt-btn);
-      font-family: var(--f-body);
-      font-size: .875rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-      border-radius: 3px;
-      transition: background .25s, transform .2s, box-shadow .2s;
+      padding: 1rem 2.8rem;
+      background: var(--cta); color: var(--ctat);
+      font-size: .95rem; font-weight: 700;
+      text-decoration: none; border-radius: 2px;
+      transition: background .25s, transform .2s;
     }
-    .btn-gold:hover { background: var(--amber-lt); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(113,67,41,.25); }
-    .btn-ghost {
-      display: inline-block;
-      padding: .9rem 2.2rem;
-      border: 1.5px solid var(--amber);
-      color: var(--amber);
-      font-family: var(--f-body);
-      font-size: .875rem;
-      font-weight: 500;
-      letter-spacing: .5px;
-      text-decoration: none;
-      border-radius: 3px;
-      transition: all .25s;
-      background: transparent;
-    }
-    .btn-ghost:hover {
-      background: var(--amber);
-      color: var(--txt-btn);
-      transform: translateY(-2px);
-    }
+    .hero-cta:hover { background: var(--ctah); transform: translateY(-2px); }
 
-    /* ━━ Credentials strip ━━ */
-    .cred-strip {
-      background: var(--bg-card);
-      padding: 1.6rem 5vw;
-      border-top: 1px solid var(--gold-line);
-      border-bottom: 1px solid var(--gold-line);
+    /* ━━ 体験レッスン概要ストリップ ━━ */
+    .trial-strip {
+      background: var(--bg1);
+      border-top: 1px solid var(--div);
+      border-bottom: 1px solid var(--div);
+      padding: 1.4rem 5vw;
     }
-    .cred-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    .trial-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
     }
-    .cred-item {
-      display: flex;
-      align-items: center;
-      gap: .7rem;
-      font-family: var(--f-body);
-      font-size: .8rem;
-      font-weight: 400;
-      color: var(--txt-sub);
-      letter-spacing: .3px;
+    .trial-label {
+      font-family: var(--f-h);
+      font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cta); white-space: nowrap;
+    }
+    .trial-items {
+      display: flex; gap: 0; flex-wrap: wrap;
+      list-style: none; flex: 1;
+    }
+    .trial-items li {
+      font-size: .85rem; font-weight: 500; color: var(--txtn);
+      padding: .2rem 1.2rem;
+      border-right: 1px solid var(--div);
       white-space: nowrap;
     }
-    .cred-item span.dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--amber);
-      flex-shrink: 0;
+    .trial-items li:first-child { padding-left: 0; }
+    .trial-items li:last-child { border-right: none; }
+    .trial-link {
+      font-size: .82rem; font-weight: 500;
+      color: var(--cta); text-decoration: none;
+      white-space: nowrap;
+      transition: opacity .2s;
     }
+    .trial-link:hover { opacity: .75; }
 
     /* ━━ セクション共通 ━━ */
     .sec { padding: 7rem 5vw; }
     .sec-eye {
-      font-family: var(--f-head);
-      font-size: .78rem;
-      font-weight: 400;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.2rem;
+      font-family: var(--f-h);
+      font-size: .72rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--cta); margin-bottom: 1.2rem; display: block;
     }
     .sec-h2 {
-      font-family: var(--f-head);
-      font-weight: 600;
-      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-      line-height: 1.5;
-      color: var(--txt-head);
-      white-space: pre-line;
+      font-family: var(--f-b);
+      font-weight: 700;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.45; color: var(--txth);
     }
-    .rule {
-      width: 32px;
-      height: 1px;
-      background: var(--amber-dim);
-      margin: 1.8rem 0 2.5rem;
-    }
+    .rule { width: 32px; height: 1px; background: var(--cta); margin: 1.8rem 0 2.5rem; }
     .inner { max-width: 1100px; margin: 0 auto; }
-
-    /* ━━ Story ━━ */
-    .story { background: var(--bg-base); }
-    .story-grid {
-      display: grid;
-      grid-template-columns: 45% 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .story-img { position: relative; overflow: hidden; }
-    .story-img img {
-      width: 100%; height: 520px;
-      object-fit: cover; object-position: center top; display: block;
-    }
-    .story-img::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border: 1px solid rgba(196,122,58,.18);
-      z-index: 1; pointer-events: none;
-    }
-    .story-body { padding-top: 1rem; }
-    .story-body p {
-      font-family: var(--f-body);
-      font-size: .95rem;
-      font-weight: 400;
-      color: var(--txt-body);
-      line-height: 2.1;
+    .body-text {
+      font-size: .95rem; font-weight: 400;
+      color: var(--txt); line-height: 2.1;
       margin-bottom: 1.4rem;
     }
-    .story-body p strong { color: var(--txt-head); font-weight: 700; }
+    .body-text strong { color: var(--txth); font-weight: 700; }
+
+    /* ━━ Story ━━ */
+    .story { background: var(--bg1); }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 48% 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .story-img { overflow: hidden; }
+    .story-img img {
+      width: 100%; height: 480px;
+      object-fit: cover; display: block;
+    }
+    .story-body { padding-top: .5rem; }
     .story-link {
-      display: inline-block;
-      margin-top: .8rem;
-      font-family: var(--f-body);
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--txt-sub);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(192,182,168,.35);
+      display: inline-block; margin-top: 1rem;
+      font-size: .85rem; font-weight: 500;
+      color: var(--txts); text-decoration: none;
+      border-bottom: 1px solid rgba(192,182,168,.3);
       padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .story-link:hover { color: var(--amber-lt); border-color: var(--amber); }
+    .story-link:hover { color: var(--cta); border-color: var(--cta); }
 
-    /* ━━ For Whom ━━ */
-    .forwhom { background: var(--bg-raised); }
-    .forwhom-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 5rem;
-      align-items: start;
-      margin-top: 3.5rem;
-    }
-    .whom-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-    .whom-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      font-family: var(--f-body);
-      font-size: .95rem;
-      font-weight: 400;
-      color: var(--txt-body);
-      line-height: 1.85;
-    }
-    .whom-list li::before {
-      content: '—';
-      color: var(--amber);
-      flex-shrink: 0;
-      margin-top: .05rem;
-      font-weight: 400;
-    }
-    .forwhom-right {
-      background: white;
-      padding: 2.5rem;
-      border-left: 3px solid var(--amber);
-      box-shadow: 0 2px 16px rgba(113,67,41,.08);
-    }
-    .forwhom-right .label {
-      font-family: var(--f-head);
-      font-size: .75rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.4rem;
-      display: block;
-    }
-    .forwhom-right p {
-      font-family: var(--f-body);
-      font-size: .92rem;
-      font-weight: 400;
-      color: var(--txt-body);
-      line-height: 2;
-    }
-
-    /* ━━ Theory ━━ */
-    .theory { background: var(--bg-dark); text-align: center; padding: 7rem 5vw; color: #FAF5EC; }
-    .theory .sec-eye { color: #D0B9A7; }
-    .theory .sec-h2 { color: #FAF5EC; }
-    .theory-formula {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      margin: 3.5rem 0;
-      flex-wrap: wrap;
-    }
-    .theory-block {
-      padding: 2.2rem 2.8rem;
-      border: 1px solid rgba(250,245,236,.25);
-      background: rgba(250,245,236,.05);
-    }
-    .theory-block .label {
-      font-family: var(--f-head);
-      font-size: .7rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #D0B9A7;
-      margin-bottom: .8rem;
-      display: block;
-    }
-    .theory-block h3 {
-      font-family: var(--f-head);
-      font-weight: 600;
-      font-size: 1.5rem;
-      color: #FAF5EC;
-    }
-    .theory-op {
-      font-family: var(--f-head);
-      font-size: 2.8rem;
-      font-weight: 400;
-      color: rgba(208,185,167,.6);
-    }
-    .theory-result {
-      padding: 1.8rem 3.5rem;
-      background: rgba(250,245,236,.12);
-      border: 1px solid rgba(250,245,236,.35);
-    }
-    .theory-result h3 {
-      font-family: var(--f-head);
-      font-weight: 600;
-      font-size: 1.3rem;
-      color: #EDD9C0;
-    }
-    .theory-body {
-      max-width: 600px;
-      margin: 2rem auto 0;
-      font-family: var(--f-body);
-      font-size: .92rem;
-      font-weight: 400;
-      color: rgba(250,245,236,.8);
-      line-height: 2;
-    }
-
-    /* ━━ Programs ━━ */
-    .programs { background: var(--bg-base); }
+    /* ━━ Programs（非均等） ━━ */
+    .programs { background: var(--bg0); }
+    .programs-inner { max-width: 1100px; margin: 0 auto; }
     .prog-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      margin-top: 3.5rem;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 3px; margin-top: 3.5rem;
     }
     .prog {
-      position: relative;
-      overflow: hidden;
-      height: 460px;
-      text-decoration: none;
-      display: block;
+      position: relative; overflow: hidden;
+      text-decoration: none; display: block;
     }
-    .prog img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .8s ease;
-      display: block;
-    }
+    .prog:first-child { height: 520px; }
+    .prog:not(:first-child) { height: 360px; }
+    .prog img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; display: block; }
     .prog:hover img { transform: scale(1.04); }
     .prog-ov {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,23,21,.92) 0%, rgba(26,23,21,.15) 100%);
+      background: linear-gradient(to top, rgba(26,23,21,.9) 0%, rgba(26,23,21,.1) 60%);
       transition: background .3s;
     }
-    .prog:hover .prog-ov {
-      background: linear-gradient(to top, rgba(26,23,21,.96) 0%, rgba(26,23,21,.3) 100%);
-    }
-    .prog-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 2rem; }
+    .prog:hover .prog-ov { background: linear-gradient(to top, rgba(26,23,21,.95) 0%, rgba(26,23,21,.2) 60%); }
+    .prog-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2rem 2.2rem; }
     .prog-eye {
-      font-family: var(--f-head);
-      font-size: .68rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: .7rem;
-      display: block;
+      font-family: var(--f-h);
+      font-size: .65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cta); margin-bottom: .6rem; display: block;
     }
     .prog h3 {
-      font-family: var(--f-head);
-      font-weight: 600;
-      font-size: 1.25rem;
-      color: var(--txt-head);
-      margin-bottom: .7rem;
+      font-family: var(--f-b);
+      font-weight: 700; font-size: 1.2rem;
+      color: var(--txth); margin-bottom: .6rem;
     }
-    .prog-detail {
-      font-family: var(--f-body);
-      font-size: .85rem;
-      font-weight: 400;
-      color: var(--txt-body);
-      line-height: 1.85;
-      margin-bottom: .9rem;
+    .prog-detail { font-size: .85rem; font-weight: 400; color: var(--txt); line-height: 1.8; margin-bottom: .8rem; }
+    .prog-meta { font-size: .78rem; font-weight: 500; color: var(--cta); }
+
+    /* ━━ ブランド大型ビジュアル（h5） ━━ */
+    .brand-visual {
+      position: relative; height: 560px; overflow: hidden;
     }
-    .prog-meta {
-      font-family: var(--f-body);
-      font-size: .78rem;
-      font-weight: 500;
-      color: var(--amber);
-      letter-spacing: .5px;
+    .brand-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%;
+      display: block;
+    }
+    .brand-visual-overlay {
+      position: absolute; inset: 0;
+      background: rgba(26,23,21,.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-visual-text {
+      text-align: center; color: var(--txth);
+    }
+    .brand-visual-text p {
+      font-family: var(--f-h);
+      font-size: .75rem; letter-spacing: 5px; text-transform: uppercase;
+      color: rgba(243,238,229,.7); margin-bottom: 1rem;
+    }
+    .brand-visual-text h2 {
+      font-family: var(--f-b);
+      font-weight: 700; font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      line-height: 1.5; color: var(--txth);
     }
 
-    /* ━━ Book + Credentials ━━ */
-    .credentials { background: var(--bg-raised); }
+    /* ━━ Credentials ━━ */
+    .credentials { background: var(--bg2); }
     .cred-grid {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 5.5rem;
-      align-items: start;
+      grid-template-columns: 240px 1fr;
+      gap: 5rem; align-items: start;
     }
-    .book-cover img {
+    .book-img img {
       width: 100%;
-      border-radius: 3px;
-      box-shadow: 0 24px 64px rgba(0,0,0,.55);
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+      border-radius: 2px;
     }
-    .cred-list { display: flex; flex-direction: column; gap: 2rem; }
-    .cred-item-lg {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(196,122,58,.1);
+    .cred-list { display: flex; flex-direction: column; gap: 1.8rem; }
+    .cred-item {
+      display: flex; gap: 1.4rem; align-items: flex-start;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--div);
     }
-    .cred-item-lg:last-child { border-bottom: none; padding-bottom: 0; }
-    .cred-icon {
-      font-family: var(--f-head);
-      font-size: 1.6rem;
-      font-weight: 400;
-      font-style: italic;
-      color: rgba(196,122,58,.35);
-      flex-shrink: 0;
-      width: 2rem;
+    .cred-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cred-num {
+      font-family: var(--f-h); font-size: 1.5rem; font-style: italic;
+      color: rgba(196,122,58,.3); flex-shrink: 0; width: 1.8rem; line-height: 1;
     }
-    .cred-text h4 {
-      font-family: var(--f-body);
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--txt-head);
-      margin-bottom: .4rem;
-    }
-    .cred-text p {
-      font-family: var(--f-body);
-      font-size: .88rem;
-      font-weight: 400;
-      color: var(--txt-sub);
-      line-height: 1.85;
-    }
+    .cred-item h4 { font-size: .95rem; font-weight: 700; color: var(--txth); margin-bottom: .35rem; }
+    .cred-item p { font-size: .88rem; font-weight: 400; color: var(--txts); line-height: 1.85; }
 
-    /* ━━ Testimonials (Custifyスタイル: 写真上・中央) ━━ */
-    .testimonials { background: var(--bg-base); }
+    /* ━━ Testimonials（Custifyスタイル） ━━ */
+    .testimonials { background: var(--bg1); }
     .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3.5rem;
+      gap: 1.2rem; margin-top: 3.5rem;
     }
     .testi {
-      background: white;
-      padding: 2.8rem 2.2rem 2.5rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 20px rgba(113,67,41,.08);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      border-top: 3px solid var(--amber-mid);
+      background: var(--bg2);
+      padding: 2.5rem 2rem;
+      border-top: 2px solid rgba(196,122,58,.35);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-    .testi-img {
-      width: 96px; height: 96px;
-      border-radius: 50%;
-      object-fit: cover; object-position: top center;
-      margin-bottom: 1.8rem;
-      border: 3px solid #EDE7DE;
-      box-shadow: 0 4px 12px rgba(113,67,41,.12);
+    .testi-photo {
+      width: 88px; height: 88px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      margin-bottom: 1.6rem;
+      border: 2px solid rgba(196,122,58,.25);
     }
-    .testi-quote-mark {
-      font-family: var(--f-head);
-      font-size: 3rem;
-      line-height: .6;
-      color: #D0B9A7;
-      margin-bottom: 1rem;
-      display: block;
+    .testi-mark {
+      font-family: var(--f-h); font-size: 2.8rem; line-height: .5;
+      color: rgba(196,122,58,.3); margin-bottom: 1rem; display: block;
     }
     .testi-quote {
-      font-family: var(--f-body);
-      font-weight: 400;
-      font-size: .92rem;
-      color: var(--txt-body);
-      line-height: 1.95;
-      margin-bottom: 2rem;
-      flex-grow: 1;
+      font-size: .92rem; font-weight: 400;
+      color: var(--txt); line-height: 1.95;
+      margin-bottom: 1.8rem; flex-grow: 1;
     }
-    .testi-divider {
-      width: 32px; height: 1px;
-      background: #D0B9A7;
-      margin: 0 auto 1.2rem;
-    }
-    .testi-name {
-      font-family: var(--f-body);
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--txt-head);
-      letter-spacing: .3px;
-    }
-    .testi-role {
-      font-family: var(--f-body);
-      font-size: .78rem;
-      font-weight: 400;
-      color: var(--txt-sub);
-      margin-top: .3rem;
-      line-height: 1.6;
-    }
+    .testi-sep { width: 28px; height: 1px; background: rgba(196,122,58,.3); margin: 0 auto 1.2rem; }
+    .testi-name { font-size: .9rem; font-weight: 700; color: var(--txth); }
+    .testi-role { font-size: .78rem; font-weight: 400; color: var(--txts); margin-top: .3rem; line-height: 1.6; }
 
-    /* ━━ Blog ━━ */
-    .blog-sec { background: var(--bg-raised); }
-    .blog-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-    }
-    .blog-link {
-      font-family: var(--f-body);
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--txt-sub);
-      text-decoration: none;
-      letter-spacing: .5px;
+    /* ━━ Journal ━━ */
+    .journal { background: var(--bg0); }
+    .journal-inner { max-width: 1100px; margin: 0 auto; }
+    .journal-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .journal-all {
+      font-size: .85rem; font-weight: 500;
+      color: var(--txts); text-decoration: none;
       transition: color .2s;
     }
-    .blog-link:hover { color: var(--amber-lt); }
-    .blog-grid {
+    .journal-all:hover { color: var(--cta); }
+    .post-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1.4fr 1fr 1fr;
       gap: 2px;
     }
     .post {
-      background: white;
-      padding: 2.5rem 2rem;
-      text-decoration: none;
-      color: inherit;
+      background: var(--bg1); padding: 2.5rem 2rem;
+      text-decoration: none; color: inherit; display: block;
       border-bottom: 2px solid transparent;
       transition: border-color .3s, background .3s;
-      display: block;
     }
-    .post:hover { border-bottom-color: var(--amber); background: var(--bg-raised); }
+    .post:hover { border-bottom-color: var(--cta); background: var(--bg2); }
     .post-cat {
-      font-family: var(--f-head);
-      font-size: .7rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: .9rem;
-      display: block;
+      font-family: var(--f-h); font-size: .68rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cta); margin-bottom: .9rem; display: block;
     }
     .post h4 {
-      font-family: var(--f-body);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--txt-head);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
+      font-size: .98rem; font-weight: 700;
+      color: var(--txth); line-height: 1.65; margin-bottom: 1.5rem;
     }
-    .post-date {
-      font-family: var(--f-body);
-      font-size: .78rem;
-      font-weight: 400;
-      color: var(--txt-sub);
-      letter-spacing: .5px;
-    }
+    .post-date { font-size: .78rem; font-weight: 400; color: var(--txts); }
 
     /* ━━ CTA ━━ */
     .cta-sec {
-      background: var(--bg-dark);
-      text-align: center;
-      padding: 8rem 5vw;
-      position: relative;
-      overflow: hidden;
-      color: #FAF5EC;
+      background: var(--bg2); text-align: center;
+      padding: 8rem 5vw; position: relative; overflow: hidden;
     }
-    .cta-sec .sec-eye { color: #D0B9A7; }
-    .cta-sec .sec-h2 { color: #FAF5EC; }
     .cta-sec::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(250,245,236,.05) 0%, transparent 68%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(196,122,58,.05) 0%, transparent 65%);
     }
-    .cta-inner { position: relative; max-width: 620px; margin: 0 auto; }
+    .cta-inner { position: relative; max-width: 580px; margin: 0 auto; }
     .cta-body {
-      font-family: var(--f-body);
-      font-size: .95rem;
-      font-weight: 400;
-      color: rgba(250,245,236,.8);
-      line-height: 2.1;
-      margin: 2rem 0 3rem;
+      font-size: .95rem; font-weight: 400;
+      color: var(--txt); line-height: 2.1; margin: 2rem 0 3rem;
     }
-    .cta-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
-    .cta-sec .btn-gold { background: #FAF5EC; color: var(--amber); }
-    .cta-sec .btn-gold:hover { background: white; }
-    .cta-sec .btn-ghost { border-color: rgba(250,245,236,.5); color: #FAF5EC; }
-    .cta-sec .btn-ghost:hover { background: rgba(250,245,236,.15); color: #FAF5EC; }
-    .cta-note {
-      margin-top: 1.4rem;
-      font-family: var(--f-body);
-      font-size: .82rem;
-      font-weight: 400;
-      color: rgba(250,245,236,.55);
+    .cta-btn {
+      display: inline-block; padding: 1rem 3rem;
+      background: var(--cta); color: var(--ctat);
+      font-size: .95rem; font-weight: 700;
+      text-decoration: none; border-radius: 2px;
+      transition: background .25s, transform .2s, box-shadow .2s;
     }
+    .cta-btn:hover { background: var(--ctah); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,122,58,.25); }
+    .cta-sub {
+      display: block; margin-top: 1.4rem;
+      font-size: .82rem; font-weight: 400; color: var(--txts);
+      text-decoration: none; transition: color .2s;
+    }
+    .cta-sub:hover { color: var(--cta); }
+    .cta-note { margin-top: 1.2rem; font-size: .78rem; font-weight: 400; color: var(--txts); }
 
     /* ━━ Footer ━━ */
     footer {
-      background: #3D2A1A;
-      padding: 5rem 5vw 2.5rem;
-      border-top: 1px solid var(--gold-line);
+      background: #110E0B; padding: 5rem 5vw 2.5rem;
+      border-top: 1px solid var(--div);
     }
     .footer-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 4.5rem;
-      padding-bottom: 3.5rem;
-      border-bottom: 1px solid rgba(243,238,229,.06);
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem; padding-bottom: 3rem;
+      border-bottom: 1px solid var(--div);
     }
-    .footer-logo img { height: 38px; margin-bottom: 1.4rem; }
-    .footer-tag {
-      font-family: var(--f-body);
-      font-size: .85rem;
-      font-weight: 400;
-      color: #C0A88A;
-      line-height: 1.9;
-    }
+    .footer-logo img { height: 38px; margin-bottom: 1.3rem; }
+    .footer-tag { font-size: .85rem; font-weight: 400; color: var(--txts); line-height: 1.9; }
     .footer-col h5 {
-      font-family: var(--f-head);
-      font-size: .7rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.2rem;
+      font-family: var(--f-h); font-size: .68rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cta); margin-bottom: 1.2rem;
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
     .footer-col a {
-      font-family: var(--f-body);
-      font-size: .88rem;
-      font-weight: 400;
-      text-decoration: none;
-      color: #C0A88A;
-      transition: color .2s;
+      font-size: .88rem; font-weight: 400;
+      text-decoration: none; color: var(--txts); transition: color .2s;
     }
-    .footer-col a:hover { color: #EDD9C0; }
+    .footer-col a:hover { color: var(--ctah); }
     .footer-copy {
-      max-width: 1100px;
-      margin: 2.5rem auto 0;
-      text-align: center;
-      font-family: var(--f-body);
-      font-size: .75rem;
-      font-weight: 400;
-      color: rgba(192,168,138,.35);
-      letter-spacing: .5px;
+      max-width: 1100px; margin: 2.5rem auto 0;
+      text-align: center; font-size: .72rem; font-weight: 400;
+      color: rgba(243,238,229,.2);
     }
 
     /* ━━ レスポンシブ ━━ */
     @media (max-width: 960px) {
-      nav { padding: 0 1.5rem; }
+      nav { padding: 0 1.2rem; }
       .nav-links { display: none; }
-      .lang { margin-left: 0; }
-      .hero { grid-template-columns: 1fr; height: auto; }
-      .hero-left { padding: 100px 1.5rem 3.5rem; }
-      .hero-right { height: 52vh; }
-      .hero-right::after { background: linear-gradient(to bottom, var(--bg-raised) 0%, transparent 28%); }
-      .story-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .story-img img { height: 320px; }
-      .forwhom-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .cred-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-cta { margin-left: .8rem; }
+      .lang { padding-left: .8rem; margin-left: .8rem; }
+      .hero-body { padding: 0 1.5rem 6vh; max-width: 100%; }
+      .trial-inner { gap: 1rem; }
+      .trial-items li { padding: .2rem .8rem; }
+      .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-img img { height: 300px; }
       .prog-grid { grid-template-columns: 1fr; }
-      .prog { height: 300px; }
+      .prog:first-child { height: 340px; }
+      .prog:not(:first-child) { height: 280px; }
+      .brand-visual { height: 380px; }
+      .cred-grid { grid-template-columns: 1fr; gap: 3rem; }
       .testi-grid { grid-template-columns: 1fr; }
-      .blog-grid { grid-template-columns: 1fr; }
+      .post-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .sec { padding: 5rem 1.5rem; }
-      .blog-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .theory-formula { gap: 1rem; }
-      .theory-block { padding: 1.5rem 2rem; }
+      .journal-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ナビ（言語切替を内包） -->
+  <!-- ナビ -->
   <nav>
     <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
     <div class="nav-right">
@@ -802,8 +502,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <li><a href="/hacco">Hacco LAB</a></li>
         <li><a href="/about">安藤千英</a></li>
         <li><a href="/blog">ブログ</a></li>
-        <li><a href="mailto:info@andlabtokyo.com" class="nav-cta">体験レッスン</a></li>
       </ul>
+      <a href="mailto:info@andlabtokyo.com" class="nav-cta">体験レッスン</a>
       <div class="lang">
         <a href="?lang=ja" class={lang==='ja'?'on':''}>JP</a>
         <a href="?lang=en" class={lang==='en'?'on':''}>EN</a>
@@ -812,78 +512,68 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </nav>
 
-  <!-- ① HERO — 「発酵創家 安藤千英」を主役に -->
+  <!-- ① Hero — portrait主役 -->
   <section class="hero">
-    <div class="hero-left">
-      <p class="hero-tag">Fermentation Creator · Tokyo Shibuya</p>
+    <div class="hero-photo">
+      <img src="/hero-portrait.jpg" alt="発酵創家 安藤千英" />
+    </div>
+    <div class="hero-body">
+      <p class="hero-eyebrow">Fermentation Creator · Tokyo Shibuya</p>
       <p class="hero-name">安藤 千英　Chie Ando</p>
-      <p class="hero-title">ELLE gourmet認定料理家　/ 発酵×ローフード研究家</p>
+      <p class="hero-role">ELLE gourmet認定料理家 ／ 発酵×ローフード研究家</p>
       <h1>
-        これからの私を、
-        <em>美しく「醸す」。</em>
+        これからの私を、<br />
+        <span>美しく「醸す」。</span>
       </h1>
+      <p class="hero-sub">— 細胞からデザインする、一生モノの心と体 —</p>
       <p class="hero-desc">
-        細胞からデザインする、一生モノの心と体。<br />
-        経営者・専門職・自分を更新し続けたいすべての女性へ。<br />
+        忙しい毎日の中で、自分の体を後回しにしていませんか。<br />
         発酵×ローフードのクロス理論で、あなたの本来の輝きを取り戻す。
       </p>
-      <div class="btns">
-        <a href="mailto:info@andlabtokyo.com" class="btn-gold">体験レッスンを予約する</a>
-        <a href="/about" class="btn-ghost">安藤千英について</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <img src="/chie-main.jpg" alt="発酵創家 安藤千英" />
+      <a href="mailto:info@andlabtokyo.com" class="hero-cta">体験レッスンを予約する</a>
     </div>
   </section>
 
-  <!-- Credentials strip -->
-  <div class="cred-strip">
-    <div class="cred-inner">
-      <div class="cred-item"><span class="dot"></span>ELLE gourmet認定クリエイター</div>
-      <div class="cred-item"><span class="dot"></span>医師監修書籍「&RAW LIVING」著者</div>
-      <div class="cred-item"><span class="dot"></span>循環器内科医・内科医が受講</div>
-      <div class="cred-item"><span class="dot"></span>国際受講生：米・墨・香港ほか</div>
-      <div class="cred-item"><span class="dot"></span>東京・渋谷 / オンライン対応</div>
+  <!-- ② 体験レッスン概要ストリップ -->
+  <div class="trial-strip">
+    <div class="trial-inner">
+      <span class="trial-label">Trial Lesson</span>
+      <ul class="trial-items">
+        <li>東京・渋谷</li>
+        <li>オンライン対応</li>
+        <li>少人数制（1〜4名）</li>
+        <li>初心者歓迎</li>
+        <li>¥8,000〜</li>
+        <li>入会費なし</li>
+      </ul>
+      <a href="mailto:info@andlabtokyo.com" class="trial-link">詳しく見る →</a>
     </div>
   </div>
 
-  <!-- モザイクグリッド -->
-  <div style="display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:260px 260px;gap:3px;background:var(--bg-base);">
-    <div style="overflow:hidden;"><img src="/mosaic-drinks.jpg" alt="ローフードジュース" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" /></div>
-    <div style="overflow:hidden;grid-row:span 2;position:relative;">
-      <img src="/prog-rawfood.jpg" alt="手毬寿司ローフード" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,8,.5) 0%,transparent 60%);"></div>
-      <span style="position:absolute;bottom:1.4rem;left:1.4rem;font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:#c8a96e;">Our World</span>
-    </div>
-    <div style="overflow:hidden;"><img src="/koji.jpg" alt="麹 発酵" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-    <div style="overflow:hidden;"><img src="/prog-chocolate.jpg" alt="ローチョコレート" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" /></div>
-  </div>
-
-  <!-- ② STORY — WHY -->
+  <!-- ③ My Story -->
   <section class="sec story">
     <div class="inner">
       <div class="story-grid">
         <div class="story-img">
-          <img src="/lesson-scene.jpg" alt="&LAB TOKYO レッスン風景" />
+          <img src="/story-lesson.jpg" alt="&LAB TOKYO レッスン風景" />
         </div>
         <div class="story-body">
-          <p class="sec-eye">My Story</p>
+          <span class="sec-eye">My Story</span>
           <h2 class="sec-h2">なぜ、私は食を伝えるのか。</h2>
           <div class="rule"></div>
-          <p>
+          <p class="body-text">
             10年前の4月。娘が台所の熱湯を頭からかぶる大火傷を負いました。
             長期入院、複数回の手術。私は<strong>キッチンに立てなくなった。</strong>
           </p>
-          <p>
+          <p class="body-text">
             そこから食を学び直しました。マクロビ、ローフード、発酵。
             食べることが娘を、そして私自身を、内側から再生させていった。
           </p>
-          <p>
+          <p class="body-text">
             40代になったとき、更年期という新しい岐路に立ちました。
             そのとき改めて気づいたのです——<strong>「細胞から整える食」は、一生モノの武器だ</strong>、と。
           </p>
-          <p>
+          <p class="body-text">
             忙しい女性が、食から自分を取り戻せる場所をつくりたい。
             それが&LAB TOKYOの原点です。
           </p>
@@ -895,86 +585,28 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ③ FOR WHOM — ターゲット明確化 -->
-  <section class="sec forwhom">
-    <div class="inner">
-      <p class="sec-eye">For Whom</p>
-      <h2 class="sec-h2">こんな女性のための場所です。</h2>
-      <div class="forwhom-grid">
-        <ul class="whom-list">
-          <li>毎日忙しく、自分の体を後回しにしてきた経営者・専門職</li>
-          <li>更年期や体調の変化を感じ、食から根本的に変えたい</li>
-          <li>「料理が苦手」「難しそう」と思っていたけれど興味はある</li>
-          <li>海外からでも学べる、グローバルなコンテンツを求めている</li>
-          <li>ダイエットや美容だけでなく、一生使える知識がほしい</li>
-          <li>認定資格を取得して、自分のビジネスや活動に活かしたい</li>
-        </ul>
-        <div class="forwhom-right">
-          <p class="label">Lesson Style</p>
-          <p>
-            少人数制（1〜4名）で丁寧に。<br />
-            初心者・お子様も歓迎。<br /><br />
-            <strong style="color:var(--amber)">東京・渋谷の教室</strong> または<br />
-            <strong style="color:var(--amber)">オンライン</strong>（国内外対応）<br /><br />
-            ¥8,000〜 入会費なし。<br />
-            まずは1回の体験から。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ④ CROSS THEORY — 独自理論を視覚化 -->
-  <section class="theory">
-    <div class="inner">
-      <p class="sec-eye">The &LAB Theory</p>
-      <h2 class="sec-h2">2つの知恵のかけ算。</h2>
-      <div class="theory-formula">
-        <div class="theory-block">
-          <p class="label">Raw Food</p>
-          <h3>ローフード</h3>
-        </div>
-        <span class="theory-op">×</span>
-        <div class="theory-block">
-          <p class="label">Fermentation</p>
-          <h3>発酵</h3>
-        </div>
-        <span class="theory-op">=</span>
-        <div class="theory-result">
-          <p class="label" style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;">Living Food</p>
-          <h3>細胞から整う、<br />一生モノの美</h3>
-        </div>
-      </div>
-      <p class="theory-body">
-        48℃以下の調理で酵素・栄養を壊さないローフードと、<br />
-        腸内環境を整える日本の発酵文化を掛け合わせる。<br />
-        これが&LAB TOKYOが提唱するクロス理論です。
-      </p>
-    </div>
-  </section>
-
-  <!-- ⑤ PROGRAMS -->
-  <section class="sec programs">
-    <div class="inner">
-      <p class="sec-eye">Programs</p>
+  <!-- ④ Programs（非均等グリッド） -->
+  <section class="sec programs" id="lessons">
+    <div class="programs-inner">
+      <span class="sec-eye">Programs</span>
       <h2 class="sec-h2">3つのプログラム。</h2>
     </div>
     <div class="prog-grid">
       <a href="/lessons" class="prog">
-        <img src="/prog-rawfood.jpg" alt="ローフード" />
+        <img src="/rawfood-zucchini.jpg" alt="ローフード" />
         <div class="prog-ov"></div>
         <div class="prog-body">
-          <p class="prog-eye">Program 01</p>
+          <span class="prog-eye">Program 01</span>
           <h3>ローフード</h3>
           <p class="prog-detail">48℃以下の調理で酵素を活かす。体験〜マイスター資格まで段階的に学べます。</p>
           <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 初心者OK</p>
         </div>
       </a>
-      <a href="/hacco" class="prog">
-        <img src="/koji.jpg" alt="Hacco LAB 発酵" />
+      <a href="/hacco" class="prog" id="hacco">
+        <img src="/hacco-amazake.jpg" alt="Hacco LAB 発酵" />
         <div class="prog-ov"></div>
         <div class="prog-body">
-          <p class="prog-eye">Program 02</p>
+          <span class="prog-eye">Program 02</span>
           <h3>Hacco LAB（発酵）</h3>
           <p class="prog-detail">麹・味噌・醤油など日本の発酵文化。発酵プランナー資格取得コースあり。</p>
           <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 国際対応</p>
@@ -984,7 +616,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <img src="/prog-chocolate.jpg" alt="ローチョコレート" />
         <div class="prog-ov"></div>
         <div class="prog-body">
-          <p class="prog-eye">Program 03</p>
+          <span class="prog-eye">Program 03</span>
           <h3>ローチョコレート</h3>
           <p class="prog-detail">日本ローチョコレーティエ協会公認。カカオの栄養を活かした、大人の甘さ。</p>
           <p class="prog-meta">¥8,000〜 ｜ 対面・オンライン ｜ 資格取得可</p>
@@ -993,44 +625,55 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑥ BOOK + CREDENTIALS — 信頼の証拠 -->
-  <section class="sec credentials">
+  <!-- ⑤ ブランドを象徴する大型ビジュアル（花寿司） -->
+  <div class="brand-visual">
+    <img src="/brand-sushi.jpg" alt="&LAB TOKYO の世界観" />
+    <div class="brand-visual-overlay">
+      <div class="brand-visual-text">
+        <p>The &LAB World</p>
+        <h2>食は、美意識である。</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ Credentials -->
+  <section class="sec credentials" id="about">
     <div class="inner">
       <div class="cred-grid">
-        <div class="book-cover">
+        <div class="book-img">
           <img src="/book-cover.jpg" alt="&RAW LIVING ローフードの教科書" />
         </div>
         <div>
-          <p class="sec-eye">Credentials</p>
+          <span class="sec-eye">Credentials</span>
           <h2 class="sec-h2">信頼の、根拠があります。</h2>
           <div class="rule"></div>
           <div class="cred-list">
-            <div class="cred-item-lg">
-              <span class="cred-icon">01</span>
-              <div class="cred-text">
+            <div class="cred-item">
+              <span class="cred-num">01</span>
+              <div>
                 <h4>医師監修書籍「&RAW LIVING」著者</h4>
                 <p>循環器内科医・吉田和弘医師の監修のもと出版。Amazonにて好評発売中。</p>
               </div>
             </div>
-            <div class="cred-item-lg">
-              <span class="cred-icon">02</span>
-              <div class="cred-text">
+            <div class="cred-item">
+              <span class="cred-num">02</span>
+              <div>
                 <h4>ELLE gourmet認定クリエイター</h4>
                 <p>フランス発のプレミアム食専門誌に認定された、日本でも数少ない料理家。</p>
               </div>
             </div>
-            <div class="cred-item-lg">
-              <span class="cred-icon">03</span>
-              <div class="cred-text">
+            <div class="cred-item">
+              <span class="cred-num">03</span>
+              <div>
                 <h4>医師・経営者・海外プロが選ぶ教室</h4>
-                <p>循環器内科医・内科医をはじめ複数の医師が受講・資格取得。米・墨・香港など海外からも受講。</p>
+                <p>循環器内科医・内科医をはじめ複数の医師が資格取得。米・墨・香港など海外からも受講。</p>
               </div>
             </div>
-            <div class="cred-item-lg">
-              <span class="cred-icon">04</span>
-              <div class="cred-text">
+            <div class="cred-item">
+              <span class="cred-num">04</span>
+              <div>
                 <h4>企業レシピ開発・メディア掲載多数</h4>
-                <p>DIC・Kuvingsほか複数企業のレシピ開発実績。ライフスタイル誌にも掲載。</p>
+                <p>DIC・Kuvingsほか複数企業のレシピ開発実績。ライフスタイル誌にも多数掲載。</p>
               </div>
             </div>
           </div>
@@ -1039,33 +682,33 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑦ TESTIMONIALS — 受講生の声 -->
+  <!-- ⑦ Testimonials -->
   <section class="sec testimonials">
     <div class="inner">
-      <p class="sec-eye">Testimonials</p>
+      <span class="sec-eye">Testimonials</span>
       <h2 class="sec-h2">受講生の声。</h2>
       <div class="testi-grid">
         <div class="testi">
-          <img src="/chie-portrait.jpg" alt="櫻庭千穂さん" class="testi-img" />
-          <span class="testi-quote-mark">"</span>
-          <p class="testi-quote">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが、私の人生と医療を変えました。</p>
-          <div class="testi-divider"></div>
+          <img src="/chie-portrait.jpg" alt="櫻庭千穂さん" class="testi-photo" />
+          <span class="testi-mark">"</span>
+          <p class="testi-quote">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました。</p>
+          <div class="testi-sep"></div>
           <p class="testi-name">櫻庭 千穂</p>
           <p class="testi-role">内科医 / ドクターズカフェ オーナー<br />那須高原</p>
         </div>
         <div class="testi">
-          <img src="/student-oscar.jpg" alt="オスカーさん" class="testi-img" />
-          <span class="testi-quote-mark">"</span>
-          <p class="testi-quote">Joining from the US and Mexico online — the koji and umami content was extraordinary. Video, text, and hands-on learning combined. One of the most memorable experiences I've ever had.</p>
-          <div class="testi-divider"></div>
+          <img src="/student-oscar.jpg" alt="オスカーさん" class="testi-photo" />
+          <span class="testi-mark">"</span>
+          <p class="testi-quote">Joining from the US and Mexico — the koji and umami content was extraordinary. Video, text, and hands-on learning combined. One of the best experiences I've ever had.</p>
+          <div class="testi-sep"></div>
           <p class="testi-name">Oscar</p>
           <p class="testi-role">Umami &amp; Koji LAB 受講<br />アメリカ・メキシコ在住</p>
         </div>
         <div class="testi">
-          <img src="/student-doctor.jpg" alt="吉田和弘医師" class="testi-img" />
-          <span class="testi-quote-mark">"</span>
-          <p class="testi-quote">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートしていただきました。医師として自信を持っておすすめします。</p>
-          <div class="testi-divider"></div>
+          <img src="/student-doctor.jpg" alt="吉田和弘医師" class="testi-photo" />
+          <span class="testi-mark">"</span>
+          <p class="testi-quote">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートいただきました。医師として自信を持っておすすめします。</p>
+          <div class="testi-sep"></div>
           <p class="testi-name">吉田 和弘 医師</p>
           <p class="testi-role">循環器内科医<br />書籍「&RAW LIVING」医学監修</p>
         </div>
@@ -1073,29 +716,29 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑧ BLOG -->
-  <section class="sec blog-sec">
-    <div class="inner">
-      <div class="blog-header">
+  <!-- ⑧ Journal -->
+  <section class="sec journal">
+    <div class="journal-inner">
+      <div class="journal-header">
         <div>
-          <p class="sec-eye">Journal</p>
+          <span class="sec-eye">Journal</span>
           <h2 class="sec-h2">食と発酵の、知恵と実践。</h2>
         </div>
-        <a href="/blog" class="blog-link">すべての記事を見る →</a>
+        <a href="/blog" class="journal-all">すべての記事を見る →</a>
       </div>
-      <div class="blog-grid">
+      <div class="post-grid">
         <a href="/blog" class="post">
-          <p class="post-cat">Raw Food</p>
+          <span class="post-cat">Raw Food</span>
           <h4>酵素を壊さない調理の5つの基本。なぜ48℃なのか</h4>
           <p class="post-date">2026.05.20</p>
         </a>
         <a href="/blog" class="post">
-          <p class="post-cat">Hacco LAB</p>
+          <span class="post-cat">Hacco LAB</span>
           <h4>自家製麹の作り方。初心者でも失敗しないポイント</h4>
           <p class="post-date">2026.05.10</p>
         </a>
         <a href="/blog" class="post">
-          <p class="post-cat">更年期 × 食</p>
+          <span class="post-cat">更年期 × 食</span>
           <h4>40代から始める「細胞から整える」ローフード習慣</h4>
           <p class="post-date">2026.04.28</p>
         </a>
@@ -1103,17 +746,18 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑨ CTA — 2つだけ -->
+  <!-- ⑨ 最終CTA -->
   <section class="cta-sec" id="contact">
     <div class="cta-inner">
-      <p class="sec-eye">First Step</p>
+      <span class="sec-eye">First Step</span>
       <h2 class="sec-h2">忙しさを、輝きに変える。</h2>
-      <div class="rule" style="margin:2rem auto;"></div>
-      <p class="cta-body">まずは1回の体験から。<br />東京・渋谷またはオンラインで、あなたのペースで始められます。</p>
-      <div class="cta-btns">
-        <a href="mailto:info@andlabtokyo.com" class="btn-gold">体験レッスンを予約する</a>
-        <a href="mailto:info@andlabtokyo.com" class="btn-ghost">お問い合わせ・ご質問</a>
-      </div>
+      <div class="rule" style="margin: 1.8rem auto;"></div>
+      <p class="cta-body">
+        まずは1回の体験から。<br />
+        東京・渋谷またはオンラインで、あなたのペースで始められます。
+      </p>
+      <a href="mailto:info@andlabtokyo.com" class="cta-btn">体験レッスンを予約する</a>
+      <a href="mailto:info@andlabtokyo.com" class="cta-sub">お問い合わせ・ご質問はこちら →</a>
       <p class="cta-note">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
     </div>
   </section>
@@ -1122,7 +766,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="/logo.png" alt="&LAB TOKYO" /></div>
+        <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
         <p class="footer-tag">発酵創家 安藤千英<br />Raw Food × Fermentation<br />Lifestyle Lab · Tokyo Shibuya</p>
       </div>
       <div class="footer-col">
