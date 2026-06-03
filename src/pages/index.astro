@@ -27,9 +27,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       --txtn: #D6CFC4;
       --div:  rgba(243,238,229,.12);
 
-      --cta:  #C47A3A;
-      --ctah: #D68B4A;
-      --ctat: #12100F;
+      --cta:  #C6A15B;
+      --ctah: #D4B06A;
+      --ctat: #221C17;
 
       --leaf: #4E8A18;
 
@@ -92,7 +92,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .lang a:hover { color: var(--txtn); }
 
     /* ━━ Hero ━━
-       portrait主役 — きれいすぎる左右分割にしない
+       食の美しさを全面主役に。
+       テキストは左下にオーバーレイ。
     ━━ */
     .hero {
       position: relative;
@@ -107,19 +108,19 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .hero-photo img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: 70% top;
+      object-fit: cover; object-position: center 35%;
       display: block;
     }
     .hero-photo::after {
       content: '';
       position: absolute; inset: 0;
       background:
-        linear-gradient(to right,  rgba(26,23,21,.88) 0%, rgba(26,23,21,.55) 50%, rgba(26,23,21,.1) 100%),
-        linear-gradient(to top,    rgba(26,23,21,.6)  0%, transparent 40%);
+        linear-gradient(to top, rgba(26,23,21,.85) 0%, rgba(26,23,21,.35) 45%, rgba(26,23,21,.05) 100%),
+        linear-gradient(to right, rgba(26,23,21,.5) 0%, transparent 60%);
     }
     .hero-body {
       position: relative; z-index: 1;
-      max-width: 560px;
+      max-width: 600px;
       padding: 0 5vw 7vh;
     }
     .hero-eyebrow {
@@ -503,7 +504,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <li><a href="/about">安藤千英</a></li>
         <li><a href="/blog">ブログ</a></li>
       </ul>
-      <a href="mailto:info@andlabtokyo.com" class="nav-cta">体験レッスン</a>
+      <a href="/lessons" class="nav-cta">体験レッスン</a>
       <div class="lang">
         <a href="?lang=ja" class={lang==='ja'?'on':''}>JP</a>
         <a href="?lang=en" class={lang==='en'?'on':''}>EN</a>
@@ -512,15 +513,13 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </nav>
 
-  <!-- ① Hero — portrait主役 -->
+  <!-- ① Hero — 食の美しさを主役に -->
   <section class="hero">
     <div class="hero-photo">
-      <img src="/hero-portrait.jpg" alt="発酵創家 安藤千英" />
+      <img src="/brand-sushi.jpg" alt="&LAB TOKYO ローフード" />
     </div>
     <div class="hero-body">
-      <p class="hero-eyebrow">Fermentation Creator · Tokyo Shibuya</p>
-      <p class="hero-name">安藤 千英　Chie Ando</p>
-      <p class="hero-role">ELLE gourmet認定料理家 ／ 発酵×ローフード研究家</p>
+      <p class="hero-eyebrow">Raw Food × Fermentation · Tokyo Shibuya</p>
       <h1>
         これからの私を、<br />
         <span>美しく「醸す」。</span>
@@ -530,7 +529,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         忙しい毎日の中で、自分の体を後回しにしていませんか。<br />
         発酵×ローフードのクロス理論で、あなたの本来の輝きを取り戻す。
       </p>
-      <a href="mailto:info@andlabtokyo.com" class="hero-cta">体験レッスンを予約する</a>
+      <a href="/lessons" class="hero-cta">体験レッスンを見る</a>
     </div>
   </section>
 
@@ -546,7 +545,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <li>¥8,000〜</li>
         <li>入会費なし</li>
       </ul>
-      <a href="mailto:info@andlabtokyo.com" class="trial-link">詳しく見る →</a>
+      <a href="/lessons" class="trial-link">詳しく見る →</a>
     </div>
   </div>
 
@@ -756,9 +755,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         まずは1回の体験から。<br />
         東京・渋谷またはオンラインで、あなたのペースで始められます。
       </p>
-      <a href="mailto:info@andlabtokyo.com" class="cta-btn">体験レッスンを予約する</a>
-      <a href="mailto:info@andlabtokyo.com" class="cta-sub">お問い合わせ・ご質問はこちら →</a>
-      <p class="cta-note">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
+      <a href="/lessons" class="cta-btn">体験レッスンを予約する</a>
+      <a href="/contact" class="cta-sub">お問い合わせフォームへ →</a>
+      <p class="cta-note">入会費・登録費は一切ありません。まずはお気軽にどうぞ。</p>
     </div>
   </section>
 
@@ -767,7 +766,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-        <p class="footer-tag">発酵創家 安藤千英<br />Raw Food × Fermentation<br />Lifestyle Lab · Tokyo Shibuya</p>
+        <p class="footer-tag">発酵創家 安藤千英<br />Raw Food × Fermentation<br />Lifestyle Lab · Tokyo Shibuya<br /><br /><a href="/contact" style="color:var(--cta);text-decoration:none;font-size:.82rem;">お問い合わせフォームへ</a></p>
       </div>
       <div class="footer-col">
         <h5>Menu</h5>
