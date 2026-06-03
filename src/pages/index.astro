@@ -8,14 +8,14 @@ const content = {
 		navAbout: '私について',
 		navBlog: 'ブログ',
 		navContact: 'お問い合わせ',
-		heroTagline: '細胞から整える、',
-		heroAccent: 'リビングフードのある暮らし',
-		heroSub: '人間は食べたものでできている',
-		heroDesc: '東京・外苑前。ローフードと発酵の料理教室。\n酵素と栄養を活かした食で、内側から美しく健やかに。',
-		btnLesson: 'レッスンを見る',
-		btnContact: 'お問い合わせ',
-		conceptTitle: '&LAB TOKYOとは',
-		conceptText: '&LAB TOKYOは、ローフードと発酵を専門とする料理教室です。48℃以下の調理で酵素・栄養を最大限に保ちながら、日本の発酵文化も取り入れた独自のプログラムをご提供しています。ELLE Gourmet認定クリエイターである安藤千英が、少人数・丁寧にお伝えします。',
+		heroTagline: 'これからの私を、',
+		heroAccent: '美しく「醸す」。',
+		heroSub: '細胞からデザインする、一生モノの心と体。',
+		heroDesc: '忙しさを、輝きに変える。\n経営者・専門職・自分を更新し続けたいすべての女性のための\n発酵×ローフード ライフスタイル・ラボ',
+		btnLesson: '&LABの世界を体験する',
+		btnContact: 'まずは体験レッスンから',
+		conceptTitle: '美しさを、自ら「つくる」人へ。',
+		conceptText: '&LAB TOKYOは、東京・渋谷を拠点とする「発酵×ローフード」のクロス理論でライフスタイルを進化させるラボです。私たちが提案するのは、単なる「料理」ではありません。細胞から目覚めるような生きたエネルギー（酵素）を取り入れ、古来の知恵である「発酵」で内側から美しさを醸成する。経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。あなたが持つ本来の輝きを、最大化させる場所でありたい。ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。',
 		service1Title: 'ローフード',
 		service1Desc: '48℃以下の調理で酵素と栄養素を壊さずに保持。体の中から美しく整える、生きた食材のチカラを学びます。',
 		service2Title: 'Hacco LAB（発酵）',
@@ -243,9 +243,26 @@ const t = content[lang] || content.ja;
 				min-height: 92vh;
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
 				background: linear-gradient(160deg, var(--cream) 55%, rgba(212,146,63,0.08) 100%);
 				padding: 5rem 3rem;
 				overflow: hidden;
+				gap: 3rem;
+			}
+			.hero-image {
+				flex: 0 0 45%;
+				max-width: 45%;
+				border-radius: 4px;
+				overflow: hidden;
+				position: relative;
+				z-index: 1;
+			}
+			.hero-image img {
+				width: 100%;
+				height: 560px;
+				object-fit: cover;
+				border-radius: 4px;
+				display: block;
 			}
 			.hero-bg-circle {
 				position: absolute;
@@ -378,18 +395,16 @@ const t = content[lang] || content.ja;
 				gap: 5rem;
 				align-items: center;
 			}
-			.concept-image-placeholder {
-				background: linear-gradient(135deg, rgba(212,146,63,0.12), rgba(217,125,125,0.12));
+			.concept-image {
 				border-radius: 4px;
-				height: 420px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: var(--text-light);
-				font-size: 0.9rem;
-				border: 1px dashed rgba(212,146,63,0.3);
-				flex-direction: column;
-				gap: 1rem;
+				overflow: hidden;
+			}
+			.concept-image img {
+				width: 100%;
+				height: 460px;
+				object-fit: cover;
+				border-radius: 4px;
+				display: block;
 			}
 			.concept-text p {
 				color: var(--text-main);
@@ -587,7 +602,9 @@ const t = content[lang] || content.ja;
 
 		<!-- ナビゲーション -->
 		<nav>
-			<a href="/" class="logo"><span class="logo-amp">&</span>LAB TOKYO</a>
+			<a href="/" class="logo">
+				<img src="/logo.png" alt="&LAB TOKYO" style="height: 48px; width: auto;" />
+			</a>
 			<ul>
 				<li><a href="#lessons">{t.navLessons}</a></li>
 				<li><a href="#hacco">{t.navHacco}</a></li>
@@ -613,14 +630,16 @@ const t = content[lang] || content.ja;
 					<a href="#contact" class="btn btn-outline">{t.btnContact}</a>
 				</div>
 			</div>
+			<div class="hero-image">
+				<img src="/chie-cooking.jpg" alt="安藤千英 料理シーン" />
+			</div>
 		</section>
 
 		<!-- コンセプト -->
 		<section class="concept" id="about">
 			<div class="concept-inner">
-				<div class="concept-image-placeholder">
-					<span style="font-size:2rem">📷</span>
-					<span>写真を追加予定</span>
+				<div class="concept-image">
+					<img src="/green-smoothie.jpg" alt="グリーンスムージー" />
 				</div>
 				<div class="concept-text">
 					<p class="section-label">Concept</p>
