@@ -240,29 +240,42 @@ const t = content[lang] || content.ja;
 			/* ---- ヒーロー ---- */
 			.hero {
 				position: relative;
-				min-height: 92vh;
+				min-height: 100vh;
 				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				background: linear-gradient(160deg, var(--cream) 55%, rgba(212,146,63,0.08) 100%);
-				padding: 5rem 3rem;
+				align-items: flex-end;
+				padding: 0;
 				overflow: hidden;
-				gap: 3rem;
 			}
-			.hero-image {
-				flex: 0 0 45%;
-				max-width: 45%;
-				border-radius: 4px;
-				overflow: hidden;
+			.hero-bg {
+				position: absolute;
+				inset: 0;
+				z-index: 0;
+			}
+			.hero-bg img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+				display: block;
+			}
+			.hero-bg::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to top,
+					rgba(10,14,39,0.75) 0%,
+					rgba(10,14,39,0.3) 50%,
+					rgba(10,14,39,0.05) 100%
+				);
+			}
+			.hero-inner {
 				position: relative;
 				z-index: 1;
-			}
-			.hero-image img {
 				width: 100%;
-				height: 560px;
-				object-fit: cover;
-				border-radius: 4px;
-				display: block;
+				padding: 5rem 5rem 6rem;
+				color: var(--cream);
+				max-width: 820px;
 			}
 			.hero-bg-circle {
 				position: absolute;
@@ -285,40 +298,42 @@ const t = content[lang] || content.ja;
 				z-index: 1;
 			}
 			.hero-eyebrow {
-				font-size: 0.82rem;
-				letter-spacing: 3px;
+				font-size: 0.78rem;
+				letter-spacing: 4px;
 				text-transform: uppercase;
-				color: var(--terracotta);
-				margin-bottom: 1.5rem;
-				font-weight: 500;
+				color: rgba(212,146,63,0.9);
+				margin-bottom: 1.8rem;
+				font-weight: 400;
 			}
 			.hero h1 {
 				font-family: 'Noto Serif JP', serif;
-				font-size: clamp(2rem, 5vw, 3.6rem);
-				line-height: 1.4;
+				font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+				line-height: 1.45;
 				font-weight: 300;
-				color: var(--deep-navy);
+				color: white;
 				margin-bottom: 0.5rem;
+				letter-spacing: -0.5px;
 			}
 			.hero h1 .accent {
-				color: var(--terracotta);
-				font-weight: 700;
+				color: rgba(212,146,63,0.95);
+				font-weight: 500;
 				display: block;
 			}
 			.hero-sub {
 				font-family: 'Noto Serif JP', serif;
-				font-size: 1rem;
-				color: var(--text-light);
-				margin: 1rem 0 1.8rem;
-				font-style: italic;
+				font-size: 1.05rem;
+				color: rgba(254,249,243,0.85);
+				margin: 1.2rem 0 1.8rem;
+				font-weight: 300;
+				letter-spacing: 1px;
 			}
 			.hero-desc {
-				font-size: 1rem;
-				color: var(--text-main);
-				opacity: 0.8;
-				margin-bottom: 2.5rem;
+				font-size: 0.95rem;
+				color: rgba(254,249,243,0.75);
+				margin-bottom: 2.8rem;
 				white-space: pre-line;
-				line-height: 2;
+				line-height: 2.2;
+				font-weight: 300;
 			}
 			.cta-group {
 				display: flex;
@@ -355,6 +370,24 @@ const t = content[lang] || content.ja;
 			.btn-outline:hover {
 				background: var(--deep-navy);
 				color: var(--cream);
+				transform: translateY(-2px);
+			}
+			.btn-outline-light {
+				background: transparent;
+				color: white;
+				border: 1.5px solid rgba(255,255,255,0.6);
+				padding: 0.9rem 2.2rem;
+				font-size: 0.9rem;
+				font-weight: 400;
+				letter-spacing: 1px;
+				text-decoration: none;
+				border-radius: 2px;
+				transition: all 0.3s;
+				display: inline-block;
+			}
+			.btn-outline-light:hover {
+				background: rgba(255,255,255,0.15);
+				border-color: white;
 				transform: translateY(-2px);
 			}
 
@@ -578,7 +611,7 @@ const t = content[lang] || content.ja;
 			@media (max-width: 900px) {
 				nav { padding: 1.2rem 1.5rem; }
 				nav ul { gap: 1.5rem; }
-				.hero { padding: 4rem 1.5rem; }
+				.hero-inner { padding: 3rem 1.5rem 4rem; }
 				.concept-inner { grid-template-columns: 1fr; gap: 3rem; }
 				.services-grid { grid-template-columns: 1fr; }
 				.lessons-grid { grid-template-columns: 1fr; }
@@ -615,10 +648,11 @@ const t = content[lang] || content.ja;
 
 		<!-- ヒーロー -->
 		<section class="hero">
-			<div class="hero-bg-circle c1"></div>
-			<div class="hero-bg-circle c2"></div>
+			<div class="hero-bg">
+				<img src="/hero-food.jpg" alt="&LAB TOKYO ローフード" />
+			</div>
 			<div class="hero-inner">
-				<p class="hero-eyebrow">Raw Food &amp; Fermentation · Tokyo Gaienmae</p>
+				<p class="hero-eyebrow">Raw Food × Fermentation · Tokyo Shibuya</p>
 				<h1>
 					{t.heroTagline}
 					<span class="accent">{t.heroAccent}</span>
@@ -627,11 +661,8 @@ const t = content[lang] || content.ja;
 				<p class="hero-desc">{t.heroDesc}</p>
 				<div class="cta-group">
 					<a href="#lessons" class="btn btn-primary">{t.btnLesson}</a>
-					<a href="#contact" class="btn btn-outline">{t.btnContact}</a>
+					<a href="#contact" class="btn btn-outline-light">{t.btnContact}</a>
 				</div>
-			</div>
-			<div class="hero-image">
-				<img src="/chie-cooking.jpg" alt="安藤千英 料理シーン" />
 			</div>
 		</section>
 
