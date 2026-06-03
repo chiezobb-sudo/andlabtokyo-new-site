@@ -10,35 +10,36 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。医師監修書籍、国内外の受講生実績。体験レッスン受付中。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━
        &LAB TOKYO — デザイントークン
-       背景: 暖かい墨色系 / 文字: 生成り系
+       背景: 白・温かいクリーム系 / Shopifyカラーパレット参考
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     :root {
-      /* 背景（真っ黒ではなく暖かい墨色） */
-      --bg-base:   #1A1715;   /* メイン背景 */
-      --bg-raised: #1E1B19;   /* セクション段差A */
-      --bg-card:   #22201D;   /* セクション段差B / カード */
-      --bg-nav:    rgba(26,23,21,.94);
+      /* 背景（白・クリーム系） */
+      --bg-base:   #FAFAF8;   /* メイン背景（温かい白） */
+      --bg-raised: #F5F1EB;   /* セクション段差A（クリーム） */
+      --bg-card:   #EDE7DE;   /* セクション段差B（ベージュ） */
+      --bg-dark:   #714329;   /* ダークセクション（深いテラコッタ） */
+      --bg-nav:    rgba(250,250,248,.96);
 
-      /* アクセント（発酵・ローチョコを連想する暖色） */
-      --amber:     #C47A3A;   /* CTAボタン背景 */
-      --amber-lt:  #D9924A;   /* ホバー */
-      --amber-dim: #A8632E;   /* ボーダー・アクセント */
-      --gold-line: rgba(196,122,58,.3); /* 仕切り線 */
+      /* アクセント（Shopify #714329系 — テラコッタ・ブラウン） */
+      --amber:     #714329;   /* プライマリアクセント */
+      --amber-lt:  #8B5534;   /* ホバー */
+      --amber-mid: #B08463;   /* ミディアム */
+      --amber-dim: rgba(113,67,41,.2); /* ボーダー */
 
-      /* テキスト（生成り・アイボリー系 — 薄グレー禁止） */
-      --txt-head:  #FAF5EC;   /* 見出し */
-      --txt-body:  #F3EEE5;   /* 本文 */
-      --txt-sub:   #C0B6A8;   /* サブテキスト・キャプション */
-      --txt-nav:   #D6CFC4;   /* ナビゲーション */
-      --txt-btn:   #12100F;   /* ボタン内テキスト */
+      /* テキスト（濃いブラウン系） */
+      --txt-head:  #1A0F08;   /* 見出し（ほぼ黒） */
+      --txt-body:  #2C1F14;   /* 本文 */
+      --txt-sub:   #7B6A5A;   /* サブテキスト */
+      --txt-nav:   #3D2A1A;   /* ナビゲーション */
+      --txt-btn:   #FAFAF8;   /* CTAボタン文字（白） */
 
       /* フォント — 2種のみ */
-      --f-head: 'Cormorant Garamond', 'Noto Sans JP', serif;  /* 見出し */
-      --f-body: 'Noto Sans JP', sans-serif;                    /* 本文・UI */
+      --f-head: 'Cormorant Garamond', 'Noto Sans JP', serif;
+      --f-body: 'Noto Sans JP', sans-serif;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -68,7 +69,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       transition: color .2s;
     }
     .lang a.on  { color: var(--amber); }
-    .lang a:hover { color: var(--txt-body); }
+    .lang a:hover { color: var(--amber); }
 
     /* ━━ ナビゲーション ━━ */
     nav {
@@ -122,7 +123,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       flex-direction: column;
       justify-content: flex-end;
       padding: 120px 4vw 7vh 5vw;
-      background: var(--bg-raised);
+      background: var(--bg-base);
       z-index: 1;
     }
     .hero-right { position: relative; overflow: hidden; }
@@ -133,7 +134,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .hero-right::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--bg-raised) 0%, transparent 28%);
+      background: linear-gradient(to right, var(--bg-base) 0%, transparent 22%);
     }
 
     .hero-tag {
@@ -195,28 +196,29 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-body);
       font-size: .875rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-decoration: none;
-      border-radius: 2px;
-      transition: background .25s, transform .2s;
+      border-radius: 3px;
+      transition: background .25s, transform .2s, box-shadow .2s;
     }
-    .btn-gold:hover { background: var(--amber-lt); transform: translateY(-2px); }
+    .btn-gold:hover { background: var(--amber-lt); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(113,67,41,.25); }
     .btn-ghost {
       display: inline-block;
       padding: .9rem 2.2rem;
-      border: 1px solid rgba(192,182,168,.4);
-      color: var(--txt-nav);
+      border: 1.5px solid var(--amber);
+      color: var(--amber);
       font-family: var(--f-body);
       font-size: .875rem;
       font-weight: 500;
-      letter-spacing: 1px;
+      letter-spacing: .5px;
       text-decoration: none;
-      border-radius: 2px;
-      transition: border-color .25s, color .25s, transform .2s;
+      border-radius: 3px;
+      transition: all .25s;
+      background: transparent;
     }
     .btn-ghost:hover {
-      border-color: var(--amber);
-      color: var(--amber-lt);
+      background: var(--amber);
+      color: var(--txt-btn);
       transform: translateY(-2px);
     }
 
@@ -282,7 +284,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .inner { max-width: 1100px; margin: 0 auto; }
 
     /* ━━ Story ━━ */
-    .story { background: var(--bg-raised); }
+    .story { background: var(--bg-base); }
     .story-grid {
       display: grid;
       grid-template-columns: 45% 1fr;
@@ -326,7 +328,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .story-link:hover { color: var(--amber-lt); border-color: var(--amber); }
 
     /* ━━ For Whom ━━ */
-    .forwhom { background: var(--bg-base); }
+    .forwhom { background: var(--bg-raised); }
     .forwhom-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -353,9 +355,10 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-weight: 400;
     }
     .forwhom-right {
-      background: var(--bg-card);
+      background: white;
       padding: 2.5rem;
-      border-left: 2px solid var(--amber-dim);
+      border-left: 3px solid var(--amber);
+      box-shadow: 0 2px 16px rgba(113,67,41,.08);
     }
     .forwhom-right .label {
       font-family: var(--f-head);
@@ -376,7 +379,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
 
     /* ━━ Theory ━━ */
-    .theory { background: var(--bg-card); text-align: center; padding: 7rem 5vw; }
+    .theory { background: var(--bg-dark); text-align: center; padding: 7rem 5vw; color: #FAF5EC; }
+    .theory .sec-eye { color: #D0B9A7; }
+    .theory .sec-h2 { color: #FAF5EC; }
     .theory-formula {
       display: flex;
       align-items: center;
@@ -387,7 +392,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .theory-block {
       padding: 2.2rem 2.8rem;
-      border: 1px solid rgba(196,122,58,.22);
+      border: 1px solid rgba(250,245,236,.25);
+      background: rgba(250,245,236,.05);
     }
     .theory-block .label {
       font-family: var(--f-head);
@@ -395,7 +401,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-weight: 400;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--txt-sub);
+      color: #D0B9A7;
       margin-bottom: .8rem;
       display: block;
     }
@@ -403,24 +409,24 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-head);
       font-weight: 600;
       font-size: 1.5rem;
-      color: var(--txt-head);
+      color: #FAF5EC;
     }
     .theory-op {
       font-family: var(--f-head);
       font-size: 2.8rem;
       font-weight: 400;
-      color: rgba(196,122,58,.45);
+      color: rgba(208,185,167,.6);
     }
     .theory-result {
       padding: 1.8rem 3.5rem;
-      background: rgba(196,122,58,.07);
-      border: 1px solid rgba(196,122,58,.28);
+      background: rgba(250,245,236,.12);
+      border: 1px solid rgba(250,245,236,.35);
     }
     .theory-result h3 {
       font-family: var(--f-head);
       font-weight: 600;
       font-size: 1.3rem;
-      color: var(--amber-lt);
+      color: #EDD9C0;
     }
     .theory-body {
       max-width: 600px;
@@ -428,12 +434,12 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-body);
       font-size: .92rem;
       font-weight: 400;
-      color: var(--txt-body);
+      color: rgba(250,245,236,.8);
       line-height: 2;
     }
 
     /* ━━ Programs ━━ */
-    .programs { background: var(--bg-raised); }
+    .programs { background: var(--bg-base); }
     .prog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -497,7 +503,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
 
     /* ━━ Book + Credentials ━━ */
-    .credentials { background: var(--bg-base); }
+    .credentials { background: var(--bg-raised); }
     .cred-grid {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -542,40 +548,61 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       line-height: 1.85;
     }
 
-    /* ━━ Testimonials ━━ */
-    .testimonials { background: var(--bg-raised); }
+    /* ━━ Testimonials (Custifyスタイル: 写真上・中央) ━━ */
+    .testimonials { background: var(--bg-base); }
     .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 1.5rem;
       margin-top: 3.5rem;
     }
     .testi {
-      background: var(--bg-card);
-      padding: 2.5rem 2.2rem;
+      background: white;
+      padding: 2.8rem 2.2rem 2.5rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 20px rgba(113,67,41,.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-top: 3px solid var(--amber-mid);
     }
     .testi-img {
-      width: 58px; height: 58px;
+      width: 96px; height: 96px;
       border-radius: 50%;
-      object-fit: cover; object-position: top;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(196,122,58,.25);
+      object-fit: cover; object-position: top center;
+      margin-bottom: 1.8rem;
+      border: 3px solid #EDE7DE;
+      box-shadow: 0 4px 12px rgba(113,67,41,.12);
+    }
+    .testi-quote-mark {
+      font-family: var(--f-head);
+      font-size: 3rem;
+      line-height: .6;
+      color: #D0B9A7;
+      margin-bottom: 1rem;
+      display: block;
     }
     .testi-quote {
-      font-family: var(--f-head);
+      font-family: var(--f-body);
       font-weight: 400;
-      font-size: 1rem;
-      font-style: italic;
+      font-size: .92rem;
       color: var(--txt-body);
-      line-height: 1.9;
-      margin-bottom: 1.5rem;
+      line-height: 1.95;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+    .testi-divider {
+      width: 32px; height: 1px;
+      background: #D0B9A7;
+      margin: 0 auto 1.2rem;
     }
     .testi-name {
       font-family: var(--f-body);
-      font-size: .82rem;
+      font-size: .9rem;
       font-weight: 700;
-      color: var(--amber);
-      letter-spacing: 1px;
+      color: var(--txt-head);
+      letter-spacing: .3px;
     }
     .testi-role {
       font-family: var(--f-body);
@@ -583,11 +610,11 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-weight: 400;
       color: var(--txt-sub);
       margin-top: .3rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     /* ━━ Blog ━━ */
-    .blog-sec { background: var(--bg-base); }
+    .blog-sec { background: var(--bg-raised); }
     .blog-header {
       display: flex;
       justify-content: space-between;
@@ -610,7 +637,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       gap: 2px;
     }
     .post {
-      background: var(--bg-raised);
+      background: white;
       padding: 2.5rem 2rem;
       text-decoration: none;
       color: inherit;
@@ -618,7 +645,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       transition: border-color .3s, background .3s;
       display: block;
     }
-    .post:hover { border-bottom-color: var(--amber); background: var(--bg-card); }
+    .post:hover { border-bottom-color: var(--amber); background: var(--bg-raised); }
     .post-cat {
       font-family: var(--f-head);
       font-size: .7rem;
@@ -647,38 +674,45 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
 
     /* ━━ CTA ━━ */
     .cta-sec {
-      background: var(--bg-card);
+      background: var(--bg-dark);
       text-align: center;
       padding: 8rem 5vw;
       position: relative;
       overflow: hidden;
+      color: #FAF5EC;
     }
+    .cta-sec .sec-eye { color: #D0B9A7; }
+    .cta-sec .sec-h2 { color: #FAF5EC; }
     .cta-sec::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(196,122,58,.06) 0%, transparent 68%);
+      background: radial-gradient(ellipse at center, rgba(250,245,236,.05) 0%, transparent 68%);
     }
     .cta-inner { position: relative; max-width: 620px; margin: 0 auto; }
     .cta-body {
       font-family: var(--f-body);
       font-size: .95rem;
       font-weight: 400;
-      color: var(--txt-body);
+      color: rgba(250,245,236,.8);
       line-height: 2.1;
       margin: 2rem 0 3rem;
     }
     .cta-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+    .cta-sec .btn-gold { background: #FAF5EC; color: var(--amber); }
+    .cta-sec .btn-gold:hover { background: white; }
+    .cta-sec .btn-ghost { border-color: rgba(250,245,236,.5); color: #FAF5EC; }
+    .cta-sec .btn-ghost:hover { background: rgba(250,245,236,.15); color: #FAF5EC; }
     .cta-note {
       margin-top: 1.4rem;
       font-family: var(--f-body);
       font-size: .82rem;
       font-weight: 400;
-      color: var(--txt-sub);
+      color: rgba(250,245,236,.55);
     }
 
     /* ━━ Footer ━━ */
     footer {
-      background: #110F0D;
+      background: #3D2A1A;
       padding: 5rem 5vw 2.5rem;
       border-top: 1px solid var(--gold-line);
     }
@@ -696,7 +730,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-body);
       font-size: .85rem;
       font-weight: 400;
-      color: var(--txt-sub);
+      color: #C0A88A;
       line-height: 1.9;
     }
     .footer-col h5 {
@@ -714,10 +748,10 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-size: .88rem;
       font-weight: 400;
       text-decoration: none;
-      color: var(--txt-sub);
+      color: #C0A88A;
       transition: color .2s;
     }
-    .footer-col a:hover { color: var(--amber-lt); }
+    .footer-col a:hover { color: #EDD9C0; }
     .footer-copy {
       max-width: 1100px;
       margin: 2.5rem auto 0;
@@ -725,7 +759,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-body);
       font-size: .75rem;
       font-weight: 400;
-      color: rgba(243,238,229,.25);
+      color: rgba(192,168,138,.35);
       letter-spacing: .5px;
     }
 
@@ -811,7 +845,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   </div>
 
   <!-- モザイクグリッド -->
-  <div style="display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:260px 260px;gap:3px;background:var(--ink);">
+  <div style="display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:260px 260px;gap:3px;background:var(--bg-base);">
     <div style="overflow:hidden;"><img src="/mosaic-drinks.jpg" alt="ローフードジュース" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" /></div>
     <div style="overflow:hidden;grid-row:span 2;position:relative;">
       <img src="/prog-rawfood.jpg" alt="手毬寿司ローフード" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
@@ -827,7 +861,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     <div class="inner">
       <div class="story-grid">
         <div class="story-img">
-          <img src="/chie-speaking.jpg" alt="安藤千英 講演" />
+          <img src="/lesson-scene.jpg" alt="&LAB TOKYO レッスン風景" />
         </div>
         <div class="story-body">
           <p class="sec-eye">My Story</p>
@@ -876,8 +910,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
           <p>
             少人数制（1〜4名）で丁寧に。<br />
             初心者・お子様も歓迎。<br /><br />
-            <strong style="color:var(--gold2)">東京・渋谷の教室</strong> または<br />
-            <strong style="color:var(--gold2)">オンライン</strong>（国内外対応）<br /><br />
+            <strong style="color:var(--amber)">東京・渋谷の教室</strong> または<br />
+            <strong style="color:var(--amber)">オンライン</strong>（国内外対応）<br /><br />
             ¥8,000〜 入会費なし。<br />
             まずは1回の体験から。
           </p>
@@ -985,7 +1019,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
               <span class="cred-icon">03</span>
               <div class="cred-text">
                 <h4>医師・経営者・海外プロが選ぶ教室</h4>
-                <p>循環器内科医2名がローフードマイスター資格を取得。米・墨・香港からも受講。</p>
+                <p>循環器内科医・内科医をはじめ複数の医師が受講・資格取得。米・墨・香港など海外からも受講。</p>
               </div>
             </div>
             <div class="cred-item-lg">
@@ -1008,22 +1042,28 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       <h2 class="sec-h2">受講生の声。</h2>
       <div class="testi-grid">
         <div class="testi">
-          <img src="/chie-speaking.jpg" alt="櫻庭千穂さん" class="testi-img" />
-          <p class="testi-quote">「発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました」</p>
-          <p class="testi-name">櫻庭 千穂さん</p>
-          <p class="testi-role">内科医 / ドクターズカフェ オーナー・那須高原</p>
+          <img src="/chie-portrait.jpg" alt="櫻庭千穂さん" class="testi-img" />
+          <span class="testi-quote-mark">"</span>
+          <p class="testi-quote">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが、私の人生と医療を変えました。</p>
+          <div class="testi-divider"></div>
+          <p class="testi-name">櫻庭 千穂</p>
+          <p class="testi-role">内科医 / ドクターズカフェ オーナー<br />那須高原</p>
         </div>
         <div class="testi">
           <img src="/student-oscar.jpg" alt="オスカーさん" class="testi-img" />
-          <p class="testi-quote">「アメリカ・メキシコからオンラインで参加。KojiとUmamiのメカニズムを動画・テキスト・体験で学び、大興奮！これほど素晴らしい体験は初めてです」</p>
-          <p class="testi-name">Oscar さん</p>
-          <p class="testi-role">アメリカ・メキシコ在住</p>
+          <span class="testi-quote-mark">"</span>
+          <p class="testi-quote">Joining from the US and Mexico online — the koji and umami content was extraordinary. Video, text, and hands-on learning combined. One of the most memorable experiences I've ever had.</p>
+          <div class="testi-divider"></div>
+          <p class="testi-name">Oscar</p>
+          <p class="testi-role">Umami &amp; Koji LAB 受講<br />アメリカ・メキシコ在住</p>
         </div>
         <div class="testi">
-          <img src="/chie-portrait.jpg" alt="吉田和弘医師" class="testi-img" />
-          <p class="testi-quote">「循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートしていただきました。医師として自信を持っておすすめします」</p>
+          <img src="/student-doctor.jpg" alt="吉田和弘医師" class="testi-img" />
+          <span class="testi-quote-mark">"</span>
+          <p class="testi-quote">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートしていただきました。医師として自信を持っておすすめします。</p>
+          <div class="testi-divider"></div>
           <p class="testi-name">吉田 和弘 医師</p>
-          <p class="testi-role">循環器内科医 / 書籍「&RAW LIVING」医学監修</p>
+          <p class="testi-role">循環器内科医<br />書籍「&RAW LIVING」医学監修</p>
         </div>
       </div>
     </div>
