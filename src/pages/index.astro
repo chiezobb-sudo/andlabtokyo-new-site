@@ -68,13 +68,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       background: rgba(0,0,0,0.88);
       backdrop-filter: saturate(180%) blur(20px);
     }
-    .nav-logo {
-      background: rgba(255,255,255,0.92);
-      padding: 4px 12px;
-      border-radius: 4px;
-      display: flex; align-items: center;
-    }
-    .nav-logo img { height: 28px; width: auto; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 32px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
     .nav-links a {
       font-size: 12px; font-weight: 400;
@@ -391,14 +386,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       gap: 48px; padding-bottom: 32px;
       border-bottom: 1px solid #333;
     }
-    .footer-logo {
-      display: inline-block;
-      background: rgba(255,255,255,0.9);
-      padding: 4px 10px;
-      border-radius: 3px;
-      margin-bottom: 16px;
-    }
-    .footer-logo img { height: 24px; width: auto; display: block; }
+    .footer-logo { display: inline-block; margin-bottom: 16px; }
+    .footer-logo img { height: 28px; width: auto; display: block; }
     .footer-tag { font-size: 14px; color: #6e6e73; line-height: 1.8; }
     .footer-col h5 {
       font-size: 12px; font-weight: 600;
