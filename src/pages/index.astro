@@ -17,9 +17,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
        canvas #ffffff / ink #1d1d1f / primary #0066cc
     ━━━━━━━━━━━━━━━━━━━━━ */
     :root {
-      --primary:        #0066cc;
-      --primary-focus:  #0071e3;
-      --primary-dark:   #2997ff;
+      --primary:        #A9D159;
+      --primary-focus:  #95C240;
+      --primary-dark:   #7AAF2A;
       --ink:            #1d1d1f;
       --ink-80:         #333333;
       --ink-48:         #7a7a7a;
@@ -68,7 +68,13 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       background: rgba(0,0,0,0.88);
       backdrop-filter: saturate(180%) blur(20px);
     }
-    .nav-logo img { height: 22px; width: auto; filter: invert(1); }
+    .nav-logo {
+      background: rgba(255,255,255,0.92);
+      padding: 4px 12px;
+      border-radius: 4px;
+      display: flex; align-items: center;
+    }
+    .nav-logo img { height: 28px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
     .nav-links a {
       font-size: 12px; font-weight: 400;
@@ -122,9 +128,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       margin-bottom: 16px; display: block;
     }
     .hero h1 {
-      font-size: clamp(40px, 5.5vw, 56px);
+      font-size: clamp(28px, 3.5vw, 44px);
       font-weight: 600;
-      line-height: 1.07;
+      line-height: 1.2;
       letter-spacing: -0.022em;
       color: #ffffff;
       margin-bottom: 14px;
@@ -231,8 +237,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       position: relative; overflow: hidden;
       text-decoration: none; display: block;
     }
-    .prog:first-child { height: 560px; }
-    .prog:not(:first-child) { height: 380px; }
+    .prog { height: 480px; }
+    .prog:first-child { height: 480px; }
     .prog img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
@@ -385,7 +391,14 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       gap: 48px; padding-bottom: 32px;
       border-bottom: 1px solid #333;
     }
-    .footer-logo img { height: 20px; filter: invert(1); margin-bottom: 16px; }
+    .footer-logo {
+      display: inline-block;
+      background: rgba(255,255,255,0.9);
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+    .footer-logo img { height: 24px; width: auto; display: block; }
     .footer-tag { font-size: 14px; color: #6e6e73; line-height: 1.8; }
     .footer-col h5 {
       font-size: 12px; font-weight: 600;
