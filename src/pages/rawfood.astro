@@ -5,275 +5,372 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ローフードとは｜体験レッスン・資格取得 | &LAB TOKYO 東京・渋谷</title>
-  <meta name="description" content="ローフード（生食）とは何か。48℃以下の調理で酵素・栄養を活かす食事法を、東京・渋谷の&LAB TOKYOで体験。初心者歓迎・少人数制・¥8,000〜。ELLE gourmet認定料理家・安藤千英が指導。" />
+  <title>ローフードとは｜ベーシック・マイスター資格講座 | &LAB TOKYO 東京・渋谷</title>
+  <meta name="description" content="ローフードの本格講座。ベーシックコース（2級・準1級）からマイスタープレミアムコース（1級）まで。東京・渋谷またはオンライン。ELLE gourmet認定料理家・安藤千英が指導。日本リビングビューティー協会認定校。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    "name": "ローフード体験レッスン",
-    "description": "48℃以下の調理で酵素・栄養を活かすローフードを学ぶ体験レッスン。東京・渋谷またはオンラインで受講可能。",
-    "provider": {
-      "@type": "Organization",
-      "name": "&LAB TOKYO",
-      "url": "https://andlabtokyo.biz"
-    },
-    "instructor": {
-      "@type": "Person",
-      "name": "安藤千英",
-      "jobTitle": "ELLE gourmet認定料理家"
-    }
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --ink: #1d1d1f; --ink-2: #3d3d3f; --ink-3: #6e6e73;
-      --bg: #ffffff; --bg-2: #f5f5f7; --bg-dark: #1a1715;
-      --green: #A9D159; --green-d: #7AAF2A;
-      --divider: #d2d2d7;
-      --f: 'Noto Sans JP', sans-serif;
-      --fh: 'Cormorant Garamond', serif;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--f); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
-
-    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(0,0,0,0.88); backdrop-filter: blur(20px); }
-    .nav-logo img { height: 32px;  }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a { font-size: 12px; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0 10px; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
-
-    /* Hero */
-    .hero { margin-top: 44px; position: relative; height: 70vh; min-height: 480px; overflow: hidden; display: flex; align-items: flex-end; }
-    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
-    .hero-body { position: relative; z-index: 1; padding: 0 5vw 56px; max-width: 700px; }
-    .hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--green); margin-bottom: 14px; display: block; }
-    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 14px; }
-    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.7; }
-    .btn-primary { display: inline-block; background: var(--green); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 28px; border-radius: 980px; text-decoration: none; transition: background .2s; }
-    .btn-primary:hover { background: var(--green-d); color: #fff; }
-    .btn-outline { display: inline-block; border: 1.5px solid rgba(255,255,255,.5); color: rgba(255,255,255,.85); font-size: 14px; padding: 12px 24px; border-radius: 980px; text-decoration: none; margin-left: 12px; transition: all .2s; }
-    .btn-outline:hover { border-color: #fff; color: #fff; }
-
-    /* Sections */
-    .sec { padding: 72px 22px; }
-    .inner { max-width: 860px; margin: 0 auto; }
-    .sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--green-d); display: block; margin-bottom: 8px; }
-    h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.3; }
-    .body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
-    .rule { width: 36px; height: 2px; background: var(--green); margin: 20px 0 28px; }
-
-    /* What is */
-    .what-sec { background: var(--bg-2); }
-    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-    .what-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; }
-    .what-points { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
-    .what-points li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-2); }
-    .what-points li::before { content: '✓'; color: var(--green-d); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-
-    /* For whom */
-    .whom-sec { background: var(--bg); }
-    .whom-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; margin-top: 32px; }
-    .whom-item { background: var(--bg-2); padding: 24px; }
-    .whom-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .whom-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-
-    /* Curriculum */
-    .curriculum-sec { background: var(--bg-2); }
-    .steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
-    .step { background: var(--bg); padding: 24px 28px; display: flex; gap: 24px; align-items: flex-start; }
-    .step-num { font-family: var(--fh); font-size: 32px; color: var(--bg-3); font-style: italic; flex-shrink: 0; line-height: 1; }
-    .step h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .step p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-
-    /* FAQ */
-    .faq-sec { background: var(--bg); }
-    .faqs { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
-    .faq { border-bottom: 1px solid var(--divider); padding: 20px 0; }
-    .faq-q { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
-    .faq-q::before { content: 'Q. '; color: var(--green-d); }
-    .faq-a { font-size: 14px; color: var(--ink-2); line-height: 1.8; padding-left: 20px; }
-
-    /* Pricing */
-    .pricing-sec { background: var(--bg-dark); color: #fff; }
-    .pricing-sec .sec-eye { color: var(--green); }
-    .pricing-sec h2 { color: #fff; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 32px; }
-    .pricing-card { background: rgba(255,255,255,.06); padding: 28px 24px; border-top: 2px solid rgba(169,209,89,.4); }
-    .pricing-card h4 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .pricing-price { font-size: 24px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
-    .pricing-card p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.7; }
-
-    /* CTA */
-    .cta-sec { background: var(--bg); text-align: center; padding: 72px 22px; }
-    .cta-sec h2 { color: var(--ink); margin-bottom: 14px; }
-    .cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 28px; }
-    .btn-dark { display: inline-block; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 980px; text-decoration: none; transition: opacity .2s; }
-    .btn-dark:hover { opacity: .8; }
-    .cta-note { margin-top: 12px; font-size: 12px; color: var(--ink-3); }
-
-    footer { background: #000; padding: 24px 22px; text-align: center; }
-    footer p { font-size: 12px; color: #6e6e73; }
-
-    @media (max-width: 680px) {
-      .what-grid { grid-template-columns: 1fr; gap: 32px; }
-      .whom-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
+    :root{--linen:#FBFBFA;--linen-2:#F4F2EE;--linen-3:#EAE7E0;--sumi:#1C1C1A;--sumi-2:#2A2A27;--ink:#1C1C1A;--ink-2:#3D3D38;--ink-3:#7A7A72;--green:#A9D159;--green-d:#7AAF2A;--divider:#D8D4CC;--f-serif:'Noto Serif JP',serif;--f-sans:'Noto Sans JP',sans-serif;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(28,28,26,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
+    .nav-logo img{height:32px;width:auto;}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links a{font-size:.8rem;font-weight:500;color:rgba(244,242,238,.6);text-decoration:none;padding:0 .9rem;transition:color .2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--green);}
+    .nav-cta{font-size:.8rem;font-weight:700;display:inline-block;background:var(--green);color:var(--sumi);padding:.45rem 1.2rem;margin-left:1rem;text-decoration:none;transition:background .2s;}
+    .nav-cta:hover{background:var(--green-d);color:#fff;}
+    .hero{margin-top:52px;position:relative;height:70vh;min-height:500px;overflow:hidden;display:flex;align-items:flex-end;}
+    .hero-img{position:absolute;inset:0;}
+    .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
+    .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.88) 0%,rgba(28,28,26,.4) 50%,rgba(28,28,26,.1) 100%);}
+    .hero-body{position:relative;z-index:1;padding:0 5vw 5rem;max-width:740px;}
+    .hero-eye{font-family:var(--f-sans);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:1.2rem;}
+    .hero h1{font-family:var(--f-serif);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:600;letter-spacing:.08em;line-height:1.4;color:#F4F2EE;margin-bottom:1rem;}
+    .hero-sub{font-family:var(--f-serif);font-size:1rem;font-weight:300;letter-spacing:.06em;color:rgba(244,242,238,.7);margin-bottom:2rem;line-height:1.9;}
+    .hero-badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .badge{font-size:.72rem;font-weight:500;letter-spacing:.06em;padding:.4rem .9rem;border:1px solid rgba(244,242,238,.25);color:rgba(244,242,238,.65);}
+    .btn-hero{display:inline-block;background:var(--linen);color:var(--sumi);font-family:var(--f-sans);font-size:.85rem;font-weight:700;letter-spacing:.06em;padding:1rem 2.4rem;text-decoration:none;transition:all .2s;}
+    .btn-hero:hover{background:var(--green);color:var(--sumi);}
+    .sec{padding:7rem 5vw;}
+    .inner{max-width:1060px;margin:0 auto;}
+    .eyebrow{font-family:var(--f-sans);font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:1rem;}
+    h2{font-family:var(--f-serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;letter-spacing:.08em;line-height:1.5;color:var(--ink);}
+    .rule{width:32px;height:1px;background:var(--divider);margin:2rem 0 3rem;}
+    .body-p{font-size:.95rem;color:var(--ink-2);line-height:2.1;margin-bottom:1.4rem;}
+    .body-p strong{color:var(--ink);font-weight:700;}
+    .what-sec{background:var(--linen-2);}
+    .what-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+    .what-img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    .what-points{list-style:none;display:flex;flex-direction:column;gap:1.2rem;margin-top:2.5rem;}
+    .what-points li{display:flex;gap:1rem;font-size:.92rem;color:var(--ink-2);line-height:1.8;}
+    .what-points li::before{content:'—';color:var(--green-d);flex-shrink:0;font-weight:700;}
+    .benefits-sec{background:var(--sumi);padding:7rem 5vw;}
+    .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
+    .benefit{background:rgba(244,242,238,.04);padding:2.5rem 2rem;border-top:1px solid rgba(244,242,238,.1);}
+    .benefit-num{font-family:var(--f-serif);font-size:2rem;font-weight:300;color:rgba(169,209,89,.3);display:block;margin-bottom:1rem;}
+    .benefit h4{font-family:var(--f-serif);font-size:1rem;font-weight:600;letter-spacing:.06em;color:#F4F2EE;margin-bottom:.8rem;}
+    .benefit p{font-size:.85rem;color:rgba(244,242,238,.5);line-height:1.9;}
+    .courses-sec{background:var(--linen);padding:7rem 5vw;}
+    .course-card{margin-bottom:3px;}
+    .course-header{background:var(--sumi);padding:3rem 4rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;}
+    .course-badge{font-family:var(--f-sans);font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:.6rem;}
+    .course-header h3{font-family:var(--f-serif);font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:600;letter-spacing:.08em;color:#F4F2EE;}
+    .course-header p{font-size:.88rem;color:rgba(244,242,238,.55);margin-top:.5rem;line-height:1.8;}
+    .course-price{text-align:right;}
+    .course-price-label{font-size:.72rem;color:rgba(244,242,238,.4);display:block;margin-bottom:.3rem;}
+    .course-price-num{font-family:var(--f-serif);font-size:1.6rem;font-weight:300;color:var(--green);display:block;}
+    .course-price-note{font-size:.72rem;color:rgba(244,242,238,.35);display:block;margin-top:.3rem;}
+    .course-body{background:var(--linen-2);padding:3rem 4rem;}
+    .course-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+    .curriculum-list{list-style:none;display:flex;flex-direction:column;gap:.8rem;}
+    .curriculum-list li{font-size:.88rem;color:var(--ink-2);line-height:1.8;padding-left:1.2rem;position:relative;}
+    .curriculum-list li::before{content:'・';position:absolute;left:0;color:var(--green-d);}
+    .info-table{display:flex;flex-direction:column;gap:.8rem;}
+    .info-row{display:flex;gap:1rem;font-size:.88rem;}
+    .info-label{color:var(--ink-3);min-width:80px;flex-shrink:0;font-weight:500;}
+    .info-value{color:var(--ink-2);line-height:1.7;}
+    .action-strip{background:var(--linen-3);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .action-strip-text{font-size:.9rem;color:var(--ink-3);}
+    .btn-apply{display:inline-block;background:var(--sumi);color:#F4F2EE;font-family:var(--f-sans);font-size:.85rem;font-weight:700;letter-spacing:.06em;padding:.9rem 2rem;text-decoration:none;transition:background .2s;white-space:nowrap;}
+    .btn-apply:hover{background:var(--sumi-2);}
+    .whom-sec{background:var(--linen-2);padding:7rem 5vw;}
+    .whom-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:3.5rem;}
+    .whom-item{background:var(--linen);padding:2.2rem 2rem;}
+    .whom-item h4{font-family:var(--f-serif);font-size:.98rem;font-weight:600;color:var(--ink);margin-bottom:.7rem;letter-spacing:.04em;}
+    .whom-item p{font-size:.85rem;color:var(--ink-3);line-height:1.85;}
+    .instructor-sec{background:var(--linen);padding:7rem 5vw;}
+    .instructor-grid{display:grid;grid-template-columns:280px 1fr;gap:6rem;align-items:start;}
+    .instructor-img img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;}
+    .instructor-tag{font-family:var(--f-sans);font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--ink-3);margin-top:.6rem;text-align:center;}
+    .testi-sec{background:var(--linen-2);padding:7rem 5vw;}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
+    .testi{background:var(--linen);padding:2.5rem 2rem;}
+    .testi-q{font-family:var(--f-serif);font-size:.95rem;font-weight:400;color:var(--ink);line-height:1.95;margin-bottom:1.6rem;}
+    .testi-q::before{content:'"';font-size:1.4rem;color:var(--green-d);line-height:.8;display:block;margin-bottom:.4rem;}
+    .testi-name{font-family:var(--f-serif);font-size:.9rem;font-weight:600;color:var(--ink);}
+    .testi-role{font-size:.78rem;color:var(--ink-3);margin-top:.3rem;line-height:1.6;}
+    .trial-sec{background:var(--sumi-2);padding:6rem 5vw;}
+    .trial-inner{max-width:720px;margin:0 auto;text-align:center;}
+    .trial-rule{width:28px;height:1px;background:rgba(244,242,238,.2);margin:1.8rem auto 2.5rem;}
+    .trial-desc{font-size:.92rem;color:rgba(244,242,238,.55);line-height:2.1;margin-bottom:2.5rem;}
+    .trial-price{font-family:var(--f-serif);font-size:1.3rem;font-weight:300;color:var(--green);margin-bottom:2.5rem;}
+    .btn-trial{display:inline-block;border:1px solid rgba(244,242,238,.25);color:rgba(244,242,238,.7);font-family:var(--f-sans);font-size:.85rem;font-weight:500;letter-spacing:.06em;padding:.9rem 2.4rem;text-decoration:none;transition:all .2s;}
+    .btn-trial:hover{border-color:var(--green);color:var(--green);}
+    .faq-sec{background:var(--linen);padding:7rem 5vw;}
+    .faq-list{display:flex;flex-direction:column;gap:0;margin-top:3.5rem;}
+    .faq-item{border-bottom:1px solid var(--linen-3);padding:2rem 0;}
+    .faq-q{font-family:var(--f-serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:1rem;line-height:1.6;}
+    .faq-q::before{content:'Q. ';color:var(--green-d);}
+    .faq-a{font-size:.9rem;color:var(--ink-2);line-height:2;padding-left:1.5rem;}
+    .cta-sec{background:var(--linen-2);padding:8rem 5vw;text-align:center;}
+    .cta-h2{font-family:var(--f-serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;letter-spacing:.08em;color:var(--ink);margin-bottom:1.2rem;}
+    .cta-desc{font-size:.92rem;color:var(--ink-3);line-height:2;margin-bottom:3rem;}
+    .btn-cta{display:inline-block;background:var(--sumi);color:#F4F2EE;font-family:var(--f-sans);font-size:.9rem;font-weight:700;letter-spacing:.08em;padding:1.1rem 3rem;text-decoration:none;transition:background .2s;}
+    .btn-cta:hover{background:var(--sumi-2);}
+    .cta-note{margin-top:1.2rem;font-size:.78rem;color:var(--ink-3);}
+    footer{background:var(--sumi);padding:2rem 2.5rem;text-align:center;border-top:1px solid rgba(244,242,238,.06);}
+    footer p{font-size:.72rem;color:rgba(244,242,238,.25);}
+    footer a{color:rgba(244,242,238,.35);text-decoration:none;}
+    footer a:hover{color:var(--green);}
+    @media(max-width:900px){nav{padding:0 1.2rem;}.nav-links{display:none;}.hero-body{padding:0 1.5rem 4rem;}.what-grid{grid-template-columns:1fr;gap:3rem;}.benefits-grid{grid-template-columns:1fr;}.course-header{grid-template-columns:1fr;padding:2rem;}.course-price{text-align:left;}.course-body{padding:2rem;}.course-body-grid{grid-template-columns:1fr;gap:2rem;}.action-strip{flex-direction:column;align-items:flex-start;padding:1.5rem 2rem;}.whom-grid{grid-template-columns:1fr;}.instructor-grid{grid-template-columns:1fr;gap:2.5rem;}.testi-grid{grid-template-columns:1fr;}.sec,.courses-sec,.whom-sec,.testi-sec,.faq-sec,.cta-sec,.trial-sec,.instructor-sec,.benefits-sec{padding:5rem 1.5rem;}}
   </style>
 </head>
 <body>
-
   <nav>
     <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
     <ul class="nav-links">
       <li><a href="/lessons">レッスン</a></li>
-      <li><a href="/rawfood" style="color:var(--green)">ローフード</a></li>
+      <li><a href="/rawfood" class="active">ローフード</a></li>
       <li><a href="/fermentation">発酵</a></li>
       <li><a href="/about">安藤千英</a></li>
       <li><a href="/blog">ブログ</a></li>
     </ul>
+    <a href="/contact" class="nav-cta">LABへの入口</a>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
-    <img src="/rawfood-zucchini.jpg" alt="ローフード料理" />
+    <div class="hero-img"><img src="/rawfood-zucchini.jpg" alt="ローフード料理" /></div>
     <div class="hero-body">
-      <span class="hero-eye">Raw Food</span>
+      <span class="hero-eye">Raw Food · &LAB TOKYO</span>
       <h1>ローフードで、<br />細胞から整える。</h1>
-      <p class="hero-sub">48℃以下の調理で酵素と栄養を壊さない。<br />生きた食材のチカラで、内側から美しく健やかに。</p>
-      <a href="/contact" class="btn-primary">&LAB TOKYOの世界を体験する</a>
-      <a href="#what" class="btn-outline">ローフードとは</a>
+      <p class="hero-sub">48℃以下の調理で酵素・栄養を壊さない。<br />生きた食材のチカラで、内側から美しく健やかに。</p>
+      <div class="hero-badges">
+        <span class="badge">日本リビングビューティー協会認定校</span>
+        <span class="badge">2級・準1級・1級</span>
+        <span class="badge">ELLE gourmet認定料理家が指導</span>
+      </div>
+      <a href="/contact" class="btn-hero">&LAB TOKYOの世界を体験する</a>
     </div>
   </section>
 
-  <!-- What is rawfood -->
   <section class="sec what-sec" id="what">
     <div class="inner">
       <div class="what-grid">
-        <div class="what-img">
-          <img src="/hero-food.jpg" alt="ローフード料理" />
-        </div>
+        <div><img src="/hero-food.jpg" alt="ローフード料理" /></div>
         <div>
-          <span class="sec-eye">What is Raw Food</span>
+          <span class="eyebrow">What is Raw Food</span>
           <h2>ローフードとは</h2>
           <div class="rule"></div>
-          <p class="body-text">
-            ローフード（Raw Food）とは、食材を<strong>48℃以下</strong>の温度で調理または未加熱のまま食べる食事法です。
-            この温度以下であれば、食材本来の<strong>酵素・ビタミン・ミネラル・食物繊維</strong>が壊れずに残ります。
-          </p>
-          <p class="body-text">
-            酵素は私たちの消化・代謝・細胞修復を助ける大切な存在。
-            熱で失われた酵素を補い続けることで、消化器官への負担が減り、
-            体が本来持つ自然治癒力・代謝力を取り戻していきます。
-          </p>
+          <p class="body-p">ローフード（Raw Food）とは、食材を<strong>48℃以下</strong>の温度で調理または未加熱のまま食べる食事法です。この温度以下であれば、食材本来の<strong>酵素・ビタミン・ミネラル・植物栄養素（フィトケミカル）</strong>が壊れずに保たれます。</p>
+          <p class="body-p">酵素は体内での消化・代謝・細胞修復・免疫機能を担う重要な存在。現代の食生活では加熱・加工によって酵素が失われ続けており、それを補い続けることが体の機能を正常に維持するカギとなっています。</p>
+          <p class="body-p">&LAB TOKYOでは、ローフードを単なる「生食主義」ではなく、<strong>発酵×ローフードのクロス理論</strong>として体系的に学び、日常に無理なく取り入れられるライフスタイルとして提案しています。</p>
           <ul class="what-points">
             <li>酵素・ビタミン・ミネラルを壊さずに摂取できる</li>
-            <li>消化器官への負担が軽減される</li>
-            <li>細胞から整うエネルギーが高まる</li>
-            <li>美肌・体重管理・疲労回復に効果的</li>
-            <li>砂糖・小麦・乳製品なしでも豊かな食事が実現できる</li>
+            <li>消化器官への負担が軽減し、体のエネルギーが上がる</li>
+            <li>美肌・体重管理・疲労回復・集中力向上に効果的</li>
+            <li>腸内環境が整い、免疫機能が高まる</li>
+            <li>砂糖・小麦・乳製品なしでも豊かで満足感のある食事が実現できる</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- For whom -->
-  <section class="sec whom-sec">
+  <section class="benefits-sec">
     <div class="inner">
-      <span class="sec-eye">For Whom</span>
-      <h2>こんな方におすすめです</h2>
+      <span class="eyebrow" style="color:var(--green)">What You'll Gain</span>
+      <h2 style="color:#F4F2EE;">ローフードを学ぶと、何が変わるのか。</h2>
+      <div class="benefits-grid">
+        <div class="benefit"><span class="benefit-num">01</span><h4>食の科学的理解が深まる</h4><p>酵素・栄養学・消化のメカニズムを理解することで、「なぜこの食材を、どのように食べるか」の判断力が身につきます。知識が習慣を変えます。</p></div>
+        <div class="benefit"><span class="benefit-num">02</span><h4>細胞レベルの変化を実感する</h4><p>受講生の多くが「肌の変化」「疲れにくくなった」「体が軽くなった」と報告しています。数週間〜数ヶ月で細胞からの変化を実感できます。</p></div>
+        <div class="benefit"><span class="benefit-num">03</span><h4>食の美意識と表現力が上がる</h4><p>ローフードは「見た目の美しさ」も重要です。色・質感・器・盛り付けまで含めた食の美意識を磨くことで、食卓そのものがアートになります。</p></div>
+        <div class="benefit"><span class="benefit-num">04</span><h4>一生使える知識とスキルが身につく</h4><p>流行のダイエットや健康法ではなく、普遍的な食の科学に基づいた知識。年齢を重ねるほどその価値を実感できる、生涯の財産になります。</p></div>
+        <div class="benefit"><span class="benefit-num">05</span><h4>資格取得でキャリアに活かせる</h4><p>日本リビングビューティー協会認定の2級・準1級・1級資格を取得。料理教室・レシピ開発・企業研修など、多様なフィールドで活動できます。</p></div>
+        <div class="benefit"><span class="benefit-num">06</span><h4>発酵とのクロス理論で相乗効果</h4><p>&LABオリジナルのクロス理論では、ローフードと発酵を組み合わせることで、腸内環境と酵素活性の両面からアプローチします。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="courses-sec" id="courses">
+    <div class="inner">
+      <span class="eyebrow">Courses</span>
+      <h2>本格講座。段階的に、深く学ぶ。</h2>
+      <div class="rule"></div>
+      <p class="body-p" style="max-width:640px;">&LAB TOKYOのローフード講座は、「本当に深く学びたい方」のための本格カリキュラムです。日本リビングビューティー協会の認定資格を段階的に取得しながら、食の専門知識と実践力を身につけます。</p>
+
+      <div class="course-card" style="margin-top:4rem;">
+        <div class="course-header">
+          <div><span class="course-badge">Level 01 · Basic Course</span><h3>ローフードベーシックコース 2級</h3><p>ローフードの基礎理論と実践。酵素・栄養学の科学的根拠から、日常への取り入れ方まで。</p></div>
+          <div class="course-price"><span class="course-price-label">受講料（税込）</span><span class="course-price-num">¥30,000〜</span><span class="course-price-note">テキスト・食材費込み</span></div>
+        </div>
+        <div class="course-body">
+          <div class="course-body-grid">
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">カリキュラム</h4>
+              <ul class="curriculum-list">
+                <li>ローフードとは何か / 酵素の働きと役割</li>
+                <li>栄養素（ビタミン・ミネラル・フィトケミカル）と加熱の影響</li>
+                <li>デトックスの仕組みと体内浄化のメカニズム</li>
+                <li>基本調理技術（ソーキング・スプラウト・デハイドレーター）</li>
+                <li>グリーンスムージー・コールドプレスジュースの実習</li>
+                <li>ローフードサラダ・ドレッシングの作り方</li>
+                <li>ナッツミルク・ナッツチーズの製法</li>
+                <li>日常への取り入れ方 / ローフードライフスタイル設計</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">受講形式</h4>
+              <div class="info-table">
+                <div class="info-row"><span class="info-label">形式</span><span class="info-value">対面（東京・渋谷）/ オンライン（Zoom）/ ハイブリッド対応</span></div>
+                <div class="info-row"><span class="info-label">人数</span><span class="info-value">少人数制（1〜4名）</span></div>
+                <div class="info-row"><span class="info-label">回数</span><span class="info-value">全4〜6回（要相談）</span></div>
+                <div class="info-row"><span class="info-label">資格</span><span class="info-value">日本リビングビューティー協会<br />ローフード検定 2級</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-strip"><p class="action-strip-text">ローフードを基礎から体系的に学び、日常への実践力を身につける最初の一歩。</p><a href="/contact" class="btn-apply">このコースに申し込む →</a></div>
+      </div>
+
+      <div class="course-card" style="margin-top:3px;">
+        <div class="course-header">
+          <div><span class="course-badge">Level 02 · Advanced Basic Course</span><h3>ローフードベーシックコース 準1級</h3><p>2級の理論を深め、実践技術を高度化。ローフード料理の表現力と応用力を磨きます。</p></div>
+          <div class="course-price"><span class="course-price-label">受講料（税込）</span><span class="course-price-num">¥40,000〜</span><span class="course-price-note">テキスト・食材費込み</span></div>
+        </div>
+        <div class="course-body">
+          <div class="course-body-grid">
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">カリキュラム</h4>
+              <ul class="curriculum-list">
+                <li>発酵×ローフードのクロス理論（&LABオリジナル）</li>
+                <li>ローフードのデセール・スイーツ製法</li>
+                <li>ローフードのコース料理設計（アミューズ〜デザート）</li>
+                <li>スーパーフードの知識と活用法</li>
+                <li>腸内環境・プロバイオティクスの深い理解</li>
+                <li>食の美意識と器・盛り付けの考え方</li>
+                <li>ローフード素材の保存・ストック術</li>
+                <li>体質別・目的別のローフードプランニング</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">受講形式</h4>
+              <div class="info-table">
+                <div class="info-row"><span class="info-label">形式</span><span class="info-value">対面（東京・渋谷）/ オンライン（Zoom）/ ハイブリッド対応</span></div>
+                <div class="info-row"><span class="info-label">人数</span><span class="info-value">少人数制（1〜4名）</span></div>
+                <div class="info-row"><span class="info-label">回数</span><span class="info-value">全4〜6回（要相談）</span></div>
+                <div class="info-row"><span class="info-label">資格</span><span class="info-value">日本リビングビューティー協会<br />ローフード検定 準1級</span></div>
+                <div class="info-row"><span class="info-label">前提</span><span class="info-value">2級取得者、または同等の基礎知識がある方</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-strip"><p class="action-strip-text">2級の基礎を土台に、より深い理解と表現力を身につけるステージ。</p><a href="/contact" class="btn-apply">このコースに申し込む →</a></div>
+      </div>
+
+      <div class="course-card" style="margin-top:3px;">
+        <div class="course-header" style="background:var(--sumi-2);">
+          <div><span class="course-badge" style="color:rgba(244,242,238,.5);">Level 03 · Meister Premium Course</span><h3>ローフードマイスタープレミアムコース 1級</h3><p>ローフードの真髄を極め、プロとして人に伝えるための最高位資格。</p></div>
+          <div class="course-price"><span class="course-price-label">受講料（税込）</span><span class="course-price-num">¥80,000〜</span><span class="course-price-note">テキスト・食材費込み<br />分割払い相談可</span></div>
+        </div>
+        <div class="course-body" style="background:var(--linen-3);">
+          <div class="course-body-grid">
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">カリキュラム</h4>
+              <ul class="curriculum-list">
+                <li>ローフード栄養学の高度な理解（分子栄養学を含む）</li>
+                <li>医師と連携した食事プログラムの設計</li>
+                <li>発酵×ローフード×スーパーフードの三位一体理論</li>
+                <li>ローフードにおけるアーユルヴェーダ・東洋医学との統合</li>
+                <li>プロレベルのローフード料理・製菓技術</li>
+                <li>レシピ開発・メニュー設計の実践</li>
+                <li>指導技術・教室運営・ビジネス設計</li>
+                <li>修了発表（オリジナルレシピ・カリキュラム設計）</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:1.2rem;letter-spacing:.04em;">受講形式</h4>
+              <div class="info-table">
+                <div class="info-row"><span class="info-label">形式</span><span class="info-value">対面（東京・渋谷）/ オンライン対応可</span></div>
+                <div class="info-row"><span class="info-label">人数</span><span class="info-value">少人数制（1〜3名）</span></div>
+                <div class="info-row"><span class="info-label">期間</span><span class="info-value">約3〜6ヶ月（個別設計）</span></div>
+                <div class="info-row"><span class="info-label">資格</span><span class="info-value">日本リビングビューティー協会<br />ローフードマイスター 1級</span></div>
+                <div class="info-row"><span class="info-label">卒業後</span><span class="info-value">認定校として教室開催可<br />レシピ開発・企業研修対応</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-strip" style="background:var(--linen-3);"><p class="action-strip-text">マイスター資格は、ローフードをプロとして教え・伝えるための最高位。医師・経営者も取得した本物の資格です。</p><a href="/contact" class="btn-apply">このコースに申し込む →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="whom-sec">
+    <div class="inner">
+      <span class="eyebrow">For Whom</span>
+      <h2>こんな方へ。</h2>
       <div class="whom-grid">
-        <div class="whom-item"><h4>体調や肌の変化が気になる方</h4><p>食事から根本的に改善したい、疲れやすい、肌荒れが続くという方に。</p></div>
-        <div class="whom-item"><h4>ダイエットを自然にしたい方</h4><p>無理な制限なく、食を楽しみながら体を整えたい方に。</p></div>
-        <div class="whom-item"><h4>更年期・体の変化を感じている方</h4><p>40代以降の体の変化に、食から向き合いたい方に。</p></div>
-        <div class="whom-item"><h4>食の資格・スキルを身につけたい方</h4><p>プロとして活動したい、自分のビジネスに活かしたい方に。</p></div>
+        <div class="whom-item"><h4>体調・体型の変化を根本から変えたい</h4><p>疲れやすい・肌荒れ・体重管理・更年期の変化など、食から根本的に整えたい方。</p></div>
+        <div class="whom-item"><h4>食の知識を専門的・体系的に学びたい</h4><p>科学的根拠に基づいた深い知識を身につけたい方。</p></div>
+        <div class="whom-item"><h4>資格取得・プロとして活動したい</h4><p>料理教室・ヘルスコーチ・企業研修・レシピ開発など、ローフードをキャリアに活かしたい方。</p></div>
+        <div class="whom-item"><h4>海外から日本の食文化を学びたい</h4><p>英語・中国語対応可。発酵とローフードを組み合わせた日本独自の食文化を世界に伝えたい方。</p></div>
+        <div class="whom-item"><h4>忙しくても続けられる食習慣を作りたい</h4><p>経営者・専門職・子育て中の方。忙しいからこそ、食のパフォーマンスを上げたい方へ。</p></div>
+        <div class="whom-item"><h4>一生モノの美意識と食の哲学を持ちたい</h4><p>ダイエットで終わらせず、年齢を重ねるほど深まる食の美意識と哲学を持ちたい方。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Curriculum -->
-  <section class="sec curriculum-sec">
+  <section class="instructor-sec">
     <div class="inner">
-      <span class="sec-eye">Curriculum</span>
-      <h2>カリキュラム</h2>
-      <div class="steps">
-        <div class="step"><span class="step-num">01</span><div><h4>体験レッスン（1Day）</h4><p>ローフードの基礎知識と実習。実際に作って食べる体験から始めます。¥8,000〜</p></div></div>
-        <div class="step"><span class="step-num">02</span><div><h4>ローフードベーシック</h4><p>酵素・栄養学の基礎、デトックス、ローフードの調理法を体系的に学びます。</p></div></div>
-        <div class="step"><span class="step-num">03</span><div><h4>ローフードマイスター資格取得</h4><p>3ステップで資格取得。日本リビングビューティー協会認定校として指導します。</p></div></div>
-        <div class="step"><span class="step-num">04</span><div><h4>ロースイーツ・ローチョコレート</h4><p>砂糖・小麦・乳製品不使用のスイーツ。日本ローチョコレーティエ協会公認コース。</p></div></div>
+      <div class="instructor-grid">
+        <div><img src="/chie-main.jpg" alt="安藤千英" /><p class="instructor-tag">安藤 千英 — Chie Ando</p></div>
+        <div>
+          <span class="eyebrow">Instructor</span>
+          <h2>安藤千英について</h2>
+          <div class="rule"></div>
+          <p class="body-p">ELLE gourmet認定料理家・発酵×ローフード研究家。医師監修書籍「&RAW LIVING ローフードの教科書」著者。日本リビングビューティー協会認定校・&LAB TOKYO主宰。</p>
+          <p class="body-p">10年前、娘の大火傷をきっかけに食の世界に深く入り込んだ安藤千英は、ローフード・発酵・リビングフードを体系的に学び、独自のクロス理論を確立。循環器内科医・内科医を含む医師が資格を取得し、米・墨・香港など海外の受講生も増え続けています。</p>
+          <a href="/about" style="font-size:.85rem;color:var(--ink-3);text-decoration:none;border-bottom:1px solid var(--linen-3);padding-bottom:2px;">安藤千英のストーリーを読む →</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section class="sec pricing-sec">
+  <section class="testi-sec">
     <div class="inner">
-      <span class="sec-eye">Pricing</span>
-      <h2>料金・形式</h2>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h4>1Day 体験レッスン</h4>
-          <p class="pricing-price">¥8,000〜</p>
-          <p>所要時間：約2〜3時間<br />対面（渋谷）またはオンライン<br />入会費・登録費なし</p>
-        </div>
-        <div class="pricing-card">
-          <h4>継続コース</h4>
-          <p class="pricing-price">要相談</p>
-          <p>複数回にわたるプログラム<br />資格取得コースを含む<br />個別スケジュール対応</p>
-        </div>
-        <div class="pricing-card">
-          <h4>資格取得コース</h4>
-          <p class="pricing-price">要相談</p>
-          <p>ローフードマイスター認定<br />日本リビングビューティー協会認定<br />オンライン受講可</p>
-        </div>
+      <span class="eyebrow">Testimonials</span>
+      <h2>受講生の声。</h2>
+      <div class="testi-grid">
+        <div class="testi"><p class="testi-q">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートいただきました。食の科学的根拠を医師として理解でき、患者さんへの食事指導にも活かせています。</p><p class="testi-name">吉田 和弘 医師</p><p class="testi-role">循環器内科医 / 書籍「&RAW LIVING」医学監修</p></div>
+        <div class="testi"><p class="testi-q">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました。食が仕事になるとは思っていなかった。</p><p class="testi-name">櫻庭 千穂</p><p class="testi-role">内科医 / ドクターズカフェ オーナー・那須高原</p></div>
+        <div class="testi"><p class="testi-q">Joining from Hong Kong — learning raw food and fermentation together was extraordinary. The cross-theory approach is uniquely &LAB's. My family's diet has completely changed since taking this course.</p><p class="testi-name">Stephanie</p><p class="testi-role">香港在住 / ローフードマイスター取得</p></div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="sec faq-sec">
+  <section class="trial-sec" id="trial">
+    <div class="trial-inner">
+      <span class="eyebrow" style="color:var(--green);">LABの世界観を体験する</span>
+      <h2 style="font-family:var(--f-serif);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;letter-spacing:.1em;color:#F4F2EE;margin-bottom:1.2rem;">1Dayのプレミアムな世界観体験</h2>
+      <div class="trial-rule"></div>
+      <p class="trial-desc">本講座へのご参加をご検討中の方で、まずは一度、&LAB TOKYOの空気感やレッスンの全体像を体感されたい方に向けて、1Dayのプレミアムな世界観体験レッスンをご用意しています。</p>
+      <p class="trial-price">体験レッスン ¥13,000（税込）</p>
+      <a href="/contact" class="btn-trial">世界観体験レッスンを申し込む</a>
+    </div>
+  </section>
+
+  <section class="faq-sec">
     <div class="inner">
-      <span class="sec-eye">FAQ</span>
-      <h2>よくあるご質問</h2>
-      <div class="faqs">
-        <div class="faq">
-          <p class="faq-q">料理が苦手でも大丈夫ですか？</p>
-          <p class="faq-a">はい、まったく問題ありません。基礎から丁寧にお伝えします。循環器内科医の先生もローフードマイスターをほぼ満点で取得されています。</p>
-        </div>
-        <div class="faq">
-          <p class="faq-q">どんな道具が必要ですか？</p>
-          <p class="faq-a">体験レッスンでは特別な道具は不要です。継続コースでは徐々に揃えていただく形になります。</p>
-        </div>
-        <div class="faq">
-          <p class="faq-q">オンラインでも同じように学べますか？</p>
-          <p class="faq-a">はい。アメリカ・メキシコ・香港など海外からも受講いただいています。動画・テキスト・オンライン実習で対応しています。</p>
-        </div>
-        <div class="faq">
-          <p class="faq-q">キャンセルはできますか？</p>
-          <p class="faq-a">レッスン前日までにご連絡いただければ対応可能です。詳しくはお問い合わせください。</p>
-        </div>
+      <span class="eyebrow">FAQ</span>
+      <h2>よくあるご質問。</h2>
+      <div class="faq-list">
+        <div class="faq-item"><p class="faq-q">料理が苦手でも受講できますか？</p><p class="faq-a">はい、まったく問題ありません。循環器内科医の先生も「料理が苦手」とおっしゃりながらローフードマイスターをほぼ満点で取得されています。少人数制なので個別にサポートします。</p></div>
+        <div class="faq-item"><p class="faq-q">どの級から始めればいいですか？</p><p class="faq-a">ローフード初心者の方は2級からのスタートを推奨します。食の知識がある程度おありの方や、早く資格取得したい方は、ご状況をお聞きしてご相談の上、最適なスタート地点をご提案します。</p></div>
+        <div class="faq-item"><p class="faq-q">オンラインでも同じように学べますか？</p><p class="faq-a">はい。アメリカ・メキシコ・香港など海外からも受講いただいています。動画・テキスト・Zoomでの実習を組み合わせた形式で、対面と同じ質の学びをお届けしています。</p></div>
+        <div class="faq-item"><p class="faq-q">資格取得後にどのような活動ができますか？</p><p class="faq-a">自身の料理教室開催・ヘルスコーチ業・企業へのレシピ提供・食育活動・メディア出演など多岐にわたります。1級（マイスター）取得後は認定校として生徒を指導する権限も得られます。</p></div>
+        <div class="faq-item"><p class="faq-q">分割払いはできますか？</p><p class="faq-a">マイスタープレミアムコース（1級）については分割払いのご相談に応じています。詳細はお問い合わせください。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="cta-sec">
-    <h2>まず、体験から始めましょう。</h2>
-    <p>東京・渋谷またはオンラインで、あなたのペースで。<br />入会費・登録費は一切ありません。</p>
-    <a href="/contact" class="btn-dark">&LAB TOKYOの世界を体験する</a>
-    <p class="cta-note">3日以内にご返信いたします</p>
+    <span class="eyebrow">申し込み・お問い合わせ</span>
+    <h2 class="cta-h2">ローフードの世界へ。<br />あなたの一歩をお待ちしています。</h2>
+    <p class="cta-desc">本講座・体験レッスンへのご参加、ご質問・ご相談は<br />お問い合わせフォームよりお気軽にどうぞ。<br />3日以内にご返信いたします。</p>
+    <a href="/contact" class="btn-cta">&LAB TOKYOの世界を体験する</a>
+    <p class="cta-note">入会費・登録費は一切ありません</p>
   </section>
 
-  <footer>
-    <p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/lessons" style="color:#6e6e73;">← レッスン一覧へ</a></p>
-  </footer>
-
+  <footer><p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/lessons">← レッスン一覧へ</a> | <a href="/">← TOP</a></p></footer>
 </body>
 </html>
