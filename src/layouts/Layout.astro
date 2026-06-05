@@ -1,0 +1,109 @@
+---
+/**
+ * &LAB TOKYO 共通レイアウト
+ * 全ページのSEO・OGP・構造化データを一元管理
+ *
+ * 使い方:
+ * import Layout from '../layouts/Layout.astro';
+ * <Layout title="ページタイトル" description="説明文" image="/og-image.jpg">
+ *   コンテンツ
+ * </Layout>
+ */
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;        // OGP画像（デフォルト: /og-default.jpg）
+  type?: string;         // article | website
+  noindex?: boolean;     // trueにするとGoogleに索引させない
+  canonical?: string;    // 正規URL（省略時は現在のURL）
+  lang?: string;
+}
+
+const {
+  title,
+  description = "ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。少人数制・初心者歓迎・体験レッスン受付中。",
+  image = "/og-default.jpg",
+  type = "website",
+  noindex = false,
+  canonical,
+  lang = "ja",
+} = Astro.props;
+
+const siteUrl = "https://andlabtokyo.biz";
+const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ━━ 基本SEO ━━ -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  {!noindex && <meta name="robots" content="index, follow" />}
+
+  <!-- ━━ OGP（SNSシェア） ━━ -->
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content="&LAB TOKYO" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <!-- ━━ Twitter Card ━━ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- ━━ ファビコン ━━ -->
+  <link rel="icon" type="image/png" href="/logo.png" />
+
+  <!-- ━━ フォント ━━ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- ━━ 組織の構造化データ（全ページ共通） ━━ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "&LAB TOKYO",
+    "url": "https://andlabtokyo.biz",
+    "logo": "https://andlabtokyo.biz/logo-wide.png",
+    "description": "東京・渋谷を拠点とする発酵×ローフードのライフスタイルラボ。ELLE gourmet認定料理家・安藤千英が指導。",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "渋谷区",
+      "addressRegion": "東京都",
+      "addressCountry": "JP"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "安藤千英",
+      "alternateName": "Chie Ando",
+      "jobTitle": "ELLE gourmet認定料理家"
+    },
+    "sameAs": [
+      "https://www.instagram.com/chie_andlab/",
+      "https://note.com/chieando",
+      "https://www.andlabtokyo.com"
+    ]
+  }
+  </script>
+
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+</body>
+</html>

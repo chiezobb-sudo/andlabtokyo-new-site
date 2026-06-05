@@ -1,0 +1,120 @@
+---
+/**
+ * InstagramFeed コンポーネント
+ *
+ * 使い方（どのページにも埋め込み可能）:
+ * import InstagramFeed from '../components/InstagramFeed.astro';
+ * <InstagramFeed />
+ *
+ * 【将来の本格連携について】
+ * 現在: 固定リンク表示（Instagram プロフィールへ誘導）
+ * 将来: 以下のいずれかで自動更新フィードに変更可能
+ *   - Embedsocial / SnapWidget（月額サービス）
+ *   - Instagram Basic Display API（無料・要Facebook Developer登録）
+ *   - Behold.so（月額 $0〜$19、最も簡単）
+ *
+ * Behold.so での設定方法（推奨）:
+ * 1. behold.so でアカウント作成
+ * 2. Instagramと連携
+ * 3. ウィジェットIDをコピー
+ * 4. 下の BEHOLD_WIDGET_ID を書き換える
+ */
+
+// Instagram の設定
+const INSTAGRAM_HANDLE = "@chie_andlab"; // Instagramのアカウント名
+const INSTAGRAM_URL = "https://www.instagram.com/chie_andlab/";
+const BEHOLD_WIDGET_ID = ""; // 将来: Behold.soのウィジェットIDをここに入れる
+
+const useLiveWidget = BEHOLD_WIDGET_ID !== "";
+---
+
+<section class="ig-sec">
+  <div class="ig-inner">
+    <div class="ig-head">
+      <div>
+        <span class="ig-eyebrow">Instagram</span>
+        <h2 class="ig-title">日々の発酵と、食の美意識。</h2>
+      </div>
+      <a href={INSTAGRAM_URL} target="_blank" rel="noopener" class="ig-follow">
+        {INSTAGRAM_HANDLE} をフォロー →
+      </a>
+    </div>
+
+    {useLiveWidget ? (
+      <!-- Behold.so ライブウィジェット（IDが設定された場合） -->
+      <div id={`behold-widget-${BEHOLD_WIDGET_ID}`}></div>
+      <script define:vars={{ BEHOLD_WIDGET_ID }}>
+        (function(){
+          var s = document.createElement('script');
+          s.src = `https://w.behold.so/widget.js`;
+          document.head.appendChild(s);
+        })();
+      </script>
+    ) : (
+      <!-- フォールバック: Instagramへのリンクボタン -->
+      <div class="ig-placeholder">
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" class="ig-link-btn">
+          <span class="ig-icon">📸</span>
+          <span>
+            <strong>{INSTAGRAM_HANDLE}</strong><br />
+            <small>Instagramで最新の投稿を見る</small>
+          </span>
+          <span class="ig-arrow">→</span>
+        </a>
+        <p class="ig-note">
+          発酵・ローフード・日々のレシピを毎日更新中
+        </p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .ig-sec {
+    padding: 5rem clamp(1rem,4vw,2.8rem);
+    background: #F4F2EE;
+  }
+  .ig-inner { max-width: 1040px; margin: 0 auto; }
+  .ig-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .ig-eyebrow {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .68rem; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: #7AAF2A; display: block; margin-bottom: .5rem;
+  }
+  .ig-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    font-weight: 600; letter-spacing: .08em;
+    color: #1C1C1A;
+  }
+  .ig-follow {
+    font-size: .8rem; font-weight: 500;
+    color: #7A7A72; text-decoration: none;
+    transition: color .2s;
+  }
+  .ig-follow:hover { color: #A9D159; }
+
+  .ig-placeholder {
+    background: #1C1C1A;
+    padding: 3rem 2.4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .ig-link-btn {
+    display: flex; align-items: center; gap: 1.4rem;
+    text-decoration: none;
+    border: 1px solid rgba(244,242,238,.15);
+    padding: 1.4rem 2rem;
+    width: 100%; max-width: 480px;
+    transition: border-color .2s;
+  }
+  .ig-link-btn:hover { border-color: #A9D159; }
+  .ig-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .ig-link-btn strong { color: #F4F2EE; font-size: .95rem; }
+  .ig-link-btn small { color: rgba(244,242,238,.5); font-size: .78rem; }
+  .ig-arrow { color: #A9D159; font-size: 1.1rem; margin-left: auto; }
+  .ig-note { font-size: .78rem; color: rgba(244,242,238,.4); text-align: center; }
+</style>
