@@ -467,7 +467,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <li><a href="/about">安藤千英</a></li>
         <li><a href="/blog">ブログ</a></li>
       </ul>
-      <a href="/lessons" class="nav-cta">体験レッスン</a>
+      <a href="/lessons" class="nav-cta">LABへの入口</a>
       <div class="lang">
         <a href="?lang=ja" class={lang==='ja'?'on':''}>JP</a>
         <a href="?lang=en" class={lang==='en'?'on':''}>EN</a>
@@ -492,23 +492,22 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         忙しい毎日の中で、自分の体を後回しにしていませんか。<br />
         発酵×ローフードのクロス理論で、<br />あなたの本来の輝きを取り戻す。
       </p>
-      <a href="/lessons" class="btn-primary">体験レッスンを見る</a>
+      <a href="/lessons" class="btn-primary">&LAB TOKYOの世界を体験する</a>
     </div>
   </section>
 
   <!-- ② 体験レッスン情報ストリップ -->
   <div class="strip">
     <div class="strip-inner">
-      <span class="strip-label">Trial Lesson</span>
+      <span class="strip-label">LABへの入口</span>
       <div class="strip-items">
-        <span>東京・渋谷</span>
-        <span>オンライン対応</span>
+        <span>東京・渋谷 / オンライン</span>
         <span>少人数制 1〜4名</span>
         <span>初心者歓迎</span>
         <span>¥8,000〜</span>
         <span>入会費なし</span>
       </div>
-      <a href="/lessons" class="strip-link">詳しく見る →</a>
+      <a href="/lessons" class="strip-link">LABの世界を体験する →</a>
     </div>
   </div>
 
@@ -544,45 +543,64 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ④ PROGRAMS: 非均等エディトリアル（花寿司をここへ） -->
+  <!-- ④ PROGRAMS: 3つの扉 + UMAMI LAB -->
   <section class="programs" id="lessons">
     <div class="programs-inner">
-      <span class="eyebrow" style="color:var(--green)">Programs</span>
-      <h2>3つのプログラム。</h2>
-      <div class="prog-featured">
-        <a href="/rawfood" class="prog-featured-main">
+      <span class="eyebrow" style="color:var(--green)">3つの扉</span>
+      <h2>LABの世界観を体験する。</h2>
+
+      <!-- 3つの扉（均等3カラム） -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;">
+
+        <a href="/rawfood" class="prog-sub" style="height:460px;">
           <img src="/brand-sushi.jpg" alt="ローフード" />
           <div class="prog-ov"></div>
           <div class="prog-body">
-            <span class="prog-eye">Raw Food 01</span>
+            <span class="prog-eye">Door 01 · Raw Food</span>
             <h3>ローフード</h3>
-            <p>48℃以下の調理で酵素を活かす。体験〜マイスター資格まで。</p>
-            <p class="prog-meta">¥8,000〜 · 対面・オンライン · 初心者OK</p>
+            <p style="margin-bottom:.4rem;">生きた酵素を活かす食の科学。<br />体験〜マイスター資格まで。</p>
+            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">¥8,000〜 · 対面・オンライン</p>
           </div>
         </a>
-        <div class="prog-sub-stack">
-          <a href="/fermentation" class="prog-sub">
-            <img src="/hacco-amazake.jpg" alt="発酵" />
-            <div class="prog-ov"></div>
-            <div class="prog-body">
-              <span class="prog-eye">Fermentation 02</span>
-              <h3>Hacco LAB（発酵）</h3>
-              <p>麹・味噌・醤油など日本の発酵文化を現代の暮らしへ。</p>
-              <p class="prog-meta">¥8,000〜 · 対面・オンライン</p>
-            </div>
-          </a>
-          <a href="/raw-sweets" class="prog-sub">
-            <img src="/prog-chocolate.jpg" alt="ローチョコレート" />
-            <div class="prog-ov"></div>
-            <div class="prog-body">
-              <span class="prog-eye">Raw Sweets 03</span>
-              <h3>ロースイーツ</h3>
-              <p>日本ローチョコレーティエ協会公認。大人の甘さ。</p>
-              <p class="prog-meta">¥8,000〜 · 資格取得可</p>
-            </div>
-          </a>
-        </div>
+
+        <a href="/fermentation" class="prog-sub" style="height:460px;">
+          <img src="/hacco-amazake.jpg" alt="発酵" />
+          <div class="prog-ov"></div>
+          <div class="prog-body">
+            <span class="prog-eye">Door 02 · Fermentation</span>
+            <h3>発酵 / Hacco LAB</h3>
+            <p style="margin-bottom:.4rem;">麹・味噌・醤油。腸から整える<br />日本の発酵文化。</p>
+            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">¥8,000〜 · 対面・オンライン</p>
+          </div>
+        </a>
+
+        <a href="/fermentation" class="prog-sub" style="height:460px;">
+          <img src="/hacco-koji.jpg" alt="UMAMI LAB" />
+          <div class="prog-ov"></div>
+          <div class="prog-body">
+            <span class="prog-eye">Door 03 · Inbound</span>
+            <h3>UMAMI &amp; KOJI LAB</h3>
+            <p style="margin-bottom:.4rem;">日本の旨みと麹を世界へ。<br />インバウンド向けプレミアム体験。</p>
+            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">英語対応 · 海外からも参加可</p>
+          </div>
+        </a>
+
       </div>
+
+      <!-- 大きなビジュアル（ロースイーツ） -->
+      <a href="/raw-sweets" class="prog-featured-main" style="display:block;height:300px;margin-top:2px;position:relative;overflow:hidden;text-decoration:none;">
+        <img src="/prog-chocolate.jpg" alt="ロースイーツ" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .8s;" />
+        <div class="prog-ov"></div>
+        <div class="prog-body" style="display:flex;align-items:center;gap:3rem;">
+          <div>
+            <span class="prog-eye">Raw Sweets</span>
+            <h3 style="font-size:1.5rem;">ロースイーツ / ローチョコレート</h3>
+          </div>
+          <p style="font-size:.88rem;color:rgba(244,242,238,.65);max-width:440px;line-height:1.8;">罪悪感を美しさに変える。砂糖・小麦・乳製品不使用。<br />日本ローチョコレーティエ協会公認。資格取得可。</p>
+          <p class="prog-meta" style="margin-left:auto;white-space:nowrap;">¥8,000〜 →</p>
+        </div>
+      </a>
+
     </div>
   </section>
 
@@ -713,13 +731,17 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   <!-- ⑨ CTA -->
   <section class="cta" id="contact">
     <div class="cta-inner">
-      <span class="eyebrow">First Step</span>
-      <h2>忙しさを、<br />輝きに変える。</h2>
+      <span class="eyebrow">LABへの入口</span>
+      <h2>まずは体験レッスンから、<br />&LAB TOKYOの世界へ。</h2>
       <div class="cta-rule"></div>
-      <p class="cta-desc">まずは1回の体験から。<br />東京・渋谷またはオンラインで、<br />あなたのペースで始められます。</p>
-      <a href="/lessons" class="btn-primary">体験レッスンを予約する</a>
-      <a href="/contact" class="cta-sub">お問い合わせフォームへ →</a>
-      <p class="cta-note">入会費・登録費は一切ありません</p>
+      <p class="cta-desc">
+        ここは、単なる料理教室ではありません。<br />
+        細胞から整える食の知恵と美意識に触れる、<br />
+        あなた自身の再生への入口です。
+      </p>
+      <a href="/lessons" class="btn-primary">&LAB TOKYOの世界を体験する</a>
+      <a href="/contact" class="cta-sub">お問い合わせ・ご質問はこちら →</a>
+      <p class="cta-note">入会費・登録費は一切ありません。まずはお気軽にどうぞ。</p>
     </div>
   </section>
 
