@@ -34,8 +34,10 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       --on-sumi-muted: rgba(244,242,238,.6);
 
       /* アクセント */
-      --green:   #A9D159;
-      --green-d: #7AAF2A;
+      --green:   #A9D159;   /* ロゴの葉グリーン（ホバー・アクセント用） */
+      --green-d: #7AAF2A;   /* ダークグリーン（テキスト・「醸す」） */
+      --green-btn: #4E8A18; /* ボタン用：抹茶のような上品なグリーン */
+      --green-btn-h: #3D6E12; /* ボタンホバー */
 
       /* フォント */
       --f-serif: 'Noto Serif JP', 'Times New Roman', serif;
@@ -64,7 +66,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       letter-spacing: 0.08em;
       line-height: 1.45;
     }
-    h1 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h1 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }  /* ③ PC大画面で少し小さく・余白を贅沢に */
     h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
     h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
 
@@ -78,7 +80,12 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(244,242,238,.08);
     }
-    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo img {
+      height: 32px; width: auto;
+      /* ① ロゴ背景の白を透明化（mix-blend-modeでナビに自然に馴染む） */
+      mix-blend-mode: screen;
+      filter: brightness(1.1);
+    }
     .nav-right { display: flex; align-items: center; gap: 0; }
     .nav-links { display: flex; list-style: none; gap: 0; }
     .nav-links a {
@@ -92,11 +99,11 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       font-family: var(--f-sans); font-size: .82rem; font-weight: 700;
       letter-spacing: .04em;
       display: inline-block;
-      background: var(--green); color: var(--sumi);
+      background: var(--green-btn); color: #FAF5EC;
       padding: .45rem 1.4rem; margin-left: 1.2rem;
       text-decoration: none; transition: background .2s;
     }
-    .nav-cta:hover { background: var(--green-d); color: #fff; }
+    .nav-cta:hover { background: var(--green-btn-h); color: #fff; }
     .lang { display: flex; align-items: center; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid rgba(244,242,238,.12); }
     .lang a { font-size: .72rem; color: rgba(244,242,238,.4); text-decoration: none; padding: 0 6px; transition: color .2s; }
     .lang a.on { color: var(--green); font-weight: 700; }
@@ -568,6 +575,12 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
           40代になったとき、更年期という新しい岐路に立ちました。
           忙しい女性が、食から自分を取り戻せる場所をつくりたい。
           それが&LAB TOKYOの原点です。
+        </p>
+        <!-- SEO: リビングフード・ローフードの定義文（Googleの強調スニペット狙い） -->
+        <p class="body-p" style="font-size:.88rem;color:var(--ink-3);margin-top:1rem;">
+          <strong style="color:var(--ink-2);">ローフード（リビングフード）とは</strong>、
+          加熱処理をせず食材本来の酵素・栄養を活かす食事法のこと。
+          発酵との組み合わせ（クロス理論）で、腸内環境と細胞の両面から整えます。
         </p>
         <a href="/about" class="text-link">安藤千英について、もっと読む →</a>
       </div>
