@@ -5,34 +5,388 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安藤千英について | &LAB TOKYO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <title>安藤千英とは — 発酵創家・ELLE gourmet認定料理家 | &LAB TOKYO</title>
+  <meta name="description" content="安藤千英。ELLE gourmet認定料理家・発酵×ローフード研究家。娘の大火傷をきっかけに食の世界へ。医師監修書籍「&RAW LIVING」著者。東京・渋谷「&LAB TOKYO」主宰。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "安藤千英",
+    "alternateName": "Chie Ando",
+    "jobTitle": "ELLE gourmet認定料理家 / 発酵×ローフード研究家",
+    "description": "東京・渋谷を拠点とする発酵×ローフードのライフスタイルラボ「&LAB TOKYO」主宰。医師監修書籍著者。",
+    "url": "https://andlabtokyo.biz/about",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "&LAB TOKYO"
+    }
+  }
+  </script>
   <style>
-    body { margin:0; background:#0c0a08; color:#f2ede4; font-family:'Noto Sans JP',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    nav { position:fixed; top:0; left:0; right:0; height:66px; display:flex; align-items:center; padding:0 3rem; background:rgba(12,10,8,.9); border-bottom:1px solid rgba(200,169,110,.1); }
-    nav a { margin-right:2rem; text-decoration:none; color:rgba(242,237,228,.5); font-size:.8rem; letter-spacing:1.5px; }
-    nav a:hover { color:#c8a96e; }
-    .coming { text-align:center; }
-    .label { font-family:'Cormorant Garamond',serif; font-size:.75rem; letter-spacing:4px; text-transform:uppercase; color:#c8a96e; margin-bottom:1.5rem; }
-    h1 { font-family:'Noto Serif JP',serif; font-weight:200; font-size:3rem; color:#fdfaf5; margin-bottom:1.5rem; }
-    p { color:rgba(242,237,228,.5); }
-    .back { display:inline-block; margin-top:2.5rem; padding:.8rem 2rem; border:1px solid rgba(200,169,110,.4); color:#c8a96e; text-decoration:none; font-size:.8rem; letter-spacing:2px; border-radius:1px; transition:background .2s; }
-    .back:hover { background:#c8a96e; color:#0c0a08; }
+    :root {
+      --ink:   #1d1d1f;
+      --ink-2: #3d3d3f;
+      --ink-3: #6e6e73;
+      --bg:    #ffffff;
+      --bg-2:  #f5f5f7;
+      --bg-dark: #1a1715;
+      --green:  #A9D159;
+      --green-d:#7AAF2A;
+      --amber:  #C6A15B;
+      --divider:#d2d2d7;
+      --f:  'Noto Sans JP', sans-serif;
+      --fh: 'Cormorant Garamond', serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* Nav */
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(0,0,0,.88); backdrop-filter: blur(20px); }
+    .nav-logo img { height: 22px; filter: invert(1); }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a { font-size: 12px; color: rgba(255,255,255,.85); text-decoration: none; padding: 0 10px; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+
+    /* Hero — portrait主役 */
+    .hero {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 44px);
+    }
+    .hero-left {
+      background: var(--bg-2);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 72px 5vw 72px 6vw;
+    }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--bg-2) 0%, transparent 20%); }
+    .hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--green-d); display: block; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 6px; }
+    .hero-en { font-family: var(--fh); font-size: 18px; color: var(--ink-3); letter-spacing: 2px; margin-bottom: 20px; font-style: italic; }
+    .hero-title { font-size: 13px; color: var(--ink-3); line-height: 1.9; margin-bottom: 32px; }
+    .hero-title span { display: block; }
+    .hero-quote {
+      border-left: 3px solid var(--green);
+      padding-left: 20px;
+      margin-bottom: 36px;
+    }
+    .hero-quote p { font-family: var(--fh); font-size: 20px; font-style: italic; color: var(--ink); line-height: 1.6; }
+    .btn-primary { display: inline-block; background: var(--green); color: #1d1d1f; font-size: 14px; font-weight: 700; padding: 12px 26px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--green-d); color: #fff; }
+
+    /* Section base */
+    .sec { padding: 72px 22px; }
+    .inner { max-width: 860px; margin: 0 auto; }
+    .inner-wide { max-width: 1000px; margin: 0 auto; }
+    .sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--green-d); display: block; margin-bottom: 8px; }
+    h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.3; }
+    .rule { width: 36px; height: 2px; background: var(--green); margin: 20px 0 32px; }
+    .body-text { font-size: 16px; color: var(--ink-2); line-height: 1.95; margin-bottom: 18px; }
+    .body-text strong { color: var(--ink); font-weight: 700; }
+
+    /* Story */
+    .story-sec { background: var(--bg); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .story-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 8px; }
+    .story-pull {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: var(--bg-2);
+      border-left: 3px solid var(--green);
+    }
+    .story-pull p { font-family: var(--fh); font-size: 17px; font-style: italic; color: var(--ink); line-height: 1.7; }
+    .story-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 500; color: var(--green-d); text-decoration: none; border-bottom: 1px solid rgba(122,175,42,.3); padding-bottom: 2px; transition: all .2s; }
+    .story-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* Philosophy */
+    .philosophy-sec { background: var(--bg-dark); color: #f5f5f7; padding: 72px 22px; }
+    .philosophy-sec .sec-eye { color: var(--green); }
+    .philosophy-sec h2 { color: #f5f5f7; }
+    .philosophy-sec .rule { background: var(--amber); }
+    .philosophy-words {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 32px;
+    }
+    .philosophy-word {
+      background: rgba(255,255,255,.05);
+      padding: 28px 24px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .philosophy-word h3 { font-family: var(--fh); font-size: 22px; font-style: italic; color: var(--green); margin-bottom: 10px; }
+    .philosophy-word p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.8; }
+
+    /* Credentials */
+    .cred-sec { background: var(--bg-2); }
+    .cred-grid { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; }
+    .book-img img { width: 100%; border-radius: 6px; box-shadow: 0 16px 48px rgba(0,0,0,.15); }
+    .cred-list { display: flex; flex-direction: column; gap: 20px; }
+    .cred-item { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--divider); }
+    .cred-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cred-num { font-family: var(--fh); font-size: 24px; font-style: italic; color: var(--divider); flex-shrink: 0; line-height: 1; }
+    .cred-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .cred-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+
+    /* Media strip */
+    .media-sec { background: var(--bg); padding: 48px 22px; }
+    .media-inner { max-width: 860px; margin: 0 auto; }
+    .media-label { font-family: var(--fh); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-3); text-align: center; margin-bottom: 24px; display: block; }
+    .media-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; }
+    .media-list span { font-size: 13px; color: var(--ink-3); font-weight: 500; }
+
+    /* Teaching style */
+    .teaching-sec { background: var(--bg-2); }
+    .teaching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
+    .teaching-item { background: var(--bg); padding: 28px 24px; }
+    .teaching-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .teaching-item p { font-size: 13px; color: var(--ink-3); line-height: 1.8; }
+
+    /* CTA */
+    .cta-sec { background: var(--bg); text-align: center; padding: 72px 22px; }
+    .cta-sec h2 { font-size: clamp(22px, 3vw, 32px); color: var(--ink); margin-bottom: 14px; }
+    .cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 28px; line-height: 1.8; }
+    .btn-dark { display: inline-block; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 980px; text-decoration: none; transition: opacity .2s; }
+    .btn-dark:hover { opacity: .75; }
+    .cta-note { margin-top: 12px; font-size: 12px; color: var(--ink-3); }
+
+    footer { background: #000; padding: 24px 22px; text-align: center; }
+    footer p { font-size: 12px; color: #6e6e73; }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 55vw; }
+      .hero-right::after { background: linear-gradient(to bottom, var(--bg-2) 0%, transparent 25%); }
+      .story-grid { grid-template-columns: 1fr; gap: 36px; }
+      .philosophy-words { grid-template-columns: 1fr; }
+      .cred-grid { grid-template-columns: 1fr; gap: 32px; }
+      .teaching-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
+
   <nav>
-    <a href="/" style="font-size:1.1rem;color:#c8a96e;font-weight:500;">&LAB TOKYO</a>
-    <a href="/lessons">レッスン</a>
-    <a href="/hacco">Hacco LAB</a>
-    <a href="/blog">ブログ</a>
-    <a href="/about">安藤千英</a>
+    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
+    <ul class="nav-links">
+      <li><a href="/lessons">レッスン</a></li>
+      <li><a href="/rawfood">ローフード</a></li>
+      <li><a href="/fermentation">発酵</a></li>
+      <li><a href="/about" style="color:var(--green)">安藤千英</a></li>
+      <li><a href="/blog">ブログ</a></li>
+    </ul>
   </nav>
-  <div class="coming">
-    <p class="label">Coming Soon</p>
-    <h1>安藤千英について</h1>
-    <p>このページは現在準備中です。</p>
-    <a href="/" class="back">← TOPへ戻る</a>
-  </div>
+
+  <!-- Hero — 人物が主役 -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="hero-eye">Founder / Chef / Researcher</span>
+      <h1>安藤 千英</h1>
+      <p class="hero-en">Chie Ando</p>
+      <div class="hero-title">
+        <span>ELLE gourmet認定料理家</span>
+        <span>発酵×ローフード研究家</span>
+        <span>&LAB TOKYO 主宰</span>
+      </div>
+      <div class="hero-quote">
+        <p>「細胞から整える食」は、<br />一生モノの武器だ。</p>
+      </div>
+      <a href="/contact" class="btn-primary">体験レッスンを予約する</a>
+    </div>
+    <div class="hero-right">
+      <img src="/chie-main.jpg" alt="安藤千英" />
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="sec story-sec" id="story">
+    <div class="inner">
+      <div class="story-grid">
+        <div class="story-img">
+          <img src="/story-lesson.jpg" alt="&LAB TOKYO レッスン風景" />
+        </div>
+        <div>
+          <span class="sec-eye">My Story</span>
+          <h2>なぜ、私は食を伝えるのか。</h2>
+          <div class="rule"></div>
+
+          <p class="body-text">
+            10年前の4月。娘が台所の熱湯を頭からかぶる大火傷を負いました。
+            長期入院、複数回の手術。私は<strong>キッチンに立てなくなった。</strong>
+          </p>
+
+          <div class="story-pull">
+            <p>「母親として、食で何かできることがあるはずだ。」</p>
+          </div>
+
+          <p class="body-text">
+            そこから食を学び直しました。マクロビオティック、ローフード、発酵。
+            食べることが娘を、そして私自身を、内側から再生させていった。
+            娘が退院後、本能的にカカオを求め続けていたこと。
+            後からカカオに創傷治癒を助ける成分があると知り、
+            <strong>「体は知っている」</strong>と確信しました。
+          </p>
+
+          <p class="body-text">
+            40代になったとき、更年期という新しい岐路に立ちました。
+            体の変化に向き合いながら、改めて気づいたのです——
+            <strong>「細胞から整える食」は、一生モノの武器だ</strong>、と。
+          </p>
+
+          <p class="body-text">
+            忙しい女性が、食から自分を取り戻せる場所をつくりたい。
+            それが&LAB TOKYOの原点です。
+          </p>
+
+          <a href="https://note.com/chieando/n/naa6e962de57b" target="_blank" class="story-link">
+            全文をnoteで読む →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy-sec">
+    <div class="inner">
+      <span class="sec-eye">Philosophy</span>
+      <h2>私が伝えたいこと</h2>
+      <div class="rule"></div>
+      <p class="body-text" style="color:rgba(245,245,247,.75); max-width:640px;">
+        &LAB TOKYOは単なる料理教室ではありません。
+        食を通じて、女性が自分の人生を更新していくための「知と美意識の場」です。
+      </p>
+      <div class="philosophy-words">
+        <div class="philosophy-word">
+          <h3>醸す</h3>
+          <p>発酵のように、時間をかけてゆっくりと変化する。急がず、焦らず、内側から熟成させていく生き方。</p>
+        </div>
+        <div class="philosophy-word">
+          <h3>細胞から</h3>
+          <p>表面だけを整えるのではなく、細胞レベルから変わること。食は最も確実な自己投資。</p>
+        </div>
+        <div class="philosophy-word">
+          <h3>更新する</h3>
+          <p>年齢を重ねるごとに、より深く、より自分らしくなれる。食はその更新を支えるもの。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials -->
+  <section class="sec cred-sec">
+    <div class="inner">
+      <div class="cred-grid">
+        <div class="book-img">
+          <img src="/book-cover.jpg" alt="&RAW LIVING ローフードの教科書" />
+        </div>
+        <div>
+          <span class="sec-eye">Credentials</span>
+          <h2>実績・資格</h2>
+          <div class="rule"></div>
+          <div class="cred-list">
+            <div class="cred-item">
+              <span class="cred-num">01</span>
+              <div>
+                <h4>医師監修書籍「&RAW LIVING」著者</h4>
+                <p>循環器内科医・吉田和弘医師の監修のもと出版。Amazonにて好評発売中。ローフードの科学的根拠を一般向けにまとめた一冊。</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-num">02</span>
+              <div>
+                <h4>ELLE gourmet認定クリエイター</h4>
+                <p>フランス発のプレミアム食専門誌に認定された、日本でも数少ない料理家。</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-num">03</span>
+              <div>
+                <h4>日本リビングビューティー協会認定校</h4>
+                <p>ローフードマイスター資格の認定校として、多くの受講生を指導。</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-num">04</span>
+              <div>
+                <h4>企業レシピ開発・メディア掲載</h4>
+                <p>DIC・Kuvingsほか複数企業のレシピ開発実績。ライフスタイル誌に多数掲載。</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-num">05</span>
+              <div>
+                <h4>国内外の医師・専門家が受講</h4>
+                <p>循環器内科医・内科医など複数の医師が資格取得。米・メキシコ・香港など海外からも受講。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media -->
+  <section class="media-sec">
+    <div class="media-inner">
+      <span class="media-label">Media &amp; Collaboration</span>
+      <div class="media-list">
+        <span>ELLE gourmet</span>
+        <span>DIC</span>
+        <span>Kuvings</span>
+        <span>日本リビングビューティー協会</span>
+        <span>日本ローチョコレーティエ協会</span>
+        <span>循環器内科医監修</span>
+        <span>ライフスタイル誌掲載多数</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching style -->
+  <section class="sec teaching-sec">
+    <div class="inner">
+      <span class="sec-eye">Teaching Style</span>
+      <h2>レッスンで大切にしていること</h2>
+      <div class="rule"></div>
+      <div class="teaching-grid">
+        <div class="teaching-item">
+          <h4>「なぜ」を伝える</h4>
+          <p>レシピを教えるだけでなく、なぜその調理法が体に良いのか、科学的根拠とともに伝えます。知識があるから、日常に定着する。</p>
+        </div>
+        <div class="teaching-item">
+          <h4>一人ひとりに向き合う</h4>
+          <p>少人数制（1〜4名）で、それぞれの体質・目的・ライフスタイルに合わせた提案をします。</p>
+        </div>
+        <div class="teaching-item">
+          <h4>継続できる形で</h4>
+          <p>難しすぎず、特別すぎず、日常に自然と溶け込む食の習慣を一緒につくります。</p>
+        </div>
+        <div class="teaching-item">
+          <h4>食の文化と美意識を共に</h4>
+          <p>器の選び方、盛り付け、食卓の空気感まで。食は美意識そのものと考えています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <h2>安藤千英のレッスンを、<br />体験してみてください。</h2>
+    <p>
+      まずは1回の体験レッスンから。<br />
+      東京・渋谷またはオンラインで、あなたのペースで始められます。
+    </p>
+    <a href="/contact" class="btn-dark">体験レッスンを予約する</a>
+    <p class="cta-note">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
+  </section>
+
+  <footer>
+    <p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/" style="color:#6e6e73;">← TOPへ</a></p>
+  </footer>
+
 </body>
 </html>
