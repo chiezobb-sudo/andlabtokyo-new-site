@@ -5,34 +5,336 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>レッスン | &LAB TOKYO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <title>体験レッスン一覧 | &LAB TOKYO — 発酵×ローフード 東京・渋谷</title>
+  <meta name="description" content="東京・渋谷のローフード＆発酵料理教室「&LAB TOKYO」の体験レッスン一覧。ローフード、発酵、リビングフード、ロースイーツなど。少人数制・初心者歓迎・¥8,000〜・入会費なし。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
-    body { margin:0; background:#0c0a08; color:#f2ede4; font-family:'Noto Sans JP',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    nav { position:fixed; top:0; left:0; right:0; height:66px; display:flex; align-items:center; padding:0 3rem; background:rgba(12,10,8,.9); border-bottom:1px solid rgba(200,169,110,.1); }
-    nav a { margin-right:2rem; text-decoration:none; color:rgba(242,237,228,.5); font-size:.8rem; letter-spacing:1.5px; }
-    nav a:hover { color:#c8a96e; }
-    .coming { text-align:center; }
-    .label { font-family:'Cormorant Garamond',serif; font-size:.75rem; letter-spacing:4px; text-transform:uppercase; color:#c8a96e; margin-bottom:1.5rem; }
-    h1 { font-family:'Noto Serif JP',serif; font-weight:200; font-size:3rem; color:#fdfaf5; margin-bottom:1.5rem; }
-    p { color:rgba(242,237,228,.5); }
-    .back { display:inline-block; margin-top:2.5rem; padding:.8rem 2rem; border:1px solid rgba(200,169,110,.4); color:#c8a96e; text-decoration:none; font-size:.8rem; letter-spacing:2px; border-radius:1px; transition:background .2s; }
-    .back:hover { background:#c8a96e; color:#0c0a08; }
+    :root {
+      --ink:    #1d1d1f;
+      --ink-2:  #3d3d3f;
+      --ink-3:  #6e6e73;
+      --bg:     #ffffff;
+      --bg-2:   #f5f5f7;
+      --bg-3:   #e8e8ed;
+      --green:  #A9D159;
+      --green-d:#7AAF2A;
+      --divider:#d2d2d7;
+      --f:      'Noto Sans JP', sans-serif;
+      --fh:     'Cormorant Garamond', serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* Nav */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 100;
+      height: 44px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 22px;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(20px);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 22px; filter: invert(1); }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a { font-size: 12px; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0 10px; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+
+    /* Hero */
+    .hero {
+      margin-top: 44px;
+      background: var(--ink);
+      padding: 80px 22px 72px;
+      text-align: center;
+    }
+    .hero-eye {
+      font-family: var(--fh);
+      font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 20px; display: block;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; line-height: 1.2;
+      color: #ffffff; margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,0.65);
+      max-width: 520px; margin: 0 auto 32px; line-height: 1.8;
+    }
+    .hero-meta {
+      display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .hero-meta span {
+      font-size: 13px; color: rgba(255,255,255,0.6);
+      padding: 0 16px; border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-meta span:last-child { border-right: none; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green); color: #1d1d1f;
+      font-size: 15px; font-weight: 700;
+      padding: 14px 32px; border-radius: 980px;
+      text-decoration: none; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--green-d); color: #fff; }
+
+    /* Lessons grid */
+    .lessons-sec { padding: 72px 22px; background: var(--bg-2); }
+    .lessons-inner { max-width: 960px; margin: 0 auto; }
+    .sec-label {
+      font-family: var(--fh);
+      font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green-d); display: block; margin-bottom: 8px;
+    }
+    .sec-title {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700; color: var(--ink); margin-bottom: 48px;
+    }
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+    .lesson-card {
+      position: relative; overflow: hidden;
+      text-decoration: none; display: block;
+      background: #fff;
+    }
+    .lesson-card-img {
+      width: 100%; height: 260px;
+      object-fit: cover; display: block;
+      transition: transform .7s ease;
+    }
+    .lesson-card:hover .lesson-card-img { transform: scale(1.03); }
+    .lesson-card-body { padding: 28px 24px 32px; }
+    .lesson-card-eye {
+      font-family: var(--fh);
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green-d); margin-bottom: 8px; display: block;
+    }
+    .lesson-card h3 {
+      font-size: 20px; font-weight: 700; color: var(--ink);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .lesson-card p {
+      font-size: 14px; color: var(--ink-3); line-height: 1.8; margin-bottom: 16px;
+    }
+    .lesson-card-meta {
+      font-size: 13px; color: var(--green-d); font-weight: 500;
+    }
+    .lesson-card-arrow {
+      position: absolute; top: 20px; right: 20px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg-2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--ink-3);
+      opacity: 0; transition: opacity .3s;
+    }
+    .lesson-card:hover .lesson-card-arrow { opacity: 1; }
+
+    /* Trial info */
+    .trial-sec { padding: 72px 22px; background: var(--bg); }
+    .trial-inner { max-width: 760px; margin: 0 auto; }
+    .trial-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px; margin-top: 40px;
+    }
+    .trial-item {
+      background: var(--bg-2); padding: 28px 24px;
+    }
+    .trial-item-num {
+      font-family: var(--fh);
+      font-size: 28px; color: var(--bg-3); font-style: italic;
+      margin-bottom: 8px; display: block;
+    }
+    .trial-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .trial-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+
+    /* Testimonials */
+    .testi-sec { padding: 72px 22px; background: var(--bg-2); }
+    .testi-inner { max-width: 960px; margin: 0 auto; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 40px; }
+    .testi {
+      background: var(--bg); padding: 24px 20px;
+      border-radius: 12px;
+      border-top: 2px solid var(--green);
+    }
+    .testi-quote { font-size: 14px; color: var(--ink-2); line-height: 1.85; margin-bottom: 16px; }
+    .testi-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .testi-role { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+    /* CTA final */
+    .cta-sec { padding: 80px 22px; background: var(--ink); text-align: center; }
+    .cta-sec h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .cta-sec p { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 32px; }
+    .cta-note { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    /* Footer */
+    footer { background: #000; padding: 32px 22px; text-align: center; }
+    footer p { font-size: 12px; color: #6e6e73; }
+
+    @media (max-width: 680px) {
+      .lessons-grid { grid-template-columns: 1fr; }
+      .trial-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
+
   <nav>
-    <a href="/" style="font-size:1.1rem;color:#c8a96e;font-weight:500;">&LAB TOKYO</a>
-    <a href="/lessons">レッスン</a>
-    <a href="/hacco">Hacco LAB</a>
-    <a href="/blog">ブログ</a>
-    <a href="/about">安藤千英</a>
+    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
+    <ul class="nav-links">
+      <li><a href="/lessons">レッスン</a></li>
+      <li><a href="/rawfood">ローフード</a></li>
+      <li><a href="/fermentation">発酵</a></li>
+      <li><a href="/about">安藤千英</a></li>
+      <li><a href="/blog">ブログ</a></li>
+    </ul>
   </nav>
-  <div class="coming">
-    <p class="label">Coming Soon</p>
-    <h1>レッスン</h1>
-    <p>このページは現在準備中です。</p>
-    <a href="/" class="back">← TOPへ戻る</a>
-  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-eye">Lessons &amp; Programs</span>
+    <h1>あなたの細胞から、<br />人生を整えるレッスン。</h1>
+    <p class="hero-sub">
+      ローフード、発酵、リビングフード、ロースイーツ。<br />
+      食を通じて内側から変わる、少人数制の体験レッスンです。
+    </p>
+    <div class="hero-meta">
+      <span>東京・渋谷</span>
+      <span>オンライン対応</span>
+      <span>少人数制 1〜4名</span>
+      <span>初心者歓迎</span>
+      <span>¥8,000〜</span>
+      <span>入会費なし</span>
+    </div>
+    <a href="/contact" class="btn-primary">体験レッスンを予約する</a>
+  </section>
+
+  <!-- Lesson categories -->
+  <section class="lessons-sec">
+    <div class="lessons-inner">
+      <span class="sec-label">Programs</span>
+      <h2 class="sec-title">4つのプログラム</h2>
+      <div class="lessons-grid">
+
+        <a href="/rawfood" class="lesson-card">
+          <img src="/rawfood-zucchini.jpg" alt="ローフード体験レッスン" class="lesson-card-img" />
+          <span class="lesson-card-arrow">→</span>
+          <div class="lesson-card-body">
+            <span class="lesson-card-eye">Raw Food</span>
+            <h3>ローフード</h3>
+            <p>48℃以下の調理で酵素と栄養を活かす。体験から資格取得まで、細胞から整える食の基礎を学びます。</p>
+            <p class="lesson-card-meta">¥8,000〜 · 対面・オンライン · 初心者OK</p>
+          </div>
+        </a>
+
+        <a href="/fermentation" class="lesson-card">
+          <img src="/hacco-amazake.jpg" alt="発酵体験レッスン" class="lesson-card-img" />
+          <span class="lesson-card-arrow">→</span>
+          <div class="lesson-card-body">
+            <span class="lesson-card-eye">Fermentation</span>
+            <h3>発酵 / Hacco LAB</h3>
+            <p>麹・味噌・醤油など、日本の発酵文化を現代の暮らしへ。腸内環境を整え、内側から美しさを醸します。</p>
+            <p class="lesson-card-meta">¥8,000〜 · 対面・オンライン · 国際対応</p>
+          </div>
+        </a>
+
+        <a href="/living-food" class="lesson-card">
+          <img src="/visual-table.jpg" alt="リビングフードレッスン" class="lesson-card-img" />
+          <span class="lesson-card-arrow">→</span>
+          <div class="lesson-card-body">
+            <span class="lesson-card-eye">Living Food</span>
+            <h3>リビングフード</h3>
+            <p>生きた食材のエネルギーを最大限に活かすライフスタイル。ローフードと発酵を組み合わせたクロス理論を体験。</p>
+            <p class="lesson-card-meta">¥8,000〜 · 対面・オンライン</p>
+          </div>
+        </a>
+
+        <a href="/raw-sweets" class="lesson-card">
+          <img src="/prog-chocolate.jpg" alt="ロースイーツ・ローチョコレート" class="lesson-card-img" />
+          <span class="lesson-card-arrow">→</span>
+          <div class="lesson-card-body">
+            <span class="lesson-card-eye">Raw Sweets</span>
+            <h3>ロースイーツ / ローチョコレート</h3>
+            <p>日本ローチョコレーティエ協会公認。砂糖・小麦・乳製品不使用でも豊かな味わい。資格取得も可能。</p>
+            <p class="lesson-card-meta">¥8,000〜 · 対面・オンライン · 資格取得可</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trial info -->
+  <section class="trial-sec">
+    <div class="trial-inner">
+      <span class="sec-label">Lesson Style</span>
+      <h2 class="sec-title">レッスンについて</h2>
+      <div class="trial-grid">
+        <div class="trial-item">
+          <span class="trial-item-num">01</span>
+          <h4>少人数制 1〜4名</h4>
+          <p>あなた一人ひとりに向き合える少人数制。質問しやすく、丁寧に学べます。</p>
+        </div>
+        <div class="trial-item">
+          <span class="trial-item-num">02</span>
+          <h4>初心者・お子様歓迎</h4>
+          <p>食の知識がゼロでも大丈夫。基礎から丁寧にお伝えします。</p>
+        </div>
+        <div class="trial-item">
+          <span class="trial-item-num">03</span>
+          <h4>東京・渋谷 ／ オンライン</h4>
+          <p>渋谷の教室での対面受講、またはオンラインでご自宅から受講できます。海外からも参加可能。</p>
+        </div>
+        <div class="trial-item">
+          <span class="trial-item-num">04</span>
+          <h4>¥8,000〜 入会費なし</h4>
+          <p>まずは1回の体験から。入会費・登録費は一切ありません。気軽にスタートできます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testi-sec">
+    <div class="testi-inner">
+      <span class="sec-label">Testimonials</span>
+      <h2 class="sec-title">受講生の声</h2>
+      <div class="testi-grid">
+        <div class="testi">
+          <p class="testi-quote">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました。</p>
+          <p class="testi-name">櫻庭 千穂</p>
+          <p class="testi-role">内科医 / ドクターズカフェ オーナー</p>
+        </div>
+        <div class="testi">
+          <p class="testi-quote">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。料理が苦手な私も丁寧にサポートしていただきました。医師として自信を持っておすすめします。</p>
+          <p class="testi-name">吉田 和弘 医師</p>
+          <p class="testi-role">循環器内科医 / 書籍「&RAW LIVING」医学監修</p>
+        </div>
+        <div class="testi">
+          <p class="testi-quote">Joining from the US and Mexico — the koji and umami content was extraordinary. One of the best learning experiences I've ever had.</p>
+          <p class="testi-name">Oscar</p>
+          <p class="testi-role">アメリカ・メキシコ在住 / Umami &amp; Koji LAB 受講</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-sec">
+    <h2>まず、1回の体験から。</h2>
+    <p>東京・渋谷またはオンラインで、あなたのペースで始められます。<br />入会費・登録費は一切ありません。</p>
+    <a href="/contact" class="btn-primary">体験レッスンを予約する</a>
+    <p class="cta-note">3日以内にご返信いたします</p>
+  </section>
+
+  <footer>
+    <p>© 2026 &LAB TOKYO. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
