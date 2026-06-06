@@ -8,6 +8,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>安藤千英 | &LAB TOKYO — 発酵×ローフード 東京・渋谷</title>
   <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。細胞から整える食の知恵。体験レッスン受付中。" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -16,34 +17,23 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
        &LAB TOKYO — 墨と生成り・エディトリアルデザイン
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     :root {
-      /* 生成り・リネンホワイト（白禁止） */
       --linen:   #FBFBFA;
       --linen-2: #F4F2EE;
       --linen-3: #EAE7E0;
-
-      /* 墨色・深い暗色 */
       --sumi:    #1C1C1A;
       --sumi-2:  #2A2A27;
       --sumi-3:  #3A3A36;
-
-      /* テキスト */
       --ink:     #1C1C1A;
       --ink-2:   #3D3D38;
       --ink-3:   #7A7A72;
       --on-sumi: #F4F2EE;
       --on-sumi-muted: rgba(244,242,238,.6);
-
-      /* アクセント */
-      --green:   #A9D159;   /* ロゴの葉グリーン（ホバー・アクセント用） */
-      --green-d: #7AAF2A;   /* ダークグリーン（テキスト・「醸す」） */
-      --green-btn: #4E8A18; /* ボタン用：抹茶のような上品なグリーン */
-      --green-btn-h: #3D6E12; /* ボタンホバー */
-
-      /* フォント */
+      --green:   #A9D159;
+      --green-d: #7AAF2A;
+      --green-btn: #4E8A18;
+      --green-btn-h: #3D6E12;
       --f-serif: 'Noto Serif JP', 'Times New Roman', serif;
       --f-sans:  'Noto Sans JP', sans-serif;
-
-      /* 角丸なし = ラボ感 */
       --r: 0px;
     }
 
@@ -59,14 +49,13 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ━━ 見出し: 明朝体・letter-spacing ━━ */
     h1, h2, h3 {
       font-family: var(--f-serif);
       font-weight: 600;
       letter-spacing: 0.08em;
       line-height: 1.45;
     }
-    h1 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }  /* ③ PC大画面で少し小さく・余白を贅沢に */
+    h1 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
     h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
     h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
 
@@ -82,7 +71,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .nav-logo img {
       height: 32px; width: auto;
-      /* ① ロゴ背景の白を透明化（mix-blend-modeでナビに自然に馴染む） */
       mix-blend-mode: screen;
       filter: brightness(1.1);
     }
@@ -109,7 +97,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .lang a.on { color: var(--green); font-weight: 700; }
     .lang a:hover { color: rgba(244,242,238,.8); }
 
-    /* ━━ ① HERO — 動画全画面背景 ━━ */
+    /* ━━ HERO ━━ */
     .hero {
       margin-top: 52px;
       position: relative;
@@ -119,8 +107,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       display: flex;
       align-items: flex-end;
     }
-
-    /* 動画背景 */
     .hero-video {
       position: absolute; inset: 0; z-index: 0;
     }
@@ -129,21 +115,18 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       object-fit: cover; object-position: center;
       display: block;
     }
-    /* 動画が再生できない場合のフォールバック画像 */
     .hero-video-fallback {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover; object-position: center 20%;
       display: block;
     }
-    /* オーバーレイ：テキストを読みやすくする */
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background:
         linear-gradient(to top, rgba(28,28,26,.82) 0%, rgba(28,28,26,.35) 50%, rgba(28,28,26,.1) 100%),
         linear-gradient(to right, rgba(28,28,26,.5) 0%, transparent 55%);
     }
-    /* テキストエリア */
     .hero-text {
       position: relative; z-index: 2;
       padding: 0 5vw 8vh;
@@ -188,7 +171,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .btn-primary:hover { background: var(--sumi-2); }
 
-    /* ━━ ② 体験レッスン情報ストリップ ━━ */
+    /* ━━ ストリップ ━━ */
     .strip {
       background: var(--sumi);
       padding: 1.4rem 3rem;
@@ -215,7 +198,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .strip-link:hover { text-decoration: underline; }
 
-    /* ━━ ③ STORY — エディトリアル2カラム ━━ */
+    /* ━━ STORY ━━ */
     .story { background: var(--linen-2); padding: 8rem 3rem; }
     .story-inner {
       max-width: 1100px; margin: 0 auto;
@@ -267,13 +250,11 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .text-link:hover { color: var(--ink); border-color: var(--ink); }
 
-    /* ━━ ④ PROGRAMS — 非均等エディトリアル ━━ */
+    /* ━━ PROGRAMS ━━ */
     .programs { background: var(--sumi); padding: 8rem 3rem; }
     .programs-inner { max-width: 1100px; margin: 0 auto; }
     .programs h2 { color: var(--on-sumi); margin-bottom: 5rem; }
     .programs .eyebrow { color: var(--green); }
-
-    /* 大きい1つ + 2つ横並び */
     .prog-featured {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 2px; margin-bottom: 2px;
@@ -287,8 +268,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       transition: transform .8s ease; display: block;
     }
     .prog-featured-main:hover img { transform: scale(1.03); }
-
-    /* 右側2つ積み */
     .prog-sub-stack { display: grid; grid-template-rows: 1fr 1fr; gap: 2px; }
     .prog-sub {
       position: relative; overflow: hidden; height: 269px;
@@ -296,8 +275,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .prog-sub img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; display: block; }
     .prog-sub:hover img { transform: scale(1.04); }
-
-    /* 共通オーバーレイ */
     .prog-ov {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(28,28,26,.88) 0%, rgba(28,28,26,.1) 55%, transparent 100%);
@@ -324,7 +301,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .prog-body p { font-size: .82rem; color: rgba(244,242,238,.65); line-height: 1.8; margin-bottom: .6rem; }
     .prog-meta { font-size: .75rem; color: var(--green); font-weight: 500; }
 
-    /* ━━ ⑤ ブランドビジュアル（花寿司） ━━ */
+    /* ━━ ブランドビジュアル ━━ */
     .brand-visual { position: relative; height: 56vh; min-height: 360px; overflow: hidden; }
     .brand-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
     .brand-visual-overlay {
@@ -345,7 +322,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       color: var(--on-sumi);
     }
 
-    /* ━━ ⑥ CREDENTIALS — エディトリアル ━━ */
+    /* ━━ CREDENTIALS ━━ */
     .credentials { background: var(--linen); padding: 8rem 3rem; }
     .credentials-inner { max-width: 1100px; margin: 0 auto; }
     .cred-grid { display: grid; grid-template-columns: 280px 1fr; gap: 7rem; align-items: start; }
@@ -361,11 +338,9 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .cred-item h4 { font-family: var(--f-serif); font-size: 1rem; font-weight: 600; letter-spacing: .04em; color: var(--ink); margin-bottom: .4rem; }
     .cred-item p { font-size: .88rem; color: var(--ink-3); line-height: 1.85; }
 
-    /* ━━ ⑦ TESTIMONIALS — エディトリアル ━━ */
+    /* ━━ TESTIMONIALS ━━ */
     .testimonials { background: var(--linen-2); padding: 8rem 3rem; }
     .testi-inner { max-width: 1100px; margin: 0 auto; }
-
-    /* 最初の1つが大きい非対称 */
     .testi-featured { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; margin-top: 4rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--linen-3); }
     .testi-featured-photo { position: relative; }
     .testi-featured-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block; }
@@ -380,8 +355,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .testi-big-quote::after  { content: '」'; color: var(--green-d); font-size: 1.4rem; }
     .testi-name { font-family: var(--f-serif); font-size: .95rem; font-weight: 600; letter-spacing: .06em; color: var(--ink); margin-bottom: .3rem; }
     .testi-role { font-size: .8rem; color: var(--ink-3); line-height: 1.6; }
-
-    /* 残り2つ横並び */
     .testi-small-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
     .testi-small { display: flex; gap: 1.2rem; align-items: flex-start; }
     .testi-small-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; flex-shrink: 0; }
@@ -389,7 +362,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .testi-small-name { font-family: var(--f-serif); font-size: .88rem; font-weight: 600; color: var(--ink); }
     .testi-small-role { font-size: .75rem; color: var(--ink-3); }
 
-    /* ━━ ⑧ JOURNAL ━━ */
+    /* ━━ JOURNAL ━━ */
     .journal { background: var(--sumi); padding: 8rem 3rem; }
     .journal-inner { max-width: 1100px; margin: 0 auto; }
     .journal h2 { color: var(--on-sumi); margin-bottom: 4rem; }
@@ -397,8 +370,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .journal-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .journal-all { font-size: .82rem; color: rgba(244,242,238,.45); text-decoration: none; transition: color .2s; }
     .journal-all:hover { color: var(--green); }
-
-    /* 非均等グリッド: 1大+2小 */
     .post-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 2px; }
     .post { background: var(--sumi-2); text-decoration: none; display: block; transition: background .2s; }
     .post:hover { background: var(--sumi-3); }
@@ -418,7 +389,44 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .post:first-child h3 { font-size: 1.15rem; }
     .post-date { font-size: .72rem; color: rgba(244,242,238,.3); }
 
-    /* ━━ ⑨ CTA ━━ */
+    /* ━━ SNS SECTION ━━ */
+    .social-section {
+      background: var(--sumi-2);
+      padding: 6rem 3rem;
+      border-top: 1px solid rgba(244,242,238,.06);
+    }
+    .social-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .social-label {
+      font-family: var(--f-sans);
+      font-size: .72rem; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 3rem; display: block;
+    }
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+    }
+    .social-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: .8rem;
+      padding: 2.4rem 1rem;
+      background: var(--sumi-3);
+      text-decoration: none; color: rgba(244,242,238,.55);
+      transition: background .2s, color .2s;
+    }
+    .social-item:hover { background: var(--sumi); color: var(--green); }
+    .social-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+    .social-icon svg { width: 24px; height: 24px; }
+    .social-name {
+      font-family: var(--f-sans); font-size: .75rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(244,242,238,.7); transition: color .2s;
+    }
+    .social-item:hover .social-name { color: var(--on-sumi); }
+    .social-handle { font-size: .72rem; color: rgba(244,242,238,.3); letter-spacing: .04em; }
+
+    /* ━━ CTA ━━ */
     .cta { background: var(--linen); padding: 10rem 3rem; text-align: center; }
     .cta-inner { max-width: 560px; margin: 0 auto; }
     .cta h2 { color: var(--ink); margin-bottom: 1.4rem; }
@@ -427,12 +435,11 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .cta-desc { font-size: .95rem; color: var(--ink-3); line-height: 2; margin-bottom: 3rem; }
     .cta-sub { display: block; margin-top: 1.4rem; font-size: .82rem; color: var(--ink-3); text-decoration: none; transition: color .2s; }
     .cta-sub:hover { color: var(--ink); }
-    .cta-note { margin-top: 1rem; font-size: .78rem; color: var(--ink-3); }
 
     /* ━━ FOOTER ━━ */
     footer { background: var(--sumi); padding: 5rem 3rem 2.5rem; border-top: 1px solid rgba(244,242,238,.06); }
     .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 5rem; padding-bottom: 3.5rem; border-bottom: 1px solid rgba(244,242,238,.06); }
-    .footer-logo img { height: 32px; margin-bottom: 1.4rem; }
+    .footer-logo img { height: 32px; margin-bottom: 1.4rem; mix-blend-mode: screen; filter: brightness(1.1); }
     .footer-tag { font-size: .82rem; color: rgba(244,242,238,.4); line-height: 1.9; }
     .footer-col h5 { font-family: var(--f-sans); font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
@@ -467,6 +474,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       .testi-small-grid { grid-template-columns: 1fr; gap: 2rem; }
       .journal { padding: 5rem 1.5rem; }
       .post-grid { grid-template-columns: 1fr; }
+      .social-section { padding: 4rem 1.5rem; }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
       .cta { padding: 6rem 1.5rem; }
       footer { padding: 4rem 1.5rem 2rem; }
       .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -480,13 +489,13 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
     <div class="nav-right">
       <ul class="nav-links">
-        <li><a href="/lessons">レッスン</a></li>
+        <li><a href="#lessons">レッスン</a></li>
         <li><a href="/rawfood">ローフード</a></li>
         <li><a href="/fermentation">発酵</a></li>
         <li><a href="/about">安藤千英</a></li>
         <li><a href="/blog">ブログ</a></li>
       </ul>
-      <a href="/lessons" class="nav-cta">LABへの入口</a>
+      <a href="/contact" class="nav-cta">CONTACT</a>
       <div class="lang">
         <a href="?lang=ja" class={lang==='ja'?'on':''}>JP</a>
         <a href="?lang=en" class={lang==='en'?'on':''}>EN</a>
@@ -495,29 +504,15 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </nav>
 
-  <!-- ① HERO: 動画背景 + テキストオーバーレイ -->
+  <!-- ① HERO -->
   <section class="hero">
-
-    <!-- 動画背景 -->
     <div class="hero-video">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster="/hero-berry.jpg"
-      >
+      <video autoplay muted loop playsinline preload="auto" poster="/hero-berry.jpg">
         <source src="/hero-video.mp4" type="video/mp4" />
-        <!-- 動画非対応ブラウザ用フォールバック -->
         <img src="/hero-berry.jpg" alt="&LAB TOKYO" class="hero-video-fallback" />
       </video>
     </div>
-
-    <!-- オーバーレイ -->
     <div class="hero-overlay"></div>
-
-    <!-- テキスト -->
     <div class="hero-text">
       <span class="hero-eyebrow">Fermentation Creator · Tokyo Shibuya</span>
       <h1>
@@ -529,27 +524,24 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         忙しい毎日の中で、自分の体を後回しにしていませんか。<br />
         発酵×ローフードのクロス理論で、<br />あなたの本来の輝きを取り戻す。
       </p>
-      <a href="/lessons" class="btn-primary">&LAB TOKYOの世界を体験する</a>
+      <a href="#lessons" class="btn-primary">講座一覧を見る</a>
     </div>
-
   </section>
 
-  <!-- ② 体験レッスン情報ストリップ -->
+  <!-- ② ストリップ -->
   <div class="strip">
     <div class="strip-inner">
-      <span class="strip-label">LABへの入口</span>
+      <span class="strip-label">受講案内</span>
       <div class="strip-items">
-        <span>東京・渋谷 / オンライン</span>
+        <span>受講形式：対面（東京・渋谷） / オンライン</span>
         <span>少人数制 1〜4名</span>
         <span>初心者歓迎</span>
-        <span>¥8,000〜</span>
-        <span>入会費なし</span>
       </div>
-      <a href="/lessons" class="strip-link">LABの世界を体験する →</a>
+      <a href="#lessons" class="strip-link">講座一覧を見る →</a>
     </div>
   </div>
 
-  <!-- ③ STORY: エディトリアル左右 -->
+  <!-- ③ STORY -->
   <section class="story" id="about">
     <div class="story-inner">
       <div class="story-photo">
@@ -561,39 +553,31 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <h2>なぜ、私は食を伝えるのか。</h2>
         <div class="rule"></div>
         <p class="body-p">
-          10年前の4月。娘が台所の熱湯を頭からかぶる大火傷を負いました。
-          長期入院、複数回の手術。私は<strong>キッチンに立てなくなった。</strong>
+          10年前の4月。娘が台所で熱湯を頭からかぶる大火傷を負いました。長期にわたる入院と、繰り返される手術。絶望の中で私は、一度<strong>キッチンに立つことすらできなくなりました。</strong>
         </p>
         <div class="pull-quote">
           <p>「細胞から整える食」は、一生モノの武器だ。</p>
         </div>
         <p class="body-p">
-          そこから食を学び直しました。マクロビ、ローフード、発酵。
-          食べることが娘を、そして私自身を、内側から再生させていった。
+          そんな私を救い、絶望から引き上げてくれたのが「細胞から整える食」の力でした。マクロビオティック、ローフード、伝統的な発酵食。学びを深め、実践を重ねるごとに、食べることが娘の肌を、私自身の心を内側から再生させていったのです。
         </p>
         <p class="body-p">
-          40代になったとき、更年期という新しい岐路に立ちました。
-          忙しい女性が、食から自分を取り戻せる場所をつくりたい。
-          それが&LAB TOKYOの原点です。
+          40代を迎え、更年期という女性の新たな岐路に立ったいま、改めて確信しています。忙しい現代の女性たちが、日々の食を通じて自分自身を取り戻せる、そんな温かい場所をつくりたい。それが『&LAB TOKYO』の原点です。
         </p>
-        <!-- SEO: リビングフード・ローフードの定義文（Googleの強調スニペット狙い） -->
         <p class="body-p" style="font-size:.88rem;color:var(--ink-3);margin-top:1rem;">
-          <strong style="color:var(--ink-2);">ローフード（リビングフード）とは</strong>、
-          加熱処理をせず食材本来の酵素・栄養を活かす食事法のこと。
-          発酵との組み合わせ（クロス理論）で、腸内環境と細胞の両面から整えます。
+          <strong style="color:var(--ink-2);">ローフード（リビングフード）とは</strong>、加熱処理をせず食材本来の生きた酵素や栄養を最大限に活かす食事法のこと。ここに「発酵」を掛け合わせる独自の「クロス理論」によって、腸内環境と細胞の両面から、身体を美しく整えていきます。
         </p>
         <a href="/about" class="text-link">安藤千英について、もっと読む →</a>
       </div>
     </div>
   </section>
 
-  <!-- ④ PROGRAMS: 3つの扉 + UMAMI LAB -->
+  <!-- ④ PROGRAMS -->
   <section class="programs" id="lessons">
     <div class="programs-inner">
       <span class="eyebrow" style="color:var(--green)">3つの扉</span>
       <h2>LABの世界観を体験する。</h2>
 
-      <!-- 3つの扉（均等3カラム） -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;">
 
         <a href="/rawfood" class="prog-sub" style="height:460px;">
@@ -603,7 +587,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
             <span class="prog-eye">Door 01 · Raw Food</span>
             <h3>ローフード</h3>
             <p style="margin-bottom:.4rem;">生きた酵素を活かす食の科学。<br />体験〜マイスター資格まで。</p>
-            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">¥8,000〜 · 対面・オンライン</p>
+            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">受講形式：対面 / オンライン</p>
           </div>
         </a>
 
@@ -614,7 +598,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
             <span class="prog-eye">Door 02 · Fermentation</span>
             <h3>発酵 / Hacco LAB</h3>
             <p style="margin-bottom:.4rem;">麹・味噌・醤油。腸から整える<br />日本の発酵文化。</p>
-            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">¥8,000〜 · 対面・オンライン</p>
+            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">受講形式：対面 / オンライン</p>
           </div>
         </a>
 
@@ -631,24 +615,24 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
 
       </div>
 
-      <!-- 大きなビジュアル（ロースイーツ） -->
+      <!-- ロースイーツ・ローチョコレート -->
       <a href="/raw-sweets" class="prog-featured-main" style="display:block;height:300px;margin-top:2px;position:relative;overflow:hidden;text-decoration:none;">
-        <img src="/prog-chocolate.jpg" alt="ロースイーツ" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .8s;" />
+        <img src="/prog-chocolate.jpg" alt="ロースイーツ・ローチョコレート" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .8s;" />
         <div class="prog-ov"></div>
         <div class="prog-body" style="display:flex;align-items:center;gap:3rem;">
           <div>
-            <span class="prog-eye">Raw Sweets</span>
+            <span class="prog-eye">Raw Sweets · ローショコラティエ協会本部</span>
             <h3 style="font-size:1.5rem;">ロースイーツ / ローチョコレート</h3>
           </div>
-          <p style="font-size:.88rem;color:rgba(244,242,238,.65);max-width:440px;line-height:1.8;">罪悪感を美しさに変える。砂糖・小麦・乳製品不使用。<br />日本ローチョコレーティエ協会公認。資格取得可。</p>
-          <p class="prog-meta" style="margin-left:auto;white-space:nowrap;">¥8,000〜 →</p>
+          <p style="font-size:.88rem;color:rgba(244,242,238,.65);max-width:440px;line-height:1.8;">罪悪感を美しさに変える。砂糖・小麦・乳製品不使用。<br />安藤千英が設立した<strong style="color:rgba(244,242,238,.9);">ローショコラティエ協会本部</strong>の公認資格取得可。</p>
+          <p class="prog-meta" style="margin-left:auto;white-space:nowrap;">受講形式：対面 / オンライン →</p>
         </div>
       </a>
 
     </div>
   </section>
 
-  <!-- ⑤ ブランドビジュアル：全幅 -->
+  <!-- ⑤ ブランドビジュアル -->
   <div class="brand-visual">
     <img src="/visual-table.jpg" alt="&LAB TOKYO の世界観" />
     <div class="brand-visual-overlay">
@@ -659,7 +643,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </div>
 
-  <!-- ⑥ CREDENTIALS: エディトリアル -->
+  <!-- ⑥ CREDENTIALS -->
   <section class="credentials">
     <div class="credentials-inner">
       <div class="cred-grid">
@@ -693,16 +677,15 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑦ TESTIMONIALS: 非対称エディトリアル -->
+  <!-- ⑦ TESTIMONIALS -->
   <section class="testimonials">
     <div class="testi-inner">
       <span class="eyebrow">Testimonials</span>
       <h2>受講生の声。</h2>
 
-      <!-- 大きな1つ目 -->
       <div class="testi-featured">
         <div class="testi-featured-photo">
-          <img src="/chie-portrait.jpg" alt="櫻庭千穂さん" />
+          <img src="/chihosakuraba.jpg" alt="櫻庭千穂さん" />
         </div>
         <div class="testi-featured-content">
           <p class="testi-big-quote">発酵、ロースイーツ、ローチョコレートを制覇し、ローショコラティエへ。那須高原にドクターズカフェをオープンしました。千英先生の教えが私の人生を変えました。</p>
@@ -711,7 +694,6 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         </div>
       </div>
 
-      <!-- 小さい2つ -->
       <div class="testi-small-grid">
         <div class="testi-small">
           <img src="/student-oscar.jpg" alt="Oscar" class="testi-small-photo" />
@@ -722,7 +704,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
           </div>
         </div>
         <div class="testi-small">
-          <img src="/student-doctor.jpg" alt="吉田和弘医師" class="testi-small-photo" />
+          <img src="/dryoshida.jpg" alt="吉田和弘医師" class="testi-small-photo" />
           <div>
             <p class="testi-small-quote">循環器内科医としてローフードマイスター3ステップをほぼ満点で合格。医師として自信を持っておすすめします。</p>
             <p class="testi-small-name">吉田 和弘 医師</p>
@@ -733,7 +715,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑧ JOURNAL -->
+  <!-- ⑧ JOURNAL — GEO強化記事 -->
   <section class="journal">
     <div class="journal-inner">
       <div class="journal-header">
@@ -744,27 +726,27 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <a href="/blog" class="journal-all">すべての記事を見る →</a>
       </div>
       <div class="post-grid">
-        <a href="/rawfood" class="post">
-          <img src="/rawfood-zucchini.jpg" alt="ローフード" class="post-img" />
+        <a href="/blog/what-is-raw-food" class="post">
+          <img src="/rawfood-zucchini.jpg" alt="ローフードとは" class="post-img" />
           <div class="post-body">
-            <span class="post-cat">Raw Food</span>
-            <h3>酵素を壊さない調理の5つの基本。なぜ48℃なのか</h3>
+            <span class="post-cat">Raw Food · 入門</span>
+            <h3>【ローフードとは】初心者でも挫折しない、細胞から美しくなる食事の始め方</h3>
             <p class="post-date">2026.05.20</p>
           </div>
         </a>
-        <a href="/fermentation" class="post">
-          <img src="/hacco-koji.jpg" alt="発酵" class="post-img" />
+        <a href="/blog/fermentation-cross-theory" class="post">
+          <img src="/hacco-koji.jpg" alt="発酵×ローフードのクロス理論" class="post-img" />
           <div class="post-body">
-            <span class="post-cat">Fermentation</span>
-            <h3>自家製麹の作り方</h3>
+            <span class="post-cat">Fermentation × Raw Food</span>
+            <h3>発酵×ローフードの相乗効果！「クロス理論」で腸内環境が劇的に変わる理由</h3>
             <p class="post-date">2026.05.10</p>
           </div>
         </a>
-        <a href="/living-food" class="post">
-          <img src="/green-smoothie.jpg" alt="リビングフード" class="post-img" />
+        <a href="/blog/fermented-raw-sweets" class="post">
+          <img src="/raw-chocolate.jpg" alt="発酵ロースイーツ" class="post-img" />
           <div class="post-body">
-            <span class="post-cat">Living Food</span>
-            <h3>40代から始める「細胞から整える」習慣</h3>
+            <span class="post-cat">Raw Sweets · 健康</span>
+            <h3>白砂糖・小麦粉不使用。罪悪感ゼロの「発酵ロースイーツ」がもたらす体へのメリット</h3>
             <p class="post-date">2026.04.28</p>
           </div>
         </a>
@@ -772,7 +754,60 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ⑨ CTA -->
+  <!-- ⑨ SNS SECTION -->
+  <section class="social-section">
+    <div class="social-inner">
+      <span class="social-label">Follow &LAB TOKYO</span>
+      <div class="social-grid">
+
+        <a href="#" class="social-item" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="social-name">Instagram</span>
+          <span class="social-handle">@andlabtokyo</span>
+        </a>
+
+        <a href="#" class="social-item" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="social-name">YouTube</span>
+          <span class="social-handle">&LAB TOKYO</span>
+        </a>
+
+        <a href="#" class="social-item" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.24 8.24 0 0 0 4.83 1.56V6.79a4.86 4.86 0 0 1-1.06-.1z"/>
+            </svg>
+          </span>
+          <span class="social-name">TikTok</span>
+          <span class="social-handle">@andlabtokyo</span>
+        </a>
+
+        <a href="#" class="social-item" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.729-8.835L2 2.25h6.857l4.264 5.63 4.97-5.63z"/>
+            </svg>
+          </span>
+          <span class="social-name">X / Twitter</span>
+          <span class="social-handle">@andlabtokyo</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑩ CTA -->
   <section class="cta" id="contact">
     <div class="cta-inner">
       <span class="eyebrow">LABへの入口</span>
@@ -783,9 +818,8 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         細胞から整える食の知恵と美意識に触れる、<br />
         あなた自身の再生への入口です。
       </p>
-      <a href="/lessons" class="btn-primary">&LAB TOKYOの世界を体験する</a>
+      <a href="#lessons" class="btn-primary">講座一覧を見る</a>
       <a href="/contact" class="cta-sub">お問い合わせ・ご質問はこちら →</a>
-      <p class="cta-note">入会費・登録費は一切ありません。まずはお気軽にどうぞ。</p>
     </div>
   </section>
 
@@ -799,20 +833,21 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       <div class="footer-col">
         <h5>Menu</h5>
         <ul>
-          <li><a href="/lessons">レッスン</a></li>
+          <li><a href="#lessons">レッスン</a></li>
           <li><a href="/rawfood">ローフード</a></li>
           <li><a href="/fermentation">発酵</a></li>
           <li><a href="/about">安藤千英</a></li>
           <li><a href="/blog">ブログ</a></li>
+          <li><a href="/contact">お問い合わせ</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Follow</h5>
         <ul>
-          <li><a href="#" target="_blank">Instagram</a></li>
-          <li><a href="#" target="_blank">YouTube</a></li>
-          <li><a href="#" target="_blank">TikTok</a></li>
-          <li><a href="#" target="_blank">X / Twitter</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="#" target="_blank" rel="noopener">X / Twitter</a></li>
         </ul>
       </div>
     </div>
