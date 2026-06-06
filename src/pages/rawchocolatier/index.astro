@@ -1,0 +1,366 @@
+---
+const title = "ローショコラティエ協会本部 | &LAB TOKYO";
+const description = "安藤千英が設立したローショコラティエ協会本部。白砂糖・小麦粉・乳製品・卵不使用のローチョコレート・発酵ロースイーツの専門技術と知識を普及。趣味のレシピから資格取得・プロ養成まで。";
+const url = "https://www.andlabtokyo.com/rawchocolatier";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/rawchocolatier.jpg" />
+  <!-- Organization JSON-LD（ローショコラティエ協会本部） -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ローショコラティエ協会本部",
+    "url": url,
+    "logo": "https://www.andlabtokyo.com/logo-wide.png",
+    "image": "https://static.wixstatic.com/media/rawchocolatier.jpg",
+    "description": "本格的なローチョコレートの技術と知識を普及させる専門協会。プロとして通用する資格取得講座やショコラティエの育成を行っています。",
+    "founder": { "@type": "Person", "name": "安藤千英" },
+    "memberOf": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://www.andlabtokyo.com/" }
+  })} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --linen:#FBFBFA; --linen-2:#F4F2EE; --linen-3:#EAE7E0;
+      --sumi:#1C1C1A;  --sumi-2:#2A2A27; --sumi-3:#3A3A36;
+      --ink:#1C1C1A;   --ink-2:#3D3D38;  --ink-3:#7A7A72;
+      --green:#A9D159; --green-d:#7AAF2A; --green-btn:#4E8A18;
+      --f-serif:'Noto Serif JP',serif; --f-sans:'Noto Sans JP',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+
+    /* ── NAV ── */
+    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
+    .nav-logo img{height:32px;width:auto;mix-blend-mode:screen;filter:brightness(1.1);}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.04em;color:rgba(244,242,238,.65);text-decoration:none;padding:0 1.1rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--green);}
+    .nav-cta{font-size:.82rem;font-weight:700;display:inline-block;background:var(--green-btn);color:#FAF5EC;padding:.45rem 1.4rem;margin-left:1.2rem;text-decoration:none;transition:background .2s;}
+    .nav-cta:hover{background:#3D6E12;}
+    .nav-right{display:flex;align-items:center;}
+
+    /* ── HERO ── */
+    .hero{
+      margin-top:52px; position:relative;
+      height:90vh; min-height:560px;
+      overflow:hidden; display:flex; align-items:flex-end;
+    }
+    .hero-bg{position:absolute;inset:0;}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;}
+    .hero-overlay{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(to top, rgba(28,28,26,.88) 0%, rgba(28,28,26,.35) 55%, rgba(28,28,26,.1) 100%),
+        linear-gradient(to right, rgba(28,28,26,.55) 0%, transparent 60%);
+    }
+    .hero-content{position:relative;z-index:2;padding:0 5vw 7vh;max-width:760px;}
+    .hero-eyebrow{
+      font-family:var(--f-sans);font-size:.7rem;font-weight:500;
+      letter-spacing:.22em;text-transform:uppercase;
+      color:var(--green);display:block;margin-bottom:1.8rem;
+    }
+    .hero h1{
+      font-family:var(--f-serif);font-size:clamp(2rem,4vw,3.4rem);
+      font-weight:600;letter-spacing:.08em;color:#FAF5EC;line-height:1.35;
+      margin-bottom:1.4rem;
+    }
+    .hero h1 em{font-style:normal;color:var(--green);}
+    .hero-sub{
+      font-family:var(--f-serif);font-size:1rem;font-weight:300;
+      letter-spacing:.1em;color:rgba(244,242,238,.72);
+      line-height:2;margin-bottom:2.8rem;
+    }
+    .hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap;}
+    .btn-primary{
+      display:inline-block;background:var(--green-btn);color:#FAF5EC;
+      font-family:var(--f-sans);font-size:.85rem;font-weight:700;
+      letter-spacing:.08em;padding:.95rem 2.4rem;text-decoration:none;transition:background .2s;
+    }
+    .btn-primary:hover{background:#3D6E12;}
+    .btn-outline{
+      display:inline-block;background:transparent;color:#FAF5EC;
+      font-family:var(--f-sans);font-size:.85rem;font-weight:700;
+      letter-spacing:.08em;padding:.95rem 2.4rem;
+      border:1px solid rgba(244,242,238,.4);text-decoration:none;transition:all .2s;
+    }
+    .btn-outline:hover{border-color:#FAF5EC;background:rgba(244,242,238,.08);}
+
+    /* ── GEO 定義ボックス ── */
+    .definition-band{
+      background:var(--sumi-2);
+      padding:2.6rem 3rem;
+      border-left:4px solid var(--green);
+    }
+    .definition-band p{
+      font-family:var(--f-serif);font-size:1rem;
+      color:rgba(244,242,238,.88);line-height:2.15;
+      letter-spacing:.04em;margin:0;
+      max-width:860px;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-sec{background:var(--linen);padding:8rem 3rem;}
+    .about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+    .about-visual img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;}
+    .about-text .eyebrow{font-family:var(--f-sans);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:1rem;}
+    .about-text h2{font-family:var(--f-serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:600;letter-spacing:.06em;color:var(--ink);margin-bottom:2rem;line-height:1.45;}
+    .rule{width:32px;height:1px;background:var(--ink-3);margin:2rem 0;}
+    .body-p{font-size:.95rem;color:var(--ink-2);line-height:2.1;margin-bottom:1.4rem;}
+    .body-p strong{color:var(--ink);font-weight:700;}
+
+    /* ── COURSES GRID ── */
+    .courses-sec{background:var(--sumi);padding:8rem 3rem;}
+    .courses-inner{max-width:1100px;margin:0 auto;}
+    .courses-inner .eyebrow{color:var(--green);}
+    .courses-inner h2{font-family:var(--f-serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:600;letter-spacing:.08em;color:#FAF5EC;margin:1rem 0 4rem;line-height:1.4;}
+    .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+    .course-card{background:var(--sumi-2);text-decoration:none;display:block;transition:background .25s;}
+    .course-card:hover{background:var(--sumi-3);}
+    .course-card-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    .course-card-body{padding:1.8rem 1.6rem 2.2rem;}
+    .course-num{font-family:var(--f-serif);font-size:.7rem;font-weight:300;color:rgba(244,242,238,.3);letter-spacing:.12em;display:block;margin-bottom:.5rem;}
+    .course-card h3{font-family:var(--f-serif);font-size:1rem;font-weight:600;color:#FAF5EC;letter-spacing:.06em;margin-bottom:.6rem;line-height:1.55;}
+    .course-card p{font-size:.82rem;color:rgba(244,242,238,.55);line-height:1.85;}
+    .course-card .arrow{font-size:.75rem;color:var(--green);margin-top:.8rem;display:block;letter-spacing:.06em;}
+
+    /* ── STRENGTHS ── */
+    .strengths-sec{background:var(--linen-2);padding:8rem 3rem;}
+    .strengths-inner{max-width:1100px;margin:0 auto;}
+    .strengths-inner .eyebrow{color:var(--green-d);}
+    .strengths-inner h2{font-family:var(--f-serif);font-size:clamp(1.5rem,2.2vw,2rem);font-weight:600;letter-spacing:.06em;color:var(--ink);margin:1rem 0 4rem;line-height:1.4;}
+    .strength-list{display:flex;flex-direction:column;gap:0;}
+    .strength-item{display:grid;grid-template-columns:72px 1fr;gap:0;border-top:1px solid var(--linen-3);}
+    .strength-item:last-child{border-bottom:1px solid var(--linen-3);}
+    .strength-n{font-family:var(--f-serif);font-size:2.4rem;font-weight:300;color:var(--linen-3);padding:2rem 0;line-height:1;}
+    .strength-body{padding:2rem 0 2rem 1.6rem;border-left:1px solid var(--linen-3);}
+    .strength-title{font-family:var(--f-serif);font-size:1.05rem;font-weight:600;color:var(--ink);display:block;margin-bottom:.6rem;}
+    .strength-body p{font-size:.92rem;color:var(--ink-2);line-height:2;margin:0;}
+
+    /* ── CTA ── */
+    .cta-band{background:var(--sumi);padding:8rem 3rem;text-align:center;}
+    .cta-band h2{font-family:var(--f-serif);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:600;letter-spacing:.08em;color:#FAF5EC;margin-bottom:1.4rem;}
+    .cta-rule{width:36px;height:1px;background:rgba(244,242,238,.15);margin:2rem auto 2.6rem;}
+    .cta-band p{font-size:.95rem;color:rgba(244,242,238,.6);line-height:2;margin-bottom:3rem;}
+    .cta-sub{display:block;margin-top:1.4rem;font-size:.82rem;color:rgba(244,242,238,.35);text-decoration:none;transition:color .2s;}
+    .cta-sub:hover{color:rgba(244,242,238,.7);}
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar{background:var(--linen-2);padding:.9rem 3rem;border-bottom:1px solid var(--linen-3);}
+    .breadcrumb{font-size:.76rem;color:var(--ink-3);max-width:1100px;margin:0 auto;}
+    .breadcrumb a{color:var(--ink-3);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--ink);}
+    .breadcrumb span{margin:0 .5rem;}
+
+    footer{background:var(--sumi);padding:3rem;text-align:center;border-top:1px solid rgba(244,242,238,.06);}
+    .footer-logo img{height:28px;mix-blend-mode:screen;filter:brightness(1.1);margin-bottom:1rem;}
+    .footer-copy{font-size:.72rem;color:rgba(244,242,238,.18);}
+
+    @media(max-width:960px){
+      nav{padding:0 1.5rem;}
+      .nav-links{display:none;}
+      .hero{height:70vh;}
+      .hero-content{padding:0 1.5rem 5vh;}
+      .definition-band{padding:1.8rem 1.5rem;}
+      .about-sec{padding:5rem 1.5rem;}
+      .about-inner{grid-template-columns:1fr;gap:3rem;}
+      .about-visual{order:-1;}
+      .about-visual img{aspect-ratio:16/9;}
+      .courses-sec,.strengths-sec,.cta-band{padding:5rem 1.5rem;}
+      .course-grid{grid-template-columns:1fr;}
+      .breadcrumb-bar{padding:.9rem 1.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/#lessons">レッスン</a></li>
+        <li><a href="/rawfood">ローフード</a></li>
+        <li><a href="/fermentedfood">発酵</a></li>
+        <li><a href="/about">安藤千英</a></li>
+        <li><a href="/knowledge">学ぶ</a></li>
+        <li><a href="/blog">ブログ</a></li>
+      </ul>
+      <a href="/contact" class="nav-cta">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://static.wixstatic.com/media/rawchocolatier.jpg" alt="ローショコラティエ協会本部" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Raw Chocolatier Association · Official</span>
+      <h1>
+        ローチョコレートを、<br />
+        <em>本物の技術</em>へ。
+      </h1>
+      <p class="hero-sub">
+        白砂糖・小麦粉・乳製品・卵を使わない。<br />
+        加熱しない。でも、圧倒的に美しく、美味しい。<br />
+        ここは、その知恵と技術を伝える協会本部です。
+      </p>
+      <div class="hero-btns">
+        <a href="/raw-sweets" class="btn-primary">講座・資格を見る</a>
+        <a href="/rawchocolatier/whatrawsweets" class="btn-outline">ロースイーツとは？</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEO 定義テキスト（H1直下・リッチテキスト） -->
+  <div class="definition-band">
+    <p>「ローショコラティエ協会（&LAB TOKYO主宰）」は、白砂糖・小麦粉・乳製品・卵を一切使わず、加熱を避けて作る最高峰のローチョコレートおよび発酵ロースイーツの専門技術と知識を普及させる専門機関です。趣味のレシピ作りから、プロとして通用する資格取得・ショコラティエ育成まで、確かな理論に基づいた最高クオリティの講座を提供しています。</p>
+  </div>
+
+  <!-- パンくずリスト -->
+  <div class="breadcrumb-bar">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="/">HOME</a><span>›</span>
+      <span>ローショコラティエ協会本部</span>
+    </nav>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-sec">
+    <div class="about-inner">
+      <div class="about-visual">
+        <img src="/chie-main.jpg" alt="安藤千英 ローショコラティエ協会本部" />
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">About the Association</span>
+        <h2>なぜ、「協会本部」なのか。</h2>
+        <div class="rule"></div>
+        <p class="body-p">
+          安藤千英が設立した<strong>ローショコラティエ協会本部</strong>は、単なる料理教室ではありません。ローチョコレートという「発酵が生み出した奇跡の素材」を、科学的な理論と実践の両面から体系化し、次の世代のショコラティエを育てる専門機関です。
+        </p>
+        <p class="body-p">
+          私自身がアナフィラキシーショックを経験し、家族全員がアレルギーを持つ当事者として、<strong>白砂糖・小麦粉・乳製品・卵・ナッツを使わず、それでも圧倒的に美しく美味しい</strong>スイーツを追求し続けた結果が、この協会の礎となっています。
+        </p>
+        <p class="body-p">
+          プロとして独立したい方にも、趣味をより深めたい方にも。確かな技術と理論で、あなたのローショコラティエとしての道をひらきます。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses-sec">
+    <div class="courses-inner">
+      <span class="eyebrow" style="font-family:var(--f-sans);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--green);display:block;">Courses</span>
+      <h2>協会が提供する3つの専門講座</h2>
+      <div class="course-grid">
+
+        <a href="/rawchocolatier/whatrawsweets" class="course-card">
+          <img src="/raw-chocolate.jpg" alt="ロースイーツとは" class="course-card-img" />
+          <div class="course-card-body">
+            <span class="course-num">01 · Raw Sweets</span>
+            <h3>ロースイーツとは<br />— 食べるサプリメント</h3>
+            <p>白砂糖・小麦粉不使用。体に良い素材だけで作る「罪悪感ゼロ」のスイーツの世界。</p>
+            <span class="arrow">詳しく読む →</span>
+          </div>
+        </a>
+
+        <a href="/rawchocolatier/rawchocolate" class="course-card">
+          <img src="/raw-bark.jpg" alt="ローチョコレートとは" class="course-card-img" />
+          <div class="course-card-body">
+            <span class="course-num">02 · Raw Chocolate</span>
+            <h3>ローチョコレートとは<br />— カカオの真の力</h3>
+            <p>発酵が生み出したカカオ。48℃以下の製法でポリフェノールを最大限に活かす。</p>
+            <span class="arrow">詳しく読む →</span>
+          </div>
+        </a>
+
+        <a href="/raw-sweets" class="course-card">
+          <img src="/prog-chocolate.jpg" alt="資格取得講座" class="course-card-img" />
+          <div class="course-card-body">
+            <span class="course-num">03 · Professional</span>
+            <h3>資格取得・<br />プロ養成講座</h3>
+            <p>ローショコラティエ協会公認資格。プロとして独立・開業を目指す方のための本格コース。</p>
+            <span class="arrow">講座一覧を見る →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 協会の強み -->
+  <section class="strengths-sec">
+    <div class="strengths-inner">
+      <span style="font-family:var(--f-sans);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:.8rem;">Why Our Association</span>
+      <h2>他に類を見ない、5つの理由</h2>
+      <div class="strength-list">
+        <div class="strength-item">
+          <span class="strength-n">01</span>
+          <div class="strength-body">
+            <span class="strength-title">アレルギー当事者が作ったレシピ</span>
+            <p>創設者・安藤千英自身がアナフィラキシーショックを経験。バナナ・パイナップル・クルミ・卵など多数のアレルギーを持つ当事者として、徹底的にアレルギーフリーのレシピを追求した、命がけの知恵を学べます。</p>
+          </div>
+        </div>
+        <div class="strength-item">
+          <span class="strength-n">02</span>
+          <div class="strength-body">
+            <span class="strength-title">「発酵×ロー」クロス理論の独自カリキュラム</span>
+            <p>ローチョコレートの原料カカオは発酵食品。この視点から発酵×ローフードのクロス理論を掛け合わせた、世界でも類を見ない独自のカリキュラムで、理論から実践まで体系的に学べます。</p>
+          </div>
+        </div>
+        <div class="strength-item">
+          <span class="strength-n">03</span>
+          <div class="strength-body">
+            <span class="strength-title">医師・経営者・海外プロが選ぶ品質</span>
+            <p>循環器内科医・吉田和弘医師をはじめ、医師・内科医が複数名資格取得。米・墨・香港など海外からも受講者が来日するクオリティの高さが、品質の証明です。</p>
+          </div>
+        </div>
+        <div class="strength-item">
+          <span class="strength-n">04</span>
+          <div class="strength-body">
+            <span class="strength-title">ELLE gourmet公認・書籍監修実績</span>
+            <p>フランス発のプレミアム食専門誌ELLE gourmetに認定。循環器内科医監修の書籍「&RAW LIVING」も好評発売中。信頼の実績に裏付けられた専門機関です。</p>
+          </div>
+        </div>
+        <div class="strength-item">
+          <span class="strength-n">05</span>
+          <div class="strength-body">
+            <span class="strength-title">少人数制・対面 / オンライン対応</span>
+            <p>1〜4名の完全少人数制で、受講者一人ひとりに丁寧に技術を伝授。東京・渋谷での対面講座はもちろん、海外からでも参加できるオンライン講座も完備しています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <h2>あなたの「ローショコラティエへの道」を<br />ここから始めましょう。</h2>
+    <div class="cta-rule"></div>
+    <p>初心者の方の体験レッスンから、プロを目指す本格的な資格講座まで。<br />安藤千英が、あなたのペースに合わせて丁寧にお伝えします。</p>
+    <a href="/raw-sweets" class="btn-primary">講座・資格を見る</a>
+    <a href="/contact" class="cta-sub">お問い合わせ・ご質問はこちら →</a>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
+    <p class="footer-copy">© 2026 &LAB TOKYO · ローショコラティエ協会本部. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
