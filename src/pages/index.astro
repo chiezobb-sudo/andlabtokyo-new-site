@@ -597,7 +597,85 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </div>
 
-  <!-- ③ STORY -->
+  <!-- ③ PROGRAMS — 講座カタログ3カード -->
+  <section class="programs" id="lessons">
+    <div class="programs-inner">
+      <span class="eyebrow" style="color:var(--green)">Courses · 東京・渋谷 / オンライン</span>
+      <h2>あなたの「扉」を選んでください。</h2>
+      <p style="font-size:.92rem;color:rgba(244,242,238,.6);line-height:2;margin-bottom:4rem;max-width:580px;">
+        東京・渋谷（原宿・外苑前エリア）の少人数制ラボで、または世界中からオンラインで。<br />
+        初めての体験から、プロとして独立するまで。あなたのペースで学べます。
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;">
+
+        <!-- 体験レッスン -->
+        <div style="background:var(--sumi-2);display:flex;flex-direction:column;">
+          <div style="position:relative;overflow:hidden;height:280px;flex-shrink:0;">
+            <img src="/brand-sushi.jpg" alt="体験レッスン" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;display:block;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.7) 0%,transparent 60%);"></div>
+            <span style="position:absolute;top:1.4rem;left:1.6rem;font-family:var(--f-sans);font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);background:rgba(28,28,26,.6);padding:.3rem .8rem;">TRIAL</span>
+          </div>
+          <div style="padding:2rem 2rem 2.4rem;flex:1;display:flex;flex-direction:column;">
+            <span style="font-family:var(--f-sans);font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;display:block;">01 · 体験レッスン</span>
+            <h3 style="font-family:var(--f-serif);font-size:1.2rem;font-weight:600;color:#FAF5EC;letter-spacing:.06em;margin-bottom:.8rem;line-height:1.5;">はじめての発酵×ローフード<br />体験レッスン</h3>
+            <p style="font-size:.85rem;color:rgba(244,242,238,.6);line-height:1.9;margin-bottom:1.4rem;flex:1;">初心者歓迎。1〜4名の少人数制で、安藤千英が直接指導。「食べること」の本質に触れる2〜3時間。東京・渋谷での対面またはオンラインで参加できます。</p>
+            <div style="border-top:1px solid rgba(244,242,238,.08);padding-top:1.2rem;margin-bottom:1.4rem;">
+              <span style="font-size:.75rem;color:rgba(244,242,238,.35);display:block;margin-bottom:.3rem;">受講形式</span>
+              <span style="font-size:.82rem;color:rgba(244,242,238,.7);">対面（渋谷） / オンライン</span>
+            </div>
+            <a href="/raw-sweets" style="display:inline-block;background:transparent;border:1px solid rgba(244,242,238,.25);color:rgba(244,242,238,.7);font-family:var(--f-sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;padding:.7rem 1.4rem;text-decoration:none;transition:all .2s;text-align:center;">詳細・予約 →</a>
+          </div>
+        </div>
+
+        <!-- 継続コース -->
+        <div style="background:var(--sumi-2);display:flex;flex-direction:column;">
+          <div style="position:relative;overflow:hidden;height:280px;flex-shrink:0;">
+            <img src="https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg" alt="継続コース" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;display:block;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.7) 0%,transparent 60%);"></div>
+            <span style="position:absolute;top:1.4rem;left:1.6rem;font-family:var(--f-sans);font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FAF5EC;background:var(--green-btn);padding:.3rem .8rem;">POPULAR</span>
+          </div>
+          <div style="padding:2rem 2rem 2.4rem;flex:1;display:flex;flex-direction:column;">
+            <span style="font-family:var(--f-sans);font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;display:block;">02 · 継続コース</span>
+            <h3 style="font-family:var(--f-serif);font-size:1.2rem;font-weight:600;color:#FAF5EC;letter-spacing:.06em;margin-bottom:.8rem;line-height:1.5;">ローフードマイスター<br />資格取得コース</h3>
+            <p style="font-size:.85rem;color:rgba(244,242,238,.6);line-height:1.9;margin-bottom:1.4rem;flex:1;">発酵×ローフードのクロス理論を体系的に学ぶ継続コース。ステップ1〜3の段階的なカリキュラムで、自信を持って人に伝えられる知識と技術を習得。認定証発行。</p>
+            <div style="border-top:1px solid rgba(244,242,238,.08);padding-top:1.2rem;margin-bottom:1.4rem;">
+              <span style="font-size:.75rem;color:rgba(244,242,238,.35);display:block;margin-bottom:.3rem;">受講形式</span>
+              <span style="font-size:.82rem;color:rgba(244,242,238,.7);">対面（渋谷・外苑前） / オンライン</span>
+            </div>
+            <a href="/raw-sweets" style="display:inline-block;background:var(--green-btn);color:#FAF5EC;font-family:var(--f-sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;padding:.7rem 1.4rem;text-decoration:none;transition:all .2s;text-align:center;">コース詳細 →</a>
+          </div>
+        </div>
+
+        <!-- プロ養成 -->
+        <div style="background:var(--sumi-2);display:flex;flex-direction:column;">
+          <div style="position:relative;overflow:hidden;height:280px;flex-shrink:0;">
+            <img src="https://static.wixstatic.com/media/rawchocolatier.jpg" alt="プロ養成講座" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .6s;display:block;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.7) 0%,transparent 60%);"></div>
+            <span style="position:absolute;top:1.4rem;left:1.6rem;font-family:var(--f-sans);font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);background:rgba(28,28,26,.6);padding:.3rem .8rem;">PRO</span>
+          </div>
+          <div style="padding:2rem 2rem 2.4rem;flex:1;display:flex;flex-direction:column;">
+            <span style="font-family:var(--f-sans);font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;display:block;">03 · プロ養成</span>
+            <h3 style="font-family:var(--f-serif);font-size:1.2rem;font-weight:600;color:#FAF5EC;letter-spacing:.06em;margin-bottom:.8rem;line-height:1.5;">ローショコラティエ<br />プロ養成・資格認定</h3>
+            <p style="font-size:.85rem;color:rgba(244,242,238,.6);line-height:1.9;margin-bottom:1.4rem;flex:1;">ローショコラティエ協会本部公認の最高位資格。独立・開業・レシピ販売を目指す方へ。医師・海外受講生も取得した、実績に裏付けられた本格プロ養成プログラム。</p>
+            <div style="border-top:1px solid rgba(244,242,238,.08);padding-top:1.2rem;margin-bottom:1.4rem;">
+              <span style="font-size:.75rem;color:rgba(244,242,238,.35);display:block;margin-bottom:.3rem;">受講形式</span>
+              <span style="font-size:.82rem;color:rgba(244,242,238,.7);">対面（渋谷・原宿エリア） / オンライン</span>
+            </div>
+            <a href="/rawchocolatier" style="display:inline-block;background:transparent;border:1px solid rgba(244,242,238,.25);color:rgba(244,242,238,.7);font-family:var(--f-sans);font-size:.78rem;font-weight:700;letter-spacing:.1em;padding:.7rem 1.4rem;text-decoration:none;transition:all .2s;text-align:center;">協会・資格を見る →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="/raw-sweets" style="display:inline-block;background:transparent;border:1px solid rgba(244,242,238,.2);color:rgba(244,242,238,.55);font-family:var(--f-sans);font-size:.82rem;font-weight:500;letter-spacing:.12em;padding:.85rem 2.6rem;text-decoration:none;transition:all .2s;">全ての講座・料金を見る →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ④ STORY / コンセプト -->
   <section class="story" id="about">
     <div class="story-inner">
       <div class="story-photo">
@@ -618,7 +696,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
           そんな私を救い、絶望から引き上げてくれたのが「細胞から整える食」の力でした。マクロビオティック、ローフード、伝統的な発酵食。学びを深め、実践を重ねるごとに、食べることが娘の肌を、私自身の心を内側から再生させていったのです。
         </p>
         <p class="body-p">
-          40代を迎え、更年期という女性の新たな岐路に立ったいま、改めて確信しています。忙しい現代の女性たちが、日々の食を通じて自分自身を取り戻せる、そんな温かい場所をつくりたい。それが『&LAB TOKYO』の原点です。
+          40代を迎え、更年期という女性の新たな岐路に立ったいま、改めて確信しています。東京・渋谷（原宿・外苑前エリア）のラボで、忙しい現代の女性たちが日々の食を通じて自分自身を取り戻せる、温かい場所をつくりたい。それが『&LAB TOKYO』の原点です。
         </p>
         <p class="body-p" style="font-size:.88rem;color:var(--ink-3);margin-top:1rem;">
           <strong style="color:var(--ink-2);">ローフード（リビングフード）とは</strong>、加熱処理をせず食材本来の生きた酵素や栄養を最大限に活かす食事法のこと。ここに「発酵」を掛け合わせる独自の「クロス理論」によって、腸内環境と細胞の両面から、身体を美しく整えていきます。
@@ -628,105 +706,51 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ④ KNOWLEDGE SECTION -->
-  <section class="knowledge-section">
-    <div class="knowledge-inner">
-      <div class="knowledge-text">
-        <span class="eyebrow">Knowledge Hub</span>
-        <h2>生きた食の、<br />知恵と科学。</h2>
-        <div class="rule"></div>
-        <p class="body-p">ローフードとは何か。発酵はなぜ体に良いのか。リビングフードの定義とは。<br />「食べること」の本質を、科学と伝統の両面から体系的に学べるナレッジハブ。</p>
-        <div class="knowledge-topics">
-          <a href="/rawfood" class="k-topic">
-            <span class="k-num">01</span>
-            <span class="k-label">ローフード（リビングフード）とは</span>
-          </a>
-          <a href="/fermentedfood" class="k-topic">
-            <span class="k-num">02</span>
-            <span class="k-label">発酵とは・クロス理論</span>
-          </a>
-          <a href="/livingfood" class="k-topic">
-            <span class="k-num">03</span>
-            <span class="k-label">リビングフードとは</span>
-          </a>
-          <a href="/rawchocolatier/whatrawsweets" class="k-topic">
-            <span class="k-num">04</span>
-            <span class="k-label">ロースイーツとは</span>
-          </a>
-          <a href="/spirulina" class="k-topic">
-            <span class="k-num">05</span>
-            <span class="k-label">スピルリナとは</span>
-          </a>
-        </div>
-        <a href="/knowledge" class="btn-knowledge">DISCOVER KNOWLEDGE →</a>
+  <!-- ⑤ KNOWLEDGE — カード型3枚 -->
+  <section class="knowledge-section" style="background:var(--linen);padding:8rem 3rem;border-top:1px solid var(--linen-3);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <span class="eyebrow" style="justify-content:center;display:block;">Knowledge Hub</span>
+        <h2 style="font-family:var(--f-serif);font-size:clamp(1.6rem,2.5vw,2.2rem);letter-spacing:.08em;color:var(--ink);">生きた食の、知恵と科学。</h2>
       </div>
-      <div class="knowledge-visual">
-        <img src="/mosaic-rawfood.jpg" alt="食と発酵の知恵" />
-        <div class="knowledge-visual-caption">
-          <p class="k-caption-label">The &LAB Method</p>
-          <p class="k-caption-text">ローフード × 発酵<br />クロス理論</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ⑤ PROGRAMS -->
-  <section class="programs" id="lessons">
-    <div class="programs-inner">
-      <span class="eyebrow" style="color:var(--green)">3つの扉</span>
-      <h2>LABの世界観を体験する。</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:3rem;">
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;">
-
-        <a href="/rawfood" class="prog-sub" style="height:460px;">
-          <img src="/brand-sushi.jpg" alt="ローフード" />
-          <div class="prog-ov"></div>
-          <div class="prog-body">
-            <span class="prog-eye">Door 01 · Raw Food</span>
-            <h3>ローフード</h3>
-            <p style="margin-bottom:.4rem;">生きた酵素を活かす食の科学。<br />体験〜マイスター資格まで。</p>
-            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">受講形式：対面 / オンライン</p>
+        <a href="/rawfood" style="display:block;text-decoration:none;background:var(--linen-2);overflow:hidden;position:relative;transition:transform .25s;" class="k-card-home">
+          <img src="https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg" alt="ローフードとは" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform .55s;" />
+          <div style="padding:1.6rem 1.8rem 2rem;">
+            <span style="font-family:var(--f-sans);font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:.4rem;">Raw Food</span>
+            <h3 style="font-family:var(--f-serif);font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:.04em;margin-bottom:.6rem;line-height:1.5;">ローフードとは<br />— 酵素を生きたまま食べる</h3>
+            <p style="font-size:.82rem;color:var(--ink-3);line-height:1.8;margin-bottom:.8rem;">48℃以下の調理法で、食物酵素・ビタミン・ミネラルを丸ごと摂取。細胞から体を整える食事法。</p>
+            <span style="font-size:.78rem;color:var(--green-d);font-family:var(--f-sans);font-weight:500;">詳しく読む →</span>
           </div>
         </a>
 
-        <a href="/fermentation" class="prog-sub" style="height:460px;">
-          <img src="/hacco-amazake.jpg" alt="発酵" />
-          <div class="prog-ov"></div>
-          <div class="prog-body">
-            <span class="prog-eye">Door 02 · Fermentation</span>
-            <h3>発酵 / Hacco LAB</h3>
-            <p style="margin-bottom:.4rem;">麹・味噌・醤油。腸から整える<br />日本の発酵文化。</p>
-            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">受講形式：対面 / オンライン</p>
+        <a href="/fermentedfood" style="display:block;text-decoration:none;background:var(--linen-2);overflow:hidden;position:relative;transition:transform .25s;" class="k-card-home">
+          <img src="https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg" alt="発酵とは" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform .55s;" />
+          <div style="padding:1.6rem 1.8rem 2rem;">
+            <span style="font-family:var(--f-sans);font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:.4rem;">Fermentation</span>
+            <h3 style="font-family:var(--f-serif);font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:.04em;margin-bottom:.6rem;line-height:1.5;">発酵とは<br />— 微生物が生み出す知恵</h3>
+            <p style="font-size:.82rem;color:var(--ink-3);line-height:1.8;margin-bottom:.8rem;">麹・乳酸菌・酢酸菌が食材を変容させる。腸内環境を整え、免疫力を引き上げる発酵の科学。</p>
+            <span style="font-size:.78rem;color:var(--green-d);font-family:var(--f-sans);font-weight:500;">詳しく読む →</span>
           </div>
         </a>
 
-        <a href="/fermentation" class="prog-sub" style="height:460px;">
-          <img src="/hacco-koji.jpg" alt="UMAMI LAB" />
-          <div class="prog-ov"></div>
-          <div class="prog-body">
-            <span class="prog-eye">Door 03 · Inbound</span>
-            <h3>UMAMI &amp; KOJI LAB</h3>
-            <p style="margin-bottom:.4rem;">日本の旨みと麹を世界へ。<br />インバウンド向けプレミアム体験。</p>
-            <p class="prog-meta" style="font-size:.72rem;opacity:.7;">英語対応 · 海外からも参加可</p>
+        <a href="/rawchocolatier/whatrawsweets" style="display:block;text-decoration:none;background:var(--linen-2);overflow:hidden;position:relative;transition:transform .25s;" class="k-card-home">
+          <img src="https://static.wixstatic.com/media/rawchocolatier.jpg" alt="ロースイーツとは" style="width:100%;height:220px;object-fit:cover;object-position:center 25%;display:block;transition:transform .55s;" />
+          <div style="padding:1.6rem 1.8rem 2rem;">
+            <span style="font-family:var(--f-sans);font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:.4rem;">Raw Sweets</span>
+            <h3 style="font-family:var(--f-serif);font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:.04em;margin-bottom:.6rem;line-height:1.5;">ロースイーツとは<br />— 食べるサプリメント</h3>
+            <p style="font-size:.82rem;color:var(--ink-3);line-height:1.8;margin-bottom:.8rem;">白砂糖・小麦粉・乳製品・卵不使用で、それでも圧倒的に美味しい。罪悪感ゼロのスイーツの世界。</p>
+            <span style="font-size:.78rem;color:var(--green-d);font-family:var(--f-sans);font-weight:500;">詳しく読む →</span>
           </div>
         </a>
 
       </div>
 
-      <!-- ロースイーツ・ローチョコレート -->
-      <a href="/raw-sweets" class="prog-featured-main" style="display:block;height:300px;margin-top:2px;position:relative;overflow:hidden;text-decoration:none;">
-        <img src="/prog-chocolate.jpg" alt="ロースイーツ・ローチョコレート" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .8s;" />
-        <div class="prog-ov"></div>
-        <div class="prog-body" style="display:flex;align-items:center;gap:3rem;">
-          <div>
-            <span class="prog-eye">Raw Sweets · ローショコラティエ協会本部</span>
-            <h3 style="font-size:1.5rem;">ロースイーツ / ローチョコレート</h3>
-          </div>
-          <p style="font-size:.88rem;color:rgba(244,242,238,.65);max-width:440px;line-height:1.8;">罪悪感を美しさに変える。砂糖・小麦・乳製品不使用。<br />安藤千英が設立した<strong style="color:rgba(244,242,238,.9);">ローショコラティエ協会本部</strong>の公認資格取得可。</p>
-          <p class="prog-meta" style="margin-left:auto;white-space:nowrap;">受講形式：対面 / オンライン →</p>
-        </div>
-      </a>
-
+      <div style="text-align:center;">
+        <a href="/knowledge" class="btn-knowledge">すべての知識ページを見る →</a>
+      </div>
     </div>
   </section>
 
