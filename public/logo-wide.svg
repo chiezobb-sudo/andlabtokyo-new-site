@@ -1,0 +1,26 @@
+<svg viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- Main text: &LAB TOKYO -->
+  <text x="0" y="50" font-family="Georgia, serif" font-size="48" font-weight="400" fill="#1C1C1A" letter-spacing="2">
+    &amp;LAB TOKYO
+  </text>
+
+  <!-- Leaf accent -->
+  <g transform="translate(385, 15)">
+    <!-- Leaf shape -->
+    <path d="M 0 0 Q 8 5 10 15 Q 8 10 5 8 Q 3 6 0 0" fill="#A9D159" opacity="0.9"/>
+    <path d="M 5 8 Q 6 10 8 15 Q 6 12 4 10 Q 3 9 2 8" fill="#7AAF2A" opacity="0.8"/>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="0" y="85" font-family="'Helvetica Neue', sans-serif" font-size="10" font-weight="400" fill="#7A7A72" letter-spacing="3">
+    RAWFOOD / FERMENTATION / LIVING
+  </text>
+
+  <!-- Bottom accent line -->
+  <line x1="0" y1="92" x2="420" y2="92" stroke="#EAE7E0" stroke-width="0.5"/>
+
+  <!-- Year -->
+  <text x="0" y="108" font-family="'Helvetica Neue', sans-serif" font-size="8" font-weight="400" fill="#A9A9A0" letter-spacing="1">
+    SINCE 2016
+  </text>
+</svg>
