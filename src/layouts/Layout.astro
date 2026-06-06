@@ -1,14 +1,7 @@
 ---
 /**
- * &LAB TOKYO — Master Layout
+ * &LAB TOKYO — Master Layout (Premium Minimalism)
  * グローバルナビ・フッター・SEO・OGP を一元管理
- *
- * 使い方:
- * import Layout from '../layouts/Layout.astro';
- * <Layout title="ページタイトル" description="説明" canonical="https://...">
- *   <script slot="head" type="application/ld+json">...</script>
- *   <!-- page content -->
- * </Layout>
  */
 
 interface Props {
@@ -23,7 +16,7 @@ interface Props {
 
 const {
   title,
-  description = "ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。",
+  description = "発酵と美の学校。表参道・代々木上原のプレミアム・ライフスタイルラボ。",
   canonical,
   ogImage = "/og-default.jpg",
   type = "website",
@@ -37,12 +30,11 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`
 const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`;
 const path = Astro.url.pathname;
 
-const navLeft = [
-  { label: "Concept", href: "/brand" },
-  { label: "Courses", href: "/listofcourses" },
-];
-const navRight = [
-  { label: "Journal", href: "/knowledge" },
+const navItems = [
+  { label: "ABOUT", href: "/brand" },
+  { label: "COURSES", href: "/listofcourses" },
+  { label: "JOURNAL", href: "/knowledge" },
+  { label: "ACCESS", href: "/contact" },
 ];
 ---
 
@@ -67,338 +59,191 @@ const navRight = [
   <meta property="og:locale" content="ja_JP" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicon (Wix) -->
+  <!-- Favicon -->
   <link rel="icon" href="https://static.wixstatic.com/media/745f65_5f8a0988e14b437298642730a9117f7b%7Emv2.png" type="image/png" />
-  <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/745f65_5f8a0988e14b437298642730a9117f7b%7Emv2.png" />
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <!-- Organization JSON-LD (全ページ共通) -->
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Organization JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "&LAB TOKYO",
     "url": "https://www.andlabtokyo.com",
-    "logo": "https://www.andlabtokyo.com/logo-wide.png",
-    "description": "東京・渋谷発。ローフード×発酵のクロス理論に基づくプレミアム・プロフェッショナルスクール。",
+    "logo": "https://www.andlabtokyo.com/logo-wide.svg",
+    "description": "発酵とローフードのクロス理論に基づくプレミアム・プロフェッショナルスクール。表参道・代々木上原。",
     "address": { "@type": "PostalAddress", "streetAddress": "東京都渋谷区神宮前（表参道・原宿エリア）", "addressLocality": "渋谷区", "addressRegion": "東京都", "postalCode": "150-0001", "addressCountry": "JP" },
-    "founder": { "@type": "Person", "name": "安藤千英", "alternateName": "Chie Ando" },
-    "sameAs": ["https://www.instagram.com/chie_andlab/", "https://www.andlabtokyo.com"]
+    "founder": { "@type": "Person", "name": "安藤千英" },
+    "sameAs": ["https://www.instagram.com/chie_andlab/"]
   }
   </script>
 
-  <!-- Page-specific head (JSON-LD etc.) -->
   <slot name="head" />
 
   <style is:global>
-    /* ─── CSS Variables ─── */
-    :root {
-      --linen:   #FAF9F6;
-      --linen-2: #F5F3F0;
-      --linen-3: #EDE9E3;
-      --sumi:    #1C1C1A;
-      --sumi-2:  #2A2A27;
-      --sumi-3:  #3A3A36;
-      --ink:     #1C1C1A;
-      --ink-2:   #3D3D38;
-      --ink-3:   #7A7A72;
-      --green:   #A9D159;
-      --green-d: #7AAF2A;
-      --green-btn: #4E8A18;
-      --gold:    #D4AF37;
-      --f-serif: 'Noto Serif JP', serif;
-      --f-sans:  'Noto Sans JP', sans-serif;
-      --nav-h:   64px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* ─── Base Reset ─── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
     body {
-      font-family: var(--f-sans);
-      background: var(--linen);
-      color: var(--ink);
+      font-family: 'Noto Serif JP', serif;
+      background: #FAF9F6;
+      color: #1C1C1A;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
-      padding-top: var(--nav-h);
     }
 
-    /* ─── GLOBAL NAV (マスター・ナビゲーション) ─── */
-    .g-nav {
+    /* HEADER */
+    header {
       position: fixed;
-      inset: 0 0 auto 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 900;
-      height: var(--nav-h);
+      padding: 2rem 4rem;
+      background: rgba(250, 249, 246, 0.98);
+      backdrop-filter: blur(12px);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 4rem;
-      background: rgba(251, 251, 250, 0.96);
-      backdrop-filter: blur(24px) saturate(1.3);
-      -webkit-backdrop-filter: blur(24px) saturate(1.3);
-      border-bottom: 1px solid rgba(28, 28, 26, .05);
-    }
-    /* Center logo */
-    .g-nav-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
       align-items: center;
-      text-decoration: none;
-      flex-shrink: 0;
+      border-bottom: 1px solid rgba(28, 28, 26, 0.05);
     }
-    .g-nav-logo img {
-      height: 44px;
+
+    .logo {
+      height: 40px;
       width: auto;
       display: block;
     }
 
-    /* Left nav */
-    .g-nav-left {
+    nav {
       display: flex;
+      gap: 3rem;
       align-items: center;
-      list-style: none;
-      gap: 0;
-      flex: 1;
-    }
-    .g-nav-left a,
-    .g-nav-right-list a {
-      font-family: var(--f-serif);
-      font-size: .68rem;
-      font-weight: 400;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      text-decoration: none;
-      padding: 0 1.8rem;
-      display: block;
-      line-height: var(--nav-h);
-      border-bottom: 2px solid transparent;
-      transition: color .3s, border-color .3s;
-    }
-    .g-nav-left a:hover,
-    .g-nav-right-list a:hover { color: var(--ink); }
-    .g-nav-left a[data-active="true"],
-    .g-nav-right-list a[data-active="true"] {
-      color: var(--ink);
-      border-bottom-color: var(--ink);
     }
 
-    /* Right side */
-    .g-nav-right { display: flex; align-items: center; gap: 1.4rem; flex-shrink: 0; flex: 1; justify-content: flex-end; }
-    .g-nav-right-list { display: flex; align-items: center; list-style: none; gap: 0; }
-    .g-nav-contact {
-      font-family: var(--f-serif);
-      font-size: .65rem;
-      font-weight: 400;
-      letter-spacing: .24em;
+    nav a {
+      font-size: 10px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--ink-2);
+      color: #7A7A72;
       text-decoration: none;
-      border: 1px solid rgba(28,28,26,.18);
-      padding: .5rem 1.6rem;
-      transition: all .3s;
-      line-height: 1;
-    }
-    .g-nav-contact:hover {
-      background: var(--ink);
-      color: var(--linen);
-      border-color: var(--ink);
-    }
-    /* ハンバーガー（モバイル用） */
-    .g-nav-burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .g-nav-burger span {
-      display: block;
-      width: 22px;
-      height: 1px;
-      background: var(--ink);
-      transition: all .3s;
+      transition: color 0.3s;
+      font-weight: 400;
     }
 
-    /* ─── GLOBAL FOOTER ─── */
-    .g-footer {
-      background: var(--sumi);
-      padding: 6rem 4rem 2.5rem;
-      border-top: 1px solid rgba(244, 242, 238, .04);
-    }
-    .g-footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2.2fr 1fr 1fr 1fr;
-      gap: 5rem;
-      padding-bottom: 4rem;
-      border-bottom: 1px solid rgba(244, 242, 238, .05);
-    }
-    .g-footer-brand {}
-    .g-footer-logo img {
-      height: 38px;
-      display: block;
-      margin-bottom: 1.8rem;
-      opacity: .65;
-    }
-    .g-footer-tag {
-      font-family: var(--f-serif);
-      font-size: .8rem;
-      font-weight: 300;
-      color: rgba(244, 242, 238, .25);
-      line-height: 2.2;
-      letter-spacing: .06em;
-    }
-    .g-footer-col h5 {
-      font-family: var(--f-serif);
-      font-size: .58rem;
-      font-weight: 400;
-      letter-spacing: .26em;
-      text-transform: uppercase;
-      color: rgba(244, 242, 238, .2);
-      margin-bottom: 1.8rem;
-    }
-    .g-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-    .g-footer-col a {
-      font-family: var(--f-serif);
-      font-size: .82rem;
-      font-weight: 300;
-      letter-spacing: .06em;
-      color: rgba(244, 242, 238, .28);
-      text-decoration: none;
-      transition: color .25s;
-    }
-    .g-footer-col a:hover { color: rgba(244, 242, 238, .7); }
-    .g-footer-copy {
-      max-width: 1100px;
-      margin: 2.2rem auto 0;
-      text-align: center;
-      font-family: var(--f-serif);
-      font-size: .65rem;
-      font-weight: 300;
-      letter-spacing: .12em;
-      color: rgba(244, 242, 238, .12);
+    nav a:hover,
+    nav a[data-active] {
+      color: #1C1C1A;
     }
 
-    /* ─── Responsive ─── */
-    @media (max-width: 960px) {
-      .g-nav { padding: 0 1.5rem; }
-      .g-nav-logo img { height: 34px; }
-      .g-nav-left { display: none; }
-      .g-nav-right-list { display: none; }
-      .g-nav-burger { display: flex; }
-      .g-nav-contact { display: none; }
-      .g-footer { padding: 4rem 1.5rem 2rem; }
-      .g-footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    /* BODY PADDING */
+    main {
+      padding-top: 100px;
     }
-    @media (max-width: 600px) {
-      .g-footer-inner { grid-template-columns: 1fr; }
+
+    /* FOOTER */
+    footer {
+      background: #FAF9F6;
+      padding: 6rem 4rem;
+      border-top: 1px solid rgba(28, 28, 26, 0.05);
+      position: relative;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-logo {
+      height: 30px;
+      width: auto;
+    }
+
+    .footer-address {
+      text-align: right;
+      font-size: 11px;
+      color: #7A7A72;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding: 1.5rem 2rem;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      nav {
+        gap: 1.5rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 3rem;
+        align-items: flex-start;
+      }
+
+      .footer-address {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ MASTER NAVIGATION ══ -->
-  <nav class="g-nav" role="navigation" aria-label="グローバルナビゲーション">
-
-    <!-- Left nav items -->
-    <ul class="g-nav-left" role="list">
-      {navLeft.map(item => (
-        <li>
-          <a href={item.href} data-active={path.startsWith(item.href) ? "true" : undefined}>
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <!-- Center logo -->
-    <a href="/" class="g-nav-logo" aria-label="&LAB TOKYO ホーム">
-      <img src="/logo-wide.png" alt="&LAB TOKYO" />
+  <!-- HEADER -->
+  <header>
+    <a href="/" aria-label="&LAB TOKYO ホーム">
+      <img src="/logo-wide.svg" alt="&LAB TOKYO" class="logo" />
     </a>
 
-    <!-- Right nav items + contact -->
-    <div class="g-nav-right">
-      <ul class="g-nav-right-list" role="list">
-        {navRight.map(item => (
-          <li>
-            <a href={item.href} data-active={path.startsWith(item.href) ? "true" : undefined}>
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a href="/contact" class="g-nav-contact">Contact</a>
-      <button class="g-nav-burger" aria-label="メニューを開く" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <nav role="navigation">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          data-active={path.startsWith(item.href) && item.href !== "/" ? "true" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <a href="/" aria-label="&LAB TOKYO ホーム">
+        <img src="/logo-wide.svg" alt="&LAB TOKYO" class="footer-logo" />
+      </a>
+
+      <div class="footer-address">
+        <p>5-2-11 Jingumae, Shibuya-ku,</p>
+        <p>Tokyo 150-0001, Japan</p>
+        <p style="margin-top: 0.8rem;"><a href="https://goo.gl/maps/andlab" target="_blank" rel="noopener" style="color: #7A7A72; text-decoration: none; border-bottom: 1px solid #7A7A72;">Google Map</a></p>
+      </div>
     </div>
-  </nav>
-
-  <!-- ══ PAGE CONTENT ══ -->
-  <slot />
-
-  <!-- ══ GLOBAL FOOTER ══ -->
-  <footer class="g-footer" role="contentinfo">
-    <div class="g-footer-inner">
-
-      <div class="g-footer-brand">
-        <div class="g-footer-logo">
-          <img src="/logo-wide.png" alt="&LAB TOKYO" />
-        </div>
-        <p class="g-footer-tag">
-          発酵創家 安藤千英<br />
-          Raw Food × Fermentation<br />
-          Lifestyle Lab · Tokyo Shibuya
-        </p>
-      </div>
-
-      <div class="g-footer-col">
-        <h5>Program</h5>
-        <ul>
-          <li><a href="/listofcourses">講座・資格一覧</a></li>
-          <li><a href="/rawfood-kentei-meister">ローフードマイスター</a></li>
-          <li><a href="/rawchocolatier">ローショコラティエ協会</a></li>
-          <li><a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a></li>
-        </ul>
-      </div>
-
-      <div class="g-footer-col">
-        <h5>Knowledge</h5>
-        <ul>
-          <li><a href="/knowledge">知識ハブ</a></li>
-          <li><a href="/rawfood">ローフードとは</a></li>
-          <li><a href="/fermentedfood">発酵とは</a></li>
-          <li><a href="/rawchocolatier/whatrawsweets">ロースイーツとは</a></li>
-          <li><a href="/spirulina">スピルリナとは</a></li>
-        </ul>
-      </div>
-
-      <div class="g-footer-col">
-        <h5>Connect</h5>
-        <ul>
-          <li><a href="/about">安藤千英について</a></li>
-          <li><a href="/blog">Journal</a></li>
-          <li><a href="/contact">お問い合わせ</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
-        </ul>
-      </div>
-
-    </div>
-    <p class="g-footer-copy">© 2026 &LAB TOKYO · 安藤千英. All rights reserved.</p>
   </footer>
 
 </body>
