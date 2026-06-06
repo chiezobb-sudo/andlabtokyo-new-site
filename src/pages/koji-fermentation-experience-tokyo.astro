@@ -1,0 +1,286 @@
+---
+const title = "UMAMI & KOJI LAB — 東京・渋谷 発酵体験ワークショップ | &LAB TOKYO";
+const description = "東京・渋谷（原宿・外苑前）で五感で醸す麹と旨味の発酵体験。日本の伝統発酵文化を世界に伝える&LAB TOKYOのプレミアムワークショップ。英語対応・海外旅行者歓迎。";
+const url = "https://www.andlabtokyo.com/koji-fermentation-experience-tokyo";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  <link rel="icon" href="/favicon.ico" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "UMAMI & KOJI LAB — 東京・渋谷 発酵体験ワークショップ",
+    "description": "日本の伝統発酵文化「麹と旨味」を五感で体験するプレミアムワークショップ。東京・渋谷（原宿・外苑前エリア）で開催。",
+    "url": url,
+    "location": {
+      "@type": "Place",
+      "name": "&LAB TOKYO",
+      "address": { "@type": "PostalAddress", "addressLocality": "渋谷区", "addressRegion": "東京都", "addressCountry": "JP" }
+    },
+    "organizer": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://www.andlabtokyo.com/" },
+    "image": "https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg"
+  })} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --linen:#FBFBFA; --linen-2:#F4F2EE; --linen-3:#EAE7E0;
+      --sumi:#1C1C1A;  --sumi-2:#2A2A27; --sumi-3:#3A3A36;
+      --ink:#1C1C1A;   --ink-2:#3D3D38;  --ink-3:#7A7A72;
+      --green:#A9D159; --green-d:#7AAF2A;
+      --f-serif:'Noto Serif JP',serif; --f-sans:'Noto Sans JP',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+
+    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.06);}
+    .nav-logo img{height:32px;mix-blend-mode:screen;filter:brightness(1.1);}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links a{font-size:.8rem;color:rgba(244,242,238,.55);text-decoration:none;padding:0 1rem;letter-spacing:.04em;transition:color .2s;}
+    .nav-links a:hover{color:var(--green);}
+    .nav-right{display:flex;align-items:center;}
+    .nav-cta{font-size:.8rem;font-weight:700;display:inline-block;background:transparent;color:rgba(244,242,238,.6);padding:.4rem 1.2rem;margin-left:1rem;text-decoration:none;border:1px solid rgba(244,242,238,.2);letter-spacing:.06em;transition:all .2s;}
+    .nav-cta:hover{color:#FAF5EC;border-color:rgba(244,242,238,.5);}
+
+    /* HERO — Full bleed */
+    .hero{margin-top:52px;position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;}
+    .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,10,.97) 0%,rgba(12,12,10,.4) 52%,rgba(12,12,10,.1) 100%);}
+    .hero-content{position:relative;z-index:2;padding:0 6vw 10vh;max-width:720px;}
+    .hero-eye{font-family:var(--f-sans);font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(244,242,238,.25);display:block;margin-bottom:3rem;}
+    .hero h1{font-family:var(--f-serif);font-size:clamp(2rem,5vw,4.2rem);font-weight:200;letter-spacing:.2em;color:#FAF5EC;line-height:1.25;margin-bottom:2rem;}
+    .hero-sub{font-family:var(--f-serif);font-size:1rem;font-weight:300;color:rgba(244,242,238,.38);letter-spacing:.1em;line-height:2.3;margin-bottom:4rem;max-width:480px;}
+    .btn-ghost{display:inline-block;font-family:var(--f-serif);font-size:.82rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,242,238,.6);text-decoration:none;border:1px solid rgba(244,242,238,.18);padding:1.1rem 3rem;transition:all .4s;}
+    .btn-ghost:hover{color:#FAF5EC;border-color:rgba(244,242,238,.5);background:rgba(244,242,238,.04);}
+
+    /* INTRO */
+    .intro-sec{background:var(--sumi);padding:11rem 3rem;}
+    .intro-inner{max-width:860px;margin:0 auto;text-align:center;}
+    .sec-eye{font-family:var(--f-sans);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,242,238,.2);display:block;margin-bottom:2.5rem;}
+    .intro-inner h2{font-family:var(--f-serif);font-size:clamp(1.6rem,3vw,2.6rem);font-weight:200;letter-spacing:.18em;color:#FAF5EC;line-height:1.4;margin-bottom:3.5rem;}
+    .intro-rule{width:32px;height:1px;background:rgba(244,242,238,.12);margin:3.5rem auto;}
+    .intro-inner p{font-family:var(--f-serif);font-size:1rem;font-weight:300;color:rgba(244,242,238,.45);line-height:2.5;letter-spacing:.07em;margin-bottom:2rem;}
+
+    /* WHAT YOU EXPERIENCE */
+    .exp-sec{background:var(--linen-2);padding:11rem 3rem;}
+    .exp-inner{max-width:1100px;margin:0 auto;}
+    .exp-sec-eye{font-family:var(--f-sans);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:2.2rem;}
+    .exp-inner h2{font-family:var(--f-serif);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;letter-spacing:.14em;color:var(--ink);line-height:1.45;margin-bottom:5rem;}
+    .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+    .exp-item{padding:3.5rem 3rem;border-right:1px solid var(--linen-3);}
+    .exp-item:last-child{border-right:none;}
+    .exp-n{font-family:var(--f-serif);font-size:3rem;font-weight:200;color:var(--linen-3);line-height:1;margin-bottom:1.8rem;display:block;}
+    .exp-item h3{font-family:var(--f-serif);font-size:1rem;font-weight:600;letter-spacing:.08em;color:var(--ink);margin-bottom:1rem;line-height:1.6;}
+    .exp-item p{font-size:.88rem;color:var(--ink-3);line-height:2;margin:0;}
+
+    /* DETAILS TABLE */
+    .details-sec{background:var(--linen);padding:11rem 3rem;}
+    .details-inner{max-width:820px;margin:0 auto;}
+    .details-inner h2{font-family:var(--f-serif);font-size:clamp(1.4rem,2vw,2rem);font-weight:300;letter-spacing:.14em;color:var(--ink);margin-bottom:4rem;line-height:1.4;}
+    .details-table{width:100%;}
+    .details-table tr{border-top:1px solid var(--linen-3);}
+    .details-table tr:last-child{border-bottom:1px solid var(--linen-3);}
+    .details-table td{padding:2rem 0;vertical-align:top;}
+    .details-table td:first-child{font-family:var(--f-sans);font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);width:160px;padding-right:2rem;}
+    .details-table td:last-child{font-family:var(--f-serif);font-size:.95rem;color:var(--ink-2);line-height:1.9;}
+
+    /* FULL IMAGE DIVIDER */
+    .img-divider{position:relative;height:60vh;min-height:380px;overflow:hidden;}
+    .img-divider img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
+    .img-divider-overlay{position:absolute;inset:0;background:rgba(12,12,10,.3);display:flex;align-items:center;justify-content:center;}
+    .img-divider-text{text-align:center;}
+    .img-divider-text p{font-family:var(--f-serif);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:200;letter-spacing:.24em;color:rgba(244,242,238,.85);line-height:1.6;}
+
+    /* 1DAY体験 */
+    .oneday-sec{background:var(--sumi-2);padding:11rem 3rem;text-align:center;}
+    .oneday-inner{max-width:640px;margin:0 auto;}
+    .oneday-inner h2{font-family:var(--f-serif);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;letter-spacing:.16em;color:#FAF5EC;line-height:1.5;margin-bottom:2.5rem;}
+    .oneday-rule{width:28px;height:1px;background:rgba(244,242,238,.1);margin:2.5rem auto;}
+    .oneday-inner p{font-family:var(--f-serif);font-size:.95rem;font-weight:300;color:rgba(244,242,238,.42);line-height:2.4;letter-spacing:.06em;margin-bottom:1.4rem;}
+    .oneday-price{font-family:var(--f-serif);font-size:2rem;font-weight:200;color:#FAF5EC;letter-spacing:.1em;display:block;margin:3rem 0 .6rem;}
+    .oneday-note{font-size:.74rem;color:rgba(244,242,238,.2);letter-spacing:.1em;display:block;margin-bottom:3.5rem;}
+    .btn-outline-light{display:inline-block;font-family:var(--f-serif);font-size:.8rem;font-weight:300;letter-spacing:.22em;color:rgba(244,242,238,.55);text-decoration:none;border:1px solid rgba(244,242,238,.16);padding:1.1rem 3rem;transition:all .4s;}
+    .btn-outline-light:hover{color:#FAF5EC;border-color:rgba(244,242,238,.45);}
+
+    /* ENGLISH BAND */
+    .en-band{background:var(--sumi);padding:6rem 3rem;border-top:1px solid rgba(244,242,238,.04);}
+    .en-band-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center;}
+    .en-band h3{font-family:var(--f-serif);font-size:1.1rem;font-weight:300;letter-spacing:.12em;color:rgba(244,242,238,.6);line-height:1.7;}
+    .en-band p{font-size:.88rem;color:rgba(244,242,238,.3);line-height:2;margin-top:.6rem;}
+
+    footer{background:var(--sumi);padding:3rem;text-align:center;border-top:1px solid rgba(244,242,238,.04);}
+    .footer-logo img{height:26px;mix-blend-mode:screen;filter:brightness(1.1);margin-bottom:.8rem;}
+    .footer-copy{font-size:.68rem;color:rgba(244,242,238,.14);}
+
+    @media(max-width:960px){
+      nav{padding:0 1.5rem;}
+      .nav-links{display:none;}
+      .hero{height:85vh;}
+      .hero-content{padding:0 1.5rem 6vh;}
+      .intro-sec,.exp-sec,.details-sec,.oneday-sec,.en-band{padding:5rem 1.5rem;}
+      .exp-grid{grid-template-columns:1fr;}
+      .exp-item{border-right:none;border-bottom:1px solid var(--linen-3);padding:2.5rem 0;}
+      .en-band-inner{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/listofcourses">講座一覧</a></li>
+        <li><a href="/fermentedfood">発酵について</a></li>
+        <li><a href="/about">安藤千英</a></li>
+        <li><a href="/knowledge">知識ハブ</a></li>
+      </ul>
+      <a href="/contact" class="nav-cta">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- HERO — Full screen -->
+  <section class="hero">
+    <img src="https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg" alt="UMAMI & KOJI LAB 東京・渋谷 発酵体験" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eye">Premium Workshop · Tokyo Shibuya · &LAB TOKYO</span>
+      <h1>UMAMI &amp;<br />KOJI LAB</h1>
+      <p class="hero-sub">
+        日本の知恵である「麹」と「旨味」を世界へ。<br />
+        五感で醸す、特別な発酵エクスペリエンス。<br />
+        東京・渋谷で、伝統の粋に触れる一日を。
+      </p>
+      <a href="#reserve" class="btn-ghost">体験を申し込む</a>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro-sec">
+    <div class="intro-inner">
+      <span class="sec-eye">What is UMAMI &amp; KOJI LAB</span>
+      <h2>「麹」は、日本の静かな革命だ。</h2>
+      <div class="intro-rule"></div>
+      <p>東京・渋谷（原宿・外苑前エリア）のプライベートラボで、安藤千英が直接案内する特別なワークショップ。麹菌が米・大豆・塩と出会い、時間をかけて変容していく。その奇跡のプロセスを、目と、鼻と、舌と、手で体感します。</p>
+      <p>ローフードと発酵の「クロス理論」に基づき、なぜ麹が「生きた食」の最高峰なのかを理論から実践まで。英語対応可能。海外からの旅行者、外国語話者の方にも、日本の発酵文化の真髄をお伝えします。</p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE CONTENT -->
+  <section class="exp-sec">
+    <div class="exp-inner">
+      <span class="exp-sec-eye">The Experience</span>
+      <h2>五感で学ぶ、発酵の知恵。<br />この体験に含まれるもの。</h2>
+      <div class="exp-grid">
+        <div class="exp-item">
+          <span class="exp-n">01</span>
+          <h3>麹の理論講義<br />（日・英対応）</h3>
+          <p>麹菌とは何か。発酵がなぜ体に良いのか。クロス理論に基づく科学的解説。資料テキスト付き。</p>
+        </div>
+        <div class="exp-item">
+          <span class="exp-n">02</span>
+          <h3>旨味の官能評価<br />— 五感のトレーニング</h3>
+          <p>様々な発酵食品の試食・試飲を通じて、旨味とは何かを五感で理解する。麹・甘酒・塩麹・醤油麹。</p>
+        </div>
+        <div class="exp-item">
+          <span class="exp-n">03</span>
+          <h3>発酵ローレシピの<br />実習・持ち帰り</h3>
+          <p>ローフード×発酵のクロス理論を活かしたオリジナルレシピを実習。作ったものはお土産に持ち帰れます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BLEED IMAGE -->
+  <div class="img-divider">
+    <img src="https://static.wixstatic.com/media/10798628320_IMG_0607%202_edited.jpg" alt="発酵の静寂" />
+    <div class="img-divider-overlay">
+      <div class="img-divider-text">
+        <p>発酵は、急がない。<br />静かに、深く、変容する。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSHOP DETAILS -->
+  <section class="details-sec" id="reserve">
+    <div class="details-inner">
+      <span style="font-family:var(--f-sans);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:2rem;">Workshop Details</span>
+      <h2>ワークショップ<br />詳細・ご予約</h2>
+      <table class="details-table">
+        <tr>
+          <td>開催地</td>
+          <td>東京・渋谷区（原宿・外苑前エリア）<br /><span style="font-size:.82rem;color:var(--ink-3);">詳細住所はご予約確定後にお知らせします。</span></td>
+        </tr>
+        <tr>
+          <td>所要時間</td>
+          <td>約3〜4時間（講義・実習・試食含む）</td>
+        </tr>
+        <tr>
+          <td>定員</td>
+          <td>1〜4名（完全少人数制・プライベート対応可）</td>
+        </tr>
+        <tr>
+          <td>言語</td>
+          <td>日本語 / English available（英語対応可）</td>
+        </tr>
+        <tr>
+          <td>受講形式</td>
+          <td>対面（東京・渋谷）<br /><span style="font-size:.82rem;color:var(--ink-3);">※ オンライン版も相談可</span></td>
+        </tr>
+        <tr>
+          <td>対象</td>
+          <td>発酵・日本食文化に興味のある方すべて。<br />料理経験・食の知識は不問。</td>
+        </tr>
+        <tr>
+          <td>ご予約</td>
+          <td>
+            <a href="/contact" style="font-family:var(--f-serif);font-size:.9rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--linen-3);padding-bottom:.3rem;transition:all .2s;">お問い合わせフォームから →</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 1Day体験セクション（各ページ共通） -->
+  <section class="oneday-sec">
+    <div class="oneday-inner">
+      <span style="font-family:var(--f-sans);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,242,238,.2);display:block;margin-bottom:2rem;">First Step</span>
+      <h2>1Dayのプレミアムな<br />世界観体験</h2>
+      <div class="oneday-rule"></div>
+      <p>本講座へのご参加をご検討中の方で、まずは一度、<br />&LAB TOKYOの空気感やレッスンの全体像を<br />体感されたい方に向けて、1Dayの体験レッスンをご用意しています。</p>
+      <p style="font-size:.88rem;color:rgba(244,242,238,.25);">&LABの哲学に共感し、本気で学びたい方のための第一歩。<br />あなたと&LABのマッチングの場として。</p>
+      <span class="oneday-price">¥13,000</span>
+      <span class="oneday-note">税込 · 東京・渋谷（原宿・外苑前エリア）</span>
+      <a href="/contact" class="btn-outline-light">体験レッスンを申し込む</a>
+    </div>
+  </section>
+
+  <!-- ENGLISH BAND -->
+  <section class="en-band">
+    <div class="en-band-inner">
+      <div>
+        <h3>Also available in English.<br />For international guests visiting Tokyo.</h3>
+        <p>This workshop is designed for visitors from overseas and English-speaking residents in Tokyo. We welcome all who wish to experience the authentic culture of Japanese fermentation — koji, umami, and the living wisdom of &LAB TOKYO.</p>
+      </div>
+      <a href="/contact" style="white-space:nowrap;font-family:var(--f-serif);font-size:.78rem;letter-spacing:.18em;color:rgba(244,242,238,.3);text-decoration:none;border:1px solid rgba(244,242,238,.1);padding:.9rem 2rem;transition:all .3s;flex-shrink:0;">Inquire in English →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
+    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
