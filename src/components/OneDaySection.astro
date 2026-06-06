@@ -3,10 +3,11 @@
 ---
 <section class="oneday-section">
   <div class="oneday-inner">
+    <div class="oneday-border"></div>
     <span class="oneday-eye">First Step</span>
     <h2>1Dayのプレミアムな<br />世界観体験</h2>
     <div class="oneday-rule"></div>
-    <p>本講座へのご参加をご検討中の方で、まずは一度、&LAB TOKYOの空気感やレッスンの全体像を体感されたい方に向けて、1Dayの体験レッスンをご用意しています。</p>
+    <p>本講座へのご参加をご検討中の方へ。&LAB TOKYOの世界観を体感いただく特別な1日。</p>
     <p class="oneday-sub">&LABの哲学に共感し、本気で学びたい方のための第一歩。<br />「誰でも歓迎」ではなく、あなたと&LABのマッチングの場として。</p>
     <span class="oneday-price">¥13,000</span>
     <span class="oneday-price-note">税込 · 東京・渋谷（原宿・外苑前エリア）対面 / オンライン</span>
@@ -24,6 +25,18 @@
   .oneday-inner {
     max-width: 640px;
     margin: 0 auto;
+    position: relative;
+    padding: 3rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  .oneday-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    pointer-events: none;
   }
   .oneday-eye {
     font-family: var(--f-sans);
