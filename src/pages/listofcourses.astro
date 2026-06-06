@@ -1,56 +1,16 @@
 ---
-const title = "&LAB TOKYO 講座・資格一覧 | ローフード・発酵・ローショコラティエ 東京・渋谷";
-const description = "東京・渋谷発。&LAB TOKYO安藤千英によるローフードマイスター、発酵ロー調味料、ローショコラティエ資格取得・プロ養成コース一覧。初心者から独立開業まで。";
-const url = "https://www.andlabtokyo.com/listofcourses";
+import Layout from '../layouts/Layout.astro';
+import OneDaySection from '../components/OneDaySection.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={url} />
-  <link rel="icon" href="/favicon.ico" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg" />
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "&LAB TOKYO",
-    "url": "https://www.andlabtokyo.com/",
-    "description": "東京・渋谷発のローフード・発酵専門教育機関。医師監修の独自カリキュラムで、ローフードマイスター・ローショコラティエ等の資格取得・プロ養成を行う。",
-    "address": { "@type": "PostalAddress", "addressLocality": "渋谷区", "addressRegion": "東京都", "addressCountry": "JP" },
-    "founder": { "@type": "Person", "name": "安藤千英" }
-  })} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --linen:#FBFBFA; --linen-2:#F4F2EE; --linen-3:#EAE7E0;
-      --sumi:#1C1C1A;  --sumi-2:#2A2A27; --sumi-3:#3A3A36;
-      --ink:#1C1C1A;   --ink-2:#3D3D38;  --ink-3:#7A7A72;
-      --green:#A9D159; --green-d:#7AAF2A; --green-btn:#4E8A18;
-      --f-serif:'Noto Serif JP',serif; --f-sans:'Noto Sans JP',sans-serif;
-    }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+<Layout
+  title="&LAB TOKYO 講座・資格一覧 | ローフード・発酵・ローショコラティエ 東京・渋谷"
+  description="東京・渋谷の発酵×ローフードプレミアムスクール &LAB TOKYO の全講座一覧。ローフードマイスター・ローショコラティエ・麹体験など。"
+  canonical="https://www.andlabtokyo.com/listofcourses"
+  ogImage="/og-default.jpg"
+>
 
-    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.06);}
-    .nav-logo img{height:32px;mix-blend-mode:screen;filter:brightness(1.1);}
-    .nav-links{display:flex;list-style:none;}
-    .nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.04em;color:rgba(244,242,238,.55);text-decoration:none;padding:0 1rem;transition:color .2s;}
-    .nav-links a:hover{color:var(--green);}
-    .nav-right{display:flex;align-items:center;}
-    .nav-cta{font-size:.8rem;font-weight:700;display:inline-block;background:transparent;color:rgba(244,242,238,.6);padding:.4rem 1.2rem;margin-left:1rem;text-decoration:none;border:1px solid rgba(244,242,238,.2);letter-spacing:.06em;transition:all .2s;}
-    .nav-cta:hover{color:#FAF5EC;border-color:rgba(244,242,238,.5);}
-
-    /* HERO */
-    .page-hero{margin-top:52px;position:relative;height:65vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end;}
-    .page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;}
+<style>
+.page-hero 
     .page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,10,.96) 0%,rgba(12,12,10,.5) 50%,rgba(12,12,10,.15) 100%);}
     .page-hero-text{position:relative;z-index:2;padding:0 5vw 7vh;max-width:680px;}
     .hero-eye{font-family:var(--f-sans);font-size:.62rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,242,238,.3);display:block;margin-bottom:1.8rem;}
@@ -60,7 +20,7 @@ const url = "https://www.andlabtokyo.com/listofcourses";
     /* BREADCRUMB */
     .bc-bar{background:var(--linen-2);padding:.85rem 3rem;border-bottom:1px solid var(--linen-3);}
     .bc{font-size:.74rem;color:var(--ink-3);max-width:1100px;margin:0 auto;}
-    .bc a{color:var(--ink-3);text-decoration:none;}
+    .bc 
     .bc span{margin:0 .5rem;}
 
     /* 哲学バンド */
@@ -80,15 +40,15 @@ const url = "https://www.andlabtokyo.com/listofcourses";
     .course-item{display:grid;grid-template-columns:360px 1fr;gap:0;border-top:1px solid var(--linen-3);transition:background .2s;}
     .course-item:last-child{border-bottom:1px solid var(--linen-3);}
     .course-item:hover{background:var(--linen-2);}
-    .course-item-img{position:relative;overflow:hidden;}
-    .course-item-img img{width:100%;height:240px;object-fit:cover;object-position:center 30%;display:block;transition:transform .8s ease;}
-    .course-item:hover .course-item-img img{transform:scale(1.03);}
-    .course-item-body{padding:3rem 3rem 3rem 4rem;display:flex;flex-direction:column;justify-content:center;}
+    .course-item-
+    .course-item-img 
+    .course-item:hover .course-item-img 
+    .course-item-
     .course-num{font-family:var(--f-serif);font-size:.75rem;font-weight:300;color:var(--ink-3);letter-spacing:.16em;display:block;margin-bottom:.8rem;}
     .course-item h3{font-family:var(--f-serif);font-size:1.1rem;font-weight:600;letter-spacing:.08em;color:var(--ink);margin-bottom:.6rem;line-height:1.55;}
     .course-subtitle{font-family:var(--f-sans);font-size:.75rem;color:var(--ink-3);letter-spacing:.06em;margin-bottom:1.4rem;display:block;}
     .course-desc{font-size:.88rem;color:var(--ink-2);line-height:2;margin-bottom:2rem;}
-    .course-meta{display:flex;gap:2rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--linen-3);}
+    .course-met
     .course-meta-item{display:flex;flex-direction:column;gap:.3rem;}
     .course-meta-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);}
     .course-meta-val{font-family:var(--f-serif);font-size:.88rem;color:var(--ink);}
@@ -110,7 +70,7 @@ const url = "https://www.andlabtokyo.com/listofcourses";
     .course-list-dark .course-desc{color:rgba(244,242,238,.55);}
     .course-list-dark .course-meta-label{color:rgba(244,242,238,.25);}
     .course-list-dark .course-meta-val{color:rgba(244,242,238,.7);}
-    .course-list-dark .course-meta{border-color:rgba(244,242,238,.06);}
+    .course-list-dark .course-met
     .course-list-dark .course-link{color:rgba(244,242,238,.35);border-color:rgba(244,242,238,.12);}
     .course-list-dark .course-link:hover{color:var(--green);border-color:var(--green);}
 
@@ -127,41 +87,24 @@ const url = "https://www.andlabtokyo.com/listofcourses";
     .btn-aman:hover{background:var(--ink);color:var(--linen);border-color:var(--ink);}
     .oneday-note{font-size:.78rem;color:var(--ink-3);line-height:2;margin-top:2rem;font-style:italic;}
 
-    footer{background:var(--sumi);padding:4rem 3rem 2rem;border-top:1px solid rgba(244,242,238,.04);}
-    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-bottom:2rem;border-bottom:1px solid rgba(244,242,238,.05);}
-    .footer-logo img{height:28px;mix-blend-mode:screen;filter:brightness(1.1);}
-    .footer-copy{font-size:.7rem;color:rgba(244,242,238,.16);text-align:center;margin-top:1.5rem;}
+    
+    
+    
 
     @media(max-width:960px){
-      nav{padding:0 1.5rem;}
-      .nav-links{display:none;}
+      
+      
       .page-hero{height:55vh;}
       .page-hero-text{padding:0 1.5rem 5vh;}
       .philosophy-band,.courses-sec,.cat-divider,.oneday-sec{padding:4rem 1.5rem;}
       .bc-bar{padding:.85rem 1.5rem;}
       .course-item{grid-template-columns:1fr;}
-      .course-item-img img{height:200px;}
-      .course-item-body{padding:2rem 1.5rem 2.5rem;}
+      .course-item-img 
+      .course-item-
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="/listofcourses">講座一覧</a></li>
-        <li><a href="/rawfood">ローフード</a></li>
-        <li><a href="/fermentedfood">発酵</a></li>
-        <li><a href="/rawchocolatier">ローショコラティエ</a></li>
-        <li><a href="/knowledge">学ぶ</a></li>
-      </ul>
-      <a href="/contact" class="nav-cta">CONTACT</a>
-    </div>
-  </nav>
-
-  <div class="page-hero">
+<div class="page-hero">
     <img src="https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg" alt="&LAB TOKYO 講座一覧" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-text">
@@ -352,28 +295,6 @@ const url = "https://www.andlabtokyo.com/listofcourses";
     </div>
   </section>
 
-  <!-- 1Day体験セクション -->
-  <section class="oneday-sec">
-    <div class="oneday-inner">
-      <span class="cat-eye">First Step</span>
-      <h2>1Dayのプレミアムな<br />世界観体験</h2>
-      <div class="oneday-rule"></div>
-      <p>本講座へのご参加をご検討中の方で、まずは一度、<br />&LAB TOKYOの空気感やレッスンの全体像を<br />体感されたい方に向けて、1Dayの体験レッスンをご用意しています。</p>
-      <p style="font-size:.88rem;color:var(--ink-3);">&LABの哲学に共感し、本気で学びたい方のための第一歩。<br />「誰でも歓迎」ではなく、あなたと&LABのマッチングの場として。</p>
-      <span class="oneday-price">¥13,000</span>
-      <span class="oneday-price-note">税込 · 東京・渋谷（原宿・外苑前エリア）対面 / オンライン</span>
-      <a href="/contact" class="btn-aman">体験レッスンを申し込む</a>
-      <p class="oneday-note">※ 1Day体験のご受講後、本講座への優先入学をご案内しています。</p>
-    </div>
-  </section>
+  <OneDaySection />
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-      <a href="/contact" style="font-family:var(--f-serif);font-size:.8rem;letter-spacing:.14em;color:rgba(244,242,238,.3);text-decoration:none;border-bottom:1px solid rgba(244,242,238,.1);padding-bottom:.3rem;">お問い合わせ →</a>
-    </div>
-    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
+</Layout>

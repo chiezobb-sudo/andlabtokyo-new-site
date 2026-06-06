@@ -1,42 +1,15 @@
 ---
-const title = "発酵とは？腸から整える日本の知恵と「クロス理論」| &LAB TOKYO";
-const description = "発酵とは何か、なぜ体に良いのかを&LAB TOKYO安藤千英が解説。ローフードと発酵を掛け合わせる独自の「クロス理論」で腸内環境・免疫・美肌を劇的に改善する仕組みをわかりやすく紹介。";
-const url = "https://www.andlabtokyo.com/fermentedfood";
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={url} />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="/hacco-amazake.jpg" />
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "発酵とは？腸から整える日本の知恵と「クロス理論」",
-    "description": description,
-    "inLanguage": "ja",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": url },
-    "author": { "@type": "Person", "name": "安藤千英", "jobTitle": "料理家 / &LAB TOKYO主宰", "url": "https://www.andlabtokyo.com/" },
-    "publisher": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://www.andlabtokyo.com/" },
-    "keywords": "発酵,クロス理論,腸内環境,プロバイオティクス,麹,味噌,ローフード,リビングフード"
-  })} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root{--linen:#FBFBFA;--linen-2:#F4F2EE;--linen-3:#EAE7E0;--sumi:#1C1C1A;--sumi-2:#2A2A27;--ink:#1C1C1A;--ink-2:#3D3D38;--ink-3:#7A7A72;--green:#A9D159;--green-d:#7AAF2A;--green-btn:#4E8A18;--f-serif:'Noto Serif JP',serif;--f-sans:'Noto Sans JP',sans-serif;}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;font-size:16px;}
-    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
-    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
-    .nav-logo img{height:32px;width:auto;mix-blend-mode:screen;filter:brightness(1.1);}
+<Layout
+  title="発酵食品・腸活とは | &LAB TOKYO 東京・渋谷"
+  description="発酵食品が腸内環境・免疫・代謝・メンタルに与える科学的メカニズム。東京・渋谷の発酵×ローフードスクール &LAB TOKYO が徹底解説。"
+  canonical="https://www.andlabtokyo.com/fermentedfood"
+  ogImage="https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg"
+>
+
+<style>
+.nav-logo img{height:32px;width:auto;mix-blend-mode:screen;filter:brightness(1.1);}
     .nav-links{display:flex;list-style:none;}
     .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.04em;color:rgba(244,242,238,.65);text-decoration:none;padding:0 1.1rem;transition:color .2s;}
     .nav-links a:hover{color:var(--green);}
@@ -86,29 +59,12 @@ const url = "https://www.andlabtokyo.com/fermentedfood";
     .breadcrumb a{color:var(--ink-3);text-decoration:none;}
     .breadcrumb a:hover{color:var(--ink);}
     .breadcrumb span{margin:0 .5rem;}
-    footer{background:var(--sumi);padding:3rem;text-align:center;border-top:1px solid rgba(244,242,238,.06);}
     .footer-logo img{height:28px;mix-blend-mode:screen;filter:brightness(1.1);margin-bottom:1rem;}
     .footer-copy{font-size:.72rem;color:rgba(244,242,238,.18);}
     @media(max-width:768px){nav{padding:0 1.5rem;}.nav-links{display:none;}.page-wrap{padding:3rem 1.5rem 5rem;}.page-hero-text{padding:0 1.5rem 2rem;}.definition-box{padding:1.6rem;}.num-item{grid-template-columns:36px 1fr;}.related-grid{grid-template-columns:1fr;}}
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="/#lessons">レッスン</a></li>
-        <li><a href="/rawfood">ローフード</a></li>
-        <li><a href="/fermentedfood" style="color:var(--green)">発酵</a></li>
-        <li><a href="/about">安藤千英</a></li>
-        <li><a href="/knowledge">学ぶ</a></li>
-        <li><a href="/blog">ブログ</a></li>
-      </ul>
-      <a href="/contact" class="nav-cta">CONTACT</a>
-    </div>
-  </nav>
+</style>
 
-  <div class="page-hero">
+<div class="page-hero">
     <img src="https://static.wixstatic.com/media/33638654_627136847631720_6550477128205336576_n.jpg" alt="発酵とは" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-text">
@@ -203,9 +159,4 @@ const url = "https://www.andlabtokyo.com/fermentedfood";
     </div>
   </div>
 
-  <footer>
-    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+</Layout>

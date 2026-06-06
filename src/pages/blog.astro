@@ -1,23 +1,19 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ブログ｜発酵・ローフード・リビングフードの知恵と実践 | &LAB TOKYO</title>
-  <meta name="description" content="&LAB TOKYO安藤千英によるローフード・発酵・リビングフード・ロースイーツの知識ブログ。細胞から整える食の知恵、レシピ、体験談を発信。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <style>
-    :root{--ink:#1d1d1f;--ink-2:#3d3d3f;--ink-3:#6e6e73;--bg:#fff;--bg-2:#f5f5f7;--bg-dark:#1a1715;--green:#A9D159;--green-d:#7AAF2A;--divider:#d2d2d7;--f:'Noto Sans JP',sans-serif;--fh:'Cormorant Garamond',serif;}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-    body{font-family:var(--f);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;}
-    nav{position:fixed;inset:0 0 auto 0;z-index:100;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);}
-    .nav-logo img{height:32px;}
-    .nav-links{display:flex;list-style:none;}
-    .nav-links a{font-size:12px;color:rgba(255,255,255,.85);text-decoration:none;padding:0 10px;transition:color .2s;}
-    .nav-links a:hover{color:var(--green);}
+<Layout
+  title="ブログ｜発酵・ローフード・リビングフードの知恵と実践 | &LAB TOKYO"
+  canonical="https://www.andlabtokyo.com/blog"
+>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    
+    
+    .
+    .
+    .
+    .
     .page-header{margin-top:44px;padding:64px 22px 48px;background:var(--bg-2);text-align:center;border-bottom:1px solid var(--divider);}
     .header-eye{font-family:var(--fh);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:12px;}
     .page-header h1{font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);margin-bottom:12px;}
@@ -33,7 +29,7 @@
     .featured-main img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
     .featured-main:hover img{transform:scale(1.03);}
     .featured-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.1) 55%,transparent 100%);}
-    .featured-main-body{position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:1;}
+    .featured-main-
     .feat-cat{font-family:var(--fh);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:8px;display:block;}
     .featured-main h2{font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;}
     .feat-date{font-size:12px;color:rgba(255,255,255,.55);}
@@ -42,7 +38,7 @@
     .feat-sub-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
     .feat-sub-card:hover img{transform:scale(1.04);}
     .feat-sub-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 60%);}
-    .feat-sub-body{position:absolute;bottom:0;left:0;right:0;padding:18px 20px;z-index:1;}
+    .feat-sub-
     .feat-sub-body span{font-family:var(--fh);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:4px;}
     .feat-sub-body h3{font-size:15px;font-weight:700;color:#fff;line-height:1.4;}
     .articles{padding:48px 22px 72px;background:var(--bg);}
@@ -52,7 +48,7 @@
     .article-card{background:var(--bg);text-decoration:none;display:block;transition:background .2s;}
     .article-card:hover{background:var(--bg-2);}
     .article-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
-    .article-card-body{padding:20px 20px 24px;}
+    .article-card-
     .article-cat{font-family:var(--fh);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:6px;}
     .article-card h3{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:8px;}
     .article-card p{font-size:13px;color:var(--ink-3);line-height:1.7;margin-bottom:12px;}
@@ -74,23 +70,12 @@
     .note-sec p{font-size:15px;color:rgba(245,245,247,.6);margin-bottom:24px;}
     .btn-note{display:inline-block;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);font-size:14px;padding:12px 28px;border-radius:980px;text-decoration:none;transition:all .2s;}
     .btn-note:hover{border-color:#fff;color:#fff;}
-    footer{background:#000;padding:24px 22px;text-align:center;}
-    footer p{font-size:12px;color:#6e6e73;}
-    @media(max-width:768px){.featured-grid{grid-template-columns:1fr;}.article-grid{grid-template-columns:1fr;}.knowledge-grid{grid-template-columns:repeat(2,1fr);}.nav-links{display:none;}}
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <ul class="nav-links">
-      <li><a href="/lessons">レッスン</a></li>
-      <li><a href="/rawfood">ローフード</a></li>
-      <li><a href="/fermentation">発酵</a></li>
-      <li><a href="/about">安藤千英</a></li>
-      <li><a href="/blog" style="color:var(--green)">ブログ</a></li>
-    </ul>
-  </nav>
-  <div class="page-header">
+    
+    
+    @media(max-width:768px){.featured-grid{grid-template-columns:1fr;}.article-grid{grid-template-columns:1fr;}.knowledge-grid{grid-template-columns:repeat(2,1fr);}.}
+</style>
+
+<div class="page-header">
     <span class="header-eye">Journal</span>
     <h1>食と発酵の、知恵と実践。</h1>
     <p>ローフード・発酵・リビングフード・ロースイーツについて。細胞から整える食の知恵を発信します。</p>
@@ -214,6 +199,5 @@
     <p>より深いストーリーや日々の実践を、noteで綴っています。</p>
     <a href="https://note.com/chieando" target="_blank" class="btn-note">noteを読む →</a>
   </section>
-  <footer><p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/" style="color:#6e6e73;">← TOPへ</a></p></footer>
-</body>
-</html>
+
+</Layout>

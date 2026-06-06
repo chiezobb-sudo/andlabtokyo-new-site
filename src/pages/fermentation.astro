@@ -1,45 +1,24 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>発酵とは｜体験レッスン・発酵プランナー資格 | &LAB TOKYO 東京・渋谷</title>
-  <meta name="description" content="発酵とは何か。麹・味噌・醤油など日本の発酵文化を現代の暮らしへ。東京・渋谷の&LAB TOKYOで体験レッスン・資格取得。腸内環境・美容・健康への効果。初心者歓迎・¥8,000〜。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    "name": "発酵体験レッスン / Hacco LAB",
-    "description": "麹・味噌・醤油など日本の発酵文化を学ぶ体験レッスン。東京・渋谷またはオンラインで受講可能。",
-    "provider": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://andlabtokyo.biz" },
-    "instructor": { "@type": "Person", "name": "安藤千英", "jobTitle": "ELLE gourmet認定料理家" }
-  }
-  </script>
-  <style>
-    :root {
-      --ink: #1d1d1f; --ink-2: #3d3d3f; --ink-3: #6e6e73;
-      --bg: #ffffff; --bg-2: #f5f5f7; --bg-dark: #1a1715;
-      --green: #A9D159; --green-d: #7AAF2A;
-      --amber: #C6A15B; --amber-d: #A8865A;
-      --divider: #d2d2d7;
-      --f: 'Noto Sans JP', sans-serif; --fh: 'Cormorant Garamond', serif;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--f); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
-    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(0,0,0,0.88); backdrop-filter: blur(20px); }
-    .nav-logo img { height: 32px;  }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a { font-size: 12px; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0 10px; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
+<Layout
+  title="発酵とは｜体験レッスン・発酵プランナー資格 | &LAB TOKYO 東京・渋谷"
+  canonical="https://www.andlabtokyo.com/fermentation"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    
+    
+    .
+    .
+    .
+    .
     .hero { margin-top: 44px; position: relative; height: 70vh; min-height: 480px; overflow: hidden; display: flex; align-items: flex-end; }
     .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
     .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
-    .hero-body { position: relative; z-index: 1; padding: 0 5vw 56px; max-width: 700px; }
+    .hero-
     .hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
     .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 14px; }
     .hero-sub { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.7; }
@@ -88,30 +67,17 @@
     .cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 28px; }
     .btn-dark { display: inline-block; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 980px; text-decoration: none; }
     .cta-note { margin-top: 12px; font-size: 12px; color: var(--ink-3); }
-    footer { background: #000; padding: 24px 22px; text-align: center; }
-    footer p { font-size: 12px; color: #6e6e73; }
+    
+    
     @media (max-width: 680px) {
       .what-grid { grid-template-columns: 1fr; gap: 32px; }
       .whom-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <ul class="nav-links">
-      <li><a href="/lessons">レッスン</a></li>
-      <li><a href="/rawfood">ローフード</a></li>
-      <li><a href="/fermentation" style="color:var(--amber)">発酵</a></li>
-      <li><a href="/about">安藤千英</a></li>
-      <li><a href="/blog">ブログ</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
+<section class="hero">
     <img src="/hacco-amazake.jpg" alt="発酵・甘麹" />
     <div class="hero-body">
       <span class="hero-eye">Fermentation / Hacco LAB</span>
@@ -214,9 +180,4 @@
     <p class="cta-note">3日以内にご返信いたします</p>
   </section>
 
-  <footer>
-    <p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/lessons" style="color:#6e6e73;">← レッスン一覧へ</a></p>
-  </footer>
-
-</body>
-</html>
+</Layout>

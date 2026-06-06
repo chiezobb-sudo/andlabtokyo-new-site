@@ -1,42 +1,15 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生きた食の知識ハブ — ローフード・発酵・ロースイーツ | &LAB TOKYO</title>
-  <meta name="description" content="ローフード・発酵・リビングフード・ローチョコレート・スピルリナ。&LAB TOKYO安藤千英が体系化した「生きた食」の知識を網羅するオンライン百科事典。" />
-  <link rel="canonical" href="https://www.andlabtokyo.com/knowledge" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <meta property="og:title" content="生きた食の知識ハブ | &LAB TOKYO" />
-  <meta property="og:description" content="ローフード・発酵・リビングフード・ローチョコレート・スピルリナの専門知識。" />
-  <meta property="og:image" content="https://static.wixstatic.com/media/IMG_4698.JPG" />
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "生きた食の知識ハブ — ローフード・発酵・ロースイーツ",
-    "description": "ローフード・発酵・リビングフード・ローチョコレート・スピルリナの専門知識を網羅するオンライン百科事典。",
-    "url": "https://www.andlabtokyo.com/knowledge",
-    "publisher": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://www.andlabtokyo.com/" }
-  })} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --linen:#FBFBFA; --linen-2:#F4F2EE; --linen-3:#EAE7E0;
-      --sumi:#1C1C1A;  --sumi-2:#2A2A27; --sumi-3:#3A3A36;
-      --ink:#1C1C1A;   --ink-2:#3D3D38;  --ink-3:#7A7A72;
-      --green:#A9D159; --green-d:#7AAF2A; --green-btn:#4E8A18;
-      --f-serif:'Noto Serif JP',serif; --f-sans:'Noto Sans JP',sans-serif;
-    }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;font-size:16px;}
-    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+<Layout
+  title="知識ハブ — 生きた食の知恵と科学 | &LAB TOKYO"
+  description="ローフード・発酵・リビングフード・ローチョコレート・スピルリナ。安藤千英が体系化した生きた食の専門知識を集約。東京・渋谷の &LAB TOKYO。"
+  canonical="https://www.andlabtokyo.com/knowledge"
+  ogImage="https://static.wixstatic.com/media/IMG_4698.JPG"
+>
 
-    /* NAV */
-    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
+<style>
+/* NAV */
     .nav-logo img{height:32px;width:auto;mix-blend-mode:screen;filter:brightness(1.1);}
     .nav-links{display:flex;list-style:none;}
     .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.04em;color:rgba(244,242,238,.65);text-decoration:none;padding:0 1.1rem;transition:color .2s;}
@@ -129,12 +102,10 @@
     .btn-green{display:inline-block;background:var(--green-btn);color:#FAF5EC;font-family:var(--f-sans);font-size:.85rem;font-weight:700;letter-spacing:.08em;padding:.95rem 2.4rem;text-decoration:none;transition:background .2s;}
     .btn-green:hover{background:#3D6E12;}
 
-    footer{background:var(--sumi);padding:3rem;text-align:center;border-top:1px solid rgba(244,242,238,.06);}
     .footer-logo img{height:28px;mix-blend-mode:screen;filter:brightness(1.1);margin-bottom:1rem;}
     .footer-copy{font-size:.72rem;color:rgba(244,242,238,.18);}
 
     @media(max-width:960px){
-      nav{padding:0 1.5rem;}
       .nav-links{display:none;}
       .k-hero{height:60vh;}
       .k-hero-content{padding:0 1.5rem 5vh;}
@@ -147,26 +118,9 @@
       .k-card.std img,.k-card.wide img{height:220px;}
       .k-list-item{grid-template-columns:40px 1fr auto;}
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="/#lessons">レッスン</a></li>
-        <li><a href="/rawfood">ローフード</a></li>
-        <li><a href="/fermentedfood">発酵</a></li>
-        <li><a href="/about">安藤千英</a></li>
-        <li><a href="/knowledge" class="active">学ぶ</a></li>
-        <li><a href="/blog">ブログ</a></li>
-      </ul>
-      <a href="/contact" class="nav-cta">CONTACT</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
+<!-- HERO -->
   <section class="k-hero">
     <div class="k-hero-imgs">
       <img src="https://static.wixstatic.com/media/IMG_4698.JPG" alt="生きた食の知識" />
@@ -324,10 +278,4 @@
     <a href="/#lessons" class="btn-green">講座一覧を見る</a>
   </section>
 
-  <footer>
-    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
+</Layout>

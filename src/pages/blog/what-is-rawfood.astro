@@ -1,78 +1,29 @@
 ---
-const title = "【ローフードとは】初心者でも挫折しない、細胞から美しくなる食事の始め方";
-const description = "ローフード（リビングフード）とは何か？酵素・ビタミン・ミネラルを壊さず摂取できる食事法の基本を、&LAB TOKYOの安藤千英が初心者向けにわかりやすく解説。挫折しない3ステップも紹介。";
-const publishDate = "2026年5月20日";
-const category = "Raw Food · 入門";
+import Layout from '../../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} | &LAB TOKYO</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href="https://andlabtokyo.biz/blog/what-is-rawfood" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <!-- OGP -->
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="/rawfood-zucchini.jpg" />
-  <!-- JSON-LD -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": title,
-    "description": description,
-    "image": "https://andlabtokyo.biz/rawfood-zucchini.jpg",
-    "author": { "@type": "Person", "name": "安藤千英", "url": "https://andlabtokyo.biz/about" },
-    "publisher": { "@type": "Organization", "name": "&LAB TOKYO", "url": "https://andlabtokyo.biz" },
-    "datePublished": "2026-05-20",
-    "keywords": "ローフード,リビングフード,食物酵素,細胞から整える,初心者,食事法"
-  })} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --linen:   #FBFBFA;
-      --linen-2: #F4F2EE;
-      --linen-3: #EAE7E0;
-      --sumi:    #1C1C1A;
-      --sumi-2:  #2A2A27;
-      --sumi-3:  #3A3A36;
-      --ink:     #1C1C1A;
-      --ink-2:   #3D3D38;
-      --ink-3:   #7A7A72;
-      --green:   #A9D159;
-      --green-d: #7AAF2A;
-      --green-btn: #4E8A18;
-      --f-serif: 'Noto Serif JP', serif;
-      --f-sans:  'Noto Sans JP', sans-serif;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--f-sans); background: var(--linen); color: var(--ink); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+<Layout
+  title="{title} | &LAB TOKYO"
+  canonical="https://www.andlabtokyo.com/blog/what-is-rawfood"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    
 
     /* NAV */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 500;
-      height: 52px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 3rem;
-      background: rgba(28,28,26,.94); backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(244,242,238,.08);
-    }
-    .nav-logo img { height: 32px; width: auto; mix-blend-mode: screen; filter: brightness(1.1); }
-    .nav-links { display: flex; list-style: none; gap: 0; }
-    .nav-links a { font-family: var(--f-sans); font-size: .82rem; font-weight: 500; letter-spacing: .04em; color: rgba(244,242,238,.65); text-decoration: none; padding: 0 1.1rem; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta { font-family: var(--f-sans); font-size: .82rem; font-weight: 700; display: inline-block; background: var(--green-btn); color: #FAF5EC; padding: .45rem 1.4rem; margin-left: 1.2rem; text-decoration: none; transition: background .2s; }
-    .nav-cta:hover { background: #3D6E12; color: #fff; }
-    .nav-right { display: flex; align-items: center; }
+    
+    .
+    .
+    .
+    .
+    .
+    .
+    .
 
     /* HERO */
     .article-hero {
-      margin-top: 52px;
+      
       position: relative; height: 52vh; min-height: 320px; overflow: hidden;
     }
     .article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
@@ -156,35 +107,19 @@ const category = "Raw Food · 入門";
     .back-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--ink-3); text-decoration: none; margin-top: 3rem; transition: color .2s; }
     .back-link:hover { color: var(--ink); }
 
-    footer { background: var(--sumi); padding: 3rem; text-align: center; border-top: 1px solid rgba(244,242,238,.06); }
-    .footer-logo img { height: 28px; mix-blend-mode: screen; filter: brightness(1.1); margin-bottom: 1rem; }
-    .footer-copy { font-size: .72rem; color: rgba(244,242,238,.18); }
+    
+    .
+    .
 
     @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
+      
+      .
       .article-wrap { padding: 3rem 1.5rem 5rem; }
       .article-hero-text { padding: 0 1.5rem 2rem; }
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="/#lessons">レッスン</a></li>
-        <li><a href="/rawfood">ローフード</a></li>
-        <li><a href="/fermentation">発酵</a></li>
-        <li><a href="/about">安藤千英</a></li>
-        <li><a href="/blog">ブログ</a></li>
-      </ul>
-      <a href="/contact" class="nav-cta">CONTACT</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
+<!-- HERO -->
   <div class="article-hero">
     <img src="/rawfood-zucchini.jpg" alt="ローフードとは" />
     <div class="article-hero-overlay"></div>
@@ -274,10 +209,4 @@ const category = "Raw Food · 入門";
     </div>
   </div>
 
-  <footer>
-    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
+</Layout>

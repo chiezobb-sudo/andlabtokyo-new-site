@@ -1,50 +1,25 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>メディア実績・掲載情報 | 安藤千英 &LAB TOKYO</title>
-  <meta name="description" content="安藤千英（&LAB TOKYO）のメディア掲載・実績一覧。ELLE gourmet公認、ベジタリアンアワード7年連続ノミネート、医師監修書籍「&RAW LIVING」著者、企業レシピ開発実績。" />
-  <link rel="canonical" href="https://andlabtokyo.biz/media" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "安藤千英",
-    "alternateName": "Chie Ando",
-    "jobTitle": "ELLE gourmet認定料理家",
-    "award": ["ELLE gourmet公認", "ベジタリアンアワード7年連続ノミネート"],
-    "author": {
-      "@type": "Book",
-      "name": "&RAW LIVING ローフードの教科書"
-    }
-  }
-  </script>
-  <style>
-    html,body{overflow-x:hidden;max-width:100%;}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --linen:#FBFBFA;--linen-2:#F4F2EE;--linen-3:#EAE7E0;
-      --sumi:#1C1C1A;--sumi-2:#2A2A27;
-      --ink:#1C1C1A;--ink-2:#3D3D38;--ink-3:#7A7A72;
-      --green:#A9D159;--green-d:#7AAF2A;--divider:#D8D4CC;
-      --f-s:'Noto Serif JP',serif;--f-b:'Noto Sans JP',sans-serif;
-      --pad:clamp(1rem,4vw,2.8rem);--max:1040px;
-    }
-    html{scroll-behavior:smooth;}
-    body{font-family:var(--f-b);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
-    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:rgba(28,28,26,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.07);}
-    .nav-logo img{height:30px;width:auto;}
-    .nav-links{display:flex;list-style:none;}
-    .nav-links a{font-size:.78rem;font-weight:500;color:rgba(244,242,238,.6);text-decoration:none;padding:0 .8rem;transition:color .2s;}
-    .nav-links a:hover{color:var(--green);}
-    .nav-cta{font-size:.78rem;font-weight:700;background:var(--green);color:var(--sumi);padding:.42rem 1rem;margin-left:.8rem;text-decoration:none;}
+<Layout
+  title="メディア実績・掲載情報 | 安藤千英 &LAB TOKYO"
+  canonical="https://www.andlabtokyo.com/media"
+>
 
-    .page-head{margin-top:52px;background:var(--sumi);padding:5rem var(--pad) 4rem;}
+<style>
+html,
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    
+    
+    
+    
+    .
+    .
+    .
+    .
+    .
+
+    .page-head{background:var(--sumi);padding:5rem var(--pad) 4rem;}
     .page-head-inner{max-width:var(--max);margin:0 auto;}
     .eyebrow{font-family:var(--f-b);font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:.8rem;}
     .page-head h1{font-family:var(--f-s);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;letter-spacing:.08em;color:#F4F2EE;margin-bottom:1rem;}
@@ -84,30 +59,18 @@
     .corp-name{font-family:var(--f-s);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.4rem;}
     .corp-desc{font-size:.75rem;color:var(--ink-3);line-height:1.7;}
 
-    footer{background:var(--sumi);padding:1.8rem var(--pad);text-align:center;}
-    footer p{font-size:.68rem;color:rgba(244,242,238,.2);}
-    footer a{color:rgba(244,242,238,.28);text-decoration:none;}
+    
+    
+    
 
     @media(max-width:680px){
-      .nav-links{display:none;}.nav-cta{margin-left:auto;}
+      ..
       .book-grid{grid-template-columns:1fr;gap:2rem;}
       .book-img{max-width:160px;}
     }
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <ul class="nav-links">
-      <li><a href="/lessons">レッスン</a></li>
-      <li><a href="/about">安藤千英</a></li>
-      <li><a href="/media" style="color:var(--green)">メディア実績</a></li>
-      <li><a href="/blog">ブログ</a></li>
-    </ul>
-    <a href="/contact" class="nav-cta">申し込む</a>
-  </nav>
+</style>
 
-  <div class="page-head">
+<div class="page-head">
     <div class="page-head-inner">
       <span class="eyebrow">Media &amp; Credentials</span>
       <h1>安藤千英のメディア実績・掲載情報</h1>
@@ -240,8 +203,4 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/about">← 安藤千英について</a> | <a href="/">← TOP</a></p>
-  </footer>
-</body>
-</html>
+</Layout>

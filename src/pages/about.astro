@@ -1,54 +1,22 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安藤千英とは — 発酵創家・ELLE gourmet認定料理家 | &LAB TOKYO</title>
-  <meta name="description" content="安藤千英。ELLE gourmet認定料理家・発酵×ローフード研究家。娘の大火傷をきっかけに食の世界へ。医師監修書籍「&RAW LIVING」著者。東京・渋谷「&LAB TOKYO」主宰。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "安藤千英",
-    "alternateName": "Chie Ando",
-    "jobTitle": "ELLE gourmet認定料理家 / 発酵×ローフード研究家",
-    "description": "東京・渋谷を拠点とする発酵×ローフードのライフスタイルラボ「&LAB TOKYO」主宰。医師監修書籍著者。",
-    "url": "https://andlabtokyo.biz/about",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "&LAB TOKYO"
-    }
-  }
-  </script>
-  <style>
-    :root {
-      --ink:   #1d1d1f;
-      --ink-2: #3d3d3f;
-      --ink-3: #6e6e73;
-      --bg:    #ffffff;
-      --bg-2:  #f5f5f7;
-      --bg-dark: #1a1715;
-      --green:  #A9D159;
-      --green-d:#7AAF2A;
-      --amber:  #C6A15B;
-      --divider:#d2d2d7;
-      --f:  'Noto Sans JP', sans-serif;
-      --fh: 'Cormorant Garamond', serif;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--f); background: var(--bg); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+<Layout
+  title="安藤千英とは — 発酵創家・ELLE gourmet認定料理家 | &LAB TOKYO"
+  canonical="https://www.andlabtokyo.com/about"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    
 
     /* Nav */
-    nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; background: rgba(0,0,0,.88); backdrop-filter: blur(20px); }
-    .nav-logo img { height: 32px;  }
-    .nav-links { display: flex; list-style: none; }
-    .nav-links a { font-size: 12px; color: rgba(255,255,255,.85); text-decoration: none; padding: 0 10px; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
+    
+    .
+    .
+    .
+    .
 
     /* Hero — portrait主役 */
     .hero {
@@ -153,8 +121,8 @@
     .btn-dark:hover { opacity: .75; }
     .cta-note { margin-top: 12px; font-size: 12px; color: var(--ink-3); }
 
-    footer { background: #000; padding: 24px 22px; text-align: center; }
-    footer p { font-size: 12px; color: #6e6e73; }
+    
+    
 
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -164,24 +132,11 @@
       .philosophy-words { grid-template-columns: 1fr; }
       .cred-grid { grid-template-columns: 1fr; gap: 32px; }
       .teaching-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <ul class="nav-links">
-      <li><a href="/lessons">レッスン</a></li>
-      <li><a href="/rawfood">ローフード</a></li>
-      <li><a href="/fermentation">発酵</a></li>
-      <li><a href="/about" style="color:var(--green)">安藤千英</a></li>
-      <li><a href="/blog">ブログ</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero — 人物が主役 -->
+<!-- Hero — 人物が主役 -->
   <section class="hero">
     <div class="hero-left">
       <span class="hero-eye">Founder / Chef / Researcher</span>
@@ -384,9 +339,4 @@
     <p class="cta-note">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
   </section>
 
-  <footer>
-    <p>© 2026 &LAB TOKYO. All rights reserved. | <a href="/" style="color:#6e6e73;">← TOPへ</a></p>
-  </footer>
-
-</body>
-</html>
+</Layout>

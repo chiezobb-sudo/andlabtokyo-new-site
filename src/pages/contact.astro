@@ -1,28 +1,19 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>お問い合わせ・体験レッスン予約 | &LAB TOKYO</title>
-  <meta name="description" content="&LAB TOKYOへのお問い合わせ・体験レッスンのご予約はこちら。発酵×ローフード料理教室。東京・渋谷またはオンラインで受講可能。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --linen:#FBFBFA;--linen-2:#F4F2EE;--sumi:#1C1C1A;--sumi-2:#2A2A27;
-      --ink:#1C1C1A;--ink-2:#3D3D38;--ink-3:#7A7A72;
-      --green:#A9D159;--green-d:#7AAF2A;--divider:#E0DDD8;
-      --f-serif:'Noto Serif JP',serif;--f-sans:'Noto Sans JP',sans-serif;
-    }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased;}
-    nav{position:fixed;inset:0 0 auto 0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(28,28,26,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
-    .nav-logo img{height:32px;width:auto;}
-    .nav-back{font-size:.82rem;font-weight:500;color:rgba(244,242,238,.55);text-decoration:none;transition:color .2s;}
-    .nav-back:hover{color:var(--green);}
+<Layout
+  title="お問い合わせ・体験レッスン予約 | &LAB TOKYO"
+  canonical="https://www.andlabtokyo.com/contact"
+>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    
+    
+    
+    .
+    .
+    .
     .page{padding-top:52px;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 52px);}
     .page-left{background:var(--sumi);padding:6rem 5vw;display:flex;flex-direction:column;justify-content:center;position:sticky;top:52px;height:calc(100vh - 52px);overflow:hidden;}
     .page-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(169,209,89,.06) 0%,transparent 65%);}
@@ -62,17 +53,12 @@
     .form-note{font-size:.78rem;color:var(--ink-3);text-align:center;line-height:1.7;}
     .privacy-check{display:flex;align-items:flex-start;gap:.7rem;font-size:.82rem;color:var(--ink-3);line-height:1.6;cursor:pointer;}
     .privacy-check input[type="checkbox"]{width:15px;height:15px;padding:0;flex-shrink:0;margin-top:2px;accent-color:var(--green-d);}
-    footer{background:var(--sumi);padding:20px 2.5rem;text-align:center;}
-    footer p{font-size:.72rem;color:rgba(244,242,238,.25);}
+    
+    
     @media(max-width:768px){.page{grid-template-columns:1fr;}.page-left{position:static;height:auto;padding:4rem 1.5rem;}.page-right{padding:3rem 1.5rem;}.program-grid{grid-template-columns:1fr;}}
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <a href="/lessons" class="nav-back">← レッスン一覧へ</a>
-  </nav>
-  <div class="page">
+</style>
+
+<div class="page">
     <div class="page-left">
       <div class="left-content">
         <span class="left-eye">LABへの入口</span>
@@ -148,6 +134,5 @@
       </div>
     </div>
   </div>
-  <footer><p>© 2026 &LAB TOKYO. All rights reserved.</p></footer>
-</body>
-</html>
+
+</Layout>

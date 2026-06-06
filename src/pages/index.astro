@@ -1,53 +1,21 @@
 ---
-const lang = Astro.url.searchParams.get('lang') || 'ja';
+import Layout from '../layouts/Layout.astro';
 ---
-<!DOCTYPE html>
-<html lang={lang}>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安藤千英 | &LAB TOKYO — 発酵×ローフード 東京・渋谷</title>
-  <meta name="description" content="ELLE gourmet認定料理家・安藤千英。東京・渋谷の発酵×ローフード ライフスタイルラボ。細胞から整える食の知恵。体験レッスン受付中。" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<Layout
+  title="&LAB TOKYO | 東京・渋谷 発酵×ローフード プレミアムスクール"
+  description="ELLE gourmet認定料理家・安藤千英主宰。ローフード×発酵のクロス理論に基づくプレミアムスクール。東京・渋谷（原宿・外苑前）。ローフードマイスター・ローショコラティエ資格取得。"
+  canonical="https://www.andlabtokyo.com"
+  ogImage="/og-default.jpg"
+  type="website"
+>
+
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        &LAB TOKYO — 墨と生成り・エディトリアルデザイン
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    :root {
-      --linen:   #FBFBFA;
-      --linen-2: #F4F2EE;
-      --linen-3: #EAE7E0;
-      --sumi:    #1C1C1A;
-      --sumi-2:  #2A2A27;
-      --sumi-3:  #3A3A36;
-      --ink:     #1C1C1A;
-      --ink-2:   #3D3D38;
-      --ink-3:   #7A7A72;
-      --on-sumi: #F4F2EE;
-      --on-sumi-muted: rgba(244,242,238,.6);
-      --green:   #A9D159;
-      --green-d: #7AAF2A;
-      --green-btn: #4E8A18;
-      --green-btn-h: #3D6E12;
-      --f-serif: 'Noto Serif JP', 'Times New Roman', serif;
-      --f-sans:  'Noto Sans JP', sans-serif;
-      --r: 0px;
-    }
+    
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      font-family: var(--f-sans);
-      font-weight: 400;
-      background: var(--linen);
-      color: var(--ink);
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-    }
+    
 
     h1, h2, h3 {
       font-family: var(--f-serif);
@@ -60,38 +28,14 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
 
     /* ━━ ナビ ━━ */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 500;
-      height: 52px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 3rem;
-      background: rgba(28,28,26,.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(244,242,238,.08);
-    }
-    .nav-logo img {
-      height: 32px; width: auto;
-      mix-blend-mode: screen;
-      filter: brightness(1.1);
-    }
-    .nav-right { display: flex; align-items: center; gap: 0; }
-    .nav-links { display: flex; list-style: none; gap: 0; }
-    .nav-links a {
-      font-family: var(--f-sans); font-size: .82rem; font-weight: 500;
-      letter-spacing: .04em;
-      color: rgba(244,242,238,.65); text-decoration: none;
-      padding: 0 1.1rem; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta {
-      font-family: var(--f-sans); font-size: .82rem; font-weight: 700;
-      letter-spacing: .04em;
-      display: inline-block;
-      background: var(--green-btn); color: #FAF5EC;
-      padding: .45rem 1.4rem; margin-left: 1.2rem;
-      text-decoration: none; transition: background .2s;
-    }
-    .nav-cta:hover { background: var(--green-btn-h); color: #fff; }
+    
+    .
+    .
+    .
+    .
+    .
+    .
+    .
     .lang { display: flex; align-items: center; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid rgba(244,242,238,.12); }
     .lang a { font-size: .72rem; color: rgba(244,242,238,.4); text-decoration: none; padding: 0 6px; transition: color .2s; }
     .lang a.on { color: var(--green); font-weight: 700; }
@@ -99,7 +43,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
 
     /* ━━ HERO ━━ */
     .hero {
-      margin-top: 52px;
+      
       position: relative;
       height: calc(100vh - 52px);
       min-height: 600px;
@@ -335,7 +279,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .prog-sub:hover .prog-ov {
       background: linear-gradient(to top, rgba(28,28,26,.94) 0%, rgba(28,28,26,.25) 55%, transparent 100%);
     }
-    .prog-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 2rem 2.4rem; }
+    .prog-
     .prog-eye {
       font-family: var(--f-sans);
       font-size: .68rem; font-weight: 500;
@@ -426,7 +370,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .post:hover { background: var(--sumi-3); }
     .post-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
     .post:first-child .post-img { aspect-ratio: 4/3; }
-    .post-body { padding: 1.6rem 1.4rem 2rem; }
+    .post-
     .post-cat {
       font-family: var(--f-sans); font-size: .68rem; font-weight: 500;
       letter-spacing: .16em; text-transform: uppercase;
@@ -488,23 +432,23 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     .cta-sub:hover { color: var(--ink); }
 
     /* ━━ FOOTER ━━ */
-    footer { background: var(--sumi); padding: 5rem 3rem 2.5rem; border-top: 1px solid rgba(244,242,238,.06); }
-    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 5rem; padding-bottom: 3.5rem; border-bottom: 1px solid rgba(244,242,238,.06); }
-    .footer-logo img { height: 32px; margin-bottom: 1.4rem; mix-blend-mode: screen; filter: brightness(1.1); }
-    .footer-tag { font-size: .82rem; color: rgba(244,242,238,.4); line-height: 1.9; }
-    .footer-col h5 { font-family: var(--f-sans); font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 1.2rem; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
-    .footer-col a { font-size: .85rem; color: rgba(244,242,238,.38); text-decoration: none; transition: color .2s; }
-    .footer-col a:hover { color: var(--on-sumi); }
-    .footer-copy { max-width: 1100px; margin: 2.5rem auto 0; text-align: center; font-size: .72rem; color: rgba(244,242,238,.18); }
+    
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .
 
     /* ━━ レスポンシブ ━━ */
     @media (prefers-reduced-motion: reduce) {
       .hero-video video { display: none; }
     }
     @media (max-width: 960px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
+      
+      .
       .hero { height: 85vh; min-height: 500px; }
       .hero-text { padding: 0 1.5rem 5vh; max-width: 100%; }
       .strip { padding: 1.4rem 1.5rem; }
@@ -532,35 +476,12 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       .social-section { padding: 4rem 1.5rem; }
       .social-grid { grid-template-columns: repeat(2, 1fr); }
       .cta { padding: 6rem 1.5rem; }
-      footer { padding: 4rem 1.5rem 2rem; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      
+      .
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <!-- ナビ -->
-  <nav>
-    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#lessons">レッスン</a></li>
-        <li><a href="/rawfood">ローフード</a></li>
-        <li><a href="/fermentation">発酵</a></li>
-        <li><a href="/about">安藤千英</a></li>
-        <li><a href="/knowledge">学ぶ</a></li>
-        <li><a href="/blog">ブログ</a></li>
-      </ul>
-      <a href="/contact" class="nav-cta">CONTACT</a>
-      <div class="lang">
-        <a href="?lang=ja" class={lang==='ja'?'on':''}>JP</a>
-        <a href="?lang=en" class={lang==='en'?'on':''}>EN</a>
-        <a href="?lang=zh" class={lang==='zh'?'on':''}>中</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ① HERO -->
+<!-- ① HERO -->
   <section class="hero">
     <div class="hero-video">
       <video autoplay muted loop playsinline preload="auto" poster="/hero-berry.jpg">
@@ -929,35 +850,5 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
-        <p class="footer-tag">発酵創家 安藤千英<br />Raw Food × Fermentation<br />Lifestyle Lab · Tokyo Shibuya</p>
-      </div>
-      <div class="footer-col">
-        <h5>Menu</h5>
-        <ul>
-          <li><a href="#lessons">レッスン</a></li>
-          <li><a href="/rawfood">ローフード</a></li>
-          <li><a href="/fermentation">発酵</a></li>
-          <li><a href="/about">安藤千英</a></li>
-          <li><a href="/blog">ブログ</a></li>
-          <li><a href="/contact">お問い合わせ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Follow</h5>
-        <ul>
-          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
-          <li><a href="#" target="_blank" rel="noopener">X / Twitter</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
-  </footer>
 
-</body>
-</html>
+</Layout>

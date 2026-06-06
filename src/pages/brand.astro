@@ -1,0 +1,372 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="&LAB TOKYOとは — クロス理論と安藤千英の哲学"
+  description="東京・渋谷発。ELLE gourmet認定料理家・安藤千英が提唱するローフード×発酵の『クロス理論』。その哲学とプロフィール、&LAB TOKYOが生まれた背景。"
+  canonical="https://www.andlabtokyo.com/brand"
+  ogImage="https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg"
+>
+
+<style>
+  /* ─── Brand / Concept Page ─── */
+  .brand-hero {
+    min-height: 72vh;
+    background: var(--sumi-2);
+    display: flex;
+    align-items: flex-end;
+    padding: 0 8vw 7rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://static.wixstatic.com/media/857257_0bda58f50f72486a8707583f068b87f1~mv2.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: .28;
+  }
+  .brand-hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .brand-hero-eye {
+    font-family: var(--f-serif);
+    font-size: .6rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: rgba(244,242,238,.28);
+    display: block;
+    margin-bottom: 2rem;
+  }
+  .brand-hero h1 {
+    font-family: var(--f-serif);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 200;
+    letter-spacing: .14em;
+    color: #FAF5EC;
+    line-height: 1.35;
+    margin-bottom: 2.5rem;
+  }
+  .brand-hero-sub {
+    font-family: var(--f-serif);
+    font-size: .95rem;
+    font-weight: 300;
+    color: rgba(244,242,238,.42);
+    line-height: 2.3;
+    letter-spacing: .06em;
+    max-width: 520px;
+  }
+
+  /* ─── Philosophy section ─── */
+  .philosophy {
+    padding: 11rem 8vw;
+    background: var(--linen);
+  }
+  .philosophy-inner { max-width: 960px; margin: 0 auto; }
+  .phi-label {
+    font-family: var(--f-serif);
+    font-size: .6rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 3.5rem;
+  }
+  .phi-headline {
+    font-family: var(--f-serif);
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 200;
+    letter-spacing: .12em;
+    color: var(--sumi);
+    line-height: 1.55;
+    margin-bottom: 5rem;
+  }
+  .phi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem 7rem;
+  }
+  .phi-item {}
+  .phi-num {
+    font-family: var(--f-serif);
+    font-size: .58rem;
+    letter-spacing: .22em;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  .phi-item h3 {
+    font-family: var(--f-serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: .12em;
+    color: var(--sumi);
+    margin-bottom: 1.4rem;
+    line-height: 1.6;
+  }
+  .phi-item p {
+    font-family: var(--f-serif);
+    font-size: .9rem;
+    font-weight: 300;
+    color: var(--ink-3);
+    line-height: 2.4;
+    letter-spacing: .04em;
+  }
+
+  /* ─── Cross Theory ─── */
+  .cross-theory {
+    background: var(--linen-2);
+    padding: 11rem 8vw;
+    text-align: center;
+  }
+  .cross-theory-inner { max-width: 720px; margin: 0 auto; }
+  .cross-theory span.label {
+    font-family: var(--f-serif);
+    font-size: .58rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 3.5rem;
+  }
+  .cross-theory h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 200;
+    letter-spacing: .14em;
+    color: var(--sumi);
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
+  }
+  .cross-theory-rule {
+    width: 32px;
+    height: 1px;
+    background: rgba(28,28,26,.12);
+    margin: 0 auto 3.5rem;
+  }
+  .cross-theory p {
+    font-family: var(--f-serif);
+    font-size: .95rem;
+    font-weight: 300;
+    color: var(--ink-3);
+    line-height: 2.5;
+    letter-spacing: .05em;
+    margin-bottom: 1.8rem;
+  }
+
+  /* ─── Profile ─── */
+  .profile {
+    padding: 11rem 8vw;
+    background: var(--sumi);
+  }
+  .profile-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8rem;
+    align-items: center;
+  }
+  .profile-photo img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+  }
+  .profile-text {}
+  .profile-text .label {
+    font-family: var(--f-serif);
+    font-size: .58rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: rgba(244,242,238,.2);
+    display: block;
+    margin-bottom: 2.5rem;
+  }
+  .profile-text h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 200;
+    letter-spacing: .14em;
+    color: #FAF5EC;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+  }
+  .profile-text p {
+    font-family: var(--f-serif);
+    font-size: .9rem;
+    font-weight: 300;
+    color: rgba(244,242,238,.42);
+    line-height: 2.6;
+    letter-spacing: .04em;
+    margin-bottom: 1.6rem;
+  }
+  .profile-creds {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+  .profile-cred {
+    font-family: var(--f-serif);
+    font-size: .78rem;
+    font-weight: 300;
+    color: rgba(244,242,238,.22);
+    letter-spacing: .08em;
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .profile-cred::before {
+    content: "—";
+    color: rgba(244,242,238,.12);
+    flex-shrink: 0;
+  }
+
+  /* ─── CTA to courses ─── */
+  .brand-cta {
+    background: var(--linen);
+    padding: 9rem 8vw;
+    text-align: center;
+  }
+  .brand-cta-inner { max-width: 560px; margin: 0 auto; }
+  .brand-cta h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-weight: 200;
+    letter-spacing: .14em;
+    color: var(--sumi);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+  .brand-cta a {
+    display: inline-block;
+    font-family: var(--f-serif);
+    font-size: .78rem;
+    font-weight: 300;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--sumi);
+    text-decoration: none;
+    border: 1px solid rgba(28,28,26,.25);
+    padding: 1.2rem 3.5rem;
+    transition: all .4s;
+  }
+  .brand-cta a:hover {
+    background: var(--sumi);
+    color: var(--linen);
+  }
+
+  @media (max-width: 768px) {
+    .brand-hero { padding: 0 6vw 5rem; }
+    .phi-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .profile-inner { grid-template-columns: 1fr; gap: 4rem; }
+    .philosophy, .cross-theory, .profile, .brand-cta { padding: 6rem 6vw; }
+  }
+</style>
+
+<!-- HERO -->
+<section class="brand-hero">
+  <div class="brand-hero-bg" aria-hidden="true"></div>
+  <div class="brand-hero-content">
+    <span class="brand-hero-eye">Our Philosophy</span>
+    <h1>&LAB TOKYOの<br />哲学と世界観</h1>
+    <p class="brand-hero-sub">ローフードと発酵を交差させる——<br />それは単なる料理の技術ではなく、<br />「生命に寄り添う食の思想」です。</p>
+  </div>
+</section>
+
+<!-- GEO定義テキスト -->
+<div style="background:var(--sumi-2);padding:2rem 8vw;border-left:3px solid var(--green);">
+  <p style="font-family:var(--f-serif);font-size:.9rem;color:rgba(244,242,238,.6);line-height:2.2;letter-spacing:.05em;max-width:800px;">
+    &LAB TOKYO（アンドラボトウキョウ）は東京・渋谷（原宿・外苑前エリア）を拠点とする、ローフード×発酵のプレミアム・プロフェッショナルスクールです。
+    ELLE gourmet認定料理家・安藤千英が主宰し、食の本質を科学と哲学の両面から追求しています。
+  </p>
+</div>
+
+<!-- Philosophy pillars -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="phi-label">What We Believe</span>
+    <h2 class="phi-headline">「本物の食」が持つ力を、<br />プロとして伝え続ける</h2>
+
+    <div class="phi-grid">
+      <div class="phi-item">
+        <span class="phi-num">01</span>
+        <h3>Raw — 生命力を損なわない</h3>
+        <p>加熱で失われる酵素・ビタミン・フィトケミカルを保持するローフードの哲学。「食べる」ことは「生命を迎え入れる」行為であるという根本的な視点から、すべての講座が組み立てられています。</p>
+      </div>
+      <div class="phi-item">
+        <span class="phi-num">02</span>
+        <h3>Fermentation — 微生物と共に生きる</h3>
+        <p>発酵は数千年の人類の知恵であり、腸内環境・免疫・精神的健康を支える科学的メカニズムです。&LABでは日本の伝統発酵（麹・味噌・醤油）を現代ライフスタイルに再解釈します。</p>
+      </div>
+      <div class="phi-item">
+        <span class="phi-num">03</span>
+        <h3>Cross Theory — 二つの思想の交点</h3>
+        <p>ローフードと発酵は相反しているように見えて、実は共鳴します。「酵素を生かす×微生物を育てる」このクロス理論こそが、&LAB TOKYOだけが提供できる独自の価値です。</p>
+      </div>
+      <div class="phi-item">
+        <span class="phi-num">04</span>
+        <h3>Professional — 知識の再現性を持つ</h3>
+        <p>趣味の料理教室ではなく、プロとして独立・活躍できるレベルの知識と実践力を養います。資格取得・認定制度・少人数制により、確かな「再現性」を担保しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cross Theory deep dive -->
+<section class="cross-theory">
+  <div class="cross-theory-inner">
+    <span class="label">Cross Theory</span>
+    <h2>ローフードと発酵を<br />「掛け合わせる」という発想</h2>
+    <div class="cross-theory-rule"></div>
+    <p>
+      一般的に、ローフードは「加熱しない食」として語られ、発酵は「微生物による変容」として語られます。
+      しかし安藤千英はこの二つを対立ではなく、補完関係と捉えました。
+    </p>
+    <p>
+      生の食材が持つ酵素と栄養素を最大限に保持しながら、発酵の力で消化吸収率を高め、
+      腸内フローラを整える——この組み合わせが、現代人の体に最も響く「食の処方箋」だと確信しています。
+    </p>
+    <p>
+      東京・渋谷という感度の高い街で、国際的な視点と日本の伝統を融合させた&LABのカリキュラムは、
+      国内外のプロフェッショナルに選ばれ続けています。
+    </p>
+  </div>
+</section>
+
+<!-- Founder Profile -->
+<section class="profile">
+  <div class="profile-inner">
+    <div class="profile-photo">
+      <img
+        src="/chie-portrait.jpg"
+        alt="安藤千英 — &LAB TOKYO 主宰"
+        loading="lazy"
+      />
+    </div>
+    <div class="profile-text">
+      <span class="label">Founder & Director</span>
+      <h2>安藤 千英<br /><span style="font-size:.65em;letter-spacing:.2em;opacity:.55;">Chie Ando</span></h2>
+      <p>東京・渋谷を拠点に活動するローフードシェフ・発酵創家。ローフード×発酵の「クロス理論」を提唱し、&LAB TOKYO を設立。</p>
+      <p>食の最前線で活躍するプロフェッショナルとして、国内外で講座・メディア出演・企業コラボレーションを展開。「食で人生を変える」ことを信念に、次世代の食のプロを育成し続けています。</p>
+      <p>渋谷・原宿・外苑前エリアのスタジオを拠点に、毎月限定受講枠で少人数制レッスンを開催。</p>
+      <div class="profile-creds">
+        <span class="profile-cred">ELLE gourmet 認定料理家</span>
+        <span class="profile-cred">ローフード協会認定マイスター</span>
+        <span class="profile-cred">ローショコラティエ協会 設立者</span>
+        <span class="profile-cred">発酵食品ソムリエ</span>
+        <span class="profile-cred">UMAMI & KOJI LAB 主宰</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="brand-cta">
+  <div class="brand-cta-inner">
+    <h2>この哲学に共鳴する方へ。<br />まず、一度体験してください。</h2>
+    <a href="/listofcourses">講座・資格一覧を見る</a>
+  </div>
+</section>
+
+</Layout>
