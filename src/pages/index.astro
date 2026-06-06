@@ -250,6 +250,57 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     }
     .text-link:hover { color: var(--ink); border-color: var(--ink); }
 
+    /* ━━ KNOWLEDGE SECTION ━━ */
+    .knowledge-section { background: var(--linen); padding: 8rem 3rem; border-top: 1px solid var(--linen-3); }
+    .knowledge-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 46%;
+      gap: 6rem; align-items: center;
+    }
+    .knowledge-topics { display: flex; flex-direction: column; gap: 0; margin: 2rem 0 2.8rem; }
+    .k-topic {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: .95rem 0; border-bottom: 1px solid var(--linen-3);
+      text-decoration: none; transition: gap .2s;
+    }
+    .k-topic:first-child { border-top: 1px solid var(--linen-3); }
+    .k-topic:hover { gap: 1.8rem; }
+    .k-num {
+      font-family: var(--f-serif); font-size: .8rem; font-weight: 300;
+      color: var(--ink-3); flex-shrink: 0; width: 2rem;
+    }
+    .k-label { font-family: var(--f-serif); font-size: .95rem; color: var(--ink-2); letter-spacing: .04em; }
+    .k-topic:hover .k-label { color: var(--ink); }
+    .btn-knowledge {
+      display: inline-block;
+      background: transparent; color: var(--ink);
+      font-family: var(--f-sans); font-size: .82rem; font-weight: 700;
+      letter-spacing: .1em;
+      border: 1px solid var(--ink);
+      padding: .85rem 2rem; text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .btn-knowledge:hover { background: var(--ink); color: var(--linen); }
+    .knowledge-visual { position: relative; }
+    .knowledge-visual img {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; display: block;
+    }
+    .knowledge-visual-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(28,28,26,.85) 0%, transparent 100%);
+    }
+    .k-caption-label {
+      font-family: var(--f-sans); font-size: .65rem; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: .4rem;
+    }
+    .k-caption-text {
+      font-family: var(--f-serif); font-size: 1.1rem; font-weight: 400;
+      color: #FAF5EC; letter-spacing: .08em; line-height: 1.7;
+    }
+
     /* ━━ PROGRAMS ━━ */
     .programs { background: var(--sumi); padding: 8rem 3rem; }
     .programs-inner { max-width: 1100px; margin: 0 auto; }
@@ -472,6 +523,10 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
       .testi-featured { grid-template-columns: 1fr; gap: 2.5rem; }
       .testi-featured-photo img { aspect-ratio: 16/9; }
       .testi-small-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .knowledge-section { padding: 5rem 1.5rem; }
+      .knowledge-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .knowledge-visual { order: -1; }
+      .knowledge-visual img { aspect-ratio: 16/9; }
       .journal { padding: 5rem 1.5rem; }
       .post-grid { grid-template-columns: 1fr; }
       .social-section { padding: 4rem 1.5rem; }
@@ -493,6 +548,7 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
         <li><a href="/rawfood">ローフード</a></li>
         <li><a href="/fermentation">発酵</a></li>
         <li><a href="/about">安藤千英</a></li>
+        <li><a href="/knowledge">学ぶ</a></li>
         <li><a href="/blog">ブログ</a></li>
       </ul>
       <a href="/contact" class="nav-cta">CONTACT</a>
@@ -572,7 +628,49 @@ const lang = Astro.url.searchParams.get('lang') || 'ja';
     </div>
   </section>
 
-  <!-- ④ PROGRAMS -->
+  <!-- ④ KNOWLEDGE SECTION -->
+  <section class="knowledge-section">
+    <div class="knowledge-inner">
+      <div class="knowledge-text">
+        <span class="eyebrow">Knowledge Hub</span>
+        <h2>生きた食の、<br />知恵と科学。</h2>
+        <div class="rule"></div>
+        <p class="body-p">ローフードとは何か。発酵はなぜ体に良いのか。リビングフードの定義とは。<br />「食べること」の本質を、科学と伝統の両面から体系的に学べるナレッジハブ。</p>
+        <div class="knowledge-topics">
+          <a href="/rawfood" class="k-topic">
+            <span class="k-num">01</span>
+            <span class="k-label">ローフード（リビングフード）とは</span>
+          </a>
+          <a href="/fermentedfood" class="k-topic">
+            <span class="k-num">02</span>
+            <span class="k-label">発酵とは・クロス理論</span>
+          </a>
+          <a href="/livingfood" class="k-topic">
+            <span class="k-num">03</span>
+            <span class="k-label">リビングフードとは</span>
+          </a>
+          <a href="/rawchocolatier/whatrawsweets" class="k-topic">
+            <span class="k-num">04</span>
+            <span class="k-label">ロースイーツとは</span>
+          </a>
+          <a href="/spirulina" class="k-topic">
+            <span class="k-num">05</span>
+            <span class="k-label">スピルリナとは</span>
+          </a>
+        </div>
+        <a href="/knowledge" class="btn-knowledge">DISCOVER KNOWLEDGE →</a>
+      </div>
+      <div class="knowledge-visual">
+        <img src="/mosaic-rawfood.jpg" alt="食と発酵の知恵" />
+        <div class="knowledge-visual-caption">
+          <p class="k-caption-label">The &LAB Method</p>
+          <p class="k-caption-text">ローフード × 発酵<br />クロス理論</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ PROGRAMS -->
   <section class="programs" id="lessons">
     <div class="programs-inner">
       <span class="eyebrow" style="color:var(--green)">3つの扉</span>

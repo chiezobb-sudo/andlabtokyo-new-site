@@ -1,0 +1,225 @@
+---
+const title = "ローチョコレートとは？カカオの力を最大化する非加熱チョコレートの世界 | &LAB TOKYO";
+const description = "ローチョコレートとは48℃以下で作る非加熱チョコレート。ローカカオのポリフェノール・酵素・ミネラルをそのまま摂れる美容・健康食品。ローショコラティエ協会本部・安藤千英が製法から効果まで解説。";
+const url = "https://www.andlabtokyo.com/rawchocolatier/rawchocolate";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/raw-bark.jpg" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "ローチョコレートとは？カカオの力を最大化する非加熱チョコレートの世界",
+    "description": description,
+    "inLanguage": "ja",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": url },
+    "author": { "@type": "Person", "name": "安藤千英", "jobTitle": "ローショコラティエ協会本部 主宰 / &LAB TOKYO", "url": "https://www.andlabtokyo.com/" },
+    "publisher": { "@type": "Organization", "name": "&LAB TOKYO / ローショコラティエ協会本部", "url": "https://www.andlabtokyo.com/" },
+    "keywords": "ローチョコレート,ローカカオ,ポリフェノール,非加熱チョコレート,ローショコラティエ,美肌,アンチエイジング,カカオ発酵"
+  })} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--linen:#FBFBFA;--linen-2:#F4F2EE;--linen-3:#EAE7E0;--sumi:#1C1C1A;--sumi-2:#2A2A27;--ink:#1C1C1A;--ink-2:#3D3D38;--ink-3:#7A7A72;--green:#A9D159;--green-d:#7AAF2A;--green-btn:#4E8A18;--f-serif:'Noto Serif JP',serif;--f-sans:'Noto Sans JP',sans-serif;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--f-sans);background:var(--linen);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+    nav{position:fixed;inset:0 0 auto 0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(28,28,26,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(244,242,238,.08);}
+    .nav-logo img{height:32px;width:auto;mix-blend-mode:screen;filter:brightness(1.1);}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.04em;color:rgba(244,242,238,.65);text-decoration:none;padding:0 1.1rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--green);}
+    .nav-cta{font-size:.82rem;font-weight:700;display:inline-block;background:var(--green-btn);color:#FAF5EC;padding:.45rem 1.4rem;margin-left:1.2rem;text-decoration:none;transition:background .2s;}
+    .nav-cta:hover{background:#3D6E12;}
+    .nav-right{display:flex;align-items:center;}
+    .page-hero{margin-top:52px;position:relative;height:50vh;min-height:300px;overflow:hidden;}
+    .page-hero img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;}
+    .page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,26,.78) 0%,rgba(28,28,26,.15) 60%,transparent 100%);}
+    .page-hero-text{position:absolute;bottom:0;left:0;right:0;padding:0 5vw 3rem;max-width:820px;}
+    .page-cat{font-family:var(--f-sans);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:.8rem;}
+    .page-hero-text h1{font-family:var(--f-serif);font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:600;letter-spacing:.06em;color:#FAF5EC;line-height:1.45;}
+    .definition-box{background:var(--sumi-2);padding:2.4rem 3rem;border-left:3px solid var(--green);}
+    .definition-box p{font-family:var(--f-serif);font-size:1rem;font-weight:400;letter-spacing:.04em;color:rgba(244,242,238,.88);line-height:2.1;margin:0;}
+    .page-wrap{max-width:860px;margin:0 auto;padding:5rem 3rem 8rem;}
+    .page-meta{display:flex;align-items:center;gap:2rem;padding-bottom:2rem;margin-bottom:0;border-bottom:1px solid var(--linen-3);}
+    .meta-date{font-size:.8rem;color:var(--ink-3);}
+    .meta-author{display:flex;align-items:center;gap:.7rem;font-size:.82rem;color:var(--ink-2);}
+    .meta-author img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top;}
+    .prose h2{font-family:var(--f-serif);font-size:clamp(1.2rem,2.2vw,1.55rem);font-weight:600;letter-spacing:.06em;color:var(--ink);margin:3.5rem 0 1.2rem;padding-top:3.5rem;border-top:1px solid var(--linen-3);line-height:1.5;}
+    .prose h2:first-child{margin-top:2.5rem;padding-top:0;border-top:none;}
+    .prose p{font-size:.97rem;color:var(--ink-2);line-height:2.1;margin-bottom:1.4rem;}
+    .prose strong{color:var(--ink);font-weight:700;}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:2rem 0;}
+    .compare-item{padding:1.8rem 1.6rem;}
+    .compare-item.light{background:var(--linen-2);}
+    .compare-item.dark{background:var(--sumi);}
+    .compare-label{font-family:var(--f-sans);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:.7rem;}
+    .compare-item h3{font-family:var(--f-serif);font-size:1rem;font-weight:600;margin-bottom:.5rem;}
+    .compare-item.dark h3{color:rgba(244,242,238,.9);}
+    .compare-item p{font-size:.88rem;color:var(--ink-3);line-height:1.9;margin:0;}
+    .compare-item.dark p{color:rgba(244,242,238,.55);}
+    .benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:2rem 0;}
+    .benefit-item{background:var(--linen-2);padding:1.6rem;}
+    .benefit-icon{font-family:var(--f-serif);font-size:1.4rem;font-weight:300;color:var(--green-d);display:block;margin-bottom:.5rem;}
+    .benefit-item h4{font-family:var(--f-serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.4rem;}
+    .benefit-item p{font-size:.85rem;color:var(--ink-3);line-height:1.8;margin:0;}
+    .tag-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--linen-3);}
+    .tag{font-size:.75rem;color:var(--green-d);border:1px solid var(--green-d);padding:.25rem .75rem;letter-spacing:.06em;}
+    .cta-box{margin-top:4rem;padding:2.5rem;background:var(--sumi);text-align:center;}
+    .cta-box p{font-family:var(--f-serif);font-size:.95rem;color:rgba(244,242,238,.75);line-height:2;margin-bottom:1.6rem;}
+    .cta-box a{display:inline-block;background:var(--green-btn);color:#FAF5EC;font-size:.85rem;font-weight:700;letter-spacing:.08em;padding:.9rem 2.4rem;text-decoration:none;transition:background .2s;}
+    .cta-box a:hover{background:#3D6E12;}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:4rem;}
+    .related-item{background:var(--linen-2);padding:1.8rem 1.4rem;text-decoration:none;transition:background .2s;}
+    .related-item:hover{background:var(--linen-3);}
+    .related-cat{font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:.5rem;}
+    .related-item h4{font-family:var(--f-serif);font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.6;}
+    .breadcrumb{font-size:.78rem;color:var(--ink-3);margin-bottom:2rem;}
+    .breadcrumb a{color:var(--ink-3);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--ink);}
+    .breadcrumb span{margin:0 .5rem;}
+    footer{background:var(--sumi);padding:3rem;text-align:center;border-top:1px solid rgba(244,242,238,.06);}
+    .footer-logo img{height:28px;mix-blend-mode:screen;filter:brightness(1.1);margin-bottom:1rem;}
+    .footer-copy{font-size:.72rem;color:rgba(244,242,238,.18);}
+    @media(max-width:768px){nav{padding:0 1.5rem;}.nav-links{display:none;}.page-wrap{padding:3rem 1.5rem 5rem;}.page-hero-text{padding:0 1.5rem 2rem;}.definition-box{padding:1.6rem;}.compare-grid,.benefit-grid{grid-template-columns:1fr;}.related-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/#lessons">レッスン</a></li>
+        <li><a href="/rawfood">ローフード</a></li>
+        <li><a href="/fermentedfood">発酵</a></li>
+        <li><a href="/about">安藤千英</a></li>
+        <li><a href="/knowledge" style="color:var(--green)">学ぶ</a></li>
+        <li><a href="/blog">ブログ</a></li>
+      </ul>
+      <a href="/contact" class="nav-cta">CONTACT</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <img src="/raw-bark.jpg" alt="ローチョコレートとは" />
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-text">
+      <span class="page-cat">Knowledge · Raw Chocolate · ローショコラティエ協会本部</span>
+      <h1>ローチョコレートとは？<br />カカオの力を最大化する非加熱チョコレートの世界</h1>
+    </div>
+  </div>
+
+  <div class="definition-box">
+    <p>ローチョコレートとは、カカオ豆を48℃以上に加熱せず、ローカカオパウダーやカカオバターを使って作る非加熱チョコレートです。高温処理によって破壊されるポリフェノール・酵素・ミネラルをそのまま保持し、美肌・抗酸化・アンチエイジング効果を最大限に引き出した「食べる美容」として注目されています。</p>
+  </div>
+
+  <div class="page-wrap">
+    <nav class="breadcrumb">
+      <a href="/">HOME</a><span>›</span>
+      <a href="/knowledge">KNOWLEDGE</a><span>›</span>
+      <a href="/rawchocolatier/whatrawsweets">ロースイーツとは</a><span>›</span>
+      <span>ローチョコレートとは</span>
+    </nav>
+    <div class="page-meta">
+      <span class="meta-date">監修：安藤千英 / ローショコラティエ協会本部</span>
+      <div class="meta-author">
+        <img src="/chie-portrait.jpg" alt="安藤千英" />
+        <span>ELLE gourmet認定料理家 · &LAB TOKYO主宰</span>
+      </div>
+    </div>
+
+    <div class="prose">
+
+      <h2>ローチョコレートvs普通のチョコレート — 決定的な違い</h2>
+
+      <div class="compare-grid">
+        <div class="compare-item light">
+          <span class="compare-label">普通のチョコレート</span>
+          <h3>加熱処理チョコレート</h3>
+          <p>高温ローストで酵素・ポリフェノールの多くが破壊。白砂糖・乳化剤・添加物が加えられ、血糖値の急上昇・炎症を引き起こしやすい。</p>
+        </div>
+        <div class="compare-item dark">
+          <span class="compare-label">Raw Chocolate</span>
+          <h3>ローチョコレート</h3>
+          <p>48℃以下で製造。カカオ本来のポリフェノール・酵素・マグネシウム・鉄分をそのまま保持。白砂糖不使用で血糖値をコントロール。</p>
+        </div>
+      </div>
+
+      <h2>ローカカオが持つ5つの美容・健康成分</h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-item">
+          <span class="benefit-icon">01</span>
+          <h4>フラバノール（ポリフェノール）</h4>
+          <p>世界最高峰の抗酸化力。活性酸素を除去し、老化・炎症・肌荒れを予防。</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">02</span>
+          <h4>マグネシウム</h4>
+          <p>ストレス軽減・筋肉の緊張緩和・ホルモンバランス調整に必須のミネラル。</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">03</span>
+          <h4>テオブロミン</h4>
+          <p>カフェインより穏やかな覚醒・集中力アップ効果。ハッピーホルモンの分泌も促進。</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">04</span>
+          <h4>食物酵素</h4>
+          <p>非加熱だから保持される消化酵素。消化の負担を軽減し、栄養吸収を助ける。</p>
+        </div>
+      </div>
+
+      <h2>カカオは「発酵」から生まれる素材</h2>
+      <p>チョコレートの原料となるカカオ豆は、収穫後に<strong>発酵・乾燥</strong>というプロセスを経て初めてチョコレートらしい香りと風味が生まれます。つまりカカオは本来、発酵の産物です。</p>
+      <p>&LAB TOKYOのローショコラティエ製法では、このカカオの発酵由来の豊かさを活かしながら、さらに<strong>発酵素材（甘酒・麹調味料など）</strong>を組み合わせることで、腸内環境と美肌の両面にアプローチするローチョコレートを追求しています。</p>
+
+      <div class="tag-list">
+        <span class="tag">ローチョコレート</span>
+        <span class="tag">ローカカオ</span>
+        <span class="tag">ポリフェノール</span>
+        <span class="tag">非加熱</span>
+        <span class="tag">ローショコラティエ</span>
+        <span class="tag">美肌</span>
+        <span class="tag">アンチエイジング</span>
+      </div>
+
+      <div class="cta-box">
+        <p>ローチョコレートの本格技術を習得したい方へ。<br />ローショコラティエ協会本部公認の資格講座。</p>
+        <a href="/raw-sweets">ロースイーツ・ローチョコ講座を見る</a>
+      </div>
+
+      <div class="related-grid">
+        <a href="/rawchocolatier/whatrawsweets" class="related-item">
+          <span class="related-cat">Raw Sweets</span>
+          <h4>ロースイーツとは</h4>
+        </a>
+        <a href="/rawfood" class="related-item">
+          <span class="related-cat">Raw Food</span>
+          <h4>ローフードとは</h4>
+        </a>
+        <a href="/fermentedfood" class="related-item">
+          <span class="related-cat">Fermentation</span>
+          <h4>発酵とは・クロス理論</h4>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="/logo-wide.png" alt="&LAB TOKYO" /></div>
+    <p class="footer-copy">© 2026 &LAB TOKYO. All rights reserved.</p>
+  </footer>
+</body>
+</html>
