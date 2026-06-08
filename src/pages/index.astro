@@ -472,6 +472,108 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- ============================================ -->
+  <!-- COURSES SECTION -->
+  <!-- ============================================ -->
+  <section style="
+    padding: 8rem 4vw;
+    background: #1C1C1A;
+    position: relative;
+  ">
+    <div style="
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    ">
+      <h2 style="
+        font-size: 2.8rem;
+        font-weight: 300;
+        letter-spacing: 0.12em;
+        color: #FAF9F6;
+        font-family: 'Noto Serif JP', serif;
+      ">
+        Courses
+      </h2>
+      <span style="
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        color: #A9D159;
+        font-family: 'Noto Serif JP', serif;
+      ">
+        講座紹介
+      </span>
+    </div>
+
+    <div style="
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.4rem;
+    ">
+      <!-- ローフード -->
+      <a href="/rawfood-kentei-meister" style="text-decoration:none;color:inherit;display:block;">
+        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#2a2a27;">
+          <img src="https://static.wixstatic.com/media/857257_00fcccc08c1d4a6bb78aadbb4ed6643c~mv2.jpg" alt="ローフード" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#FAF9F6;font-family:'Noto Serif JP', serif;font-weight:400;">ローフード</h3>
+        <p style="font-size:10px;line-height:1.8;color:#A8A8A0;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">酵素を活かす、生きた食の知恵を体系的に学ぶ。</p>
+      </a>
+
+      <!-- 発酵 -->
+      <a href="/koji-fermentation-experience-tokyo" style="text-decoration:none;color:inherit;display:block;">
+        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#2a2a27;">
+          <img src="https://static.wixstatic.com/media/857257_0173fefcc068487aa0977c6d825dba1b~mv2.jpg" alt="発酵" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#FAF9F6;font-family:'Noto Serif JP', serif;font-weight:400;">発酵</h3>
+        <p style="font-size:10px;line-height:1.8;color:#A8A8A0;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">日本の伝統である発酵の力を、暮らしと美容へ応用する。</p>
+      </a>
+
+      <!-- ロースイーツ -->
+      <a href="/raw-sweets" style="text-decoration:none;color:inherit;display:block;">
+        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#2a2a27;">
+          <img src="https://static.wixstatic.com/media/857257_15a82e70bf93434fa7bee87b8336f7b9~mv2.jpg" alt="ロースイーツ" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#FAF9F6;font-family:'Noto Serif JP', serif;font-weight:400;">ロースイーツ</h3>
+        <p style="font-size:10px;line-height:1.8;color:#A8A8A0;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">罪悪感のない、心躍るご褒美スイーツをつくる。</p>
+      </a>
+
+      <!-- ローチョコレート -->
+      <a href="/rawchocolatier" style="text-decoration:none;color:inherit;display:block;">
+        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#2a2a27;">
+          <img src="https://static.wixstatic.com/media/857257_142c86f0ed2a4006b707842a98e83c84~mv2.jpg" alt="ローチョコレート" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#FAF9F6;font-family:'Noto Serif JP', serif;font-weight:400;">ローチョコレート</h3>
+        <p style="font-size:10px;line-height:1.8;color:#A8A8A0;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">カカオの生命力を、五感で味わうセルフケア・アート。</p>
+      </a>
+
+      <!-- UMAMI&KOJI LAB -->
+      <a href="/koji-fermentation-experience-tokyo" style="text-decoration:none;color:inherit;display:block;">
+        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#2a2a27;">
+          <img src="https://static.wixstatic.com/media/857257_8fddc85939c749f8ba4892cfa56de3c6~mv2.jpg" alt="UMAMI&KOJI LAB" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        </div>
+        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#FAF9F6;font-family:'Noto Serif JP', serif;font-weight:400;">UMAMI &amp; KOJI LAB</h3>
+        <p style="font-size:10px;line-height:1.8;color:#A8A8A0;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">麹と発酵の力で「うまみ」を引き出す、新しい食の探求。</p>
+      </a>
+    </div>
+
+    <div style="text-align:center; margin-top: 4rem;">
+      <a href="/listofcourses" style="
+        display:inline-block;
+        padding: 1rem 3rem;
+        border: 1px solid rgba(250,249,246,0.3);
+        color:#FAF9F6;
+        text-decoration:none;
+        font-size:11px;
+        letter-spacing:0.2em;
+        font-family:'Noto Serif JP', serif;
+        transition: border-color 0.3s, background 0.3s;
+      ">すべての講座を見る</a>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
