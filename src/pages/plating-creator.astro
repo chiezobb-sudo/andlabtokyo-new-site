@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="プレイティングクリエイター養成講座 | &LAB TOKYO"
+  description="科学と芸術で一皿を設計する、SNS・ブランドを強くするプレイティング×マーケティング講座。1日完結・¥60,000（税別）。修了証付き。"
+  canonical="https://www.andlabtokyo.com/plating-creator"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 65vh; min-height: 440px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(24px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 14px; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.price-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.3); padding: 36px; text-align: center; margin: 32px 0; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.price-item h4 { font-size: 13px; color: var(--ink-3); margin-bottom: 8px; }
+.price-num { font-family: var(--fh); font-size: 44px; color: var(--amber); font-style: italic; }
+.price-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.curriculum { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 32px; }
+.cur-item { background: var(--bg-card); padding: 24px; }
+.cur-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.cur-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.for-whom { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin-top: 32px; }
+.whom { background: var(--bg-card); padding: 18px; font-size: 13px; color: var(--ink-3); }
+.after-sec { background: var(--bg-2); }
+.after-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+.after-list li { padding: 14px 0; border-bottom: 1px solid var(--divider); font-size: 14px; color: var(--ink-3); padding-left: 20px; position: relative; }
+.after-list li::before { content: '→'; position: absolute; left: 0; color: var(--amber-d); }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 72px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 32px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <img src="/visual-table.jpg" alt="プレイティングクリエイター養成講座" />
+  <div class="hero-body">
+    <span class="hero-eye">Plating Creator</span>
+    <h1>プレイティングクリエイター<br>養成講座</h1>
+    <p class="hero-sub">ただの盛り付けレッスンではありません。科学と芸術で一皿を設計する——新しいプレイティングの学び。</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>SNSとブランドを強くする<br>プレイティング×マーケティング</h2>
+    <div class="rule"></div>
+    <p class="body-text">色彩理論・光と影・構図の知識を組み合わせ、一皿を科学的かつ芸術的にデザインするプログラム。料理の盛り付けをSNS発信力とブランドにつなげる実践的な内容です。</p>
+    <p class="body-text">受講したらすぐに行動したくなる——仕事につながるスキルを1日で習得します。個別フィードバック付き・少人数制。</p>
+    <div class="price-box">
+      <div class="price-item">
+        <h4>受講料</h4>
+        <div class="price-num">¥60,000</div>
+        <div class="price-note">税別 / 1日完結 / 修了証付き</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Curriculum</span>
+    <h2>学ぶ内容</h2>
+    <div class="rule"></div>
+    <div class="curriculum">
+      <div class="cur-item">
+        <h4>光と角度の理論</h4>
+        <p>撮影に最適な光の使い方・角度・ハイライト・シャドウの基本を理論から学ぶ。</p>
+      </div>
+      <div class="cur-item">
+        <h4>色彩の知識と実践</h4>
+        <p>色相・彩度・補色の理論を料理に応用。視覚的に魅力的な一皿の設計法。</p>
+      </div>
+      <div class="cur-item">
+        <h4>プレイティング技術</h4>
+        <p>高さ・ソース・テクスチャーを使ったプロの盛り付け技術を実践で習得。</p>
+      </div>
+      <div class="cur-item">
+        <h4>フォトスタイリング</h4>
+        <p>食器・背景・小物の選び方と構図。SNS映えする写真の撮り方を習得。</p>
+      </div>
+      <div class="cur-item">
+        <h4>マーケティング戦略</h4>
+        <p>プレイティングをブランドに落とし込む方法。SNS運用とブランド設計。</p>
+      </div>
+      <div class="cur-item">
+        <h4>個人フィードバック</h4>
+        <p>講師による個別フィードバックで、自分の課題を明確にして持ち帰る。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">For Whom</span>
+    <h2>こんな方におすすめ</h2>
+    <div class="rule"></div>
+    <div class="for-whom">
+      <div class="whom">料理家・フードスタイリスト</div>
+      <div class="whom">カフェ・飲食店オーナー</div>
+      <div class="whom">料理教室講師</div>
+      <div class="whom">SNS発信をしている方</div>
+      <div class="whom">フードライター・ブロガー</div>
+      <div class="whom">自分のブランドを作りたい方</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec after-sec">
+  <div class="inner">
+    <span class="sec-eye">After</span>
+    <h2>受講後に描ける未来</h2>
+    <div class="rule"></div>
+    <ul class="after-list">
+      <li>SNSのフォロワーが増え、集客につながるビジュアルが作れる</li>
+      <li>フードスタイリングの仕事が受けられる</li>
+      <li>自分のブランドの世界観を写真で表現できる</li>
+      <li>料理教室・カフェのメニュー写真が劇的に向上する</li>
+      <li>レシピ本・メディア出演につながるポートフォリオが作れる</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>一皿で世界が変わる</h2>
+  <p>お申し込み・ご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
+</section>
+</Layout>

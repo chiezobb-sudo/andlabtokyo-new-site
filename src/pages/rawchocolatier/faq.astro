@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="よくある質問 FAQ | ローショコラティエ協会 | &LAB TOKYO"
+  description="ローショコラティエ協会・&LAB TOKYOのよくある質問。講座内容・オンライン受講・資格・支払い方法など。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/faq"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(26px, 4vw, 44px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--ink-3); }
+.sec { padding: 72px 24px; }
+.inner { max-width: 720px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 36px; }
+.faqs { display: flex; flex-direction: column; gap: 0; }
+.faq { border-bottom: 1px solid var(--divider); padding: 28px 0; }
+.faq:first-child { border-top: 1px solid var(--divider); }
+.faq-q { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 14px; display: flex; gap: 14px; }
+.faq-q::before { content: 'Q'; color: var(--amber); font-family: var(--fh); font-size: 20px; font-style: italic; flex-shrink: 0; line-height: 1.2; }
+.faq-a { font-size: 14px; color: var(--ink-3); line-height: 1.85; padding-left: 34px; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">FAQ</span>
+  <h1>よくある質問</h1>
+  <p>ローショコラティエ協会・&LAB TOKYOへのよくあるご質問</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Courses</span>
+    <h2>講座について</h2>
+    <div class="rule"></div>
+    <div class="faqs">
+      <div class="faq">
+        <div class="faq-q">どんな講座がありますか？</div>
+        <p class="faq-a">ローチョコレートマイスター、ローパティシエ（ロースイーツマイスター）、ローチョコレートコンシェルジュの3講座があります。初心者向けの体験レッスンや、プロ養成のローショコラティエ®資格コースもご用意しています。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">初心者でも参加できますか？</div>
+        <p class="faq-a">大人向け講座は初心者からプロ志向の方まで幅広く受講いただけます。まずは体験レッスン（¥12,000〜）からお気軽にご参加ください。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">資格を取ると何ができますか？</div>
+        <p class="faq-a">学んだレシピを使ったレッスン開催や販売に活用できます（各講座の規定に準拠）。認定インストラクターとしてご自身の教室やオンラインサロンを開くことが可能です。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">2025年10月に講座名・料金が変わったと聞きましたが？</div>
+        <p class="faq-a">はい。原材料価格の高騰に伴い、2025年10月より一部講座の料金を改定しました。また、資格名称も一部変更しています（例：ローチョコレートマイスター初級 ¥15,000→¥16,500）。講座の内容・習得できる技術・資格の価値に変わりはありません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Online</span>
+    <h2>オンライン受講について</h2>
+    <div class="rule"></div>
+    <div class="faqs">
+      <div class="faq">
+        <div class="faq-q">オンラインで受講できますか？</div>
+        <p class="faq-a">マイスター講座・ローパティシエ講座はオンライン対応が可能です。キッズ向け講座は対面のみの開催です。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">オンライン受講に必要なものは？</div>
+        <p class="faq-a">インターネット環境と使用する材料・道具をご自身でご用意いただく必要があります。詳細は各講座の「オンライン受講ガイド」をご確認ください。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">海外からでも受講できますか？</div>
+        <p class="faq-a">はい。オンライン講座は全国・海外からご受講いただけます。英語・中国語対応が必要な場合はお問い合わせください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Payment & Practical</span>
+    <h2>お申し込み・お支払いについて</h2>
+    <div class="rule"></div>
+    <div class="faqs">
+      <div class="faq">
+        <div class="faq-q">支払い方法は？</div>
+        <p class="faq-a">銀行振込・クレジットカードに対応しています。詳細はお申し込み後にご案内します。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">修了証・ディプロマはもらえますか？</div>
+        <p class="faq-a">各講座修了後に修了証・ディプロマを発行します。認定資格コースでは認定証もお渡しします。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">材料・道具は用意してもらえますか？</div>
+        <p class="faq-a">対面レッスンはすべてご用意しています。手ぶらでお越しください。オンライン受講の場合は材料リストをお渡ししますので、ご自身でご準備ください。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-q">スケジュールの融通はききますか？</div>
+        <p class="faq-a">少人数制のため、日程はご相談のうえ調整可能です。お気軽にお問い合わせください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>その他のご質問はコンタクトフォームからどうぞ</p>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>

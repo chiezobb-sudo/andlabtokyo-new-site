@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="キッズローパティシエクラス | &LAB TOKYO"
+  description="子どもたちが植物性・砂糖不使用のローお菓子を学ぶキッズクラス。全5回・¥51,000（税別）。認定証付き。対面のみ。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/kidsveganpatissier"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --leaf: #4E8A18; --leaf-l: #6AAD22;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 60vh; min-height: 400px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 14px; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 64px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 3vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.price-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.3); padding: 32px; text-align: center; margin: 32px 0; }
+.price-box h3 { font-size: 16px; color: var(--ink-3); margin-bottom: 8px; }
+.price-big { font-family: var(--fh); font-size: 52px; color: var(--amber); font-style: italic; }
+.price-note { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+.topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin-top: 28px; }
+.topic { background: var(--bg-card); padding: 18px; font-size: 13px; color: var(--ink-3); display: flex; align-items: center; gap: 10px; }
+.topic::before { content: '🌿'; flex-shrink: 0; }
+.recipes-sec { background: var(--bg-2); }
+.recipe-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; margin-top: 28px; }
+.recipe { background: var(--bg-card); padding: 16px; font-size: 13px; color: var(--ink-3); text-align: center; }
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 28px; }
+.feat { background: var(--bg-card); padding: 24px; }
+.feat h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.feat p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+@media (max-width: 640px) { .features { grid-template-columns: 1fr; } }
+</style>
+
+<section class="hero">
+  <img src="/prog-chocolate.jpg" alt="キッズローパティシエクラス" />
+  <div class="hero-body">
+    <span class="hero-eye">Kids Raw Patissier</span>
+    <h1>キッズローパティシエクラス</h1>
+    <p class="hero-sub">子どもたちが植物性・砂糖不使用のローお菓子を学ぶ特別プログラム。認定証付き。</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>身体に優しいお菓子を<br>子どもたちと一緒に</h2>
+    <div class="rule"></div>
+    <p class="body-text">プラントベース・砂糖不使用・グルテンフリーのローお菓子を通じて、食の大切さを楽しく学ぶキッズ向けプログラムです。栄養学・食品添加物・環境サステナビリティなど、食育の内容も盛り込んでいます。</p>
+    <p class="body-text">親子での参加も歓迎。お子さんが実習中は保護者の方の見学も可能です。</p>
+    <div class="price-box">
+      <h3>全5回コース</h3>
+      <div class="price-big">¥51,000</div>
+      <div class="price-note">税別 / テキスト代 ¥3,000 別途 / 認定証付き</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Topics</span>
+    <h2>学べること</h2>
+    <div class="rule"></div>
+    <div class="topics">
+      <div class="topic">ローお菓子の基礎</div>
+      <div class="topic">栄養の知識</div>
+      <div class="topic">砂糖について</div>
+      <div class="topic">食品添加物</div>
+      <div class="topic">環境サステナビリティ</div>
+      <div class="topic">プラントベース・ヴィーガン</div>
+      <div class="topic">グルテンフリー</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec recipes-sec">
+  <div class="inner">
+    <span class="sec-eye">Recipes</span>
+    <h2>作るレシピ例</h2>
+    <div class="rule"></div>
+    <div class="recipe-list">
+      <div class="recipe">旬のスムージー</div>
+      <div class="recipe">カラフルローケーキ</div>
+      <div class="recipe">グルテンフリーチョコカップケーキ</div>
+      <div class="recipe">ブラウニー</div>
+      <div class="recipe">グラノーラ</div>
+      <div class="recipe">プラントミルク</div>
+      <div class="recipe">ローパフェ・プリン</div>
+      <div class="recipe">ジェラート</div>
+      <div class="recipe">スピルリナラボ実験</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Features</span>
+    <h2>このクラスの特徴</h2>
+    <div class="rule"></div>
+    <div class="features">
+      <div class="feat">
+        <h4>オリジナルテキスト</h4>
+        <p>大きな文字・イラスト・クイズ形式で子どもが主体的に参加できるオリジナルテキスト付き。</p>
+      </div>
+      <div class="feat">
+        <h4>認定証付き</h4>
+        <p>全5回修了後、キッズローパティシエ認定証をお渡しします。</p>
+      </div>
+      <div class="feat">
+        <h4>対面のみ</h4>
+        <p>子どもたちの安全を最優先に、対面レッスンのみで開催しています。</p>
+      </div>
+      <div class="feat">
+        <h4>親子参加歓迎</h4>
+        <p>親子での参加OK。保護者の方の見学も可能です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>お申し込み・ご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
+</section>
+</Layout>

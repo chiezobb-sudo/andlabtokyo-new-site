@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="チーム紹介 | &LAB TOKYO"
+  description="&LAB TOKYOのチームメンバー。医師・調理師・美容家・料理研究家など、国内外から集まる多彩なメンバーが在籍。料理家として活躍したい方も募集中。"
+  canonical="https://www.andlabtokyo.com/andlab-team"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(26px, 4vw, 48px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--ink-3); line-height: 1.8; max-width: 540px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.leader-box { background: var(--bg-card); padding: 40px; display: grid; grid-template-columns: 200px 1fr; gap: 36px; align-items: start; margin-top: 32px; }
+.leader-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
+.leader-name { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.leader-name-en { font-family: var(--fh); font-size: 15px; color: var(--amber-d); font-style: italic; margin-bottom: 16px; display: block; }
+.leader-role { font-size: 13px; color: var(--amber-d); margin-bottom: 16px; }
+.leader-bio { font-size: 14px; color: var(--ink-3); line-height: 1.85; }
+.members-sec { background: var(--bg-2); }
+.members { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; margin-top: 32px; }
+.member { background: var(--bg-card); padding: 28px; }
+.member h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.member-role { font-size: 12px; color: var(--amber-d); margin-bottom: 10px; }
+.member p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.diversity { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; margin-top: 32px; }
+.div-item { background: var(--bg-card); padding: 20px; text-align: center; }
+.div-icon { font-size: 28px; margin-bottom: 8px; }
+.div-item p { font-size: 13px; color: var(--ink-3); }
+.recruit-sec { background: var(--bg-dark); text-align: center; padding: 72px 24px; }
+.recruit-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.recruit-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 32px; line-height: 1.8; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; }
+@media (max-width: 640px) {
+  .leader-box { grid-template-columns: 1fr; }
+  .leader-img { max-width: 160px; }
+}
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Team</span>
+  <h1>&LAB TOKYO チーム</h1>
+  <p>医師・調理師・美容家・料理研究家など、国内外から集まる多彩なメンバーが&LAB TOKYOを支えています。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Leader</span>
+    <h2>代表</h2>
+    <div class="rule"></div>
+    <div class="leader-box">
+      <img src="/chie-portrait.jpg" alt="安藤千英" class="leader-img" />
+      <div>
+        <div class="leader-name">安藤 千英</div>
+        <span class="leader-name-en">Chie Ando</span>
+        <div class="leader-role">発酵創家 / ローフードシェフ / ローショコラティエ協会 代表</div>
+        <p class="leader-bio">1973年福岡生まれ。料亭を営む家に育ち、2016年に料理教室を開校。2021年東京移転。ELLE gourmet認定クリエイター、ヴィーガンアワード7年連続ノミネート。著書「&RAW LIVING」はAmazon #1獲得。発酵創家®・ローパティシエ®・ローショコラティエ®の資格創設者。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec members-sec">
+  <div class="inner">
+    <span class="sec-eye">Certified Instructors</span>
+    <h2>認定インストラクター</h2>
+    <div class="rule"></div>
+    <div class="members">
+      <div class="member">
+        <h4>MIKA</h4>
+        <div class="member-role">認定インストラクター</div>
+        <p>ローショコラティエ協会認定インストラクター。</p>
+      </div>
+      <div class="member">
+        <h4>坂口 裕子</h4>
+        <div class="member-role">認定インストラクター</div>
+        <p>ローショコラティエ協会認定インストラクター。</p>
+      </div>
+      <div class="member">
+        <h4>中原 利佳</h4>
+        <div class="member-role">認定インストラクター</div>
+        <p>ローショコラティエ協会認定インストラクター。</p>
+      </div>
+      <div class="member">
+        <h4>鶴田 裕美子</h4>
+        <div class="member-role">認定インストラクター</div>
+        <p>ローショコラティエ協会認定インストラクター。</p>
+      </div>
+      <div class="member">
+        <h4>大歳 敦子</h4>
+        <div class="member-role">認定インストラクター</div>
+        <p>ローショコラティエ協会認定インストラクター。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Members</span>
+    <h2>チームの多様性</h2>
+    <div class="rule"></div>
+    <p class="body-text">現在国内外よりメンバーが参加。医師・調理師・美容家・料理研究家など、さまざまな背景を持つプロフェッショナルが&LAB TOKYOを支えています。</p>
+    <div class="diversity">
+      <div class="div-item"><div class="div-icon">🩺</div><p>医師</p></div>
+      <div class="div-item"><div class="div-icon">👨‍🍳</div><p>調理師</p></div>
+      <div class="div-item"><div class="div-icon">✨</div><p>美容家</p></div>
+      <div class="div-item"><div class="div-icon">📖</div><p>料理研究家</p></div>
+      <div class="div-item"><div class="div-icon">🌏</div><p>海外メンバー</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="recruit-sec">
+  <h2>料理家として活躍したい方、募集中</h2>
+  <p>ローフード・発酵・ローチョコレートの分野で活躍したい方、<br>&LAB TOKYOチームへの参加をご検討ください。</p>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>

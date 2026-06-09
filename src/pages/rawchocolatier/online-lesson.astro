@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="オンラインレッスン | ローショコラティエ協会 | &LAB TOKYO"
+  description="すべてのレッスンはオンラインで受講可能。ローチョコレートマイスター・ローパティシエのオンライン対応コース一覧。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/online-lesson"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(26px, 4vw, 44px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--ink-3); line-height: 1.8; }
+.sec { padding: 64px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.5vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.course-group { margin-bottom: 48px; }
+.course-group h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 16px; border-left: 3px solid var(--amber); padding-left: 14px; }
+.course-links { display: flex; flex-direction: column; gap: 2px; }
+.course-link { background: var(--bg-card); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; transition: background .2s; }
+.course-link:hover { background: #2c2823; }
+.course-link span { font-size: 15px; color: var(--ink-2); }
+.course-link .arrow { color: var(--amber); }
+.prep-sec { background: var(--bg-2); }
+.prep-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+.prep-list li { padding: 16px 0; border-bottom: 1px solid var(--divider); font-size: 14px; color: var(--ink-3); padding-left: 20px; position: relative; line-height: 1.7; }
+.prep-list li::before { content: '✓'; position: absolute; left: 0; color: var(--amber-d); font-weight: 700; }
+.cta-sec { text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Online Lesson</span>
+  <h1>オンラインレッスン</h1>
+  <p>すべてのレッスンはオンラインでの受講が可能です</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Courses</span>
+    <h2>オンライン対応コース</h2>
+    <div class="rule"></div>
+    <p class="body-text">全国・海外どこからでもご受講いただけます。ライブ形式でリアルタイムに講師から指導を受けられます。</p>
+
+    <div class="course-group">
+      <h3>ローチョコレートマイスター</h3>
+      <div class="course-links">
+        <a href="/rawchocolatier/rawchocolatier-online-beginner" class="course-link">
+          <span>初級オンラインガイド</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="/rawchocolatier/rawchocolatier-online-intermediate" class="course-link">
+          <span>中級オンラインガイド</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="/rawchocolatier/rawchocolatier-online-advanced" class="course-link">
+          <span>上級オンラインガイド</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="course-group">
+      <h3>ローパティシエ</h3>
+      <div class="course-links">
+        <a href="/rawchocolatier/rawpatissier-online-beginner" class="course-link">
+          <span>初級オンラインガイド</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec prep-sec">
+  <div class="inner">
+    <span class="sec-eye">Preparation</span>
+    <h2>オンライン受講に必要なもの</h2>
+    <div class="rule"></div>
+    <ul class="prep-list">
+      <li>安定したインターネット環境（Wi-Fi推奨）</li>
+      <li>ZoomまたはGoogle Meetが使用できるデバイス（PC・スマホ・タブレット）</li>
+      <li>各コース指定の材料・道具（事前に材料リストをお送りします）</li>
+      <li>作業できるキッチンスペース</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>オンライン受講のご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>
