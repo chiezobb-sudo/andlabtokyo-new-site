@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = "東京・渋谷のローフード・発酵料理教室 &LAB TOKYO。ELLE gourmet認定料理家・安藤千英が主宰するローショコラティエ協会本部。",
+  description = "発酵と美の学校。東京・渋谷のプレミアム・ライフスタイルラボ。ELLE gourmet認定料理家・安藤千英が主宰。",
   canonical,
   ogImage = "/og-default.jpg",
   type = "website",
@@ -54,26 +54,24 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
 
   <!-- JSON-LD -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"&LAB TOKYO","url":"https://www.andlabtokyo.com","description":"東京・渋谷のローフード・発酵料理教室。ローショコラティエ協会本部。","founder":{"@type":"Person","name":"安藤千英"},"sameAs":["https://www.instagram.com/chie_andlab/"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"&LAB TOKYO","url":"https://www.andlabtokyo.com","logo":"https://www.andlabtokyo.com/logo-wide.svg","description":"発酵とローフードのクロス理論に基づくプレミアム・プロフェッショナルスクール。東京・渋谷。","address":{"@type":"PostalAddress","streetAddress":"東京都渋谷区神宮前（表参道・原宿エリア）","addressLocality":"渋谷区","addressRegion":"東京都","postalCode":"150-0001","addressCountry":"JP"},"founder":{"@type":"Person","name":"安藤千英"},"sameAs":["https://www.instagram.com/chie_andlab/"]}</script>
 
   <slot name="head" />
 
   <style is:global>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     /* ================================================
-       DESIGN SYSTEM TOKENS (shared across all pages)
+       DESIGN SYSTEM TOKENS
     ================================================ */
     :root {
-      /* Typography */
       --f-serif: 'Noto Serif JP', serif;
       --f-sans:  'Noto Sans JP', sans-serif;
       --f-s:     'Noto Serif JP', serif;
       --f-b:     'Noto Sans JP', sans-serif;
       --fh:      'Cormorant Garamond', serif;
 
-      /* Light palette */
       --linen:   #FAF9F6;
       --linen-2: #F5F3EE;
       --linen-3: rgba(28,28,26,0.09);
@@ -82,22 +80,18 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       --ink-3:   #8C8C8A;
       --divider: rgba(28,28,26,0.09);
 
-      /* Dark palette */
       --sumi:    #1A1715;
       --sumi-2:  #1E1B19;
       --bg-card: #24211E;
       --bg-dark: #110E0B;
 
-      /* Amber */
       --amber:   #C6A15B;
       --amber-d: #A8865A;
 
-      /* Green */
       --green:     #6B9A3A;
       --green-d:   #4A7A1E;
       --green-btn: #4D7C2A;
 
-      /* Layout helpers */
       --pad: 3rem;
       --max: 1100px;
     }
@@ -111,119 +105,46 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
     }
 
     /* ================================================
-       HEADER & NAV
+       HEADER
     ================================================ */
     .site-header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 1000;
+      z-index: 900;
+      padding: 1.6rem 4rem;
       background: rgba(250,249,246,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(28,28,26,0.07);
-      height: 64px;
+      backdrop-filter: blur(12px);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      align-items: center;
+      border-bottom: 1px solid rgba(28,28,26,0.05);
     }
 
     .header-logo {
       height: 36px;
       width: auto;
       display: block;
-      flex-shrink: 0;
     }
 
-    /* --- Desktop Nav --- */
     .site-nav {
       display: flex;
-      align-items: center;
-      gap: 0;
-      height: 64px;
-    }
-
-    .nav-item {
-      position: relative;
-      height: 64px;
-      display: flex;
+      gap: 3rem;
       align-items: center;
     }
 
-    .nav-label {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      height: 64px;
-      padding: 0 1rem;
+    .site-nav a {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: #3C3C3A;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #7A7A72;
       text-decoration: none;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: color 0.2s;
-      border-bottom: 2px solid transparent;
-    }
-    .nav-label:hover { color: #1C1C1A; border-bottom-color: #1C1C1A; }
-    .nav-label svg { width: 10px; height: 10px; opacity: 0.5; transition: transform 0.2s; }
-    .nav-item:hover .nav-label svg { transform: rotate(180deg); }
-
-    /* --- Dropdown --- */
-    .nav-dropdown {
-      position: absolute;
-      top: 64px;
-      left: 0;
-      min-width: 220px;
-      background: #fff;
-      border: 1px solid rgba(28,28,26,0.08);
-      border-top: 2px solid #1C1C1A;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-6px);
-      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
-      z-index: 200;
-    }
-    .nav-item:hover .nav-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    .nav-dropdown a {
-      display: block;
-      padding: 0.65rem 1.2rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
+      transition: color 0.3s;
       font-weight: 400;
-      color: #4A4A48;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      border-bottom: 1px solid rgba(28,28,26,0.05);
-      transition: background 0.15s, color 0.15s;
-      white-space: nowrap;
     }
-    .nav-dropdown a:last-child { border-bottom: none; }
-    .nav-dropdown a:hover { background: #FAF9F6; color: #1C1C1A; }
+    .site-nav a:hover { color: #1C1C1A; }
 
-    /* Contact button */
-    .nav-contact {
-      margin-left: 0.5rem;
-      padding: 0.5rem 1.2rem;
-      background: #1C1C1A;
-      color: #FAF9F6 !important;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-    .nav-contact:hover { background: #3C3C3A !important; color: #FAF9F6 !important; }
-
-    /* --- Hamburger (mobile) --- */
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -245,339 +166,170 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 64px; left: 0; right: 0;
+      top: 73px; left: 0; right: 0;
       background: #fff;
       border-top: 1px solid rgba(28,28,26,0.08);
       overflow-y: auto;
-      max-height: calc(100vh - 64px);
-      z-index: 999;
+      max-height: calc(100vh - 73px);
+      z-index: 899;
+      padding: 1.5rem;
     }
     .mobile-menu.open { display: block; }
-    .mobile-section { border-bottom: 1px solid rgba(28,28,26,0.07); }
-    .mobile-section-title {
+    .mobile-menu a {
       display: block;
-      padding: 1rem 1.5rem;
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: #1C1C1A;
-      background: #FAF9F6;
-    }
-    .mobile-section a {
-      display: block;
-      padding: 0.75rem 2rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 13px;
-      color: #4A4A48;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #3C3C3A;
       text-decoration: none;
-      border-bottom: 1px solid rgba(28,28,26,0.04);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(28,28,26,0.06);
     }
-    .mobile-contact-link {
-      display: block;
-      margin: 1.5rem;
-      padding: 0.9rem;
-      background: #1C1C1A;
-      color: #FAF9F6 !important;
-      text-align: center;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-    }
+    .mobile-menu a:last-child { border-bottom: none; }
 
     /* ================================================
        MAIN
     ================================================ */
-    main { padding-top: 64px; }
+    main { padding-top: 73px; }
 
     /* ================================================
        FOOTER
     ================================================ */
     .site-footer {
-      background: #1C1C1A;
-      color: rgba(250,249,246,0.6);
-      padding: 5rem 2rem 3rem;
+      background: #FAF9F6;
+      padding: 5rem 4rem;
+      border-top: 1px solid rgba(28,28,26,0.05);
     }
     .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 4rem;
-    }
-    .footer-col-title {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(250,249,246,0.35);
-      display: block;
-      margin-bottom: 1.2rem;
-    }
-    .footer-col a {
-      display: block;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
-      color: rgba(250,249,246,0.55);
-      text-decoration: none;
-      margin-bottom: 0.6rem;
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: rgba(250,249,246,0.9); }
-    .footer-bottom {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(250,249,246,0.08);
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
+      align-items: flex-end;
     }
-    .footer-logo-white { height: 28px; width: auto; filter: brightness(0) invert(1); opacity: 0.7; }
-    .footer-copy {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 10px;
-      color: rgba(250,249,246,0.3);
-      letter-spacing: 0.08em;
+    .footer-logo {
+      height: 28px;
+      width: auto;
+      display: block;
+      margin-bottom: 1.5rem;
     }
-    .footer-sns {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-    .footer-sns a {
+    .footer-left p {
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 11px;
-      color: rgba(250,249,246,0.4);
-      text-decoration: none;
-      letter-spacing: 0.12em;
+      color: #7A7A72;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
     }
-    .footer-sns a:hover { color: rgba(250,249,246,0.8); }
+    .footer-right {
+      text-align: right;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: #7A7A72;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+    }
+    .footer-right a {
+      color: #7A7A72;
+      text-decoration: none;
+      border-bottom: 1px solid #7A7A72;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      text-align: right;
+    }
+    .footer-links a {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #7A7A72;
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: none;
+    }
+    .footer-links a:hover { color: #1C1C1A; }
+    .footer-copy {
+      margin-top: 3rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: rgba(28,28,26,0.25);
+      letter-spacing: 0.08em;
+    }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 768px) {
+      .site-header { padding: 1.2rem 1.5rem; }
       .site-nav { display: none; }
       .hamburger { display: flex; }
-      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-    }
-    @media (max-width: 640px) {
-      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .site-footer { padding: 4rem 1.5rem; }
+      .footer-inner { flex-direction: column; gap: 2.5rem; align-items: flex-start; }
+      .footer-right { text-align: left; }
+      .footer-links { text-align: left; }
     }
   </style>
 </head>
 <body>
 
-<!-- ================================================
-     HEADER
-================================================ -->
 <header class="site-header">
   <a href="/" aria-label="&LAB TOKYO ホーム">
     <img src="/logo-wide.svg" alt="&LAB TOKYO" class="header-logo"
       onerror="this.style.cssText='font-family:Noto Serif JP,serif;font-size:14px;font-weight:300;letter-spacing:.15em;color:#1C1C1A;text-decoration:none;display:block';this.outerHTML='<span style=\'font-family:Noto Serif JP,serif;font-size:14px;letter-spacing:.2em;color:#1C1C1A\'>&LAB TOKYO</span>'"
     />
   </a>
-
-  <!-- Desktop Nav -->
   <nav class="site-nav" role="navigation" aria-label="メインナビゲーション">
-
-    <!-- 各種講座 -->
-    <div class="nav-item">
-      <span class="nav-label">
-        各種講座
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
-      </span>
-      <div class="nav-dropdown">
-        <a href="/experiencelessons">体験レッスン</a>
-        <a href="/rawfood-kentei-meister">ローフードマイスター講座（JLBA国際認定）</a>
-        <a href="/fermentedfood">発酵プランナー講座</a>
-        <a href="/professional-training">プロ養成</a>
-        <a href="/rawchocolatier/rawchocolatemeister">ローチョコレートマイスター養成講座</a>
-        <a href="/rawchocolatier/rawpatissier">ロースイーツ｜ローパティシエ養成講座</a>
-        <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>
-        <a href="/trial-fermentation">トライアルレッスン「発酵」</a>
-        <a href="/rawfood-kentei-meister/jlba-advance">JLBA上級講座</a>
-        <a href="/plating-creator">プレイティングクリエイター養成講座</a>
-        <a href="/listofcourses">▶ 全講座一覧</a>
-      </div>
-    </div>
-
-    <!-- ローショコラティエ協会 -->
-    <div class="nav-item">
-      <span class="nav-label">
-        ローショコラティエ協会
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
-      </span>
-      <div class="nav-dropdown">
-        <a href="/rawchocolatier/rawchocolatier-course">ローショコラティエ</a>
-        <a href="/rawchocolatier/rawchocolateconcierge">ローチョコレートコンシェルジュ</a>
-        <a href="/rawchocolatier/online-lesson">オンラインレッスンについて</a>
-        <a href="/rawchocolatier/faq">よくある質問</a>
-        <a href="/rawchocolatier/about-association">協会概要</a>
-        <a href="/rawchocolatier">▶ 協会トップ</a>
-      </div>
-    </div>
-
-    <!-- KNOWLEDGE -->
-    <div class="nav-item">
-      <span class="nav-label">
-        KNOWLEDGE
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
-      </span>
-      <div class="nav-dropdown">
-        <a href="/rawfood">ローフードとは</a>
-        <a href="/fermentedfood">発酵とは</a>
-        <a href="/livingfood">リビングフードとは</a>
-        <a href="/rawchocolatier/rawchocolate">ローチョコレートとは</a>
-        <a href="/rawchocolatier/whatrawsweets">ロースイーツとは</a>
-        <a href="/spirulina">スピルリナとは</a>
-        <a href="/knowledge">▶ ナレッジ一覧</a>
-      </div>
-    </div>
-
-    <!-- ABOUT -->
-    <div class="nav-item">
-      <span class="nav-label">
-        ABOUT
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
-      </span>
-      <div class="nav-dropdown">
-        <a href="/media">活動・メディア掲載</a>
-        <a href="/andlab-team">講師紹介</a>
-        <a href="/instructor-chie-ando">安藤千英 プロフィール</a>
-        <a href="/beginner">はじめての方へ</a>
-        <a href="/supirurinalab">スピルリナLAB</a>
-        <a href="/upcycledfood">アップサイクルフード</a>
-        <a href="/rawfood-book">教科書（本）</a>
-        <a href="/shop">レッスンアイテム</a>
-        <a href="/sustainability">サステナビリティ</a>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
-    <a href="/contact" class="nav-contact">CONTACT</a>
+    <a href="/brand">ABOUT</a>
+    <a href="/listofcourses">COURSES</a>
+    <a href="/knowledge">JOURNAL</a>
+    <a href="/contact">ACCESS</a>
   </nav>
-
-  <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="メニューを開く">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
 </header>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-section">
-    <span class="mobile-section-title">各種講座</span>
-    <a href="/experiencelessons">体験レッスン</a>
-    <a href="/rawfood-kentei-meister">ローフードマイスター講座（JLBA）</a>
-    <a href="/fermentedfood">発酵プランナー講座</a>
-    <a href="/professional-training">プロ養成</a>
-    <a href="/rawchocolatier/rawchocolatemeister">ローチョコレートマイスター養成</a>
-    <a href="/rawchocolatier/rawpatissier">ローパティシエ養成講座</a>
-    <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>
-    <a href="/trial-fermentation">トライアルレッスン「発酵」</a>
-    <a href="/rawfood-kentei-meister/jlba-advance">JLBA上級講座</a>
-    <a href="/plating-creator">プレイティングクリエイター</a>
-    <a href="/listofcourses">全講座一覧 →</a>
-  </div>
-  <div class="mobile-section">
-    <span class="mobile-section-title">ローショコラティエ協会</span>
-    <a href="/rawchocolatier/rawchocolatier-course">ローショコラティエ</a>
-    <a href="/rawchocolatier/rawchocolateconcierge">ローチョコレートコンシェルジュ</a>
-    <a href="/rawchocolatier/online-lesson">オンラインレッスン</a>
-    <a href="/rawchocolatier/faq">よくある質問</a>
-    <a href="/rawchocolatier/about-association">協会概要</a>
-    <a href="/rawchocolatier">協会トップ →</a>
-  </div>
-  <div class="mobile-section">
-    <span class="mobile-section-title">KNOWLEDGE</span>
-    <a href="/rawfood">ローフードとは</a>
-    <a href="/fermentedfood">発酵とは</a>
-    <a href="/livingfood">リビングフードとは</a>
-    <a href="/rawchocolatier/rawchocolate">ローチョコレートとは</a>
-    <a href="/rawchocolatier/whatrawsweets">ロースイーツとは</a>
-    <a href="/spirulina">スピルリナとは</a>
-  </div>
-  <div class="mobile-section">
-    <span class="mobile-section-title">ABOUT</span>
-    <a href="/media">活動・メディア掲載</a>
-    <a href="/andlab-team">講師紹介</a>
-    <a href="/instructor-chie-ando">安藤千英 プロフィール</a>
-    <a href="/beginner">はじめての方へ</a>
-    <a href="/supirurinalab">スピルリナLAB</a>
-    <a href="/upcycledfood">アップサイクルフード</a>
-    <a href="/rawfood-book">教科書（本）</a>
-    <a href="/shop">レッスンアイテム</a>
-  </div>
-  <a href="/contact" class="mobile-contact-link">CONTACT お問い合わせ</a>
+  <a href="/brand">ABOUT</a>
+  <a href="/listofcourses">COURSES</a>
+  <a href="/rawfood-kentei-meister">ローフードマイスター講座</a>
+  <a href="/fermentedfood">発酵プランナー講座</a>
+  <a href="/rawchocolatier/rawchocolatemeister">ローチョコレートマイスター</a>
+  <a href="/rawchocolatier/rawpatissier">ローパティシエ養成</a>
+  <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>
+  <a href="/rawchocolatier">ローショコラティエ協会</a>
+  <a href="/knowledge">JOURNAL / KNOWLEDGE</a>
+  <a href="/instructor-chie-ando">安藤千英 プロフィール</a>
+  <a href="/contact">ACCESS / お問い合わせ</a>
 </div>
 
-<!-- MAIN -->
 <main>
   <slot />
 </main>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-col">
-      <span class="footer-col-title">各種講座</span>
-      <a href="/experiencelessons">体験レッスン</a>
-      <a href="/rawfood-kentei-meister">ローフードマイスター</a>
-      <a href="/fermentedfood">発酵プランナー</a>
-      <a href="/rawchocolatier/rawchocolatemeister">ローチョコレートマイスター</a>
-      <a href="/rawchocolatier/rawpatissier">ローパティシエ</a>
-      <a href="/professional-training">プロ養成</a>
-      <a href="/listofcourses">全講座一覧</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">ローショコラティエ協会</span>
-      <a href="/rawchocolatier">協会トップ</a>
-      <a href="/rawchocolatier/rawchocolatier-course">ローショコラティエ</a>
-      <a href="/rawchocolatier/rawchocolateconcierge">コンシェルジュ</a>
-      <a href="/rawchocolatier/online-lesson">オンラインレッスン</a>
-      <a href="/rawchocolatier/faq">よくある質問</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">KNOWLEDGE</span>
-      <a href="/rawfood">ローフードとは</a>
-      <a href="/fermentedfood">発酵とは</a>
-      <a href="/livingfood">リビングフードとは</a>
-      <a href="/rawchocolatier/rawchocolate">ローチョコレートとは</a>
-      <a href="/spirulina">スピルリナとは</a>
-      <a href="/knowledge">ナレッジ一覧</a>
-    </div>
-    <div class="footer-col">
-      <span class="footer-col-title">ABOUT</span>
-      <a href="/media">活動・メディア</a>
-      <a href="/andlab-team">講師紹介</a>
-      <a href="/instructor-chie-ando">安藤千英</a>
-      <a href="/beginner">はじめての方へ</a>
-      <a href="/rawfood-book">教科書（本）</a>
-      <a href="/contact">お問い合わせ</a>
-      <a href="/tokushoho">特定商取引法</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <a href="/" aria-label="&LAB TOKYO ホーム">
-      <img src="/logo-wide.svg" alt="&LAB TOKYO" class="footer-logo-white"
-        onerror="this.outerHTML='<span style=\'font-size:13px;letter-spacing:.2em;color:rgba(250,249,246,.5)\'>&LAB TOKYO</span>'"
+    <div class="footer-left">
+      <img src="/logo-wide.svg" alt="&LAB TOKYO" class="footer-logo"
+        onerror="this.outerHTML='<span style=\'font-family:Noto Serif JP,serif;font-size:13px;letter-spacing:.2em;color:#7A7A72;display:block;margin-bottom:1.5rem\'>&LAB TOKYO</span>'"
       />
-    </a>
-    <div class="footer-sns">
-      <a href="https://www.instagram.com/chie_andlab/" target="_blank" rel="noopener">Instagram</a>
+      <p>Raw Food &amp; Fermentation School</p>
+      <p style="margin-top:0.4rem">Tokyo · Shibuya, Japan</p>
     </div>
-    <p class="footer-copy">© 2025 &LAB TOKYO. All rights reserved.</p>
+    <div class="footer-right">
+      <p>5-2-11 Jingumae, Shibuya-ku,</p>
+      <p>Tokyo 150-0001, Japan</p>
+      <div class="footer-links">
+        <a href="/listofcourses">Courses</a>
+        <a href="/rawchocolatier">協会</a>
+        <a href="/knowledge">Journal</a>
+        <a href="/instructor-chie-ando">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/tokushoho">特定商取引法</a>
+      </div>
+    </div>
   </div>
+  <p class="footer-copy">© 2025 &LAB TOKYO. All rights reserved.</p>
 </footer>
 
 <script>
-  // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger?.addEventListener('click', () => {
@@ -591,7 +343,6 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
     }
   });
-  // Close on nav link click (mobile)
   mobileMenu?.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       mobileMenu.classList.remove('open');

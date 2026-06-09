@@ -2,620 +2,432 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout
-  title="&LAB TOKYO | ローフード・発酵料理教室 東京・渋谷"
-  description="東京・渋谷のローフード・発酵料理教室 &LAB TOKYO。ELLE gourmet認定料理家・安藤千英が主宰。ローショコラティエ協会本部。JLBAローフードマイスター・発酵プランナー・ローチョコレートマイスター養成講座。"
+  title="これからの私を、美しく「醸す」。 | &LAB TOKYO"
+  description="発酵と美の学校。東京・渋谷のプレミアム・ライフスタイルラボ。ローフード×発酵のクロス理論でライフスタイルを進化させる &LAB TOKYO。ELLE gourmet認定料理家・安藤千英が主宰。"
   canonical="https://www.andlabtokyo.com/"
   type="website"
 >
 
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 /* ===== HERO ===== */
 .hero {
+  min-height: calc(100vh - 73px);
+  background: #FAF9F6;
   position: relative;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #1A1715;
   overflow: hidden;
-  padding: 80px 24px 60px;
+  display: flex;
+  align-items: center;
 }
-.hero-bg {
+.hero-image-wrap {
   position: absolute;
-  inset: 0;
-  background-image: url('https://static.wixstatic.com/media/745f65_7c4c8d79025e432e8a9bd02e8dc3a455~mv2.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.35;
-}
-.hero-eyebrow {
-  position: relative;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 12px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: #C6A15B;
-  margin-bottom: 20px;
-}
-.hero-title {
-  position: relative;
-  font-family: 'Noto Serif JP', serif;
-  font-size: clamp(32px, 5vw, 72px);
-  font-weight: 200;
-  color: #FAF5EC;
-  line-height: 1.3;
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
-}
-.hero-title-en {
-  position: relative;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(14px, 2vw, 22px);
-  font-weight: 400;
-  font-style: italic;
-  color: #C0B6A8;
-  letter-spacing: 0.25em;
-  margin-bottom: 28px;
-}
-.hero-rule {
-  position: relative;
-  width: 40px;
-  height: 1px;
-  background: #C6A15B;
-  margin: 0 auto 28px;
-}
-.hero-desc {
-  position: relative;
-  font-family: 'Noto Serif JP', serif;
-  font-size: clamp(13px, 1.5vw, 16px);
-  color: #C0B6A8;
-  line-height: 2;
-  max-width: 520px;
-  margin: 0 auto 40px;
-}
-.hero-btns {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-.btn-primary {
-  display: inline-block;
-  background: #C6A15B;
-  color: #1A1715;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 14px 32px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.btn-primary:hover { background: #A8865A; }
-.btn-outline {
-  display: inline-block;
-  border: 1px solid rgba(198,161,91,0.5);
-  color: #C6A15B;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  padding: 13px 28px;
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s;
-}
-.btn-outline:hover { border-color: #C6A15B; color: #FAF5EC; }
-
-/* ===== SECTION SHARED ===== */
-.sec { padding: 80px 24px; }
-.inner { max-width: 1100px; margin: 0 auto; }
-.sec-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: #8C7A6A;
-  display: block;
-  margin-bottom: 12px;
-}
-.sec-title {
-  font-family: 'Noto Serif JP', serif;
-  font-size: clamp(22px, 3vw, 38px);
-  font-weight: 300;
-  color: #1C1C1A;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.sec-rule {
-  width: 32px;
-  height: 1px;
-  background: #8C7A6A;
-  margin: 16px 0 28px;
-}
-.sec-lead {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 15px;
-  color: #5A5A58;
-  line-height: 2;
-  max-width: 660px;
-  margin-bottom: 48px;
-}
-
-/* ===== NUMBERS ===== */
-.about-sec { background: #FAF9F6; }
-.numbers {
-  display: flex;
-  gap: 2px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-}
-.number-item {
-  flex: 1;
-  min-width: 120px;
-  background: #fff;
-  padding: 28px 20px;
-  text-align: center;
-  border: 1px solid rgba(28,28,26,0.05);
-}
-.number-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 4vw, 54px);
-  font-weight: 600;
-  color: #1C1C1A;
-  line-height: 1;
-  display: block;
-  margin-bottom: 6px;
-}
-.number-label {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 11px;
-  color: #8C7A6A;
-  letter-spacing: 0.08em;
-}
-
-/* ===== COURSES GRID ===== */
-.courses-sec { background: #1C1C1A; }
-.courses-sec .sec-eyebrow { color: #A8865A; }
-.courses-sec .sec-title { color: #FAF5EC; }
-.courses-sec .sec-rule { background: #A8865A; }
-.courses-sec .sec-lead { color: #C0B6A8; }
-
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
-.course-card {
-  background: #24211E;
-  padding: 32px 28px;
-  text-decoration: none;
-  display: block;
-  transition: background 0.2s;
-  border-bottom: 2px solid transparent;
-}
-.course-card:hover { background: #2C2926; border-bottom-color: #C6A15B; }
-.course-card-tag {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #C6A15B;
-  display: block;
-  margin-bottom: 10px;
-}
-.course-card h3 {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #FAF5EC;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-.course-card p {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 12px;
-  color: #C0B6A8;
-  line-height: 1.8;
-}
-.courses-more {
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* ===== RAWCHOCOLATIER BAND ===== */
-.rawchoco-sec {
-  background: #110E0B;
-  padding: 80px 24px;
-  text-align: center;
-}
-.rawchoco-sec .sec-eyebrow { color: #A8865A; }
-.rawchoco-sec .sec-title { color: #FAF5EC; text-align: center; }
-.rawchoco-sec .sec-lead { color: #C0B6A8; margin: 0 auto 40px; text-align: center; }
-.rawchoco-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 16px;
-}
-.rawchoco-link {
-  display: inline-block;
-  border: 1px solid rgba(198,161,91,0.3);
-  color: #C6A15B;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  padding: 10px 20px;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-.rawchoco-link:hover { background: #C6A15B; color: #110E0B; }
-
-/* ===== KNOWLEDGE ===== */
-.knowledge-sec { background: #FAF9F6; }
-.knowledge-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
-.knowledge-card {
-  background: #fff;
-  border: 1px solid rgba(28,28,26,0.06);
-  padding: 28px 24px;
-  text-decoration: none;
-  display: block;
-  transition: border-color 0.2s;
-}
-.knowledge-card:hover { border-color: #8C7A6A; }
-.knowledge-card-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #8C7A6A;
-  display: block;
-  margin-bottom: 8px;
-}
-.knowledge-card h3 {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 17px;
-  font-weight: 400;
-  color: #1C1C1A;
-  margin-bottom: 8px;
-}
-.knowledge-card p {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 12px;
-  color: #6A6A68;
-  line-height: 1.8;
-}
-.knowledge-more {
-  text-align: center;
-  margin-top: 36px;
-}
-.btn-text {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 13px;
-  color: #3C3C3A;
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid rgba(28,28,26,0.2);
-  padding-bottom: 4px;
-  transition: border-color 0.2s;
-}
-.btn-text:hover { border-color: #1C1C1A; }
-
-/* ===== ABOUT / PROFILE ===== */
-.profile-sec {
-  background: #1C1C1A;
-  padding: 80px 24px;
-}
-.profile-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-.profile-img {
-  aspect-ratio: 4/5;
-  background: #24211E;
+  right: 0;
+  top: 0;
+  width: 80%;
+  height: 100%;
   overflow: hidden;
 }
-.profile-img img {
+.hero-image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.85;
-}
-.profile-text .sec-eyebrow { color: #A8865A; }
-.profile-text .sec-title { color: #FAF5EC; font-size: clamp(20px, 2.5vw, 30px); }
-.profile-text .sec-rule { background: #A8865A; }
-.profile-name-en {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-style: italic;
-  color: #C6A15B;
-  margin-bottom: 16px;
+  object-position: center;
   display: block;
 }
-.profile-text p {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 14px;
-  color: #C0B6A8;
-  line-height: 2;
-  margin-bottom: 12px;
+.hero-gradient {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #FAF9F6 0%,
+    #FAF9F6 22%,
+    rgba(250,249,246,0.82) 42%,
+    rgba(250,249,246,0) 68%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
-.profile-tags {
+.hero-text {
+  position: relative;
+  z-index: 10;
+  padding: 0 4rem;
+  width: 52%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 20px 0;
+  flex-direction: column;
+  justify-content: center;
 }
-.profile-tag {
+.hero-eyebrow {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 11px;
-  color: #A8865A;
-  border: 1px solid rgba(168,134,90,0.35);
-  padding: 4px 12px;
-  letter-spacing: 0.05em;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7A7A72;
+  font-weight: 400;
+  display: block;
+  margin-bottom: 1.2rem;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 200;
+  letter-spacing: 0.28em;
+  line-height: 1.45;
+  color: #1C1C1A;
+  margin-bottom: 2.8rem;
+}
+.hero-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  line-height: 2.2;
+  color: #7A7A72;
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.hero-body {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 2.1;
+  color: #999;
+  font-weight: 300;
+  margin-bottom: 3.5rem;
+}
+.hero-cta {
+  display: inline-block;
+  width: fit-content;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #1C1C1A;
+  text-decoration: none;
+  border-bottom: 1.5px solid #1C1C1A;
+  padding-bottom: 0.7rem;
+  transition: opacity 0.3s;
+  font-weight: 300;
+}
+.hero-cta:hover { opacity: 0.55; }
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.scroll-indicator span {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #7A7A72;
+}
+.scroll-indicator div {
+  width: 1px;
+  height: 32px;
+  background: #7A7A72;
+  opacity: 0.35;
 }
 
-/* ===== CTA ===== */
-.cta-sec {
-  background: #C6A15B;
-  padding: 72px 24px;
+/* ===== ABOUT ===== */
+.about-sec {
+  padding: 10rem 4rem;
+  background: #FAF9F6;
+}
+.about-inner {
+  max-width: 820px;
+  margin: 0 auto;
   text-align: center;
 }
-.cta-sec h2 {
+.rule {
+  width: 60px;
+  height: 1px;
+  background: #1C1C1A;
+  margin: 0 auto 3rem;
+}
+.about-sub {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(20px, 2.5vw, 32px);
+  font-size: 15px;
   font-weight: 300;
-  color: #1A1715;
-  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+  color: #1C1C1A;
+  margin-bottom: 1.2rem;
 }
-.cta-sec p {
-  font-family: 'Noto Sans JP', sans-serif;
+.about-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: #1C1C1A;
+  margin-bottom: 3rem;
+}
+.rule-sm {
+  width: 60px;
+  height: 1px;
+  background: #1C1C1A;
+  margin: 0 auto 3.5rem;
+}
+.about-lead {
+  font-family: 'Noto Serif JP', serif;
   font-size: 14px;
-  color: rgba(26,23,21,0.7);
-  margin-bottom: 32px;
-  line-height: 1.8;
+  line-height: 2.3;
+  color: #7A7A72;
+  font-weight: 300;
+  margin-bottom: 1.8rem;
 }
-.btn-dark {
-  display: inline-block;
-  background: #1A1715;
-  color: #FAF5EC;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
+
+/* ===== TWO DOORS ===== */
+.doors-sec {
+  padding: 7rem 4rem;
+  background: #FAF9F6;
+}
+.doors-header {
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.doors-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
   letter-spacing: 0.12em;
-  padding: 14px 36px;
-  text-decoration: none;
-  transition: background 0.2s;
+  color: #1C1C1A;
 }
-.btn-dark:hover { background: #3C3C3A; }
+.doors-title-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: #7A7A72;
+}
+.doors-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  position: relative;
+}
+.door-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: opacity 0.3s;
+}
+.door-card:hover { opacity: 0.88; }
+.door-card-img {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: #E5E0DA;
+}
+.door-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.8s ease;
+}
+.door-card:hover .door-card-img img { transform: scale(1.03); }
+.door-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.15);
+  color: #fff;
+  text-align: center;
+}
+.door-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.door-label {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+  line-height: 1.7;
+}
+.door-card h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+  color: #1C1C1A;
+  font-weight: 400;
+}
+.door-card p {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #7A7A72;
+  letter-spacing: 0.06em;
+}
+.doors-vert {
+  position: absolute;
+  right: -6%;
+  top: 50%;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotateZ(180deg);
+}
+.doors-vert p {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #7A7A72;
+  opacity: 0.45;
+  font-weight: 300;
+  white-space: nowrap;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .courses-grid { grid-template-columns: 1fr 1fr; }
-  .knowledge-grid { grid-template-columns: 1fr 1fr; }
-  .profile-inner { grid-template-columns: 1fr; gap: 40px; }
-  .profile-img { max-width: 360px; }
+  .hero-text { width: 65%; }
+  .hero-image-wrap { width: 70%; }
+  .doors-vert { display: none; }
 }
-@media (max-width: 600px) {
-  .courses-grid { grid-template-columns: 1fr; }
-  .knowledge-grid { grid-template-columns: 1fr; }
-  .numbers { flex-direction: column; }
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: auto;
+    padding: 3rem 0 0;
+  }
+  .hero-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 55vw;
+    min-height: 240px;
+  }
+  .hero-gradient {
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(250,249,246,0.7) 70%,
+      #FAF9F6 100%
+    );
+  }
+  .hero-text { width: 100%; padding: 2.5rem 1.5rem 4rem; }
+  .hero-title { font-size: 1.8rem; margin-bottom: 2rem; }
+  .scroll-indicator { left: 1.5rem; }
+  .about-sec { padding: 6rem 1.5rem; }
+  .doors-sec { padding: 5rem 1.5rem; }
+  .doors-grid { grid-template-columns: 1fr; }
+  .door-card + .door-card { margin-top: 0; }
 }
 </style>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <span class="hero-eyebrow">Tokyo · Shibuya</span>
-  <h1 class="hero-title">&LAB TOKYO</h1>
-  <p class="hero-title-en">Raw Food &amp; Fermentation School</p>
-  <div class="hero-rule"></div>
-  <p class="hero-desc">
-    ローフード・発酵・植物性食材の可能性を探求する、<br>
-    東京・渋谷の料理教室 &amp;ラボ トーキョー。<br>
-    JLBA認定ローフードマイスター、ローショコラティエ協会本部。
-  </p>
-  <div class="hero-btns">
-    <a href="/listofcourses" class="btn-primary">全講座を見る</a>
-    <a href="/experiencelessons" class="btn-outline">体験レッスン</a>
+  <div class="hero-image-wrap">
+    <img src="/herotable.JPG" alt="&LAB TOKYO Studio"
+      onerror="this.style.background='#E5E0DA';this.style.opacity='0'"
+    />
+    <div class="hero-gradient"></div>
+  </div>
+
+  <div class="hero-text">
+    <span class="hero-eyebrow">Fermentation Creator · Tokyo Shibuya</span>
+    <h1 class="hero-title">
+      これからの私を、<br>
+      美しく「醸す」。
+    </h1>
+    <p class="hero-sub">
+      細胞からデザインする、<br>
+      一生モノの心と体。
+    </p>
+    <p class="hero-body">
+      忙しい毎日の中で、自分の体を後回しにしていませんか。<br>
+      発酵×ローフードのクロス理論で、<br>
+      あなたの本来の輝きを取り戻す。
+    </p>
+    <a href="/brand" class="hero-cta">&LAB TOKYO について</a>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div></div>
+    </div>
   </div>
 </section>
 
-<!-- ===== ABOUT NUMBERS ===== -->
-<section class="sec about-sec">
-  <div class="inner">
-    <span class="sec-eyebrow">About &amp;LAB TOKYO</span>
-    <h2 class="sec-title">食の本質を、<br>自分の手で学ぶ場所</h2>
-    <div class="sec-rule"></div>
-    <p class="sec-lead">2015年の開講以来、ローフード・発酵・ロースイーツ・スピルリナなど、食の最前線をテーマに多彩な講座を展開。ELLE gourmet認定料理家・安藤千英が主宰する、プロも通う本格的な料理教室です。</p>
+<!-- ===== ABOUT ===== -->
+<section class="about-sec">
+  <div class="about-inner">
+    <div class="rule"></div>
+    <p class="about-sub">美しさを、自ら「つくる」人へ。</p>
+    <h2 class="about-title">ABOUT &LAB TOKYO</h2>
+    <div class="rule-sm"></div>
+    <p class="about-lead">
+      &LAB TOKYOは、東京・渋谷を拠点とする<br>
+      「発酵×ローフード」のクロス理論でライフスタイルを進化させる。
+    </p>
+    <p class="about-lead">
+      私たちが提案するのは、単なる「料理」ではありません。<br>
+      細胞から目覚めるような生きたエネルギー（酵素）を取り入れ、<br>
+      古来の知恵である「発酵」で内側から美しさを醸成する。
+    </p>
+    <p class="about-lead" style="margin-bottom:0">
+      経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。<br>
+      あなたが持つ本来の輝きを、最大化させる場所でありたい。<br>
+      ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。
+    </p>
+  </div>
+</section>
 
-    <div class="numbers">
-      <div class="number-item">
-        <span class="number-val">2015</span>
-        <span class="number-label">設立年</span>
+<!-- ===== THE TWO DOORS ===== -->
+<section class="doors-sec">
+  <div class="doors-header">
+    <h2 class="doors-title">The Two Doors</h2>
+    <span class="doors-title-ja">ふたつの扉</span>
+  </div>
+
+  <div class="doors-grid">
+    <!-- CARD 01 -->
+    <a href="/listofcourses" class="door-card">
+      <div class="door-card-img">
+        <img src="/IMG_1203.JPG" alt="Professional Courses"
+          onerror="this.style.display='none'"
+        />
+        <div class="door-card-overlay">
+          <div class="door-num">01</div>
+          <div class="door-label">PROFESSIONAL<br>COURSES</div>
+        </div>
       </div>
-      <div class="number-item">
-        <span class="number-val">500<small style="font-size:0.5em">+</small></span>
-        <span class="number-label">年間受講生</span>
+      <h3>Professional Courses</h3>
+      <p>高度なローフードと発酵の技術を体系化した本講座。</p>
+    </a>
+
+    <!-- CARD 02 -->
+    <a href="/koji-fermentation-experience-tokyo" class="door-card" style="margin-top:2.5rem">
+      <div class="door-card-img">
+        <img src="/IMG_1544.JPG" alt="KOJI Workshops"
+          onerror="this.style.display='none'"
+        />
+        <div class="door-card-overlay">
+          <div class="door-num">02</div>
+          <div class="door-label">TRADITIONAL<br>KOJI WORKSHOPS</div>
+        </div>
       </div>
-      <div class="number-item">
-        <span class="number-val">50<small style="font-size:0.5em">+</small></span>
-        <span class="number-label">講座・メニュー数</span>
-      </div>
-      <div class="number-item">
-        <span class="number-val">10<small style="font-size:0.5em">+</small></span>
-        <span class="number-label">取得可能資格</span>
-      </div>
+      <h3>Traditional KOJI Workshops</h3>
+      <p>日本の知恵を五感で学ぶ、特別な発酵体験。</p>
+    </a>
+
+    <!-- vertical text -->
+    <div class="doors-vert">
+      <p>学ぶことは、未来の美しさをつくること。</p>
     </div>
-
-    <div style="text-align:center">
-      <a href="/brand" class="btn-text">&amp;LAB TOKYO について詳しく →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COURSES ===== -->
-<section class="sec courses-sec">
-  <div class="inner">
-    <span class="sec-eyebrow">Courses</span>
-    <h2 class="sec-title">各種講座</h2>
-    <div class="sec-rule"></div>
-    <p class="sec-lead">初心者から、資格取得・プロ養成まで。あなたのステージに合わせた多彩な講座をご用意しています。</p>
-
-    <div class="courses-grid">
-      <a href="/experiencelessons" class="course-card">
-        <span class="course-card-tag">Trial</span>
-        <h3>体験レッスン</h3>
-        <p>初めての方でも気軽に参加できる体験レッスン。ローフードや発酵の世界を楽しく体験。</p>
-      </a>
-      <a href="/rawfood-kentei-meister" class="course-card">
-        <span class="course-card-tag">Certification · JLBA</span>
-        <h3>ローフードマイスター講座</h3>
-        <p>JLBA国際認定の資格が取得できる本格講座。酵素・栄養学から実践レシピまで体系的に学ぶ。</p>
-      </a>
-      <a href="/fermentedfood" class="course-card">
-        <span class="course-card-tag">Fermentation</span>
-        <h3>発酵プランナー講座</h3>
-        <p>塩麹・甘酒・味噌・ぬか漬けなど、日本の伝統発酵食を深く学ぶ専門講座。</p>
-      </a>
-      <a href="/rawchocolatier/rawchocolatemeister" class="course-card">
-        <span class="course-card-tag">Raw Chocolate</span>
-        <h3>ローチョコレートマイスター養成講座</h3>
-        <p>ローショコラティエ協会認定。カカオの世界とローチョコレートの本格技術を習得。</p>
-      </a>
-      <a href="/rawchocolatier/rawpatissier" class="course-card">
-        <span class="course-card-tag">Raw Sweets</span>
-        <h3>ローパティシエ養成講座</h3>
-        <p>ロースイーツの理論と実践を体系的に学ぶ。プロとしての活動を目指す方に。</p>
-      </a>
-      <a href="/koji-fermentation-experience-tokyo" class="course-card">
-        <span class="course-card-tag">KOJI LAB</span>
-        <h3>UMAMI &amp; KOJI LAB</h3>
-        <p>英語で学ぶ麹の文化とUMAMIの科学。外国からのゲストにも対応。</p>
-      </a>
-    </div>
-
-    <div class="courses-more">
-      <a href="/listofcourses" class="btn-outline" style="border-color:rgba(198,161,91,0.4);color:#C6A15B">全講座一覧を見る →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== RAWCHOCOLATIER ASSOCIATION ===== -->
-<section class="rawchoco-sec">
-  <span class="sec-eyebrow">Association</span>
-  <h2 class="sec-title" style="max-width:600px;margin:0 auto 12px">ローショコラティエ協会</h2>
-  <div class="sec-rule" style="margin:16px auto 24px"></div>
-  <p class="sec-lead">ローチョコレート・ロースイーツに特化した世界初の協会。登録商標「ローショコラティエ®」「ローパティシエ®」のもと、プロフェッショナルを育成。</p>
-  <div class="rawchoco-links">
-    <a href="/rawchocolatier/rawchocolatier-course" class="rawchoco-link">ローショコラティエ</a>
-    <a href="/rawchocolatier/rawchocolateconcierge" class="rawchoco-link">ローチョコレートコンシェルジュ</a>
-    <a href="/rawchocolatier/online-lesson" class="rawchoco-link">オンラインレッスン</a>
-    <a href="/rawchocolatier/about-association" class="rawchoco-link">協会概要</a>
-  </div>
-  <div style="margin-top:36px">
-    <a href="/rawchocolatier" class="btn-primary">協会トップへ</a>
-  </div>
-</section>
-
-<!-- ===== KNOWLEDGE ===== -->
-<section class="sec knowledge-sec">
-  <div class="inner">
-    <span class="sec-eyebrow">Knowledge</span>
-    <h2 class="sec-title">食の知識を深める</h2>
-    <div class="sec-rule"></div>
-    <p class="sec-lead">ローフード・発酵・ローチョコレートなど、&LAB TOKYOが専門とする食のジャンルについて詳しく解説します。</p>
-
-    <div class="knowledge-grid">
-      <a href="/rawfood" class="knowledge-card">
-        <span class="knowledge-card-en">Raw Food</span>
-        <h3>ローフードとは</h3>
-        <p>加熱しない食事法で酵素を活かす、ローフードの基礎知識。</p>
-      </a>
-      <a href="/fermentedfood" class="knowledge-card">
-        <span class="knowledge-card-en">Fermentation</span>
-        <h3>発酵とは</h3>
-        <p>腸活・免疫・旨味。日本の発酵食文化の奥深さを解説。</p>
-      </a>
-      <a href="/livingfood" class="knowledge-card">
-        <span class="knowledge-card-en">Living Food</span>
-        <h3>リビングフードとは</h3>
-        <p>生きた食材の力を最大限に活かす、リビングフードの考え方。</p>
-      </a>
-      <a href="/rawchocolatier/rawchocolate" class="knowledge-card">
-        <span class="knowledge-card-en">Raw Chocolate</span>
-        <h3>ローチョコレートとは</h3>
-        <p>非加熱で作るローチョコレートの製法と栄養価。</p>
-      </a>
-      <a href="/rawchocolatier/whatrawsweets" class="knowledge-card">
-        <span class="knowledge-card-en">Raw Sweets</span>
-        <h3>ロースイーツとは</h3>
-        <p>砂糖・乳製品・小麦粉不使用。自然素材のみで作るスイーツ。</p>
-      </a>
-      <a href="/spirulina" class="knowledge-card">
-        <span class="knowledge-card-en">Spirulina</span>
-        <h3>スピルリナとは</h3>
-        <p>50以上の栄養素を含むスーパーフード、スピルリナの全て。</p>
-      </a>
-    </div>
-
-    <div class="knowledge-more">
-      <a href="/knowledge" class="btn-text">ナレッジ一覧を見る →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROFILE ===== -->
-<section class="profile-sec">
-  <div class="profile-inner">
-    <div class="profile-img">
-      <img
-        src="https://static.wixstatic.com/media/745f65_e3e2cfcf4e2f416e80c49a57b7f6eaf2~mv2.jpg"
-        alt="安藤千英 / Chie Ando"
-        loading="lazy"
-        onerror="this.parentElement.style.background='#24211E'"
-      />
-    </div>
-    <div class="profile-text">
-      <span class="sec-eyebrow">Founder</span>
-      <h2 class="sec-title">安藤千英</h2>
-      <div class="sec-rule"></div>
-      <span class="profile-name-en">Chie Ando</span>
-      <div class="profile-tags">
-        <span class="profile-tag">ELLE gourmet 認定料理家</span>
-        <span class="profile-tag">JLBAアンバサダー</span>
-        <span class="profile-tag">ローショコラティエ協会代表</span>
-        <span class="profile-tag">発酵プランナー</span>
-      </div>
-      <p>ローフード・発酵・プランツベースの食を専門とする料理家。2015年に&LAB TOKYOを設立し、これまでに延べ500名以上の受講生を指導。</p>
-      <p>書籍監修・企業レシピ開発・メディア出演など、幅広い分野で活躍。</p>
-      <a href="/instructor-chie-ando" class="btn-outline" style="margin-top:20px;border-color:rgba(198,161,91,0.4);color:#C6A15B;display:inline-block">プロフィールを見る →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CTA ===== -->
-<section class="cta-sec">
-  <h2>はじめての方へ</h2>
-  <p>どの講座から始めればいいか迷っている方は、<br>まず体験レッスンまたはお問い合わせからどうぞ。</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="/experiencelessons" class="btn-dark">体験レッスンを見る</a>
-    <a href="/contact" style="display:inline-block;border:1px solid rgba(26,23,21,0.3);color:#1A1715;font-family:'Noto Sans JP',sans-serif;font-size:13px;letter-spacing:.1em;padding:13px 28px;text-decoration:none">お問い合わせ</a>
   </div>
 </section>
 
