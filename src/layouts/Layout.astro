@@ -287,66 +287,136 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       ================================================ */
       main { padding-top: 73px; }
 
+      /* ---- FOOTER ---- */
       .site-footer {
-        background: var(--bg);
-        padding: 5rem 4rem;
-        border-top: 1px solid rgba(0,0,0,0.05);
+        background: #252320;
+        color: rgba(250,249,246,0.55);
       }
-      .footer-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 2rem;
+
+      /* Top: logo center */
+      .footer-logo-area {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        border-bottom: 1px solid rgba(250,249,246,0.07);
       }
-      .footer-logo {
-        height: 24px;
+      .footer-main-logo {
+        height: 44px;
         width: auto;
-        display: block;
-        margin-bottom: 0.9rem;
-        opacity: 0.55;
-      }
-      .footer-left p {
-        font-family: 'Noto Sans JP', sans-serif;
-        font-size: 11px;
-        color: #7A7A72;
-        letter-spacing: 0.1em;
-        line-height: 1.9;
-      }
-      .footer-right { text-align: right; }
-      .footer-right p {
-        font-family: 'Noto Sans JP', sans-serif;
-        font-size: 11px;
-        color: #7A7A72;
-        letter-spacing: 0.1em;
-        line-height: 1.9;
-      }
-      .footer-map {
-        font-family: 'Noto Sans JP', sans-serif;
-        font-size: 11px;
-        color: #7A7A72;
-        text-decoration: none;
-        border-bottom: 1px solid #7A7A72;
         display: inline-block;
-        margin-top: 0.3rem;
-        transition: color 0.2s, border-color 0.2s;
+        opacity: 0.75;
+        filter: brightness(0) invert(1);
       }
-      .footer-map:hover { color: var(--ink); border-color: var(--ink); }
-      .footer-links {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0.3rem;
-        margin-top: 1rem;
-      }
-      .footer-links a {
+      .footer-tagline {
         font-family: 'Noto Sans JP', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: rgba(250,249,246,0.3);
+        margin-top: 0.6rem;
+        display: block;
+      }
+
+      /* Middle: 5-column links */
+      .footer-cols {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        border-bottom: 1px solid rgba(250,249,246,0.07);
+      }
+      .footer-col-head {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(250,249,246,0.4);
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .footer-col a {
+        display: block;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 11px;
+        color: rgba(250,249,246,0.5);
+        text-decoration: none;
+        margin-bottom: 0.55rem;
+        letter-spacing: 0.04em;
+        transition: color 0.2s;
+        line-height: 1.6;
+      }
+      .footer-col a::before {
+        content: '・';
+        opacity: 0.4;
         font-size: 10px;
-        letter-spacing: 0.12em;
-        color: #BDBDB5;
+      }
+      .footer-col a:hover { color: rgba(250,249,246,0.9); }
+
+      /* Bottom: LINE + SNS */
+      .footer-bottom-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid rgba(250,249,246,0.07);
+      }
+      .footer-line-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1.4rem 2rem;
+        background: #1A1A18;
+        text-decoration: none;
+        border-right: 1px solid rgba(250,249,246,0.07);
+        transition: background 0.2s;
+      }
+      .footer-line-btn:hover { background: #111110; }
+      .footer-line-btn svg { width: 28px; height: 28px; flex-shrink: 0; }
+      .footer-line-btn span {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        color: rgba(250,249,246,0.8);
+      }
+      .footer-sns-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.4rem;
+        padding: 1.4rem 2rem;
+        background: #1E1C1A;
+      }
+      .footer-sns-row a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        color: rgba(250,249,246,0.45);
         text-decoration: none;
         transition: color 0.2s;
       }
-      .footer-links a:hover { color: #7A7A72; }
+      .footer-sns-row a:hover { color: rgba(250,249,246,0.9); }
+      .footer-sns-row svg { width: 20px; height: 20px; }
+      .footer-sns-row .sns-label {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.04em;
+        color: rgba(250,249,246,0.4);
+      }
+
+      /* Copyright */
+      .footer-copy {
+        text-align: center;
+        padding: 1.2rem 2rem;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 10px;
+        color: rgba(250,249,246,0.2);
+        letter-spacing: 0.1em;
+        background: #1A1A18;
+      }
       .footer-copy {
         margin-top: 3rem;
         font-family: 'Noto Sans JP', sans-serif;
@@ -366,12 +436,14 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       }
       @media (max-width: 1023px) {
         .site-header { padding: 1.2rem 1.5rem; }
+        .footer-cols { grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
       }
-      @media (max-width: 767px) {
-        .site-footer { padding: 3.5rem 1.5rem; }
-        .footer-inner { flex-direction: column; align-items: flex-start; }
-        .footer-right { text-align: left; }
-        .footer-links { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 0.8rem; }
+      @media (max-width: 640px) {
+        .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; padding: 2rem 1.5rem; }
+        .footer-bottom-bar { grid-template-columns: 1fr; }
+        .footer-line-btn { border-right: none; border-bottom: 1px solid rgba(250,249,246,0.07); }
+        .footer-sns-row { flex-wrap: wrap; gap: 1rem; padding: 1.2rem 1.5rem; }
+        .footer-logo-area { padding: 3rem 1.5rem 2rem; }
       }
     </style>
   </head>
@@ -494,37 +566,118 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
 
     <!-- ===== FOOTER ===== -->
     <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-left">
-          <img
-            src="/logo-wide.svg"
-            alt="&LAB TOKYO"
-            class="footer-logo"
-            onerror="this.outerHTML='<span style=\'font-family:Noto Serif JP,serif;font-size:12px;letter-spacing:.2em;color:#7A7A72;display:block;margin-bottom:0.9rem;opacity:.55\'>&LAB TOKYO</span>'"
-          />
-          <p>Raw Food &amp; Fermentation School</p>
-          <p>Tokyo · Shibuya, Japan</p>
+
+      <!-- ロゴ -->
+      <div class="footer-logo-area">
+        <img
+          src="/logo-wide.svg"
+          alt="&LAB TOKYO"
+          class="footer-main-logo"
+          onerror="this.outerHTML='<span style=\'font-family:Noto Serif JP,serif;font-size:22px;font-weight:200;letter-spacing:.3em;color:rgba(250,249,246,.7);display:inline-block\'>&LAB TOKYO</span>'"
+        />
+        <span class="footer-tagline">RAWFOOD / FERMENTATION / LIVING</span>
+      </div>
+
+      <!-- 5カラム リンク -->
+      <div class="footer-cols">
+        <div class="footer-col">
+          <span class="footer-col-head">COURSE（講座）</span>
+          <a href="/experiencelessons">体験レッスン</a>
+          <a href="/rawfood-kentei-meister">ローフードマイスター講座</a>
+          <a href="/fermentedfood">発酵プランナー講座</a>
+          <a href="/professional-training">プロ養成</a>
+          <a href="/rawchocolatier/rawpatissier">ローパティシエ養成</a>
+          <a href="/rawchocolatier/rawchocolatemeister">ローチョコレートマイスター</a>
         </div>
-        <div class="footer-right">
-          <p>5-2-11 Jingumae, Shibuya-ku,</p>
-          <p>Tokyo 150-0001, Japan</p>
-          <a
-            href="https://www.google.com/maps/search/&LAB+TOKYO+渋谷"
-            target="_blank"
-            rel="noopener"
-            class="footer-map"
-          >Google Map</a>
-          <div class="footer-links">
-            <a href="/listofcourses">Courses</a>
-            <a href="/rawchocolatier">協会</a>
-            <a href="/knowledge">Knowledge</a>
-            <a href="/brand">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/tokushoho">特定商取引法</a>
-          </div>
+        <div class="footer-col">
+          <span class="footer-col-head">ASSOCIATION</span>
+          <a href="/rawchocolatier">ローショコラティエ協会</a>
+          <a href="/rawchocolatier/rawchocolatier-course">ローショコラティエ</a>
+          <a href="/rawchocolatier/rawchocolateconcierge">ローチョコレートコンシェルジュ</a>
+          <a href="/rawchocolatier/about-association">協会概要</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-head">KNOWLEDGE</span>
+          <a href="/rawfood">ローフードとは</a>
+          <a href="/fermentedfood">発酵とは</a>
+          <a href="/livingfood">リビングフードとは</a>
+          <a href="/rawchocolatier/rawchocolate">ローチョコレートとは</a>
+          <a href="/rawchocolatier/whatrawsweets">ロースイーツとは</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-head">ABOUT</span>
+          <a href="/brand">&amp;LAB東京理念</a>
+          <a href="/andlab-team">講師紹介</a>
+          <a href="/media">メディア掲載</a>
+          <a href="/beginner">はじめての方へ</a>
+          <a href="/contact">ニュースレター</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-head">SUPPORT</span>
+          <a href="/rawchocolatier/faq">FAQ</a>
+          <a href="/contact">CONTACT</a>
+          <a href="/tokushoho">特定商取引法</a>
+          <a href="/privacy">プライバシーポリシー</a>
         </div>
       </div>
-      <p class="footer-copy">&copy; 2026 &LAB TOKYO. All rights reserved.</p>
+
+      <!-- LINE + SNS -->
+      <div class="footer-bottom-bar">
+        <!-- LINE -->
+        <a href="https://lin.ee/andlabtokyo" target="_blank" rel="noopener" class="footer-line-btn">
+          <!-- LINE icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" style="color:rgba(250,249,246,0.8)">
+            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+          </svg>
+          <span>LINE</span>
+        </a>
+
+        <!-- SNS アイコン -->
+        <div class="footer-sns-row">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/chie_andlab/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <!-- note -->
+          <a href="https://note.com/andlabtokyo" target="_blank" rel="noopener" aria-label="note">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2H6C4.343 2 3 3.343 3 5v14c0 1.657 1.343 3 3 3h12c1.657 0 3-1.343 3-3V5c0-1.657-1.343-3-3-3zm-1 14H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V6h10v2z"/>
+            </svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/andlabtokyo" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <!-- X (Twitter) -->
+          <a href="https://x.com/andlabtokyo" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.638 5.903-5.638zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@andlabtokyo" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@andlabtokyo" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.24 8.24 0 0 0 4.83 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z"/>
+            </svg>
+          </a>
+          <!-- 小紅書 (xiaohongshu) -->
+          <a href="https://www.xiaohongshu.com/user/andlabtokyo" target="_blank" rel="noopener" aria-label="小紅書">
+            <span class="sns-label" style="font-size:11px;font-weight:700;color:rgba(250,249,246,0.45)">小红书</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-copy">(C)2015 RawfoodHaccoLabTOKYO All rights reserved.</p>
     </footer>
 
     <script>
