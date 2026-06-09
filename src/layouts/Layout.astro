@@ -61,6 +61,47 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
   <style is:global>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* ================================================
+       DESIGN SYSTEM TOKENS (shared across all pages)
+    ================================================ */
+    :root {
+      /* Typography */
+      --f-serif: 'Noto Serif JP', serif;
+      --f-sans:  'Noto Sans JP', sans-serif;
+      --f-s:     'Noto Serif JP', serif;
+      --f-b:     'Noto Sans JP', sans-serif;
+      --fh:      'Cormorant Garamond', serif;
+
+      /* Light palette */
+      --linen:   #FAF9F6;
+      --linen-2: #F5F3EE;
+      --linen-3: rgba(28,28,26,0.09);
+      --ink:     #1C1C1A;
+      --ink-2:   #3C3C3A;
+      --ink-3:   #8C8C8A;
+      --divider: rgba(28,28,26,0.09);
+
+      /* Dark palette */
+      --sumi:    #1A1715;
+      --sumi-2:  #1E1B19;
+      --bg-card: #24211E;
+      --bg-dark: #110E0B;
+
+      /* Amber */
+      --amber:   #C6A15B;
+      --amber-d: #A8865A;
+
+      /* Green */
+      --green:     #6B9A3A;
+      --green-d:   #4A7A1E;
+      --green-btn: #4D7C2A;
+
+      /* Layout helpers */
+      --pad: 3rem;
+      --max: 1100px;
+    }
+
     body {
       font-family: 'Noto Serif JP', serif;
       background: #FAF9F6;
