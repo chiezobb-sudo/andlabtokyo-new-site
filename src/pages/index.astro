@@ -1,855 +1,622 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-
-<Layout title="これからの私を、美しく「醸す」。 | &LAB TOKYO">
-
-  <!-- HERO SECTION -->
-  <section style="
-    min-height: calc(100vh - 100px);
-    background: #FAF9F6;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  ">
-    <!-- BACKGROUND IMAGE WITH GRADIENT OVERLAY -->
-    <div style="
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 80%;
-      height: 100%;
-      overflow: hidden;
-    ">
-      <img
-        src="/herotable.JPG"
-        alt="&LAB TOKYO Studio"
-        style="
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          display: block;
-        "
-      />
-
-      <!-- GRADIENT OVERLAY: Background color to transparent -->
-      <div style="
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          to right,
-          #FAF9F6 0%,
-          #FAF9F6 20%,
-          rgba(250, 249, 246, 0.8) 40%,
-          rgba(250, 249, 246, 0) 70%,
-          transparent 100%
-        );
-        pointer-events: none;
-      "></div>
-    </div>
-
-    <!-- LEFT: TEXT AREA -->
-    <div style="
-      position: relative;
-      z-index: 10;
-      padding: 0 4rem 0 4rem;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
-    ">
-      <span style="
-        font-size: 10px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: #7A7A72;
-        font-family: 'Noto Sans JP', sans-serif;
-        font-weight: 400;
-        display: block;
-        margin-bottom: 1.2rem;
-      ">Fermentation Creator · Tokyo Shibuya</span>
-
-      <h1 style="
-        font-size: 3rem;
-        font-weight: 200;
-        letter-spacing: 0.28em;
-        line-height: 1.4;
-        color: #1C1C1A;
-        margin-bottom: 2.8rem;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        これからの私を、<br>美しく「醸す」。
-      </h1>
-
-      <p style="
-        font-size: 13px;
-        letter-spacing: 0.08em;
-        line-height: 2.2;
-        color: #7A7A72;
-        margin-bottom: 1.5rem;
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-      ">
-        細胞からデザインする、<br>一生モノの心と体。
-      </p>
-
-      <p style="
-        font-size: 12px;
-        letter-spacing: 0.08em;
-        line-height: 2;
-        color: #999;
-        margin-bottom: 3.5rem;
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-      ">
-        忙しい毎日の中で、自分の体を後回しにしていませんか。<br>
-        発酵×ローフードのクロス理論で、<br>
-        あなたの本来の輝きを取り戻す。
-      </p>
-
-      <a href="/brand" style="
-        display: inline-block;
-        width: fit-content;
-        font-size: 10px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: #1C1C1A;
-        text-decoration: none;
-        border-bottom: 1.5px solid #1C1C1A;
-        padding-bottom: 0.7rem;
-        font-family: 'Noto Serif JP', serif;
-        transition: opacity 0.3s;
-        font-weight: 300;
-      ">
-        &LAB TOKYO
-      </a>
-
-      <!-- SCROLL INDICATOR -->
-      <div style="
-        position: absolute;
-        bottom: 2rem;
-        left: 4rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.8rem;
-      ">
-        <span style="
-          font-size: 8px;
-          letter-spacing: 0.25em;
-          text-transform: uppercase;
-          color: #7A7A72;
-          font-family: 'Noto Sans JP', sans-serif;
-          font-weight: 400;
-        ">Scroll</span>
-        <div style="
-          width: 1px;
-          height: 32px;
-          background: #7A7A72;
-          opacity: 0.35;
-        "></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT &LAB TOKYO セクション -->
-  <section style="
-    padding: 12rem 4rem;
-    background: #FAF9F6;
-    position: relative;
-  ">
-    <div style="
-      max-width: 820px;
-      margin: 0 auto;
-      text-align: center;
-    ">
-      <!-- DIVIDER LINE -->
-      <div style="
-        width: 80px;
-        height: 1px;
-        background: #1C1C1A;
-        margin: 0 auto 3rem;
-      "></div>
-
-      <!-- TAGLINE -->
-      <p style="
-        font-size: 16px;
-        font-weight: 300;
-        letter-spacing: 0.08em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 1.2rem;
-      ">
-        美しさを、自ら「つくる」人へ。
-      </p>
-
-      <!-- SECTION TITLE -->
-      <h2 style="
-        font-size: 2.6rem;
-        font-weight: 300;
-        letter-spacing: 0.1em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 3rem;
-      ">
-        ABOUT &LAB TOKYO
-      </h2>
-
-      <!-- DIVIDER LINE -->
-      <div style="
-        width: 80px;
-        height: 1px;
-        background: #1C1C1A;
-        margin: 0 auto 3.5rem;
-      "></div>
-
-      <!-- BODY TEXT -->
-      <p style="
-        font-size: 14px;
-        line-height: 2.2;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-        margin-bottom: 2rem;
-      ">
-        &LAB TOKYOは、東京・渋谷を拠点とする<br>
-        「発酵×ローフード」のクロス理論でライフスタイルを進化させる。
-      </p>
-
-      <p style="
-        font-size: 14px;
-        line-height: 2.2;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-        margin-bottom: 2rem;
-      ">
-        私たちが提案するのは、単なる「料理」ではありません。<br>
-        細胞から目覚めるような生きたエネルギー（酵素）を取り入れ、<br>
-        古来の知恵である「発酵」で内側から美しさを醸成する。
-      </p>
-
-      <p style="
-        font-size: 14px;
-        line-height: 2.2;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-      ">
-        経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。<br>
-        あなたが持つ本来の輝きを、最大化させる場所でありたい。<br>
-        ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- COURSES セクション（講座紹介） -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 8rem 4rem;
-    background: #FFFFFF;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    ">
-      <h2 style="
-        font-size: 2.6rem;
-        font-weight: 300;
-        letter-spacing: 0.12em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        Courses
-      </h2>
-      <span style="
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        講座紹介
-      </span>
-    </div>
-
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2.4rem;
-    ">
-      <!-- ローフード -->
-      <a href="/rawfood-kentei-meister" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#f0ede7;">
-          <img src="/images/courses/course-rawfood.jpg" alt="ローフード講座" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ローフード</h3>
-        <p style="font-size:10px;line-height:1.8;color:#7A7A72;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">酵素を活かす、生きた食の知恵を体系的に学ぶ。</p>
-      </a>
-
-      <!-- 発酵 -->
-      <a href="/koji-fermentation-experience-tokyo" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#f0ede7;">
-          <img src="/images/courses/course-fermentation.jpg" alt="発酵講座" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">発酵</h3>
-        <p style="font-size:10px;line-height:1.8;color:#7A7A72;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">日本の伝統である発酵の力を、暮らしと美容へ応用する。</p>
-      </a>
-
-      <!-- ロースイーツ -->
-      <a href="/raw-sweets" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#f0ede7;">
-          <img src="/images/courses/course-rawsweets.jpg" alt="ロースイーツ講座" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ロースイーツ</h3>
-        <p style="font-size:10px;line-height:1.8;color:#7A7A72;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">罪悪感のない、心躍るご褒美スイーツをつくる。</p>
-      </a>
-
-      <!-- ローチョコレート -->
-      <a href="/rawchocolatier" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#f0ede7;">
-          <img src="/images/courses/course-rawchocolate.jpg" alt="ローチョコレート講座" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ローチョコレート</h3>
-        <p style="font-size:10px;line-height:1.8;color:#7A7A72;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">カカオの生命力を、五感で味わうセルフケア・アート。</p>
-      </a>
-
-      <!-- UMAMI&KOJI LAB -->
-      <a href="/koji-fermentation-experience-tokyo" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 1/1; overflow:hidden; margin-bottom:1.2rem; background:#f0ede7;">
-          <img src="/images/courses/course-umami-koji.jpg" alt="UMAMI&KOJI LAB" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.6rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">UMAMI &amp; KOJI LAB</h3>
-        <p style="font-size:10px;line-height:1.8;color:#7A7A72;letter-spacing:0.06em;font-family:'Noto Serif JP', serif;">麹と発酵の力で「うまみ」を引き出す、新しい食の探求。</p>
-      </a>
-    </div>
-
-    <div style="text-align:center; margin-top: 4rem;">
-      <a href="/listofcourses" style="
-        display:inline-block;
-        padding: 1rem 3rem;
-        border: 1px solid #1C1C1A;
-        color:#1C1C1A;
-        text-decoration:none;
-        font-size:11px;
-        letter-spacing:0.2em;
-        font-family:'Noto Serif JP', serif;
-        transition: background 0.3s, color 0.3s;
-      ">すべての講座を見る</a>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- PICK UP セクション（&LAB 最新活動） -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 8rem 4rem;
-    background: #FAF9F6;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    ">
-      <h2 style="
-        font-size: 2.6rem;
-        font-weight: 300;
-        letter-spacing: 0.12em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        Pick Up
-      </h2>
-      <span style="
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        &LAB 最新活動
-      </span>
-    </div>
-
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.4rem;
-    ">
-      <a href="/blog/what-is-rawfood" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 16/10; overflow:hidden; margin-bottom:1.2rem; background:#e5e0da;">
-          <img src="/images/pickup/pickup-rawfood-basics.jpg" alt="ローフードとは何か" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <p style="font-size:10px;letter-spacing:0.15em;color:#A9A99F;margin-bottom:0.6rem;font-family:'Noto Serif JP', serif;">JOURNAL</p>
-        <h3 style="font-size:14px;letter-spacing:0.08em;line-height:1.7;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ローフードとは何か。酵素から考える、新しい食のかたち。</h3>
-      </a>
-
-      <a href="/blog/cross-theory" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 16/10; overflow:hidden; margin-bottom:1.2rem; background:#e5e0da;">
-          <img src="/images/pickup/pickup-cross-theory.jpg" alt="クロス理論について" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <p style="font-size:10px;letter-spacing:0.15em;color:#A9A99F;margin-bottom:0.6rem;font-family:'Noto Serif JP', serif;">JOURNAL</p>
-        <h3 style="font-size:14px;letter-spacing:0.08em;line-height:1.7;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">「発酵×ローフード」のクロス理論が、暮らしを変える理由。</h3>
-      </a>
-
-      <a href="/blog/raw-sweets-benefits" style="text-decoration:none;color:inherit;display:block;">
-        <div style="aspect-ratio: 16/10; overflow:hidden; margin-bottom:1.2rem; background:#e5e0da;">
-          <img src="/images/pickup/pickup-rawsweets-benefits.jpg" alt="ロースイーツの効果" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <p style="font-size:10px;letter-spacing:0.15em;color:#A9A99F;margin-bottom:0.6rem;font-family:'Noto Serif JP', serif;">JOURNAL</p>
-        <h3 style="font-size:14px;letter-spacing:0.08em;line-height:1.7;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">罪悪感ゼロの、心躍るご褒美。ロースイーツがもたらす効果とは。</h3>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- KNOWLEDGE セクション（知る・学ぶ リビングフード） -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 8rem 4rem;
-    background: #FFFFFF;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    ">
-      <h2 style="
-        font-size: 2.6rem;
-        font-weight: 300;
-        letter-spacing: 0.12em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        Knowledge
-      </h2>
-      <span style="
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: #7A7A72;
-        font-family: 'Noto Serif JP', serif;
-      ">
-        知る・学ぶ リビングフード
-      </span>
-    </div>
-
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-    ">
-      <!-- ローフードとは -->
-      <a href="/living-food" style="text-decoration:none;color:inherit;display:block;border:1px solid #eee;padding:2rem;">
-        <div style="aspect-ratio: 4/3; overflow:hidden; margin-bottom:1.4rem; background:#f0ede7;">
-          <img src="/images/knowledge/knowledge-rawfood.jpg" alt="ローフードとは" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.8rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ローフードとは</h3>
-        <p style="font-size:11px;line-height:1.9;color:#7A7A72;letter-spacing:0.04em;font-family:'Noto Serif JP', serif;">
-          食材の酵素や栄養素を生きたまま取り入れる、新しい食のスタイル。細胞から美しさと健やかさを育む。
-        </p>
-      </a>
-
-      <!-- 発酵食とは -->
-      <a href="/fermentation" style="text-decoration:none;color:inherit;display:block;border:1px solid #eee;padding:2rem;">
-        <div style="aspect-ratio: 4/3; overflow:hidden; margin-bottom:1.4rem; background:#f0ede7;">
-          <img src="/images/knowledge/knowledge-fermentation.jpg" alt="発酵食とは" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.8rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">発酵食とは</h3>
-        <p style="font-size:11px;line-height:1.9;color:#7A7A72;letter-spacing:0.04em;font-family:'Noto Serif JP', serif;">
-          日本古来の知恵である発酵の力を、現代の暮らしに取り入れる。麹がつくる「うまみ」と健やかな腸内環境。
-        </p>
-      </a>
-
-      <!-- ローチョコレートとは（修正済みテキスト） -->
-      <a href="/rawchocolatier" style="text-decoration:none;color:inherit;display:block;border:1px solid #eee;padding:2rem;">
-        <div style="aspect-ratio: 4/3; overflow:hidden; margin-bottom:1.4rem; background:#f0ede7;">
-          <img src="/images/knowledge/knowledge-rawchocolate.jpg" alt="ローチョコレートとは" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.8rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ローチョコレートとは</h3>
-        <p style="font-size:11px;line-height:1.9;color:#7A7A72;letter-spacing:0.04em;font-family:'Noto Serif JP', serif;">
-          カカオの生命力を、五感で味わう。温度と香りを味方につける、至福のセルフケア・アート。
-        </p>
-      </a>
-
-      <!-- ロースイーツとは（修正済みテキスト） -->
-      <a href="/raw-sweets" style="text-decoration:none;color:inherit;display:block;border:1px solid #eee;padding:2rem;">
-        <div style="aspect-ratio: 4/3; overflow:hidden; margin-bottom:1.4rem; background:#f0ede7;">
-          <img src="/images/knowledge/knowledge-rawsweets.jpg" alt="ロースイーツとは" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.8rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">ロースイーツとは</h3>
-        <p style="font-size:11px;line-height:1.9;color:#7A7A72;letter-spacing:0.04em;font-family:'Noto Serif JP', serif;">
-          罪悪感（ギルト）を、美しさに変える。砂糖・小麦・乳製品を使わない、心躍るご褒美。
-        </p>
-      </a>
-
-      <!-- スピルリナとは -->
-      <a href="/spirulina" style="text-decoration:none;color:inherit;display:block;border:1px solid #eee;padding:2rem;">
-        <div style="aspect-ratio: 4/3; overflow:hidden; margin-bottom:1.4rem; background:#f0ede7;">
-          <img src="/images/knowledge/knowledge-spirulina.jpg" alt="スピルリナとは" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        </div>
-        <h3 style="font-size:13px;letter-spacing:0.12em;margin-bottom:0.8rem;color:#1C1C1A;font-family:'Noto Serif JP', serif;font-weight:400;">スピルリナとは</h3>
-        <p style="font-size:11px;line-height:1.9;color:#7A7A72;letter-spacing:0.04em;font-family:'Noto Serif JP', serif;">
-          次世代タンパク源として世界が注目する藻類。栄養素を豊富に含み、美容と健康をサポートする。
-        </p>
-      </a>
-    </div>
-
-    <div style="text-align:center; margin-top: 4rem;">
-      <a href="/knowledge" style="
-        display:inline-block;
-        padding: 1rem 3rem;
-        border: 1px solid #1C1C1A;
-        color:#1C1C1A;
-        text-decoration:none;
-        font-size:11px;
-        letter-spacing:0.2em;
-        font-family:'Noto Serif JP', serif;
-        transition: background 0.3s, color 0.3s;
-      ">ナレッジハブをもっと見る</a>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- FEATURED IN セクション（メディア掲載） -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 6rem 4rem;
-    background: #1C1C1A;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    ">
-      <span style="
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: #A9D159;
-        font-family: 'Noto Serif JP', serif;
-        display: block;
-        margin-bottom: 1rem;
-      ">FEATURED IN</span>
-      <h2 style="
-        font-size: 1.6rem;
-        font-weight: 300;
-        letter-spacing: 0.1em;
-        color: #FAF9F6;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 4rem;
-      ">
-        メディア掲載
-      </h2>
-
-      <div style="
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 3rem;
-        align-items: center;
-        justify-items: center;
-      ">
-        <img src="/images/media/media-logo-ellegourmet.png" alt="ELLE gourmet" style="max-width:140px; max-height:48px; object-fit:contain; opacity:0.85;" />
-        <img src="/images/media/media-logo-1.png" alt="メディア掲載ロゴ1" style="max-width:140px; max-height:48px; object-fit:contain; opacity:0.85;" />
-        <img src="/images/media/media-logo-2.png" alt="メディア掲載ロゴ2" style="max-width:140px; max-height:48px; object-fit:contain; opacity:0.85;" />
-        <img src="/images/media/media-logo-3.png" alt="メディア掲載ロゴ3" style="max-width:140px; max-height:48px; object-fit:contain; opacity:0.85;" />
-        <img src="/images/media/media-logo-4.png" alt="メディア掲載ロゴ4" style="max-width:140px; max-height:48px; object-fit:contain; opacity:0.85;" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- ABOUT &LAB TOKYO（食のLABとして） -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 10rem 4rem;
-    background: #FAF9F6;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    ">
-      <div style="aspect-ratio: 4/5; overflow:hidden; background:#e5e0da;">
-        <img src="/images/about/about-lab-studio.jpg" alt="&LAB TOKYO 食のLAB" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      </div>
-
-      <div>
-        <span style="
-          font-size: 12px;
-          letter-spacing: 0.2em;
-          color: #7A7A72;
-          font-family: 'Noto Serif JP', serif;
-          display: block;
-          margin-bottom: 1.4rem;
-        ">食のLABとして</span>
-        <h2 style="
-          font-size: 2.2rem;
-          font-weight: 300;
-          letter-spacing: 0.08em;
-          color: #1C1C1A;
-          font-family: 'Noto Serif JP', serif;
-          line-height: 1.6;
-          margin-bottom: 2.4rem;
-        ">
-          &LAB TOKYOは、<br>「食」を実験し、探求する場所。
-        </h2>
-        <p style="
-          font-size: 13px;
-          line-height: 2.2;
-          color: #7A7A72;
-          font-family: 'Noto Serif JP', serif;
-          font-weight: 300;
-          margin-bottom: 1.6rem;
-        ">
-          ローフード、発酵、ロースイーツ、ローチョコレート——。<br>
-          一見異なるこれらの食の世界は、すべて「生きた酵素」と「発酵の知恵」という共通の軸でつながっています。
-        </p>
-        <p style="
-          font-size: 13px;
-          line-height: 2.2;
-          color: #7A7A72;
-          font-family: 'Noto Serif JP', serif;
-          font-weight: 300;
-        ">
-          &LAB TOKYOは、それらをひとつの「LAB（実験室）」として捉え、体系立てて学べる場をつくっています。<br>
-          知識として理解するだけでなく、実際につくり、味わい、暮らしに取り入れる。<br>
-          そのプロセスこそが、内側からの美しさを醸成します。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- CHIE ANDO セクション -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 10rem 4rem;
-    background: #FFFFFF;
-    position: relative;
-  ">
-    <div style="
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    ">
-      <div>
-        <span style="
-          font-size: 12px;
-          letter-spacing: 0.2em;
-          color: #7A7A72;
-          font-family: 'Noto Serif JP', serif;
-          display: block;
-          margin-bottom: 1.4rem;
-        ">PROFILE</span>
-        <h2 style="
-          font-size: 2.2rem;
-          font-weight: 300;
-          letter-spacing: 0.08em;
-          color: #1C1C1A;
-          font-family: 'Noto Serif JP', serif;
-          line-height: 1.6;
-          margin-bottom: 2.4rem;
-        ">
-          安藤千英<br>CHIE ANDO
-        </h2>
-        <p style="
-          font-size: 13px;
-          line-height: 2.2;
-          color: #7A7A72;
-          font-family: 'Noto Serif JP', serif;
-          font-weight: 300;
-          margin-bottom: 1.6rem;
-        ">
-          ELLE gourmet認定料理家。発酵×ローフードのクロス理論を提唱し、東京・渋谷を拠点に講座やレッスンを展開。<br>
-          経営者や専門職をはじめ、自分自身の可能性を信じるすべての女性に向けて、内側から輝く美しさのつくり方を伝えている。
-        </p>
-        <a href="/about" style="
-          display: inline-block;
-          font-size: 10px;
-          letter-spacing: 0.3em;
-          text-transform: uppercase;
-          color: #1C1C1A;
-          text-decoration: none;
-          border-bottom: 1.5px solid #1C1C1A;
-          padding-bottom: 0.6rem;
-          font-family: 'Noto Serif JP', serif;
-          font-weight: 300;
-        ">
-          プロフィールを見る
-        </a>
-      </div>
-
-      <div style="aspect-ratio: 4/5; overflow:hidden; background:#e5e0da;">
-        <img src="/images/about/profile-chie-ando.jpg" alt="安藤千英 プロフィール写真" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- NEWS セクション -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 8rem 4rem;
-    background: #FAF9F6;
-    position: relative;
-  ">
-    <div style="
-      max-width: 900px;
-      margin: 0 auto;
-    ">
-      <h2 style="
-        font-size: 2.2rem;
-        font-weight: 300;
-        letter-spacing: 0.12em;
-        color: #1C1C1A;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 3.5rem;
-        text-align: center;
-      ">
-        News
-      </h2>
-
-      <ul style="list-style:none; padding:0; margin:0;">
-        <li style="display:flex; gap:2rem; padding:1.6rem 0; border-bottom:1px solid #e5e0da; align-items:baseline;">
-          <span style="font-size:11px; letter-spacing:0.1em; color:#A9A99F; font-family:'Noto Serif JP', serif; flex-shrink:0; width:90px;">2026.05.20</span>
-          <span style="font-size:13px; letter-spacing:0.04em; color:#1C1C1A; font-family:'Noto Serif JP', serif; line-height:1.8;">夏季限定「ロースイーツ・ワークショップ」開講のお知らせ。</span>
-        </li>
-        <li style="display:flex; gap:2rem; padding:1.6rem 0; border-bottom:1px solid #e5e0da; align-items:baseline;">
-          <span style="font-size:11px; letter-spacing:0.1em; color:#A9A99F; font-family:'Noto Serif JP', serif; flex-shrink:0; width:90px;">2026.04.12</span>
-          <span style="font-size:13px; letter-spacing:0.04em; color:#1C1C1A; font-family:'Noto Serif JP', serif; line-height:1.8;">ELLE gourmetにて、安藤千英のインタビュー記事が掲載されました。</span>
-        </li>
-        <li style="display:flex; gap:2rem; padding:1.6rem 0; border-bottom:1px solid #e5e0da; align-items:baseline;">
-          <span style="font-size:11px; letter-spacing:0.1em; color:#A9A99F; font-family:'Noto Serif JP', serif; flex-shrink:0; width:90px;">2026.03.01</span>
-          <span style="font-size:13px; letter-spacing:0.04em; color:#1C1C1A; font-family:'Noto Serif JP', serif; line-height:1.8;">「UMAMI &amp; KOJI LAB」新講座、オンライン受講の受付を開始しました。</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- &LAB TOKYO 理念 セクション -->
-  <!-- ============================================ -->
-  <section style="
-    padding: 12rem 4rem;
-    background: #1C1C1A;
-    position: relative;
-  ">
-    <div style="
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-    ">
-      <div style="
-        width: 80px;
-        height: 1px;
-        background: rgba(250,249,246,0.3);
-        margin: 0 auto 3rem;
-      "></div>
-
-      <p style="
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: #A9D159;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 1.6rem;
-      ">
-        &LAB TOKYO PHILOSOPHY
-      </p>
-
-      <h2 style="
-        font-size: 1.8rem;
-        font-weight: 300;
-        letter-spacing: 0.12em;
-        line-height: 2.1;
-        color: #FAF9F6;
-        font-family: 'Noto Serif JP', serif;
-        margin-bottom: 3rem;
-      ">
-        食べることは、<br>未来の自分を選ぶこと。
-      </h2>
-
-      <p style="
-        font-size: 13px;
-        line-height: 2.4;
-        color: rgba(250,249,246,0.6);
-        font-family: 'Noto Serif JP', serif;
-        font-weight: 300;
-        margin-bottom: 3.5rem;
-      ">
-        &LAB TOKYOが大切にしているのは、知識を「特別なもの」で終わらせないこと。<br>
-        日々の食卓に取り入れられる小さな実践の積み重ねが、やがて大きな変化となって、<br>
-        あなた自身の輝きとなって表れていく。私たちはその過程に、寄り添い続けます。
-      </p>
-
-      <div style="
-        width: 80px;
-        height: 1px;
-        background: rgba(250,249,246,0.3);
-        margin: 0 auto;
-      "></div>
-    </div>
-  </section>
-
-</Layout>
+<Layout
+  title="&LAB TOKYO | ローフード・発酵料理教室 東京・渋谷"
+  description="東京・渋谷のローフード・発酵料理教室 &LAB TOKYO。ELLE gourmet認定料理家・安藤千英が主宰。ローショコラティエ協会本部。JLBAローフードマイスター・発酵プランナー・ローチョコレートマイスター養成講座。"
+  canonical="https://www.andlabtokyo.com/"
+  type="website"
+>
 
 <style>
-  a:hover {
-    opacity: 0.85;
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  img {
-    display: block;
-  }
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #1A1715;
+  overflow: hidden;
+  padding: 80px 24px 60px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://static.wixstatic.com/media/745f65_7c4c8d79025e432e8a9bd02e8dc3a455~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+}
+.hero-eyebrow {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #C6A15B;
+  margin-bottom: 20px;
+}
+.hero-title {
+  position: relative;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 200;
+  color: #FAF5EC;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.hero-title-en {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 2vw, 22px);
+  font-weight: 400;
+  font-style: italic;
+  color: #C0B6A8;
+  letter-spacing: 0.25em;
+  margin-bottom: 28px;
+}
+.hero-rule {
+  position: relative;
+  width: 40px;
+  height: 1px;
+  background: #C6A15B;
+  margin: 0 auto 28px;
+}
+.hero-desc {
+  position: relative;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(13px, 1.5vw, 16px);
+  color: #C0B6A8;
+  line-height: 2;
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+.hero-btns {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.btn-primary {
+  display: inline-block;
+  background: #C6A15B;
+  color: #1A1715;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #A8865A; }
+.btn-outline {
+  display: inline-block;
+  border: 1px solid rgba(198,161,91,0.5);
+  color: #C6A15B;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  padding: 13px 28px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: #C6A15B; color: #FAF5EC; }
 
-  @media (max-width: 1024px) {
-    section {
-      display: block !important;
-      padding: 4rem 2rem !important;
-    }
+/* ===== SECTION SHARED ===== */
+.sec { padding: 80px 24px; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.sec-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8C7A6A;
+  display: block;
+  margin-bottom: 12px;
+}
+.sec-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 300;
+  color: #1C1C1A;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.sec-rule {
+  width: 32px;
+  height: 1px;
+  background: #8C7A6A;
+  margin: 16px 0 28px;
+}
+.sec-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  color: #5A5A58;
+  line-height: 2;
+  max-width: 660px;
+  margin-bottom: 48px;
+}
 
-    h1 {
-      font-size: 2.5rem !important;
-    }
+/* ===== NUMBERS ===== */
+.about-sec { background: #FAF9F6; }
+.numbers {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.number-item {
+  flex: 1;
+  min-width: 120px;
+  background: #fff;
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid rgba(28,28,26,0.05);
+}
+.number-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 600;
+  color: #1C1C1A;
+  line-height: 1;
+  display: block;
+  margin-bottom: 6px;
+}
+.number-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  color: #8C7A6A;
+  letter-spacing: 0.08em;
+}
 
-    div[style*="grid-template-columns: 1fr 1fr"] {
-      grid-template-columns: 1fr !important;
-      gap: 2rem !important;
-    }
+/* ===== COURSES GRID ===== */
+.courses-sec { background: #1C1C1A; }
+.courses-sec .sec-eyebrow { color: #A8865A; }
+.courses-sec .sec-title { color: #FAF5EC; }
+.courses-sec .sec-rule { background: #A8865A; }
+.courses-sec .sec-lead { color: #C0B6A8; }
 
-    div[style*="grid-template-columns: repeat(auto-fit"] {
-      grid-template-columns: 1fr !important;
-    }
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.course-card {
+  background: #24211E;
+  padding: 32px 28px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+  border-bottom: 2px solid transparent;
+}
+.course-card:hover { background: #2C2926; border-bottom-color: #C6A15B; }
+.course-card-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C6A15B;
+  display: block;
+  margin-bottom: 10px;
+}
+.course-card h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #FAF5EC;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.course-card p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  color: #C0B6A8;
+  line-height: 1.8;
+}
+.courses-more {
+  text-align: center;
+  margin-top: 40px;
+}
 
-    div[style*="absolute"][style*="right"] {
-      display: none !important;
-    }
-  }
+/* ===== RAWCHOCOLATIER BAND ===== */
+.rawchoco-sec {
+  background: #110E0B;
+  padding: 80px 24px;
+  text-align: center;
+}
+.rawchoco-sec .sec-eyebrow { color: #A8865A; }
+.rawchoco-sec .sec-title { color: #FAF5EC; text-align: center; }
+.rawchoco-sec .sec-lead { color: #C0B6A8; margin: 0 auto 40px; text-align: center; }
+.rawchoco-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.rawchoco-link {
+  display: inline-block;
+  border: 1px solid rgba(198,161,91,0.3);
+  color: #C6A15B;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.rawchoco-link:hover { background: #C6A15B; color: #110E0B; }
+
+/* ===== KNOWLEDGE ===== */
+.knowledge-sec { background: #FAF9F6; }
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.knowledge-card {
+  background: #fff;
+  border: 1px solid rgba(28,28,26,0.06);
+  padding: 28px 24px;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.2s;
+}
+.knowledge-card:hover { border-color: #8C7A6A; }
+.knowledge-card-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #8C7A6A;
+  display: block;
+  margin-bottom: 8px;
+}
+.knowledge-card h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #1C1C1A;
+  margin-bottom: 8px;
+}
+.knowledge-card p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  color: #6A6A68;
+  line-height: 1.8;
+}
+.knowledge-more {
+  text-align: center;
+  margin-top: 36px;
+}
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: #3C3C3A;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(28,28,26,0.2);
+  padding-bottom: 4px;
+  transition: border-color 0.2s;
+}
+.btn-text:hover { border-color: #1C1C1A; }
+
+/* ===== ABOUT / PROFILE ===== */
+.profile-sec {
+  background: #1C1C1A;
+  padding: 80px 24px;
+}
+.profile-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.profile-img {
+  aspect-ratio: 4/5;
+  background: #24211E;
+  overflow: hidden;
+}
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.profile-text .sec-eyebrow { color: #A8865A; }
+.profile-text .sec-title { color: #FAF5EC; font-size: clamp(20px, 2.5vw, 30px); }
+.profile-text .sec-rule { background: #A8865A; }
+.profile-name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #C6A15B;
+  margin-bottom: 16px;
+  display: block;
+}
+.profile-text p {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: #C0B6A8;
+  line-height: 2;
+  margin-bottom: 12px;
+}
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.profile-tag {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  color: #A8865A;
+  border: 1px solid rgba(168,134,90,0.35);
+  padding: 4px 12px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== CTA ===== */
+.cta-sec {
+  background: #C6A15B;
+  padding: 72px 24px;
+  text-align: center;
+}
+.cta-sec h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 300;
+  color: #1A1715;
+  margin-bottom: 12px;
+}
+.cta-sec p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: rgba(26,23,21,0.7);
+  margin-bottom: 32px;
+  line-height: 1.8;
+}
+.btn-dark {
+  display: inline-block;
+  background: #1A1715;
+  color: #FAF5EC;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 14px 36px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-dark:hover { background: #3C3C3A; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .courses-grid { grid-template-columns: 1fr 1fr; }
+  .knowledge-grid { grid-template-columns: 1fr 1fr; }
+  .profile-inner { grid-template-columns: 1fr; gap: 40px; }
+  .profile-img { max-width: 360px; }
+}
+@media (max-width: 600px) {
+  .courses-grid { grid-template-columns: 1fr; }
+  .knowledge-grid { grid-template-columns: 1fr; }
+  .numbers { flex-direction: column; }
+}
 </style>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <span class="hero-eyebrow">Tokyo · Shibuya</span>
+  <h1 class="hero-title">&LAB TOKYO</h1>
+  <p class="hero-title-en">Raw Food &amp; Fermentation School</p>
+  <div class="hero-rule"></div>
+  <p class="hero-desc">
+    ローフード・発酵・植物性食材の可能性を探求する、<br>
+    東京・渋谷の料理教室 &amp;ラボ トーキョー。<br>
+    JLBA認定ローフードマイスター、ローショコラティエ協会本部。
+  </p>
+  <div class="hero-btns">
+    <a href="/listofcourses" class="btn-primary">全講座を見る</a>
+    <a href="/experiencelessons" class="btn-outline">体験レッスン</a>
+  </div>
+</section>
+
+<!-- ===== ABOUT NUMBERS ===== -->
+<section class="sec about-sec">
+  <div class="inner">
+    <span class="sec-eyebrow">About &amp;LAB TOKYO</span>
+    <h2 class="sec-title">食の本質を、<br>自分の手で学ぶ場所</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">2015年の開講以来、ローフード・発酵・ロースイーツ・スピルリナなど、食の最前線をテーマに多彩な講座を展開。ELLE gourmet認定料理家・安藤千英が主宰する、プロも通う本格的な料理教室です。</p>
+
+    <div class="numbers">
+      <div class="number-item">
+        <span class="number-val">2015</span>
+        <span class="number-label">設立年</span>
+      </div>
+      <div class="number-item">
+        <span class="number-val">500<small style="font-size:0.5em">+</small></span>
+        <span class="number-label">年間受講生</span>
+      </div>
+      <div class="number-item">
+        <span class="number-val">50<small style="font-size:0.5em">+</small></span>
+        <span class="number-label">講座・メニュー数</span>
+      </div>
+      <div class="number-item">
+        <span class="number-val">10<small style="font-size:0.5em">+</small></span>
+        <span class="number-label">取得可能資格</span>
+      </div>
+    </div>
+
+    <div style="text-align:center">
+      <a href="/brand" class="btn-text">&amp;LAB TOKYO について詳しく →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COURSES ===== -->
+<section class="sec courses-sec">
+  <div class="inner">
+    <span class="sec-eyebrow">Courses</span>
+    <h2 class="sec-title">各種講座</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">初心者から、資格取得・プロ養成まで。あなたのステージに合わせた多彩な講座をご用意しています。</p>
+
+    <div class="courses-grid">
+      <a href="/experiencelessons" class="course-card">
+        <span class="course-card-tag">Trial</span>
+        <h3>体験レッスン</h3>
+        <p>初めての方でも気軽に参加できる体験レッスン。ローフードや発酵の世界を楽しく体験。</p>
+      </a>
+      <a href="/rawfood-kentei-meister" class="course-card">
+        <span class="course-card-tag">Certification · JLBA</span>
+        <h3>ローフードマイスター講座</h3>
+        <p>JLBA国際認定の資格が取得できる本格講座。酵素・栄養学から実践レシピまで体系的に学ぶ。</p>
+      </a>
+      <a href="/fermentedfood" class="course-card">
+        <span class="course-card-tag">Fermentation</span>
+        <h3>発酵プランナー講座</h3>
+        <p>塩麹・甘酒・味噌・ぬか漬けなど、日本の伝統発酵食を深く学ぶ専門講座。</p>
+      </a>
+      <a href="/rawchocolatier/rawchocolatemeister" class="course-card">
+        <span class="course-card-tag">Raw Chocolate</span>
+        <h3>ローチョコレートマイスター養成講座</h3>
+        <p>ローショコラティエ協会認定。カカオの世界とローチョコレートの本格技術を習得。</p>
+      </a>
+      <a href="/rawchocolatier/rawpatissier" class="course-card">
+        <span class="course-card-tag">Raw Sweets</span>
+        <h3>ローパティシエ養成講座</h3>
+        <p>ロースイーツの理論と実践を体系的に学ぶ。プロとしての活動を目指す方に。</p>
+      </a>
+      <a href="/koji-fermentation-experience-tokyo" class="course-card">
+        <span class="course-card-tag">KOJI LAB</span>
+        <h3>UMAMI &amp; KOJI LAB</h3>
+        <p>英語で学ぶ麹の文化とUMAMIの科学。外国からのゲストにも対応。</p>
+      </a>
+    </div>
+
+    <div class="courses-more">
+      <a href="/listofcourses" class="btn-outline" style="border-color:rgba(198,161,91,0.4);color:#C6A15B">全講座一覧を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RAWCHOCOLATIER ASSOCIATION ===== -->
+<section class="rawchoco-sec">
+  <span class="sec-eyebrow">Association</span>
+  <h2 class="sec-title" style="max-width:600px;margin:0 auto 12px">ローショコラティエ協会</h2>
+  <div class="sec-rule" style="margin:16px auto 24px"></div>
+  <p class="sec-lead">ローチョコレート・ロースイーツに特化した世界初の協会。登録商標「ローショコラティエ®」「ローパティシエ®」のもと、プロフェッショナルを育成。</p>
+  <div class="rawchoco-links">
+    <a href="/rawchocolatier/rawchocolatier-course" class="rawchoco-link">ローショコラティエ</a>
+    <a href="/rawchocolatier/rawchocolateconcierge" class="rawchoco-link">ローチョコレートコンシェルジュ</a>
+    <a href="/rawchocolatier/online-lesson" class="rawchoco-link">オンラインレッスン</a>
+    <a href="/rawchocolatier/about-association" class="rawchoco-link">協会概要</a>
+  </div>
+  <div style="margin-top:36px">
+    <a href="/rawchocolatier" class="btn-primary">協会トップへ</a>
+  </div>
+</section>
+
+<!-- ===== KNOWLEDGE ===== -->
+<section class="sec knowledge-sec">
+  <div class="inner">
+    <span class="sec-eyebrow">Knowledge</span>
+    <h2 class="sec-title">食の知識を深める</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">ローフード・発酵・ローチョコレートなど、&LAB TOKYOが専門とする食のジャンルについて詳しく解説します。</p>
+
+    <div class="knowledge-grid">
+      <a href="/rawfood" class="knowledge-card">
+        <span class="knowledge-card-en">Raw Food</span>
+        <h3>ローフードとは</h3>
+        <p>加熱しない食事法で酵素を活かす、ローフードの基礎知識。</p>
+      </a>
+      <a href="/fermentedfood" class="knowledge-card">
+        <span class="knowledge-card-en">Fermentation</span>
+        <h3>発酵とは</h3>
+        <p>腸活・免疫・旨味。日本の発酵食文化の奥深さを解説。</p>
+      </a>
+      <a href="/livingfood" class="knowledge-card">
+        <span class="knowledge-card-en">Living Food</span>
+        <h3>リビングフードとは</h3>
+        <p>生きた食材の力を最大限に活かす、リビングフードの考え方。</p>
+      </a>
+      <a href="/rawchocolatier/rawchocolate" class="knowledge-card">
+        <span class="knowledge-card-en">Raw Chocolate</span>
+        <h3>ローチョコレートとは</h3>
+        <p>非加熱で作るローチョコレートの製法と栄養価。</p>
+      </a>
+      <a href="/rawchocolatier/whatrawsweets" class="knowledge-card">
+        <span class="knowledge-card-en">Raw Sweets</span>
+        <h3>ロースイーツとは</h3>
+        <p>砂糖・乳製品・小麦粉不使用。自然素材のみで作るスイーツ。</p>
+      </a>
+      <a href="/spirulina" class="knowledge-card">
+        <span class="knowledge-card-en">Spirulina</span>
+        <h3>スピルリナとは</h3>
+        <p>50以上の栄養素を含むスーパーフード、スピルリナの全て。</p>
+      </a>
+    </div>
+
+    <div class="knowledge-more">
+      <a href="/knowledge" class="btn-text">ナレッジ一覧を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROFILE ===== -->
+<section class="profile-sec">
+  <div class="profile-inner">
+    <div class="profile-img">
+      <img
+        src="https://static.wixstatic.com/media/745f65_e3e2cfcf4e2f416e80c49a57b7f6eaf2~mv2.jpg"
+        alt="安藤千英 / Chie Ando"
+        loading="lazy"
+        onerror="this.parentElement.style.background='#24211E'"
+      />
+    </div>
+    <div class="profile-text">
+      <span class="sec-eyebrow">Founder</span>
+      <h2 class="sec-title">安藤千英</h2>
+      <div class="sec-rule"></div>
+      <span class="profile-name-en">Chie Ando</span>
+      <div class="profile-tags">
+        <span class="profile-tag">ELLE gourmet 認定料理家</span>
+        <span class="profile-tag">JLBAアンバサダー</span>
+        <span class="profile-tag">ローショコラティエ協会代表</span>
+        <span class="profile-tag">発酵プランナー</span>
+      </div>
+      <p>ローフード・発酵・プランツベースの食を専門とする料理家。2015年に&LAB TOKYOを設立し、これまでに延べ500名以上の受講生を指導。</p>
+      <p>書籍監修・企業レシピ開発・メディア出演など、幅広い分野で活躍。</p>
+      <a href="/instructor-chie-ando" class="btn-outline" style="margin-top:20px;border-color:rgba(198,161,91,0.4);color:#C6A15B;display:inline-block">プロフィールを見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-sec">
+  <h2>はじめての方へ</h2>
+  <p>どの講座から始めればいいか迷っている方は、<br>まず体験レッスンまたはお問い合わせからどうぞ。</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="/experiencelessons" class="btn-dark">体験レッスンを見る</a>
+    <a href="/contact" style="display:inline-block;border:1px solid rgba(26,23,21,0.3);color:#1A1715;font-family:'Noto Sans JP',sans-serif;font-size:13px;letter-spacing:.1em;padding:13px 28px;text-decoration:none">お問い合わせ</a>
+  </div>
+</section>
+
+</Layout>
