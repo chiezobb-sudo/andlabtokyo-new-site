@@ -1,0 +1,471 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="&LAB TOKYOとは — 発酵×ローフードの学校 | &LAB TOKYO"
+  description="東京・渋谷を拠点とする発酵×ローフードのクロス理論スクール。ELLE gourmet認定料理家・安藤千英が主宰する、内側から美しくなるための食の学校。"
+  canonical="https://www.andlabtokyo.com/brand"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #FAF9F6;
+  color: #1C1C1A;
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* HERO */
+.hero {
+  margin-top: 100px;
+  padding: 10rem 4rem 8rem;
+  background: #FAF9F6;
+  text-align: center;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
+  background: rgba(28,28,26,.15);
+}
+.hero-eye {
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #7A7A72;
+  display: block;
+  margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 200;
+  letter-spacing: .15em;
+  line-height: 1.5;
+  color: #1C1C1A;
+  margin-bottom: 2.5rem;
+}
+.hero-lead {
+  font-size: 14px;
+  line-height: 2.4;
+  color: #7A7A72;
+  max-width: 640px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* SECTIONS */
+.sec {
+  padding: 8rem 4rem;
+}
+.sec-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.sec-inner-narrow {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.sec-label {
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #A9A99F;
+  display: block;
+  margin-bottom: 1.6rem;
+}
+h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: .12em;
+  color: #1C1C1A;
+  margin-bottom: 3rem;
+  line-height: 1.4;
+}
+.divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(28,28,26,.2);
+  margin: 2.5rem 0;
+}
+.body-p {
+  font-size: 14px;
+  line-height: 2.4;
+  color: #7A7A72;
+  font-weight: 300;
+  margin-bottom: 1.8rem;
+}
+
+/* 2-col grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.grid-img {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: #E8E4DE;
+}
+.grid-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* PHILOSOPHY */
+.philosophy {
+  background: #1C1C1A;
+  padding: 10rem 4rem;
+  text-align: center;
+}
+.philosophy-quote {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 200;
+  letter-spacing: .14em;
+  line-height: 2;
+  color: #FAF9F6;
+  margin-bottom: 3rem;
+}
+.philosophy-body {
+  font-size: 13px;
+  line-height: 2.6;
+  color: rgba(250,249,246,.45);
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* PILLARS */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(28,28,26,.08);
+  margin-top: 5rem;
+}
+.pillar {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(28,28,26,.08);
+}
+.pillar:last-child { border-right: none; }
+.pillar-num {
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #A9A99F;
+  display: block;
+  margin-bottom: 1.2rem;
+}
+.pillar h3 {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: #1C1C1A;
+  margin-bottom: .8rem;
+}
+.pillar p {
+  font-size: 12px;
+  line-height: 2;
+  color: #7A7A72;
+  font-weight: 300;
+}
+
+/* NUMBERS */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  background: #FAF9F6;
+}
+.num-box {
+  padding: 4rem 2rem;
+  text-align: center;
+  border-right: 1px solid rgba(28,28,26,.07);
+  border-bottom: 1px solid rgba(28,28,26,.07);
+}
+.num-big {
+  font-size: 3rem;
+  font-weight: 200;
+  color: #1C1C1A;
+  letter-spacing: .05em;
+  line-height: 1;
+  margin-bottom: .6rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+.num-box p {
+  font-size: 11px;
+  color: #7A7A72;
+  letter-spacing: .1em;
+  line-height: 1.7;
+}
+
+/* COURSES GRID */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+.course-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.course-card-img {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background: #EAE6E0;
+  margin-bottom: 1.2rem;
+}
+.course-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.course-card:hover .course-card-img img {
+  transform: scale(1.04);
+}
+.course-card h3 {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  color: #1C1C1A;
+  margin-bottom: .5rem;
+}
+.course-card p {
+  font-size: 11px;
+  color: #7A7A72;
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+/* CTA */
+.cta-sec {
+  background: #FAF9F6;
+  padding: 8rem 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(28,28,26,.07);
+}
+.cta-sec p {
+  font-size: 13px;
+  color: #7A7A72;
+  margin-bottom: 2.4rem;
+  letter-spacing: .06em;
+  font-weight: 300;
+}
+.btn {
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid #1C1C1A;
+  color: #1C1C1A;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 300;
+  margin: 0 .6rem;
+  transition: background .3s, color .3s;
+}
+.btn:hover { background: #1C1C1A; color: #FAF9F6; }
+.btn-fill {
+  background: #1C1C1A;
+  color: #FAF9F6;
+}
+.btn-fill:hover { background: #3a3a38; }
+
+@media (max-width: 768px) {
+  .hero { padding: 6rem 2rem 6rem; }
+  .sec { padding: 5rem 2rem; }
+  .grid-2 { grid-template-columns: 1fr; gap: 3rem; }
+  .philosophy { padding: 6rem 2rem; }
+  .cta-sec { padding: 5rem 2rem; }
+  .pillar { border-right: none; border-bottom: 1px solid rgba(28,28,26,.08); }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eye">&LAB TOKYO — Brand Story</span>
+  <h1>発酵と美の学校、<br>東京・渋谷。</h1>
+  <p class="hero-lead">
+    「発酵×ローフード」のクロス理論で、<br>
+    細胞から美しくなる食の知恵を伝える。
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" style="background: #fff;">
+  <div class="sec-inner">
+    <div class="grid-2">
+      <div class="grid-img">
+        <img src="/herotable.JPG" alt="&LAB TOKYO スタジオ" />
+      </div>
+      <div>
+        <span class="sec-label">About</span>
+        <h2>&LAB TOKYOとは</h2>
+        <div class="divider"></div>
+        <p class="body-p">
+          &LAB TOKYO（アンドラボ東京）は、東京・渋谷を拠点とする「発酵×ローフード」のプレミアムスクールです。
+          ELLE gourmet認定料理家・安藤千英が2015年に創設しました。
+        </p>
+        <p class="body-p">
+          ローフード（非加熱）と発酵（麹・乳酸菌・酵母）という、一見異なる食の領域を交差させる「クロス理論」が私たちの基軸。
+          加熱で失われがちな生きた酵素と、発酵で生まれる複雑な旨みと栄養。その両方を日常に取り入れることで、
+          内側から輝く美しさと健やかさが育まれていきます。
+        </p>
+        <p class="body-p">
+          経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。
+          食を通じて「これからの自分を美しく醸す」旅路を、ご一緒しています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div style="max-width:860px; margin:0 auto;">
+    <span style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(250,249,246,.3);display:block;margin-bottom:2rem;">&LAB TOKYO Philosophy</span>
+    <p class="philosophy-quote">
+      食べることは、<br>未来の自分を選ぶこと。
+    </p>
+    <p class="philosophy-body">
+      &LAB TOKYOが大切にしているのは、知識を「特別なもの」で終わらせないこと。<br>
+      日々の食卓に取り入れられる小さな実践の積み重ねが、やがて大きな変化となって、<br>
+      あなた自身の輝きとなって表れていく。私たちはその過程に、寄り添い続けます。
+    </p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="sec" style="background: #FAF9F6;">
+  <div class="sec-inner">
+    <span class="sec-label">What We Do</span>
+    <h2>4つの専門領域</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <h3>ローフード</h3>
+        <p>酵素を活かす非加熱の食。細胞から美しさと健やかさを育む生きた食のスタイル。</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <h3>発酵</h3>
+        <p>日本古来の知恵である発酵の力を現代の暮らしへ。麹・乳酸菌・酢酸菌の体系的な学び。</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <h3>ローチョコレート</h3>
+        <p>カカオの生命力を五感で味わう。世界唯一のローショコラティエ協会が認定する資格制度。</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">04</span>
+        <h3>ロースイーツ</h3>
+        <p>砂糖・小麦・乳製品不使用の罪悪感ゼロのお菓子。植物性素材で作る心躍るご褒美。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="sec" style="background: #fff; padding-top: 0; padding-bottom: 0;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="numbers">
+      <div class="num-box">
+        <div class="num-big">2015</div>
+        <p>創設年<br>Year Founded</p>
+      </div>
+      <div class="num-box">
+        <div class="num-big">500+</div>
+        <p>修了生<br>Graduates</p>
+      </div>
+      <div class="num-box">
+        <div class="num-big">50+</div>
+        <p>開講講座数<br>Courses Offered</p>
+      </div>
+      <div class="num-box">
+        <div class="num-big">10+</div>
+        <p>メディア掲載<br>Media Features</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" style="background: #FAF9F6;">
+  <div class="sec-inner">
+    <span class="sec-label">Courses</span>
+    <h2>主な講座・資格</h2>
+    <div class="course-grid">
+      <a href="/experiencelessons" class="course-card">
+        <div class="course-card-img">
+          <img src="/koji-experience.jpg" alt="体験レッスン" />
+        </div>
+        <h3>体験レッスン</h3>
+        <p>ローフード・発酵・UMAMI&KOJI LAB。初心者歓迎。</p>
+      </a>
+      <a href="/rawchocolatier" class="course-card">
+        <div class="course-card-img">
+          <img src="/prog-chocolate.jpg" alt="ローショコラティエ" />
+        </div>
+        <h3>ローショコラティエ講座</h3>
+        <p>世界唯一の協会認定資格。マイスターからプロまで。</p>
+      </a>
+      <a href="/rawchocolatier/rawpatissier" class="course-card">
+        <div class="course-card-img">
+          <img src="/prog-rawsweets.jpg" alt="ローパティシエ" />
+        </div>
+        <h3>ローパティシエ講座</h3>
+        <p>砂糖・小麦・乳製品不使用の本格スイーツ資格。</p>
+      </a>
+      <a href="/professional-training" class="course-card">
+        <div class="course-card-img">
+          <img src="/prog-fermentation.jpg" alt="プロフェッショナル資格" />
+        </div>
+        <h3>プロフェッショナル資格</h3>
+        <p>発酵創家®・ローパティシエ®・ローショコラティエ®。</p>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top: 4rem;">
+      <a href="/listofcourses" class="btn">すべての講座を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="sec" style="background: #fff;">
+  <div class="sec-inner">
+    <div class="grid-2">
+      <div>
+        <span class="sec-label">Founder</span>
+        <h2>安藤千英<br><span style="font-size:1.4rem;letter-spacing:.2em;">CHIE ANDO</span></h2>
+        <div class="divider"></div>
+        <p class="body-p">
+          ELLE gourmet認定料理家。1973年福岡生まれ。発酵×ローフードのクロス理論を提唱し、
+          東京・渋谷を拠点に講座・レッスン・レシピ監修・講演活動を展開。
+        </p>
+        <p class="body-p">
+          ローショコラティエ協会・発酵創家協会の代表。著書『&RAW LIVING』はAmazon新着1位を獲得。
+          Kuvings・MATEUS公式アンバサダー。
+        </p>
+        <a href="/instructor-chie-ando" class="btn" style="margin-top:1rem;">プロフィールを見る</a>
+      </div>
+      <div class="grid-img">
+        <img src="/images/about/profile-chie-ando.jpg" alt="安藤千英" onerror="this.style.background='#E8E4DE'" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <p>まずは体験レッスンから、または講座一覧をご覧ください。</p>
+  <a href="/experiencelessons" class="btn">体験レッスン</a>
+  <a href="/contact" class="btn btn-fill">お問い合わせ</a>
+</section>
+
+</Layout>
