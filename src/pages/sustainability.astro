@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="サステナビリティ | &LAB TOKYO のビジョンと理念"
+  description="オーガニック・フェアトレード・再利用。&LAB TOKYOが大切にする持続可能なビジョン、女性活躍、SDGs、スマートライフプロジェクト。"
+  canonical="https://www.andlabtokyo.com/sustainability"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --leaf: #4E8A18; --leaf-l: #6AAD22;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(78,138,24,.08) 0%, transparent 70%); }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--leaf-l); display: block; margin-bottom: 16px; position: relative; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 16px; position: relative; }
+.hero-sub { font-size: 17px; color: var(--ink-3); line-height: 1.85; max-width: 560px; margin: 0 auto; position: relative; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+.sec-eye-green { color: var(--leaf); }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.rule-green { background: var(--leaf); }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; margin-top: 32px; }
+.pillar { background: var(--bg-card); padding: 32px 24px; }
+.pillar-icon { font-size: 32px; margin-bottom: 14px; }
+.pillar h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.pillar p { font-size: 14px; color: var(--ink-3); line-height: 1.75; }
+.mission-sec { background: var(--bg-2); }
+.mission-box { background: var(--bg-card); border-left: 3px solid var(--leaf); padding: 36px; margin-top: 32px; }
+.mission-box h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.mission-box p { font-size: 15px; color: var(--ink-3); line-height: 1.9; }
+.guidelines { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+.guideline { background: var(--bg-card); padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; }
+.guideline-num { font-family: var(--fh); font-size: 36px; color: var(--leaf); font-style: italic; opacity: .5; flex-shrink: 0; line-height: 1; }
+.guideline h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.guideline p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.sdg-sec { background: var(--bg); }
+.sdg-text { font-size: 15px; color: var(--ink-3); line-height: 1.85; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Sustainability</span>
+  <h1>持続可能な未来へ<br>私たちのビジョン</h1>
+  <p class="hero-sub">オーガニック・フェアトレード・再利用。&LAB TOKYOが大切にする、地球と人への責任。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye sec-eye-green">Our Vision</span>
+    <h2>持続可能な私たちのビジョン</h2>
+    <div class="rule rule-green"></div>
+    <p class="body-text">「食べることは、生きること。そして選ぶことは、未来をつくること。」</p>
+    <p class="body-text">&LAB TOKYOは、ローフード・発酵・ローチョコレートの教育を通じて、個人の健康と地球環境の持続可能性を同時に追求しています。オーガニック・フェアトレード・再利用を三本柱に、食を通じた社会貢献を実践します。</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🌿</div>
+        <h3>Global Environment</h3>
+        <p>オーガニック素材とフェアトレード食材を積極的に採用。環境負荷を減らした食の在り方を実践・発信。</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">👩</div>
+        <h3>Women's Success</h3>
+        <p>女性が食のスキルを通じて自立・活躍できる社会を支援。ジェンダーフリーの指導方針で全ての人を応援。</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💚</div>
+        <h3>Health</h3>
+        <p>スマートライフプロジェクト参加。食事・運動・健診・禁煙の4つの柱で、健康な社会をつくる活動に参加。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec mission-sec">
+  <div class="inner">
+    <span class="sec-eye sec-eye-green">Mission</span>
+    <h2>ミッション</h2>
+    <div class="rule rule-green"></div>
+    <div class="mission-box">
+      <h3>ローお菓子・ローチョコレートの技術と社会的価値を高め、持続可能な社会への貢献を可能にする。</h3>
+      <p>私たちは、食の技術を持つ人が社会で活躍できる環境を整えることを使命としています。インストラクターの育成を通じて、食育と健康の輪を広げ続けます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye sec-eye-green">Guideline</span>
+    <h2>指導方針</h2>
+    <div class="rule rule-green"></div>
+    <div class="guidelines">
+      <div class="guideline">
+        <div class="guideline-num">01</div>
+        <div>
+          <h4>個性を大切に</h4>
+          <p>食のハンディキャップ・身体的なハンディキャップ・ジェンダーを問わず、すべての人が学べる環境を整えます。一人ひとりの個性と背景を尊重した指導を心がけます。</p>
+        </div>
+      </div>
+      <div class="guideline">
+        <div class="guideline-num">02</div>
+        <div>
+          <h4>技能力</h4>
+          <p>理論だけでなく実践力を重視。手を動かして覚える技術力と、それを人に伝えられる指導力の両方を育てます。</p>
+        </div>
+      </div>
+      <div class="guideline">
+        <div class="guideline-num">03</div>
+        <div>
+          <h4>持続可能</h4>
+          <p>一時的な技術習得で終わらない、長期的に活躍し続けるための知識・ネットワーク・サポート体制を提供します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sdg-sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye sec-eye-green">SDGs</span>
+    <h2>SDGsへの取り組み</h2>
+    <div class="rule rule-green"></div>
+    <p class="sdg-text">&LAB TOKYOは、日本のスマートライフプロジェクトに参加しています。食事・運動・健診・禁煙の4つの柱を軸に、国民の健康寿命延伸に寄与する活動を行っています。また、フェアトレード食材の採用・食品ロス削減・植物性食の普及を通じて、SDGs目標達成に貢献します。</p>
+  </div>
+</section>
+
+</Layout>

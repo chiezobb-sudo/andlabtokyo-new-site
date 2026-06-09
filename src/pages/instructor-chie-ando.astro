@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="講師 安藤千英 プロフィール | &LAB TOKYO"
+  description="発酵創家・ローフードシェフ 安藤千英のプロフィール。ELLE gourmet認定クリエイター、ローショコラティエ協会代表。東京・表参道。"
+  canonical="https://www.andlabtokyo.com/instructor-chie-ando"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 70vh; min-height: 500px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,23,21,.95) 0%, rgba(26,23,21,.3) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 60px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(28px, 5vw, 56px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
+.hero-en { font-family: var(--fh); font-size: clamp(16px, 2.5vw, 22px); color: rgba(255,255,255,.55); font-style: italic; margin-bottom: 16px; display: block; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+.profile-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
+.profile-name { font-size: 32px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.profile-name-en { font-family: var(--fh); font-size: 18px; color: var(--amber-d); font-style: italic; margin-bottom: 20px; display: block; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.tag { font-size: 12px; background: rgba(198,161,91,0.1); color: var(--amber-d); border: 1px solid rgba(198,161,91,0.25); padding: 4px 12px; border-radius: 100px; }
+.story-sec { background: var(--bg-2); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.story-text .body-text { font-size: 15px; }
+.story-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; }
+.creds-sec { background: var(--bg); }
+.creds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; margin-top: 32px; }
+.cred { background: var(--bg-card); padding: 24px; }
+.cred-cat { font-family: var(--fh); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 10px; }
+.cred h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.cred p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.media-sec { background: var(--bg-2); }
+.media-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
+.media-item { padding: 16px 0; border-bottom: 1px solid var(--divider); display: flex; gap: 16px; align-items: baseline; }
+.media-year { font-family: var(--fh); font-size: 14px; color: var(--amber-d); font-style: italic; min-width: 44px; }
+.media-text { font-size: 14px; color: var(--ink-3); line-height: 1.7; }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+@media (max-width: 640px) {
+  .profile-grid { grid-template-columns: 1fr; }
+  .story-grid { grid-template-columns: 1fr; }
+  .profile-img { max-width: 240px; }
+}
+</style>
+
+<section class="hero">
+  <img src="/chie-portrait.jpg" alt="安藤千英" />
+  <div class="hero-body">
+    <span class="hero-eye">Instructor</span>
+    <h1>安藤 千英</h1>
+    <span class="hero-en">Chie Ando</span>
+    <p class="hero-sub">発酵創家 / ローフードシェフ / ローショコラティエ協会 代表</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <div class="profile-grid">
+      <img src="/chie-portrait.jpg" alt="安藤千英" class="profile-img" />
+      <div>
+        <div class="profile-name">安藤 千英</div>
+        <span class="profile-name-en">Chie Ando</span>
+        <div class="tags">
+          <span class="tag">ELLE gourmet 認定クリエイター</span>
+          <span class="tag">ローショコラティエ協会 代表</span>
+          <span class="tag">発酵創家®</span>
+          <span class="tag">ヴィーガンアワード 7年連続ノミネート</span>
+        </div>
+        <p class="body-text">1973年福岡生まれ。代々続く料亭を営む家に育つ。結婚・子育てを経て、38歳のとき三女の火傷をきっかけに食の力と向き合い、ローフードと発酵を深く学ぶ。</p>
+        <p class="body-text">ローフードを取り入れることで「細胞年齢が6歳若返り」「体重3kg減」を実現。2016年に料理教室を開校し、2021年に東京へ移転。現在は表参道・代々木上原を拠点に活動中。</p>
+        <p class="body-text">著書「&RAW LIVING Step1 ローフードの教科書」はAmazon #1（贈り物ランキング）を獲得。吉田和弘医師（京都大学医学博士）監修のもと、世界初のローフードエビデンスを掲載。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec story-sec">
+  <div class="inner">
+    <span class="sec-eye">Story</span>
+    <h2>食との出会い、<br>そして&LAB TOKYOへ</h2>
+    <div class="rule"></div>
+    <div class="story-grid">
+      <div class="story-text">
+        <p class="body-text">「料理は生まれた時から身近にあった」と語る千英さん。しかし、食が本当に「力」になることを知ったのは38歳のときでした。</p>
+        <p class="body-text">三女が火傷を負った経験をきっかけに、食と体の関係を本格的に研究。ローフード・発酵・スーパーフードを学び、「細胞から整える」というコンセプトを確立しました。</p>
+        <p class="body-text">2016年に料理教室を開校。2021年に東京に拠点を移し、&LAB TOKYOとしてリブランディング。発酵×ローフード×ローチョコレートという唯一無二のスクールとして、国内外から受講生が集まっています。</p>
+      </div>
+      <img src="/story-lesson.jpg" alt="レッスン風景" class="story-img" />
+    </div>
+  </div>
+</section>
+
+<section class="sec creds-sec">
+  <div class="inner">
+    <span class="sec-eye">Credentials</span>
+    <h2>資格・実績</h2>
+    <div class="rule"></div>
+    <div class="creds-grid">
+      <div class="cred">
+        <span class="cred-cat">Certification</span>
+        <h4>ローフード国際プロデューサー</h4>
+        <p>ローフードの国際資格・リーダーシップ認定。</p>
+      </div>
+      <div class="cred">
+        <span class="cred-cat">Certification</span>
+        <h4>JLBAローフードマイスター1級</h4>
+        <p>日本リビングビューティー協会公認資格。</p>
+      </div>
+      <div class="cred">
+        <span class="cred-cat">Founder</span>
+        <h4>発酵プランナー講座 創設者</h4>
+        <p>発酵創家®の最高位資格を持つ発酵専門家。</p>
+      </div>
+      <div class="cred">
+        <span class="cred-cat">Representative</span>
+        <h4>ローショコラティエ協会 代表</h4>
+        <p>日本唯一の商標登録済みローチョコレート資格の主宰。</p>
+      </div>
+      <div class="cred">
+        <span class="cred-cat">Media</span>
+        <h4>ELLE gourmet 認定クリエイター</h4>
+        <p>ELLE gourmetへのレシピ提供・メディア出演多数。</p>
+      </div>
+      <div class="cred">
+        <span class="cred-cat">Author</span>
+        <h4>著書「&RAW LIVING」</h4>
+        <p>Amazon #1獲得・医師監修・4.7★。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec media-sec">
+  <div class="inner">
+    <span class="sec-eye">Media</span>
+    <h2>メディア・ブランドアンバサダー</h2>
+    <div class="rule"></div>
+    <ul class="media-list">
+      <li class="media-item"><span class="media-year">2025</span><span class="media-text">テレビ朝日「グッド！モーニング」出演 / CBS42・FOX WFXR News（米国）/ ELLE gourmet レシピ掲載 / AquaClara レシピ提供</span></li>
+      <li class="media-item"><span class="media-year">2024</span><span class="media-text">Veggy magazine vol.96 掲載 / ジャパンヴィーガンアワード ノミネート / ELLE gourmet 掲載 / サッポロビールイベント出演</span></li>
+      <li class="media-item"><span class="media-year">2023</span><span class="media-text">ELLE gourmet 複数回掲載 / 水前寺海苔レシピコンテスト審査員 / マレーシアカカオ農園視察</span></li>
+      <li class="media-item"><span class="media-year">2022</span><span class="media-text">ふるさと納税特集 / 大人のおしゃれ手帖 掲載 / ローショコラティエ®商標登録取得</span></li>
+      <li class="media-item"><span class="media-year">〜2021</span><span class="media-text">MATEUSアンバサダー / KUVINGSアンバサダー / Veggy公式アンバサダー / GABANスパイスアンバサダー</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>千英のレッスンを体験する</h2>
+  <p>体験レッスン・各種講座のお申し込みはこちら</p>
+  <a href="/experiencelessons" class="btn-primary">体験レッスンを見る</a>
+</section>
+
+</Layout>

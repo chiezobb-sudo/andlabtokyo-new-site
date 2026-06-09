@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="プロ養成コース | 発酵・ローフード・ローチョコレート資格 | &LAB TOKYO"
+  description="発酵創家®・ローパティシエ®・ローショコラティエ®。認定インストラクター資格で自分のスクール・教室を開く。東京・表参道。"
+  canonical="https://www.andlabtokyo.com/professional-training"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 70vh; min-height: 500px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 60px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(24px, 4vw, 48px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.courses { display: flex; flex-direction: column; gap: 2px; margin-top: 36px; }
+.course-card { background: var(--bg-card); padding: 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; }
+.course-tag { display: inline-block; background: rgba(198,161,91,0.12); border: 1px solid rgba(198,161,91,0.3); color: var(--amber); font-size: 11px; padding: 3px 12px; border-radius: 100px; margin-bottom: 14px; letter-spacing: 1px; }
+.course-card h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.course-card p { font-size: 14px; color: var(--ink-3); line-height: 1.85; margin-bottom: 16px; }
+.course-steps { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.course-steps li { font-size: 13px; color: var(--ink-3); padding-left: 18px; position: relative; }
+.course-steps li::before { content: '→'; position: absolute; left: 0; color: var(--amber-d); font-size: 12px; }
+.price-col { text-align: right; flex-shrink: 0; }
+.price-label { font-size: 12px; color: var(--ink-3); margin-bottom: 6px; }
+.price-big { font-family: var(--fh); font-size: 34px; color: var(--amber); font-style: italic; white-space: nowrap; }
+.price-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.why-sec { background: var(--bg-2); }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
+.why-item { background: var(--bg-card); padding: 24px; }
+.why-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.why-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.after-sec { background: var(--bg); }
+.after-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 2px; margin-top: 32px; }
+.after-item { background: var(--bg-card); padding: 24px 20px; text-align: center; }
+.after-icon { font-size: 28px; margin-bottom: 10px; }
+.after-item h4 { font-size: 13px; font-weight: 700; color: var(--ink); }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+@media (max-width: 640px) {
+  .course-card { grid-template-columns: 1fr; }
+  .price-col { text-align: left; }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="/story-lesson.jpg" alt="プロ養成コース" />
+  <div class="hero-body">
+    <span class="hero-eye">Professional Training</span>
+    <h1>Become a Professional.<br>Food as Art. Art as Life.</h1>
+    <p class="hero-sub">ローフード・ロースイーツ・発酵の認定インストラクター資格。<br>自分のスクール・教室を開く力を身につける。</p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Pro Class</span>
+    <h2>認定インストラクター<br>養成プログラム</h2>
+    <div class="rule"></div>
+    <p class="body-text">資格取得から認定インストラクターへ。&LAB TOKYOのプロクラスは、基礎・中級・上級・創家®の段階を経て、最高位の資格を目指すプログラムです。</p>
+    <p class="body-text">修了後はご自身のスクール・カフェ・オンラインサロンなど、多彩な形で活躍できます。</p>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Certification Paths</span>
+    <h2>3つの資格コース</h2>
+    <div class="rule"></div>
+    <div class="courses">
+
+      <div class="course-card">
+        <div>
+          <span class="course-tag">FERMENTATION</span>
+          <h3>発酵創家®</h3>
+          <p>基礎・中級・上級・創家®の4段階を経て取得する最高位の発酵資格。日本の発酵文化を深く学び、伝えるプロフェッショナルへ。</p>
+          <ul class="course-steps">
+            <li>発酵基礎 → 発酵中級 → 発酵上級 → 発酵創家®</li>
+          </ul>
+        </div>
+        <div class="price-col">
+          <div class="price-label">合計</div>
+          <div class="price-big">¥394,500</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div>
+          <span class="course-tag">RAW SWEETS</span>
+          <h3>ローパティシエ®</h3>
+          <p>ローお菓子を教えるための認定インストラクター資格。植物性・砂糖不使用のスイーツ製造・指導技術を習得。</p>
+          <ul class="course-steps">
+            <li>パティシエBASIC → ADVANCE → PRO → ローパティシエ®</li>
+          </ul>
+        </div>
+        <div class="price-col">
+          <div class="price-label">合計</div>
+          <div class="price-big">¥252,000</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div>
+          <span class="course-tag">RAW CHOCOLATE</span>
+          <h3>ローショコラティエ®</h3>
+          <p>日本唯一の商標登録済みローチョコレート資格。ジュニアからマスターまで、チョコレート技術の最高峰へ。</p>
+          <ul class="course-steps">
+            <li>Jr.ローショコラティエ®：¥185,000（税込）</li>
+            <li>マスターローショコラティエ®：¥437,000（税込）</li>
+          </ul>
+        </div>
+        <div class="price-col">
+          <div class="price-label">Jr.コース</div>
+          <div class="price-big">¥185,000</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why-sec">
+  <div class="inner">
+    <span class="sec-eye">School Strengths</span>
+    <h2>選ばれる理由</h2>
+    <div class="rule"></div>
+    <div class="why-grid">
+      <div class="why-item">
+        <h4>オリジナルテキスト</h4>
+        <p>歴史・栄養学・豊富なレシピを収録した完全オリジナルテキスト。</p>
+      </div>
+      <div class="why-item">
+        <h4>ローフード専門</h4>
+        <p>ローフード・発酵に特化した日本唯一のスペシャリスト養成校。</p>
+      </div>
+      <div class="why-item">
+        <h4>商標登録済み資格</h4>
+        <p>発酵創家®・ローパティシエ®・ローショコラティエ®はすべて商標登録済み。</p>
+      </div>
+      <div class="why-item">
+        <h4>小人数・丁寧指導</h4>
+        <p>1〜4名の少人数制で、個別のフォローを大切にしています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFTER CERTIFICATION -->
+<section class="sec after-sec">
+  <div class="inner">
+    <span class="sec-eye">After Certification</span>
+    <h2>資格取得後の活躍の場</h2>
+    <div class="rule"></div>
+    <div class="after-grid">
+      <div class="after-item">
+        <div class="after-icon">🏠</div>
+        <h4>自宅スタジオ</h4>
+      </div>
+      <div class="after-item">
+        <div class="after-icon">☕</div>
+        <h4>カフェ・店舗展開</h4>
+      </div>
+      <div class="after-item">
+        <div class="after-icon">💻</div>
+        <h4>オンラインサロン</h4>
+      </div>
+      <div class="after-item">
+        <div class="after-icon">🌏</div>
+        <h4>海外展開</h4>
+      </div>
+      <div class="after-item">
+        <div class="after-icon">📖</div>
+        <h4>レシピ・商品開発</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>プロへの第一歩を踏み出す</h2>
+  <p>コース詳細・個別相談はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・個別相談</a>
+</section>
+
+</Layout>

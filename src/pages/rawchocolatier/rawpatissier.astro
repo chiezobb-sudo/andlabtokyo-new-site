@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ローパティシエ® 養成講座 | &LAB TOKYO"
+  description="植物性・砂糖不使用のローお菓子を教えるプロへ。ローパティシエ®認定資格取得コース。東京・表参道、オンライン受講可。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/rawpatissier"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 65vh; min-height: 440px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 16px; }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+.step { background: var(--bg-card); padding: 32px; display: grid; grid-template-columns: 56px 1fr auto; gap: 20px; align-items: start; }
+.step-num { font-family: var(--fh); font-size: 44px; color: var(--amber); font-style: italic; line-height: 1; opacity: .6; }
+.step h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.step p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.step-price { font-family: var(--fh); font-size: 24px; color: var(--amber); font-style: italic; white-space: nowrap; text-align: right; flex-shrink: 0; }
+.step-price small { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-style: normal; color: var(--ink-3); margin-top: 4px; }
+.cert-sec { background: var(--bg-dark); }
+.cert-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.35); padding: 40px; margin-top: 32px; }
+.cert-box h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.cert-box p { font-size: 14px; color: var(--ink-3); line-height: 1.85; margin-bottom: 12px; }
+.cert-price { font-family: var(--fh); font-size: 44px; color: var(--amber); font-style: italic; margin-top: 20px; }
+.cert-price small { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-style: normal; color: var(--ink-3); margin-left: 8px; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
+.feat { background: var(--bg-card); padding: 24px; }
+.feat h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.feat p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.formats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
+.format { background: var(--bg-card); padding: 28px; }
+.format h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.format p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { text-align: center; padding: 80px 24px; background: var(--bg); }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+@media (max-width: 640px) {
+  .step { grid-template-columns: 1fr; }
+  .step-price { text-align: left; }
+  .formats { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="hero">
+  <img src="/rawfood-zucchini.jpg" alt="ローパティシエ養成講座" />
+  <div class="hero-body">
+    <span class="hero-eye">Raw Patissier</span>
+    <h1>ローパティシエ®<br>養成講座</h1>
+    <p class="hero-sub">植物性・砂糖不使用のローお菓子を、プロとして教える力を身につける。</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>ローお菓子を「教える」<br>プロフェッショナルへ</h2>
+    <div class="rule"></div>
+    <p class="body-text">ローパティシエ®養成講座は、植物性・砂糖不使用・乳製品不使用のローお菓子を教えるための認定資格プログラムです。BASIC・ADVANCE・PROの3ステップで、レシピ力・指導力・ブランディング力を段階的に習得します。</p>
+    <p class="body-text">修了後は「ローパティシエ®認定インストラクター」として、ご自身の教室やオンラインサロンでローお菓子を教えることができます。</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Curriculum</span>
+    <h2>3ステップ・カリキュラム</h2>
+    <div class="rule"></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h3>PÂTISSIER BASIC（基礎）</h3>
+          <p>ローお菓子の基礎理論と実践。植物性素材の特性・甘味料の選び方・基本レシピを習得。はじめての方でも安心のスタートカリキュラム。</p>
+        </div>
+        <div class="step-price">¥55,000<small>税込</small></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h3>PÂTISSIER ADVANCE（応用）</h3>
+          <p>中級レシピ・ナチュラルカラーリング・フレーバーペアリングなど、表現の幅を広げる応用技術を学ぶ。オリジナルレシピ開発にも挑戦。</p>
+        </div>
+        <div class="step-price">¥75,000<small>税込</small></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h3>PÂTISSIER PRO（プロ）</h3>
+          <p>プレゼンテーション・ブランディング・指導技術。オリジナル作品制作プロジェクトで、インストラクターとしての実力を磨く。</p>
+        </div>
+        <div class="step-price">¥87,000<small>税込</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec cert-sec">
+  <div class="inner">
+    <span class="sec-eye">Certification</span>
+    <h2>ローパティシエ® 認定資格</h2>
+    <div class="rule"></div>
+    <div class="cert-box">
+      <h3>3ステップ修了後、認定資格が取得できます</h3>
+      <p>認定後はロゴ使用権・教授権・最新テキスト更新・マーケティングサポートが含まれます。ご自身の教室・オンラインサロン・カフェなどで活動できます。</p>
+      <p>「ローパティシエ®」は商標登録済みの称号です。修了者のみが使用できる資格です。</p>
+      <div class="cert-price">¥252,000<small>3ステップ合計（税込）</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Features</span>
+    <h2>このコースの特徴</h2>
+    <div class="rule"></div>
+    <div class="features">
+      <div class="feat">
+        <h4>完全植物性レシピ</h4>
+        <p>砂糖・乳製品・小麦不使用。アレルギー対応・ヴィーガン対応のお菓子を学ぶ。</p>
+      </div>
+      <div class="feat">
+        <h4>オリジナルテキスト付き</h4>
+        <p>豊富なレシピと理論を収録したオリジナルテキスト付き。</p>
+      </div>
+      <div class="feat">
+        <h4>少人数制</h4>
+        <p>1〜4名の少人数で、丁寧に個別サポートします。</p>
+      </div>
+      <div class="feat">
+        <h4>修了後サポート</h4>
+        <p>認定後もマーケティングサポート・コミュニティへの参加が継続。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">How to Join</span>
+    <h2>受講形式</h2>
+    <div class="rule"></div>
+    <div class="formats">
+      <div class="format">
+        <h4>対面レッスン</h4>
+        <p>東京・表参道のスタジオで。少人数制・集中形式。道具はすべてご用意しています。</p>
+      </div>
+      <div class="format">
+        <h4>オンラインレッスン</h4>
+        <p>全国・海外からご受講可能。材料はご自身でご用意いただきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>ローパティシエ®への道へ</h2>
+  <p>お申し込み・ご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
+</section>
+
+</Layout>

@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="ショップ | &RAW LIVING 書籍・商品 | &LAB TOKYO"
+  description="安藤千英著「&RAW LIVING」をはじめ、ローフード・発酵関連の書籍・商品をご紹介。"
+  canonical="https://www.andlabtokyo.com/shop"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.hero p { font-size: 16px; color: var(--ink-3); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.book-layout { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; margin-top: 32px; }
+.book-cover { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.book-info h3 { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.35; }
+.book-author { font-size: 14px; color: var(--amber-d); margin-bottom: 20px; }
+.book-desc { font-size: 15px; color: var(--ink-3); line-height: 1.9; margin-bottom: 24px; }
+.book-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+.book-meta-row { display: flex; gap: 12px; font-size: 14px; }
+.book-meta-label { color: var(--amber-d); min-width: 60px; }
+.book-meta-val { color: var(--ink-2); }
+.btn-amazon { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-amazon:hover { background: var(--amber-d); color: #fff; }
+.coming-sec { background: var(--bg-2); }
+.coming-msg { background: var(--bg-card); padding: 48px; text-align: center; margin-top: 32px; }
+.coming-msg h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.coming-msg p { font-size: 15px; color: var(--ink-3); line-height: 1.8; }
+@media (max-width: 640px) {
+  .book-layout { grid-template-columns: 1fr; }
+  .book-cover { max-width: 240px; margin: 0 auto; display: block; }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eye">Shop</span>
+  <h1>書籍・商品</h1>
+  <p>安藤千英の著書と、&LAB TOKYOが厳選するプロダクト</p>
+</section>
+
+<!-- BOOK -->
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Books</span>
+    <h2>著書</h2>
+    <div class="rule"></div>
+
+    <div class="book-layout">
+      <img src="/book-cover.jpg" alt="&RAW LIVING 書籍" class="book-cover" />
+      <div class="book-info">
+        <h3>&RAW LIVING<br>ローフードと発酵で<br>体の内側から整える</h3>
+        <div class="book-author">著：安藤 千英（&LAB TOKYO）</div>
+        <p class="book-desc">ローフード・発酵・スピルリナ・カカオ——植物性の力で体の内側からデザインする、新しいライフスタイルの教科書。ELLE gourmet掲載レシピ多数収録。ヴィーガン・グルテンフリー対応。</p>
+        <div class="book-meta">
+          <div class="book-meta-row">
+            <span class="book-meta-label">出版</span>
+            <span class="book-meta-val">2025年</span>
+          </div>
+          <div class="book-meta-row">
+            <span class="book-meta-label">対応</span>
+            <span class="book-meta-val">ヴィーガン・グルテンフリー・ローフード</span>
+          </div>
+        </div>
+        <a href="https://www.amazon.co.jp/s?k=%26RAW+LIVING+%E5%AE%89%E8%97%A4%E5%8D%83%E8%8B%B1" target="_blank" rel="noopener" class="btn-amazon">Amazonで購入する →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="sec coming-sec">
+  <div class="inner">
+    <span class="sec-eye">Coming Soon</span>
+    <h2>オンラインショップ</h2>
+    <div class="rule"></div>
+    <div class="coming-msg">
+      <h3>準備中</h3>
+      <p>ローフード・発酵関連の厳選プロダクトを近日公開予定です。<br>更新情報はSNSでお知らせします。</p>
+    </div>
+  </div>
+</section>
+
+</Layout>

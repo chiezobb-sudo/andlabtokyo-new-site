@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="はじめての方へ | &LAB TOKYOへようこそ"
+  description="ローフード・発酵・ローチョコレートのスクール &LAB TOKYO。初心者の方でも安心。体験レッスンから資格コースまで。東京・表参道。"
+  canonical="https://www.andlabtokyo.com/beginner"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 16px; }
+.hero-tagline { font-family: var(--fh); font-size: clamp(18px, 2.5vw, 26px); color: var(--amber-d); font-style: italic; margin-bottom: 20px; }
+.hero-sub { font-size: 16px; color: var(--ink-3); line-height: 1.85; max-width: 560px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 32px; }
+.reason { background: var(--bg-card); padding: 28px 24px; }
+.reason-num { font-family: var(--fh); font-size: 40px; color: var(--amber); font-style: italic; opacity: .5; margin-bottom: 12px; line-height: 1; }
+.reason h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.reason p { font-size: 13px; color: var(--ink-3); line-height: 1.75; }
+.courses-sec { background: var(--bg-2); }
+.course-list { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+.course-item { background: var(--bg-card); padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; transition: background .2s; }
+.course-item:hover { background: #2c2823; }
+.course-info h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.course-info p { font-size: 13px; color: var(--ink-3); }
+.course-arrow { color: var(--amber); font-size: 20px; flex-shrink: 0; }
+.flow-sec { background: var(--bg); }
+.flow { display: flex; flex-direction: column; gap: 0; margin-top: 32px; position: relative; }
+.flow-item { background: var(--bg-card); padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 2px; }
+.flow-num { background: var(--amber); color: #1d1d1f; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.flow-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.flow-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; margin: 0 8px 12px; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+.btn-outline { display: inline-block; border: 1.5px solid rgba(198,161,91,.5); color: var(--amber); font-size: 15px; padding: 13px 32px; border-radius: 980px; text-decoration: none; margin: 0 8px 12px; transition: all .2s; }
+.btn-outline:hover { background: rgba(198,161,91,.1); }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Welcome</span>
+  <h1>はじめての方へ</h1>
+  <div class="hero-tagline">おいしい！は世界共通のハッピー。</div>
+  <p class="hero-sub">ローフード・発酵・ローチョコレートを、スクールのモットーとともにご紹介します。初心者の方でも、安心してスタートできます。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Reasons</span>
+    <h2>&LAB TOKYOが<br>選ばれる理由</h2>
+    <div class="rule"></div>
+    <div class="reasons">
+      <div class="reason">
+        <div class="reason-num">01</div>
+        <h4>手ぶらで参加OK</h4>
+        <p>エプロン・道具・テキストはすべてご用意。持ち物は手ぶらで大丈夫です。</p>
+      </div>
+      <div class="reason">
+        <div class="reason-num">02</div>
+        <h4>少人数制・丁寧サポート</h4>
+        <p>1〜4名の少人数制で、一人ひとりに寄り添った丁寧な指導を行います。</p>
+      </div>
+      <div class="reason">
+        <div class="reason-num">03</div>
+        <h4>1回完結レッスンあり</h4>
+        <p>まず体験から。1回だけの体験レッスンで、ローフードや発酵の世界を気軽に試せます。</p>
+      </div>
+      <div class="reason">
+        <div class="reason-num">04</div>
+        <h4>テキスト・資料付き</h4>
+        <p>各レッスンにはオリジナルテキスト・レシピカードを用意。自宅でも復習できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec courses-sec">
+  <div class="inner">
+    <span class="sec-eye">Courses</span>
+    <h2>まずどのコースから始める？</h2>
+    <div class="rule"></div>
+    <div class="course-list">
+      <a href="/experiencelessons" class="course-item">
+        <div class="course-info">
+          <h4>体験レッスン（¥12,000〜）</h4>
+          <p>初めての方に一番おすすめ。1回完結・手ぶらOK</p>
+        </div>
+        <span class="course-arrow">→</span>
+      </a>
+      <a href="/rawfood" class="course-item">
+        <div class="course-info">
+          <h4>ローフードマイスター講座</h4>
+          <p>植物性食・ローフードの基礎から資格まで</p>
+        </div>
+        <span class="course-arrow">→</span>
+      </a>
+      <a href="/fermentation" class="course-item">
+        <div class="course-info">
+          <h4>発酵プランナー講座</h4>
+          <p>塩麹・味噌・甘酒など発酵食の専門家へ</p>
+        </div>
+        <span class="course-arrow">→</span>
+      </a>
+      <a href="/rawchocolatier/rawchocolatemeister" class="course-item">
+        <div class="course-info">
+          <h4>ローチョコレートマイスター講座</h4>
+          <p>本格ローチョコレートを3ステップで習得</p>
+        </div>
+        <span class="course-arrow">→</span>
+      </a>
+      <a href="/professional-training" class="course-item">
+        <div class="course-info">
+          <h4>プロ養成コース</h4>
+          <p>認定インストラクターとして独立・開業を目指す</p>
+        </div>
+        <span class="course-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec flow-sec">
+  <div class="inner">
+    <span class="sec-eye">Flow</span>
+    <h2>受講の流れ</h2>
+    <div class="rule"></div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div>
+          <h4>コースを選ぶ</h4>
+          <p>このページや講座一覧を参考に、興味のあるコースを見つけてください。</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div>
+          <h4>お問い合わせ・お申し込み</h4>
+          <p>コンタクトフォームから気軽にご連絡ください。日程・詳細をご案内します。</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div>
+          <h4>レッスン当日</h4>
+          <p>手ぶらでお越しください。少人数で、リラックスした雰囲気でレッスンを行います。</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div>
+          <h4>お持ち帰り・復習</h4>
+          <p>テキスト・レシピをお持ち帰りいただき、自宅でも実践できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>まずは体験から始めましょう</h2>
+  <p>ご不明な点はお気軽にお問い合わせください</p>
+  <a href="/experiencelessons" class="btn-primary">体験レッスンを見る</a>
+  <a href="/contact" class="btn-outline">お問い合わせ</a>
+</section>
+
+</Layout>

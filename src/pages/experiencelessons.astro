@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="東京のローフード・発酵体験レッスン | &LAB TOKYO"
+  description="東京・表参道でローフード・発酵・UMAMI&KOJI LABの体験レッスンを開催。¥12,000〜、少人数制・英語対応。初心者歓迎。"
+  canonical="https://www.andlabtokyo.com/experiencelessons"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 70vh; min-height: 480px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(28px, 4.5vw, 48px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 16px; }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 40px; }
+.card { background: var(--bg-card); padding: 36px 28px; }
+.card-eye { font-family: var(--fh); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 12px; }
+.card h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.4; }
+.card p { font-size: 14px; color: var(--ink-3); line-height: 1.8; margin-bottom: 20px; }
+.price-tag { font-family: var(--fh); font-size: 28px; color: var(--amber); font-style: italic; }
+.price-tag span { font-size: 14px; font-style: normal; color: var(--ink-3); margin-left: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag { font-size: 12px; background: rgba(198,161,91,0.12); color: var(--amber-d); border: 1px solid rgba(198,161,91,0.3); padding: 4px 12px; border-radius: 100px; }
+.feature-sec { background: var(--bg-2); }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
+.feat { background: var(--bg-card); padding: 24px; text-align: center; }
+.feat-icon { font-size: 28px; margin-bottom: 12px; }
+.feat h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.feat p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.premium-sec { background: var(--bg-dark); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+.premium-sec .sec-eye { color: var(--amber); }
+.premium-sec h2 { color: var(--ink); }
+.premium-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 32px; }
+.premium-info { }
+.premium-info h3 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.premium-info p { font-size: 15px; color: var(--ink-3); line-height: 1.85; margin-bottom: 12px; }
+.premium-detail { background: var(--bg-card); padding: 28px; }
+.detail-row { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--divider); font-size: 14px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--amber-d); font-weight: 700; min-width: 80px; }
+.detail-val { color: var(--ink-2); line-height: 1.6; }
+.cta-sec { background: var(--bg); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 16px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+@media (max-width: 640px) {
+  .premium-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="/koji-experience.jpg" alt="体験レッスンの様子" onerror="this.style.display='none'" />
+  <div class="hero-body">
+    <span class="hero-eye">Experience Lessons</span>
+    <h1>東京のローフード・発酵<br>体験レッスン</h1>
+    <p class="hero-sub">ひとつの体験が、食と体の見方を変える。<br>初心者歓迎・少人数制・英語対応可</p>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Programs</span>
+    <h2>体験レッスン一覧</h2>
+    <div class="rule"></div>
+    <p class="body-text">本格的な資格コースに進む前に、まずは体験から。すべて手ぶらでご参加いただけます。</p>
+
+    <div class="cards">
+      <!-- Rawfood Experience -->
+      <div class="card">
+        <span class="card-eye">Raw Food</span>
+        <h3>ローフード体験レッスン</h3>
+        <p>ローフード・ロースイーツ・発酵の基本を、実際に作りながら体験。植物性食材だけで作るレシピの驚きと美味しさを実感してください。</p>
+        <div class="price-tag">¥12,000<span>（税込）</span></div>
+        <div class="tags">
+          <span class="tag">所要 2.5〜3時間</span>
+          <span class="tag">手ぶらOK</span>
+          <span class="tag">初心者歓迎</span>
+          <span class="tag">ヴィーガン対応</span>
+        </div>
+      </div>
+
+      <!-- Fermentation Experience -->
+      <div class="card">
+        <span class="card-eye">Fermentation</span>
+        <h3>発酵体験レッスン</h3>
+        <p>塩麹・甘酒・ヴィーガンキムチ・味噌など、4種類からお選びいただけます。お土産付き。日本の発酵文化を丁寧にお伝えします。</p>
+        <div class="price-tag">¥12,000〜<span>（税込）</span></div>
+        <div class="tags">
+          <span class="tag">4種類から選択</span>
+          <span class="tag">お土産付き</span>
+          <span class="tag">初心者歓迎</span>
+          <span class="tag">ヴィーガン対応</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec feature-sec">
+  <div class="inner">
+    <span class="sec-eye">Features</span>
+    <h2>体験レッスンの特徴</h2>
+    <div class="rule"></div>
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon">🌿</div>
+        <h4>手ぶらでOK</h4>
+        <p>エプロン・道具はすべてご用意。手ぶらでお越しください。</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">👥</div>
+        <h4>少人数制</h4>
+        <p>1〜4名の少人数制で、丁寧にサポートします。</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌱</div>
+        <h4>完全植物性</h4>
+        <p>すべてヴィーガン・グルテンフリー対応。食のアレルギーもご相談可能。</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌏</div>
+        <h4>英語・中国語対応</h4>
+        <p>UMAMI & KOJI LABは英語・中国語・日本語に対応しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM: UMAMI & KOJI LAB -->
+<section class="sec premium-sec">
+  <div class="inner">
+    <span class="sec-eye">Premium Program</span>
+    <h2>UMAMI &amp; KOJI LAB</h2>
+    <div class="rule"></div>
+    <div class="premium-grid">
+      <div class="premium-info">
+        <h3>日本の発酵文化を五感で体験する<br>プレミアムプログラム</h3>
+        <p>外国からのゲストや、特別な体験を求める方のために設計したプレミアムプログラム。麹・発酵・うまみという日本独自の食文化を、五感を使って深く体験していただきます。</p>
+        <p>英語・中国語・日本語に対応。グループ・企業・インバウンド向けにも対応可能です。</p>
+      </div>
+      <div class="premium-detail">
+        <div class="detail-row">
+          <span class="detail-label">料金</span>
+          <span class="detail-val">¥60,000（税込）<br><small>グループ料金 / 最大8名</small></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">所要時間</span>
+          <span class="detail-val">約3時間</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">定員</span>
+          <span class="detail-val">最大8名</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">言語</span>
+          <span class="detail-val">英語 / 中国語 / 日本語</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">対象</span>
+          <span class="detail-val">インバウンド・企業研修・特別体験をご希望の方</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>まずは体験から始めましょう</h2>
+  <p>ご予約・お問い合わせはコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">体験レッスンを予約する</a>
+</section>
+
+</Layout>

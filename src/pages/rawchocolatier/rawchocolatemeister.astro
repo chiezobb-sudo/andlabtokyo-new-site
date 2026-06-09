@@ -1,0 +1,248 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ローチョコレートマイスター講座 | &LAB TOKYO"
+  description="初心者からプロまで3ステップで学ぶローチョコレートマイスター講座。¥16,500〜、資格取得コースあり。東京・表参道。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/rawchocolatemeister"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; position: relative; height: 65vh; min-height: 440px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.hero h1 { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 16px; }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+.step { background: var(--bg-card); padding: 32px; display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: start; }
+.step-num { font-family: var(--fh); font-size: 48px; color: var(--amber); font-style: italic; line-height: 1; opacity: .6; }
+.step-info h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.step-info p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.step-info ul { margin-top: 12px; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.step-info ul li { font-size: 13px; color: var(--ink-3); padding-left: 16px; position: relative; }
+.step-info ul li::before { content: '—'; position: absolute; left: 0; color: var(--amber-d); }
+.step-price { text-align: right; flex-shrink: 0; }
+.step-price .price { font-family: var(--fh); font-size: 26px; color: var(--amber); font-style: italic; white-space: nowrap; }
+.step-price .price-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.bundle-sec { background: var(--bg-dark); }
+.bundle-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.3); padding: 40px; margin-top: 32px; text-align: center; }
+.bundle-box h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.bundle-box .price-big { font-family: var(--fh); font-size: 52px; color: var(--amber); font-style: italic; margin: 16px 0 8px; }
+.bundle-box p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.for-whom { background: var(--bg-2); }
+.whom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
+.whom-item { background: var(--bg-card); padding: 24px; }
+.whom-item h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.whom-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.cert-sec { background: var(--bg); }
+.cert-box { background: var(--bg-card); border-left: 3px solid var(--amber); padding: 32px; margin-top: 32px; }
+.cert-box h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+.cert-box p { font-size: 14px; color: var(--ink-3); line-height: 1.8; margin-bottom: 8px; }
+.cert-price { display: flex; align-items: center; gap: 8px; margin-top: 20px; }
+.cert-price .p1 { font-family: var(--fh); font-size: 22px; color: var(--amber); font-style: italic; }
+.cert-price .p2 { font-size: 13px; color: var(--ink-3); }
+.format-sec { background: var(--bg-2); }
+.formats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
+.format { background: var(--bg-card); padding: 28px; }
+.format h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.format p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-primary:hover { background: var(--amber-d); color: #fff; }
+@media (max-width: 640px) {
+  .step { grid-template-columns: 1fr; }
+  .step-price { text-align: left; }
+  .formats { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="/prog-chocolate.jpg" alt="ローチョコレートマイスター講座" />
+  <div class="hero-body">
+    <span class="hero-eye">Raw Chocolate Meister</span>
+    <h1>ローチョコレート<br>マイスター講座</h1>
+    <p class="hero-sub">初心者から資格取得まで。3ステップで本格的なローチョコレートをマスターする。</p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>ローチョコレートを<br>体系的に学ぶ</h2>
+    <div class="rule"></div>
+    <p class="body-text">素材の理解から温度管理、甘味料の代替、なめらかな溶け感まで。初心者からプロフェッショナルまで対応する3ステップのプログラムです。</p>
+    <p class="body-text">オリジナルテキスト（27〜45レシピ収録）付き。対面・オンラインどちらでも受講可能。</p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Curriculum</span>
+    <h2>3ステップ・カリキュラム</h2>
+    <div class="rule"></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-info">
+          <h3>Beginner（初級）</h3>
+          <p>ローチョコレートの基礎知識とカカオバター・カカオパウダーの特性を学び、基本レシピとテンパリングの基礎を習得。</p>
+          <ul>
+            <li>ローチョコレートとは</li>
+            <li>カカオバター・カカオパウダーの特性</li>
+            <li>基本レシピ</li>
+            <li>テンパリング基礎</li>
+          </ul>
+        </div>
+        <div class="step-price">
+          <div class="price">¥16,500</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-info">
+          <h3>Intermediate（中級）</h3>
+          <p>ホワイトチョコレート・ナッツバター・ガナッシュ・トリュフ・キャラメルなど応用技術を学ぶ。</p>
+          <ul>
+            <li>ホワイトチョコレート</li>
+            <li>ナッツバター制作</li>
+            <li>ガナッシュ・トリュフ</li>
+            <li>キャラメル技術</li>
+          </ul>
+        </div>
+        <div class="step-price">
+          <div class="price">¥30,000</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-info">
+          <h3>Advanced（上級）</h3>
+          <p>ボンボンショコラ・上級ガナッシュ・ドバイチョコレート・デコレーション技術など、プロレベルの技術を習得。</p>
+          <ul>
+            <li>ボンボンショコラ</li>
+            <li>上級ガナッシュ各種</li>
+            <li>ドバイチョコレート</li>
+            <li>デコレーション技術</li>
+          </ul>
+        </div>
+        <div class="step-price">
+          <div class="price">¥33,500</div>
+          <div class="price-note">税込</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section class="sec bundle-sec">
+  <div class="inner">
+    <span class="sec-eye">Best Value</span>
+    <h2>3ステップ一括受講</h2>
+    <div class="rule"></div>
+    <div class="bundle-box">
+      <h3>Complete 3-Step Bundle</h3>
+      <div class="price-big">¥75,000</div>
+      <p>テキスト代（27レシピ収録）含む・税込<br>アイスクリーム・ドリンク・スペシャリティなど30種類以上のレシピに対応</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="sec for-whom">
+  <div class="inner">
+    <span class="sec-eye">For Whom</span>
+    <h2>こんな方に</h2>
+    <div class="rule"></div>
+    <div class="whom-grid">
+      <div class="whom-item">
+        <h4>家族に安心なお菓子を</h4>
+        <p>添加物ゼロの健康的なスイーツをご自宅で作りたい方。</p>
+      </div>
+      <div class="whom-item">
+        <h4>趣味を深めたい</h4>
+        <p>チョコレート菓子のレパートリーを広げたいホビーユーザー。</p>
+      </div>
+      <div class="whom-item">
+        <h4>販売・教室開催を考えている</h4>
+        <p>ローチョコレートを教えたい・販売したい方。</p>
+      </div>
+      <div class="whom-item">
+        <h4>自分のブランドを作りたい</h4>
+        <p>オリジナルブランドの立ち上げを目指している方。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section class="sec cert-sec">
+  <div class="inner">
+    <span class="sec-eye">Certification</span>
+    <h2>資格取得コース</h2>
+    <div class="rule"></div>
+    <div class="cert-box">
+      <h3>ジュニアローショコラティエ® 認定資格</h3>
+      <p>3ステップ修了後、認定資格の取得が可能です。ロゴ使用権・更新テキスト（45レシピ）・マーケティングサポートが含まれます。</p>
+      <p>認定後はご自身のスクール・教室でローチョコレートを教える権利を取得できます。</p>
+      <div class="cert-price">
+        <span class="p1">¥155,000</span>
+        <span class="p2">（3ステップ¥75,000 ＋ 認定料¥80,000・税込）</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="sec format-sec">
+  <div class="inner">
+    <span class="sec-eye">How to Join</span>
+    <h2>受講形式</h2>
+    <div class="rule"></div>
+    <div class="formats">
+      <div class="format">
+        <h4>対面レッスン</h4>
+        <p>東京・表参道のスタジオで。2〜3日間の集中形式（11:00〜15:30 または 16:30）。少人数制で丁寧に指導します。</p>
+      </div>
+      <div class="format">
+        <h4>オンラインレッスン</h4>
+        <p>ライブ形式のオンライン指導。材料はご自身でご用意いただきます。全国・海外からご受講可能。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>ローチョコレートの世界へ</h2>
+  <p>お申し込み・ご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
+</section>
+
+</Layout>

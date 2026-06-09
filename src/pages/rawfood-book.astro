@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="&RAW LIVING ローフードの教科書 | 安藤千英 著 | &LAB TOKYO"
+  description="Amazon #1獲得。36レシピ収録、医師監修。世界初のローフードエビデンス掲載。著者：安藤千英（&LAB TOKYO）"
+  canonical="https://www.andlabtokyo.com/rawfood-book"
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; background: var(--bg-dark); padding: 80px 24px; }
+.hero-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 260px 1fr; gap: 56px; align-items: center; }
+.book-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; box-shadow: 0 24px 64px rgba(0,0,0,.6); }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(24px, 3.5vw, 42px); font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 8px; }
+.hero-sub { font-size: 16px; color: var(--ink-3); margin-bottom: 24px; }
+.badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.badge { background: rgba(198,161,91,0.15); border: 1px solid rgba(198,161,91,0.4); color: var(--amber); font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 4px; }
+.btn-amazon { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; transition: background .2s; }
+.btn-amazon:hover { background: var(--amber-d); color: #fff; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
+.contents { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 32px; }
+.content-item { background: var(--bg-card); padding: 24px; }
+.content-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.content-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.supervisor-sec { background: var(--bg-2); }
+.supervisor-box { background: var(--bg-card); padding: 36px; margin-top: 32px; display: flex; gap: 24px; }
+.supervisor-box .sup-info h4 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.supervisor-box .sup-info p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
+.cta-sec h2 { font-size: clamp(20px, 3vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
+@media (max-width: 640px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .book-img { max-width: 200px; margin: 0 auto; display: block; }
+}
+</style>
+
+<section class="hero">
+  <div class="hero-inner">
+    <img src="/book-cover.jpg" alt="&RAW LIVING ローフードの教科書" class="book-img" />
+    <div>
+      <span class="hero-eye">Book</span>
+      <h1>&RAW LIVING Step1<br>ローフードの教科書</h1>
+      <p class="hero-sub">著：安藤 千英 / 監修：吉田和弘 医師（京都大学医学博士）</p>
+      <div class="badges">
+        <span class="badge">Amazon #1 贈り物ランキング</span>
+        <span class="badge">★4.7</span>
+        <span class="badge">医師監修</span>
+        <span class="badge">世界初のローフードエビデンス</span>
+      </div>
+      <a href="https://www.amazon.co.jp/s?k=%26RAW+LIVING+%E5%AE%89%E8%97%A4%E5%8D%83%E8%8B%B1" target="_blank" rel="noopener" class="btn-amazon">Amazonで購入する →</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>この本について</h2>
+    <div class="rule"></div>
+    <p class="body-text">「&RAW LIVING Step1 ローフードの教科書」は、ローフードを初めて学ぶ方から、食と体の関係を深く知りたい方まで、わかりやすく実践的にまとめた一冊です。</p>
+    <p class="body-text">36の実践レシピ、医師監修による科学的根拠、21日間の実践プログラムを収録。発酵とローフードを組み合わせたリビングフードレシピも多数掲載しています。</p>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Contents</span>
+    <h2>収録内容</h2>
+    <div class="rule"></div>
+    <div class="contents">
+      <div class="content-item">
+        <h4>36の実践レシピ</h4>
+        <p>身近な食材で作れるローフードレシピを36種収録。ヴィーガン・グルテンフリー対応。</p>
+      </div>
+      <div class="content-item">
+        <h4>世界初のローフードエビデンス</h4>
+        <p>医師監修による科学的根拠。ローフードが体に与える影響を証拠とともに解説。</p>
+      </div>
+      <div class="content-item">
+        <h4>リビングフードレシピ</h4>
+        <p>発酵とローフードを組み合わせた「リビングフード」のレシピを多数収録。</p>
+      </div>
+      <div class="content-item">
+        <h4>スムージー・ドリンク</h4>
+        <p>毎日続けられるスムージーと多様なドリンクレシピ。</p>
+      </div>
+      <div class="content-item">
+        <h4>21日間プログラム</h4>
+        <p>ローフード生活を無理なく始められる21日間の実践ガイド付き。</p>
+      </div>
+      <div class="content-item">
+        <h4>理論・基礎知識</h4>
+        <p>なぜローフードが体に良いのか、基礎理論をわかりやすく解説。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec supervisor-sec">
+  <div class="inner">
+    <span class="sec-eye">Supervisor</span>
+    <h2>監修者</h2>
+    <div class="rule"></div>
+    <div class="supervisor-box">
+      <div class="sup-info">
+        <h4>吉田 和弘 医師（PhD）</h4>
+        <p>京都大学医学部大学院博士課程修了。概日リズム栄養療法の専門家。ローフードを活用した食事療法の研究・実践を行う。本書では科学的エビデンスの監修を担当。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>今すぐAmazonで手に入れる</h2>
+  <p>ローフードの扉を開く一冊</p>
+  <a href="https://www.amazon.co.jp/s?k=%26RAW+LIVING+%E5%AE%89%E8%97%A4%E5%8D%83%E8%8B%B1" target="_blank" rel="noopener" class="btn-amazon" style="display:inline-block;background:var(--amber);color:#1d1d1f;font-size:15px;font-weight:700;padding:14px 36px;border-radius:980px;text-decoration:none;">Amazonで購入する →</a>
+</section>
+
+</Layout>
