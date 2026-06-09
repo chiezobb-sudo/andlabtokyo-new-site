@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="スピルリナLAB | &LAB TOKYO × DIC"
+  description="&LABとDIC株式会社のコラボレーションプロジェクト「スピルリナLAB」。日常に寄り添う小さなヘルスケア。50種以上の栄養成分と98%以上の吸収率を誇るスピルリナのレシピを開発。"
+  canonical="https://www.andlabtokyo.com/supirurinalab"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --green: #3E7A14; --green-l: #5FA823;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 120%, rgba(62,122,20,.12) 0%, transparent 60%); }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; position: relative; }
+.hero h1 { font-size: clamp(26px, 4vw, 48px); font-weight: 700; color: var(--ink); margin-bottom: 14px; position: relative; }
+.hero-sub { font-size: 16px; color: var(--ink-3); line-height: 1.8; max-width: 480px; margin: 0 auto; position: relative; }
+.collab { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.04); border: 1px solid var(--divider); padding: 8px 20px; border-radius: 100px; font-size: 12px; color: var(--ink-3); margin-top: 24px; position: relative; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 900px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.nutrition { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin-top: 28px; }
+.nut { background: var(--bg-card); padding: 28px 20px; text-align: center; }
+.nut-num { font-family: var(--fh); font-size: 36px; color: var(--green-l); font-style: italic; }
+.nut h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin: 6px 0; }
+.nut p { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+.activities { display: flex; flex-direction: column; gap: 2px; margin-top: 28px; }
+.act { background: var(--bg-card); padding: 22px 28px; display: flex; gap: 16px; align-items: baseline; }
+.act-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-l); flex-shrink: 0; margin-top: 6px; }
+.act h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.act p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 28px; }
+.theme { background: var(--bg-card); padding: 22px 20px; border-top: 2px solid var(--green-l); }
+.theme h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.theme p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-outline { display: inline-block; border: 1px solid rgba(198,161,91,.4); color: var(--amber-d); font-size: 14px; padding: 12px 24px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Spirulina Lab</span>
+  <h1>スピルリナLAB</h1>
+  <p class="hero-sub">日常に寄り添う、小さな一歩のヘルスケア。</p>
+  <div class="collab">
+    <span>&LAB</span><span style="opacity:.4">×</span><span>DIC株式会社</span>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>スピルリナLABとは</h2>
+    <div class="rule"></div>
+    <p class="body-text">スピルリナLABは、料理家チーム「&LAB」とDIC株式会社によるコラボレーションプロジェクトです。スピルリナを使った日常的なヘルスケアレシピの開発・普及を行っています。</p>
+    <p class="body-text">医師・管理栄養士・料理家・子育て世代など延べ30名以上がボランティアで参加。クックパッドでは250以上のレシピを公開し、ライフステージに応じた食の提案を続けています。</p>
+
+    <div class="nutrition">
+      <div class="nut">
+        <div class="nut-num">50+</div>
+        <h4>健康・栄養成分</h4>
+        <p>植物性たんぱく質・鉄・ビタミン・葉緑素など現代人に不足しがちな栄養を凝縮。</p>
+      </div>
+      <div class="nut">
+        <div class="nut-num">98%+</div>
+        <h4>吸収率</h4>
+        <p>驚異的な高吸収率。加熱調理にも対応しているため日常使いに適している。</p>
+      </div>
+      <div class="nut">
+        <div class="nut-num">250+</div>
+        <h4>レシピ公開数</h4>
+        <p>クックパッドにて250以上のスピルリナレシピを公開中。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Activities</span>
+    <h2>活動内容</h2>
+    <div class="rule"></div>
+    <div class="activities">
+      <div class="act">
+        <div class="act-dot"></div>
+        <div>
+          <h4>テーマ別レシピ開発</h4>
+          <p>フレイル予防・女性の代謝ケア・働き盛り世代対応など、ライフステージ別レシピを開発。</p>
+        </div>
+      </div>
+      <div class="act">
+        <div class="act-dot"></div>
+        <div>
+          <h4>クックパッドでの情報発信</h4>
+          <p>250以上のレシピを公開し、スピルリナを日常食に取り入れる方法を提案。</p>
+        </div>
+      </div>
+      <div class="act">
+        <div class="act-dot"></div>
+        <div>
+          <h4>書籍コンテンツ提供</h4>
+          <p>書籍『&RAW LIVING』での医学監修コンテンツ提供。</p>
+        </div>
+      </div>
+      <div class="act">
+        <div class="act-dot"></div>
+        <div>
+          <h4>SNS・Instagram発信</h4>
+          <p>レシピおよびヘルスケア情報をSNSで継続発信中。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Themes</span>
+    <h2>テーマ別アプローチ</h2>
+    <div class="rule"></div>
+    <div class="themes">
+      <div class="theme">
+        <h4>フレイル予防</h4>
+        <p>高齢者の筋力維持・栄養補給をサポートするレシピ。</p>
+      </div>
+      <div class="theme">
+        <h4>女性の代謝ケア</h4>
+        <p>鉄分・ホルモンバランスを意識した女性のためのレシピ。</p>
+      </div>
+      <div class="theme">
+        <h4>働き盛り世代</h4>
+        <p>忙しい毎日でも取り入れやすい時短ヘルシーレシピ。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>書籍でスピルリナレシピをさらに詳しく</p>
+  <a href="/rawfood-book" class="btn-outline">書籍を見る</a>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>

@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ナッツフリー・アレルギー対応ローお菓子講座 | &LAB TOKYO"
+  description="砂糖不使用・乳製品不使用・グルテンフリー・ナッツフリー。アレルギーをお持ちの方のための優しいローお菓子1日集中講座。¥88,000（税別）。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/nutfreerawsweets"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --leaf: #4E8A18;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(22px, 3.5vw, 40px); font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 14px; }
+.hero-sub { font-size: 15px; color: var(--ink-3); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.sec { padding: 64px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.free-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+.free-tag { background: rgba(78,138,24,.1); border: 1px solid rgba(78,138,24,.3); color: #6AAD22; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 100px; }
+.prices { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 28px; }
+.price-box { background: var(--bg-card); padding: 28px; text-align: center; }
+.price-box h4 { font-size: 14px; color: var(--ink-3); margin-bottom: 10px; }
+.price-num { font-family: var(--fh); font-size: 40px; color: var(--amber); font-style: italic; }
+.price-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.recipes { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; margin-top: 28px; }
+.recipe { background: var(--bg-card); padding: 14px; font-size: 13px; color: var(--ink-3); text-align: center; }
+.warning { background: rgba(198,161,91,0.06); border: 1px solid rgba(198,161,91,0.2); padding: 20px 24px; margin-top: 24px; border-radius: 4px; }
+.warning p { font-size: 13px; color: var(--ink-3); line-height: 1.75; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+@media (max-width: 640px) { .prices { grid-template-columns: 1fr; } }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Nut-Free Raw Sweets</span>
+  <h1>ナッツフリー<br>アレルギー対応ローお菓子講座</h1>
+  <p class="hero-sub">Gentle &amp; Vegan Raw Sweets — アレルギーがあっても、みんなで楽しめるローお菓子を。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>6つのフリーで作る<br>やさしいローお菓子</h2>
+    <div class="rule"></div>
+    <p class="body-text">食物アレルギーをお持ちの方や、身体に優しいお菓子を求める方のための1日集中講座です。ナッツ・カカオ・フルーツなど一般的なアレルゲンの代替方法を学び、誰でも安心して食べられるローお菓子を作ります。</p>
+    <div class="free-tags">
+      <span class="free-tag">Sugar Free</span>
+      <span class="free-tag">Dairy Free</span>
+      <span class="free-tag">Gluten Free</span>
+      <span class="free-tag">Nuts Free</span>
+      <span class="free-tag">Cacao Free</span>
+      <span class="free-tag">Guilt Free</span>
+    </div>
+    <div class="prices">
+      <div class="price-box">
+        <h4>一般受講</h4>
+        <div class="price-num">¥88,000</div>
+        <div class="price-note">税別 / テキスト代込み / 1日完結</div>
+      </div>
+      <div class="price-box">
+        <h4>認定インストラクター割引</h4>
+        <div class="price-num">¥80,000</div>
+        <div class="price-note">税別</div>
+      </div>
+    </div>
+    <div class="warning">
+      <p>⚠️ 本スクールではナッツを使用した授業も行っています。重度のナッツアレルギーをお持ちの方はお申し込み前にご相談ください。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Recipes</span>
+    <h2>作るレシピ例</h2>
+    <div class="rule"></div>
+    <div class="recipes">
+      <div class="recipe">プラントベースヨーグルト</div>
+      <div class="recipe">チアプディング</div>
+      <div class="recipe">フルーツアイスバー</div>
+      <div class="recipe">ノンカカオチョコクリーム</div>
+      <div class="recipe">ブルーベリーマキクリーム</div>
+      <div class="recipe">カスタードプリン</div>
+      <div class="recipe">アボカドチョコケーキ</div>
+      <div class="recipe">プロテインボール</div>
+      <div class="recipe">ヨーグルトバーク</div>
+      <div class="recipe">プラントミルク</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>お申し込み・ご質問はコンタクトフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
+</section>
+</Layout>

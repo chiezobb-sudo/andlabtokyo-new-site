@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="レシピ監修・フードコーディネート・講演 | &LAB TOKYO"
+  description="健康・発酵・ローフードを軸にしたレシピ監修、フードコーディネート、講演会・講習。企業・メディア向けサービス。アクアクララ、DIC、ホテルニューオータニ博多など実績多数。"
+  canonical="https://www.andlabtokyo.com/recipe-supervision"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(24px, 3.5vw, 44px); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 14px; }
+.hero-sub { font-size: 16px; color: var(--ink-3); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 900px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; margin-top: 28px; }
+.service { background: var(--bg-card); padding: 32px 28px; }
+.service-num { font-family: var(--fh); font-size: 48px; color: var(--amber); font-style: italic; opacity: .3; line-height: 1; margin-bottom: 12px; }
+.service h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.service p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.clients { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 28px; }
+.client-group { background: var(--bg-card); padding: 24px; }
+.client-group h4 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber-d); margin-bottom: 12px; }
+.client-group ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.client-group ul li { font-size: 13px; color: var(--ink-3); padding-left: 14px; position: relative; }
+.client-group ul li::before { content: '—'; position: absolute; left: 0; color: var(--amber-d); opacity: .5; }
+.contact-note { background: rgba(198,161,91,0.06); border: 1px solid rgba(198,161,91,0.2); padding: 24px 28px; margin-top: 32px; }
+.contact-note p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Business Service</span>
+  <h1>レシピ監修 ·<br>フードコーディネート · 講演</h1>
+  <p class="hero-sub">健康・発酵・ローフードを軸に、商品や食材の魅力を引き出すご提案をいたします。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Services</span>
+    <h2>主なサービス</h2>
+    <div class="rule"></div>
+    <div class="services">
+      <div class="service">
+        <div class="service-num">01</div>
+        <h3>レシピ監修</h3>
+        <p>健康・発酵・ローフードを軸に、商品や食材の魅力を引き出すレシピを制作。書籍・雑誌・WEB媒体・商品パッケージに対応。</p>
+      </div>
+      <div class="service">
+        <div class="service-num">02</div>
+        <h3>フードコーディネート</h3>
+        <p>撮影スタイリングやイベント演出を担当。食の美しさとメッセージを映像・空間で表現します。</p>
+      </div>
+      <div class="service">
+        <div class="service-num">03</div>
+        <h3>講演会・講習</h3>
+        <p>食育・腸活・発酵食・ロースイーツなどをテーマに企業・教育機関・自治体向けに実施。</p>
+      </div>
+    </div>
+
+    <div class="contact-note">
+      <p>ご予算・日程・内容に応じて柔軟に対応いたします。まずはお気軽にご相談ください。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Clients</span>
+    <h2>主な実績</h2>
+    <div class="rule"></div>
+    <div class="clients">
+      <div class="client-group">
+        <h4>レシピ監修</h4>
+        <ul>
+          <li>株式会社CORED</li>
+          <li>アクアクララ株式会社</li>
+          <li>DIC株式会社</li>
+        </ul>
+      </div>
+      <div class="client-group">
+        <h4>講習・講演</h4>
+        <ul>
+          <li>ホテルニューオータニ博多</li>
+          <li>品川女子高等学校</li>
+        </ul>
+      </div>
+      <div class="client-group">
+        <h4>料理イベント</h4>
+        <ul>
+          <li>積水ハウスリフォーム</li>
+          <li>キッチンハウス</li>
+          <li>サッポロビール</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>ご依頼・ご相談はお問い合わせフォームから</p>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>

@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="レシピ | ローフード・発酵・ローチョコレート | &LAB TOKYO"
+  description="ELLE gourmet掲載レシピ、ローフード、発酵、ヴィーガンスイーツなど、安藤千英のレシピ集。"
+  canonical="https://www.andlabtokyo.com/recipe"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(26px, 4vw, 48px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--ink-3); }
+.sec { padding: 72px 24px; }
+.inner { max-width: 900px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
+.cat { background: var(--bg-card); padding: 28px 24px; }
+.cat h3 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.cat p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.featured { background: var(--bg-2); }
+.recipe-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 32px; }
+.recipe-card { background: var(--bg-card); }
+.recipe-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.recipe-card-body { padding: 18px; }
+.recipe-card h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.recipe-card p { font-size: 13px; color: var(--ink-3); }
+.coming { background: var(--bg-card); padding: 48px; text-align: center; margin-top: 32px; }
+.coming p { font-size: 15px; color: var(--ink-3); }
+.cta-sec { text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Recipe</span>
+  <h1>レシピ</h1>
+  <p>ELLE gourmet掲載・ローフード・発酵・ヴィーガンスイーツ</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Categories</span>
+    <h2>レシピカテゴリー</h2>
+    <div class="rule"></div>
+    <div class="categories">
+      <div class="cat">
+        <h3>🥗 Raw Food</h3>
+        <p>ローフードの基本レシピ。加熱なしで素材の栄養を最大限に活かす。</p>
+      </div>
+      <div class="cat">
+        <h3>🍫 Healthy Vegan Sweets</h3>
+        <p>砂糖不使用・乳製品不使用のヴィーガンスイーツレシピ。</p>
+      </div>
+      <div class="cat">
+        <h3>🧪 Fermentation</h3>
+        <p>塩麹・甘酒・味噌など、発酵食品を使ったレシピ。</p>
+      </div>
+      <div class="cat">
+        <h3>🍛 Spice Curry</h3>
+        <p>スパイスを使ったヘルシーカレーレシピ。</p>
+      </div>
+      <div class="cat">
+        <h3>🫒 Olive Oil Life</h3>
+        <p>オリーブオイルを活かした料理レシピ。雑誌掲載作品。</p>
+      </div>
+      <div class="cat">
+        <h3>🌸 ELLE gourmet</h3>
+        <p>ELLE gourmet掲載レシピ。安藤千英監修の厳選レシピ。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec featured">
+  <div class="inner">
+    <span class="sec-eye">Featured</span>
+    <h2>注目レシピ</h2>
+    <div class="rule"></div>
+    <div class="coming">
+      <p>レシピページは随時更新中です。<br>最新レシピはInstagramとNoteでも公開しています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>レッスンでレシピを直接学ぶ</p>
+  <a href="/experiencelessons" class="btn-primary">体験レッスンを見る</a>
+</section>
+</Layout>

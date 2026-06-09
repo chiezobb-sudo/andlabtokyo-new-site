@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ロースイーツ講座 お申し込み | &LAB TOKYO"
+  description="ローチョコレートマイスター・ローパティシエ・ローショコラティエ講座のお申し込みフォーム。希望講座・日程を選んでお申し込みください。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/rawsweets-application"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--ink-3); }
+.sec { padding: 64px 24px; }
+.inner { max-width: 680px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.form-group { margin-bottom: 24px; }
+label { display: block; font-size: 13px; color: var(--amber-d); margin-bottom: 6px; }
+label .req { color: #E87160; margin-left: 4px; }
+input, select, textarea {
+  width: 100%; background: var(--bg-card); border: 1px solid var(--divider);
+  color: var(--ink-2); font-size: 14px; font-family: 'Noto Sans JP', sans-serif;
+  padding: 12px 16px; border-radius: 4px;
+  transition: border-color .2s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(198,161,91,.5); }
+textarea { min-height: 100px; resize: vertical; }
+select { appearance: none; cursor: pointer; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.submit-btn { width: 100%; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px; border: none; border-radius: 980px; cursor: pointer; margin-top: 8px; }
+.submit-btn:hover { background: var(--amber-d); }
+.note { font-size: 13px; color: var(--ink-3); margin-top: 24px; line-height: 1.75; text-align: center; }
+.courses-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-bottom: 40px; }
+.course-card { background: var(--bg-card); padding: 18px 20px; }
+.course-card h4 { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.course-card p { font-size: 12px; color: var(--ink-3); }
+@media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Application</span>
+  <h1>ロースイーツ講座<br>お申し込み</h1>
+  <p>希望講座・日程をご記入ください。2営業日以内にご連絡いたします。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Courses</span>
+    <h2>対象講座</h2>
+    <div class="rule"></div>
+    <div class="courses-preview">
+      <div class="course-card">
+        <h4>ロースイーツマイスター</h4>
+        <p>初・中・上級の3ステップ</p>
+      </div>
+      <div class="course-card">
+        <h4>ローチョコレートマイスター</h4>
+        <p>初・中・上級の3ステップ</p>
+      </div>
+      <div class="course-card">
+        <h4>ローショコラティエ</h4>
+        <p>プロ認定資格コース</p>
+      </div>
+      <div class="course-card">
+        <h4>ローパティシエ養成講座</h4>
+        <p>3ステップ・プロ養成</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Form</span>
+    <h2>申し込みフォーム</h2>
+    <div class="rule"></div>
+
+    <form name="rawsweets-application" method="POST" data-netlify="true" action="/contact-thanks">
+      <input type="hidden" name="form-name" value="rawsweets-application" />
+
+      <div class="row">
+        <div class="form-group">
+          <label>姓 <span class="req">*</span></label>
+          <input type="text" name="last_name" required placeholder="安藤" />
+        </div>
+        <div class="form-group">
+          <label>名 <span class="req">*</span></label>
+          <input type="text" name="first_name" required placeholder="千英" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>メールアドレス <span class="req">*</span></label>
+        <input type="email" name="email" required placeholder="info@example.com" />
+      </div>
+
+      <div class="form-group">
+        <label>電話番号</label>
+        <input type="tel" name="phone" placeholder="090-0000-0000" />
+      </div>
+
+      <div class="form-group">
+        <label>住所</label>
+        <input type="text" name="address" placeholder="東京都渋谷区" />
+      </div>
+
+      <div class="form-group">
+        <label>お申し込み希望講座 <span class="req">*</span></label>
+        <select name="course" required>
+          <option value="">選択してください</option>
+          <option>ロースイーツマイスター</option>
+          <option>ローチョコレートマイスター</option>
+          <option>ローショコラティエ</option>
+          <option>ローパティシエ養成講座</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>受講形式</label>
+        <select name="format">
+          <option value="">選択してください</option>
+          <option>対面</option>
+          <option>オンライン</option>
+          <option>どちらでも可</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>第1希望日</label>
+        <input type="text" name="date1" placeholder="例：2026年7月中旬の平日" />
+      </div>
+
+      <div class="form-group">
+        <label>第2希望日</label>
+        <input type="text" name="date2" placeholder="例：2026年8月上旬の土日" />
+      </div>
+
+      <div class="form-group">
+        <label>第3希望日</label>
+        <input type="text" name="date3" placeholder="例：2026年8月中旬以降でも可" />
+      </div>
+
+      <div class="form-group">
+        <label>その他、可能な日程・ご質問</label>
+        <textarea name="message" placeholder="ご質問やご要望があればご記入ください。"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">送信する</button>
+
+      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信がない場合は <a href="mailto:info@andlabtokyo.com" style="color:var(--amber)">info@andlabtokyo.com</a> へ直接ご連絡ください。</p>
+    </form>
+  </div>
+</section>
+</Layout>

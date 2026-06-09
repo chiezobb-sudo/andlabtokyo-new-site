@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="商標について | &LAB TOKYO"
+  description="ローショコラティエ®・ローパティシエ®はローショコラティエ協会の登録商標です。無断使用を禁止します。"
+  canonical="https://www.andlabtokyo.com/trademark"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 80px 24px 60px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--ink-3); }
+.sec { padding: 64px 24px; }
+.inner { max-width: 760px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.trademark-list { display: flex; flex-direction: column; gap: 2px; margin-top: 24px; }
+.tm { background: var(--bg-card); padding: 24px 28px; }
+.tm-name { font-family: var(--fh); font-size: 28px; color: var(--amber); font-style: italic; margin-bottom: 8px; }
+.tm p { font-size: 14px; color: var(--ink-3); line-height: 1.75; }
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 24px; }
+.vocab-item { background: var(--bg-card); padding: 20px 24px; }
+.vocab-item h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.vocab-item p { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+.note-box { background: rgba(198,161,91,0.05); border: 1px solid rgba(198,161,91,0.15); padding: 20px 24px; margin-top: 28px; border-radius: 4px; }
+.note-box p { font-size: 13px; color: var(--ink-3); line-height: 1.8; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Trademark</span>
+  <h1>商標について</h1>
+  <p>ローショコラティエ協会の登録商標に関するご案内</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Registered Trademarks</span>
+    <h2>登録商標</h2>
+    <div class="rule"></div>
+    <p class="body-text">以下の名称はローショコラティエ協会の登録商標です。協会の許可なく商業目的で使用することを禁止します。</p>
+    <div class="trademark-list">
+      <div class="tm">
+        <div class="tm-name">ローショコラティエ®</div>
+        <p>ローショコラティエはローショコラティエ協会の登録商標です。協会認定プログラムを修了した方のみが名乗ることができます。</p>
+      </div>
+      <div class="tm">
+        <div class="tm-name">ローパティシエ®</div>
+        <p>ローパティシエはローショコラティエ協会の登録商標です。ローパティシエ養成講座を修了し認定を受けた方のみが使用できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Terminology</span>
+    <h2>職人の名称について</h2>
+    <div class="rule"></div>
+    <p class="body-text">フランス語に由来する製菓・製パン職人の名称について、その区分をご説明します。</p>
+    <div class="vocab">
+      <div class="vocab-item">
+        <h4>パティシエ</h4>
+        <p>製菓職人の総称。ケーキ・菓子全般を専門とする。</p>
+      </div>
+      <div class="vocab-item">
+        <h4>ブランジェ</h4>
+        <p>パン専門の職人。製パンに特化した技術を持つ。</p>
+      </div>
+      <div class="vocab-item">
+        <h4>ショコラティエ</h4>
+        <p>チョコレート専門の職人。カカオの知識と加工技術を持つ。</p>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top: 28px;">
+      <p>ローショコラティエ協会は「ロースイーツ・ローチョコレートに特化した世界で初めての協会」として、独自の認定制度を整備しています。2019年のロースイーツプランナー講座開講以来、多くのプロフェッショナルを育成してきました。</p>
+    </div>
+  </div>
+</section>
+</Layout>

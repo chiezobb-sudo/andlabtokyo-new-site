@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Creative Book Lab | &LAB TOKYO"
+  description="Creative Book Lab — &LAB TOKYOのクリエイティブプロジェクト。食と本とアートが交差するラボ。"
+  canonical="https://www.andlabtokyo.com/creativebooklab"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(28px, 4.5vw, 56px); font-weight: 400; color: var(--ink); line-height: 1.15; margin-bottom: 16px; font-family: var(--fh); font-style: italic; }
+.hero-sub { font-size: 16px; color: var(--ink-3); line-height: 1.8; max-width: 480px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 28px; }
+.pillar { background: var(--bg-card); padding: 32px 24px; text-align: center; }
+.pillar-icon { font-size: 40px; margin-bottom: 14px; }
+.pillar h3 { font-family: var(--fh); font-size: 22px; color: var(--amber); font-style: italic; margin-bottom: 8px; }
+.pillar p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.coming-soon { background: var(--bg-card); padding: 48px; text-align: center; margin-top: 28px; }
+.coming-soon p { font-size: 15px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Project</span>
+  <h1>Creative Book Lab</h1>
+  <p class="hero-sub">食と本とアートが交差する、&LABのクリエイティブプロジェクト。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>Creative Book Labとは</h2>
+    <div class="rule"></div>
+    <p class="body-text">Creative Book Labは、&LAB TOKYOが食・本・アートをテーマに展開するクリエイティブプロジェクトです。レシピ制作にとどまらず、食を通じたライフスタイルの提案・表現・発信を行います。</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🍽️</div>
+        <h3>Food</h3>
+        <p>ローフード・発酵・植物性食を軸にしたレシピとコンセプト開発。</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📚</div>
+        <h3>Book</h3>
+        <p>書籍制作・レシピブック・コンテンツ監修を通じた食の知識の普及。</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🎨</div>
+        <h3>Art</h3>
+        <p>フードアート・プレートデザイン・写真・映像表現での食の審美。</p>
+      </div>
+    </div>
+
+    <div class="coming-soon">
+      <p>Creative Book Labの最新情報はInstagramとNoteで随時発信しています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>お仕事のご依頼・コラボレーションはこちら</p>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>

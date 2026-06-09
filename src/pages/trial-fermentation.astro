@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="発酵体験レッスン | 塩麹・甘酒・ビーガンキムチ | &LAB TOKYO"
+  description="渋谷・&LAB TOKYOで開催する発酵体験レッスン。塩麹・甘酒・ビーガンキムチを手作りで学べる初心者向け体験講座。"
+  canonical="https://www.andlabtokyo.com/trial-fermentation"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(26px, 4vw, 48px); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 14px; }
+.hero-sub { font-size: 16px; color: var(--ink-3); line-height: 1.8; max-width: 480px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 28px; }
+.lesson { background: var(--bg-card); padding: 28px; }
+.lesson-icon { font-size: 32px; margin-bottom: 12px; }
+.lesson h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.lesson p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.info-box { background: var(--bg-card); padding: 28px; margin-top: 28px; }
+.info-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--divider); font-size: 14px; }
+.info-row:last-child { border-bottom: none; }
+.info-label { color: var(--amber-d); min-width: 70px; }
+.info-val { color: var(--ink-3); }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+.btn-outline { display: inline-block; border: 1px solid rgba(198,161,91,.4); color: var(--amber-d); font-size: 14px; padding: 12px 24px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Fermentation Trial</span>
+  <h1>発酵体験レッスン</h1>
+  <p class="hero-sub">塩麹・甘酒・ビーガンキムチ——発酵の不思議と美味しさを、手作りで体験。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">About</span>
+    <h2>発酵の世界への<br>はじめの一歩</h2>
+    <div class="rule"></div>
+    <p class="body-text">発酵食品は腸内環境の改善・免疫力アップ・栄養の吸収率向上など、身体にうれしい効果が期待できます。本講座では、日本の伝統発酵食を中心に、初心者でも気軽に体験できる内容をご用意しています。</p>
+    <p class="body-text">作った発酵食品はお持ち帰りいただけます。自宅でそのまま活用できるレシピもお渡しします。</p>
+
+    <div class="lessons">
+      <div class="lesson">
+        <div class="lesson-icon">🌾</div>
+        <h3>塩麹</h3>
+        <p>お米の麹と塩で作るシンプルな発酵調味料。お肉・魚・野菜を漬けるだけで旨味が倍増。</p>
+      </div>
+      <div class="lesson">
+        <div class="lesson-icon">🍚</div>
+        <h3>甘酒</h3>
+        <p>飲む点滴とも呼ばれる甘酒。砂糖不使用で米の自然な甘みだけで作る発酵ドリンク。</p>
+      </div>
+      <div class="lesson">
+        <div class="lesson-icon">🥬</div>
+        <h3>ビーガンキムチ</h3>
+        <p>動物性食材を使わないプラントベースのキムチ。旨味は発酵と野菜だけで実現。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Info</span>
+    <h2>レッスン情報</h2>
+    <div class="rule"></div>
+    <div class="info-box">
+      <div class="info-row"><span class="info-label">場所</span><span class="info-val">渋谷・&LAB TOKYO</span></div>
+      <div class="info-row"><span class="info-label">対象</span><span class="info-val">初心者・発酵食に興味がある方どなたでも</span></div>
+      <div class="info-row"><span class="info-label">内容</span><span class="info-val">塩麹・甘酒・ビーガンキムチのいずれか（当日選択可）</span></div>
+      <div class="info-row"><span class="info-label">持ち帰り</span><span class="info-val">当日作った発酵食品をお持ち帰りいただけます</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>日程・お申し込みはお問い合わせから</p>
+  <a href="/experiencelessons" class="btn-outline">体験レッスン一覧を見る</a>
+  <a href="/contact" class="btn-primary">お申し込み</a>
+</section>
+</Layout>

@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ローチョコレートマイスター中級 オンラインレッスンガイド | &LAB TOKYO"
+  description="ローチョコレートマイスター中級をオンラインで受講する方のための準備ガイド。材料・道具リスト・レッスンの流れ。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/rawchocolatier-online-intermediate"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 72px 24px 56px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(22px, 3.5vw, 38px); font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 12px; }
+.hero p { font-size: 15px; color: var(--ink-3); }
+.sec { padding: 64px 24px; }
+.inner { max-width: 760px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 16px 0 28px; }
+.list-group { margin-bottom: 32px; }
+.list-group h3 { font-size: 16px; font-weight: 700; color: var(--amber-d); margin-bottom: 12px; border-left: 2px solid var(--amber); padding-left: 12px; }
+.list-group ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.list-group ul li { font-size: 14px; color: var(--ink-3); padding-left: 18px; position: relative; line-height: 1.7; }
+.list-group ul li::before { content: '—'; position: absolute; left: 0; color: var(--amber-d); }
+.flow { display: flex; flex-direction: column; gap: 2px; margin-top: 24px; }
+.flow-item { background: var(--bg-card); padding: 18px 24px; display: flex; gap: 16px; align-items: baseline; }
+.flow-num { background: var(--amber); color: #1d1d1f; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.flow-item p { font-size: 14px; color: var(--ink-3); line-height: 1.7; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 56px 24px; }
+.cta-sec p { font-size: 14px; color: var(--ink-3); margin-bottom: 20px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 14px; font-weight: 700; padding: 12px 28px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+.btn-outline { display: inline-block; border: 1px solid rgba(198,161,91,.4); color: var(--amber-d); font-size: 14px; padding: 11px 24px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Online Guide — Intermediate</span>
+  <h1>ローチョコレートマイスター中級<br>オンラインレッスン ご準備ガイド</h1>
+  <p>オンラインで受講される方のための材料・道具・流れのご案内</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Materials</span>
+    <h2>必要な材料・道具</h2>
+    <div class="rule"></div>
+
+    <div class="list-group">
+      <h3>主な材料</h3>
+      <ul>
+        <li>オーガニック ローカカオパウダー</li>
+        <li>オーガニック ローカカオバター</li>
+        <li>オーガニック メープルシロップ</li>
+        <li>デーツ（オーガニック）</li>
+        <li>ピンクピタヤパウダー</li>
+        <li>リナブルー（スピルリナ由来の青色色素）</li>
+        <li>天然着色パウダー（マキベリー・抹茶など）</li>
+      </ul>
+    </div>
+
+    <div class="list-group">
+      <h3>必要な道具</h3>
+      <ul>
+        <li>Zoom対応デバイス（タブレットまたはPC推奨）</li>
+        <li>温度計付きスパチュラ（テンパリング用）</li>
+        <li>シリコンモールドまたはチョコレートモールド</li>
+        <li>フードプロセッサーまたはブレンダー</li>
+        <li>バット・ボウル・鍋などの調理器具</li>
+      </ul>
+    </div>
+
+    <div style="background: rgba(198,161,91,0.05); border: 1px solid rgba(198,161,91,0.15); padding: 16px 20px; border-radius: 4px;">
+      <p style="font-size:13px; color: var(--ink-3);">ブレンテック製ブレンダー、プリンセス製フードドライヤーは受講生割引で購入できます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Flow</span>
+    <h2>レッスンの流れ</h2>
+    <div class="rule"></div>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-num">1</div><p>材料・道具確認（Zoomセットアップ）</p></div>
+      <div class="flow-item"><div class="flow-num">2</div><p>基本ホワイトチョコレート製作</p></div>
+      <div class="flow-item"><div class="flow-num">3</div><p>基本トリュフ製作</p></div>
+      <div class="flow-item"><div class="flow-num">4</div><p>座学：テンパリング・カカオについて</p></div>
+      <div class="flow-item"><div class="flow-num">5</div><p>モールドへの流し込み・整形</p></div>
+      <div class="flow-item"><div class="flow-num">6</div><p>カラフルチョコレート製作（天然色素を使用）</p></div>
+      <div class="flow-item"><div class="flow-num">7</div><p>生チョコレート製作</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>講座の詳細・お申し込みはこちら</p>
+  <a href="/rawchocolatier/rawchocolatemeister" class="btn-outline">講座詳細を見る</a>
+  <a href="/contact" class="btn-primary">お申し込み</a>
+</section>
+</Layout>

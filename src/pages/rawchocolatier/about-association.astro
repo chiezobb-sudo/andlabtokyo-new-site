@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="ローショコラティエ協会について | &LAB TOKYO"
+  description="ローショコラティエ協会は、ロースイーツ・ローチョコレートの技術と文化を広め次世代へ継承するために設立された団体です。代表：安藤千英。"
+  canonical="https://www.andlabtokyo.com/rawchocolatier/rawchocolatieraboutchocolatierchocolatierassociation"
+>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+.hero { margin-top: 44px; padding: 100px 24px 80px; background: var(--bg-dark); text-align: center; }
+.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(24px, 3.5vw, 44px); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 14px; }
+.hero-sub { font-size: 15px; color: var(--ink-3); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.sec { padding: 72px 24px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
+h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
+.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
+.body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
+.profile-box { background: var(--bg-card); padding: 28px 32px; margin-top: 24px; }
+.profile-box dt { font-size: 12px; color: var(--amber-d); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; margin-top: 16px; }
+.profile-box dt:first-child { margin-top: 0; }
+.profile-box dd { font-size: 15px; color: var(--ink-2); }
+.values { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin-top: 28px; }
+.value { background: var(--bg-card); padding: 24px 20px; }
+.value h4 { font-size: 14px; font-weight: 700; color: var(--amber-d); margin-bottom: 8px; }
+.value p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.certs { display: flex; flex-direction: column; gap: 2px; margin-top: 28px; }
+.cert { background: var(--bg-card); padding: 20px 24px; display: flex; gap: 16px; align-items: center; }
+.cert-badge { background: var(--amber); color: #1d1d1f; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
+.cert p { font-size: 14px; color: var(--ink-3); line-height: 1.6; }
+.tech { background: rgba(198,161,91,0.05); border-left: 3px solid var(--amber); padding: 20px 24px; margin-top: 24px; }
+.tech p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
+.cta-sec { background: var(--bg-2); text-align: center; padding: 64px 24px; }
+.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+.btn-outline { display: inline-block; border: 1px solid rgba(198,161,91,.4); color: var(--amber-d); font-size: 14px; padding: 12px 24px; border-radius: 980px; text-decoration: none; margin: 0 6px; }
+</style>
+
+<section class="hero">
+  <span class="hero-eye">Association</span>
+  <h1>ローショコラティエ協会<br>について</h1>
+  <p class="hero-sub">ロースイーツ・ローチョコレートの技術と文化を次世代へ。</p>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Overview</span>
+    <h2>協会概要</h2>
+    <div class="rule"></div>
+    <p class="body-text">ローショコラティエ協会は、ロースイーツとローチョコレートの技術・文化を広め、次世代へ継承することを目的として設立された任意団体です。&LAB TOKYO内で活動し、講座運営・講師養成・社会貢献活動・研究・普及活動を行っています。</p>
+
+    <dl class="profile-box">
+      <dt>設立</dt>
+      <dd>2022年</dd>
+      <dt>代表</dt>
+      <dd>安藤 千英</dd>
+      <dt>所在地</dt>
+      <dd>東京都（&LAB TOKYO内）</dd>
+      <dt>形態</dt>
+      <dd>任意団体</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg-2);">
+  <div class="inner">
+    <span class="sec-eye">Certification</span>
+    <h2>認定制度・主要講座</h2>
+    <div class="rule"></div>
+    <p class="body-text">協会が育成する専門家を「ローショコラティエ®」と称し、複数の認定プログラムを提供しています。</p>
+    <div class="certs">
+      <div class="cert">
+        <span class="cert-badge">2019年</span>
+        <p>ロースイーツプランナー講座 開講</p>
+      </div>
+      <div class="cert">
+        <span class="cert-badge">2022年</span>
+        <p>ローチョコレートマイスター講座 開設</p>
+      </div>
+      <div class="cert">
+        <span class="cert-badge">資格</span>
+        <p>ローショコラティエ® 認定資格（商業販売・指導資格付き）</p>
+      </div>
+    </div>
+
+    <div class="tech">
+      <p>協会の強みは「独自開発のテンパリングと着色技術」と「なめらかな口当たりを追求した製法」にあり、世界に唯一無二の存在として支持されています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background: var(--bg);">
+  <div class="inner">
+    <span class="sec-eye">Values</span>
+    <h2>協会の理念</h2>
+    <div class="rule"></div>
+    <div class="values">
+      <div class="value">
+        <h4>環境配慮</h4>
+        <p>有機・フェアトレード素材の使用を推進し、持続可能な食文化を目指す。</p>
+      </div>
+      <div class="value">
+        <h4>女性の活躍</h4>
+        <p>食の専門家としての女性の社会進出を支援する。</p>
+      </div>
+      <div class="value">
+        <h4>健康寿命延伸</h4>
+        <p>植物性・無添加の食を通じた健康的な生き方を提案する。</p>
+      </div>
+      <div class="value">
+        <h4>多様性尊重</h4>
+        <p>アレルギー対応・ヴィーガン対応で、誰もが楽しめる食を作る。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p>講座・資格について詳しく見る</p>
+  <a href="/rawchocolatier/rawchocolatemeister" class="btn-outline">講座一覧を見る</a>
+  <a href="/contact" class="btn-primary">お問い合わせ</a>
+</section>
+</Layout>
