@@ -1,196 +1,250 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// ブログ記事データ
+const articles = [
+  {
+    slug: 'what-is-rawfood',
+    title: 'ローフードとは何か？基礎知識とライフスタイル',
+    category: 'Knowledge',
+    publishDate: '2026-06-06',
+    description: 'ローフードの基本的な定義から、細胞レベルでの変化、日常生活への取り入れ方まで。酵素の力と48℃の科学的根拠を解説します。',
+    image: '/rawfood-zucchini.jpg'
+  },
+  {
+    slug: 'cross-theory',
+    title: 'クロス理論：ローフード×発酵の融合',
+    category: 'Philosophy',
+    publishDate: '2026-06-06',
+    description: '&LAB TOKYOが独自開発した「ローフード×発酵」のクロス理論。生きた酵素と発酵の力で、細胞から整う真のウェルネスを実現する理論的背景。',
+    image: '/hacco-koji.jpg'
+  },
+  {
+    slug: 'raw-sweets-benefits',
+    title: 'ロースイーツの驚くべき健康効果',
+    category: 'Wellness',
+    publishDate: '2026-06-06',
+    description: '砂糖不使用・加熱なしのロースイーツが、血糖値・腸内環境・肌に与える効果を科学的に解説。美しく甘いお菓子を罪悪感なく楽しむ方法。',
+    image: '/raw-chocolate.jpg'
+  }
+];
+
+// 公開日でソート（新しい順）
+const sortedArticles = articles.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+
+// ユニークなカテゴリを取得
+const categories = ['すべて', ...new Set(articles.map(a => a.category))];
 ---
 <Layout
-  title="ブログ｜発酵・ローフード・リビングフードの知恵と実践 | &LAB TOKYO"
+  title="ジャーナル｜発酵・ローフード・リビングフードの知恵と実践 | &LAB TOKYO"
   canonical="https://www.andlabtokyo.com/blog"
 >
 
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    
-    
-    .page-header{margin-top:44px;padding:64px 22px 48px;background:var(--bg-2);text-align:center;border-bottom:1px solid var(--divider);}
-    .header-eye{font-family:var(--fh);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:12px;}
-    .page-header h1{font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);margin-bottom:12px;}
-    .page-header p{font-size:15px;color:var(--ink-3);max-width:480px;margin:0 auto;}
-    .categories{padding:20px 22px;background:var(--bg);border-bottom:1px solid var(--divider);position:sticky;top:44px;z-index:50;}
-    .cat-inner{max-width:1000px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
-    .cat-btn{font-size:13px;font-weight:500;padding:7px 16px;border-radius:980px;text-decoration:none;transition:all .2s;border:1.5px solid var(--divider);color:var(--ink-3);}
-    .cat-btn:hover,.cat-btn.active{background:var(--green);color:#1d1d1f;border-color:var(--green);}
-    .featured{padding:48px 22px 0;background:var(--bg);}
-    .featured-inner{max-width:1000px;margin:0 auto;}
-    .featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
-    .featured-main{position:relative;overflow:hidden;height:440px;text-decoration:none;display:block;}
-    .featured-main img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
-    .featured-main:hover img{transform:scale(1.03);}
-    .featured-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.1) 55%,transparent 100%);}
-    .feat-cat{font-family:var(--fh);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:8px;display:block;}
-    .featured-main h2{font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;}
-    .feat-date{font-size:12px;color:rgba(255,255,255,.55);}
-    .featured-sub{display:grid;grid-template-rows:1fr 1fr;gap:3px;}
-    .feat-sub-card{position:relative;overflow:hidden;height:216px;text-decoration:none;display:block;}
-    .feat-sub-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
-    .feat-sub-card:hover img{transform:scale(1.04);}
-    .feat-sub-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 60%);}
-    .feat-sub-body span{font-family:var(--fh);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:4px;}
-    .feat-sub-body h3{font-size:15px;font-weight:700;color:#fff;line-height:1.4;}
-    .articles{padding:48px 22px 72px;background:var(--bg);}
-    .articles-inner{max-width:1000px;margin:0 auto;}
-    .articles-label{font-family:var(--fh);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:28px;}
-    .article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--divider);}
-    .article-card{background:var(--bg);text-decoration:none;display:block;transition:background .2s;}
-    .article-card:hover{background:var(--bg-2);}
-    .article-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
-    .article-cat{font-family:var(--fh);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:6px;}
-    .article-card h3{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:8px;}
-    .article-card p{font-size:13px;color:var(--ink-3);line-height:1.7;margin-bottom:12px;}
-    .article-date{font-size:12px;color:var(--divider);}
-    .knowledge{padding:56px 22px;background:var(--bg-2);}
-    .knowledge-inner{max-width:1000px;margin:0 auto;}
-    .knowledge-eye{font-family:var(--fh);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green-d);display:block;margin-bottom:10px;}
-    .knowledge h2{font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--ink);margin-bottom:8px;}
-    .knowledge-sub{font-size:15px;color:var(--ink-3);margin-bottom:36px;}
-    .knowledge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
-    .knowledge-card{background:var(--bg);padding:24px 20px;text-decoration:none;display:block;border-bottom:2px solid transparent;transition:border-color .2s,background .2s;}
-    .knowledge-card:hover{border-bottom-color:var(--green);background:var(--bg-2);}
-    .knowledge-card-icon{font-size:24px;margin-bottom:12px;display:block;}
-    .knowledge-card h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;}
-    .knowledge-card p{font-size:12px;color:var(--ink-3);line-height:1.7;}
-    .note-sec{padding:48px 22px;background:var(--bg-dark);text-align:center;}
-    .note-eye{font-family:var(--fh);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:12px;}
-    .note-sec h2{font-size:clamp(20px,3vw,30px);font-weight:700;color:#f5f5f7;margin-bottom:12px;}
-    .note-sec p{font-size:15px;color:rgba(245,245,247,.6);margin-bottom:24px;}
-    .btn-note{display:inline-block;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);font-size:14px;padding:12px 28px;border-radius:980px;text-decoration:none;transition:all .2s;}
-    .btn-note:hover{border-color:#fff;color:#fff;}
-    
-    
-    @media(max-width:768px){.featured-grid{grid-template-columns:1fr;}.article-grid{grid-template-columns:1fr;}.knowledge-grid{grid-template-columns:repeat(2,1fr);}}
+/* ===== HEADER ===== */
+.blog-header {
+  padding: 6rem 4rem;
+  background: #FAF9F6;
+  border-bottom: 1px solid rgba(28,28,26,0.06);
+}
+.blog-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.blog-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #C6A15B;
+  display: block;
+  margin-bottom: 1rem;
+}
+.blog-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: #1C1C1A;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.blog-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  line-height: 2;
+  color: #7A7A72;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ===== CATEGORIES ===== */
+.blog-categories {
+  padding: 2.5rem 4rem;
+  background: #FAF9F6;
+}
+.blog-categories-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.blog-cat-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #7A7A72;
+  background: transparent;
+  border: 1px solid rgba(28,28,26,0.2);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+.blog-cat-btn:hover,
+.blog-cat-btn.active {
+  color: #1C1C1A;
+  border-color: #1C1C1A;
+  background: rgba(28,28,26,0.02);
+}
+
+/* ===== ARTICLES GRID ===== */
+.blog-articles {
+  padding: 5rem 4rem 6rem;
+  background: #FAF9F6;
+}
+.blog-articles-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.article-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.article-item-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+  background: #E5E0DA;
+}
+.article-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1s ease;
+}
+.article-item:hover .article-item-img img {
+  transform: scale(1.04);
+}
+.article-item-category {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C6A15B;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.article-item-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: #1C1C1A;
+  margin-bottom: 0.8rem;
+}
+.article-item-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: #7A7A72;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+}
+.article-item-date {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #999;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .articles-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .blog-header { padding: 4rem 1.5rem; }
+  .blog-categories { padding: 2rem 1.5rem; }
+  .blog-articles { padding: 4rem 1.5rem 5rem; }
+  .articles-list { grid-template-columns: 1fr; gap: 2rem; }
+  .blog-categories-inner { gap: 0.6rem; }
+  .blog-cat-btn { font-size: 10px; padding: 0.5rem 1rem; }
+}
 </style>
 
-<div class="page-header">
-    <span class="header-eye">Journal</span>
-    <h1>食と発酵の、知恵と実践。</h1>
-    <p>ローフード・発酵・リビングフード・ロースイーツについて。細胞から整える食の知恵を発信します。</p>
+<!-- ===== HEADER ===== -->
+<div class="blog-header">
+  <div class="blog-header-inner">
+    <span class="blog-eyebrow">Journal</span>
+    <h1 class="blog-title">食と発酵の、知恵と実践。</h1>
+    <p class="blog-desc">
+      ローフード・発酵・リビングフード・ロースイーツについて。<br>
+      細胞から整える食の知恵を、&LAB TOKYOがお届けします。
+    </p>
   </div>
-  <div class="categories">
-    <div class="cat-inner">
-      <a href="/blog" class="cat-btn active">すべて</a>
-      <a href="/rawfood" class="cat-btn">ローフード</a>
-      <a href="/fermentation" class="cat-btn">発酵</a>
-      <a href="/living-food" class="cat-btn">リビングフード</a>
-      <a href="/raw-sweets" class="cat-btn">ロースイーツ</a>
+</div>
+
+<!-- ===== CATEGORIES ===== -->
+<div class="blog-categories">
+  <div class="blog-categories-inner">
+    {categories.map(cat => (
+      <button class={`blog-cat-btn ${cat === 'すべて' ? 'active' : ''}`} data-category={cat}>
+        {cat}
+      </button>
+    ))}
+  </div>
+</div>
+
+<!-- ===== ARTICLES ===== -->
+<section class="blog-articles">
+  <div class="blog-articles-inner">
+    <div class="articles-list">
+      {sortedArticles.map(article => (
+        <a href={`/blog/${article.slug}`} class="article-item">
+          <div class="article-item-img">
+            <img src={article.image} alt={article.title} loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="article-item-category">{article.category}</span>
+          <h2 class="article-item-title">{article.title}</h2>
+          <p class="article-item-desc">{article.description}</p>
+          <span class="article-item-date">{article.publishDate}</span>
+        </a>
+      ))}
     </div>
   </div>
-  <section class="featured">
-    <div class="featured-inner">
-      <div class="featured-grid">
-        <a href="/rawfood" class="featured-main">
-          <img src="/rawfood-zucchini.jpg" alt="ローフード" />
-          <div class="featured-main-body">
-            <span class="feat-cat">Raw Food</span>
-            <h2>酵素を壊さない調理の5つの基本。なぜ48℃なのか</h2>
-            <p class="feat-date">2026.05.20</p>
-          </div>
-        </a>
-        <div class="featured-sub">
-          <a href="/fermentation" class="feat-sub-card">
-            <img src="/hacco-amazake.jpg" alt="発酵" />
-            <div class="feat-sub-body">
-              <span>Fermentation</span>
-              <h3>自家製麹の作り方。初心者でも失敗しないポイント</h3>
-            </div>
-          </a>
-          <a href="/living-food" class="feat-sub-card">
-            <img src="/visual-table.jpg" alt="リビングフード" />
-            <div class="feat-sub-body">
-              <span>Living Food</span>
-              <h3>40代から始める「細胞から整える」ローフード習慣</h3>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="articles">
-    <div class="articles-inner">
-      <span class="articles-label">Recent Articles</span>
-      <div class="article-grid">
-        <a href="/fermentation" class="article-card">
-          <img src="/koji.jpg" alt="麹" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Fermentation</span>
-            <h3>麹とは何か。甘麹・塩麹・醤油麹の違いと使い方</h3>
-            <p>日本古来の発酵文化、麹の基礎知識を解説します。</p>
-            <span class="article-date">2026.05.15</span>
-          </div>
-        </a>
-        <a href="/raw-sweets" class="article-card">
-          <img src="/prog-chocolate.jpg" alt="ローチョコ" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Raw Sweets</span>
-            <h3>ローチョコレートがなぜ体に良いのか。カカオの科学</h3>
-            <p>カカオポリフェノールとマグネシウムの働きを解説。</p>
-            <span class="article-date">2026.05.08</span>
-          </div>
-        </a>
-        <a href="/about" class="article-card">
-          <img src="/story-lesson.jpg" alt="レッスン" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Story</span>
-            <h3>娘の大火傷が、私を食の世界へ導いた。安藤千英の原点</h3>
-            <p>&LAB TOKYOが生まれるまでのストーリー。</p>
-            <span class="article-date">2026.04.28</span>
-          </div>
-        </a>
-        <a href="/rawfood" class="article-card">
-          <img src="/green-smoothie.jpg" alt="スムージー" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Raw Food</span>
-            <h3>毎朝のグリーンスムージーで変わる、細胞からの体質改善</h3>
-            <p>忙しい朝でも続けられる、酵素スムージーの作り方。</p>
-            <span class="article-date">2026.04.20</span>
-          </div>
-        </a>
-        <a href="/fermentation" class="article-card">
-          <img src="/hacco-koji.jpg" alt="麹素材" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Fermentation</span>
-            <h3>腸内環境と美肌の関係。発酵食が肌に効く理由</h3>
-            <p>腸は「第二の脳」であり「美肌の鍵」。科学的に解説。</p>
-            <span class="article-date">2026.04.10</span>
-          </div>
-        </a>
-        <a href="/living-food" class="article-card">
-          <img src="/brand-sushi.jpg" alt="リビングフード" class="article-card-img" />
-          <div class="article-card-body">
-            <span class="article-cat">Living Food</span>
-            <h3>忙しい経営者・専門職が「食で自分を整える」方法</h3>
-            <p>パフォーマンスを上げる食習慣。リビングフードの実践。</p>
-            <span class="article-date">2026.03.28</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="knowledge">
-    <div class="knowledge-inner">
-      <span class="knowledge-eye">Knowledge Hub</span>
-      <h2>テーマ別に学ぶ</h2>
-      <p class="knowledge-sub">各テーマの基礎知識からレッスン情報まで</p>
-      <div class="knowledge-grid">
-        <a href="/rawfood" class="knowledge-card"><span class="knowledge-card-icon">🌿</span><h4>ローフード</h4><p>酵素・栄養・48℃の科学。生食の基礎から実践まで。</p></a>
-        <a href="/fermentation" class="knowledge-card"><span class="knowledge-card-icon">🍶</span><h4>発酵</h4><p>麹・味噌・醤油。日本の発酵文化と腸内環境の知識。</p></a>
-        <a href="/living-food" class="knowledge-card"><span class="knowledge-card-icon">✨</span><h4>リビングフード</h4><p>発酵×ローフードのクロス理論。細胞から整えるライフスタイル。</p></a>
-        <a href="/raw-sweets" class="knowledge-card"><span class="knowledge-card-icon">🍫</span><h4>ロースイーツ</h4><p>砂糖不使用の美しいお菓子。カカオの科学と実践。</p></a>
-      </div>
-    </div>
-  </section>
-  <section class="note-sec">
-    <span class="note-eye">Note</span>
-    <h2>安藤千英のnoteも読む</h2>
-    <p>より深いストーリーや日々の実践を、noteで綴っています。</p>
-    <a href="https://note.com/chieando" target="_blank" class="btn-note">noteを読む →</a>
-  </section>
+</section>
+
+<script>
+// カテゴリフィルター（将来の拡張用）
+document.querySelectorAll('.blog-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // 将来：記事をフィルターする処理
+  });
+});
+</script>
 
 </Layout>

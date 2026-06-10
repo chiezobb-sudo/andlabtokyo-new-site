@@ -413,6 +413,95 @@ import Layout from '../layouts/Layout.astro';
   color: #1C1C1A;
 }
 
+/* ===== LATEST JOURNALS ===== */
+.journals-sec {
+  padding: 7rem 4rem;
+  background: #FAF9F6;
+}
+.journals-header {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.journals-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  color: #1C1C1A;
+}
+.journals-link {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #7A7A72;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(28,28,26,0.2);
+  padding-bottom: 0.4rem;
+  transition: color 0.3s, border-color 0.3s;
+}
+.journals-link:hover { color: #1C1C1A; border-color: #1C1C1A; }
+.journals-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+.journal-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.journal-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+  background: #E5E0DA;
+}
+.journal-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1s ease;
+}
+.journal-card:hover .journal-img img { transform: scale(1.04); }
+.journal-category {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C6A15B;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.journal-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  color: #1C1C1A;
+  margin-bottom: 0.8rem;
+}
+.journal-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: #7A7A72;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+.journal-date {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #999;
+}
+
 /* ===== KNOWLEDGE ===== */
 .knowledge-sec {
   padding: 7rem 4rem 8rem;
@@ -497,6 +586,7 @@ import Layout from '../layouts/Layout.astro';
 @media (max-width: 1024px) {
   .courses-grid { grid-template-columns: repeat(3, 1fr); }
   .activity-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .journals-grid { grid-template-columns: repeat(2, 1fr); }
   .knowledge-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
@@ -538,6 +628,9 @@ import Layout from '../layouts/Layout.astro';
   .courses-grid { grid-template-columns: repeat(2, 1fr); }
   .activity-sec { padding: 4.5rem 1.5rem; }
   .activity-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .journals-sec { padding: 4.5rem 1.5rem; }
+  .journals-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .journals-grid { grid-template-columns: 1fr; }
   .knowledge-sec { padding: 4.5rem 1.5rem 5rem; }
   .knowledge-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -724,6 +817,45 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <span class="activity-num">04 — Media</span>
       <h3>雑誌・メディアでの<br>掲載実績</h3>
+    </a>
+  </div>
+</section>
+
+<!-- ===== LATEST JOURNALS ===== -->
+<section class="journals-sec">
+  <div class="journals-header">
+    <h2 class="journals-title">&LAB のジャーナル</h2>
+    <a href="/blog" class="journals-link">すべての記事を見る →</a>
+  </div>
+  <div class="journals-grid">
+    <a href="/blog/what-is-rawfood" class="journal-card">
+      <div class="journal-img">
+        <img src="/rawfood-zucchini.jpg" alt="ローフードとは何か？基礎知識とライフスタイル" loading="lazy" onerror="this.style.display='none'" />
+      </div>
+      <span class="journal-category">Knowledge</span>
+      <h3 class="journal-title">ローフードとは何か？基礎知識とライフスタイル</h3>
+      <p class="journal-desc">ローフードの基本的な定義から、細胞レベルでの変化、日常生活への取り入れ方まで。酵素の力と48℃の科学的根拠を解説します。</p>
+      <span class="journal-date">2026.06.06</span>
+    </a>
+
+    <a href="/blog/cross-theory" class="journal-card">
+      <div class="journal-img">
+        <img src="/hacco-koji.jpg" alt="クロス理論：ローフード×発酵の融合" loading="lazy" onerror="this.style.display='none'" />
+      </div>
+      <span class="journal-category">Philosophy</span>
+      <h3 class="journal-title">クロス理論：ローフード×発酵の融合</h3>
+      <p class="journal-desc">&LAB TOKYOが独自開発した「ローフード×発酵」のクロス理論。生きた酵素と発酵の力で、細胞から整う真のウェルネスを実現する理論的背景。</p>
+      <span class="journal-date">2026.06.06</span>
+    </a>
+
+    <a href="/blog/raw-sweets-benefits" class="journal-card">
+      <div class="journal-img">
+        <img src="/raw-chocolate.jpg" alt="ロースイーツの驚くべき健康効果" loading="lazy" onerror="this.style.display='none'" />
+      </div>
+      <span class="journal-category">Wellness</span>
+      <h3 class="journal-title">ロースイーツの驚くべき健康効果</h3>
+      <p class="journal-desc">砂糖不使用・加熱なしのロースイーツが、血糖値・腸内環境・肌に与える効果を科学的に解説。美しく甘いお菓子を罪悪感なく楽しむ方法。</p>
+      <span class="journal-date">2026.06.06</span>
     </a>
   </div>
 </section>
