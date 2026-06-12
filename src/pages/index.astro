@@ -32,7 +32,7 @@ import Layout from '../layouts/Layout.astro';
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: brightness(1.05);
+  filter: brightness(1.12) contrast(1.1) saturate(1.1);
 }
 .hero-gradient {
   position: absolute;
@@ -133,54 +133,53 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== ABOUT ===== */
 .about-sec {
-  padding: 7rem 4rem;
+  padding: 2.4rem 4rem 5rem;
   background: #FAF9F6;
+  text-align: center;
 }
-.about-grid {
+.about-inner {
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 5rem;
-}
-.about-left {
-  display: flex;
-  flex-direction: column;
-}
-.rule {
-  width: 36px;
-  height: 1px;
-  background: #1C1C1A;
-  margin-bottom: 2rem;
 }
 .about-sub {
   font-family: 'Noto Serif JP', serif;
   font-size: 13px;
   font-weight: 300;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.15em;
   line-height: 2.2;
   color: #5C5C58;
   margin-bottom: 1.6rem;
 }
 .about-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
   font-weight: 400;
   font-style: italic;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   color: #1C1C1A;
+  margin-bottom: 2.4rem;
 }
-.about-right {
-  max-width: 640px;
+.about-line {
+  width: 56px;
+  height: 1px;
+  background: rgba(28,28,26,0.18);
+}
+.about-text {
+  max-width: 480px;
+  margin: 0 auto;
 }
 .about-lead {
   font-family: 'Noto Serif JP', serif;
-  font-size: 14px;
-  line-height: 2.4;
+  font-size: 13px;
+  line-height: 2.3;
   color: #5C5C58;
   font-weight: 300;
   letter-spacing: 0.03em;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
 }
 .about-lead:last-child { margin-bottom: 0; }
 .about-lead strong {
@@ -190,7 +189,7 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== TWO ENTRY POINTS ===== */
 .entries-sec {
-  padding: 0 4rem 7rem;
+  padding: 0 4rem 5rem;
   background: #FAF9F6;
 }
 .entries-grid {
@@ -208,7 +207,7 @@ import Layout from '../layouts/Layout.astro';
   color: inherit;
 }
 .entry-text {
-  padding: 3.2rem 2.8rem;
+  padding: 2.2rem 2.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -219,7 +218,7 @@ import Layout from '../layouts/Layout.astro';
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #C6A15B;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 .entry-title {
   font-family: 'Noto Serif JP', serif;
@@ -227,7 +226,7 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 300;
   letter-spacing: 0.1em;
   color: #1C1C1A;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.2rem;
   line-height: 1.6;
 }
 .entry-list {
@@ -237,12 +236,12 @@ import Layout from '../layouts/Layout.astro';
   font-family: 'Noto Serif JP', serif;
   font-size: 12px;
   letter-spacing: 0.06em;
-  line-height: 2.4;
+  line-height: 2.1;
   color: #5C5C58;
   font-weight: 300;
 }
 .entry-img {
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/3;
   overflow: hidden;
 }
 .entry-img img {
@@ -256,7 +255,7 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== COURSE NAVIGATION ===== */
 .courses-sec {
-  padding: 7rem 0;
+  padding: 5rem 0;
   background: #FAF9F6;
 }
 .courses-header {
@@ -311,11 +310,11 @@ import Layout from '../layouts/Layout.astro';
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: brightness(0.55);
+  filter: brightness(0.5);
   transition: filter 0.6s ease, transform 1s ease;
 }
 .course-card:hover img {
-  filter: brightness(0.75);
+  filter: brightness(0.68);
   transform: scale(1.04);
 }
 .course-card-text {
@@ -324,46 +323,45 @@ import Layout from '../layouts/Layout.astro';
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.6rem 1.4rem;
+  padding: 1.8rem 1.6rem;
   color: #fff;
 }
 .course-card-jp {
   font-family: 'Noto Serif JP', serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 300;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   margin-bottom: 0.5rem;
 }
 .course-card-en {
   font-family: 'Cormorant Garamond', serif;
   font-size: 9px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.6);
 }
 
 /* ===== LATEST ACTIVITY ===== */
 .activity-sec {
-  padding: 7rem 4rem;
+  padding: 5rem 4rem;
   background: #FAF9F6;
 }
 .activity-header {
   max-width: 1100px;
-  margin: 0 auto 4rem;
-  text-align: center;
+  margin: 0 auto 3rem;
 }
 .activity-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
   font-weight: 300;
   letter-spacing: 0.16em;
   color: #1C1C1A;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 .activity-sub {
   font-family: 'Noto Serif JP', serif;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   line-height: 2;
   color: #6E6E6A;
   font-weight: 300;
@@ -413,12 +411,12 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== LATEST JOURNALS ===== */
 .journals-sec {
-  padding: 7rem 4rem;
+  padding: 5rem 4rem;
   background: #FAF9F6;
 }
 .journals-header {
   max-width: 1100px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 3rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -502,12 +500,12 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== KNOWLEDGE ===== */
 .knowledge-sec {
-  padding: 7rem 4rem 8rem;
+  padding: 5rem 4rem 6rem;
   background: #F4F0E9;
 }
 .knowledge-header {
   max-width: 1100px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 3rem;
   text-align: center;
 }
 .knowledge-eyebrow {
@@ -590,7 +588,8 @@ import Layout from '../layouts/Layout.astro';
 @media (max-width: 900px) {
   .hero-text { width: 65%; }
   .hero-image-wrap { width: 70%; }
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-text { max-width: 100%; }
+  .about-line { width: 28px; }
   .entry-card { grid-template-columns: 1fr; }
   .entry-img { aspect-ratio: 16/9; order: -1; }
 }
@@ -668,26 +667,18 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- ===== ABOUT ===== -->
 <section class="about-sec">
-  <div class="about-grid">
-    <div class="about-left">
-      <div class="rule"></div>
-      <p class="about-sub">美しさを、<br>自ら「つくる」人へ。</p>
-      <h2 class="about-title">About<br>&LAB TOKYO</h2>
-    </div>
-    <div class="about-right">
+  <div class="about-inner">
+    <p class="about-sub">美しさを、自ら「つくる」人へ。</p>
+    <h2 class="about-title"><span class="about-line"></span>About &amp;LAB TOKYO<span class="about-line"></span></h2>
+    <div class="about-text">
       <p class="about-lead">
-        &LAB TOKYOは、東京・渋谷を拠点とする<br>
-        「発酵×ローフード」のクロス理論でライフスタイルを進化させる。
+        &LAB TOKYOは、東京・渋谷を拠点とする「発酵×ローフード」のクロス理論でライフスタイルを進化させる。
       </p>
       <p class="about-lead">
-        私たちが提案するのは、単なる「料理」ではありません。<br>
-        細胞から目覚めるような<strong>生きたエネルギー（酵素）</strong>を取り入れ、<br>
-        古来の知恵である<strong>「発酵」</strong>で内側から美しさを醸成する。
+        私たちが提案するのは、単なる「料理」ではありません。細胞から目覚めるような<strong>生きたエネルギー（酵素）</strong>を取り入れ、古来の知恵である<strong>「発酵」</strong>で内側から美しさを醸成する。
       </p>
       <p class="about-lead">
-        経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。<br>
-        あなたが持つ本来の輝きを、最大化させる場所でありたい。<br>
-        ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。
+        経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。あなたが持つ本来の輝きを、最大化させる場所でありたい。ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。
       </p>
     </div>
   </div>
