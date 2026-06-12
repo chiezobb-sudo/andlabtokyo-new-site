@@ -133,7 +133,7 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== ABOUT ===== */
 .about-sec {
-  padding: 2.4rem 4rem 5rem;
+  padding: 2rem 4rem 3.2rem;
   background: #FAF9F6;
   text-align: center;
 }
@@ -148,7 +148,7 @@ import Layout from '../layouts/Layout.astro';
   letter-spacing: 0.15em;
   line-height: 2.2;
   color: #5C5C58;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.2rem;
 }
 .about-title {
   display: flex;
@@ -161,7 +161,7 @@ import Layout from '../layouts/Layout.astro';
   font-style: italic;
   letter-spacing: 0.14em;
   color: #1C1C1A;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.8rem;
 }
 .about-line {
   width: 56px;
@@ -175,11 +175,11 @@ import Layout from '../layouts/Layout.astro';
 .about-lead {
   font-family: 'Noto Serif JP', serif;
   font-size: 13px;
-  line-height: 2.3;
+  line-height: 2.1;
   color: #5C5C58;
   font-weight: 300;
   letter-spacing: 0.03em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
 }
 .about-lead:last-child { margin-bottom: 0; }
 .about-lead strong {
@@ -207,7 +207,7 @@ import Layout from '../layouts/Layout.astro';
   color: inherit;
 }
 .entry-text {
-  padding: 2.2rem 2.4rem;
+  padding: 1.8rem 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,7 +241,7 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 300;
 }
 .entry-img {
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/11;
   overflow: hidden;
 }
 .entry-img img {
@@ -260,7 +260,7 @@ import Layout from '../layouts/Layout.astro';
 }
 .courses-header {
   max-width: 1100px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 4.5rem;
   padding: 0 4rem;
   display: flex;
   justify-content: space-between;
@@ -340,15 +340,40 @@ import Layout from '../layouts/Layout.astro';
   text-transform: uppercase;
   color: rgba(255,255,255,0.6);
 }
+.course-card-arrow {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.course-card:hover .course-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-/* ===== LATEST ACTIVITY ===== */
-.activity-sec {
-  padding: 5rem 4rem;
+/* ===== ACTIVITY + KNOWLEDGE (SPLIT) ===== */
+.split-sec {
+  padding: 5rem 4rem 6rem;
   background: #FAF9F6;
 }
-.activity-header {
+.split-grid {
   max-width: 1100px;
-  margin: 0 auto 3rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+.split-col-right {
+  padding-left: 5rem;
+  border-left: 1px solid rgba(28,28,26,0.08);
+}
+.activity-header {
+  margin-bottom: 2.2rem;
 }
 .activity-title {
   font-family: 'Noto Serif JP', serif;
@@ -367,11 +392,9 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 300;
 }
 .activity-grid {
-  max-width: 1100px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
 }
 .activity-card {
   text-decoration: none;
@@ -498,15 +521,9 @@ import Layout from '../layouts/Layout.astro';
   color: #6E6E6A;
 }
 
-/* ===== KNOWLEDGE ===== */
-.knowledge-sec {
-  padding: 5rem 4rem 6rem;
-  background: #F4F0E9;
-}
+/* ===== KNOWLEDGE (TOC LIST) ===== */
 .knowledge-header {
-  max-width: 1100px;
-  margin: 0 auto 3rem;
-  text-align: center;
+  margin-bottom: 2.2rem;
 }
 .knowledge-eyebrow {
   font-family: 'Cormorant Garamond', serif;
@@ -515,75 +532,81 @@ import Layout from '../layouts/Layout.astro';
   text-transform: uppercase;
   color: #C6A15B;
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 .knowledge-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
   font-weight: 300;
   letter-spacing: 0.14em;
   color: #1C1C1A;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.8rem;
 }
 .knowledge-sub {
   font-family: 'Noto Serif JP', serif;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.04em;
-  line-height: 2.1;
+  line-height: 2;
   color: #6E6E6A;
   font-weight: 300;
 }
-.knowledge-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
+.knowledge-list {
+  display: flex;
+  flex-direction: column;
 }
-.knowledge-card {
-  background: #FAF9F6;
+.knowledge-row {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid rgba(28,28,26,0.08);
   text-decoration: none;
   color: inherit;
-  display: block;
-  padding: 1.8rem 1.6rem 2.2rem;
-  transition: background 0.3s;
+  transition: opacity 0.25s;
 }
-.knowledge-card:hover { background: #fff; }
-.knowledge-img {
-  aspect-ratio: 1/1;
+.knowledge-row:last-child {
+  border-bottom: 1px solid rgba(28,28,26,0.08);
+}
+.knowledge-row:hover { opacity: 0.55; }
+.knowledge-thumb {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
   overflow: hidden;
-  margin-bottom: 1.4rem;
 }
-.knowledge-img img {
+.knowledge-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1s ease;
 }
-.knowledge-card:hover .knowledge-img img { transform: scale(1.05); }
-.knowledge-card h4 {
+.knowledge-row-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.05em;
-  line-height: 1.8;
+  line-height: 1.7;
   color: #1C1C1A;
-  margin-bottom: 0.6rem;
+  flex: 1;
 }
-.knowledge-arrow {
+.knowledge-row-arrow {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: 13px;
   color: #5C5C58;
+  flex-shrink: 0;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .courses-grid { grid-template-columns: repeat(3, 1fr); }
-  .activity-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
   .journals-grid { grid-template-columns: repeat(2, 1fr); }
-  .knowledge-grid { grid-template-columns: repeat(3, 1fr); }
+  .split-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .split-col-right {
+    padding-left: 0;
+    padding-top: 3rem;
+    border-left: none;
+    border-top: 1px solid rgba(28,28,26,0.08);
+  }
 }
 @media (max-width: 900px) {
   .hero-text { width: 65%; }
@@ -622,13 +645,11 @@ import Layout from '../layouts/Layout.astro';
   .courses-sec { padding: 4.5rem 0; }
   .courses-header { padding: 0 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
   .courses-grid { grid-template-columns: repeat(2, 1fr); }
-  .activity-sec { padding: 4.5rem 1.5rem; }
-  .activity-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .journals-sec { padding: 4.5rem 1.5rem; }
   .journals-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .journals-grid { grid-template-columns: 1fr; }
-  .knowledge-sec { padding: 4.5rem 1.5rem 5rem; }
-  .knowledge-grid { grid-template-columns: 1fr 1fr; }
+  .split-sec { padding: 4.5rem 1.5rem 5rem; }
+  .activity-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
 }
 </style>
 
@@ -732,6 +753,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="courses-grid">
     <a href="/rawfood" class="course-card">
       <img src="/rawfood-zucchini.jpg" alt="ローフード" loading="lazy" />
+      <span class="course-card-arrow">→</span>
       <div class="course-card-text">
         <span class="course-card-jp">ローフード</span>
         <span class="course-card-en">Raw Food</span>
@@ -739,6 +761,7 @@ import Layout from '../layouts/Layout.astro';
     </a>
     <a href="/fermentation" class="course-card">
       <img src="/hacco-koji.jpg" alt="発酵" loading="lazy" />
+      <span class="course-card-arrow">→</span>
       <div class="course-card-text">
         <span class="course-card-jp">発酵</span>
         <span class="course-card-en">Fermentation</span>
@@ -746,6 +769,7 @@ import Layout from '../layouts/Layout.astro';
     </a>
     <a href="/living-food" class="course-card">
       <img src="/almond-butter.jpg" alt="美容・健康" loading="lazy" />
+      <span class="course-card-arrow">→</span>
       <div class="course-card-text">
         <span class="course-card-jp">美容・健康</span>
         <span class="course-card-en">Beauty &amp; Health</span>
@@ -753,6 +777,7 @@ import Layout from '../layouts/Layout.astro';
     </a>
     <a href="/professional-training" class="course-card">
       <img src="/chie-speaking.jpg" alt="ビジネス・教養" loading="lazy" />
+      <span class="course-card-arrow">→</span>
       <div class="course-card-text">
         <span class="course-card-jp">ビジネス・教養</span>
         <span class="course-card-en">Business &amp; Culture</span>
@@ -760,51 +785,11 @@ import Layout from '../layouts/Layout.astro';
     </a>
     <a href="/experiencelessons" class="course-card">
       <img src="/lesson-scene.jpg" alt="1DAYワークショップ" loading="lazy" />
+      <span class="course-card-arrow">→</span>
       <div class="course-card-text">
         <span class="course-card-jp">1DAYワークショップ</span>
         <span class="course-card-en">Workshop &amp; Culture</span>
       </div>
-    </a>
-  </div>
-</section>
-
-<!-- ===== LATEST ACTIVITY ===== -->
-<section class="activity-sec">
-  <div class="activity-header">
-    <h2 class="activity-title">&amp;LAB 最新活動</h2>
-    <p class="activity-sub">
-      Pick Up — レッスン・出版・研究・メディア。<br>
-      &LAB TOKYOの最新のアクティビティをご紹介します。
-    </p>
-  </div>
-  <div class="activity-grid">
-    <a href="/experiencelessons" class="activity-card">
-      <div class="activity-img">
-        <img src="/lesson-table.jpg" alt="レッスン" loading="lazy" onerror="this.style.display='none'" />
-      </div>
-      <span class="activity-num">01 — Lesson</span>
-      <h3>渋谷スタジオでの<br>体験レッスン</h3>
-    </a>
-    <a href="/rawfood-book" class="activity-card">
-      <div class="activity-img">
-        <img src="/book-cover.jpg" alt="出版" loading="lazy" onerror="this.style.display='none'" />
-      </div>
-      <span class="activity-num">02 — Publication</span>
-      <h3>発酵ローフードの<br>書籍を出版</h3>
-    </a>
-    <a href="/supirurinalab" class="activity-card">
-      <div class="activity-img">
-        <img src="/mosaic-rawfood.jpg" alt="研究" loading="lazy" onerror="this.style.display='none'" />
-      </div>
-      <span class="activity-num">03 — Research</span>
-      <h3>スピルリナ・発酵食材の<br>研究プロジェクト</h3>
-    </a>
-    <a href="/media" class="activity-card">
-      <div class="activity-img">
-        <img src="/chie-main.jpg" alt="メディア掲載" loading="lazy" onerror="this.style.display='none'" />
-      </div>
-      <span class="activity-num">04 — Media</span>
-      <h3>雑誌・メディアでの<br>掲載実績</h3>
     </a>
   </div>
 </section>
@@ -848,52 +833,95 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ===== KNOWLEDGE ===== -->
-<section class="knowledge-sec">
-  <div class="knowledge-header">
-    <span class="knowledge-eyebrow">Knowledge</span>
-    <h2 class="knowledge-title">知る・学ぶ リビングフード</h2>
-    <p class="knowledge-sub">
-      ローフード・発酵・スピルリナ・ローチョコレート。<br>
-      食の可能性を広げる知識を、LABとして発信しています。
-    </p>
-  </div>
-  <div class="knowledge-grid">
-    <a href="/rawfood" class="knowledge-card">
-      <div class="knowledge-img">
-        <img src="/visual-table.jpg" alt="ローフードについて" loading="lazy" onerror="this.style.display='none'" />
+<!-- ===== ACTIVITY + KNOWLEDGE (SPLIT) ===== -->
+<section class="split-sec">
+  <div class="split-grid">
+    <div class="split-col-left">
+      <div class="activity-header">
+        <h2 class="activity-title">&amp;LAB 最新活動</h2>
+        <p class="activity-sub">
+          Pick Up — レッスン・出版・研究・メディア。<br>
+          &LAB TOKYOの最新のアクティビティをご紹介します。
+        </p>
       </div>
-      <h4>ローフード<br>について</h4>
-      <span class="knowledge-arrow">Read More →</span>
-    </a>
-    <a href="/fermentation" class="knowledge-card">
-      <div class="knowledge-img">
-        <img src="/hacco-amazake.jpg" alt="発酵の基礎知識" loading="lazy" onerror="this.style.display='none'" />
+      <div class="activity-grid">
+        <a href="/experiencelessons" class="activity-card">
+          <div class="activity-img">
+            <img src="/lesson-table.jpg" alt="レッスン" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="activity-num">01 — Lesson</span>
+          <h3>渋谷スタジオでの<br>体験レッスン</h3>
+        </a>
+        <a href="/rawfood-book" class="activity-card">
+          <div class="activity-img">
+            <img src="/book-cover.jpg" alt="出版" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="activity-num">02 — Publication</span>
+          <h3>発酵ローフードの<br>書籍を出版</h3>
+        </a>
+        <a href="/supirurinalab" class="activity-card">
+          <div class="activity-img">
+            <img src="/mosaic-rawfood.jpg" alt="研究" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="activity-num">03 — Research</span>
+          <h3>スピルリナ・発酵食材の<br>研究プロジェクト</h3>
+        </a>
+        <a href="/media" class="activity-card">
+          <div class="activity-img">
+            <img src="/chie-main.jpg" alt="メディア掲載" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="activity-num">04 — Media</span>
+          <h3>雑誌・メディアでの<br>掲載実績</h3>
+        </a>
       </div>
-      <h4>発酵の<br>基礎知識</h4>
-      <span class="knowledge-arrow">Read More →</span>
-    </a>
-    <a href="/spirulina" class="knowledge-card">
-      <div class="knowledge-img">
-        <img src="/mosaic-drinks.jpg" alt="スピルリナの魅力" loading="lazy" onerror="this.style.display='none'" />
+    </div>
+    <div class="split-col-right">
+      <div class="knowledge-header">
+        <span class="knowledge-eyebrow">Knowledge</span>
+        <h2 class="knowledge-title">知る・学ぶ リビングフード</h2>
+        <p class="knowledge-sub">
+          ローフード・発酵・スピルリナ・ローチョコレート。<br>
+          食の可能性を広げる知識を、LABとして発信しています。
+        </p>
       </div>
-      <h4>スピルリナ<br>の魅力</h4>
-      <span class="knowledge-arrow">Read More →</span>
-    </a>
-    <a href="/raw-sweets" class="knowledge-card">
-      <div class="knowledge-img">
-        <img src="/raw-chocolate.jpg" alt="ローチョコレートの世界" loading="lazy" onerror="this.style.display='none'" />
+      <div class="knowledge-list">
+        <a href="/rawfood" class="knowledge-row">
+          <div class="knowledge-thumb">
+            <img src="/visual-table.jpg" alt="ローフードについて" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="knowledge-row-title">ローフードについて</span>
+          <span class="knowledge-row-arrow">→</span>
+        </a>
+        <a href="/fermentation" class="knowledge-row">
+          <div class="knowledge-thumb">
+            <img src="/hacco-amazake.jpg" alt="発酵の基礎知識" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="knowledge-row-title">発酵の基礎知識</span>
+          <span class="knowledge-row-arrow">→</span>
+        </a>
+        <a href="/spirulina" class="knowledge-row">
+          <div class="knowledge-thumb">
+            <img src="/mosaic-drinks.jpg" alt="スピルリナの魅力" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="knowledge-row-title">スピルリナの魅力</span>
+          <span class="knowledge-row-arrow">→</span>
+        </a>
+        <a href="/raw-sweets" class="knowledge-row">
+          <div class="knowledge-thumb">
+            <img src="/raw-chocolate.jpg" alt="ローチョコレートの世界" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="knowledge-row-title">ローチョコレートの世界</span>
+          <span class="knowledge-row-arrow">→</span>
+        </a>
+        <a href="/living-food" class="knowledge-row">
+          <div class="knowledge-thumb">
+            <img src="/brand-sushi.jpg" alt="食と心のつながり" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <span class="knowledge-row-title">食と心のつながり</span>
+          <span class="knowledge-row-arrow">→</span>
+        </a>
       </div>
-      <h4>ローチョコレート<br>の世界</h4>
-      <span class="knowledge-arrow">Read More →</span>
-    </a>
-    <a href="/living-food" class="knowledge-card">
-      <div class="knowledge-img">
-        <img src="/brand-sushi.jpg" alt="食と心のつながり" loading="lazy" onerror="this.style.display='none'" />
-      </div>
-      <h4>食と心の<br>つながり</h4>
-      <span class="knowledge-arrow">Read More →</span>
-    </a>
+    </div>
   </div>
 </section>
 
