@@ -1,7 +1,5 @@
 ---
-// /src/pages/profile.astro
-// ※AstroのグローバルCSSの影響を避け、完全に独立したデザインを保つため、
-// 既存のLayoutで囲まずにこのまま出力します。
+// Full profile page - Astro独立ページ (Layout不使用)
 ---
 
 <!DOCTYPE html>
@@ -9,10 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安藤千英：細胞レベルで生まれ変わるシンリビングフード</title>
-    <!-- Tailwind CSS CDN (ページ独自のデザインを強制適用) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Chie Ando Official Profile | &LAB TOKYO</title>
+    <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
 
@@ -29,8 +26,6 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             scroll-behavior: smooth;
-            margin: 0;
-            padding: 0;
         }
 
         h1, h2, h3, h4 {
@@ -117,12 +112,13 @@
             <span class="text-xl font-bold tracking-tighter text-gray-900">
                 CHIE ANDO <span class="text-xs font-normal text-gray-500 ml-1">Official Profile</span>
             </span>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="#journey" class="nav-link">Life Journey</a>
                 <a href="#education" class="nav-link">&LAB TOKYO</a>
                 <a href="#ai-lab" class="nav-link text-[#4A635D] font-semibold">✦ AI Lab</a>
                 <a href="#spirulina" class="nav-link">Spirulina LAB</a>
                 <a href="#global" class="nav-link">Global/Media</a>
+                <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="border border-[#C2A878] text-[#C2A878] hover:bg-[#C2A878] hover:text-white px-4 py-1.5 rounded-full transition-colors text-xs font-bold tracking-widest">OFFICIAL SITE</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden p-2 flex flex-col justify-center items-center space-y-1.5 focus:outline-none">
                 <div class="w-6 h-0.5 bg-gray-800"></div>
@@ -145,6 +141,9 @@
                 <a href="#ai-lab" class="text-[#4A635D] hover:text-[#384C47] font-bold transition-colors drawer-link">AI体験ラボ（レシピ・相談）</a>
                 <a href="#spirulina" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">スピルリナ LAB</a>
                 <a href="#global" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">グローバル活動とメディア</a>
+                <div class="pt-6 border-t border-gray-100">
+                    <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-[#FDFBF7] border border-[#C2A878]/30 text-[#8C6D3B] py-3 rounded-xl text-sm font-bold tracking-widest hover:bg-[#C2A878] hover:text-white transition-colors">公式サイトへ ↗</a>
+                </div>
             </div>
         </div>
     </div>
@@ -381,6 +380,11 @@
                             </button>
                         </div>
                     </div>
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                         <div class="p-4 bg-blue-50 border border-blue-100 rounded-lg text-xs text-blue-800 leading-relaxed font-medium">
+                            この機能はGoogle Geminiの最新モデルを使用してリアルタイムにコンテンツを生成します。
+                        </div>
+                    </div>
                 </div>
 
                 <!-- AI メインパネル -->
@@ -507,7 +511,7 @@
         </div>
     </section>
 
-    <!-- Spirulina LAB (メイン強化セクション) -->
+    <!-- Spirulina LAB -->
     <section id="spirulina" class="py-24 px-4 bg-[#F5F8F7] border-t border-gray-200 relative overflow-hidden">
         <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-96 h-96 bg-[#4A635D]/5 rounded-full blur-3xl"></div>
         <div class="max-w-6xl mx-auto relative z-10">
@@ -522,7 +526,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- スピルリナ詳細カード -->
                 <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold mb-4 leading-tight text-gray-900">地球最古の植物で、<br>細胞から美しく。</h3>
                     <p class="text-gray-600 mb-8 leading-relaxed text-sm">
@@ -546,7 +549,6 @@
                     </div>
                 </div>
 
-                <!-- FUFP アップサイクル カード -->
                 <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-center">
                     <span class="text-xs font-bold text-[#C2A878] uppercase tracking-widest block mb-2">Sustainable Project</span>
                     <h3 class="text-2xl font-bold mb-4 text-gray-900">FUFP<br><span class="text-sm font-normal text-gray-500">富士山アップサイクルフードプロジェクト</span></h3>
@@ -630,6 +632,7 @@
                     Syn-Living Food Innovator<br>
                     &LAB TOKYO | Spirulina LAB
                 </p>
+                <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-[#C2A878] hover:text-white text-xs border-b border-[#C2A878] pb-0.5 transition-colors">Official Website ↗</a>
             </div>
             <div class="text-center md:text-right">
                 <p class="text-sm text-[#C2A878] mb-6 italic font-serif">"食べることは、生きることそのもの。"</p>
@@ -645,7 +648,7 @@
         </div>
     </footer>
 
-    <script>
+    <script is:inline>
         document.addEventListener('DOMContentLoaded', function() {
             // モバイルメニューの制御
             const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -690,7 +693,7 @@
                 });
             });
 
-            // スクロールフェードイン アニメーション
+            // スクロールフェードイン
             const observerOptions = { threshold: 0.15 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -729,7 +732,7 @@
             tabChatBtn.addEventListener('click', () => {
                 panelRecipe.classList.add('hidden');
                 panelChat.classList.remove('hidden');
-                panelChat.classList.add('flex'); // h-full等のため
+                panelChat.classList.add('flex');
                 tabChatBtn.className = activeTabClass;
                 tabChatBtn.querySelector('span:last-child').style.opacity = '1';
                 tabRecipeBtn.className = inactiveTabClass;
@@ -752,12 +755,10 @@
             });
 
             // ==========================================
-            // Gemini API 連携ロジック (Vercel Serverless Function経由)
+            // Gemini API 連携（/api/gemini プロキシ経由）
             // ==========================================
-            // クロードが作成したVercel上のAPIルートを指定します
             const API_URL = '/api/gemini';
 
-            // 指数バックオフを用いたAPI呼び出しラッパー
             async function callGeminiApi(payload) {
                 let attempt = 0;
                 const maxAttempts = 3;
@@ -784,7 +785,7 @@
                 }
             }
 
-            // 1. レシピクリエイター実行
+            // 1. レシピクリエイター
             const recipeBtn = document.getElementById('generate-recipe-btn');
             const recipeOutput = document.getElementById('recipe-output');
             const loadingIndicator = document.getElementById('ai-loading');
@@ -796,7 +797,7 @@
                 properties: {
                     recipeName: { type: "STRING" },
                     prepTime: { type: "STRING" },
-                    concept: { type: "STRING", description: "シンリビングフードの哲学（壊さないのではなく、届けるために生で食べる）に基づくレシピのコンセプト" },
+                    concept: { type: "STRING" },
                     ingredients: { type: "ARRAY", items: { type: "STRING" } },
                     instructions: { type: "ARRAY", items: { type: "STRING" } }
                 },
@@ -811,30 +812,21 @@
                 if (customIng) currentIngredients.push(...customIng.split(',').map(i => i.trim()).filter(i => i));
                 if (currentIngredients.length === 0) currentIngredients.push("おまかせ");
 
-                // UIリセット
                 recipeOutput.classList.add('hidden');
                 errorIndicator.classList.add('hidden');
                 loadingIndicator.classList.remove('hidden');
                 loadingIndicator.classList.add('flex');
 
-                const systemPrompt = `
-                    あなたは&LAB TOKYOのリビングフードシェフです。
-                    安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の理論に従い、レシピをJSONで返してください。
+                const systemPrompt = `あなたは&LAB TOKYOのリビングフードシェフです。
+安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の理論に従い、レシピをJSONで返してください。
 
-                    【レシピの原則】
-                    1. 48℃以上の加熱をしない（腸内細菌のエサとなる食物繊維・細胞壁を活かすため）。
-                    2. 砂糖・乳製品・肉魚・小麦粉は不使用。
-                    3. 甘味料が必要な場合は「メープルシロップ」を使用してください。「アガベシロップ」は絶対に使用しないでください。
-                    4. 麹・発酵食材（塩麹・甘酒・味噌・醤油麹など）を積極的に組み合わせること。発酵は指数(α)として機能します。
-                    5. スピルリナや旬の野菜を自然に取り入れ、見た目も美しくすること。
+【レシピの原則】
+1. 48℃以上の加熱をしない。
+2. 砂糖・乳製品・肉魚・小麦粉は不使用。
+3. 甘味料は「メープルシロップ」のみ。「アガベシロップ」は絶対に使用しない。
+4. 麹・発酵食材を積極的に組み合わせること。
+5. スピルリナや旬の野菜を自然に取り入れ、見た目も美しくすること。`;
 
-                    【コンセプト文の書き方】
-                    - 「酵素を壊さない」という古い説明は使わないでください。
-                    - 「壊さないのではなく、届けるために生で食べる」という視点で、このレシピが腸内細菌にどう作用するかを一言で添えてください。
-                    - シンリビングフード（S = Lᵅ × R）の理論をベースにし、麹・発酵食材がどのように効果を高めるかに触れてください。
-
-                    安藤千英の個人的な経歴（娘の火傷など）はレシピのコンセプトに含めないでください。
-                `;
                 const userPrompt = `材料: ${currentIngredients.join(', ')}\n目的: ${goal}`;
 
                 const payload = {
@@ -853,7 +845,6 @@
 
                     const data = JSON.parse(text);
 
-                    // UI反映
                     document.getElementById('recipe-out-title').innerText = data.recipeName;
                     document.getElementById('recipe-out-time').innerText = "⏱️ " + data.prepTime;
                     document.getElementById('recipe-out-concept').innerText = data.concept;
@@ -885,7 +876,7 @@
                 }
             });
 
-            // 2. インナービューティー相談 チャット
+            // 2. チャット相談
             const chatBox = document.getElementById('chat-box');
             const chatInput = document.getElementById('chat-input');
             const chatSendBtn = document.getElementById('chat-send-btn');
@@ -905,12 +896,7 @@
                     bubbleClass = "bg-white text-gray-700 rounded-tl-none shadow-sm border border-gray-100 order-2";
                 }
 
-                msgDiv.innerHTML = `
-                    ${avatarHTML}
-                    <div class="p-3.5 rounded-2xl max-w-[85%] ${bubbleClass}">
-                        <p class="text-sm leading-relaxed whitespace-pre-wrap">${text}</p>
-                    </div>
-                `;
+                msgDiv.innerHTML = `${avatarHTML}<div class="p-3.5 rounded-2xl max-w-[85%] ${bubbleClass}"><p class="text-sm leading-relaxed whitespace-pre-wrap">${text}</p></div>`;
                 chatBox.appendChild(msgDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
                 return msgDiv;
@@ -919,33 +905,19 @@
             const handleChat = async (message) => {
                 if (!message) return;
 
-                // ユーザー発言追加
                 addMessage('user', message);
                 chatInput.value = "";
 
-                // タイピングインジケータ追加
                 const typingMsg = addMessage('ai', '思考中...');
                 typingMsg.id = 'typing-indicator';
 
-                const systemPrompt = `
-                    あなたは&LAB TOKYOのAIアシスタントです。
-                    安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の哲学に基づいて、インナービューティーと食について的確にアドバイスしてください。
+                const systemPrompt = `あなたは&LAB TOKYOのAIアシスタントです。
+安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の哲学に基づいて、インナービューティーと食について的確にアドバイスしてください。
 
-                    【シンリビングフードの核心理論（知識ベース）】
-                    - S（シンリビングフード）= L（生きた食）の α（麹・発酵食）乗 × R（ローフード）
-                    - ローフードの真の意義は「酵素を壊さない」ではなく「腸内細菌のエサ（食物繊維・細胞壁）を大腸まで届けること」です。
-                    - 日本の麹・発酵食は"指数"として機能し、ローフードの効果を線形ではなく指数的に高めます。
-                    - 酵素は「魔法の成分」ではなく「事前消化を担う案内役」であり、その後アミノ酸として体の材料になります。
-                    - 「Syn」＝共合：ローフード×日本の発酵食が共に合わさって初めて生まれる哲学です。
-
-                    【回答のスタンス】
-                    - 純粋にリビングフード・発酵食の専門家として、科学的根拠を踏まえて簡潔に答えてください。
-                    - エレガントで知的なトーン。押しつけがましくなく、読んだ人が「やってみたい」と感じる文体にしてください。
-                    - 安藤千英の個人的な経歴（家族のこと、娘の火傷のことなど）は、ユーザーから直接質問された場合のみ答えてください。質問されていないのに自己紹介や経歴を語らないでください。
-
-                    【使わない表現】
-                    - 「酵素を壊さない」「酵素を摂る」という古い説明は使わないでください。
-                `;
+【回答のスタンス】
+- 純粋にリビングフード・発酵食の専門家として答えてください。
+- エレガントで知的なトーン。押しつけがましくなく。
+- 安藤千英の個人的な経歴は、ユーザーから直接質問された場合のみ答えてください。`;
 
                 const payload = {
                     contents: [{ parts: [{ text: message }] }],
