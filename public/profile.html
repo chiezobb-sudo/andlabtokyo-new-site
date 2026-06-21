@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chie Ando Official Profile | &LAB TOKYO</title>
     <script src="https://cdn.tailwindcss.com" is:inline></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
 
@@ -395,6 +394,22 @@
                         <p class="text-sm text-gray-500 mb-6">冷蔵庫にある食材を選ぶだけで、食物繊維を腸まで届け、発酵の力で指数的に効果を高めるオリジナルレシピをご提案します。</p>
 
                         <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">1. ベースとなる食材を選択 (複数可):</span>
+                            <div class="flex flex-wrap gap-2" id="ingredient-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="アボカド">🥑 アボカド</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="ビーツ">💖 ビーツ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="塩麹">🍶 塩麹</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="スピルリナ">🌿 スピルリナ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="パスタ(グルテンフリー)">🍝 パスタ(GF)</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="玄米">🍚 玄米</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="ローカカオ">🍫 ローカカオ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="生アーモンド">🥜 生アーモンド</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="甘酒">🌾 甘酒</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100" data-val="醤油麹">🥢 醤油麹</button>
+                            </div>
+                        </div>
+
+                        <div>
                             <span class="block text-xs font-bold text-gray-700 mb-2">その他に加えたい食材、または「食べたい料理名」 (任意):</span>
                             <input type="text" id="recipe-custom-ingredients" placeholder="例: カルボナーラ風にしたい、レモン、生姜" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A635D]/50 text-sm bg-gray-50">
                         </div>
@@ -694,15 +709,70 @@
             });
 
             // ==========================================
-            // Gemini API 連携ロジック (Vercel Serverless Function経由)
+            // AI ラボ UI 制御
             // ==========================================
-            // クロードが作成したVercel上のAPIルートを指定します
-            const API_URL = '/api/gemini';
+            const tabRecipeBtn = document.getElementById('tab-recipe-btn');
+            const tabChatBtn = document.getElementById('tab-chat-btn');
+            const panelRecipe = document.getElementById('panel-recipe');
+            const panelChat = document.getElementById('panel-chat');
 
-            // ★ 1日3回の利用制限ロジック (localStorageを使用) ★
-            const DAILY_LIMIT = 3;
+            const activeTabClass = "text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-[#4A635D] text-white shadow-md flex items-center justify-between";
+            const inactiveTabClass = "text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center justify-between";
+
+            tabRecipeBtn.addEventListener('click', () => {
+                panelRecipe.classList.remove('hidden');
+                panelChat.classList.add('hidden');
+                tabRecipeBtn.className = activeTabClass;
+                tabRecipeBtn.querySelector('span:last-child').style.opacity = '1';
+                tabChatBtn.className = inactiveTabClass;
+                tabChatBtn.querySelector('span:last-child').style.opacity = '0';
+            });
+
+            tabChatBtn.addEventListener('click', () => {
+                panelRecipe.classList.add('hidden');
+                panelChat.classList.remove('hidden');
+                panelChat.classList.add('flex'); // h-full等のため
+                tabChatBtn.className = activeTabClass;
+                tabChatBtn.querySelector('span:last-child').style.opacity = '1';
+                tabRecipeBtn.className = inactiveTabClass;
+                tabRecipeBtn.querySelector('span:last-child').style.opacity = '0';
+            });
+
+            // 食材ピルの選択制御
+            const selectedIngredients = new Set();
+            document.querySelectorAll('#ingredient-pills .pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const value = pill.getAttribute('data-val');
+                    if (selectedIngredients.has(value)) {
+                        selectedIngredients.delete(value);
+                        // 選択解除時：元のグレーに戻り、サイズも戻る
+                        pill.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-all duration-200 border border-transparent transform scale-100";
+                    } else {
+                        selectedIngredients.add(value);
+                        // 選択時：深緑色になり、少しポコッと大きくなって影がつく
+                        pill.className = "pill bg-[#4A635D] text-white text-xs px-4 py-2 rounded-full font-bold transition-all duration-200 shadow-md transform scale-105";
+                    }
+                });
+            });
+
+            // ==========================================
+            // Gemini API 連携ロジック (自動判定付き)
+            // ==========================================
+
+            // 基本はクロードが作成したVercel上のAPIルートを指定
+            let API_URL = '/api/gemini';
+
+            // ★ プレビュー画面（Canvas）でも動くようにする自動切り替え ★
+            if (window.location.protocol === 'blob:' || window.location.hostname.includes('usercontent') || window.location.hostname === 'localhost') {
+                const apiKey = ""; // プレビュー環境から自動提供されます
+                const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
+                API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+            }
+
+            // ★ 1日10回の利用制限ロジック (localStorageを使用) ★
+            const DAILY_LIMIT = 10;
             function checkUsageLimit() {
-                const today = new Date().toDateString(); // 今日の日付 (例: "Sun Jun 21 2026")
+                const today = new Date().toDateString(); // 今日の日付
                 let usage = JSON.parse(localStorage.getItem('andlab_ai_usage') || '{"date": "", "count": 0}');
 
                 // 日付が変わっていたらカウントをリセット
@@ -719,6 +789,16 @@
                 usage.count++;
                 localStorage.setItem('andlab_ai_usage', JSON.stringify(usage));
                 return true; // 利用許可
+            }
+
+            // エラーが発生した場合に利用回数を元に戻す関数
+            function rollbackUsageLimit() {
+                const today = new Date().toDateString();
+                let usage = JSON.parse(localStorage.getItem('andlab_ai_usage') || '{"date": "", "count": 0}');
+                if (usage.date === today && usage.count > 0) {
+                    usage.count--; // カウントを1つ減らす
+                    localStorage.setItem('andlab_ai_usage', JSON.stringify(usage));
+                }
             }
 
             // 指数バックオフを用いたAPI呼び出しラッパー
@@ -775,12 +855,15 @@
                 if (!checkUsageLimit()) {
                     recipeOutput.classList.add('hidden');
                     errorIndicator.classList.remove('hidden');
-                    errorText.innerText = "本日のAI利用回数（3回）の上限に達しました。また明日お試しください。";
+                    errorText.innerText = "本日のAI利用回数（10回）の上限に達しました。また明日お試しください。";
                     return;
                 }
 
-                let currentIngredients = [];
-                if (customIng) currentIngredients.push(...customIng.split(',').map(i => i.trim()).filter(i => i));
+                let currentIngredients = Array.from(selectedIngredients);
+                if (customIng) {
+                    // カンマ、読点、スペース（全角・半角）で区切られた入力を別々の食材として認識する
+                    currentIngredients.push(...customIng.split(/[,、\s]+/).map(i => i.trim()).filter(i => i));
+                }
                 if (currentIngredients.length === 0) currentIngredients.push("おまかせ");
 
                 // UIリセット
@@ -816,6 +899,7 @@
                 `;
                 const userPrompt = `材料・要望: ${currentIngredients.join(', ')}\n目的: ${goal}`;
 
+                // Vercelサーバーへそのまま中継できる形式のPayload
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: systemPrompt }] },
@@ -827,9 +911,11 @@
 
                 try {
                     const result = await callGeminiApi(payload);
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (!text) throw new Error("不正な応答データです");
+                    let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!text) throw new Error("APIからの応答データが不正です。");
 
+                    // markdownのバッククォートが含まれている場合を除去し、JSONパースエラーを防ぐ
+                    text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
                     const data = JSON.parse(text);
 
                     // UI反映
@@ -857,10 +943,11 @@
                     loadingIndicator.classList.remove('flex');
                     recipeOutput.classList.remove('hidden');
                 } catch (err) {
+                    rollbackUsageLimit(); // エラー時は利用回数を戻す
                     loadingIndicator.classList.add('hidden');
                     loadingIndicator.classList.remove('flex');
                     errorIndicator.classList.remove('hidden');
-                    errorText.innerText = err.message;
+                    errorText.innerText = "レシピの生成中にエラーが発生しました（回数は消費されていません）。詳細: " + err.message;
                 }
             });
 
@@ -904,7 +991,7 @@
 
                 // ★ API呼び出し前に利用回数をチェック ★
                 if (!checkUsageLimit()) {
-                    addMessage('ai', "本日のAI利用回数（3回）の上限に達しました。また明日お気軽にご相談ください。");
+                    addMessage('ai', "本日のAI利用回数（10回）の上限に達しました。また明日お気軽にご相談ください。");
                     return;
                 }
 
@@ -944,10 +1031,15 @@
                     const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     document.getElementById('typing-indicator').remove();
 
-                    if (text) addMessage('ai', text);
+                    if (text) {
+                        addMessage('ai', text);
+                    } else {
+                        throw new Error("APIからの応答が空でした。");
+                    }
                 } catch (err) {
                     document.getElementById('typing-indicator').remove();
-                    addMessage('ai', "申し訳ありません、現在通信が混み合っています。少し時間をおいて再度お試しください。");
+                    rollbackUsageLimit(); // エラー時は利用回数を戻す
+                    addMessage('ai', "申し訳ありません、現在通信が混み合っているためエラーが発生しました（利用回数は消費されていません）。少し時間をおいて再度お試しください。");
                 }
             };
 
@@ -957,34 +1049,6 @@
             });
             document.querySelectorAll('.chat-shortcut').forEach(btn => {
                 btn.addEventListener('click', () => handleChat(btn.getAttribute('data-msg')));
-            });
-
-            // AI タブ切り替え
-            const tabRecipeBtn = document.getElementById('tab-recipe-btn');
-            const tabChatBtn = document.getElementById('tab-chat-btn');
-            const panelRecipe = document.getElementById('panel-recipe');
-            const panelChat = document.getElementById('panel-chat');
-
-            const activeTabClass = "text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-[#4A635D] text-white shadow-md flex items-center justify-between";
-            const inactiveTabClass = "text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center justify-between";
-
-            tabRecipeBtn.addEventListener('click', () => {
-                panelRecipe.classList.remove('hidden');
-                panelChat.classList.add('hidden');
-                tabRecipeBtn.className = activeTabClass;
-                tabRecipeBtn.querySelector('span:last-child').style.opacity = '1';
-                tabChatBtn.className = inactiveTabClass;
-                tabChatBtn.querySelector('span:last-child').style.opacity = '0';
-            });
-
-            tabChatBtn.addEventListener('click', () => {
-                panelRecipe.classList.add('hidden');
-                panelChat.classList.remove('hidden');
-                panelChat.classList.add('flex');
-                tabChatBtn.className = activeTabClass;
-                tabChatBtn.querySelector('span:last-child').style.opacity = '1';
-                tabRecipeBtn.className = inactiveTabClass;
-                tabRecipeBtn.querySelector('span:last-child').style.opacity = '0';
             });
 
         });
