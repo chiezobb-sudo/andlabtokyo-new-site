@@ -1,6 +1,7 @@
 ---
-// Vercelの環境変数（GEMINI_API_KEY）をサーバーサイド（Astro）で取得します
-const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || "";
+// Vercelの環境変数（GEMINI_API_KEY）をサーバーサイド（Astro）で確実に取得します
+// AstroのSSGビルド時、およびSSR実行時の両方でフォールバックしてキャッチできるようにバインドを強化
+const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "undefined" ? process.env.GEMINI_API_KEY : "") || "";
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,7 +17,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             --color-bg: #FDFBF7;
             --color-primary: #4A635D; /* Spirulina Green */
             --color-secondary: #C2A878; /* Soft Gold */
-            --color-accent: #E5D5B5; 
+            --color-accent: #E5D5B5;
             --color-text: #333333;
         }
 
@@ -107,7 +108,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
 </head>
 <body class="overflow-x-hidden text-gray-800">
 
-    <!-- AstroでビルドされたAPIキーを安全にHTMLのdata属性に埋め込み、プレビュー環境クラッシュを防ぎます -->
+    <!-- Astroでビルドされた環境変数を安全にHTMLのdata属性に埋め込み、ブラウザ側スクリプトでのクラッシュを防ぎます -->
     <div id="gemini-api-config" data-api-key={geminiApiKey} style="display:none;"></div>
 
     <!-- ナビゲーション -->
@@ -212,7 +213,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                         <span class="text-sm font-bold text-[#C2A878] tracking-widest">21歳〜38歳（専業主婦期）</span>
                         <h3 class="text-xl font-bold mt-1 mb-2">結婚・出産を経て、17年間専業主婦として家庭を守る</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">
-                            社会で専門性を発揮する友人たちを見て焦りを感じることもあったが、フラワーアレンジメントの資格を取得するなど、自己のアイデンティティを模索する葛藤期を経験。この時期に培った色彩感覚やデザインへの視点は、後の料理家としての表現の土台になる。
+                            社会で専門性を発揮する友人たちを見て焦りを感じomあったが、フラワーアレンジメントの資格を取得するなど、自己のアイデンティティを模索する葛藤期を経験。この時期に培った色彩感覚やデザインへの視点は、後の料理家としての表現の土台になる。
                         </p>
                     </div>
                 </div>
@@ -242,7 +243,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
@@ -255,7 +256,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
-                
+
                 <!-- Timeline Item -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
@@ -268,7 +269,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item -->
                 <div class="relative flex flex-col md:flex-row items-center z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
@@ -309,7 +310,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     <div class="absolute top-0 right-0 w-20 h-20 bg-[#4A635D]/5 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
                     <div class="text-3xl mb-5 relative z-10">🥗</div>
                     <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">ローフード</h3>
-                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">日本リビングビューティー協会(JLBA)認定校。細胞レベルでのデトックスと再生を追求する世界水準の教育。</p>
+                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">日本リビングビューティー協会(JLBA)認定校。細胞レベルでのデトックスと再生を追求する world class の教育。</p>
                     <ul class="text-xs space-y-2 text-gray-500 font-medium relative z-10">
                         <li class="flex items-center"><span class="w-1 h-1 bg-[#C2A878] rounded-full mr-2"></span>マイスター1級・上級講座</li>
                         <li class="flex items-center"><span class="w-1 h-1 bg-[#C2A878] rounded-full mr-2"></span>ローフード国際プロデュース</li>
@@ -353,7 +354,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
     <!-- AI体験ラボ (Gemini API Integration) -->
     <section id="ai-lab" class="py-24 px-4 bg-gray-900 text-white border-y border-gray-800 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
-        
+
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="mb-12 text-center">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest rounded-full">
@@ -393,7 +394,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
 
                 <!-- AI メインパネル -->
                 <div class="lg:col-span-8 p-8 min-h-[500px] flex flex-col" id="ai-panel-content">
-                    
+
                     <!-- レシピクリエイター パネル -->
                     <div id="panel-recipe" class="space-y-6 flex-1">
                         <div class="flex items-center justify-between mb-2">
@@ -401,12 +402,11 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                             <span class="text-[10px] bg-[#C2A878]/20 border border-[#C2A878]/30 text-[#8C6D3B] px-2 py-1 rounded font-bold uppercase">S = Lᵅ × R</span>
                         </div>
                         <p class="text-sm text-gray-500 mb-6">ベースとなる食材や、あなたの「食のスタイル」を選択してください。腸を整え、細胞から美しくなるレシピをご提案します。</p>
-                        
-                        <!-- 追加されたステップのUI -->
+
+                        <!-- ステップ1. 食材選択 -->
                         <div>
                             <span class="block text-xs font-bold text-gray-700 mb-3">1. ベースとなる食材を選択 (複数可):</span>
                             <div class="flex flex-wrap gap-2" id="ingredient-pills">
-                                <!-- ベース食材 -->
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="アボカド">🥑 アボカド</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="塩麹">🍶 塩麹</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="スピルリナ">🌿 スピルリナ</button>
@@ -416,10 +416,10 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                             </div>
                         </div>
 
+                        <!-- ステップ2. スタイル選択 -->
                         <div>
                             <span class="block text-xs font-bold text-gray-700 mb-3">2. 食のスタイル・こだわりを選択 (任意):</span>
                             <div class="flex flex-wrap gap-2" id="style-pills">
-                                <!-- こだわりスタイル (色分け) -->
                                 <button class="pill bg-green-50 hover:bg-green-100 text-green-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-green-200" data-val="Vegan(完全菜食)">🌱 Vegan(ヴィーガン)</button>
                                 <button class="pill bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-blue-200" data-val="100% Raw(非加熱)">🥗 100% Raw</button>
                                 <button class="pill bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-orange-200" data-val="肉・魚あり(消化酵素ケア)">🥩 肉・魚をヘルシーに</button>
@@ -427,11 +427,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                             </div>
                         </div>
 
+                        <!-- ステップ3. 自由入力 -->
                         <div>
                             <span class="block text-xs font-bold text-gray-700 mb-2">3. その他に加えたい食材・食べたい料理 (任意):</span>
                             <input type="text" id="recipe-custom-ingredients" placeholder="例: カレーが食べたい, レモン, トマト" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A635D]/50 text-sm bg-gray-50">
                         </div>
 
+                        <!-- ステップ4. 目的選択 -->
                         <div>
                             <span class="block text-xs font-bold text-gray-700 mb-2">4. インナービューティーの目的:</span>
                             <select id="recipe-goal" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A635D]/50 text-sm bg-gray-50">
@@ -477,7 +479,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                             <span class="text-[10px] bg-blue-100 text-blue-800 border border-blue-200 px-2 py-1 rounded font-bold uppercase">AI Assistant</span>
                         </div>
                         <p class="text-sm text-gray-500">「シンリビングフード（S = Lᵅ × R）」の理論に基づくAI相談室です。食事に関するお悩みをお気軽にご相談ください。</p>
-                        
+
                         <!-- チャットボックス -->
                         <div class="border border-gray-200 rounded-xl bg-gray-50 p-4 h-[320px] overflow-y-auto space-y-4 flex-1 shadow-inner" id="chat-box">
                             <div class="flex items-start gap-3">
@@ -589,7 +591,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     <div class="inline-block px-3 py-1 mb-4 bg-gray-100 text-gray-600 text-xs font-bold tracking-widest rounded-full uppercase">Global Reach</div>
                     <h2 class="text-3xl font-bold mb-6">Media, Branding & Publishing</h2>
                     <p class="text-gray-600 mb-8 leading-relaxed">
-                        国内でのベストセラー獲得に留まらず、その活動は海外メディアでも注目されています。
+                        国内でのベストセラー獲得に留まらず、その活動は海外メディアそれでも注目されています。
                         グローバル家電ブランドKuvings（クビンス）の公式アンバサダーとして、米国CBS系列やFOXニュースにて「7色ジュースレシピ」等の取り組みが特集されました。
                     </p>
                     <div class="grid grid-cols-2 gap-4">
@@ -762,13 +764,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             document.querySelectorAll('.pill').forEach(pill => {
                 pill.addEventListener('click', () => {
                     const value = pill.getAttribute('data-val');
-                    
+
                     // 色の切り替えロジック
                     const isNutFree = value.includes("ナッツフリー");
                     const isVegan = value.includes("Vegan");
                     const isRaw = value.includes("100% Raw");
                     const isMeat = value.includes("肉・魚");
-                    
+
                     if (selectedIngredients.has(value)) {
                         selectedIngredients.delete(value);
                         // 選択解除時の色
@@ -814,7 +816,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             // プレビュー環境（右側の画面）でも動くようにする自動判定
             if (window.location.protocol === 'blob:' || window.location.hostname.includes('usercontent') || window.location.hostname === 'localhost') {
                 apiKey = ""; // プレビュー環境では自動でキーが提供されるため空にします
-                MODEL_NAME = "gemini-2.5-flash-preview-09-2025"; 
+                MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
                 isPreview = true;
             }
 
@@ -825,17 +827,17 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             function checkUsageLimit() {
                 const today = new Date().toDateString(); // 今日の日付
                 let usage = JSON.parse(localStorage.getItem('andlab_ai_usage') || '{"date": "", "count": 0}');
-                
+
                 // 日付が変わっていたらカウントをリセット
                 if (usage.date !== today) {
                     usage = { date: today, count: 0 };
                 }
-                
+
                 // 制限に達しているかチェック
                 if (usage.count >= DAILY_LIMIT) {
                     return false; // 制限オーバー
                 }
-                
+
                 // カウントを増やして保存
                 usage.count++;
                 localStorage.setItem('andlab_ai_usage', JSON.stringify(usage));
@@ -861,7 +863,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
 
                 let attempt = 0;
                 const maxAttempts = 5;
-                
+
                 while (attempt < maxAttempts) {
                     try {
                         const response = await fetch(API_URL, {
@@ -966,7 +968,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     const result = await callGeminiApi(payload);
                     let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     if (!text) throw new Error("APIからの応答データが不正です。");
-                    
+
                     // markdownのバッククォートが含まれている場合を除去し、JSONパースエラーを防ぐ
                     text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
                     const data = JSON.parse(text);
@@ -975,7 +977,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     document.getElementById('recipe-out-title').innerText = data.recipeName;
                     document.getElementById('recipe-out-time').innerText = "⏱️ " + data.prepTime;
                     document.getElementById('recipe-out-concept').innerText = data.concept;
-                    
+
                     const ul = document.getElementById('recipe-out-ingredients');
                     ul.innerHTML = "";
                     data.ingredients.forEach(i => {
@@ -1012,7 +1014,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             const addMessage = (sender, text) => {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = "flex items-start gap-3 " + (sender === 'user' ? "justify-end" : "");
-                
+
                 let avatarHTML = '';
                 let bubbleClass = '';
 
@@ -1037,11 +1039,11 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
 
             const handleChat = async (message) => {
                 if (!message) return;
-                
+
                 // ユーザー発言追加
                 addMessage('user', message);
                 chatInput.value = "";
-                
+
                 // ★ API呼び出し前に利用回数をチェック ★
                 if (!checkUsageLimit()) {
                     addMessage('ai', "本日のAI利用回数（10回）の上限に達しました。また明日お気軽にご相談ください。");
@@ -1084,7 +1086,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                     const result = await callGeminiApi(payload);
                     const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     document.getElementById('typing-indicator').remove();
-                    
+
                     if (text) {
                         addMessage('ai', text);
                     } else {
