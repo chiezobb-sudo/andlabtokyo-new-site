@@ -123,23 +123,6 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
         </div>
     </nav>
 
-    <!-- モバイルドロワー -->
-    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden transition-opacity duration-300 opacity-0">
-        <div class="fixed right-0 top-0 bottom-0 w-64 bg-white shadow-2xl p-6 transform translate-x-full transition-transform duration-300" id="drawer-content">
-            <div class="flex justify-between items-center mb-8">
-                <span class="font-bold text-gray-800 tracking-widest">MENU</span>
-                <button id="close-drawer-btn" class="text-gray-500 hover:text-gray-800 text-3xl font-light leading-none">&times;</button>
-            </div>
-            <div class="flex flex-col space-y-6 text-base font-medium">
-                <a href="#journey" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">人生の歩み</a>
-                <a href="#education" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">料理教室 &LAB TOKYO</a>
-                <a href="#ai-lab" class="text-[#4A635D] hover:text-[#384C47] font-bold transition-colors drawer-link">AI体験ラボ</a>
-                <a href="#spirulina" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">スピルリナ LAB</a>
-                <a href="#global" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">グローバル活動</a>
-            </div>
-        </div>
-    </div>
-
     <!-- ヒーローセクション -->
     <section class="relative pt-32 pb-24 px-4 bg-gradient-to-b from-[#F9F7F2] to-white overflow-hidden min-h-[90vh] flex items-center">
         <div class="max-w-4xl mx-auto text-center relative z-10">
@@ -149,15 +132,14 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             </h1>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
                 安藤千英（Chie Ando）は、ローフードと日本の発酵文化を組み合わせた<br class="hidden md:block">
-                新しい食のあり方「シンリビングフード」を提唱しています。
+                新しい食のあり方「シンリビングフード」を提唱しています。<br class="hidden md:block">
+                ELLE gourmet公認料理家として、教育、ブランディング、サステナビリティを統合し、<br class="hidden md:block">
+                細胞レベルで生まれ変わる食の力を世界へ発信しています。
             </p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#ai-lab" class="w-full sm:w-auto bg-[#4A635D] text-white px-8 py-3.5 rounded-lg font-bold shadow-lg hover:bg-[#384C47] transition-all flex items-center justify-center gap-2">
+                <a href="#ai-lab" class="w-full sm:w-auto bg-[#4A635D] text-white px-8 py-3.5 rounded-lg font-bold shadow-lg hover:bg-[#384C47] transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
                     <span>AIリビングフード体験</span>
-                    <span class="animate-pulse">✦</span>
-                </a>
-                <a href="#journey" class="w-full sm:w-auto border border-gray-300 text-gray-700 px-8 py-3.5 rounded-lg font-bold hover:bg-gray-50 transition-all flex items-center justify-center">
-                    プロフィールを見る
+                    <span class="animate-pulse text-[#C2A878]">✦</span>
                 </a>
             </div>
         </div>
@@ -165,125 +147,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
         <div class="absolute -left-20 -bottom-20 w-[400px] h-[400px] bg-[#C2A878]/10 rounded-full blur-3xl"></div>
     </section>
 
-    <!-- プロフィール・タイムライン -->
-    <section id="journey" class="py-24 px-4">
-        <div class="max-w-5xl mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="text-3xl font-bold mb-4">Life Journey</h2>
-                <div class="w-12 h-1 bg-[#C2A878] mx-auto mb-6"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-sm leading-relaxed">
-                    福岡の老舗割烹料理屋の長女として生まれ、専業主婦としての17年間を経て、家族の危機をきっかけに料理家として歩み始めました。
-                </p>
-            </div>
-
-            <div class="relative timeline-line pt-8 pb-8">
-                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
-                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
-                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">1973</span>
-                        <h3 class="text-xl font-bold mt-1 mb-2">福岡の老舗割烹に生まれる</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            安藤千英氏は、1973年に福岡県で長い歴史を持つ割烹料理屋の長女として誕生。幼少期から伝統的な日本料理に親しむ環境で育った。
-                        </p>
-                    </div>
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
-                </div>
-
-                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
-                    <div class="md:w-1/2 md:pl-12 w-full">
-                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">21〜38歳</span>
-                        <h3 class="text-xl font-bold mt-1 mb-2">17年間の専業主婦期間</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            結婚・出産を経て、家庭を守りながら自己のアイデンティティを模索。この時期に培った色彩感覚やデザイン視点は、後の料理家としての表現の土台となる。
-                        </p>
-                    </div>
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
-                </div>
-
-                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
-                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
-                        <span class="text-sm font-bold text-[#4A635D] tracking-widest">38歳：Turning Point</span>
-                        <h3 class="text-xl font-bold mt-1 mb-2">家族の危機と「食の力」</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            第3子の重度熱傷事故をきっかけに、食の力を再認識。マクロビオティック、ローフード、発酵について深く学び始める。
-                        </p>
-                    </div>
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
-                </div>
-
-                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
-                    <div class="md:w-1/2 md:pl-12 w-full">
-                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">2016年12月</span>
-                        <h3 class="text-xl font-bold mt-1 mb-2">ローフード資格取得＆教室開始</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            マシュー・ケニー氏に衝撃を受け、わずか5ヶ月で資格取得。福岡で「happycheesekitchen」をスタート。
-                        </p>
-                    </div>
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
-                </div>
-
-                <div class="relative flex flex-col md:flex-row items-center z-10 w-full pl-12 md:pl-0">
-                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
-                        <span class="text-sm font-bold text-[#4A635D] tracking-widest">2019年〜Present</span>
-                        <h3 class="text-xl font-bold mt-1 mb-2">東京進出と「シンリビングフード」確立</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            &LAB TOKYOへ改称。著書『&RAW LIVING Step1』がAmazon 1位獲得。ローフード×発酵食を融合させた新しい食のあり方を世界に発信。
-                        </p>
-                    </div>
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 教育セクション -->
-    <section id="education" class="py-24 px-4 bg-white border-t border-gray-50">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4">Educational Ecosystem</h2>
-            <div class="w-12 h-1 bg-[#C2A878] mb-6"></div>
-            <p class="text-gray-600 leading-relaxed mb-16">
-                &LAB TOKYOでは、商標登録を軸としたIP講座を展開。受講生がプロとして自立できる仕組みを構築しています。
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
-                    <div class="text-3xl mb-5 relative z-10">🥗</div>
-                    <h3 class="text-lg font-bold mb-3 text-gray-900">ローフード</h3>
-                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">JLBA認定校。細胞レベルでのデトックスと再生を追求する教育。</p>
-                    <ul class="text-xs space-y-2 text-gray-500 font-medium">
-                        <li>🏆 マイスター1級・上級講座</li>
-                        <li>🌍 ローフード国際プロデュース</li>
-                    </ul>
-                </div>
-
-                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
-                    <div class="text-3xl mb-5">🍫</div>
-                    <h3 class="text-lg font-bold mb-3 text-gray-900">ローチョコレート</h3>
-                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">商標登録済。砂糖・乳製品不使用の高度な製菓技術。</p>
-                    <div class="text-[10px] bg-[#C2A878] text-white inline-block px-2 py-0.5 rounded mb-4 font-bold">商標登録済IP</div>
-                </div>
-
-                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
-                    <div class="text-3xl mb-5">🍶</div>
-                    <h3 class="text-lg font-bold mb-3 text-gray-900">発酵プランナー</h3>
-                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">日本の伝統に根ざした本質的な発酵の体系化。</p>
-                </div>
-
-                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
-                    <div class="text-3xl mb-5">📸</div>
-                    <h3 class="text-lg font-bold mb-3 text-gray-900">クリエイティブ講座</h3>
-                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">理論に基づいたブランディング＆自己ブランディング。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Lab セクション -->
+    <!-- AI体験ラボ (Gemini API Integration) -->
     <section id="ai-lab" class="py-24 px-4 bg-gray-900 text-white border-y border-gray-800 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
 
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="mb-12 text-center">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/10 border border-white/20 text-xs font-bold tracking-widest rounded-full">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest rounded-full">
                     <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                     POWERED BY GEMINI AI
                 </div>
@@ -291,65 +161,67 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                 <div class="w-12 h-1 bg-[#C2A878] mx-auto mb-6"></div>
                 <p class="text-gray-300 max-w-2xl mx-auto text-sm leading-relaxed">
                     「シンリビングフード（S = Lᵅ × R）」の理論をインプットした先進AI機能。<br>
-                    食材やこだわりを選ぶだけで、オリジナルレシピ＆相談ができます。
+                    手元の食材やこだわりに合わせて、消化を助け発酵の力を掛け合わせたレシピやアドバイスをリアルタイムで生成します。
                 </p>
             </div>
 
             <div class="bg-white text-gray-800 rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
-                <!-- サイドナビ -->
+                <!-- AI サイドナビ -->
                 <div class="lg:col-span-4 bg-gray-50 p-8 border-r border-gray-200 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-bold text-lg text-gray-900 mb-6 border-b border-gray-200 pb-3">機能を選択</h3>
+                        <h3 class="font-bold text-lg text-gray-900 mb-6 border-b border-gray-200 pb-3">AI ラボ機能の選択</h3>
                         <div class="flex flex-col space-y-3" id="ai-tabs">
-                            <button id="tab-recipe-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all bg-[#4A635D] text-white shadow-md flex items-center justify-between">
-                                <span>🥗 レシピ生成</span>
+                            <button id="tab-recipe-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-[#4A635D] text-white shadow-md flex items-center justify-between">
+                                <span>🥗 AI レシピ生成</span>
                                 <span>→</span>
                             </button>
-                            <button id="tab-chat-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center justify-between">
-                                <span>💬 相談</span>
-                                <span class="opacity-0">→</span>
+                            <button id="tab-chat-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center justify-between">
+                                <span>💬 インナービューティー相談</span>
+                                <span class="opacity-0 transition-opacity">→</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- メインパネル -->
+                <!-- AI メインパネル -->
                 <div class="lg:col-span-8 p-8 min-h-[500px] flex flex-col">
 
-                    <!-- レシピパネル -->
+                    <!-- レシピクリエイター パネル -->
                     <div id="panel-recipe" class="space-y-6 flex-1">
                         <div class="flex items-center justify-between mb-2">
-                            <h4 class="font-bold text-xl text-gray-900">レシピ生成</h4>
-                            <span class="text-[10px] bg-[#C2A878]/20 border border-[#C2A878]/30 text-[#8C6D3B] px-2 py-1 rounded font-bold">S = Lᵅ × R</span>
+                            <h4 class="font-bold text-xl text-gray-900">シンリビングフード・レシピ生成</h4>
+                            <span class="text-[10px] bg-[#C2A878]/20 border border-[#C2A878]/30 text-[#8C6D3B] px-2 py-1 rounded font-bold uppercase">S = Lᵅ × R</span>
                         </div>
+                        <p class="text-sm text-gray-500 mb-6">ベースとなる食材や、あなたの「食のスタイル」を選択してください。腸を整え、細胞から美しくなるレシピをご提案します。</p>
 
                         <div>
-                            <span class="block text-xs font-bold text-gray-700 mb-3">1. 食材を選択 (複数可):</span>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">1. ベースとなる食材を選択 (複数可):</span>
                             <div class="flex flex-wrap gap-2" id="ingredient-pills">
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="アボカド">🥑 アボカド</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="塩麹">🍶 塩麹</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="スピルリナ">🌿 スピルリナ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="全粒粉/豆パスタ">🍝 全粒粉/豆パスタ</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="玄米">🍚 玄米</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="甘酒">🌾 甘酒</button>
                             </div>
                         </div>
 
                         <div>
-                            <span class="block text-xs font-bold text-gray-700 mb-3">2. 食のスタイル (任意):</span>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">2. 食のスタイル・こだわりを選択 (任意):</span>
                             <div class="flex flex-wrap gap-2" id="style-pills">
-                                <button class="pill bg-green-50 hover:bg-green-100 text-green-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-green-200" data-val="Vegan">🌱 Vegan</button>
-                                <button class="pill bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-blue-200" data-val="100% Raw">🥗 100% Raw</button>
-                                <button class="pill bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-orange-200" data-val="肉・魚対応">🥩 肉・魚対応</button>
-                                <button class="pill bg-red-50 hover:bg-red-100 text-red-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-red-200" data-val="ナッツフリー">🚫 ナッツフリー</button>
+                                <button class="pill bg-green-50 hover:bg-green-100 text-green-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-green-200" data-val="Vegan(完全菜食)">🌱 Vegan</button>
+                                <button class="pill bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-blue-200" data-val="100% Raw(非加熱)">🥗 100% Raw</button>
+                                <button class="pill bg-orange-50 hover:bg-orange-100 text-orange-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-orange-200" data-val="肉・魚あり(消化酵素ケア)">🥩 肉・魚</button>
+                                <button class="pill bg-red-50 hover:bg-red-100 text-red-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-red-200" data-val="ナッツフリー(代替でクリーミーに)">🚫 ナッツフリー</button>
                             </div>
                         </div>
 
                         <button id="generate-recipe-btn" class="w-full bg-[#4A635D] hover:bg-[#384C47] text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                            <span>レシピを生成</span>
+                            <span>レシピを生成する</span>
                             <span class="animate-pulse">✨</span>
                         </button>
 
-                        <!-- 結果表示 -->
+                        <!-- 生成結果エリア -->
                         <div id="recipe-output" class="hidden mt-8 bg-white border border-[#C2A878]/30 shadow-sm p-6 rounded-xl space-y-5">
                             <h5 class="font-bold text-xl text-gray-900" id="recipe-out-title">...</h5>
                             <div class="text-sm text-[#4A635D] bg-[#4A635D]/5 p-4 rounded-lg" id="recipe-out-concept">...</div>
@@ -357,13 +229,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                         </div>
                     </div>
 
-                    <!-- チャットパネル -->
+                    <!-- チャット相談 パネル -->
                     <div id="panel-chat" class="space-y-6 hidden flex-col">
-                        <h4 class="font-bold text-xl text-gray-900">相談室</h4>
+                        <h4 class="font-bold text-xl text-gray-900">安藤千英AI インナービューティー相談</h4>
                         <div class="border border-gray-200 rounded-xl bg-gray-50 p-4 h-[300px] overflow-y-auto flex-1" id="chat-box">
                             <div class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-full bg-[#4A635D] text-white flex items-center justify-center font-bold text-xs">AI</div>
-                                <div class="bg-white p-3 rounded-2xl text-sm text-gray-700">こんにちは。何でも相談ください。</div>
+                                <div class="bg-white p-3 rounded-2xl text-sm text-gray-700">こんにちは。何でもご相談ください。</div>
                             </div>
                         </div>
                         <div class="flex gap-2">
@@ -383,81 +255,20 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
         </div>
     </section>
 
-    <!-- スピルリナセクション -->
-    <section id="spirulina" class="py-24 px-4 bg-[#F5F8F7] border-t border-gray-200">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4">Spirulina LAB</h2>
-            <p class="text-gray-600 max-w-2xl leading-relaxed mb-12">
-                スピルリナを毎日の食卓に美しく取り入れるためのリビングフードレシピを開発・発信。
-            </p>
-        </div>
-    </section>
-
-    <!-- メディアセクション -->
-    <section id="global" class="py-24 px-4 bg-white border-t border-gray-100">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4">Media & Publishing</h2>
-            <p class="text-gray-600 mb-8">
-                著書『&RAW LIVING Step1』がAmazon栄養科学部門 1位獲得。Kuvings公式アンバサダーとして米国メディアにも紹介されています。
-            </p>
-        </div>
-    </section>
-
     <!-- フッター -->
     <footer class="py-16 px-4 bg-[#1F2937] text-white">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-            <div class="text-center md:text-left">
-                <span class="text-2xl font-bold tracking-tighter block mb-2">CHIE ANDO</span>
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    Syn-Living Food Innovator<br>
-                    &LAB TOKYO
-                </p>
+        <div class="max-w-6xl mx-auto text-center">
+            <span class="text-2xl font-bold tracking-tighter block mb-2">CHIE ANDO</span>
+            <p class="text-gray-400 text-xs">Syn-Living Food Innovator | &LAB TOKYO</p>
+            <div class="mt-8 text-[10px] text-gray-500 uppercase tracking-widest">
+                &copy; 2026 Deep Research Profile. Powered by Gemini.
             </div>
-            <div class="text-center md:text-right">
-                <p class="text-sm text-[#C2A878] mb-6 italic">"食べることは、生きることそのもの。"</p>
-            </div>
-        </div>
-        <div class="mt-16 text-center text-[10px] text-gray-500 border-t border-gray-800 pt-8 uppercase tracking-widest">
-            &copy; 2026 Deep Research Profile. Powered by Gemini.
         </div>
     </footer>
 
     <script is:inline>
         document.addEventListener('DOMContentLoaded', function() {
-            // モバイルメニュー
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            const mobileDrawer = document.getElementById('mobile-drawer');
-            const drawerContent = document.getElementById('drawer-content');
-            const closeBtn = document.getElementById('close-drawer-btn');
-
-            mobileBtn.addEventListener('click', () => {
-                mobileDrawer.classList.remove('hidden');
-                setTimeout(() => {
-                    mobileDrawer.classList.remove('opacity-0');
-                    drawerContent.classList.remove('translate-x-full');
-                }, 20);
-            });
-
-            closeBtn.addEventListener('click', () => {
-                mobileDrawer.classList.add('opacity-0');
-                drawerContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileDrawer.classList.add('hidden');
-                }, 300);
-            });
-
-            // スムーススクロール
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-
-            // ==========================================
-            // AI Lab
-            // ==========================================
+            // Tab switching
             const tabRecipeBtn = document.getElementById('tab-recipe-btn');
             const tabChatBtn = document.getElementById('tab-chat-btn');
             const panelRecipe = document.getElementById('panel-recipe');
@@ -477,42 +288,24 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                 tabRecipeBtn.classList.remove('bg-[#4A635D]', 'text-white');
             });
 
-            // 食材選択
+            // Ingredient selection
             const selectedIngredients = new Set();
             document.querySelectorAll('.pill').forEach(pill => {
                 pill.addEventListener('click', () => {
                     const value = pill.getAttribute('data-val');
                     if (selectedIngredients.has(value)) {
                         selectedIngredients.delete(value);
-                        pill.classList.remove('bg-green-600', 'bg-red-600', 'bg-blue-600', 'bg-orange-500', 'bg-[#4A635D]', 'text-white', 'shadow-inner');
-                        if (value.includes('Vegan')) pill.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
-                        else if (value.includes('Raw')) pill.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
-                        else if (value.includes('肉')) pill.classList.add('bg-orange-50', 'text-orange-700', 'border-orange-200');
-                        else if (value.includes('ナッツ')) pill.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
-                        else pill.classList.add('bg-gray-100', 'hover:bg-gray-200');
+                        pill.classList.remove('bg-[#4A635D]', 'text-white', 'shadow-inner');
+                        pill.classList.add('bg-gray-100', 'hover:bg-gray-200');
                     } else {
                         selectedIngredients.add(value);
-                        if (value.includes('Vegan')) {
-                            pill.classList.add('bg-green-600', 'text-white', 'shadow-inner');
-                            pill.classList.remove('bg-green-50', 'text-green-700', 'border-green-200');
-                        } else if (value.includes('Raw')) {
-                            pill.classList.add('bg-blue-600', 'text-white', 'shadow-inner');
-                            pill.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-200');
-                        } else if (value.includes('肉')) {
-                            pill.classList.add('bg-orange-500', 'text-white', 'shadow-inner');
-                            pill.classList.remove('bg-orange-50', 'text-orange-700', 'border-orange-200');
-                        } else if (value.includes('ナッツ')) {
-                            pill.classList.add('bg-red-600', 'text-white', 'shadow-inner');
-                            pill.classList.remove('bg-red-50', 'text-red-700', 'border-red-200');
-                        } else {
-                            pill.classList.add('bg-[#4A635D]', 'text-white', 'shadow-inner');
-                            pill.classList.remove('bg-gray-100', 'hover:bg-gray-200');
-                        }
+                        pill.classList.remove('bg-gray-100', 'hover:bg-gray-200');
+                        pill.classList.add('bg-[#4A635D]', 'text-white', 'shadow-inner');
                     }
                 });
             });
 
-            // Gemini API
+            // Gemini API setup - read key from data attribute
             const apiConfigEl = document.getElementById('gemini-api-config');
             let apiKey = apiConfigEl ? apiConfigEl.getAttribute('data-api-key') : "";
             const MODEL_NAME = "gemini-2.5-flash";
@@ -520,7 +313,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
 
             async function callGeminiApi(payload) {
                 if (!apiKey) {
-                    throw new Error("APIキーが設定されていません。Vercelの環境変数 GEMINI_API_KEY を確認してください。");
+                    throw new Error("APIキーが設定されていません。Vercelの環境変数を確認してください。");
                 }
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -531,7 +324,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                 return await response.json();
             }
 
-            // レシピ生成
+            // Recipe generation
             document.getElementById('generate-recipe-btn').addEventListener('click', async () => {
                 const ingredients = Array.from(selectedIngredients);
                 if (ingredients.length === 0) ingredients.push("おまかせ");
@@ -553,7 +346,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
                 }
             });
 
-            // チャット
+            // Chat
             const chatBox = document.getElementById('chat-box');
             const chatInput = document.getElementById('chat-input');
             const chatSendBtn = document.getElementById('chat-send-btn');
@@ -561,11 +354,11 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KE
             const addMessage = (sender, text) => {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = "flex items-start gap-3 " + (sender === 'user' ? "justify-end" : "");
-                const avatarHTML = sender === 'user'
+                const avatar = sender === 'user'
                     ? `<div class="w-8 h-8 rounded-full bg-[#C2A878] text-white flex items-center justify-center font-bold text-xs">ME</div>`
                     : `<div class="w-8 h-8 rounded-full bg-[#4A635D] text-white flex items-center justify-center font-bold text-xs">AI</div>`;
-                const bubbleClass = sender === 'user' ? "bg-[#C2A878] text-white" : "bg-white text-gray-700 border border-gray-100";
-                msgDiv.innerHTML = `${avatarHTML}<div class="p-3 rounded-2xl text-sm ${bubbleClass}">${text}</div>`;
+                const bubble = sender === 'user' ? "bg-[#C2A878] text-white" : "bg-white text-gray-700 border border-gray-100";
+                msgDiv.innerHTML = `${avatar}<div class="p-3 rounded-2xl text-sm ${bubble}">${text}</div>`;
                 chatBox.appendChild(msgDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
             };
