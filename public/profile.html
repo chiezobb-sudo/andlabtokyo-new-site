@@ -756,18 +756,14 @@
             });
 
             // ==========================================
-            // Gemini API 連携ロジック (自動判定付き)
+            // Gemini API 連携ロジック (直接通信版)
             // ==========================================
 
-            // 基本はクロードが作成したVercel上のAPIルートを指定
-            let API_URL = '/api/gemini';
+            // APIキーはグローバルスコープまたは環境変数から取得
+            const apiKey = (typeof window !== 'undefined' && window.GEMINI_API_KEY) ? window.GEMINI_API_KEY : "";
 
-            // ★ プレビュー画面（Canvas）でも動くようにする自動切り替え ★
-            if (window.location.protocol === 'blob:' || window.location.hostname.includes('usercontent') || window.location.hostname === 'localhost') {
-                const apiKey = ""; // プレビュー環境から自動提供されます
-                const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
-                API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
-            }
+            const MODEL_NAME = "gemini-2.5-flash";
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
             // ★ 1日10回の利用制限ロジック (localStorageを使用) ★
             const DAILY_LIMIT = 10;
@@ -803,6 +799,10 @@
 
             // 指数バックオフを用いたAPI呼び出しラッパー
             async function callGeminiApi(payload) {
+                if (!apiKey) {
+                    throw new Error("APIキーが設定されていません。");
+                }
+
                 let attempt = 0;
                 const maxAttempts = 3;
 
