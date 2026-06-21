@@ -1,0 +1,252 @@
+---
+// /src/pages/profile.astro
+// Astroのグローバルアライメント環境を避けるため、独立したレイアウトで出力
+export const prerender = true;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chie Ando Official Profile | &LAB TOKYO</title>
+    <!-- Astroのバンドルを回避し、デザインを強制適用するための is:inline -->
+    <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+        :root {
+            --color-bg: #FDFBF7;
+            --color-primary: #4A635D; /* Spirulina Green */
+            --color-secondary: #C2A878; /* Soft Gold */
+            --color-accent: #E5D5B5;
+            --color-text: #333333;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .section-fade {
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .spinner {
+            border: 3px solid rgba(74, 99, 93, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: var(--color-primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden text-gray-800">
+
+    <!-- AI体験ラボ (Gemini API Integration) -->
+    <section id="ai-lab" class="py-24 px-4 bg-gray-900 text-white border-y border-gray-800 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="mb-12 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    POWERED BY GEMINI AI
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Syn-Living Food AI Lab</h2>
+                <div class="w-12 h-1 bg-[#C2A878] mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto text-sm leading-relaxed">
+                    「シンリビングフード（S = Lᵅ × R）」の理論をインプットした先進AI機能。
+                </p>
+            </div>
+
+            <div class="bg-white text-gray-800 rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                <!-- AI サイドナビ -->
+                <div class="lg:col-span-4 bg-gray-50 p-8 border-r border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-6 border-b border-gray-200 pb-3">AI ラボ機能の選択</h3>
+                        <div class="flex flex-col space-y-3" id="ai-tabs">
+                            <button id="tab-recipe-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-[#4A635D] text-white shadow-md flex items-center justify-between">
+                                <span>🥗 AI レシピ生成</span>
+                                <span>→</span>
+                            </button>
+                            <button id="tab-chat-btn" class="text-left w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center justify-between">
+                                <span>💬 インナービューティー相談</span>
+                                <span class="opacity-0 transition-opacity">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI メインパネル -->
+                <div class="lg:col-span-8 p-8 min-h-[500px] flex flex-col" id="ai-panel-content">
+
+                    <!-- レシピクリエイター パネル -->
+                    <div id="panel-recipe" class="space-y-6 flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-xl text-gray-900">シンリビングフード・レシピ生成</h4>
+                            <span class="text-[10px] bg-[#C2A878]/20 border border-[#C2A878]/30 text-[#8C6D3B] px-2 py-1 rounded font-bold uppercase">S = Lᵅ × R</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">冷蔵庫にある食材を選ぶだけで、食物繊維を腸まで届け、発酵の力で指数的に効果を高めるオリジナルレシピをご提案します。</p>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">1. ベースとなる食材を選択 (複数可):</span>
+                            <div class="flex flex-wrap gap-2" id="ingredient-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="アボカド">🥑 アボカド</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="ビーツ">💖 ビーツ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="塩麹">🍶 塩麹</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="スピルリナ">🌿 スピルリナ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="ローカカオ">🍫 ローカカオ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="生アーモンド">🥜 生アーモンド</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="甘酒">🌾 甘酒</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium transition-colors border border-transparent" data-val="醤油麹">🥢 醤油麹</button>
+                                <!-- ★ ナッツフリーボタンを追加 ★ -->
+                                <button class="pill bg-red-50 hover:bg-red-100 text-red-700 text-xs px-4 py-2 rounded-full font-bold transition-colors border border-red-200" data-val="ナッツフリー(カシューナッツ等不使用)">🚫 ナッツフリー</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-2">その他に加えたい食材 (任意):</span>
+                            <input type="text" id="recipe-custom-ingredients" placeholder="例: レモン, 生姜, セロリ" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A635D]/50 text-sm bg-gray-50">
+                        </div>
+
+                        <button id="generate-recipe-btn" class="w-full bg-[#4A635D] hover:bg-[#384C47] text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-transform transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <span>レシピを生成する</span>
+                            <span class="animate-pulse">✨</span>
+                        </button>
+
+                        <!-- 生成結果エリア -->
+                        <div id="recipe-output" class="hidden mt-8 bg-white border border-[#C2A878]/30 shadow-sm p-6 rounded-xl space-y-5">
+                            <div class="flex justify-between items-center border-b pb-4">
+                                <h5 class="font-bold text-xl" id="recipe-out-title">...</h5>
+                                <span class="text-xs bg-gray-100 px-3 py-1.5 rounded-full" id="recipe-out-time">...</span>
+                            </div>
+                            <div class="text-sm text-[#4A635D] bg-[#4A635D]/5 p-4 rounded-lg" id="recipe-out-concept">...</div>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-2" id="recipe-out-ingredients"></ul>
+                        </div>
+                    </div>
+
+                    <!-- チャット相談 パネル -->
+                    <div id="panel-chat" class="space-y-6 hidden flex-col h-full">
+                        <h4 class="font-bold text-xl text-gray-900">安藤千英AI インナービューティー相談</h4>
+                        <div class="border border-gray-200 rounded-xl bg-gray-50 p-4 h-[300px] overflow-y-auto flex-1" id="chat-box">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-[#4A635D] text-white flex items-center justify-center font-bold text-xs">AI</div>
+                                <div class="bg-white p-3 rounded-2xl text-sm text-gray-700">
+                                    こんにちは。&LAB TOKYOのAIアシスタントです。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="chat-input" placeholder="質問を入力..." class="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50">
+                            <button id="chat-send-btn" class="bg-[#4A635D] text-white px-6 py-3 rounded-xl font-bold text-sm">送信</button>
+                        </div>
+                    </div>
+
+                    <!-- エラー -->
+                    <div id="ai-error" class="hidden bg-red-50 border border-red-200 p-4 rounded-xl text-center">
+                        <p class="text-sm text-red-600 font-bold mb-1">⚠️ エラーが発生しました</p>
+                        <p class="text-xs text-red-500" id="ai-error-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabRecipeBtn = document.getElementById('tab-recipe-btn');
+            const tabChatBtn = document.getElementById('tab-chat-btn');
+            const panelRecipe = document.getElementById('panel-recipe');
+            const panelChat = document.getElementById('panel-chat');
+
+            tabRecipeBtn.addEventListener('click', () => {
+                panelRecipe.classList.remove('hidden');
+                panelChat.classList.add('hidden');
+            });
+
+            tabChatBtn.addEventListener('click', () => {
+                panelRecipe.classList.add('hidden');
+                panelChat.classList.remove('hidden');
+            });
+
+            // 食材ピルの選択
+            const selectedIngredients = new Set();
+            document.querySelectorAll('#ingredient-pills .pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const value = pill.getAttribute('data-val');
+                    const isNutFree = value.includes("ナッツフリー");
+
+                    if (selectedIngredients.has(value)) {
+                        selectedIngredients.delete(value);
+                        if (isNutFree) {
+                            pill.className = "pill bg-red-50 hover:bg-red-100 text-red-700 text-xs px-4 py-2 rounded-full font-bold border border-red-200";
+                        } else {
+                            pill.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                        }
+                    } else {
+                        selectedIngredients.add(value);
+                        if (isNutFree) {
+                            pill.className = "pill bg-red-600 text-white text-xs px-4 py-2 rounded-full font-bold shadow-inner";
+                        } else {
+                            pill.className = "pill bg-[#4A635D] text-white text-xs px-4 py-2 rounded-full font-bold shadow-inner";
+                        }
+                    }
+                });
+            });
+
+            // Gemini API設定（フロントエンドから直接叩く仕様）
+            // Vercel 環境変数より取得：VITE_GEMINI_API_KEY
+            let apiKey = import.meta.env.VITE_GEMINI_API_KEY || window.GEMINI_API_KEY || "";
+            const MODEL_NAME = "gemini-2.5-flash";
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+
+            async function callGeminiApi(payload) {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            }
+
+            // レシピ生成
+            document.getElementById('generate-recipe-btn').addEventListener('click', async () => {
+                const ingredients = Array.from(selectedIngredients);
+                const customIng = document.getElementById('recipe-custom-ingredients').value.trim();
+                if (customIng) ingredients.push(...customIng.split(/[,、\s]+/).filter(i => i.trim()));
+                if (ingredients.length === 0) ingredients.push("おまかせ");
+
+                const payload = {
+                    contents: [{ parts: [{ text: `食材: ${ingredients.join(', ')}` }] }],
+                    systemInstruction: { parts: [{ text: 'ローフードレシピを提案してください。ナッツフリー要望がある場合は豆乳やアボカドを使用してください。' }] }
+                };
+
+                try {
+                    const result = await callGeminiApi(payload);
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text || 'レシピを生成できませんでした';
+                    document.getElementById('recipe-out-title').innerText = 'レシピ完成';
+                    document.getElementById('recipe-out-concept').innerText = text;
+                    document.getElementById('recipe-output').classList.remove('hidden');
+                } catch (err) {
+                    document.getElementById('ai-error-text').innerText = err.message;
+                    document.getElementById('ai-error').classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
