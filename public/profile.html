@@ -1,22 +1,18 @@
----
-// Full profile page - Astro独立ページ (Layout不使用)
----
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chie Ando Official Profile | &LAB TOKYO</title>
-    <script src="https://cdn.tailwindcss.com" is:inline></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
 
         :root {
             --color-bg: #FDFBF7;
-            --color-primary: #4A635D; /* Spirulina Green */
-            --color-secondary: #C2A878; /* Soft Gold */
+            --color-primary: #4A635D;
+            --color-secondary: #C2A878;
             --color-accent: #E5D5B5;
             --color-text: #333333;
         }
@@ -138,9 +134,9 @@
             <div class="flex flex-col space-y-6 text-base font-medium">
                 <a href="#journey" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">人生の歩み</a>
                 <a href="#education" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">料理教室 &LAB TOKYO</a>
-                <a href="#ai-lab" class="text-[#4A635D] hover:text-[#384C47] font-bold transition-colors drawer-link">AI体験ラボ（レシピ・相談）</a>
+                <a href="#ai-lab" class="text-[#4A635D] hover:text-[#384C47] font-bold transition-colors drawer-link">AI体験ラボ</a>
                 <a href="#spirulina" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">スピルリナ LAB</a>
-                <a href="#global" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">グローバル活動とメディア</a>
+                <a href="#global" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">グローバル活動</a>
                 <div class="pt-6 border-t border-gray-100">
                     <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-[#FDFBF7] border border-[#C2A878]/30 text-[#8C6D3B] py-3 rounded-xl text-sm font-bold tracking-widest hover:bg-[#C2A878] hover:text-white transition-colors">公式サイトへ ↗</a>
                 </div>
@@ -187,7 +183,6 @@
             </div>
 
             <div class="relative timeline-line pt-8 pb-8">
-                <!-- Timeline Item 1 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
                         <span class="text-sm font-bold text-[#C2A878] tracking-widest">1973</span>
@@ -200,7 +195,6 @@
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
 
-                <!-- Timeline Item 2 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
                     <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
@@ -213,7 +207,6 @@
                     </div>
                 </div>
 
-                <!-- Timeline Item 3 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
                         <span class="text-sm font-bold text-[#4A635D] tracking-widest">Turning Point（38歳）</span>
@@ -226,7 +219,6 @@
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
 
-                <!-- Timeline Item 4 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
                     <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
@@ -239,7 +231,6 @@
                     </div>
                 </div>
 
-                <!-- Timeline Item 5 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
                         <span class="text-sm font-bold text-[#4A635D] tracking-widest">2016-2018（福岡での教室と学びの深化）</span>
@@ -252,7 +243,6 @@
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
 
-                <!-- Timeline Item 6 -->
                 <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
                     <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
@@ -265,19 +255,17 @@
                     </div>
                 </div>
 
-                <!-- Timeline Item 7 -->
                 <div class="relative flex flex-col md:flex-row items-center z-10 w-full pl-12 md:pl-0">
                     <div class="md:w-1/2 md:pr-12 md:text-right w-full">
                         <span class="text-sm font-bold text-[#4A635D] tracking-widest">Present</span>
                         <h3 class="text-xl font-bold mt-1 mb-2">グローバル展開と著書、そして「シンリビングフード」へ</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">
-                            著書『&RAW LIVING Step1 ─ ローフードの教科書』は医学博士監修のもとAmazonランキング1位を獲得し、英語版も同時リリース。Kuvings公式アンバサダーとして米国メディアでも紹介され、出版プロデュース「Creative Book Lab」やワインパミスのアップサイクル事業など、教育・ブランディング・サステナビリティを統合する活動を続ける。現在は、ローフードと日本の発酵文化を組み合わせた新しい食のあり方「シンリビングフード」を提唱している。
+                            著書『&RAW LIVING Step1』はAmazonランキング1位を獲得。Kuvings公式アンバサダーとして米国メディアでも紹介され、出版プロデュース「Creative Book Lab」やワインパミスのアップサイクル事業など、教育・ブランディング・サステナビリティを統合する活動を続ける。現在は、ローフードと日本の発酵文化を組み合わせた新しい食のあり方「シンリビングフード」を提唱している。
                         </p>
                     </div>
                     <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -336,7 +324,7 @@
                     <div class="absolute top-0 right-0 w-20 h-20 bg-[#C2A878]/10 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
                     <div class="text-3xl mb-5 relative z-10">📸</div>
                     <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">魅せる人のためのクリエイティブ</h3>
-                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">バズらなくていい。理論で「選ばれる人」になる。<br>色・構図・心理学から導く、本当のブランディングが学べる講座</p>
+                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">バズらなくていい。理論で「選ばれる人」になる。色・構図・心理学から導く、本当のブランディングが学べる講座</p>
                     <ul class="text-xs space-y-2 text-gray-500 font-medium relative z-10">
                         <li class="flex items-center"><span class="w-1 h-1 bg-[#C2A878] rounded-full mr-2"></span>魅せる料理家のための講座</li>
                         <li class="flex items-center"><span class="w-1 h-1 bg-[#C2A878] rounded-full mr-2"></span>自己ブランディング構築</li>
@@ -477,12 +465,10 @@
                         <div class="space-y-3">
                             <span class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Quick Questions:</span>
                             <div class="flex flex-wrap gap-2">
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="肌荒れやくすみに効果的なローフードは何ですか？">🌿 肌荒れ・くすみに効くローフード</button>
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="腸活を始めたいのですが、まずは何から始めればいいですか？">🍵 腸活を始めるなら何から？</button>
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="疲れやすい体質を食事で整えるにはどうすればいいですか？">😴 疲れやすい体質を食で整えるには</button>
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="忙しい人でも続けられるリビングフードの習慣を教えてください。">🥗 忙しい人でもできるリビングフード習慣</button>
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="生理周期と食事の深い関係について教えてください。">🌙 生理周期と食事の関係</button>
-                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="老化を感じたとき、まず見直すべき食習慣は何ですか？">✨ 老化を感じたときに見直したい食習慣</button>
+                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="肌荒れやくすみに効果的なローフードは何ですか？">🌿 肌荒れに効くローフード</button>
+                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="腸活を始めたいのですが、まずは何から始めればいいですか？">🍵 腸活を始めるなら</button>
+                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="疲れやすい体質を食事で整えるにはどうすればいいですか？">😴 疲れやすい体質</button>
+                                <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="忙しい人でも続けられるリビングフードの習慣を教えてください。">🥗 忙しい人向けの習慣</button>
                             </div>
                         </div>
 
@@ -502,7 +488,7 @@
                     </div>
 
                     <div id="ai-error" class="hidden mt-6 bg-red-50 border border-red-200 p-4 rounded-xl text-center">
-                        <p class="text-sm text-red-600 font-bold mb-1">⚠️ 処理中にエラーが発生しました</p>
+                        <p class="text-sm text-red-600 font-bold mb-1">⚠️ エラーが発生しました</p>
                         <p class="text-xs text-red-500" id="ai-error-text"></p>
                     </div>
 
@@ -578,17 +564,17 @@
                         <a href="https://amzn.to/4fSJAqS" target="_blank" rel="noopener noreferrer" class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow block group">
                             <span class="block text-3xl font-bold text-[#4A635D] mb-1 group-hover:text-[#384C47] transition-colors">Amazon #1</span>
                             <span class="text-xs font-bold text-gray-500 tracking-wide uppercase">『&RAW LIVING Step1』</span>
-                            <p class="text-[10px] text-gray-400 mt-2">栄養科学・食品科学部門 1位獲得<br><span class="text-[#C2A878] mt-1 inline-block font-bold">書籍をチェック ↗</span></p>
+                            <p class="text-[10px] text-gray-400 mt-2">栄養科学・食品科学部門 1位<br><span class="text-[#C2A878] mt-1 inline-block font-bold">書籍をチェック ↗</span></p>
                         </a>
                         <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
                             <span class="block text-3xl font-bold text-[#C2A878] mb-1">CBS / FOX</span>
                             <span class="text-xs font-bold text-gray-500 tracking-wide uppercase">US Media Features</span>
-                            <p class="text-[10px] text-gray-400 mt-2">Kuvingsアンバサダーとしての活動特集</p>
+                            <p class="text-[10px] text-gray-400 mt-2">Kuvingsアンバサダー活動特集</p>
                         </div>
                         <div class="col-span-2 p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
                             <span class="block text-xl font-bold text-gray-800 mb-1">出版プロデューサー</span>
                             <span class="text-xs font-bold text-gray-500 tracking-wide uppercase">Creative Book Lab 主宰</span>
-                            <p class="text-xs text-gray-600 mt-2 leading-relaxed">自身のベストセラー経験を活かし、食やウェルネス分野で活躍する専門家の商業出版・電子書籍出版をトータルプロデュース。「選ばれる人」になるための、書籍を通じた権威性構築とブランディングを支援しています。</p>
+                            <p class="text-xs text-gray-600 mt-2 leading-relaxed">自身のベストセラー経験を活かし、食やウェルネス分野で活躍する専門家の商業出版・電子書籍出版をトータルプロデュース。</p>
                         </div>
                     </div>
                 </div>
@@ -599,22 +585,22 @@
                         <li class="flex items-start">
                             <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
                             <div>
-                                <h5 class="font-bold text-sm text-gray-900">Kuvings (クビンス) 公式アンバサダー</h5>
-                                <p class="text-xs text-gray-500 mt-1">最新スロージューサー「AUTO10」等のレシピ開発・海外発信</p>
+                                <h5 class="font-bold text-sm text-gray-900">Kuvings 公式アンバサダー</h5>
+                                <p class="text-xs text-gray-500 mt-1">最新スロージューサーのレシピ開発・海外発信</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
                             <div>
                                 <h5 class="font-bold text-sm text-gray-900">ELLE gourmet 公認料理家</h5>
-                                <p class="text-xs text-gray-500 mt-1">フードクリエイター部メンバーとしてレシピ提案</p>
+                                <p class="text-xs text-gray-500 mt-1">フードクリエイター部メンバー</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
                             <div>
                                 <h5 class="font-bold text-sm text-gray-900">スピルリナLAB 主催</h5>
-                                <p class="text-xs text-gray-500 mt-1">スーパーフード「スピルリナ」のリビングフードレシピ開発・発信</p>
+                                <p class="text-xs text-gray-500 mt-1">スーパーフードレシピ開発・発信</p>
                             </div>
                         </li>
                     </ul>
@@ -648,9 +634,9 @@
         </div>
     </footer>
 
-    <script is:inline>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // モバイルメニューの制御
+            // モバイルメニュー制御
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileDrawer = document.getElementById('mobile-drawer');
             const drawerContent = document.getElementById('drawer-content');
@@ -693,7 +679,7 @@
                 });
             });
 
-            // スクロールフェードイン
+            // セクションフェードイン
             const observerOptions = { threshold: 0.15 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -709,9 +695,7 @@
                 observer.observe(section);
             });
 
-            // ==========================================
-            // AI ラボ UI 制御
-            // ==========================================
+            // AI Lab UI制御
             const tabRecipeBtn = document.getElementById('tab-recipe-btn');
             const tabChatBtn = document.getElementById('tab-chat-btn');
             const panelRecipe = document.getElementById('panel-recipe');
@@ -739,7 +723,7 @@
                 tabRecipeBtn.querySelector('span:last-child').style.opacity = '0';
             });
 
-            // 食材ピルの選択制御
+            // 食材ピル選択
             const selectedIngredients = new Set();
             document.querySelectorAll('#ingredient-pills .pill').forEach(pill => {
                 pill.addEventListener('click', () => {
@@ -754,9 +738,7 @@
                 });
             });
 
-            // ==========================================
-            // Gemini API 連携（/api/gemini プロキシ経由）
-            // ==========================================
+            // Gemini API（/api/geminiプロキシ経由）
             const API_URL = '/api/gemini';
 
             async function callGeminiApi(payload) {
@@ -785,7 +767,7 @@
                 }
             }
 
-            // 1. レシピクリエイター
+            // レシピ生成
             const recipeBtn = document.getElementById('generate-recipe-btn');
             const recipeOutput = document.getElementById('recipe-output');
             const loadingIndicator = document.getElementById('ai-loading');
@@ -817,16 +799,8 @@
                 loadingIndicator.classList.remove('hidden');
                 loadingIndicator.classList.add('flex');
 
-                const systemPrompt = `あなたは&LAB TOKYOのリビングフードシェフです。
-安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の理論に従い、レシピをJSONで返してください。
-
-【レシピの原則】
-1. 48℃以上の加熱をしない。
-2. 砂糖・乳製品・肉魚・小麦粉は不使用。
-3. 甘味料は「メープルシロップ」のみ。「アガベシロップ」は絶対に使用しない。
-4. 麹・発酵食材を積極的に組み合わせること。
-5. スピルリナや旬の野菜を自然に取り入れ、見た目も美しくすること。`;
-
+                const systemPrompt = `あなたは&LAB TOKYOのリビングフードシェフです。「シンリビングフード（S = Lᵅ × R）」の理論に従い、レシピをJSONで返してください。
+【原則】1. 48℃以上の加熱をしない 2. 砂糖・乳製品・肉魚・小麦粉不使用 3. 甘味料は「メープルシロップ」を使用（アガベは絶対禁止） 4. 麹・発酵食材を積極的に組み合わせ 5. スピルリナや旬の野菜を自然に取り入れ`;
                 const userPrompt = `材料: ${currentIngredients.join(', ')}\n目的: ${goal}`;
 
                 const payload = {
@@ -876,7 +850,7 @@
                 }
             });
 
-            // 2. チャット相談
+            // チャット
             const chatBox = document.getElementById('chat-box');
             const chatInput = document.getElementById('chat-input');
             const chatSendBtn = document.getElementById('chat-send-btn');
@@ -891,7 +865,7 @@
                 if (sender === 'user') {
                     avatarHTML = `<div class="w-8 h-8 rounded-full bg-[#C2A878] text-white flex items-center justify-center font-bold text-xs shrink-0 order-2 shadow">ME</div>`;
                     bubbleClass = "bg-[#C2A878] text-white rounded-tr-none shadow-sm order-1";
-                } else if (sender === 'ai') {
+                } else {
                     avatarHTML = `<div class="w-8 h-8 rounded-full bg-[#4A635D] text-white flex items-center justify-center font-bold text-xs shrink-0 order-1 shadow">AI</div>`;
                     bubbleClass = "bg-white text-gray-700 rounded-tl-none shadow-sm border border-gray-100 order-2";
                 }
@@ -911,13 +885,7 @@
                 const typingMsg = addMessage('ai', '思考中...');
                 typingMsg.id = 'typing-indicator';
 
-                const systemPrompt = `あなたは&LAB TOKYOのAIアシスタントです。
-安藤千英が提唱する「シンリビングフード（S = Lᵅ × R）」の哲学に基づいて、インナービューティーと食について的確にアドバイスしてください。
-
-【回答のスタンス】
-- 純粋にリビングフード・発酵食の専門家として答えてください。
-- エレガントで知的なトーン。押しつけがましくなく。
-- 安藤千英の個人的な経歴は、ユーザーから直接質問された場合のみ答えてください。`;
+                const systemPrompt = `あなたは&LAB TOKYOのAIアシスタントです。「シンリビングフード（S = Lᵅ × R）」に基づいてアドバイスしてください。安藤千英の個人的な経歴は、直接質問された場合のみ答えてください。`;
 
                 const payload = {
                     contents: [{ parts: [{ text: message }] }],
