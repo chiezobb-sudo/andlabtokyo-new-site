@@ -741,6 +741,40 @@
             // Gemini API（/api/geminiプロキシ経由）
             const API_URL = '/api/gemini';
 
+            // 1日3回の使用回数制限
+            const DAILY_LIMIT = 3;
+            const STORAGE_KEY = 'andlab_ai_usage';
+
+            function getDailyUsageCount() {
+                const today = new Date().toISOString().split('T')[0];
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (!stored) return { date: today, count: 0 };
+
+                const data = JSON.parse(stored);
+                if (data.date !== today) {
+                    return { date: today, count: 0 };
+                }
+                return data;
+            }
+
+            function incrementUsageCount() {
+                const today = new Date().toISOString().split('T')[0];
+                const data = getDailyUsageCount();
+                const updated = { date: today, count: data.count + 1 };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+                return updated.count;
+            }
+
+            function canUseAI() {
+                const data = getDailyUsageCount();
+                return data.count < DAILY_LIMIT;
+            }
+
+            function getRemainingRequests() {
+                const data = getDailyUsageCount();
+                return Math.max(0, DAILY_LIMIT - data.count);
+            }
+
             async function callGeminiApi(payload) {
                 let attempt = 0;
                 const maxAttempts = 3;
@@ -786,7 +820,23 @@
                 required: ["recipeName", "prepTime", "concept", "ingredients", "instructions"]
             };
 
+            const updateRecipeButtonState = () => {
+                const isDisabled = !canUseAI();
+                recipeBtn.disabled = isDisabled;
+                recipeBtn.style.opacity = isDisabled ? '0.5' : '1';
+                recipeBtn.style.pointerEvents = isDisabled ? 'none' : 'auto';
+            };
+
             recipeBtn.addEventListener('click', async () => {
+                // 使用回数チェック
+                if (!canUseAI()) {
+                    errorIndicator.classList.remove('hidden');
+                    errorText.innerText = `本日の使用回数に達しました。1日3回まで使用できます。明日以降にお試しください。`;
+                    recipeOutput.classList.add('hidden');
+                    loadingIndicator.classList.add('hidden');
+                    return;
+                }
+
                 const customIng = document.getElementById('recipe-custom-ingredients').value.trim();
                 const goal = document.getElementById('recipe-goal').value;
 
@@ -819,9 +869,13 @@
 
                     const data = JSON.parse(text);
 
+                    // 成功時に使用回数をカウント
+                    const newCount = incrementUsageCount();
+                    const remaining = getRemainingRequests();
+
                     document.getElementById('recipe-out-title').innerText = data.recipeName;
                     document.getElementById('recipe-out-time').innerText = "⏱️ " + data.prepTime;
-                    document.getElementById('recipe-out-concept').innerText = data.concept;
+                    document.getElementById('recipe-out-concept').innerText = `${data.concept}\n\n【残り使用回数: ${remaining}回】`;
 
                     const ul = document.getElementById('recipe-out-ingredients');
                     ul.innerHTML = "";
@@ -842,11 +896,13 @@
                     loadingIndicator.classList.add('hidden');
                     loadingIndicator.classList.remove('flex');
                     recipeOutput.classList.remove('hidden');
+                    updateRecipeButtonState();
                 } catch (err) {
                     loadingIndicator.classList.add('hidden');
                     loadingIndicator.classList.remove('flex');
                     errorIndicator.classList.remove('hidden');
                     errorText.innerText = err.message;
+                    updateRecipeButtonState();
                 }
             });
 
@@ -879,6 +935,12 @@
             const handleChat = async (message) => {
                 if (!message) return;
 
+                // 使用回数チェック
+                if (!canUseAI()) {
+                    addMessage('ai', `申し訳ありません。本日の使用回数に達しました。1日3回まで使用できます。明日以降にお試しください。`);
+                    return;
+                }
+
                 addMessage('user', message);
                 chatInput.value = "";
 
@@ -897,20 +959,59 @@
                     const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     document.getElementById('typing-indicator').remove();
 
-                    if (text) addMessage('ai', text);
+                    if (text) {
+                        // 成功時に使用回数をカウント
+                        const remaining = getRemainingRequests() - 1; // -1は次のカウント後の残数
+                        incrementUsageCount();
+
+                        let displayText = text;
+                        if (remaining > 0) {
+                            displayText += `\n\n【本日の残り使用回数: ${remaining}回】`;
+                        } else {
+                            displayText += `\n\n【本日の使用回数が終了しました。明日以降にお試しください。】`;
+                        }
+                        addMessage('ai', displayText);
+                    }
                 } catch (err) {
                     document.getElementById('typing-indicator').remove();
                     addMessage('ai', "申し訳ありません、現在通信が混み合っています。少し時間をおいて再度お試しください。");
                 }
             };
 
-            chatSendBtn.addEventListener('click', () => handleChat(chatInput.value.trim()));
+            const updateChatButtonsState = () => {
+                const isDisabled = !canUseAI();
+                chatSendBtn.disabled = isDisabled;
+                chatInput.disabled = isDisabled;
+                chatSendBtn.style.opacity = isDisabled ? '0.5' : '1';
+                chatInput.style.opacity = isDisabled ? '0.5' : '1';
+
+                document.querySelectorAll('.chat-shortcut').forEach(btn => {
+                    btn.disabled = isDisabled;
+                    btn.style.opacity = isDisabled ? '0.5' : '1';
+                    btn.style.pointerEvents = isDisabled ? 'none' : 'auto';
+                });
+            };
+
+            chatSendBtn.addEventListener('click', () => {
+                handleChat(chatInput.value.trim());
+                updateChatButtonsState();
+            });
             chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleChat(chatInput.value.trim());
+                if (e.key === 'Enter') {
+                    handleChat(chatInput.value.trim());
+                    updateChatButtonsState();
+                }
             });
             document.querySelectorAll('.chat-shortcut').forEach(btn => {
-                btn.addEventListener('click', () => handleChat(btn.getAttribute('data-msg')));
+                btn.addEventListener('click', () => {
+                    handleChat(btn.getAttribute('data-msg'));
+                    updateChatButtonsState();
+                });
             });
+
+            // 初期状態のボタン状態を設定
+            updateChatButtonsState();
+            updateRecipeButtonState();
 
         });
     </script>
