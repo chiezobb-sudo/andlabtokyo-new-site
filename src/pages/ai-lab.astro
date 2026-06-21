@@ -1,0 +1,540 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Living Food AI Lab | &LAB TOKYO" description="安藤千英のリビングフード哲学をAIで体験。レシピ生成・インナービューティー相談。">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+  .ai-page {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #FDFBF7;
+    color: #333333;
+  }
+
+  .ai-page h1, .ai-page h2, .ai-page h3, .ai-page h4 {
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .back-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #f0ede8;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #5C5C58;
+    text-decoration: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: #1C1C1A; }
+
+  .usage-badge {
+    margin-left: auto;
+    font-size: 11px;
+    color: #6E6E6A;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .usage-badge span {
+    font-weight: 700;
+    color: #C6A15B;
+  }
+
+  .limit-reached {
+    display: none;
+    background: #fff8f0;
+    border: 1px solid #f0d9b0;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .limit-reached p {
+    font-size: 14px;
+    color: #6E6E6A;
+    line-height: 1.8;
+  }
+
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+  }
+
+  .spinner {
+    border: 3px solid rgba(107, 122, 92, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #6B7A5C;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .pill.selected {
+    background-color: #6B7A5C;
+    color: white;
+    font-weight: 700;
+  }
+
+  .chat-bubble-ai {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    border-top-left-radius: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .chat-bubble-user {
+    background: #C2A878;
+    color: white;
+    border-radius: 1rem;
+    border-top-right-radius: 0;
+  }
+</style>
+
+<div class="ai-page">
+
+  <!-- 戻るバー -->
+  <div class="back-bar">
+    <a href="/" class="back-link">
+      ← &LAB TOKYO トップへ
+    </a>
+    <div class="usage-badge" id="usageBadge">本日の残り利用回数：<span id="remainCount">3</span> / 3</div>
+  </div>
+
+  <!-- ヒーロー -->
+  <section class="relative pt-24 pb-16 px-4 bg-gradient-to-b from-[#F9F7F2] to-white overflow-hidden min-h-[60vh] flex items-center">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-5 bg-white/80 border border-[#C2A878]/40 text-[#C2A878] text-xs font-bold tracking-widest rounded-full">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        POWERED BY GEMINI AI
+      </div>
+      <h1 class="text-3xl md:text-5xl font-bold mb-5 leading-tight text-gray-900">
+        Living Food <span class="text-[#6B7A5C] italic">AI Lab</span>
+      </h1>
+      <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-xl mx-auto">
+        安藤千英の「48℃以下の酵素栄養学」「美肌・再生レシピ」「発酵食理論」を学習したAI。<br>
+        手元の食材からリビングフードレシピを生成したり、インナービューティーの悩みを相談できます。
+      </p>
+    </div>
+    <div class="absolute -right-20 -top-20 w-96 h-96 bg-[#6B7A5C]/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-20 bottom-0 w-80 h-80 bg-[#C2A878]/5 rounded-full blur-3xl pointer-events-none"></div>
+  </section>
+
+  <!-- AIラボ本体 -->
+  <section class="py-12 px-4 bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+
+        <!-- サイドナビ -->
+        <div class="lg:col-span-4 bg-gray-50 p-7 border-r border-gray-200 flex flex-col justify-between">
+          <div>
+            <h3 class="font-bold text-base text-gray-900 mb-5 border-b border-gray-200 pb-3">AI ラボ機能</h3>
+            <div class="flex flex-col space-y-3" id="aiTabs">
+              <button id="tabRecipeBtn" class="tab-btn active-tab text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between bg-[#6B7A5C] text-white shadow-md">
+                <span>🥗 AI レシピ生成</span><span>→</span>
+              </button>
+              <button id="tabChatBtn" class="tab-btn text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between bg-white text-gray-600 border border-gray-200 hover:bg-gray-100">
+                <span>💬 相談室 (Chat)</span><span class="opacity-0">→</span>
+              </button>
+            </div>
+          </div>
+          <div class="mt-8 pt-5 border-t border-gray-200">
+            <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg text-xs text-amber-800 leading-relaxed font-medium">
+              1日3回まで無料でご利用いただけます。翌日リセットされます。
+            </div>
+          </div>
+        </div>
+
+        <!-- メインパネル -->
+        <div class="lg:col-span-8 p-7 min-h-[520px] flex flex-col" id="aiPanelContent">
+
+          <!-- レシピパネル -->
+          <div id="panelRecipe" class="space-y-5 flex-1">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-gray-900">リビングフード・レシピクリエイター</h4>
+              <span class="text-[10px] bg-[#8C4356]/10 border border-[#8C4356]/20 text-[#8C4356] px-2 py-1 rounded font-bold">Sugar / Dairy Free</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">食材を選ぶだけで、酵素を壊さない「ローフード×発酵」のレシピをご提案します。</p>
+
+            <div>
+              <span class="block text-xs font-bold text-gray-700 mb-2">1. 食材を選択（複数可）</span>
+              <div class="flex flex-wrap gap-2" id="ingredientPills">
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="アボカド">🥑 アボカド</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="ビーツ">💖 ビーツ</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="塩麹">🍶 塩麹</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="スピルリナ">🌿 スピルリナ</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="ローカカオ">🍫 ローカカオ</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="生アーモンド">🥜 生アーモンド</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="にんじん">🥕 にんじん</button>
+                <button class="pill text-xs px-4 py-2 rounded-full font-medium transition-colors bg-gray-100 hover:bg-gray-200" data-val="甘酒">🌾 甘酒</button>
+              </div>
+            </div>
+
+            <div>
+              <span class="block text-xs font-bold text-gray-700 mb-1">その他の食材（任意）</span>
+              <input type="text" id="recipeCustom" placeholder="例: レモン, 生姜, セロリ" class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#6B7A5C]/40" />
+            </div>
+
+            <div>
+              <span class="block text-xs font-bold text-gray-700 mb-1">2. 目的を選択</span>
+              <select id="recipeGoal" class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#6B7A5C]/40">
+                <option>細胞の再生と肌のアンチエイジング</option>
+                <option>麹・発酵を取り入れた強力な腸活</option>
+                <option>疲労回復とエネルギーチャージ</option>
+                <option>抗酸化作用によるデトックス</option>
+              </select>
+            </div>
+
+            <button id="generateRecipeBtn" class="w-full bg-[#8C4356] hover:bg-[#733646] disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-all flex items-center justify-center gap-2">
+              <span>レシピを生成する</span><span class="animate-pulse">✨</span>
+            </button>
+
+            <div id="limitMsgRecipe" class="limit-reached">
+              <p>本日の利用回数（3回）に達しました。<br>明日またお試しください。</p>
+            </div>
+
+            <div id="recipeOutput" class="hidden mt-4 bg-white border border-[#C2A878]/30 shadow-sm p-6 rounded-xl space-y-4">
+              <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 pb-3 gap-2">
+                <h5 class="font-bold text-lg text-gray-900" id="recipeOutTitle"></h5>
+                <span class="text-xs bg-gray-100 text-gray-600 font-bold px-3 py-1 rounded-full w-max" id="recipeOutTime"></span>
+              </div>
+              <div class="text-sm text-[#6B7A5C] bg-[#6B7A5C]/5 p-4 rounded-lg italic font-medium" id="recipeOutConcept"></div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1">
+                <div class="md:col-span-1">
+                  <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Ingredients</h6>
+                  <ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5" id="recipeOutIngredients"></ul>
+                </div>
+                <div class="md:col-span-2">
+                  <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Steps</h6>
+                  <ol class="list-decimal list-inside text-sm text-gray-700 space-y-2" id="recipeOutSteps"></ol>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-gray-100">
+                <h6 class="text-xs font-bold text-[#8C4356] uppercase tracking-widest mb-1">Benefit</h6>
+                <p class="text-sm text-gray-600 leading-relaxed" id="recipeOutBenefit"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- チャットパネル -->
+          <div id="panelChat" class="hidden flex-col space-y-4 h-full">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-lg text-gray-900">インナービューティー相談室</h4>
+              <span class="text-[10px] bg-blue-100 text-blue-800 border border-blue-200 px-2 py-1 rounded font-bold">AI Assistant</span>
+            </div>
+            <p class="text-xs text-gray-500 leading-relaxed">安藤千英の書籍・哲学・発酵×ローフード理論をもとに、食と美についてお答えします。</p>
+
+            <div class="border border-gray-200 rounded-xl bg-gray-50 p-4 h-72 overflow-y-auto space-y-3 shadow-inner" id="chatBox">
+              <div class="flex items-start gap-2">
+                <div class="w-7 h-7 rounded-full bg-[#6B7A5C] text-white flex items-center justify-center font-bold text-[10px] shrink-0 shadow">AI</div>
+                <div class="chat-bubble-ai p-3 max-w-[85%]">
+                  <p class="text-sm text-gray-700 leading-relaxed">こんにちは。安藤千英の哲学を学習したAIアシスタントです。お肌の悩み、ローフードの始め方など、何でもご相談ください。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 transition-colors" data-msg="肌荒れやくすみに効果的なローフードは何ですか？">🌿 肌荒れ・くすみに効くローフード</button>
+              <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 transition-colors" data-msg="腸活を始めたいのですが、まずは何から始めればいいですか？">🍵 腸活を始めるなら何から？</button>
+              <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 transition-colors" data-msg="疲れやすい体質を食事で整えるにはどうすればいいですか？">😴 疲れやすい体質を整えるには</button>
+              <button class="chat-shortcut text-xs bg-white hover:bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full text-gray-600 transition-colors" data-msg="忙しい人でも続けられるリビングフードの習慣を教えてください。">🥗 忙しい人のリビングフード習慣</button>
+            </div>
+
+            <div id="limitMsgChat" class="limit-reached">
+              <p>本日の利用回数（3回）に達しました。<br>明日またお試しください。</p>
+            </div>
+
+            <div class="flex gap-2">
+              <input type="text" id="chatInput" placeholder="質問を入力..." class="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#6B7A5C]/40" />
+              <button id="chatSendBtn" class="bg-[#6B7A5C] hover:bg-[#58644A] disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-5 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm flex items-center gap-1.5">
+                送信
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ローディング -->
+          <div id="aiLoading" class="hidden items-center justify-center py-12 space-y-3">
+            <div class="spinner"></div>
+            <p class="text-sm text-[#6B7A5C] font-bold tracking-widest">Generating...</p>
+          </div>
+
+          <!-- エラー -->
+          <div id="aiError" class="hidden mt-4 bg-red-50 border border-red-200 p-4 rounded-xl text-center">
+            <p class="text-sm text-red-600 font-bold mb-1">⚠️ エラーが発生しました</p>
+            <p class="text-xs text-red-500" id="aiErrorText"></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="py-10 px-4 bg-[#1C1C1A] text-center">
+    <p class="text-xs text-gray-500 tracking-widest">
+      &copy; &LAB TOKYO — <a href="/" class="text-[#C2A878] hover:underline">andlabtokyo.com</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  // ===== 利用回数管理（1日3回） =====
+  const LIMIT = 3;
+  const LS_KEY = 'andlab_ai_usage';
+
+  function getUsage() {
+    const today = new Date().toISOString().slice(0, 10);
+    try {
+      const stored = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+      if (stored.date !== today) return { date: today, count: 0 };
+      return stored;
+    } catch {
+      return { date: today, count: 0 };
+    }
+  }
+
+  function incrementUsage() {
+    const usage = getUsage();
+    usage.count += 1;
+    localStorage.setItem(LS_KEY, JSON.stringify(usage));
+    return usage.count;
+  }
+
+  function getRemainingCount() {
+    return Math.max(0, LIMIT - getUsage().count);
+  }
+
+  function updateUsageBadge() {
+    const remain = getRemainingCount();
+    const el = document.getElementById('remainCount');
+    if (el) el.textContent = String(remain);
+  }
+
+  function isLimitReached() {
+    return getUsage().count >= LIMIT;
+  }
+
+  function applyLimitState() {
+    const reached = isLimitReached();
+    const recipeBtn = document.getElementById('generateRecipeBtn') as HTMLButtonElement;
+    const chatBtn = document.getElementById('chatSendBtn') as HTMLButtonElement;
+    const limitRecipe = document.getElementById('limitMsgRecipe');
+    const limitChat = document.getElementById('limitMsgChat');
+
+    if (recipeBtn) recipeBtn.disabled = reached;
+    if (chatBtn) chatBtn.disabled = reached;
+    if (limitRecipe) limitRecipe.style.display = reached ? 'block' : 'none';
+    if (limitChat) limitChat.style.display = reached ? 'block' : 'none';
+    updateUsageBadge();
+  }
+
+  // ===== API呼び出し =====
+  async function callApi(payload: object) {
+    const res = await fetch('/api/gemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }
+
+  // ===== タブ切替 =====
+  const activeClass = 'bg-[#6B7A5C] text-white shadow-md';
+  const inactiveClass = 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-100';
+
+  document.getElementById('tabRecipeBtn')?.addEventListener('click', () => {
+    document.getElementById('panelRecipe')?.classList.remove('hidden');
+    document.getElementById('panelChat')?.classList.add('hidden');
+    document.getElementById('tabRecipeBtn')!.className = `tab-btn text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between ${activeClass}`;
+    document.getElementById('tabChatBtn')!.className = `tab-btn text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between ${inactiveClass}`;
+  });
+
+  document.getElementById('tabChatBtn')?.addEventListener('click', () => {
+    document.getElementById('panelRecipe')?.classList.add('hidden');
+    const chat = document.getElementById('panelChat');
+    if (chat) { chat.classList.remove('hidden'); chat.classList.add('flex'); }
+    document.getElementById('tabChatBtn')!.className = `tab-btn text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between ${activeClass}`;
+    document.getElementById('tabRecipeBtn')!.className = `tab-btn text-left w-full p-4 rounded-xl font-bold text-sm flex items-center justify-between ${inactiveClass}`;
+  });
+
+  // ===== 食材ピル =====
+  const selectedIngredients = new Set<string>();
+  document.querySelectorAll('#ingredientPills .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const val = pill.getAttribute('data-val')!;
+      if (selectedIngredients.has(val)) {
+        selectedIngredients.delete(val);
+        pill.classList.remove('selected');
+      } else {
+        selectedIngredients.add(val);
+        pill.classList.add('selected');
+      }
+    });
+  });
+
+  // ===== レシピ生成 =====
+  const recipeSchema = {
+    type: 'OBJECT',
+    properties: {
+      recipeName: { type: 'STRING' },
+      prepTime: { type: 'STRING' },
+      concept: { type: 'STRING' },
+      ingredients: { type: 'ARRAY', items: { type: 'STRING' } },
+      instructions: { type: 'ARRAY', items: { type: 'STRING' } },
+      benefit: { type: 'STRING' },
+    },
+    required: ['recipeName', 'prepTime', 'concept', 'ingredients', 'instructions', 'benefit'],
+  };
+
+  document.getElementById('generateRecipeBtn')?.addEventListener('click', async () => {
+    if (isLimitReached()) return;
+
+    const custom = (document.getElementById('recipeCustom') as HTMLInputElement).value.trim();
+    const goal = (document.getElementById('recipeGoal') as HTMLSelectElement).value;
+    const ings = [...selectedIngredients];
+    if (custom) ings.push(...custom.split(',').map(s => s.trim()).filter(Boolean));
+    if (ings.length === 0) ings.push('おまかせ');
+
+    document.getElementById('recipeOutput')?.classList.add('hidden');
+    document.getElementById('aiError')?.classList.add('hidden');
+    const loading = document.getElementById('aiLoading')!;
+    loading.classList.remove('hidden');
+    loading.classList.add('flex');
+
+    try {
+      const result = await callApi({
+        contents: [{ parts: [{ text: `材料: ${ings.join(', ')}\n目的: ${goal}` }] }],
+        systemInstruction: { parts: [{ text: `あなたは安藤千英のAIフードサイエンティストです。以下のルールに従いレシピをJSONで返してください：1. 48℃以上加熱しない（酵素保護）。2. 砂糖・乳製品・肉魚・小麦粉不使用。3. 美しく見た目も意識。` }] },
+        generationConfig: { responseMimeType: 'application/json', responseSchema: recipeSchema },
+      });
+
+      const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error('応答データが不正です');
+      const data = JSON.parse(text);
+
+      document.getElementById('recipeOutTitle')!.textContent = data.recipeName;
+      document.getElementById('recipeOutTime')!.textContent = '⏱️ ' + data.prepTime;
+      document.getElementById('recipeOutConcept')!.textContent = data.concept;
+
+      const ul = document.getElementById('recipeOutIngredients')!;
+      ul.innerHTML = '';
+      data.ingredients.forEach((i: string) => {
+        const li = document.createElement('li'); li.textContent = i; ul.appendChild(li);
+      });
+
+      const ol = document.getElementById('recipeOutSteps')!;
+      ol.innerHTML = '';
+      data.instructions.forEach((s: string) => {
+        const li = document.createElement('li'); li.textContent = s; ol.appendChild(li);
+      });
+
+      document.getElementById('recipeOutBenefit')!.textContent = data.benefit;
+
+      incrementUsage();
+      applyLimitState();
+
+      loading.classList.add('hidden');
+      loading.classList.remove('flex');
+      document.getElementById('recipeOutput')?.classList.remove('hidden');
+    } catch (err: any) {
+      loading.classList.add('hidden');
+      loading.classList.remove('flex');
+      document.getElementById('aiError')?.classList.remove('hidden');
+      document.getElementById('aiErrorText')!.textContent = err.message;
+    }
+  });
+
+  // ===== チャット =====
+  function addChatMessage(sender: 'user' | 'ai', text: string) {
+    const box = document.getElementById('chatBox')!;
+    const div = document.createElement('div');
+    div.className = `flex items-start gap-2 ${sender === 'user' ? 'justify-end' : ''}`;
+
+    if (sender === 'ai') {
+      div.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-[#6B7A5C] text-white flex items-center justify-center font-bold text-[10px] shrink-0 shadow">AI</div>
+        <div class="chat-bubble-ai p-3 max-w-[85%]"><p class="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">${text}</p></div>
+      `;
+    } else {
+      div.innerHTML = `
+        <div class="chat-bubble-user p-3 max-w-[85%] order-1"><p class="text-sm leading-relaxed">${text}</p></div>
+        <div class="w-7 h-7 rounded-full bg-[#C2A878] text-white flex items-center justify-center font-bold text-[10px] shrink-0 shadow order-2">ME</div>
+      `;
+    }
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+  }
+
+  async function handleChat(message: string) {
+    if (!message.trim() || isLimitReached()) return;
+    (document.getElementById('chatInput') as HTMLInputElement).value = '';
+    addChatMessage('user', message);
+    const typing = addChatMessage('ai', '思考中...');
+
+    try {
+      const result = await callApi({
+        contents: [{ parts: [{ text: message }] }],
+        systemInstruction: { parts: [{ text: `あなたは安藤千英のAIアシスタントです。リビングフード・発酵食・インナービューティーの専門家として、エレガントで簡潔にアドバイスしてください。48℃以下の酵素栄養学、発酵と腸内環境、ローフードの実践法が得意分野です。` }] },
+      });
+
+      const text = result.candidates?.[0]?.content?.parts?.[0]?.text || '申し訳ありません、回答を生成できませんでした。';
+      typing.remove();
+      addChatMessage('ai', text);
+
+      incrementUsage();
+      applyLimitState();
+    } catch {
+      typing.remove();
+      addChatMessage('ai', '申し訳ありません、エラーが発生しました。しばらくしてから再度お試しください。');
+    }
+  }
+
+  document.getElementById('chatSendBtn')?.addEventListener('click', () => {
+    handleChat((document.getElementById('chatInput') as HTMLInputElement).value);
+  });
+
+  document.getElementById('chatInput')?.addEventListener('keypress', (e) => {
+    if ((e as KeyboardEvent).key === 'Enter') handleChat((document.getElementById('chatInput') as HTMLInputElement).value);
+  });
+
+  document.querySelectorAll('.chat-shortcut').forEach(btn => {
+    btn.addEventListener('click', () => handleChat(btn.getAttribute('data-msg') || ''));
+  });
+
+  // 初期化
+  applyLimitState();
+</script>
+
+</Layout>
