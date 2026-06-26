@@ -220,6 +220,10 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                                 <div class="max-w-xs mx-auto" style="height: 220px;">
                                     <canvas id="smoothie-balance-chart"></canvas>
                                 </div>
+                                <div class="mt-5 bg-[#C9A227]/10 border border-[#C9A227]/30 rounded-lg p-4 flex items-start gap-3">
+                                    <span class="text-lg">🍃</span>
+                                    <p class="text-xs text-gray-700 leading-relaxed" id="smoothie-out-seasonal"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -544,9 +548,10 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                             detox: { type: "INTEGER", description: "整え・デトックス度 1〜5" }
                         },
                         required: ["sweetness", "fiber", "vitaminC", "detox"]
-                    }
+                    },
+                    seasonalTip: { type: "STRING", description: "今の季節に合わせたアレンジ提案" }
                 },
-                required: ["name", "concept", "ingredients", "steps", "balance"]
+                required: ["name", "concept", "ingredients", "steps", "balance", "seasonalTip"]
             };
 
             let smoothieChartInstance = null;
@@ -563,8 +568,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
 5. 朝、水分補給後に少しずつ飲むのが基本。作り置きは冷蔵で6時間以内、レモンを使うと酸化対策になる。
 6. 甘味料は加えず、果物本来の甘さを活かす。
 
-ユーザーの要望（レベル・食材）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+【表現上の注意（重要）】
+- スムージーはブレンダーで滑らかにした飲み物です。「シャキシャキ」「歯ごたえ」など固形物の食感を表す言葉は絶対に使わないでください。
+- 代わりに「なめらか」「すっきり」「飲みやすい」「爽やか」など、飲み物にふさわしい表現を使ってください。
+
+ユーザーの要望（レベル・食材・現在の季節）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
 balanceには、出来上がるスムージーの特徴を1〜5の整数で評価してください（sweetness=甘さ、fiber=食物繊維量、vitaminC=ビタミンC量、detox=整え・デトックス度）。
+seasonalTipには、伝えられた現在の季節（月）に合わせた一言アレンジ提案を書いてください（例：冷凍フルーツで冷たく、生姜を増やして温め効果を高める、旬の果物に差し替える、など）。本書の理論の範囲内で提案してください。
             `;
 
             document.getElementById('generate-smoothie-btn').addEventListener('click', async () => {
@@ -579,7 +589,8 @@ balanceには、出来上がるスムージーの特徴を1〜5の整数で評�
                 document.getElementById('smoothie-output').classList.add('hidden');
                 showLoading();
 
-                const userPrompt = `レベル: ${level}\n使いたい食材: ${ingredients.join(', ') || 'おまかせ'}\n追加要望: ${custom || 'なし'}`;
+                const currentMonth = new Date().getMonth() + 1;
+                const userPrompt = `レベル: ${level}\n使いたい食材: ${ingredients.join(', ') || 'おまかせ'}\n追加要望: ${custom || 'なし'}\n現在の季節: ${currentMonth}月`;
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: SMOOTHIE_SYSTEM_PROMPT }] },
@@ -601,6 +612,8 @@ balanceには、出来上がるスムージーの特徴を1〜5の整数で評�
                     const ol = document.getElementById('smoothie-out-steps');
                     ol.innerHTML = "";
                     data.steps.forEach(s => { const li = document.createElement('li'); li.innerText = s; ol.appendChild(li); });
+
+                    document.getElementById('smoothie-out-seasonal').innerText = data.seasonalTip || '';
 
                     const balance = data.balance || { sweetness: 3, fiber: 3, vitaminC: 3, detox: 3 };
                     const chartCtx = document.getElementById('smoothie-balance-chart').getContext('2d');
