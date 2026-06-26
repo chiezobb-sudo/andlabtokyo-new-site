@@ -118,6 +118,32 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
     <!-- Astroでビルドされた環境変数を安全にHTMLのdata属性に埋め込み、ブラウザ側スクリプトでのクラッシュを防ぎます -->
     <div id="gemini-api-config" data-api-key={geminiApiKey} style="display:none;"></div>
 
+    <!-- ================= ゲート画面（パスワード入力） ================= -->
+    <section id="gate-screen" class="min-h-screen flex items-center justify-center px-4 py-16 bg-[#FDFBF7]">
+        <div class="max-w-md w-full text-center">
+            <h1 class="text-2xl md:text-3xl font-bold mb-3 leading-snug text-gray-900">
+                サンプルページ
+            </h1>
+            <div class="w-12 h-1 bg-[#C2A878] mx-auto mb-6"></div>
+            <p class="text-sm text-gray-600 leading-relaxed mb-8">
+                このページは現在非公開です。<br>
+                アクセスキーをお持ちの方はご入力ください。
+            </p>
+
+            <div class="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
+                <label class="block text-xs font-bold text-gray-500 mb-2 tracking-widest uppercase">アクセスキー</label>
+                <input type="text" id="sample-gate-input" placeholder="キーを入力" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg text-center text-lg tracking-wider focus:outline-none focus:ring-2 focus:ring-[#4A635D]/40 mb-4">
+                <button id="sample-gate-unlock-btn" class="w-full bg-[#4A635D] hover:bg-[#3A4F4A] text-white py-3.5 rounded-lg font-bold tracking-widest transition-colors">
+                    ページを開く
+                </button>
+                <p id="sample-gate-error" class="hidden text-xs text-red-500 mt-3">キーが一致しません。もう一度ご確認ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= サンプルページ本体（解放後表示） ================= -->
+    <main id="sample-content" class="hidden">
+
     <!-- ナビゲーション -->
     <nav class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -675,8 +701,47 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
         </div>
     </footer>
 
+    </main>
+
     <script is:inline>
         document.addEventListener('DOMContentLoaded', function() {
+            // ==========================================
+            // ゲート制御（アクセスキー）
+            // ==========================================
+            const VALID_SAMPLE_KEY = "90000";
+            const SAMPLE_UNLOCK_KEY = "sample_unlocked";
+
+            const sampleGateScreen = document.getElementById('gate-screen');
+            const sampleContent = document.getElementById('sample-content');
+            const sampleGateInput = document.getElementById('sample-gate-input');
+            const sampleUnlockBtn = document.getElementById('sample-gate-unlock-btn');
+            const sampleGateError = document.getElementById('sample-gate-error');
+
+            function unlockSample() {
+                sampleGateScreen.classList.add('hidden');
+                sampleContent.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            if (localStorage.getItem(SAMPLE_UNLOCK_KEY) === 'true') {
+                unlockSample();
+            }
+
+            sampleUnlockBtn.addEventListener('click', () => {
+                const value = sampleGateInput.value.replace(/[^0-9]/g, '');
+                if (value === VALID_SAMPLE_KEY) {
+                    localStorage.setItem(SAMPLE_UNLOCK_KEY, 'true');
+                    sampleGateError.classList.add('hidden');
+                    unlockSample();
+                } else {
+                    sampleGateError.classList.remove('hidden');
+                }
+            });
+
+            sampleGateInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sampleUnlockBtn.click();
+            });
+
             // モバイルメニューの制御
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileDrawer = document.getElementById('mobile-drawer');
