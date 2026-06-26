@@ -378,6 +378,9 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
     <script is:inline>
         document.addEventListener('DOMContentLoaded', function() {
 
+            // 本書の全文を読み込んでおく（お悩み相談の根拠資料として使用）
+            const step1FullTextPromise = fetch('/step1-fulltext.txt').then(r => r.ok ? r.text() : '').catch(() => '');
+
             // ==========================================
             // ゲート制御（ISBNキー）
             // ==========================================
@@ -934,9 +937,15 @@ chapterRefには、このレシピが本書のどの内容を参考にしてい�
                 const typingMsg = addMessage('ai', '思考中...');
                 typingMsg.id = 'soudan-typing-indicator';
 
+                const fullText = await step1FullTextPromise;
+                const systemParts = [{ text: SOUDAN_SYSTEM_PROMPT }];
+                if (fullText) {
+                    systemParts.push({ text: "【本書の全文（参考資料）】\n上記のルールに加えて、以下の本文も参照し、より正確に答えてください。本文に書かれていないことは推測で答えないこと。\n\n" + fullText });
+                }
+
                 const payload = {
                     contents: [{ parts: [{ text: message }] }],
-                    systemInstruction: { parts: [{ text: SOUDAN_SYSTEM_PROMPT }] }
+                    systemInstruction: { parts: systemParts }
                 };
 
                 try {
