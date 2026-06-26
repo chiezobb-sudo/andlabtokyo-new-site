@@ -17,6 +17,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
       gtag('config', 'G-CHR2SG5835');
     </script>
     <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
@@ -214,6 +215,12 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                                     <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1.5" id="smoothie-out-steps"></ol>
                                 </div>
                             </div>
+                            <div class="pt-2 border-t border-[#E3D8BE]">
+                                <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">栄養・甘さのバランス</h6>
+                                <div class="max-w-xs mx-auto" style="height: 220px;">
+                                    <canvas id="smoothie-balance-chart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -225,16 +232,28 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                         <div>
                             <span class="block text-xs font-bold text-gray-700 mb-3">好みのタイプを選択：</span>
                             <div class="flex flex-wrap gap-2" id="dressing-type-pills">
-                                <button class="pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent" data-val="塩麹×シトラスの和風発酵系">和風発酵系（塩麹×シトラス）</button>
-                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="メイプル×バルサミコのまろやか系">まろやか系（メイプル×バルサミコ）</button>
-                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="タヒニや野菜のクリーミー系">クリーミー系（タヒニ・野菜ベース）</button>
-                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ゴジベリーや玉ねぎの彩りアクセント系">彩りアクセント系（ゴジベリー・玉ねぎ）</button>
+                                <button class="pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent" data-val="塩麹×シトラスの和風発酵系">和風発酵系</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="メイプル×バルサミコのまろやか系">まろやか系</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="タヒニや野菜のクリーミー系">クリーミー系</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ゴジベリーや玉ねぎの彩りアクセント系">彩りアクセント系</button>
                             </div>
                         </div>
 
                         <div>
-                            <span class="block text-xs font-bold text-gray-700 mb-2">合わせたい料理・野菜（任意）：</span>
-                            <input type="text" id="dressing-custom" placeholder="例: 葉物サラダ, 生春巻き" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 text-sm bg-white">
+                            <span class="block text-xs font-bold text-gray-700 mb-3">合わせたい野菜・料理（任意）：</span>
+                            <div class="flex flex-wrap gap-2" id="dressing-vegetable-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="葉物サラダ">葉物サラダ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="生春巻き">生春巻き</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="アボカド">アボカド</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="蒸し野菜">蒸し野菜</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="トマト">トマト</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="スプラウト">スプラウト</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-2">その他に合わせたいもの（任意）：</span>
+                            <input type="text" id="dressing-custom" placeholder="例: 玄米, 豆腐" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 text-sm bg-white">
                         </div>
 
                         <button id="generate-dressing-btn" class="w-full bg-[#5C6E45] hover:bg-[#475636] text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-transform hover:-translate-y-0.5">
@@ -417,6 +436,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
             const smoothieLevel = setupSinglePillGroup('smoothie-level-pills');
             const smoothieIngredients = setupMultiPillGroup('smoothie-ingredient-pills');
             const dressingType = setupSinglePillGroup('dressing-type-pills');
+            const dressingVegetables = setupMultiPillGroup('dressing-vegetable-pills');
 
             // ==========================================
             // Gemini API 連携
@@ -508,6 +528,29 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                 required: ["name", "concept", "ingredients", "steps"]
             };
 
+            const smoothieRecipeSchema = {
+                type: "OBJECT",
+                properties: {
+                    name: { type: "STRING" },
+                    concept: { type: "STRING" },
+                    ingredients: { type: "ARRAY", items: { type: "STRING" } },
+                    steps: { type: "ARRAY", items: { type: "STRING" } },
+                    balance: {
+                        type: "OBJECT",
+                        properties: {
+                            sweetness: { type: "INTEGER", description: "甘さの指数 1〜5" },
+                            fiber: { type: "INTEGER", description: "食物繊維の量 1〜5" },
+                            vitaminC: { type: "INTEGER", description: "ビタミンCの量 1〜5" },
+                            detox: { type: "INTEGER", description: "整え・デトックス度 1〜5" }
+                        },
+                        required: ["sweetness", "fiber", "vitaminC", "detox"]
+                    }
+                },
+                required: ["name", "concept", "ingredients", "steps", "balance"]
+            };
+
+            let smoothieChartInstance = null;
+
             // ---- スムージー生成 ----
             const SMOOTHIE_SYSTEM_PROMPT = `
 あなたは書籍「&RAW LIVING Step1 ローフードの教科書」（著者：安藤千英）の理論だけに基づいてスムージーレシピを提案するアシスタントです。書籍に書かれていない独自の理論や、他の流派の主張を混ぜないでください。
@@ -521,6 +564,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
 6. 甘味料は加えず、果物本来の甘さを活かす。
 
 ユーザーの要望（レベル・食材）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+balanceには、出来上がるスムージーの特徴を1〜5の整数で評価してください（sweetness=甘さ、fiber=食物繊維量、vitaminC=ビタミンC量、detox=整え・デトックス度）。
             `;
 
             document.getElementById('generate-smoothie-btn').addEventListener('click', async () => {
@@ -539,7 +583,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: SMOOTHIE_SYSTEM_PROMPT }] },
-                    generationConfig: { responseMimeType: "application/json", responseSchema: recipeSchema }
+                    generationConfig: { responseMimeType: "application/json", responseSchema: smoothieRecipeSchema }
                 };
 
                 try {
@@ -557,6 +601,30 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                     const ol = document.getElementById('smoothie-out-steps');
                     ol.innerHTML = "";
                     data.steps.forEach(s => { const li = document.createElement('li'); li.innerText = s; ol.appendChild(li); });
+
+                    const balance = data.balance || { sweetness: 3, fiber: 3, vitaminC: 3, detox: 3 };
+                    const chartCtx = document.getElementById('smoothie-balance-chart').getContext('2d');
+                    if (smoothieChartInstance) smoothieChartInstance.destroy();
+                    smoothieChartInstance = new Chart(chartCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['甘さ', '食物繊維', 'ビタミンC', '整え度'],
+                            datasets: [{
+                                data: [balance.sweetness, balance.fiber, balance.vitaminC, balance.detox],
+                                backgroundColor: ['#C9A227', '#5C6E45', '#8FA876', '#4A5C3A'],
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { min: 0, max: 5, ticks: { stepSize: 1 } }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
 
                     hideLoading();
                     document.getElementById('smoothie-output').classList.remove('hidden');
@@ -594,12 +662,13 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                     return;
                 }
                 const type = dressingType.getValue();
+                const vegetables = dressingVegetables.getValues();
                 const custom = document.getElementById('dressing-custom').value.trim();
 
                 document.getElementById('dressing-output').classList.add('hidden');
                 showLoading();
 
-                const userPrompt = `好みのタイプ: ${type}\n合わせたい料理・野菜: ${custom || 'おまかせ'}`;
+                const userPrompt = `好みのタイプ: ${type}\n合わせたい野菜・料理: ${vegetables.join(', ') || 'おまかせ'}\nその他に合わせたいもの: ${custom || 'なし'}`;
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: DRESSING_SYSTEM_PROMPT }] },
