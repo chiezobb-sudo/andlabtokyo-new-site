@@ -1,0 +1,725 @@
+---
+// &RAW LIVING Step1 読者限定特典ページ
+// アクセスキー：書籍裏表紙のISBN番号（9798286097296）
+const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "undefined" ? process.env.GEMINI_API_KEY : "") || "";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&RAW LIVING Step1 読者限定特典 | &LAB TOKYO</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHR2SG5835"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CHR2SG5835');
+    </script>
+    <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+        :root {
+            --color-bg: #FBF5E9;
+            --color-paper: #FFFDF8;
+            --color-primary: #5C6E45; /* Olive / Raw Leaf Green */
+            --color-secondary: #C9A227; /* Book Gold */
+            --color-ink: #3A2E1F; /* Deep Brown Ink */
+            --color-line: #E3D8BE;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--color-bg);
+            background-image: radial-gradient(circle at 1px 1px, rgba(92,110,69,0.06) 1px, transparent 0);
+            background-size: 26px 26px;
+            color: var(--color-ink);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .gold-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+        }
+
+        .book-card {
+            background: var(--color-paper);
+            border: 1px solid var(--color-line);
+            box-shadow: 0 10px 40px rgba(58,46,31,0.08);
+        }
+
+        .tab-btn.active {
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 6px 16px rgba(92,110,69,0.25);
+        }
+
+        .tab-btn:not(.active) {
+            background: white;
+            color: var(--color-ink);
+            border: 1px solid var(--color-line);
+        }
+
+        .pill {
+            transition: all 0.2s;
+        }
+
+        .spinner {
+            border: 3px solid rgba(92,110,69,0.15);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--color-primary);
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #gate-screen {
+            min-height: 100vh;
+        }
+
+        .stamp {
+            border: 2px solid var(--color-secondary);
+            color: var(--color-secondary);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div id="gemini-api-config" data-api-key={geminiApiKey} style="display:none;"></div>
+
+    <!-- ================= ゲート画面（鍵入力） ================= -->
+    <section id="gate-screen" class="flex items-center justify-center px-4 py-16">
+        <div class="max-w-md w-full text-center">
+            <div class="inline-block stamp rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase mb-6">
+                Readers Only
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold mb-3 leading-snug">
+                &RAW LIVING Step1<br>読者限定特典
+            </h1>
+            <div class="gold-line w-24 mx-auto mb-6"></div>
+            <p class="text-sm text-gray-600 leading-relaxed mb-8">
+                本書をお読みいただいた方への、<br>
+                特別なAI機能をご用意しました。<br>
+                お手元の書籍、裏表紙にある<br>
+                <span class="font-bold text-[#5C6E45]">ISBN番号</span>を入力してください。
+            </p>
+
+            <div class="book-card rounded-2xl p-6 md:p-8">
+                <label class="block text-xs font-bold text-gray-500 mb-2 tracking-widest uppercase">ISBN</label>
+                <input type="text" id="isbn-input" placeholder="例：9798286097296" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg text-center text-lg tracking-wider focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 mb-4">
+                <button id="unlock-btn" class="w-full bg-[#5C6E45] hover:bg-[#475636] text-white py-3.5 rounded-lg font-bold tracking-widest transition-colors">
+                    特典をひらく
+                </button>
+                <p id="gate-error" class="hidden text-xs text-red-500 mt-3">ISBN番号が一致しません。もう一度ご確認ください。</p>
+            </div>
+
+            <p class="text-[11px] text-gray-400 mt-8">
+                ISBN番号は書籍裏表紙のバーコード上部に記載されています。
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= 特典コンテンツ（解放後表示） ================= -->
+    <main id="bonus-content" class="hidden">
+
+        <!-- ヒーロー -->
+        <section class="relative pt-20 pb-16 px-4 text-center overflow-hidden">
+            <div class="absolute -right-24 -top-24 w-[420px] h-[420px] bg-[#5C6E45]/5 rounded-full blur-3xl"></div>
+            <div class="absolute -left-24 -bottom-24 w-[380px] h-[380px] bg-[#C9A227]/10 rounded-full blur-3xl"></div>
+            <div class="max-w-3xl mx-auto relative z-10">
+                <div class="inline-block stamp rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase mb-5">
+                    &RAW LIVING Step1 Bonus
+                </div>
+                <h1 class="text-3xl md:text-5xl font-bold mb-5 leading-tight">
+                    本の続きを、<br><span class="text-[#5C6E45] italic">AIと一緒に。</span>
+                </h1>
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-xl mx-auto">
+                    「&RAW LIVING Step1」でご紹介した理論をもとに、<br class="hidden md:block">
+                    あなただけのスムージー・ドレッシングづくりや、<br class="hidden md:block">
+                    ローフードのお悩み相談ができる特典ラボです。
+                </p>
+                <p class="text-[11px] text-gray-400 mt-6 italic font-serif">
+                    "人は自然から遠ざかるほど病気に近づく" — ヒポクラテス
+                </p>
+            </div>
+        </section>
+
+        <div class="gold-line max-w-4xl mx-auto"></div>
+
+        <!-- ラボ本体 -->
+        <section class="py-16 px-4">
+            <div class="max-w-5xl mx-auto">
+
+                <div class="flex flex-wrap justify-center gap-3 mb-10" id="step1-tabs">
+                    <button id="tab-smoothie-btn" class="tab-btn active px-5 py-2.5 rounded-full font-bold text-sm transition-all">🥬 スムージー生成</button>
+                    <button id="tab-dressing-btn" class="tab-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all">🫙 発酵ドレッシング生成</button>
+                    <button id="tab-soudan-btn" class="tab-btn px-5 py-2.5 rounded-full font-bold text-sm transition-all">💬 ローフードお悩み相談</button>
+                </div>
+
+                <div class="book-card rounded-2xl p-6 md:p-10">
+
+                    <!-- スムージー生成パネル -->
+                    <div id="panel-smoothie" class="space-y-6">
+                        <h3 class="font-bold text-xl">あなただけのグリーンスムージー</h3>
+                        <p class="text-sm text-gray-500">本書の「野菜と果物の黄金バランス」理論にもとづいてレシピを作ります。</p>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">1. 慣れ具合を選択：</span>
+                            <div class="flex flex-wrap gap-2" id="smoothie-level-pills">
+                                <button class="pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent" data-val="初心者（野菜4：果物6）">🌱 初心者（甘め）</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="慣れてきた（野菜6：果物4）">🌿 慣れてきた（整え重視）</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">2. 使いたい野菜・果物（任意）：</span>
+                            <div class="flex flex-wrap gap-2" id="smoothie-ingredient-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="小松菜">小松菜</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ほうれん草">ほうれん草</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="りんご">りんご</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="バナナ">バナナ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="レモン">レモン</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="生姜">生姜</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-2">3. その他に加えたい食材（任意）：</span>
+                            <input type="text" id="smoothie-custom" placeholder="例: ミント, キウイ" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 text-sm bg-white">
+                        </div>
+
+                        <button id="generate-smoothie-btn" class="w-full bg-[#5C6E45] hover:bg-[#475636] text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-transform hover:-translate-y-0.5">
+                            スムージーレシピを作る ✨
+                        </button>
+
+                        <div id="smoothie-output" class="hidden mt-6 bg-[#FBF5E9] border border-[#E3D8BE] p-6 md:p-8 rounded-xl space-y-4">
+                            <h5 class="font-bold text-xl" id="smoothie-out-title">...</h5>
+                            <p class="text-sm text-[#5C6E45] bg-white/60 p-4 rounded-lg italic leading-relaxed" id="smoothie-out-concept">...</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">材料</h6>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5" id="smoothie-out-ingredients"></ul>
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">作り方</h6>
+                                    <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1.5" id="smoothie-out-steps"></ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ドレッシング生成パネル -->
+                    <div id="panel-dressing" class="space-y-6 hidden">
+                        <h3 class="font-bold text-xl">あなただけの発酵ドレッシング</h3>
+                        <p class="text-sm text-gray-500">本書「楽しむ7つのドレッシング」のレシピをベースに、お好みのタイプを作ります。</p>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">好みのタイプを選択：</span>
+                            <div class="flex flex-wrap gap-2" id="dressing-type-pills">
+                                <button class="pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent" data-val="塩麹×シトラスの和風発酵系">和風発酵系（塩麹×シトラス）</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="メイプル×バルサミコのまろやか系">まろやか系（メイプル×バルサミコ）</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="タヒニや野菜のクリーミー系">クリーミー系（タヒニ・野菜ベース）</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ゴジベリーや玉ねぎの彩りアクセント系">彩りアクセント系（ゴジベリー・玉ねぎ）</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-2">合わせたい料理・野菜（任意）：</span>
+                            <input type="text" id="dressing-custom" placeholder="例: 葉物サラダ, 生春巻き" class="w-full px-4 py-3 border border-[#E3D8BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 text-sm bg-white">
+                        </div>
+
+                        <button id="generate-dressing-btn" class="w-full bg-[#5C6E45] hover:bg-[#475636] text-white py-4 px-6 rounded-xl font-bold text-sm tracking-widest shadow-lg transition-transform hover:-translate-y-0.5">
+                            ドレッシングレシピを作る ✨
+                        </button>
+
+                        <div id="dressing-output" class="hidden mt-6 bg-[#FBF5E9] border border-[#E3D8BE] p-6 md:p-8 rounded-xl space-y-4">
+                            <h5 class="font-bold text-xl" id="dressing-out-title">...</h5>
+                            <p class="text-sm text-[#5C6E45] bg-white/60 p-4 rounded-lg italic leading-relaxed" id="dressing-out-concept">...</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">材料</h6>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5" id="dressing-out-ingredients"></ul>
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">作り方</h6>
+                                    <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1.5" id="dressing-out-steps"></ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- お悩み相談パネル -->
+                    <div id="panel-soudan" class="space-y-6 hidden flex-col">
+                        <h3 class="font-bold text-xl">ローフードお悩み相談</h3>
+                        <p class="text-sm text-gray-500">本書 Chapter7「よくある質問」をベースに、安藤千英AIがお答えします。</p>
+
+                        <div class="border border-[#E3D8BE] rounded-xl bg-[#FBF5E9] p-4 h-[320px] overflow-y-auto space-y-4 shadow-inner" id="soudan-chat-box">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-[#5C6E45] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow">AI</div>
+                                <div class="bg-white p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] border border-[#E3D8BE]">
+                                    <p class="text-sm text-gray-700 leading-relaxed">
+                                        こんにちは。「&RAW LIVING Step1」のお悩み相談室です。冷え・タンパク質・好転反応など、本の内容に基づいてお答えします。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2">
+                            <button class="soudan-shortcut text-xs bg-white hover:bg-gray-100 border border-[#E3D8BE] px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="ローフードを始めると体が冷えるって本当ですか？">❄️ 体が冷えるって本当？</button>
+                            <button class="soudan-shortcut text-xs bg-white hover:bg-gray-100 border border-[#E3D8BE] px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="ローフードだけでタンパク質は足りますか？">🥜 タンパク質は足りる？</button>
+                            <button class="soudan-shortcut text-xs bg-white hover:bg-gray-100 border border-[#E3D8BE] px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="ローフードを始めて頭痛や肌荒れが出ました。これは好転反応ですか？">🌀 好転反応について</button>
+                            <button class="soudan-shortcut text-xs bg-white hover:bg-gray-100 border border-[#E3D8BE] px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="外食が多いのですが、ローフードを続けるコツはありますか？">🍽️ 外食が多くても大丈夫？</button>
+                            <button class="soudan-shortcut text-xs bg-white hover:bg-gray-100 border border-[#E3D8BE] px-4 py-2 rounded-full text-gray-600 transition-colors shadow-sm" data-msg="3週間プログラムはどう進めればいいですか？">📅 3週間プログラムの進め方</button>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <input type="text" id="soudan-input" placeholder="質問を入力..." class="flex-1 px-4 py-3 border border-[#E3D8BE] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5C6E45]/40 text-sm bg-white">
+                            <button id="soudan-send-btn" class="bg-[#5C6E45] hover:bg-[#475636] text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm">送信</button>
+                        </div>
+                    </div>
+
+                    <!-- ローディング & エラー -->
+                    <div id="step1-loading" class="hidden flex-col items-center justify-center py-16 space-y-4">
+                        <div class="spinner"></div>
+                        <p class="text-sm text-[#5C6E45] font-bold tracking-widest">Generating...</p>
+                    </div>
+                    <div id="step1-error" class="hidden mt-6 bg-red-50 border border-red-200 p-4 rounded-xl text-center">
+                        <p class="text-sm text-red-600 font-bold mb-1">⚠️ 処理中にエラーが発生しました</p>
+                        <p class="text-xs text-red-500" id="step1-error-text"></p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- フッター -->
+        <footer class="py-12 px-4 bg-[#3A2E1F] text-white text-center">
+            <p class="text-sm font-bold tracking-widest mb-2">&RAW LIVING Step1</p>
+            <p class="text-xs text-gray-400 mb-6">ローフードの教科書｜安藤千英</p>
+            <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="inline-block text-[#C9A227] hover:text-white text-xs border-b border-[#C9A227] pb-0.5 transition-colors">&LAB TOKYO 公式サイトへ ↗</a>
+            <div class="mt-8 text-[10px] text-gray-500 tracking-widest uppercase">&copy; 2026 &LAB TOKYO. Reader's Exclusive Content.</div>
+        </footer>
+
+    </main>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ==========================================
+            // ゲート制御（ISBNキー）
+            // ==========================================
+            const VALID_ISBN = "9798286097296";
+            const UNLOCK_KEY = "step1bonus_unlocked";
+
+            const gateScreen = document.getElementById('gate-screen');
+            const bonusContent = document.getElementById('bonus-content');
+            const isbnInput = document.getElementById('isbn-input');
+            const unlockBtn = document.getElementById('unlock-btn');
+            const gateError = document.getElementById('gate-error');
+
+            function normalizeIsbn(v) {
+                return v.replace(/[^0-9]/g, '');
+            }
+
+            function unlock() {
+                gateScreen.classList.add('hidden');
+                bonusContent.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            if (localStorage.getItem(UNLOCK_KEY) === 'true') {
+                unlock();
+            }
+
+            unlockBtn.addEventListener('click', () => {
+                const value = normalizeIsbn(isbnInput.value);
+                if (value === VALID_ISBN) {
+                    localStorage.setItem(UNLOCK_KEY, 'true');
+                    gateError.classList.add('hidden');
+                    unlock();
+                } else {
+                    gateError.classList.remove('hidden');
+                }
+            });
+
+            isbnInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') unlockBtn.click();
+            });
+
+            // ==========================================
+            // タブ制御
+            // ==========================================
+            const tabSmoothieBtn = document.getElementById('tab-smoothie-btn');
+            const tabDressingBtn = document.getElementById('tab-dressing-btn');
+            const tabSoudanBtn = document.getElementById('tab-soudan-btn');
+            const panelSmoothie = document.getElementById('panel-smoothie');
+            const panelDressing = document.getElementById('panel-dressing');
+            const panelSoudan = document.getElementById('panel-soudan');
+
+            function setActiveTab(activeBtn, activePanel) {
+                [tabSmoothieBtn, tabDressingBtn, tabSoudanBtn].forEach(b => b.classList.remove('active'));
+                [panelSmoothie, panelDressing, panelSoudan].forEach(p => p.classList.add('hidden'));
+                activeBtn.classList.add('active');
+                activePanel.classList.remove('hidden');
+            }
+
+            tabSmoothieBtn.addEventListener('click', () => setActiveTab(tabSmoothieBtn, panelSmoothie));
+            tabDressingBtn.addEventListener('click', () => setActiveTab(tabDressingBtn, panelDressing));
+            tabSoudanBtn.addEventListener('click', () => setActiveTab(tabSoudanBtn, panelSoudan));
+
+            // ==========================================
+            // ピル選択制御（共通）
+            // ==========================================
+            function setupSinglePillGroup(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return { getValue: () => "" };
+                let selected = container.querySelector('.pill').getAttribute('data-val');
+                container.querySelectorAll('.pill').forEach(pill => {
+                    pill.addEventListener('click', () => {
+                        container.querySelectorAll('.pill').forEach(p => {
+                            p.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                        });
+                        pill.className = "pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent";
+                        selected = pill.getAttribute('data-val');
+                    });
+                });
+                return { getValue: () => selected };
+            }
+
+            function setupMultiPillGroup(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return { getValues: () => [] };
+                const selectedSet = new Set();
+                container.querySelectorAll('.pill').forEach(pill => {
+                    pill.addEventListener('click', () => {
+                        const val = pill.getAttribute('data-val');
+                        if (selectedSet.has(val)) {
+                            selectedSet.delete(val);
+                            pill.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                        } else {
+                            selectedSet.add(val);
+                            pill.className = "pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent";
+                        }
+                    });
+                });
+                return { getValues: () => Array.from(selectedSet) };
+            }
+
+            const smoothieLevel = setupSinglePillGroup('smoothie-level-pills');
+            const smoothieIngredients = setupMultiPillGroup('smoothie-ingredient-pills');
+            const dressingType = setupSinglePillGroup('dressing-type-pills');
+
+            // ==========================================
+            // Gemini API 連携
+            // ==========================================
+            const apiConfigEl = document.getElementById('gemini-api-config');
+            let apiKey = apiConfigEl ? apiConfigEl.getAttribute('data-api-key') : "";
+            let MODEL_NAME = "gemini-2.5-flash";
+            let isPreview = false;
+
+            if (window.location.protocol === 'blob:' || window.location.hostname.includes('usercontent') || window.location.hostname === 'localhost') {
+                apiKey = "";
+                MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
+                isPreview = true;
+            }
+
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+
+            const DAILY_LIMIT = 10;
+            function checkUsageLimit() {
+                const today = new Date().toDateString();
+                let usage = JSON.parse(localStorage.getItem('step1bonus_ai_usage') || '{"date": "", "count": 0}');
+                if (usage.date !== today) usage = { date: today, count: 0 };
+                if (usage.count >= DAILY_LIMIT) return false;
+                usage.count++;
+                localStorage.setItem('step1bonus_ai_usage', JSON.stringify(usage));
+                return true;
+            }
+
+            function rollbackUsageLimit() {
+                const today = new Date().toDateString();
+                let usage = JSON.parse(localStorage.getItem('step1bonus_ai_usage') || '{"date": "", "count": 0}');
+                if (usage.date === today && usage.count > 0) {
+                    usage.count--;
+                    localStorage.setItem('step1bonus_ai_usage', JSON.stringify(usage));
+                }
+            }
+
+            async function callGeminiApi(payload) {
+                if (!isPreview && (!apiKey || apiKey === "")) {
+                    throw new Error("本番環境用のAPIキーが設定されていません。");
+                }
+                let attempt = 0;
+                const maxAttempts = 5;
+                while (attempt < maxAttempts) {
+                    try {
+                        const response = await fetch(API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (!response.ok) throw new Error(`通信エラーが発生しました (HTTP ${response.status})。`);
+                        return await response.json();
+                    } catch (error) {
+                        attempt++;
+                        if (attempt >= maxAttempts) throw error;
+                        const delay = Math.pow(2, attempt - 1) * 1000;
+                        await new Promise(res => setTimeout(res, delay));
+                    }
+                }
+            }
+
+            const loadingIndicator = document.getElementById('step1-loading');
+            const errorIndicator = document.getElementById('step1-error');
+            const errorText = document.getElementById('step1-error-text');
+
+            function showLoading() {
+                loadingIndicator.classList.remove('hidden');
+                loadingIndicator.classList.add('flex');
+                errorIndicator.classList.add('hidden');
+            }
+            function hideLoading() {
+                loadingIndicator.classList.add('hidden');
+                loadingIndicator.classList.remove('flex');
+            }
+            function showError(message) {
+                hideLoading();
+                errorIndicator.classList.remove('hidden');
+                errorText.innerText = message;
+            }
+
+            const recipeSchema = {
+                type: "OBJECT",
+                properties: {
+                    name: { type: "STRING" },
+                    concept: { type: "STRING" },
+                    ingredients: { type: "ARRAY", items: { type: "STRING" } },
+                    steps: { type: "ARRAY", items: { type: "STRING" } }
+                },
+                required: ["name", "concept", "ingredients", "steps"]
+            };
+
+            // ---- スムージー生成 ----
+            const SMOOTHIE_SYSTEM_PROMPT = `
+あなたは書籍「&RAW LIVING Step1 ローフードの教科書」（著者：安藤千英）の理論だけに基づいてスムージーレシピを提案するアシスタントです。書籍に書かれていない独自の理論や、他の流派の主張を混ぜないでください。
+
+【本書のスムージー理論（厳守ルール）】
+1. 黄金バランス：初心者は「野菜4：果物6」、慣れてきた人は「野菜6：果物4」。全体量の目安は約300ml。
+2. スムージーに適した野菜：小松菜、ほうれん草（シュウ酸を含むため摂取量に注意）、レタス類、セロリ（少量）、ミント・大葉などのハーブ。
+3. スムージーに適さない野菜（提案しない）：ごぼう・蓮根・にんじん・とうもろこし（発酵しやすくガスの原因）、キャベツ・白菜・ブロッコリー・カリフラワー（FODMAP食材）、玉ねぎ・長ねぎ・にらなどのネギ類。
+4. 甘酒は糖度が高く血糖値を急上昇させるため使わない。ナッツ類は消化に時間がかかるため朝のスムージーには使わない。
+5. 朝、水分補給後に少しずつ飲むのが基本。作り置きは冷蔵で6時間以内、レモンを使うと酸化対策になる。
+6. 甘味料は加えず、果物本来の甘さを活かす。
+
+ユーザーの要望（レベル・食材）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+            `;
+
+            document.getElementById('generate-smoothie-btn').addEventListener('click', async () => {
+                if (!checkUsageLimit()) {
+                    showError("本日のAI利用回数（10回）の上限に達しました。また明日お試しください。");
+                    return;
+                }
+                const level = smoothieLevel.getValue();
+                const ingredients = smoothieIngredients.getValues();
+                const custom = document.getElementById('smoothie-custom').value.trim();
+
+                document.getElementById('smoothie-output').classList.add('hidden');
+                showLoading();
+
+                const userPrompt = `レベル: ${level}\n使いたい食材: ${ingredients.join(', ') || 'おまかせ'}\n追加要望: ${custom || 'なし'}`;
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    systemInstruction: { parts: [{ text: SMOOTHIE_SYSTEM_PROMPT }] },
+                    generationConfig: { responseMimeType: "application/json", responseSchema: recipeSchema }
+                };
+
+                try {
+                    const result = await callGeminiApi(payload);
+                    let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!text) throw new Error("応答データが不正です。");
+                    text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                    const data = JSON.parse(text);
+
+                    document.getElementById('smoothie-out-title').innerText = data.name;
+                    document.getElementById('smoothie-out-concept').innerText = data.concept;
+                    const ul = document.getElementById('smoothie-out-ingredients');
+                    ul.innerHTML = "";
+                    data.ingredients.forEach(i => { const li = document.createElement('li'); li.innerText = i; ul.appendChild(li); });
+                    const ol = document.getElementById('smoothie-out-steps');
+                    ol.innerHTML = "";
+                    data.steps.forEach(s => { const li = document.createElement('li'); li.innerText = s; ol.appendChild(li); });
+
+                    hideLoading();
+                    document.getElementById('smoothie-output').classList.remove('hidden');
+                } catch (err) {
+                    rollbackUsageLimit();
+                    showError("レシピの生成中にエラーが発生しました（回数は消費されていません）。詳細: " + err.message);
+                }
+            });
+
+            // ---- ドレッシング生成 ----
+            const DRESSING_SYSTEM_PROMPT = `
+あなたは書籍「&RAW LIVING Step1 ローフードの教科書」（著者：安藤千英）に掲載されている「楽しむ7つのドレッシング」をベースに、新しい発酵ドレッシングを提案するアシスタントです。
+
+【本書に実在する7つのドレッシング（必ずこれらの技法・食材カテゴリーの範囲内で発想すること）】
+1. 塩麹×レモンのシトラスドレッシング：塩麹、レモン果汁、オリーブオイル、こしょう
+2. メイプル×バルサミコのまろやかドレッシング：バルサミコ酢、メイプルシロップ、オリーブオイル、粒マスタード、塩
+3. パプリカドレッシング：パプリカ、オリーブオイル、レモン果汁、メイプルシロップ、塩、水
+4. タヒニドレッシング：タヒニ（ごまペースト）、レモン果汁、オリーブオイル、メイプルシロップ、にんにく、水、塩
+5. 玉ねぎとオリーブのドレッシング：紫玉ねぎ、オリーブオイル、醤油、メイプルシロップ、レモン果汁、にんにく
+6. ゴジベリードレッシング：ゴジベリー、紫玉ねぎ、オリーブオイル、レモン汁、塩麹
+7. ローナッツマヨネーズ：生カシューナッツ、レモン果汁、白味噌、メイプルシロップ、オリーブオイル
+
+【厳守ルール】
+- 必ず「発酵調味料（塩麹・醤油・味噌など）」または「酸（レモン・バルサミコ酢）」のいずれかを軸に使うこと。
+- 甘みはメイプルシロップのみを使用し、白砂糖は使わない。
+- オイルは基本的にオリーブオイルを使用する。
+- 上記7レシピの技法を参考に、ユーザーの好みのタイプ・要望に合わせたオリジナルの組み合わせを提案する。架空の珍しい食材は使わず、家庭で手に入るものに限定する。
+
+レシピをJSONで返してください。conceptには、発酵や栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+            `;
+
+            document.getElementById('generate-dressing-btn').addEventListener('click', async () => {
+                if (!checkUsageLimit()) {
+                    showError("本日のAI利用回数（10回）の上限に達しました。また明日お試しください。");
+                    return;
+                }
+                const type = dressingType.getValue();
+                const custom = document.getElementById('dressing-custom').value.trim();
+
+                document.getElementById('dressing-output').classList.add('hidden');
+                showLoading();
+
+                const userPrompt = `好みのタイプ: ${type}\n合わせたい料理・野菜: ${custom || 'おまかせ'}`;
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    systemInstruction: { parts: [{ text: DRESSING_SYSTEM_PROMPT }] },
+                    generationConfig: { responseMimeType: "application/json", responseSchema: recipeSchema }
+                };
+
+                try {
+                    const result = await callGeminiApi(payload);
+                    let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!text) throw new Error("応答データが不正です。");
+                    text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                    const data = JSON.parse(text);
+
+                    document.getElementById('dressing-out-title').innerText = data.name;
+                    document.getElementById('dressing-out-concept').innerText = data.concept;
+                    const ul = document.getElementById('dressing-out-ingredients');
+                    ul.innerHTML = "";
+                    data.ingredients.forEach(i => { const li = document.createElement('li'); li.innerText = i; ul.appendChild(li); });
+                    const ol = document.getElementById('dressing-out-steps');
+                    ol.innerHTML = "";
+                    data.steps.forEach(s => { const li = document.createElement('li'); li.innerText = s; ol.appendChild(li); });
+
+                    hideLoading();
+                    document.getElementById('dressing-output').classList.remove('hidden');
+                } catch (err) {
+                    rollbackUsageLimit();
+                    showError("レシピの生成中にエラーが発生しました（回数は消費されていません）。詳細: " + err.message);
+                }
+            });
+
+            // ---- お悩み相談チャット ----
+            const SOUDAN_SYSTEM_PROMPT = `
+あなたは書籍「&RAW LIVING Step1 ローフードの教科書」（著者：安藤千英）のChapter7「ローフードのよくある質問」、および本書の知識のみに基づいて回答するお悩み相談AIです。本書に書かれていない医学的助言や、他の流派の理論は答えないでください。
+
+【本書のQ&A知識ベース】
+・サラダばかりではない：ラザニアやナッツチーズ、スイーツなど多様なレシピがある。
+・100%生でなくてよい：加熱食や発酵食と組み合わせてOK。バランスが目的。
+・体が冷える対策：食材や摂り方の工夫で冷えにくくなる。常温に戻す、発酵食やスパイスと組み合わせる。
+・タンパク質：ナッツ・豆・スプラウトで植物性たんぱく質を十分摂れる。
+・スムージーは体に悪いという説：飲み方次第。葉野菜ベース＋常温でゆっくり飲めば良い習慣になる。
+・食中毒リスク：野菜・果物も衛生管理が大切。鮮度の良いものを選び、よく洗えばリスクは低い。
+・料理が苦手でも続けられる：切る・混ぜるが中心で簡単。
+・ダイエット効果：食物繊維が豊富で満腹感あり、代謝アップやデトックス効果も期待できる。
+・デメリット・注意点：冷えや栄養不足に注意。温かい飲み物や発酵食でバランスを。
+・家族と一緒に：一品から取り入れてOK。朝のスムージーやドレッシングがおすすめ。
+・スムージーの作り置き：密閉・冷蔵で6時間以内が目安。レモンで酸化対策。
+・外食が多い場合：サラダを選ぶ、食べる順番（水分→生野菜→メイン→デザート）を意識する。
+・冬でも続けられる：常温に戻す、温かい飲み物を使う、発酵食と組み合わせる。
+・好転反応：開始後数日〜1週間は倦怠感／眠気／頭痛／便秘または下痢／肌荒れが出ることがある。これは老廃物が排出される過程で一時的なもの。無理せずゆるやかに継続する。
+・3週間プログラム：1週目は朝だけスムージー、2週目は昼もローフード中心＋発酵活用、3週目は3食中2食をローフード＋1食調整型。
+・水分摂取目安：1日1.5〜2リットル。
+・控えたいもの：アルコール、揚げ物・動物性脂肪の多い食品、白砂糖・精製甘味料、カフェイン、小麦製品（完全除去は不要、量の調整）。
+
+【回答のスタンス】
+- 安藤千英として、温かく励ますような口調で答える。
+- 本書の内容に基づいた範囲でのみ答え、過度な医学的断定は避け、心配な症状は医師に相談するよう優しく案内する。
+- 簡潔に、3〜5文程度で答える。
+            `;
+
+            const chatBox = document.getElementById('soudan-chat-box');
+            const soudanInput = document.getElementById('soudan-input');
+            const soudanSendBtn = document.getElementById('soudan-send-btn');
+
+            const addMessage = (sender, text) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = "flex items-start gap-3 " + (sender === 'user' ? "justify-end" : "");
+                let avatarHTML = '';
+                let bubbleClass = '';
+                if (sender === 'user') {
+                    avatarHTML = `<div class="w-8 h-8 rounded-full bg-[#C9A227] text-white flex items-center justify-center font-bold text-xs shrink-0 order-2 shadow">ME</div>`;
+                    bubbleClass = "bg-[#C9A227] text-white rounded-tr-none shadow-sm order-1";
+                } else {
+                    avatarHTML = `<div class="w-8 h-8 rounded-full bg-[#5C6E45] text-white flex items-center justify-center font-bold text-xs shrink-0 order-1 shadow">AI</div>`;
+                    bubbleClass = "bg-white text-gray-700 rounded-tl-none shadow-sm border border-[#E3D8BE] order-2";
+                }
+                msgDiv.innerHTML = `${avatarHTML}<div class="p-3.5 rounded-2xl max-w-[85%] ${bubbleClass}"><p class="text-sm leading-relaxed whitespace-pre-wrap">${text}</p></div>`;
+                chatBox.appendChild(msgDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                return msgDiv;
+            };
+
+            const handleSoudan = async (message) => {
+                if (!message) return;
+                addMessage('user', message);
+                soudanInput.value = "";
+
+                if (!checkUsageLimit()) {
+                    addMessage('ai', "本日のAI利用回数（10回）の上限に達しました。また明日ご相談ください。");
+                    return;
+                }
+
+                const typingMsg = addMessage('ai', '思考中...');
+                typingMsg.id = 'soudan-typing-indicator';
+
+                const payload = {
+                    contents: [{ parts: [{ text: message }] }],
+                    systemInstruction: { parts: [{ text: SOUDAN_SYSTEM_PROMPT }] }
+                };
+
+                try {
+                    const result = await callGeminiApi(payload);
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    document.getElementById('soudan-typing-indicator').remove();
+                    if (text) {
+                        addMessage('ai', text);
+                    } else {
+                        throw new Error("応答が空でした。");
+                    }
+                } catch (err) {
+                    document.getElementById('soudan-typing-indicator').remove();
+                    rollbackUsageLimit();
+                    addMessage('ai', "申し訳ありません、通信エラーが発生しました（利用回数は消費されていません）。少し時間をおいて再度お試しください。");
+                }
+            };
+
+            soudanSendBtn.addEventListener('click', () => handleSoudan(soudanInput.value.trim()));
+            soudanInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSoudan(soudanInput.value.trim()); });
+            document.querySelectorAll('.soudan-shortcut').forEach(btn => {
+                btn.addEventListener('click', () => handleSoudan(btn.getAttribute('data-msg')));
+            });
+
+        });
+    </script>
+</body>
+</html>
