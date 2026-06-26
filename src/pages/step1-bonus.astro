@@ -551,6 +551,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
 
             const DAILY_LIMIT = 10;
             function checkUsageLimit() {
+                if (typeof isTestVisit !== 'undefined' && isTestVisit) return true;
                 const today = new Date().toDateString();
                 let usage = JSON.parse(localStorage.getItem('step1bonus_ai_usage') || '{"date": "", "count": 0}');
                 if (usage.date !== today) usage = { date: today, count: 0 };
