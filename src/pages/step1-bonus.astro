@@ -186,10 +186,40 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                             <div class="flex flex-wrap gap-2" id="smoothie-ingredient-pills">
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="小松菜">小松菜</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ほうれん草">ほうれん草</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ケール">ケール</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="セロリ">セロリ</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="りんご">りんご</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="バナナ">バナナ</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="レモン">レモン</button>
                                 <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="生姜">生姜</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">🍃 今が旬のフルーツ（任意）：</span>
+                            <div class="flex flex-wrap gap-2" id="smoothie-seasonal-pills"></div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">✦ スーパーフードを加える（任意）：</span>
+                            <div class="flex flex-wrap gap-2" id="smoothie-superfood-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="スピルリナ">スピルリナ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="チアシード">チアシード</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ビーポーレン">ビーポーレン</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="カカオ">カカオ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="抹茶">抹茶</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="ターメリック">ターメリック</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="block text-xs font-bold text-gray-700 mb-3">🎯 目的（任意）：</span>
+                            <div class="flex flex-wrap gap-2" id="smoothie-goal-pills">
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="デトックス・むくみ巡り">デトックス・巡り</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="美肌・エイジングケア">美肌・エイジングケア</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="腸活・便通">腸活・便通</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="疲労回復・元気チャージ">疲労回復・元気チャージ</button>
+                                <button class="pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent" data-val="リフレッシュ・気分転換">リフレッシュ・気分転換</button>
                             </div>
                         </div>
 
@@ -447,8 +477,58 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                 return { getValues: () => Array.from(selectedSet) };
             }
 
+            function setupOptionalSinglePillGroup(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return { getValue: () => "" };
+                let selected = "";
+                container.querySelectorAll('.pill').forEach(pill => {
+                    pill.addEventListener('click', () => {
+                        const val = pill.getAttribute('data-val');
+                        if (selected === val) {
+                            selected = "";
+                            pill.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                        } else {
+                            container.querySelectorAll('.pill').forEach(p => {
+                                p.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                            });
+                            pill.className = "pill bg-[#5C6E45] text-white text-xs px-4 py-2 rounded-full font-bold border border-transparent";
+                            selected = val;
+                        }
+                    });
+                });
+                return { getValue: () => selected };
+            }
+
+            // 今が旬のフルーツピルを月ごとに生成
+            const SEASONAL_FRUITS_BY_MONTH = {
+                1: ['みかん', 'いちご', 'キウイ'],
+                2: ['いちご', 'みかん', 'キウイ'],
+                3: ['いちご', 'デコポン', 'グレープフルーツ'],
+                4: ['いちご', 'グレープフルーツ', 'びわ'],
+                5: ['びわ', 'メロン', 'いちご'],
+                6: ['すいか', 'メロン', 'プラム'],
+                7: ['すいか', 'もも', 'ブルーベリー'],
+                8: ['すいか', 'もも', 'ぶどう'],
+                9: ['ぶどう', 'なし', 'いちじく'],
+                10: ['ぶどう', 'りんご', 'かき'],
+                11: ['りんご', 'かき', 'みかん'],
+                12: ['みかん', 'りんご', 'ゆず']
+            };
+            const seasonalContainer = document.getElementById('smoothie-seasonal-pills');
+            const currentMonthForFruit = new Date().getMonth() + 1;
+            (SEASONAL_FRUITS_BY_MONTH[currentMonthForFruit] || []).forEach(fruit => {
+                const btn = document.createElement('button');
+                btn.className = "pill bg-gray-100 hover:bg-gray-200 text-xs px-4 py-2 rounded-full font-medium border border-transparent";
+                btn.setAttribute('data-val', fruit);
+                btn.innerText = fruit;
+                seasonalContainer.appendChild(btn);
+            });
+
             const smoothieLevel = setupSinglePillGroup('smoothie-level-pills');
             const smoothieIngredients = setupMultiPillGroup('smoothie-ingredient-pills');
+            const smoothieSeasonalFruit = setupMultiPillGroup('smoothie-seasonal-pills');
+            const smoothieSuperfoods = setupMultiPillGroup('smoothie-superfood-pills');
+            const smoothieGoal = setupOptionalSinglePillGroup('smoothie-goal-pills');
             const dressingType = setupSinglePillGroup('dressing-type-pills');
             const dressingVegetables = setupMultiPillGroup('dressing-vegetable-pills');
 
@@ -583,6 +663,19 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
 6. 甘味料は加えず、果物本来の甘さを活かす。
 7. ユーザーが希望した食材が3の「適さない野菜」に該当する場合は、レシピには含めず、ingredientNoteで理由をやさしく説明し、代わりに使った野菜を伝えること。希望食材がすべて使える場合はingredientNoteは空文字でよい。
 
+【本書に実在するスーパーフード入りスムージー（参考レシピ）】
+- 「スピルリナグリーンのスムージー」：バナナ、りんご、ケール、レモン果汁、スピルリナ小さじ1/3〜1/2、水。スピルリナは少量ずつ加えるのがポイント。
+- 「整える、朝のスムージー」：ミックスベリー、セロリ、バナナ、水、レモン果汁。
+- ユーザーがスーパーフード（スピルリナ、チアシード、ビーポーレン、カカオ、抹茶、ターメリック等）を希望した場合、上記レシピを参考に少量から加える形で取り入れてよい。チアシードやビーポーレンはトッピングとして仕上げに加える形が本書の流儀。
+
+【目的別のアレンジ指針】
+- 「デトックス・むくみ巡り」：セロリ、レモン、きゅうり系の要素を意識する。
+- 「美肌・エイジングケア」：ビタミンCが豊富なベリー類や柑橘、抗酸化のカカオ・スピルリナを意識する。
+- 「腸活・便通」：食物繊維の多い葉野菜とりんご（皮ごと）を意識する。
+- 「疲労回復・元気チャージ」：バナナなど自然な糖質とビタミンB群を意識する。
+- 「リフレッシュ・気分転換」：ミントや柑橘系の爽やかな香りを意識する。
+- 目的が「おまかせ」の場合は、上記を踏まえつつバランスよく提案する。
+
 【表現上の注意（重要）】
 - スムージーはブレンダーで滑らかにした飲み物です。「シャキシャキ」「歯ごたえ」など固形物の食感を表す言葉は絶対に使わないでください。
 - 代わりに「なめらか」「すっきり」「飲みやすい」「爽やか」など、飲み物にふさわしい表現を使ってください。
@@ -591,7 +684,7 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
 - 生食に適さない、または処理をしないと有毒な果物は絶対に提案しないこと。特に「梅（未熟な生梅はアミグダリンを含み中毒のおそれがあり、必ず梅酒・梅干し等の加工が必要なため生食NG）」「銀杏（生食・多量摂取で中毒のおそれ）」「あんず・びわ等の種」は提案禁止。
 - 季節のフルーツは、りんご・柑橘類（みかん・グレープフルーツ等）・いちご・桃・ぶどう・柿・すいか・メロン・キウイ・バナナ・ベリー類など、生のまま安全に食べられる一般的な果物の中から、旬のものを提案すること。
 
-ユーザーの要望（レベル・食材・現在の季節）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+ユーザーの要望（レベル・食材・旬のフルーツ・スーパーフード・目的・現在の季節）を踏まえ、上記ルールの範囲内でレシピをJSONで返してください。conceptには、栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
 balanceには、出来上がるスムージーの特徴を1〜5の整数で評価してください（sweetness=甘さ、fiber=食物繊維量、vitaminC=ビタミンC量、detox=整え・デトックス度）。
 seasonalTipには、伝えられた現在の季節（月）に合わせた一言アレンジ提案を書いてください（例：冷凍フルーツで冷たく、生姜を増やして温め効果を高める、旬の果物に差し替える、など）。本書の理論の範囲内で提案してください。
 chapterRefには、このレシピが本書のどの内容を参考にしているかを一言で書いてください（例：「本書 Lesson1『スムージーは"整える朝の一杯"』より」「本書 比率別スムージー例チャートより」など）。
@@ -604,13 +697,16 @@ chapterRefには、このレシピが本書のどの内容を参考にしてい�
                 }
                 const level = smoothieLevel.getValue();
                 const ingredients = smoothieIngredients.getValues();
+                const seasonalFruit = smoothieSeasonalFruit.getValues();
+                const superfoods = smoothieSuperfoods.getValues();
+                const goal = smoothieGoal.getValue();
                 const custom = document.getElementById('smoothie-custom').value.trim();
 
                 document.getElementById('smoothie-output').classList.add('hidden');
                 showLoading();
 
                 const currentMonth = new Date().getMonth() + 1;
-                const userPrompt = `レベル: ${level}\n使いたい食材: ${ingredients.join(', ') || 'おまかせ'}\n追加要望: ${custom || 'なし'}\n現在の季節: ${currentMonth}月`;
+                const userPrompt = `レベル: ${level}\n使いたい食材: ${ingredients.join(', ') || 'おまかせ'}\n旬のフルーツ希望: ${seasonalFruit.join(', ') || 'なし'}\nスーパーフード希望: ${superfoods.join(', ') || 'なし'}\n目的: ${goal || 'おまかせ'}\n追加要望: ${custom || 'なし'}\n現在の季節: ${currentMonth}月`;
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: SMOOTHIE_SYSTEM_PROMPT }] },
