@@ -14,7 +14,8 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-CHR2SG5835');
+      const isTestVisit = new URLSearchParams(window.location.search).has('test');
+      gtag('config', 'G-CHR2SG5835', { debug_mode: isTestVisit });
     </script>
     <script src="https://cdn.tailwindcss.com" is:inline></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
