@@ -1,0 +1,516 @@
+---
+// Sample Profile Page - 営業用サンプル版
+// 本来のプロフィールは /profile（パスワード保護予定）
+const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "undefined" ? process.env.GEMINI_API_KEY : "") || "";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chie Ando Official Profile | &LAB TOKYO - Sample</title>
+    <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+        :root {
+            --color-bg: #FDFBF7;
+            --color-primary: #4A635D;
+            --color-secondary: #C2A878;
+            --color-accent: #E5D5B5;
+            --color-text: #333333;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .section-fade {
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-secondary);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .card-hover {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: #E5E7EB;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line::before { left: 16px; transform: none; }
+        }
+
+        .sample-banner {
+            background: linear-gradient(135deg, #E5D5B5 0%, #C2A878 100%);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden text-gray-800">
+
+    <!-- サンプル版バナー -->
+    <div class="sample-banner">
+        📋 これはサンプル版です｜このようなプロフィールページを制作できます
+    </div>
+
+    <div id="gemini-api-config" data-api-key={geminiApiKey} style="display:none;"></div>
+
+    <!-- ナビゲーション -->
+    <nav class="fixed top-16 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <span class="text-xl font-bold tracking-tighter text-gray-900">
+                CHIE ANDO <span class="text-xs font-normal text-gray-500 ml-1">Official Profile</span>
+            </span>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#journey" class="nav-link">Life Journey</a>
+                <a href="#education" class="nav-link">&LAB TOKYO</a>
+                <a href="#spirulina" class="nav-link">Spirulina LAB</a>
+                <a href="#global" class="nav-link">Global/Media</a>
+                <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="border border-[#C2A878] text-[#C2A878] hover:bg-[#C2A878] hover:text-white px-4 py-1.5 rounded-full transition-colors text-xs font-bold tracking-widest">OFFICIAL SITE</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-2 flex flex-col justify-center items-center space-y-1.5 focus:outline-none">
+                <div class="w-6 h-0.5 bg-gray-800"></div>
+                <div class="w-6 h-0.5 bg-gray-800"></div>
+                <div class="w-6 h-0.5 bg-gray-800"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- モバイルドロワー -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden transition-opacity duration-300 opacity-0">
+        <div class="fixed right-0 top-0 bottom-0 w-64 bg-white shadow-2xl p-6 transform translate-x-full transition-transform duration-300" id="drawer-content">
+            <div class="flex justify-between items-center mb-8">
+                <span class="font-bold text-gray-800 tracking-widest">MENU</span>
+                <button id="close-drawer-btn" class="text-gray-500 hover:text-gray-800 text-3xl font-light leading-none">&times;</button>
+            </div>
+            <div class="flex flex-col space-y-6 text-base font-medium">
+                <a href="#journey" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">人生の歩み</a>
+                <a href="#education" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">料理教室 &LAB TOKYO</a>
+                <a href="#spirulina" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">スピルリナ LAB</a>
+                <a href="#global" class="text-gray-600 hover:text-[#4A635D] transition-colors drawer-link">グローバル活動とメディア</a>
+                <div class="pt-6 border-t border-gray-100">
+                    <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-[#FDFBF7] border border-[#C2A878]/30 text-[#8C6D3B] py-3 rounded-xl text-sm font-bold tracking-widest hover:bg-[#C2A878] hover:text-white transition-colors">公式サイトへ ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ヒーローセクション -->
+    <section class="relative pt-32 pb-24 px-4 bg-gradient-to-b from-[#F9F7F2] to-white overflow-hidden min-h-[90vh] flex items-center mt-16">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-block px-4 py-1 mb-6 border border-[#C2A878] text-[#C2A878] text-xs tracking-widest rounded-full uppercase font-bold bg-white/50 backdrop-blur">Syn-Living Food Innovator</div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
+                食べたものが身体をつくり、<br><span class="text-[#4A635D] italic">人生を変える。</span>
+            </h1>
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+                安藤千英（Chie Ando）は、ローフードと日本の発酵文化を組み合わせた<br class="hidden md:block">
+                新しい食のあり方「シンリビングフード」を提唱しています。<br class="hidden md:block">
+                ELLE gourmet公認料理家として、教育、ブランディング、サステナビリティを統合し、<br class="hidden md:block">
+                細胞レベルで生まれ変わる食の力を世界へ発信しています。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#journey" class="w-full sm:w-auto bg-[#4A635D] text-white px-8 py-3.5 rounded-lg font-bold shadow-lg hover:bg-[#384C47] transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                    <span>プロフィールを見る</span>
+                </a>
+            </div>
+        </div>
+        <div class="absolute -right-20 -top-20 w-[500px] h-[500px] bg-[#4A635D]/5 rounded-full blur-3xl"></div>
+        <div class="absolute -left-20 -bottom-20 w-[400px] h-[400px] bg-[#C2A878]/10 rounded-full blur-3xl"></div>
+    </section>
+
+    <!-- プロフィール・タイムライン -->
+    <section id="journey" class="py-24 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="mb-16 text-center">
+                <h2 class="text-3xl font-bold mb-4">Life Journey</h2>
+                <div class="w-12 h-1 bg-[#C2A878] mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm leading-relaxed">
+                    福岡の老舗割烹料理屋の長女として生まれ、専業主婦としての17年間を経て、家族の危機をきっかけに料理家として歩み始めました。食には人を治す力があると確信した、これまでの道のりです。
+                </p>
+            </div>
+
+            <div class="relative timeline-line pt-8 pb-8">
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
+                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">1973</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">福岡の老舗割烹に生まれる</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            安藤千英氏は、1973年に福岡県で長い歴史を持つ割烹料理屋の長女として誕生した。幼少期から伝統的な日本料理や保存食、手仕事に親しむ環境で育ち、家政科を卒業するなど、食に対する基礎的な素養を培った。
+                        </p>
+                    </div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 w-full">
+                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">21歳〜38歳（専業主婦期）</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">結婚・出産を経て、17年間専業主婦として家庭を守る</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            社会で専門性を発揮する友人たちを見て焦りを感じることもあったが、フラワーアレンジメントの資格を取得するなど、自己のアイデンティティを模索する葛藤期を経験。この時期に培った色彩感覚やデザインへの視点は、後の料理家としての表現の土台になる。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
+                        <span class="text-sm font-bold text-[#4A635D] tracking-widest">Turning Point（38歳）</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">人生の転機が訪れる。第3子の重度熱傷事故と「食の力」</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            全身におよぶ重度熱傷を負った娘の闘病に向き合いながら、肌の再生と回復を願い、食の力を再認識しました。マクロビオティック、ローフード、発酵について深く学び始めた。
+                        </p>
+                    </div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 w-full">
+                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">2016年7月〜12月</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">ローフードとの出会いから、わずか5ヶ月でレッスン開始</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            アメリカの著名なローフードシェフ、マシュー・ケニー氏の調理法と美しい盛り付けに衝撃を受ける。資格取得と講師試験にわずか1ヶ月で合格し、同じ年の12月、福岡で料理教室「happycheesekitchen」をスタート。自身も体年齢マイナス6歳、体重マイナス3kgという変化を実証した。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
+                        <span class="text-sm font-bold text-[#4A635D] tracking-widest">2016-2018（福岡での教室と学びの深化）</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">料理家としての独立と福岡での活躍</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            福岡で料理教室「happycheesekitchen」を開講し、活動の幅を広げる中、2018年にはロサンゼルスのカフェでマシュー・ケニー氏と対面する。
+                        </p>
+                    </div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center mb-16 z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#C2A878] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 w-full">
+                        <span class="text-sm font-bold text-[#C2A878] tracking-widest">2019-2021（東京進出と&LAB TOKYOへの発展）</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">東京進出と「&LAB TOKYO」へ</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            活動拠点を東京・渋谷へ移転し、「happycheesekitchen」から「&LAB TOKYO」へと改称。ローフードと発酵食を融合させた「リビングフード」の体系化を進める。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item -->
+                <div class="relative flex flex-col md:flex-row items-center z-10 w-full pl-12 md:pl-0">
+                    <div class="md:w-1/2 md:pr-12 md:text-right w-full">
+                        <span class="text-sm font-bold text-[#4A635D] tracking-widest">Present</span>
+                        <h3 class="text-xl font-bold mt-1 mb-2">グローバル展開と著書、そして「シンリビングフード」へ</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            著書『&RAW LIVING Step1 ─ ローフードの教科書』は医学博士監修のもとAmazonランキング1位を獲得し、英語版も同時リリース。出版プロデュース「Creative Book Lab」など、教育・ブランディング・サステナビリティを統合する活動を続ける。現在は、ローフードと日本の発酵文化を組み合わせた新しい食のあり方「シンリビングフード」を提唱している。
+                        </p>
+                    </div>
+                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4A635D] rounded-full border-4 border-white shadow"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育・IPエコシステム -->
+    <section id="education" class="py-24 px-4 bg-white border-t border-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 md:flex md:justify-between md:items-end">
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-4">Educational Ecosystem</h2>
+                    <div class="w-12 h-1 bg-[#C2A878] mb-6"></div>
+                    <p class="text-gray-600 leading-relaxed">
+                        渋谷に拠点を置く「&LAB TOKYO」では、単なるレシピ提供を超え、
+                        商標登録等の知的財産（IP）を軸としたライセンス講座を展開。
+                        受講生がプロの講師やクリエイターとして自立できる本質的な仕組みを構築しています。
+                    </p>
+                </div>
+                <div class="hidden md:block md:w-1/3 text-right">
+                    <span class="inline-block px-3 py-1 bg-gray-100 text-gray-500 text-xs rounded-full font-bold tracking-widest">&LAB TOKYO SHIBUYA</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#4A635D]/5 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                    <div class="text-3xl mb-5 relative z-10">🥗</div>
+                    <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">ローフード</h3>
+                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">日本リビングビューティー協会(JLBA)認定校。細胞レベルでのデトックスと再生を追求する教育。</p>
+                </div>
+                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#C2A878]/10 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                    <div class="text-3xl mb-5 relative z-10">🍫</div>
+                    <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">ローチョコレート</h3>
+                    <p class="text-sm text-gray-600 mb-4 relative z-10 leading-relaxed">「ローショコラティエ」の商標を取得。砂糖・乳製品不使用、温度管理を徹底した高度な製菓技術。</p>
+                </div>
+                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#4A635D]/5 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                    <div class="text-3xl mb-5 relative z-10">🍶</div>
+                    <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">発酵プランナー</h3>
+                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">日本の伝統と暮らしに根ざした「生きた知識」。本質的な発酵の体系化。</p>
+                </div>
+                <div class="p-8 bg-[#FDFBF7] rounded-2xl card-hover border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#C2A878]/10 rounded-bl-full -z-0 transition-transform group-hover:scale-150"></div>
+                    <div class="text-3xl mb-5 relative z-10">📸</div>
+                    <h3 class="text-lg font-bold mb-3 text-gray-900 relative z-10">ビジュアル発信</h3>
+                    <p class="text-sm text-gray-600 mb-6 relative z-10 leading-relaxed">料理家・講師として世界観を表現する自己ブランディング。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spirulina LAB -->
+    <section id="spirulina" class="py-24 px-4 bg-[#F5F8F7] border-t border-gray-200 relative overflow-hidden">
+        <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-96 h-96 bg-[#4A635D]/5 rounded-full blur-3xl"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="mb-16 text-center">
+                <span class="text-[#4A635D] font-bold tracking-widest text-sm uppercase">Superfood Innovation</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 mt-2 text-gray-900">Spirulina LAB</h2>
+                <div class="w-12 h-1 bg-[#4A635D] mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed text-sm">
+                    スピルリナLABを主宰。50種類以上の健康・栄養成分を含む「スーパーフードの王様」スピルリナを、<br class="hidden md:block">
+                    毎日の食卓で美しく、美味しく取り入れるためのリビングフードレシピを開発・発信しています。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4 leading-tight text-gray-900">地球最古の植物で、<br>細胞から美しく。</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-sm">
+                        約30億年前に誕生したとされる最古の植物、スピルリナ。その強力な抗酸化力とデトックス作用に着目し、加熱しない「リビングフード」と掛け合わせることで、栄養素の吸収率を極限まで高めるメソッドを構築しています。
+                    </p>
+                    <div class="space-y-5">
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4">🌿</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">驚異の消化吸収率 95%</h4>
+                                <p class="text-xs text-gray-500 mt-1">細胞壁が薄いため、栄養素が体に負担なく素早く吸収されます。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4">✨</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">強力なエイジングケア</h4>
+                                <p class="text-xs text-gray-500 mt-1">クロロフィルやフィコシアニンが、体内の酸化を防ぎクリアな肌へ。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-center">
+                    <span class="text-xs font-bold text-[#C2A878] uppercase tracking-widest block mb-2">Sustainable Project</span>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">FUFP<br><span class="text-sm font-normal text-gray-500">富士山アップサイクルフードプロジェクト</span></h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-sm">
+                        山梨県のワイン醸造過程で廃棄される「ビオ赤ワインパミス」を、ポリフェノール豊富な「美しいおやつ」へと昇華。フードロス削減と地域創生に取り組んでいます。
+                    </p>
+                    <div class="text-4xl mt-auto pt-4 flex gap-4 opacity-80">
+                        🍷 ♻️
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- メディア・ブランディング -->
+    <section id="global" class="py-24 px-4 bg-white border-t border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="flex-1">
+                    <div class="inline-block px-3 py-1 mb-4 bg-gray-100 text-gray-600 text-xs font-bold tracking-widest rounded-full uppercase">Global Reach</div>
+                    <h2 class="text-3xl font-bold mb-6">Media & Branding</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        国内でのベストセラー獲得に留まらず、その活動は海外メディアでも注目されています。
+                        出版プロデュース「Creative Book Lab」など、教育・ブランディング・サステナビリティを統合する活動を続けています。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <span class="block text-3xl font-bold text-[#4A635D] mb-1">Amazon #1</span>
+                            <span class="text-xs font-bold text-gray-500 tracking-wide uppercase">『&RAW LIVING Step1』</span>
+                            <p class="text-[10px] text-gray-400 mt-2">栄養科学・食品科学部門 1位獲得</p>
+                        </div>
+                        <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <span class="block text-3xl font-bold text-[#C2A878] mb-1">認定</span>
+                            <span class="text-xs font-bold text-gray-500 tracking-wide uppercase">ELLE Gourmet</span>
+                            <p class="text-[10px] text-gray-400 mt-2">公認料理家として活動中</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 bg-[#FDFBF7] p-8 md:p-10 rounded-3xl border border-[#C2A878]/20 relative">
+                    <div class="absolute -top-4 -right-4 text-6xl opacity-10">🌍</div>
+                    <h4 class="font-bold text-xl mb-6 text-gray-900 border-b border-gray-200 pb-3">Official Partnerships</h4>
+                    <ul class="space-y-6">
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
+                            <div>
+                                <h5 class="font-bold text-sm text-gray-900">ELLE gourmet 公認料理家</h5>
+                                <p class="text-xs text-gray-500 mt-1">フードクリエイター部メンバー</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
+                            <div>
+                                <h5 class="font-bold text-sm text-gray-900">出版プロデュース</h5>
+                                <p class="text-xs text-gray-500 mt-1">「Creative Book Lab」として書籍制作をサポート</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="mt-1 mr-4 bg-[#C2A878] rounded-full p-1.5"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></div>
+                            <div>
+                                <h5 class="font-bold text-sm text-gray-900">スピルリナLAB</h5>
+                                <p class="text-xs text-gray-500 mt-1">スーパーフード「スピルリナ」の研究・発信</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-16 px-4 bg-[#1F2937] text-white">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+            <div class="text-center md:text-left">
+                <span class="text-2xl font-bold tracking-tighter block mb-2">CHIE ANDO</span>
+                <p class="text-gray-400 text-xs leading-relaxed max-w-xs mx-auto md:mx-0">
+                    Syn-Living Food Innovator<br>
+                    &LAB TOKYO | Spirulina LAB
+                </p>
+                <a href="https://www.andlabtokyo.com/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-[#C2A878] hover:text-white text-xs border-b border-[#C2A878] pb-0.5 transition-colors">Official Website ↗</a>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-sm text-[#C2A878] mb-6 italic font-serif">"食べることは、生きることそのもの。"</p>
+                <div class="flex flex-wrap justify-center md:justify-end gap-4 text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+                    <span class="border border-gray-700 px-3 py-1 rounded">Research 2026</span>
+                    <span class="border border-gray-700 px-3 py-1 rounded">Wellness</span>
+                    <span class="border border-gray-700 px-3 py-1 rounded">Innovation</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16 text-center text-[10px] text-gray-500 border-t border-gray-800 pt-8 tracking-widest uppercase">
+            &copy; 2026 Deep Research Profile. &LAB TOKYO Official.
+        </div>
+    </footer>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const drawerContent = document.getElementById('drawer-content');
+            const closeBtn = document.getElementById('close-drawer-btn');
+
+            const openDrawer = () => {
+                mobileDrawer.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileDrawer.classList.remove('opacity-0');
+                    drawerContent.classList.remove('translate-x-full');
+                }, 20);
+            };
+
+            const closeDrawer = () => {
+                mobileDrawer.classList.add('opacity-0');
+                drawerContent.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileDrawer.classList.add('hidden');
+                }, 300);
+            };
+
+            mobileBtn.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            mobileDrawer.addEventListener('click', (e) => {
+                if (e.target === mobileDrawer) closeDrawer();
+            });
+
+            document.querySelectorAll('.drawer-link').forEach(link => {
+                link.addEventListener('click', closeDrawer);
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            const observerOptions = { threshold: 0.15 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('section-fade', 'opacity-0', 'translate-y-8');
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
