@@ -277,6 +277,10 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                                     <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1.5" id="dressing-out-steps"></ol>
                                 </div>
                             </div>
+                            <div class="bg-[#C9A227]/10 border border-[#C9A227]/30 rounded-lg p-4 flex items-start gap-3">
+                                <span class="text-lg">🍃</span>
+                                <p class="text-xs text-gray-700 leading-relaxed" id="dressing-out-seasonal"></p>
+                            </div>
                         </div>
                     </div>
 
@@ -521,15 +525,16 @@ const geminiApiKey = import.meta.env.GEMINI_API_KEY || (typeof process !== "unde
                 errorText.innerText = message;
             }
 
-            const recipeSchema = {
+            const dressingRecipeSchema = {
                 type: "OBJECT",
                 properties: {
                     name: { type: "STRING" },
                     concept: { type: "STRING" },
                     ingredients: { type: "ARRAY", items: { type: "STRING" } },
-                    steps: { type: "ARRAY", items: { type: "STRING" } }
+                    steps: { type: "ARRAY", items: { type: "STRING" } },
+                    seasonalTip: { type: "STRING", description: "今の季節の旬野菜を使ったアレンジ提案" }
                 },
-                required: ["name", "concept", "ingredients", "steps"]
+                required: ["name", "concept", "ingredients", "steps", "seasonalTip"]
             };
 
             const smoothieRecipeSchema = {
@@ -665,8 +670,10 @@ seasonalTipには、伝えられた現在の季節（月）に合わせた一言
 - 甘みはメイプルシロップのみを使用し、白砂糖は使わない。
 - オイルは基本的にオリーブオイルを使用する。
 - 上記7レシピの技法を参考に、ユーザーの好みのタイプ・要望に合わせたオリジナルの組み合わせを提案する。架空の珍しい食材は使わず、家庭で手に入るものに限定する。
+- 合わせるサラダの野菜については、本書に明確な制限はないため、旬の野菜を含め自由に提案してよい。
 
 レシピをJSONで返してください。conceptには、発酵や栄養面の効果を本書のトーンに合わせて簡潔に書いてください。
+seasonalTipには、伝えられた現在の季節（月）の旬の野菜を使ったサラダのアレンジ提案を一言で書いてください。
             `;
 
             document.getElementById('generate-dressing-btn').addEventListener('click', async () => {
@@ -681,11 +688,12 @@ seasonalTipには、伝えられた現在の季節（月）に合わせた一言
                 document.getElementById('dressing-output').classList.add('hidden');
                 showLoading();
 
-                const userPrompt = `好みのタイプ: ${type}\n合わせたい野菜・料理: ${vegetables.join(', ') || 'おまかせ'}\nその他に合わせたいもの: ${custom || 'なし'}`;
+                const currentMonth = new Date().getMonth() + 1;
+                const userPrompt = `好みのタイプ: ${type}\n合わせたい野菜・料理: ${vegetables.join(', ') || 'おまかせ'}\nその他に合わせたいもの: ${custom || 'なし'}\n現在の季節: ${currentMonth}月`;
                 const payload = {
                     contents: [{ parts: [{ text: userPrompt }] }],
                     systemInstruction: { parts: [{ text: DRESSING_SYSTEM_PROMPT }] },
-                    generationConfig: { responseMimeType: "application/json", responseSchema: recipeSchema }
+                    generationConfig: { responseMimeType: "application/json", responseSchema: dressingRecipeSchema }
                 };
 
                 try {
@@ -703,6 +711,8 @@ seasonalTipには、伝えられた現在の季節（月）に合わせた一言
                     const ol = document.getElementById('dressing-out-steps');
                     ol.innerHTML = "";
                     data.steps.forEach(s => { const li = document.createElement('li'); li.innerText = s; ol.appendChild(li); });
+
+                    document.getElementById('dressing-out-seasonal').innerText = data.seasonalTip || '';
 
                     hideLoading();
                     document.getElementById('dressing-output').classList.remove('hidden');
