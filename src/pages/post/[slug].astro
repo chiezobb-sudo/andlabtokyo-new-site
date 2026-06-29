@@ -1,0 +1,121 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, date, image, category } = post.data;
+
+const formattedDate = new Date(date).toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={image}
+  type="article"
+>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .article-hero {
+      position: relative; height: 52vh; min-height: 320px; overflow: hidden;
+    }
+    .article-hero img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block;
+    }
+    .article-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,28,26,.75) 0%, rgba(28,28,26,.2) 60%, transparent 100%);
+    }
+    .article-hero-text {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0 5vw 3rem; max-width: 860px; margin: 0 auto;
+    }
+    .article-cat {
+      font-family: var(--f-sans); font-size: .72rem; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--green); display: block; margin-bottom: 1rem;
+    }
+    .article-title {
+      font-family: var(--f-serif); font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 300; color: #fff; line-height: 1.35; letter-spacing: .04em;
+    }
+
+    .article-wrap {
+      max-width: 760px; margin: 0 auto; padding: 3.5rem 5vw 6rem;
+    }
+    .article-meta {
+      font-family: var(--f-sans); font-size: .78rem; color: #888;
+      letter-spacing: .08em; margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem; border-bottom: 1px solid #e8e4dc;
+    }
+
+    .article-body { font-family: var(--f-sans); font-size: 1rem; line-height: 2; color: #333; }
+    .article-body h2 {
+      font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400;
+      margin: 2.5rem 0 1rem; padding-bottom: .5rem;
+      border-bottom: 1px solid #C2A878; color: #2c2c2a;
+    }
+    .article-body h3 {
+      font-family: var(--f-serif); font-size: 1.15rem; font-weight: 400;
+      margin: 2rem 0 .8rem; color: #2c2c2a;
+    }
+    .article-body p { margin-bottom: 1.4rem; }
+    .article-body img {
+      width: 100%; height: auto; border-radius: 4px;
+      margin: 1.5rem 0; display: block;
+    }
+    .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { font-weight: 700; }
+    .article-body a { color: #C2A878; text-decoration: underline; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--f-sans); font-size: .82rem; letter-spacing: .1em;
+      color: #888; text-decoration: none; margin-top: 3rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: #C2A878; }
+
+    @media (max-width: 600px) {
+      .article-wrap { padding: 2.5rem 1.2rem 4rem; }
+    }
+  </style>
+
+  {image && (
+    <div class="article-hero">
+      <img src={image} alt={title} loading="eager" />
+      <div class="article-hero-overlay"></div>
+      <div class="article-hero-text">
+        <span class="article-cat">{category}</span>
+        <h1 class="article-title">{title}</h1>
+      </div>
+    </div>
+  )}
+  {!image && (
+    <div style="padding: 4rem 5vw 2rem; max-width: 760px; margin: 0 auto;">
+      <span style="font-family: var(--f-sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green);">{category}</span>
+      <h1 style="font-family: var(--f-serif); font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 300; margin-top: 1rem; line-height: 1.35;">{title}</h1>
+    </div>
+  )}
+
+  <div class="article-wrap">
+    <p class="article-meta">{formattedDate}</p>
+    <div class="article-body">
+      <Content />
+    </div>
+    <a href="/blog" class="back-link">← ブログ一覧へ戻る</a>
+  </div>
+</Layout>
