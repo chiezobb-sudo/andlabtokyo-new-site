@@ -196,7 +196,7 @@ const courseJsonLd = {
     }
 
     /* STEPS */
-    .bg-dark { background: #1c1c1a; }
+    .bg-dark { background: #3D2E22; }
     .bg-dark .sec-title { color: #fff; }
     .bg-dark .sec-lead { color: rgba(255,255,255,.65); }
     .steps-wrap { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
@@ -299,7 +299,11 @@ const courseJsonLd = {
     .faq-item.open .faq-a { max-height: 220px; padding-top: .9rem; }
 
     /* CTA */
-    .cta-section { background: #1c1c1a; text-align: center; padding: 6rem 6vw; }
+    .cta-section {
+      position: relative; text-align: center; padding: 6rem 6vw; overflow: hidden;
+      background-image: linear-gradient(rgba(61,46,34,.82), rgba(61,46,34,.88)), url('/raw-chocolate.jpg');
+      background-size: cover; background-position: center;
+    }
     .cta-title {
       font-family: var(--f-serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 300; color: #fff; line-height: 1.5; margin-bottom: 1rem;
