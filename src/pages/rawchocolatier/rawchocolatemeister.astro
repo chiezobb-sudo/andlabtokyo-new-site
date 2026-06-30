@@ -24,18 +24,21 @@ const features = [
 const steps = [
   {
     level: "初級", label: "基礎", price: "¥16,500（税別）",
+    image: "/choco-real/07-step-beginner.jpg",
     goal: "ローチョコレートの基本を理解し、テンパリングを習得する",
     contents: ["ローチョコレートとは？歴史と栄養", "カカオバター・カカオパウダーの特徴", "基本のテンパリングと成功のポイント"],
     recipes: ["基本のローチョコレート", "パレ（フラワーチョコほかアレンジ）", "チョコレートカバーフルーツ", "スパイシーチョコレート", "アマンドショコラ　ほか"],
   },
   {
     level: "中級", label: "応用", price: "¥30,000（税別）",
+    image: "/choco-real/08-step-intermediate.jpg",
     goal: "ホワイトチョコレート・ナッツバターを使った応用技術を習得する",
     contents: ["ホワイトチョコレートの基本", "ナッツバターの作り方", "成形技術の応用（トリュフなど）"],
     recipes: ["カラフルチョコレート（マーメイド・地球チョコ）", "ジャンドゥーヤ", "パヴェドジュネーブ（生チョコ）", "チョコレートトリュフ", "ローキャラメル　ほか"],
   },
   {
     level: "上級", label: "発展", price: "¥33,500（税別）",
+    image: "/choco-real/09-step-advanced.jpg",
     goal: "ガナッシュ・ボンボンショコラなど本格技術とオリジナル創作力を習得する",
     contents: ["ガナッシュ・ボンボンショコラの製法", "基本の型取り・デコレーション技術", "カカオ素材の代用・応用テクニック"],
     recipes: ["ボンボンショコラ", "賞味期限15分のチョコレート", "ドバイチョコレート", "チョコレートファッジ", "Raw塩キャラメルソース　ほか"],
@@ -130,7 +133,7 @@ const courseJsonLd = {
     }
     .hero-cta {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--amber); color: #1c1c1a;
+      background: var(--amber); color: #fff;
       font-family: var(--f-sans); font-size: .88rem; font-weight: 700; letter-spacing: .1em;
       padding: .9rem 2.2rem; border-radius: 2rem; text-decoration: none; transition: background .2s;
     }
@@ -201,10 +204,14 @@ const courseJsonLd = {
     .bg-dark .sec-lead { color: rgba(255,255,255,.65); }
     .steps-wrap { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
     .step-card {
-      display: grid; grid-template-columns: 180px 1fr; gap: 2.5rem;
+      display: grid; grid-template-columns: 140px 180px 1fr; gap: 2.5rem; align-items: start;
       border-top: 1px solid rgba(255,255,255,.1); padding: 2.5rem 0;
     }
-    .step-level { font-family: var(--fh); font-size: 3rem; color: var(--amber); opacity: .45; line-height: 1; display: block; }
+    .step-thumb {
+      width: 140px; height: 140px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+    }
+    .step-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .step-level { font-family: var(--fh); font-size: 3rem; color: #E8C988; line-height: 1; display: block; }
     .step-label { font-family: var(--f-serif); font-size: 1.15rem; font-weight: 300; color: #fff; display: block; margin: .3rem 0 .8rem; }
     .step-price {
       display: inline-block; border: 1px solid var(--amber); color: var(--amber);
@@ -229,6 +236,14 @@ const courseJsonLd = {
 
     /* FORMAT */
     .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .online-feature {
+      display: grid; grid-template-columns: 280px 1fr; gap: 2.2rem; align-items: center;
+      margin-top: 1.5rem; background: #f7f4ef; border-radius: 4px; overflow: hidden;
+    }
+    .online-feature-img { height: 100%; min-height: 220px; }
+    .online-feature-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .online-feature-body { padding: 1.8rem 1.8rem 1.8rem 0; }
+    .online-feature-body .format-card-body { margin-top: .3rem; }
     .format-card { background: #f7f4ef; padding: 1.8rem; border-radius: 4px; }
     .format-card-label { font-family: var(--f-sans); font-size: .68rem; letter-spacing: .18em; color: var(--amber); margin-bottom: .6rem; }
     .format-card-title { font-family: var(--f-serif); font-size: 1.05rem; margin-bottom: .5rem; color: #2c2c2a; }
@@ -242,6 +257,8 @@ const courseJsonLd = {
     .instructor-body { font-family: var(--f-sans); font-size: .9rem; color: #555; line-height: 1.9; }
 
     /* JUNIOR */
+    .junior-thumb { width: 100%; max-width: 420px; border-radius: 6px; overflow: hidden; margin-bottom: 1.5rem; }
+    .junior-thumb img { width: 100%; height: auto; display: block; }
     .junior-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
     .junior-card { background: #fff; padding: 2rem; border-radius: 4px; }
     .junior-card-title {
@@ -311,7 +328,7 @@ const courseJsonLd = {
     .cta-btns { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--amber); color: #1c1c1a;
+      background: var(--amber); color: #fff;
       font-family: var(--f-sans); font-size: .88rem; font-weight: 700; letter-spacing: .1em;
       padding: 1rem 2.6rem; border-radius: 2rem; text-decoration: none; transition: background .2s;
     }
@@ -337,7 +354,7 @@ const courseJsonLd = {
     .sticky-cta-text { font-family: var(--f-sans); font-size: .8rem; color: rgba(255,255,255,.65); }
     .sticky-cta-text strong { display: block; color: #fff; font-size: .86rem; }
     .sticky-btn {
-      flex-shrink: 0; background: var(--amber); color: #1c1c1a;
+      flex-shrink: 0; background: var(--amber); color: #fff;
       font-family: var(--f-sans); font-size: .82rem; font-weight: 700; letter-spacing: .1em;
       padding: .7rem 1.8rem; border-radius: 2rem; text-decoration: none; white-space: nowrap;
       transition: background .2s;
@@ -350,6 +367,10 @@ const courseJsonLd = {
       .instructor-wrap { grid-template-columns: 1fr; }
       .junior-grid { grid-template-columns: 1fr; }
       .format-grid { grid-template-columns: 1fr; }
+      .online-feature { grid-template-columns: 1fr; }
+      .online-feature-img { min-height: 200px; }
+      .online-feature-body { padding: 1.5rem; }
+      .step-thumb { width: 100%; height: 200px; }
       .hero-body { padding: 0 5vw 3.5rem; }
       section { padding: 3.5rem 5vw; }
       .sticky-cta-text { display: none; }
@@ -434,6 +455,9 @@ const courseJsonLd = {
       <div class="steps-wrap">
         {steps.map(s => (
           <div class="step-card">
+            <div class="step-thumb">
+              <img src={s.image} alt={`${s.level}（${s.label}）で作るローチョコレート`} loading="lazy" />
+            </div>
             <div>
               <span class="step-level">{s.level}</span>
               <span class="step-label">{s.label}</span>
@@ -484,6 +508,16 @@ const courseJsonLd = {
           <p class="format-card-body">座学（動画視聴）→ 実習2日間<br/>凝縮カリキュラム対応</p>
         </div>
       </div>
+      <div class="online-feature">
+        <div class="online-feature-img">
+          <img src="/choco-real/11-online-lesson.jpg" alt="オンラインでのローチョコレートレッスンの様子" loading="lazy" />
+        </div>
+        <div class="online-feature-body">
+          <p class="format-card-label">ONLINE</p>
+          <p class="format-card-title">自宅からそのまま受講できます</p>
+          <p class="format-card-body">ビデオ通話で講師と直接やり取りしながら学べるので、地方や海外にお住まいの方、小さなお子さんがいる方でもご自宅で本格的なテンパリング技術を習得できます。</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -519,6 +553,9 @@ const courseJsonLd = {
         3ステップ講座修了後、<strong>教える・販売する・広める</strong>ためのインストラクター講座へ進めます。
       </p>
       <p style="display:inline-block; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; letter-spacing:.08em; padding:.35rem 1rem; border-radius:2rem; margin-bottom:1.5rem;">認定料 ¥80,000（税別）</p>
+      <div class="junior-thumb">
+        <img src="/choco-real/10-step-junior.jpg" alt="ジュニアローショコラティエ養成講座で仕上げるボンボンショコラ" loading="lazy" />
+      </div>
       <div class="junior-grid">
         <div class="junior-card">
           <p class="junior-card-title">学べること</p>
