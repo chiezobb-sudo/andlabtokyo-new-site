@@ -62,24 +62,6 @@ const formattedDate = new Date(date).toLocaleDateString('ja-JP', {
     }
 
     .article-body { font-family: var(--f-sans); font-size: 1rem; line-height: 2; color: #333; }
-    .article-body h2 {
-      font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400;
-      margin: 2.5rem 0 1rem; padding-bottom: .5rem;
-      border-bottom: 1px solid #C2A878; color: #2c2c2a;
-    }
-    .article-body h3 {
-      font-family: var(--f-serif); font-size: 1.15rem; font-weight: 400;
-      margin: 2rem 0 .8rem; color: #2c2c2a;
-    }
-    .article-body p { margin-bottom: 1.4rem; }
-    .article-body img {
-      width: 100%; height: auto; border-radius: 4px;
-      margin: 1.5rem 0; display: block;
-    }
-    .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
-    .article-body li { margin-bottom: .4rem; }
-    .article-body strong { font-weight: 700; }
-    .article-body a { color: #C2A878; text-decoration: underline; }
 
     .back-link {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -112,6 +94,28 @@ const formattedDate = new Date(date).toLocaleDateString('ja-JP', {
     @media (max-width: 600px) {
       .article-wrap { padding: 2.5rem 1.2rem 4rem; }
     }
+  </style>
+
+  <style is:global>
+    /* Markdown content rendered via <Content /> isn't scoped, so these rules must be global */
+    .article-body h2 {
+      font-family: var(--f-serif); font-size: 1.4rem; font-weight: 400;
+      margin: 2.5rem 0 1rem; padding-bottom: .5rem;
+      border-bottom: 1px solid #C2A878; color: #2c2c2a;
+    }
+    .article-body h3 {
+      font-family: var(--f-serif); font-size: 1.15rem; font-weight: 400;
+      margin: 2rem 0 .8rem; color: #2c2c2a;
+    }
+    .article-body p { margin-bottom: 1.4rem; }
+    .article-body img {
+      width: 100%; max-width: 100%; height: auto; border-radius: 4px;
+      margin: 1.5rem 0; display: block;
+    }
+    .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+    .article-body li { margin-bottom: .4rem; }
+    .article-body strong { font-weight: 700; }
+    .article-body a { color: #C2A878; text-decoration: underline; }
   </style>
 
   {image && (
