@@ -133,58 +133,88 @@ import Layout from '../layouts/Layout.astro';
 
 /* ===== ABOUT ===== */
 .about-sec {
-  padding: 2rem 4rem 3.2rem;
+  padding: 5rem 4rem 5rem;
   background: #FAF9F6;
   text-align: center;
 }
 .about-inner {
-  max-width: 1100px;
+  max-width: 760px;
   margin: 0 auto;
 }
-.about-sub {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 13px;
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  line-height: 2.2;
-  color: #45453F;
-  margin-bottom: 1.2rem;
-}
-.about-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.5rem, 2.2vw, 2rem);
+.about-eyebrow {
+  display: inline-block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
   font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.14em;
-  color: #1C1C1A;
-  margin-bottom: 1.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.6rem;
 }
-.about-line {
-  width: 56px;
-  height: 1px;
-  background: rgba(28,28,26,0.18);
+.about-statement {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  line-height: 1.55;
+  color: #1C1C1A;
+  margin-bottom: 2rem;
+}
+.about-concept {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.9;
+  color: #45453F;
+  margin-bottom: 2.4rem;
+}
+.about-keyword {
+  font-weight: 600;
+  color: #1C1C1A;
+  letter-spacing: 0.08em;
 }
 .about-text {
-  max-width: 480px;
-  margin: 0 auto;
+  max-width: 580px;
+  margin: 0 auto 2.2rem;
+  border-top: 1px solid rgba(28,28,26,0.1);
+  padding-top: 2rem;
+  text-align: left;
 }
 .about-lead {
-  font-family: 'Noto Serif JP', serif;
+  font-family: 'Noto Sans JP', sans-serif;
   font-size: 13px;
-  line-height: 2.1;
-  color: #45453F;
+  line-height: 2.2;
+  color: #5A5A54;
   font-weight: 300;
   letter-spacing: 0.03em;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
 }
 .about-lead:last-child { margin-bottom: 0; }
 .about-lead strong {
   color: #1C1C1A;
+  font-weight: 500;
+}
+.about-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.about-credit-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.05rem;
   font-weight: 400;
+  letter-spacing: 0.18em;
+  color: #1C1C1A;
+}
+.about-credit-role {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  text-transform: uppercase;
 }
 
 /* ===== TWO ENTRY POINTS ===== */
@@ -611,8 +641,8 @@ import Layout from '../layouts/Layout.astro';
 @media (max-width: 900px) {
   .hero-text { width: 65%; }
   .hero-image-wrap { width: 70%; }
-  .about-text { max-width: 100%; }
-  .about-line { width: 28px; }
+  .about-text { max-width: 100%; text-align: left; }
+  .sp-br { display: none; }
   .entry-card { grid-template-columns: 1fr; }
   .entry-img { aspect-ratio: 16/9; order: -1; }
 }
@@ -639,7 +669,10 @@ import Layout from '../layouts/Layout.astro';
   }
   .hero-text { width: 100%; padding: 2.5rem 1.5rem 4rem; }
   .hero-title { font-size: 1.8rem; margin-bottom: 2rem; }
-  .about-sec { padding: 4.5rem 1.5rem; }
+  .about-sec { padding: 4rem 1.5rem; }
+  .about-statement { text-align: center; }
+  .about-concept { text-align: center; }
+  .about-credit { margin-top: 2rem; }
   .entries-sec { padding: 0 1.5rem 4.5rem; }
   .entries-grid { grid-template-columns: 1fr; }
   .courses-sec { padding: 4.5rem 0; }
@@ -689,19 +722,24 @@ import Layout from '../layouts/Layout.astro';
 <!-- ===== ABOUT ===== -->
 <section class="about-sec">
   <div class="about-inner">
-    <p class="about-sub">美しさを、自ら「つくる」人へ。</p>
-    <h2 class="about-title"><span class="about-line"></span>About &amp;LAB TOKYO<span class="about-line"></span></h2>
+    <span class="about-eyebrow">About &amp;LAB TOKYO</span>
+    <h2 class="about-statement">美しさを、自ら<br class="sp-br" />「つくる」人へ。</h2>
+    <p class="about-concept"><span class="about-keyword">発酵 × ローフード</span>のクロス理論で、ライフスタイルを進化させる。</p>
     <div class="about-text">
       <p class="about-lead">
-        &LAB TOKYOは、東京・渋谷を拠点とする「発酵×ローフード」のクロス理論でライフスタイルを進化させる。
+        私たちが提案するのは、単なる「料理」ではありません。<br />
+        細胞から目覚めるような<strong>生きたエネルギー（酵素）</strong>を取り入れ、<br />
+        古来の知恵「発酵」で<strong>内側から美しさを醸成する</strong>。
       </p>
       <p class="about-lead">
-        私たちが提案するのは、単なる「料理」ではありません。細胞から目覚めるような<strong>生きたエネルギー（酵素）</strong>を取り入れ、古来の知恵である<strong>「発酵」</strong>で内側から美しさを醸成する。
-      </p>
-      <p class="about-lead">
-        経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。あなたが持つ本来の輝きを、最大化させる場所でありたい。ELLE gourmet認定料理家・安藤千英が、その旅路をガイドします。
+        経営者、専門職、そして自分自身の可能性を信じるすべての女性へ。<br />
+        あなたが持つ本来の輝きを、最大化させる場所でありたい。
       </p>
     </div>
+    <p class="about-credit">
+      <span class="about-credit-name">安藤 千英</span>
+      <span class="about-credit-role">ELLE gourmet 認定料理家</span>
+    </p>
   </div>
 </section>
 
