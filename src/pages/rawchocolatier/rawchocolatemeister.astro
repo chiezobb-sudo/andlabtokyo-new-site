@@ -28,7 +28,7 @@ const steps = [
     recipes: ["カラフルチョコレート（マーメイド・地球チョコ）", "ジャンドゥーヤ", "パヴェドジュネーブ（生チョコ）", "チョコレートトリュフ", "ローキャラメル　ほか"],
   },
   {
-    level: "上級", label: "発展", price: "受講料はお問い合わせください",
+    level: "上級", label: "発展", price: "¥33,500（税別）",
     goal: "ガナッシュ・ボンボンショコラなど本格技術とオリジナル創作力を習得する",
     contents: ["ガナッシュ・ボンボンショコラの製法", "基本の型取り・デコレーション技術", "カカオ素材の代用・応用テクニック"],
     recipes: ["ボンボンショコラ", "賞味期限15分のチョコレート", "ドバイチョコレート", "チョコレートファッジ", "Raw塩キャラメルソース　ほか"],
@@ -269,7 +269,7 @@ const faqs = [
         本物のローチョコレート技術を体系的に学べる唯一のプログラム。<br/>
         初級〜上級の3ステップで、趣味からプロ志向まで確実に身につきます。
       </p>
-      <a href={applyUrl} class="hero-cta">お申し込みはこちら →</a>
+      <a href="#apply-form" class="hero-cta">お申し込みはこちら →</a>
     </div>
   </div>
 
@@ -402,6 +402,7 @@ const faqs = [
       <p class="sec-lead">
         3ステップ講座修了後、<strong>教える・販売する・広める</strong>ためのインストラクター講座へ進めます。
       </p>
+      <p style="display:inline-block; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; letter-spacing:.08em; padding:.35rem 1rem; border-radius:2rem; margin-bottom:1.5rem;">認定料 ¥80,000（税別）</p>
       <div class="junior-grid">
         <div class="junior-card">
           <p class="junior-card-title">学べること</p>
@@ -456,8 +457,51 @@ const faqs = [
       まずはお気軽にお申し込みください。
     </p>
     <div class="cta-btns">
-      <a href={applyUrl} class="btn-primary">お申し込みはこちら →</a>
+      <a href="#apply-form" class="btn-primary">お申し込みはこちら →</a>
       <a href="/contact" class="btn-outline">お問い合わせ</a>
+    </div>
+  </section>
+
+  <!-- APPLY FORM -->
+  <section id="apply-form" style="padding:5rem 6vw; background:#f7f4ef;">
+    <div style="max-width:900px; margin:0 auto;">
+      <span class="eyebrow">Apply</span>
+      <h2 class="sec-title">お申し込み</h2>
+      <div class="divider"></div>
+      <p class="sec-lead" style="margin-bottom:2.5rem;">
+        受講したい講座を選んでお申し込みください。<br/>
+        ご不明な点はお気軽にお問い合わせください。
+      </p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.2rem; margin-bottom:2.5rem;">
+        <div style="background:#fff; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
+          <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 1</p>
+          <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">初級講座</p>
+          <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥16,500（税別）</p>
+          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+        </div>
+        <div style="background:#fff; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
+          <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 2</p>
+          <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">中級講座</p>
+          <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥30,000（税別）</p>
+          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+        </div>
+        <div style="background:#fff; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
+          <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 3</p>
+          <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">上級講座</p>
+          <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥33,500（税別）</p>
+          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+        </div>
+        <div style="background:#1c1c1a; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
+          <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">NEXT STEP</p>
+          <p style="font-family:var(--f-serif); font-size:1.05rem; color:#fff; margin-bottom:.4rem;">ジュニア養成講座</p>
+          <p style="font-family:var(--f-sans); font-size:.8rem; color:rgba(255,255,255,.5); margin-bottom:1.2rem;">認定料 ¥80,000（税別）</p>
+          <a href={applyUrl} style="display:block; text-align:center; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+        </div>
+      </div>
+      <p style="font-family:var(--f-sans); font-size:.8rem; color:#999; line-height:1.8;">
+        ※ 申し込みフォームページへ移動します。<br/>
+        ※ ご不明な点は <a href="/contact" style="color:var(--amber);">お問い合わせ</a> からご連絡ください。
+      </p>
     </div>
   </section>
 
@@ -467,7 +511,7 @@ const faqs = [
       <strong>ローチョコレートマイスター養成講座</strong>
       商標登録済み ／ 国内唯一の認定資格
     </div>
-    <a href={applyUrl} class="sticky-btn">お申し込み →</a>
+    <a href="#apply-form" class="sticky-btn">お申し込み →</a>
   </div>
 
   <script>
