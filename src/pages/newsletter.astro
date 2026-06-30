@@ -1,11 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-
-const allPosts = await getCollection('blog');
-const issues = allPosts
-  .filter(p => p.data.category === 'メルマガ')
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
 <Layout
@@ -39,44 +33,19 @@ const issues = allPosts
     }
     .nl-embed-inner { width: 100%; max-width: 640px; }
 
-    .archive-section { padding: 5rem 5vw 6rem; max-width: 900px; margin: 0 auto; }
-    .archive-title {
-      font-family: var(--f-serif); font-size: 1.5rem; font-weight: 400;
-      letter-spacing: .06em; color: var(--ink); margin-bottom: .6rem;
+    .archive-link-section {
+      padding: 4rem 5vw 6rem; text-align: center;
     }
-    .archive-sub { font-family: var(--f-sans); font-size: .85rem; color: var(--ink-3); margin-bottom: 2.5rem; }
-
-    .issue-list { display: flex; flex-direction: column; gap: 1.6rem; }
-    .issue-card {
-      display: grid; grid-template-columns: 160px 1fr; gap: 1.6rem;
-      text-decoration: none; color: inherit; padding-bottom: 1.6rem;
-      border-bottom: 1px solid var(--divider);
+    .archive-link-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-family: var(--f-sans); font-size: .88rem; font-weight: 700; letter-spacing: .06em;
+      color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink);
+      padding-bottom: .3rem; transition: opacity .2s;
     }
-    .issue-thumb { aspect-ratio: 4/3; overflow: hidden; border-radius: 2px; background: var(--linen-2); }
-    .issue-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
-    .issue-card:hover .issue-thumb img { transform: scale(1.05); }
-    .issue-date {
-      font-family: var(--f-sans); font-size: .72rem; color: var(--ink-3);
-      letter-spacing: .06em; margin-bottom: .5rem; display: block;
-    }
-    .issue-title {
-      font-family: var(--f-serif); font-size: 1.1rem; font-weight: 400;
-      line-height: 1.6; color: var(--ink);
-    }
-    .issue-desc {
-      font-family: var(--f-sans); font-size: .82rem; color: var(--ink-3);
-      line-height: 1.8; margin-top: .6rem;
-    }
-
-    .empty-state {
-      font-family: var(--f-sans); font-size: .88rem; color: var(--ink-3);
-      text-align: center; padding: 3rem 0; line-height: 1.9;
-    }
+    .archive-link-cta:hover { opacity: .65; }
 
     @media (max-width: 600px) {
       .nl-hero { padding: 4rem 1.5rem 3rem; }
-      .archive-section { padding: 3.5rem 1.5rem 4rem; }
-      .issue-card { grid-template-columns: 100px 1fr; gap: 1rem; }
     }
   </style>
 
@@ -96,33 +65,7 @@ const issues = allPosts
     </div>
   </div>
 
-  <div class="archive-section">
-    <h2 class="archive-title">バックナンバー</h2>
-    <p class="archive-sub">{issues.length}件のメールマガジンを公開中</p>
-
-    {issues.length > 0 ? (
-      <div class="issue-list">
-        {issues.map(issue => {
-          const slug = issue.id.replace(/\.md$/, '');
-          const date = new Date(issue.data.date).toLocaleDateString('ja-JP', {
-            year: 'numeric', month: 'long', day: 'numeric'
-          });
-          return (
-            <a href={`/post/${slug}`} class="issue-card">
-              <div class="issue-thumb">
-                {issue.data.image && <img src={issue.data.image} alt={issue.data.title} loading="lazy" />}
-              </div>
-              <div>
-                <span class="issue-date">{date}</span>
-                <h3 class="issue-title">{issue.data.title}</h3>
-                {issue.data.description && <p class="issue-desc">{issue.data.description}</p>}
-              </div>
-            </a>
-          );
-        })}
-      </div>
-    ) : (
-      <p class="empty-state">まだバックナンバーはありません。配信が始まり次第、こちらに公開していきます。</p>
-    )}
+  <div class="archive-link-section">
+    <a href="/newsletter/archive" class="archive-link-cta">バックナンバーを見る →</a>
   </div>
 </Layout>

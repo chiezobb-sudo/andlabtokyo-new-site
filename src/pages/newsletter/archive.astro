@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const issues = allPosts
+  .filter(p => p.data.category === 'メルマガ')
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout
+  title="メルマガ バックナンバー | &LAB TOKYO"
+  description="&LAB TOKYOのメールマガジン、バックナンバー一覧。発酵・ローフード・リビングフードにまつわる読み物をアーカイブしています。"
+  canonical="https://www.andlabtokyo.com/newsletter/archive"
+>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .ar-hero {
+      background: var(--sumi);
+      padding: 5rem 5vw 3.5rem;
+      text-align: center;
+    }
+    .ar-hero-eyebrow {
+      font-family: var(--f-sans); font-size: .72rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--green); display: block; margin-bottom: 1.2rem;
+    }
+    .ar-hero-title {
+      font-family: var(--f-serif); font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 300; color: #F4F2EE; letter-spacing: .06em;
+    }
+    .ar-hero-sub {
+      font-family: var(--f-sans); font-size: .85rem; color: rgba(244,242,238,.55);
+      margin-top: 1rem;
+    }
+    .ar-hero-back {
+      display: inline-block; margin-top: 1.6rem; font-family: var(--f-sans); font-size: .8rem;
+      color: rgba(244,242,238,.7); text-decoration: none; border-bottom: 1px solid rgba(244,242,238,.3);
+      padding-bottom: .2rem; transition: opacity .2s;
+    }
+    .ar-hero-back:hover { opacity: .7; }
+
+    .ar-grid-wrap { max-width: 1100px; margin: 0 auto; padding: 4rem 5vw 6rem; }
+
+    .ar-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .ar-card {
+      text-decoration: none; color: inherit; display: block;
+    }
+    .ar-card-thumb {
+      aspect-ratio: 4/3; overflow: hidden; border-radius: 16px; background: var(--linen-2);
+      box-shadow: 0 2px 12px rgba(28,28,26,.08);
+    }
+    .ar-card-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease;
+    }
+    .ar-card:hover .ar-card-thumb img { transform: scale(1.06); }
+    .ar-card-date {
+      font-family: var(--f-sans); font-size: .7rem; color: var(--ink-3);
+      letter-spacing: .06em; margin-top: 1rem; display: block;
+    }
+    .ar-card-title {
+      font-family: var(--f-serif); font-size: 1rem; font-weight: 400;
+      line-height: 1.6; color: var(--ink); margin-top: .4rem;
+    }
+
+    .empty-state {
+      font-family: var(--f-sans); font-size: .88rem; color: var(--ink-3);
+      text-align: center; padding: 3rem 0; line-height: 1.9; grid-column: 1 / -1;
+    }
+
+    @media (max-width: 900px) {
+      .ar-grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+    }
+    @media (max-width: 560px) {
+      .ar-hero { padding: 3.5rem 1.5rem 2.5rem; }
+      .ar-grid-wrap { padding: 3rem 1.2rem 4rem; }
+      .ar-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <div class="ar-hero">
+    <span class="ar-hero-eyebrow">&amp;LAB Letter</span>
+    <h1 class="ar-hero-title">バックナンバー</h1>
+    <p class="ar-hero-sub">{issues.length}件のメールマガジンを公開中</p>
+    <a href="/newsletter" class="ar-hero-back">← メルマガ登録ページへ戻る</a>
+  </div>
+
+  <div class="ar-grid-wrap">
+    {issues.length > 0 ? (
+      <div class="ar-grid">
+        {issues.map(issue => {
+          const slug = issue.id.replace(/\.md$/, '');
+          const date = new Date(issue.data.date).toLocaleDateString('ja-JP', {
+            year: 'numeric', month: 'long', day: 'numeric'
+          });
+          return (
+            <a href={`/post/${slug}`} class="ar-card">
+              <div class="ar-card-thumb">
+                {issue.data.image && <img src={issue.data.image} alt={issue.data.title} loading="lazy" />}
+              </div>
+              <span class="ar-card-date">{date}</span>
+              <h2 class="ar-card-title">{issue.data.title}</h2>
+            </a>
+          );
+        })}
+      </div>
+    ) : (
+      <p class="empty-state">まだバックナンバーはありません。配信が始まり次第、こちらに公開していきます。</p>
+    )}
+  </div>
+</Layout>
