@@ -89,6 +89,26 @@ const formattedDate = new Date(date).toLocaleDateString('ja-JP', {
     }
     .back-link:hover { color: #C2A878; }
 
+    .author-card {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-top: 3rem; padding: 1.6rem; background: var(--linen-2);
+      border-radius: 4px;
+    }
+    .author-photo {
+      width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .author-name {
+      font-family: var(--f-serif); font-size: 1rem; font-weight: 400; color: var(--ink);
+    }
+    .author-role {
+      font-family: var(--f-sans); font-size: .76rem; color: var(--ink-3); margin-top: .3rem; line-height: 1.6;
+    }
+    .author-links { margin-top: .5rem; display: flex; gap: 1rem; }
+    .author-links a {
+      font-family: var(--f-sans); font-size: .76rem; color: #C2A878; text-decoration: none;
+    }
+    .author-links a:hover { text-decoration: underline; }
+
     @media (max-width: 600px) {
       .article-wrap { padding: 2.5rem 1.2rem 4rem; }
     }
@@ -116,6 +136,25 @@ const formattedDate = new Date(date).toLocaleDateString('ja-JP', {
     <div class="article-body">
       <Content />
     </div>
+
+    <div class="author-card">
+      <img
+        class="author-photo"
+        src="https://static.wixstatic.com/media/857257_6a244d3ac66044b9a091293c8e91cd03~mv2.jpg/v1/fill/w_580,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/chieando_edited_edited.jpg"
+        alt="安藤千英"
+        loading="lazy"
+      />
+      <div>
+        <p class="author-name">安藤 千英</p>
+        <p class="author-role">ELLE gourmet認定料理家 ／ &amp;LAB TOKYO主宰<br />Photographed &amp; Directed by Chie Ando</p>
+        <div class="author-links">
+          <a href="https://www.instagram.com/rawfoodhaccolab/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://note.com/chieando" target="_blank" rel="noopener">note</a>
+          <a href="/newsletter">メルマガ登録</a>
+        </div>
+      </div>
+    </div>
+
     <a href="/blog" class="back-link">← ブログ一覧へ戻る</a>
   </div>
 </Layout>

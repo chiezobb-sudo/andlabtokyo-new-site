@@ -2,9 +2,16 @@
 import Layout from '../../layouts/Layout.astro';
 
 const heroImage = "https://static.wixstatic.com/media/857257_379c3e3dce8046929166f5d2c1e24b5f~mv2.jpg";
-const img1 = "https://static.wixstatic.com/media/d9b33118a3154c3195868a6e5e12ab98.jpg";
+const instructorImage = "https://static.wixstatic.com/media/857257_6a244d3ac66044b9a091293c8e91cd03~mv2.jpg/v1/fill/w_580,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/chieando_edited_edited.jpg";
 
-const applyUrl = "https://www.andlabtokyo.com/rawchocolatier/rawsweets-application";
+const galleryImages = [
+  { src: "/choco-real/01-beginner-flatlay.jpg", caption: "カカオポッドから学ぶ、ローチョコレートの基礎" },
+  { src: "/choco-real/02-beginner-assorted.jpg", caption: "初級で習得する多彩な成形テクニック" },
+  { src: "/choco-real/03-intermediate-mermaid.jpg", caption: "中級で学ぶマーメイドチョコのアレンジ成形" },
+  { src: "/choco-real/04-intermediate-hearts.jpg", caption: "色とりどりに仕上げるハート型ボンボンショコラ" },
+  { src: "/choco-real/05-advanced-assorted.jpg", caption: "上級で極める本格ボンボンショコラの数々" },
+  { src: "/choco-real/06-junior-plating.jpg", caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
+];
 
 const features = [
   { num: "01", title: "体系的なテキスト", body: "ローチョコの歴史・栄養・テンパリングを網羅した公式テキストで、確実に基礎が身につきます。" },
@@ -48,6 +55,43 @@ const faqs = [
   { q: "3ステップを全部受講しないといけませんか？", a: "目的に応じて初級のみの受講も可能です。まずは初級から始め、その後のステップを検討される方が多いです。" },
   { q: "修了後に資格は取得できますか？", a: "3ステップ講座を修了後、ジュニアローショコラティエ養成講座でインストラクター資格が取得できます。公式ロゴの使用やSNS集客サポートなどの特典もあります。" },
 ];
+
+const voices = [
+  { initial: "A", label: "Aさんの場合", body: "休みを利用して対面受講しました！" },
+  { initial: "B", label: "Bさんの場合", body: "子育てもひと段落、これからの自分磨きと将来の夢叶えるために。" },
+  { initial: "C", label: "Cさんの場合", body: "家族のお世話の合間の時間でオンラインで！" },
+  { initial: "D", label: "Dさんの場合", body: "子供が小さいのでオンラインで学びました。" },
+  { initial: "E", label: "Eさんの場合", body: "昼間はカフェ運営があるため夜間の受講で対応していただきました。" },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
+const courseJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "ローチョコレートマイスター養成講座",
+  "description": "商標登録済みの本物のローチョコレート技術が学べる唯一の資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。",
+  "provider": { "@type": "EducationalOrganization", "name": "&LAB TOKYO", "sameAs": "https://www.andlabtokyo.com" },
+  "hasCourseInstance": steps.map(s => ({
+    "@type": "CourseInstance",
+    "name": `${s.level}（${s.label}）`,
+    "courseMode": ["onsite", "online"],
+  })),
+  "offers": steps.map(s => ({
+    "@type": "Offer",
+    "name": s.level,
+    "price": s.price.replace(/[^\d]/g, ""),
+    "priceCurrency": "JPY",
+  })),
+};
 ---
 
 <Layout
@@ -55,6 +99,11 @@ const faqs = [
   description="商標登録済みの本物のローチョコレート技術が学べる唯一の資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。東京・渋谷、オンラインでも受講可能。"
   ogImage={heroImage}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(courseJsonLd)} />
+  </Fragment>
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -124,6 +173,28 @@ const faqs = [
     .feature-title { font-family: var(--f-serif); font-size: 1rem; font-weight: 400; color: #2c2c2a; margin-bottom: .5rem; }
     .feature-body { font-family: var(--f-sans); font-size: .84rem; color: #666; line-height: 1.8; }
 
+    /* GALLERY */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem;
+    }
+    .gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 4px; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-cap {
+      position: absolute; inset: 0; display: flex; align-items: flex-end;
+      padding: 1rem; background: linear-gradient(to top, rgba(20,15,10,.75) 0%, transparent 65%);
+      opacity: 0; transition: opacity .25s;
+    }
+    .gallery-item:hover .gallery-cap { opacity: 1; }
+    .gallery-cap span {
+      font-family: var(--f-sans); font-size: .75rem; color: #fff; line-height: 1.6;
+    }
+    @media (max-width: 760px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     /* STEPS */
     .bg-dark { background: #1c1c1a; }
     .bg-dark .sec-title { color: #fff; }
@@ -184,6 +255,33 @@ const faqs = [
     }
     .junior-list li::before { content: '✓ '; color: var(--amber); }
     .junior-note { font-family: var(--f-sans); font-size: .8rem; color: #999; margin-top: 1.5rem; line-height: 1.9; }
+
+    /* VOICES */
+    .voice-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; margin-top: 2.5rem;
+    }
+    .voice-card {
+      background: #fff; border-radius: 4px; padding: 1.6rem 1.2rem;
+      text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .voice-avatar {
+      width: 52px; height: 52px; border-radius: 50%; margin: 0 auto .9rem;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--linen-2); border: 1px solid var(--amber);
+      font-family: var(--f-serif); font-size: 1.2rem; color: var(--amber);
+    }
+    .voice-label {
+      font-family: var(--f-sans); font-size: .8rem; font-weight: 700; color: #2c2c2a; margin-bottom: .6rem;
+    }
+    .voice-body {
+      font-family: var(--f-sans); font-size: .78rem; color: #666; line-height: 1.8;
+    }
+    @media (max-width: 760px) {
+      .voice-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .voice-grid { grid-template-columns: 1fr; }
+    }
 
     /* FAQ */
     .faq-list { margin-top: 2rem; }
@@ -308,6 +406,24 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ギャラリー -->
+  <section class="bg-linen">
+    <div class="section-inner">
+      <span class="eyebrow">Gallery</span>
+      <h2 class="sec-title">講座で作るローチョコレートの世界</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">初級〜上級まで、実際にレッスンで仕上げる作品の一部をご紹介します。</p>
+      <div class="gallery-grid">
+        {galleryImages.map(g => (
+          <div class="gallery-item">
+            <img src={g.src} alt={g.caption} loading="lazy" />
+            <div class="gallery-cap"><span>{g.caption}</span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- カリキュラム -->
   <section class="bg-dark">
     <div class="section-inner">
@@ -378,7 +494,7 @@ const faqs = [
       <h2 class="sec-title">講師紹介</h2>
       <div class="divider"></div>
       <div class="instructor-wrap">
-        <img src={img1} alt="安藤千英" class="instructor-img" loading="lazy" />
+        <img src={instructorImage} alt="安藤千英" class="instructor-img" loading="lazy" />
         <div>
           <p class="instructor-name">安藤 千英</p>
           <p class="instructor-role">ELLE gourmet認定料理家 ／ ローショコラティエ協会 代表</p>
@@ -432,6 +548,25 @@ const faqs = [
     </div>
   </section>
 
+  <!-- 受講生の声 -->
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow">Voices</span>
+      <h2 class="sec-title">多様なライフスタイルに<br/>対応できます</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">対面・オンラインを柔軟に選べるから、忙しい方でも自分のペースで続けられます。</p>
+      <div class="voice-grid">
+        {voices.map(v => (
+          <div class="voice-card">
+            <div class="voice-avatar">{v.initial}</div>
+            <p class="voice-label">{v.label}</p>
+            <p class="voice-body">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="bg-linen">
     <div class="section-inner">
@@ -477,33 +612,48 @@ const faqs = [
           <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 1</p>
           <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">初級講座</p>
           <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥16,500（税別）</p>
-          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+          <a href="#tally-form-wrap" style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
         </div>
         <div style="background:#fff; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
           <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 2</p>
           <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">中級講座</p>
           <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥30,000（税別）</p>
-          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+          <a href="#tally-form-wrap" style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
         </div>
         <div style="background:#fff; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
           <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">STEP 3</p>
           <p style="font-family:var(--f-serif); font-size:1.05rem; color:#2c2c2a; margin-bottom:.4rem;">上級講座</p>
           <p style="font-family:var(--f-sans); font-size:.8rem; color:#888; margin-bottom:1.2rem;">¥33,500（税別）</p>
-          <a href={applyUrl} style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+          <a href="#tally-form-wrap" style="display:block; text-align:center; background:var(--amber); color:#1c1c1a; font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
         </div>
         <div style="background:#1c1c1a; padding:1.8rem; border-radius:4px; border-top:3px solid var(--amber);">
           <p style="font-family:var(--f-sans); font-size:.68rem; letter-spacing:.18em; color:var(--amber); margin-bottom:.5rem;">NEXT STEP</p>
           <p style="font-family:var(--f-serif); font-size:1.05rem; color:#fff; margin-bottom:.4rem;">ジュニア養成講座</p>
+          <p style="font-family:var(--f-sans); font-size:.72rem; color:rgba(255,255,255,.6); line-height:1.6; margin-bottom:.5rem;">※ STEP1〜3（初級・中級・上級）修了者限定</p>
           <p style="font-family:var(--f-sans); font-size:.8rem; color:rgba(255,255,255,.5); margin-bottom:1.2rem;">認定料 ¥80,000（税別）</p>
-          <a href={applyUrl} style="display:block; text-align:center; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
+          <a href="#tally-form-wrap" style="display:block; text-align:center; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; font-weight:700; padding:.6rem 1rem; border-radius:2rem; text-decoration:none;">申し込む →</a>
         </div>
       </div>
-      <p style="font-family:var(--f-sans); font-size:.8rem; color:#999; line-height:1.8;">
-        ※ 申し込みフォームページへ移動します。<br/>
+      <p style="font-family:var(--f-sans); font-size:.8rem; color:#999; line-height:1.8; margin-bottom:3rem;">
+        ※ 下のフォームから希望コースを選んでお申し込みください。<br/>
         ※ ご不明な点は <a href="/contact" style="color:var(--amber);">お問い合わせ</a> からご連絡ください。
       </p>
+      <div id="tally-form-wrap" style="background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,.06); scroll-margin-top:6rem;">
+        <iframe
+          data-tally-src="https://tally.so/embed/ODgokM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="900"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="ローチョコレートマイスター養成講座 お申し込みフォーム"
+        ></iframe>
+      </div>
     </div>
   </section>
+
+  <script is:inline src="https://tally.so/widgets/embed.js"></script>
 
   <!-- STICKY CTA -->
   <div class="sticky-cta" id="stickyCta">

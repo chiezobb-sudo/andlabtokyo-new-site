@@ -925,253 +925,45 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ===== NEWSLETTER POPUP ===== -->
-<div class="nl-popup-overlay" id="nlPopupOverlay">
-  <div class="nl-popup">
-    <button class="nl-popup-close" id="nlPopupClose" aria-label="閉じる">×</button>
-    <span class="nl-popup-eyebrow">&amp;LAB Letter</span>
-    <h3 class="nl-popup-title">食と時間にまつわる便りを、<br>月2回のメールマガジンで。</h3>
-    <p class="nl-popup-desc">
-      季節の発酵、旅先での発見、暮らしのリズムと食について。<br>
-      &amp;LAB TOKYOからの読み物を、ふたつきに一度お届けします。
-    </p>
-    <a href="/contact" class="nl-popup-cta">メールマガジンに登録する</a>
-    <button class="nl-popup-later" id="nlPopupLater">あとで</button>
+<!-- ===== NEWSLETTER TEASER ===== -->
+<section class="nl-teaser-section">
+  <div class="nl-teaser-inner">
+    <span class="nl-teaser-eyebrow">&amp;LAB Letter</span>
+    <h2 class="nl-teaser-title">食と時間にまつわる便りを、<br>メールマガジンで。</h2>
+    <p class="nl-teaser-desc">発酵・ローフード・リビングフードの考え方、レッスンのご案内、レシピなどを不定期でお届けします。</p>
+    <a href="/newsletter" class="nl-teaser-cta">メールマガジンに登録する →</a>
   </div>
-</div>
-
-<!-- ===== NEWSLETTER BOTTOM BANNER ===== -->
-<div class="nl-banner" id="nlBanner">
-  <div class="nl-banner-inner">
-    <span class="nl-banner-text">
-      <span class="nl-banner-eyebrow">&amp;LAB Letter</span>
-      食と時間の読み物を、月2回のメールマガジンで。
-    </span>
-    <a href="/contact" class="nl-banner-cta">登録する</a>
-  </div>
-  <button class="nl-banner-close" id="nlBannerClose" aria-label="閉じる">×</button>
-</div>
+</section>
 
 <style>
-/* ===== NEWSLETTER POPUP ===== */
-.nl-popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(28,28,26,0.45);
-  z-index: 2000;
+.nl-teaser-section {
+  padding: 5rem 5vw;
+  background: var(--sumi);
   display: flex;
-  align-items: center;
   justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  padding: 1.5rem;
-}
-.nl-popup-overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-.nl-popup {
-  position: relative;
-  background: #FAF9F6;
-  max-width: 460px;
-  width: 100%;
-  padding: 3.2rem 2.8rem 2.6rem;
   text-align: center;
-  border-top: 2px solid #C6A15B;
-  transform: translateY(16px);
-  transition: transform 0.4s ease;
 }
-.nl-popup-overlay.show .nl-popup {
-  transform: translateY(0);
+.nl-teaser-inner { max-width: 560px; }
+.nl-teaser-eyebrow {
+  font-family: var(--f-sans); font-size: .72rem; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--green); display: block; margin-bottom: 1.2rem;
 }
-.nl-popup-close {
-  position: absolute;
-  top: 1rem;
-  right: 1.2rem;
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: 300;
-  line-height: 1;
-  color: #6E6E6A;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: color 0.2s;
+.nl-teaser-title {
+  font-family: var(--f-serif); font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 300; color: #F4F2EE; line-height: 1.6; letter-spacing: .04em;
 }
-.nl-popup-close:hover { color: #1C1C1A; }
-.nl-popup-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #C6A15B;
-  display: block;
-  margin-bottom: 1.2rem;
+.nl-teaser-desc {
+  font-family: var(--f-sans); font-size: .85rem; color: rgba(244,242,238,.6);
+  line-height: 1.9; margin-top: 1.2rem;
 }
-.nl-popup-title {
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 300;
-  font-size: 1.15rem;
-  letter-spacing: 0.06em;
-  line-height: 1.9;
-  color: #1C1C1A;
-  margin-bottom: 1.2rem;
+.nl-teaser-cta {
+  display: inline-block; margin-top: 1.8rem;
+  font-family: var(--f-sans); font-size: .85rem; font-weight: 700; letter-spacing: .06em;
+  color: #1C1C1A; background: var(--amber, #C2A878);
+  padding: .85rem 2rem; border-radius: 2rem; text-decoration: none;
+  transition: opacity .2s;
 }
-.nl-popup-desc {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 0.8rem;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  line-height: 2;
-  color: #5C5C58;
-  margin-bottom: 2rem;
-}
-.nl-popup-cta {
-  display: block;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #1C1C1A;
-  text-decoration: none;
-  border: 1px solid rgba(28,28,26,0.25);
-  padding: 0.95rem 1.5rem;
-  margin-bottom: 1rem;
-  transition: background 0.25s, color 0.25s;
-}
-.nl-popup-cta:hover {
-  background: #1C1C1A;
-  color: #FAF9F6;
-}
-.nl-popup-later {
-  background: none;
-  border: none;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: #6E6E6A;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: color 0.2s;
-}
-.nl-popup-later:hover { color: #1C1C1A; }
-
-/* ===== NEWSLETTER BOTTOM BANNER ===== */
-.nl-banner {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  z-index: 1500;
-  background: #1C1C1A;
-  color: #FAF9F6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 0.95rem 1.5rem 0.95rem 2.5rem;
-  transform: translateY(0);
-  transition: transform 0.4s ease;
-}
-.nl-banner.hide {
-  transform: translateY(100%);
-}
-.nl-banner-inner {
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-  flex-wrap: wrap;
-  margin: 0 auto;
-}
-.nl-banner-text {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 0.78rem;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: rgba(250,249,246,0.85);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.nl-banner-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #C6A15B;
-  white-space: nowrap;
-}
-.nl-banner-cta {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #1C1C1A;
-  background: #C6A15B;
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  white-space: nowrap;
-  transition: background 0.25s;
-}
-.nl-banner-cta:hover { background: #B58F45; }
-.nl-banner-close {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: 300;
-  line-height: 1;
-  color: rgba(250,249,246,0.5);
-  cursor: pointer;
-  padding: 0.4rem;
-  flex-shrink: 0;
-  transition: color 0.2s;
-}
-.nl-banner-close:hover { color: #FAF9F6; }
-
-@media (max-width: 640px) {
-  .nl-popup { padding: 2.6rem 1.6rem 2.2rem; }
-  .nl-banner { padding: 0.85rem 1rem; gap: 0.8rem; }
-  .nl-banner-text { font-size: 0.7rem; gap: 0.6rem; }
-  .nl-banner-eyebrow { font-size: 10px; }
-}
+.nl-teaser-cta:hover { opacity: .85; }
 </style>
-
-<script>
-const NL_POPUP_KEY = 'andlab_nl_popup_dismissed';
-const NL_BANNER_KEY = 'andlab_nl_banner_dismissed';
-
-const popupOverlay = document.getElementById('nlPopupOverlay');
-const popupClose = document.getElementById('nlPopupClose');
-const popupLater = document.getElementById('nlPopupLater');
-const banner = document.getElementById('nlBanner');
-const bannerClose = document.getElementById('nlBannerClose');
-
-if (popupOverlay && !localStorage.getItem(NL_POPUP_KEY)) {
-  setTimeout(() => {
-    popupOverlay.classList.add('show');
-  }, 5000);
-}
-
-const dismissPopup = () => {
-  popupOverlay?.classList.remove('show');
-  localStorage.setItem(NL_POPUP_KEY, '1');
-};
-popupClose?.addEventListener('click', dismissPopup);
-popupLater?.addEventListener('click', dismissPopup);
-popupOverlay?.addEventListener('click', (e) => {
-  if (e.target === popupOverlay) dismissPopup();
-});
-
-if (banner && localStorage.getItem(NL_BANNER_KEY)) {
-  banner.classList.add('hide');
-}
-bannerClose?.addEventListener('click', () => {
-  banner?.classList.add('hide');
-  localStorage.setItem(NL_BANNER_KEY, '1');
-});
-</script>
 
 </Layout>
