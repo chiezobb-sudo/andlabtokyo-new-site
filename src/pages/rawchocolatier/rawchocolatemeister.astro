@@ -1,248 +1,486 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const heroImage = "https://static.wixstatic.com/media/857257_379c3e3dce8046929166f5d2c1e24b5f~mv2.jpg";
+const img1 = "https://static.wixstatic.com/media/d9b33118a3154c3195868a6e5e12ab98.jpg";
+
+const applyUrl = "https://www.andlabtokyo.com/rawchocolatier/rawsweets-application";
+
+const features = [
+  { num: "01", title: "体系的なテキスト", body: "ローチョコの歴史・栄養・テンパリングを網羅した公式テキストで、確実に基礎が身につきます。" },
+  { num: "02", title: "少人数制・直接指導", body: "テンパリングのコツと技術を講師が直接指導。疑問をその場で解決できる環境です。" },
+  { num: "03", title: "30種類以上のレシピ", body: "アイス・ドリンク・カカオアレンジまで網羅。アレンジ力が自然と身につきます。" },
+  { num: "04", title: "オリジナルレシピ力", body: "基本からアレンジまで学び、自分だけのレシピが作れる創作力を培います。" },
+  { num: "05", title: "ヘルシー素材", body: "カカオ・ナッツなど美容食材を活用。自分にも地球にも優しいスイーツを学べます。" },
+];
+
+const steps = [
+  {
+    level: "初級", label: "基礎", price: "¥16,500（税別）",
+    goal: "ローチョコレートの基本を理解し、テンパリングを習得する",
+    contents: ["ローチョコレートとは？歴史と栄養", "カカオバター・カカオパウダーの特徴", "基本のテンパリングと成功のポイント"],
+    recipes: ["基本のローチョコレート", "パレ（フラワーチョコほかアレンジ）", "チョコレートカバーフルーツ", "スパイシーチョコレート", "アマンドショコラ　ほか"],
+  },
+  {
+    level: "中級", label: "応用", price: "¥30,000（税別）",
+    goal: "ホワイトチョコレート・ナッツバターを使った応用技術を習得する",
+    contents: ["ホワイトチョコレートの基本", "ナッツバターの作り方", "成形技術の応用（トリュフなど）"],
+    recipes: ["カラフルチョコレート（マーメイド・地球チョコ）", "ジャンドゥーヤ", "パヴェドジュネーブ（生チョコ）", "チョコレートトリュフ", "ローキャラメル　ほか"],
+  },
+  {
+    level: "上級", label: "発展", price: "受講料はお問い合わせください",
+    goal: "ガナッシュ・ボンボンショコラなど本格技術とオリジナル創作力を習得する",
+    contents: ["ガナッシュ・ボンボンショコラの製法", "基本の型取り・デコレーション技術", "カカオ素材の代用・応用テクニック"],
+    recipes: ["ボンボンショコラ", "賞味期限15分のチョコレート", "ドバイチョコレート", "チョコレートファッジ", "Raw塩キャラメルソース　ほか"],
+  },
+];
+
+const forWho = [
+  "自分や家族のために、ヘルシーで安心できるスイーツを作りたい方",
+  "趣味でローチョコレートを楽しみながら、レシピの幅を広げたい方",
+  "将来的にローチョコレートを教えたり、販売したい方",
+  "オリジナルのレッスンやブランドを作りたい方",
+];
+
+const faqs = [
+  { q: "初心者でも受講できますか？", a: "はい、初級講座は初心者の方でも安心して取り組めるカリキュラムです。ローチョコレートの基礎から丁寧に学べます。" },
+  { q: "対面・オンラインどちらで受講できますか？", a: "対面（東京・渋谷）とオンラインの両方に対応しています。お住まいの地域を問わず受講いただけます。" },
+  { q: "3ステップを全部受講しないといけませんか？", a: "目的に応じて初級のみの受講も可能です。まずは初級から始め、その後のステップを検討される方が多いです。" },
+  { q: "修了後に資格は取得できますか？", a: "3ステップ講座を修了後、ジュニアローショコラティエ養成講座でインストラクター資格が取得できます。公式ロゴの使用やSNS集客サポートなどの特典もあります。" },
+];
 ---
+
 <Layout
-  title="ローチョコレートマイスター講座 | &LAB TOKYO"
-  description="初心者からプロまで3ステップで学ぶローチョコレートマイスター講座。¥16,500〜、資格取得コースあり。東京・表参道。"
-  canonical="https://www.andlabtokyo.com/rawchocolatier/rawchocolatemeister"
+  title="ローチョコレートマイスター養成講座"
+  description="商標登録済みの本物のローチョコレート技術が学べる唯一の資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。東京・渋谷、オンラインでも受講可能。"
+  ogImage={heroImage}
 >
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
-  --amber: #C6A15B; --amber-d: #A8865A;
-  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
-  --divider: rgba(243,238,229,0.12);
-  --fh: 'Cormorant Garamond', serif;
-}
-body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
-.hero { margin-top: 44px; position: relative; height: 65vh; min-height: 440px; overflow: hidden; display: flex; align-items: flex-end; }
-.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
-.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
-.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
-.hero h1 { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 16px; }
-.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
-.sec { padding: 72px 24px; }
-.inner { max-width: 860px; margin: 0 auto; }
-.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
-h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
-.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
-.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
-.steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
-.step { background: var(--bg-card); padding: 32px; display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: start; }
-.step-num { font-family: var(--fh); font-size: 48px; color: var(--amber); font-style: italic; line-height: 1; opacity: .6; }
-.step-info h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.step-info p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
-.step-info ul { margin-top: 12px; list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.step-info ul li { font-size: 13px; color: var(--ink-3); padding-left: 16px; position: relative; }
-.step-info ul li::before { content: '—'; position: absolute; left: 0; color: var(--amber-d); }
-.step-price { text-align: right; flex-shrink: 0; }
-.step-price .price { font-family: var(--fh); font-size: 26px; color: var(--amber); font-style: italic; white-space: nowrap; }
-.step-price .price-note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
-.bundle-sec { background: var(--bg-dark); }
-.bundle-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.3); padding: 40px; margin-top: 32px; text-align: center; }
-.bundle-box h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.bundle-box .price-big { font-family: var(--fh); font-size: 52px; color: var(--amber); font-style: italic; margin: 16px 0 8px; }
-.bundle-box p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
-.for-whom { background: var(--bg-2); }
-.whom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
-.whom-item { background: var(--bg-card); padding: 24px; }
-.whom-item h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.whom-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-.cert-sec { background: var(--bg); }
-.cert-box { background: var(--bg-card); border-left: 3px solid var(--amber); padding: 32px; margin-top: 32px; }
-.cert-box h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
-.cert-box p { font-size: 14px; color: var(--ink-3); line-height: 1.8; margin-bottom: 8px; }
-.cert-price { display: flex; align-items: center; gap: 8px; margin-top: 20px; }
-.cert-price .p1 { font-family: var(--fh); font-size: 22px; color: var(--amber); font-style: italic; }
-.cert-price .p2 { font-size: 13px; color: var(--ink-3); }
-.format-sec { background: var(--bg-2); }
-.formats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
-.format { background: var(--bg-card); padding: 28px; }
-.format h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
-.format p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
-.cta-sec { background: var(--bg-dark); text-align: center; padding: 80px 24px; }
-.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
-.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
-.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
-.btn-primary:hover { background: var(--amber-d); color: #fff; }
-@media (max-width: 640px) {
-  .step { grid-template-columns: 1fr; }
-  .step-price { text-align: left; }
-  .formats { grid-template-columns: 1fr; }
-}
-</style>
+    /* HERO */
+    .hero { position: relative; height: 90vh; min-height: 540px; overflow: hidden; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,15,10,.82) 0%, rgba(20,15,10,.3) 55%, transparent 100%);
+    }
+    .hero-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 6vw 5rem; max-width: 900px; }
+    .hero-badge {
+      display: inline-block; border: 1px solid var(--amber); color: var(--amber);
+      font-family: var(--f-sans); font-size: .7rem; letter-spacing: .14em;
+      padding: .3rem .9rem; border-radius: 2rem; margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: var(--f-serif); font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+      font-weight: 300; color: #fff; line-height: 1.3; letter-spacing: .06em; margin-bottom: 1rem;
+    }
+    .hero-sub {
+      font-family: var(--f-sans); font-size: clamp(.85rem, 1.4vw, 1rem);
+      color: rgba(255,255,255,.82); line-height: 1.9; max-width: 580px; margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--amber); color: #1c1c1a;
+      font-family: var(--f-sans); font-size: .88rem; font-weight: 700; letter-spacing: .1em;
+      padding: .9rem 2.2rem; border-radius: 2rem; text-decoration: none; transition: background .2s;
+    }
+    .hero-cta:hover { background: #d4a84a; }
 
-<!-- HERO -->
-<section class="hero">
-  <img src="/prog-chocolate.jpg" alt="ローチョコレートマイスター講座" />
-  <div class="hero-body">
-    <span class="hero-eye">Raw Chocolate Meister</span>
-    <h1>ローチョコレート<br>マイスター講座</h1>
-    <p class="hero-sub">初心者から資格取得まで。3ステップで本格的なローチョコレートをマスターする。</p>
+    /* SECTIONS */
+    section { padding: 5rem 6vw; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--f-sans); font-size: .68rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--amber); display: block; margin-bottom: .8rem;
+    }
+    .sec-title {
+      font-family: var(--f-serif); font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300; color: #2c2c2a; line-height: 1.4; letter-spacing: .04em; margin-bottom: 1rem;
+    }
+    .sec-lead { font-family: var(--f-sans); font-size: .93rem; color: #555; line-height: 1.9; max-width: 700px; }
+    .divider { width: 40px; height: 1px; background: var(--amber); margin: 1.2rem 0 2.2rem; }
+
+    /* FOR WHO */
+    .bg-linen { background: #f7f4ef; }
+    .forwho-list {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .forwho-item {
+      background: #fff; border-left: 3px solid var(--amber);
+      padding: 1.1rem 1.4rem; font-family: var(--f-sans); font-size: .9rem;
+      color: #333; line-height: 1.7; border-radius: 0 4px 4px 0;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem; margin-top: 2.5rem;
+    }
+    .feature-card { border-top: 1px solid #e8e4dc; padding-top: 1.4rem; }
+    .feature-num { font-family: var(--fh); font-size: 2.2rem; color: var(--amber); opacity: .55; display: block; margin-bottom: .4rem; }
+    .feature-title { font-family: var(--f-serif); font-size: 1rem; font-weight: 400; color: #2c2c2a; margin-bottom: .5rem; }
+    .feature-body { font-family: var(--f-sans); font-size: .84rem; color: #666; line-height: 1.8; }
+
+    /* STEPS */
+    .bg-dark { background: #1c1c1a; }
+    .bg-dark .sec-title { color: #fff; }
+    .bg-dark .sec-lead { color: rgba(255,255,255,.65); }
+    .steps-wrap { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
+    .step-card {
+      display: grid; grid-template-columns: 180px 1fr; gap: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.1); padding: 2.5rem 0;
+    }
+    .step-level { font-family: var(--fh); font-size: 3rem; color: var(--amber); opacity: .45; line-height: 1; display: block; }
+    .step-label { font-family: var(--f-serif); font-size: 1.15rem; font-weight: 300; color: #fff; display: block; margin: .3rem 0 .8rem; }
+    .step-price {
+      display: inline-block; border: 1px solid var(--amber); color: var(--amber);
+      font-family: var(--f-sans); font-size: .74rem; letter-spacing: .06em;
+      padding: .2rem .75rem; border-radius: 2rem;
+    }
+    .step-goal {
+      font-family: var(--f-sans); font-size: .84rem; color: rgba(255,255,255,.58);
+      margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .step-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .col-label {
+      font-family: var(--f-sans); font-size: .68rem; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: .6rem;
+    }
+    .step-list { list-style: none; }
+    .step-list li {
+      font-family: var(--f-sans); font-size: .82rem; color: rgba(255,255,255,.75);
+      padding: .3rem 0; border-bottom: 1px solid rgba(255,255,255,.05); line-height: 1.6;
+    }
+    .step-list li::before { content: '— '; color: var(--amber); opacity: .6; }
+
+    /* FORMAT */
+    .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .format-card { background: #f7f4ef; padding: 1.8rem; border-radius: 4px; }
+    .format-card-label { font-family: var(--f-sans); font-size: .68rem; letter-spacing: .18em; color: var(--amber); margin-bottom: .6rem; }
+    .format-card-title { font-family: var(--f-serif); font-size: 1.05rem; margin-bottom: .5rem; color: #2c2c2a; }
+    .format-card-body { font-family: var(--f-sans); font-size: .84rem; color: #666; line-height: 1.8; }
+
+    /* INSTRUCTOR */
+    .instructor-wrap { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start; }
+    .instructor-img { width: 100%; border-radius: 2px; display: block; }
+    .instructor-name { font-family: var(--f-serif); font-size: 1.4rem; font-weight: 300; margin-bottom: .3rem; }
+    .instructor-role { font-family: var(--f-sans); font-size: .76rem; letter-spacing: .12em; color: var(--amber); margin-bottom: 1.2rem; }
+    .instructor-body { font-family: var(--f-sans); font-size: .9rem; color: #555; line-height: 1.9; }
+
+    /* JUNIOR */
+    .junior-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    .junior-card { background: #fff; padding: 2rem; border-radius: 4px; }
+    .junior-card-title {
+      font-family: var(--f-serif); font-size: 1rem; font-weight: 400; color: #2c2c2a;
+      margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 1px solid #e8e4dc;
+    }
+    .junior-list { list-style: none; }
+    .junior-list li {
+      font-family: var(--f-sans); font-size: .85rem; color: #555;
+      padding: .4rem 0; border-bottom: 1px solid #f0ede6; line-height: 1.6;
+    }
+    .junior-list li::before { content: '✓ '; color: var(--amber); }
+    .junior-note { font-family: var(--f-sans); font-size: .8rem; color: #999; margin-top: 1.5rem; line-height: 1.9; }
+
+    /* FAQ */
+    .faq-list { margin-top: 2rem; }
+    .faq-item { border-bottom: 1px solid #e8e4dc; padding: 1.4rem 0; }
+    .faq-q {
+      font-family: var(--f-sans); font-size: .92rem; font-weight: 700; color: #2c2c2a;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--amber); flex-shrink: 0; transition: transform .25s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      font-family: var(--f-sans); font-size: .88rem; color: #666; line-height: 1.9;
+      max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s;
+    }
+    .faq-item.open .faq-a { max-height: 220px; padding-top: .9rem; }
+
+    /* CTA */
+    .cta-section { background: #1c1c1a; text-align: center; padding: 6rem 6vw; }
+    .cta-title {
+      font-family: var(--f-serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 300; color: #fff; line-height: 1.5; margin-bottom: 1rem;
+    }
+    .cta-lead {
+      font-family: var(--f-sans); font-size: .9rem; color: rgba(255,255,255,.6);
+      line-height: 1.9; max-width: 480px; margin: 0 auto 2.5rem;
+    }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--amber); color: #1c1c1a;
+      font-family: var(--f-sans); font-size: .88rem; font-weight: 700; letter-spacing: .1em;
+      padding: 1rem 2.6rem; border-radius: 2rem; text-decoration: none; transition: background .2s;
+    }
+    .btn-primary:hover { background: #d4a84a; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.85);
+      font-family: var(--f-sans); font-size: .88rem; letter-spacing: .1em;
+      padding: 1rem 2.2rem; border-radius: 2rem; text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* STICKY CTA */
+    .sticky-cta {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(20,15,10,.95); backdrop-filter: blur(8px);
+      padding: 1rem 6vw;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      z-index: 100; transform: translateY(100%); transition: transform .3s ease;
+    }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-cta-text { font-family: var(--f-sans); font-size: .8rem; color: rgba(255,255,255,.65); }
+    .sticky-cta-text strong { display: block; color: #fff; font-size: .86rem; }
+    .sticky-btn {
+      flex-shrink: 0; background: var(--amber); color: #1c1c1a;
+      font-family: var(--f-sans); font-size: .82rem; font-weight: 700; letter-spacing: .1em;
+      padding: .7rem 1.8rem; border-radius: 2rem; text-decoration: none; white-space: nowrap;
+      transition: background .2s;
+    }
+    .sticky-btn:hover { background: #d4a84a; }
+
+    @media (max-width: 760px) {
+      .step-card { grid-template-columns: 1fr; gap: 1rem; }
+      .step-cols { grid-template-columns: 1fr; }
+      .instructor-wrap { grid-template-columns: 1fr; }
+      .junior-grid { grid-template-columns: 1fr; }
+      .format-grid { grid-template-columns: 1fr; }
+      .hero-body { padding: 0 5vw 3.5rem; }
+      section { padding: 3.5rem 5vw; }
+      .sticky-cta-text { display: none; }
+    }
+  </style>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src={heroImage} alt="ローチョコレートマイスター養成講座" loading="eager" />
+    <div class="hero-overlay"></div>
+    <div class="hero-body">
+      <span class="hero-badge">商標登録済み ／ 国内唯一の認定資格</span>
+      <h1 class="hero-title">ローチョコレート<br/>マイスター養成講座</h1>
+      <p class="hero-sub">
+        本物のローチョコレート技術を体系的に学べる唯一のプログラム。<br/>
+        初級〜上級の3ステップで、趣味からプロ志向まで確実に身につきます。
+      </p>
+      <a href={applyUrl} class="hero-cta">お申し込みはこちら →</a>
+    </div>
   </div>
-</section>
 
-<!-- OVERVIEW -->
-<section class="sec" style="background: var(--bg);">
-  <div class="inner">
-    <span class="sec-eye">About</span>
-    <h2>ローチョコレートを<br>体系的に学ぶ</h2>
-    <div class="rule"></div>
-    <p class="body-text">素材の理解から温度管理、甘味料の代替、なめらかな溶け感まで。初心者からプロフェッショナルまで対応する3ステップのプログラムです。</p>
-    <p class="body-text">オリジナルテキスト（27〜45レシピ収録）付き。対面・オンラインどちらでも受講可能。</p>
-  </div>
-</section>
+  <!-- こんな方に -->
+  <section class="bg-linen">
+    <div class="section-inner">
+      <span class="eyebrow">For Who</span>
+      <h2 class="sec-title">こんな方におすすめ</h2>
+      <div class="divider"></div>
+      <ul class="forwho-list">
+        {forWho.map(text => <li class="forwho-item">{text}</li>)}
+      </ul>
+    </div>
+  </section>
 
-<!-- STEPS -->
-<section class="sec" style="background: var(--bg-2);">
-  <div class="inner">
-    <span class="sec-eye">Curriculum</span>
-    <h2>3ステップ・カリキュラム</h2>
-    <div class="rule"></div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-info">
-          <h3>Beginner（初級）</h3>
-          <p>ローチョコレートの基礎知識とカカオバター・カカオパウダーの特性を学び、基本レシピとテンパリングの基礎を習得。</p>
-          <ul>
-            <li>ローチョコレートとは</li>
-            <li>カカオバター・カカオパウダーの特性</li>
-            <li>基本レシピ</li>
-            <li>テンパリング基礎</li>
+  <!-- 5つの特徴 -->
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow">Features</span>
+      <h2 class="sec-title">ローチョコレートマイスター講座<br/>5つの特徴</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">
+        「健康」「趣味」「仕事」──目的はさまざまですが、共通するのは
+        <em>ローチョコレートをもっと深く学びたい</em>という気持ちです。
+        この講座は、そんなあなたをしっかりサポートする体系的プログラムです。
+      </p>
+      <div class="features-grid">
+        {features.map(f => (
+          <div class="feature-card">
+            <span class="feature-num">{f.num}</span>
+            <h3 class="feature-title">{f.title}</h3>
+            <p class="feature-body">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- カリキュラム -->
+  <section class="bg-dark">
+    <div class="section-inner">
+      <span class="eyebrow">Curriculum</span>
+      <h2 class="sec-title">3ステップで確実に身につく<br/>カリキュラム</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">まずは基礎から学びたい方は【3ステップ講座】、教えたい・販売したい方は修了後に【インストラクター講座】へ進みます。</p>
+      <div class="steps-wrap">
+        {steps.map(s => (
+          <div class="step-card">
+            <div>
+              <span class="step-level">{s.level}</span>
+              <span class="step-label">{s.label}</span>
+              <span class="step-price">{s.price}</span>
+            </div>
+            <div>
+              <p class="step-goal">{s.goal}</p>
+              <div class="step-cols">
+                <div>
+                  <p class="col-label">学ぶ内容</p>
+                  <ul class="step-list">
+                    {s.contents.map(c => <li>{c}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <p class="col-label">作るレシピ</p>
+                  <ul class="step-list">
+                    {s.recipes.map(r => <li>{r}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 受講形式 -->
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow">Format</span>
+      <h2 class="sec-title">対面・オンラインどちらも対応</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">
+        東京・渋谷（表参道）での対面レッスンのほか、オンラインでも受講可能です。
+        対面はプランA（3日間）・プランB（2日間）から選択いただけます。
+      </p>
+      <div class="format-grid">
+        <div class="format-card">
+          <p class="format-card-label">PLAN A — 対面</p>
+          <p class="format-card-title">3日間コース</p>
+          <p class="format-card-body">座学（動画視聴）→ 実習3日間<br/>11:00〜15:30</p>
+        </div>
+        <div class="format-card">
+          <p class="format-card-label">PLAN B — 対面</p>
+          <p class="format-card-title">2日間コース</p>
+          <p class="format-card-body">座学（動画視聴）→ 実習2日間<br/>凝縮カリキュラム対応</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 講師 -->
+  <section class="bg-linen">
+    <div class="section-inner">
+      <span class="eyebrow">Instructor</span>
+      <h2 class="sec-title">講師紹介</h2>
+      <div class="divider"></div>
+      <div class="instructor-wrap">
+        <img src={img1} alt="安藤千英" class="instructor-img" loading="lazy" />
+        <div>
+          <p class="instructor-name">安藤 千英</p>
+          <p class="instructor-role">ELLE gourmet認定料理家 ／ ローショコラティエ協会 代表</p>
+          <p class="instructor-body">
+            東京・渋谷を拠点とするローフードと発酵の専門料理教室「&LAB TOKYO」主宰。
+            日本リビングビューティー協会（JLBA）認定のローフードマイスター講座をはじめ、
+            ローチョコレートマイスター養成講座を開講。
+            商標登録済みの「ローショコラティエ」認定資格を国内で唯一発行しています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ジュニアローショコラティエ -->
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow">Next Step</span>
+      <h2 class="sec-title">さらにステップアップ<br/>ジュニアローショコラティエ養成講座</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">
+        3ステップ講座修了後、<strong>教える・販売する・広める</strong>ためのインストラクター講座へ進めます。
+      </p>
+      <div class="junior-grid">
+        <div class="junior-card">
+          <p class="junior-card-title">学べること</p>
+          <ul class="junior-list">
+            <li>ローチョコレートの指導法</li>
+            <li>レッスン開催・自分ブランドの作り方</li>
+            <li>販売の基礎知識（食品表示・価格設定）</li>
+            <li>公式テキスト使用OK（講師専用特典）</li>
           </ul>
         </div>
-        <div class="step-price">
-          <div class="price">¥16,500</div>
-          <div class="price-note">税込</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-info">
-          <h3>Intermediate（中級）</h3>
-          <p>ホワイトチョコレート・ナッツバター・ガナッシュ・トリュフ・キャラメルなど応用技術を学ぶ。</p>
-          <ul>
-            <li>ホワイトチョコレート</li>
-            <li>ナッツバター制作</li>
-            <li>ガナッシュ・トリュフ</li>
-            <li>キャラメル技術</li>
+        <div class="junior-card">
+          <p class="junior-card-title">修了後の特典</p>
+          <ul class="junior-list">
+            <li>年会費無料</li>
+            <li>「ローチョコレートマイスター」公式ロゴ使用OK</li>
+            <li>最新版テキスト無料提供（追加レシピ掲載）</li>
+            <li>レシピを販売に活用OK</li>
+            <li>SNS集客バックアップ</li>
           </ul>
         </div>
-        <div class="step-price">
-          <div class="price">¥30,000</div>
-          <div class="price-note">税込</div>
-        </div>
       </div>
+      <p class="junior-note">
+        ※ 受講条件：3ステップ講座の修了者<br/>
+        ※ 受講期間：1〜3ヶ月 ／ 開催形式：オンラインor対面<br/>
+        ※ 特典を受けるには当スクールの理念に基づいた指導を行い、規定の条件を満たす場合に受けることができます。
+      </p>
+    </div>
+  </section>
 
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-info">
-          <h3>Advanced（上級）</h3>
-          <p>ボンボンショコラ・上級ガナッシュ・ドバイチョコレート・デコレーション技術など、プロレベルの技術を習得。</p>
-          <ul>
-            <li>ボンボンショコラ</li>
-            <li>上級ガナッシュ各種</li>
-            <li>ドバイチョコレート</li>
-            <li>デコレーション技術</li>
-          </ul>
-        </div>
-        <div class="step-price">
-          <div class="price">¥33,500</div>
-          <div class="price-note">税込</div>
-        </div>
+  <!-- FAQ -->
+  <section class="bg-linen">
+    <div class="section-inner">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title">よくある質問</h2>
+      <div class="divider"></div>
+      <div class="faq-list">
+        {faqs.map(item => (
+          <div class="faq-item">
+            <p class="faq-q">{item.q}</p>
+            <p class="faq-a">{item.a}</p>
+          </div>
+        ))}
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- BUNDLE -->
-<section class="sec bundle-sec">
-  <div class="inner">
-    <span class="sec-eye">Best Value</span>
-    <h2>3ステップ一括受講</h2>
-    <div class="rule"></div>
-    <div class="bundle-box">
-      <h3>Complete 3-Step Bundle</h3>
-      <div class="price-big">¥75,000</div>
-      <p>テキスト代（27レシピ収録）含む・税込<br>アイスクリーム・ドリンク・スペシャリティなど30種類以上のレシピに対応</p>
+  <!-- CTA -->
+  <section class="cta-section" id="apply">
+    <h2 class="cta-title">本物のローチョコレート技術を<br/>あなたのものに</h2>
+    <p class="cta-lead">
+      趣味でも、仕事でも。あなたのペースで、しっかり学べる環境が整っています。<br/>
+      まずはお気軽にお申し込みください。
+    </p>
+    <div class="cta-btns">
+      <a href={applyUrl} class="btn-primary">お申し込みはこちら →</a>
+      <a href="/contact" class="btn-outline">お問い合わせ</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOR WHOM -->
-<section class="sec for-whom">
-  <div class="inner">
-    <span class="sec-eye">For Whom</span>
-    <h2>こんな方に</h2>
-    <div class="rule"></div>
-    <div class="whom-grid">
-      <div class="whom-item">
-        <h4>家族に安心なお菓子を</h4>
-        <p>添加物ゼロの健康的なスイーツをご自宅で作りたい方。</p>
-      </div>
-      <div class="whom-item">
-        <h4>趣味を深めたい</h4>
-        <p>チョコレート菓子のレパートリーを広げたいホビーユーザー。</p>
-      </div>
-      <div class="whom-item">
-        <h4>販売・教室開催を考えている</h4>
-        <p>ローチョコレートを教えたい・販売したい方。</p>
-      </div>
-      <div class="whom-item">
-        <h4>自分のブランドを作りたい</h4>
-        <p>オリジナルブランドの立ち上げを目指している方。</p>
-      </div>
+  <!-- STICKY CTA -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-text">
+      <strong>ローチョコレートマイスター養成講座</strong>
+      商標登録済み ／ 国内唯一の認定資格
     </div>
+    <a href={applyUrl} class="sticky-btn">お申し込み →</a>
   </div>
-</section>
 
-<!-- CERTIFICATION -->
-<section class="sec cert-sec">
-  <div class="inner">
-    <span class="sec-eye">Certification</span>
-    <h2>資格取得コース</h2>
-    <div class="rule"></div>
-    <div class="cert-box">
-      <h3>ジュニアローショコラティエ® 認定資格</h3>
-      <p>3ステップ修了後、認定資格の取得が可能です。ロゴ使用権・更新テキスト（45レシピ）・マーケティングサポートが含まれます。</p>
-      <p>認定後はご自身のスクール・教室でローチョコレートを教える権利を取得できます。</p>
-      <div class="cert-price">
-        <span class="p1">¥155,000</span>
-        <span class="p2">（3ステップ¥75,000 ＋ 認定料¥80,000・税込）</span>
-      </div>
-    </div>
-  </div>
-</section>
+  <script>
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.closest('.faq-item')?.classList.toggle('open'));
+    });
 
-<!-- FORMAT -->
-<section class="sec format-sec">
-  <div class="inner">
-    <span class="sec-eye">How to Join</span>
-    <h2>受講形式</h2>
-    <div class="rule"></div>
-    <div class="formats">
-      <div class="format">
-        <h4>対面レッスン</h4>
-        <p>東京・表参道のスタジオで。2〜3日間の集中形式（11:00〜15:30 または 16:30）。少人数制で丁寧に指導します。</p>
-      </div>
-      <div class="format">
-        <h4>オンラインレッスン</h4>
-        <p>ライブ形式のオンライン指導。材料はご自身でご用意いただきます。全国・海外からご受講可能。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-sec">
-  <h2>ローチョコレートの世界へ</h2>
-  <p>お申し込み・ご質問はコンタクトフォームから</p>
-  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
-</section>
-
+    const sticky = document.getElementById('stickyCta');
+    const hero = document.querySelector('.hero') as HTMLElement;
+    if (sticky && hero) {
+      new IntersectionObserver(([e]) => {
+        sticky.classList.toggle('visible', !e.isIntersecting);
+      }, { threshold: 0 }).observe(hero);
+    }
+  </script>
 </Layout>
