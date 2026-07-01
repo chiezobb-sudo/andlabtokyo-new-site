@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout
-  title="これからの私を、美しく「醸す」。 | &LAB TOKYO"
-  description="発酵と美の学校。東京・渋谷のプレミアム・ライフスタイルラボ。ローフード×発酵のクロス理論でライフスタイルを進化させる &LAB TOKYO。ELLE gourmet認定料理家・安藤千英が主宰。"
+  title="東京・渋谷のローフード×発酵料理教室 | &LAB TOKYO"
+  description="東京・渋谷発のローフード×発酵専門料理教室。ローチョコレート・ロースイーツ・発酵プランナーなど本格資格講座を開講。ELLE gourmet認定料理家・安藤千英主宰。対面・オンライン対応。"
   canonical="https://www.andlabtokyo.com/"
   type="website"
 >
@@ -95,6 +95,12 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 400;
   margin-bottom: 3.5rem;
 }
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
 .hero-cta {
   display: inline-block;
   width: fit-content;
@@ -110,6 +116,10 @@ import Layout from '../layouts/Layout.astro';
   font-weight: 300;
 }
 .hero-cta:hover { opacity: 0.55; }
+.hero-cta--outline {
+  color: rgba(28,28,26,0.55);
+  border-bottom-color: rgba(28,28,26,0.3);
+}
 .scroll-indicator {
   display: flex;
   flex-direction: column;
@@ -696,7 +706,7 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <div class="hero-text">
-    <span class="hero-eyebrow">Fermentation Creator · Tokyo Shibuya</span>
+    <span class="hero-eyebrow">東京・渋谷 / ローフード × 発酵 料理教室</span>
     <h1 class="hero-title">
       これからの私を、<br>
       美しく「醸す」。
@@ -710,7 +720,10 @@ import Layout from '../layouts/Layout.astro';
       発酵×ローフードのクロス理論で、<br>
       あなたの本来の輝きを取り戻す。
     </p>
-    <a href="/brand" class="hero-cta">&LAB TOKYO について</a>
+    <div class="hero-cta-group">
+      <a href="/experiencelessons" class="hero-cta">体験レッスンを見る</a>
+      <a href="/listofcourses" class="hero-cta hero-cta--outline">講座一覧を見る</a>
+    </div>
 
     <div class="scroll-indicator">
       <span>Scroll</span>
