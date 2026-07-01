@@ -1,0 +1,416 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="&LAB TOKYO 10周年 | みんなの声を集めています"
+  description="&LAB TOKYOは2025年に10周年を迎えます。受講してくださった皆さんの声・写真・メッセージを記念ページに掲載します。"
+  canonical="https://www.andlabtokyo.com/10th"
+>
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* HERO */
+  .hero {
+    background: #FAFAF8;
+    padding: 7rem 5vw 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '10';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18rem, 35vw, 30rem);
+    font-weight: 300;
+    color: rgba(168,134,90,.07);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -.04em;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.6rem;
+  }
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 300;
+    color: #1C1C1A;
+    line-height: 1.5;
+    letter-spacing: .06em;
+    margin-bottom: 1.8rem;
+  }
+  .hero-title span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    color: var(--amber);
+    letter-spacing: .08em;
+    line-height: 1.1;
+  }
+  .hero-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .9rem;
+    color: #6B6B66;
+    line-height: 2;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+  .hero-deadline {
+    display: inline-block;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .8rem;
+    letter-spacing: .12em;
+    padding: .5rem 1.6rem;
+    border-radius: 2rem;
+  }
+
+  /* PHOTOS STRIP */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 220px;
+    overflow: hidden;
+  }
+  .photo-strip-item {
+    overflow: hidden;
+  }
+  .photo-strip-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .6s ease;
+  }
+  .photo-strip-item:hover img { transform: scale(1.05); }
+
+  /* MESSAGE */
+  .message-sec {
+    padding: 6rem 5vw;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .message-eyebrow {
+    display: block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.4rem;
+  }
+  .message-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(.95rem, 1.6vw, 1.05rem);
+    line-height: 2.3;
+    color: #3C3C3A;
+    font-weight: 300;
+    text-align: left;
+  }
+  .message-text p { margin-bottom: 1.4rem; }
+  .message-text p:last-child { margin-bottom: 0; }
+  .message-sign {
+    margin-top: 2.4rem;
+    text-align: right;
+    font-family: 'Noto Serif JP', serif;
+    font-size: .92rem;
+    color: #6B6B66;
+    font-weight: 300;
+  }
+
+  /* WHAT TO SHARE */
+  .share-sec {
+    background: #F5F3EE;
+    padding: 5rem 5vw;
+  }
+  .share-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .share-eyebrow {
+    display: block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .share-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 300;
+    color: #1C1C1A;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .share-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .share-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 1.8rem;
+  }
+  .share-card-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .68rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: .8rem;
+    display: block;
+  }
+  .share-card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #1C1C1A;
+    margin-bottom: .8rem;
+  }
+  .share-list {
+    list-style: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .82rem;
+    color: #6B6B66;
+    line-height: 2;
+  }
+  .share-list li::before {
+    content: '— ';
+    color: var(--amber);
+  }
+
+  /* GIFT */
+  .gift-sec {
+    padding: 5rem 5vw;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .gift-badge {
+    display: inline-block;
+    background: var(--amber);
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .72rem;
+    letter-spacing: .16em;
+    padding: .4rem 1.2rem;
+    border-radius: 2rem;
+    margin-bottom: 1.4rem;
+  }
+  .gift-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 300;
+    color: #1C1C1A;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .gift-note {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .82rem;
+    color: #6B6B66;
+    line-height: 1.9;
+  }
+
+  /* CTA */
+  .cta-sec {
+    background: var(--sumi);
+    padding: 6rem 5vw;
+    text-align: center;
+  }
+  .cta-eyebrow {
+    display: block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.2rem;
+  }
+  .cta-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 300;
+    color: #F4F2EE;
+    margin-bottom: .8rem;
+  }
+  .cta-deadline {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .82rem;
+    color: rgba(244,242,238,.55);
+    margin-bottom: 2.5rem;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--amber);
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .88rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .cta-btn:hover { opacity: .82; }
+  .cta-note {
+    margin-top: 1.2rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: .75rem;
+    color: rgba(244,242,238,.4);
+  }
+
+  @media (max-width: 760px) {
+    .photo-strip { grid-template-columns: repeat(2, 1fr); height: 280px; }
+    .share-grid { grid-template-columns: 1fr; }
+    .hero { padding: 5rem 1.5rem 4rem; }
+    .message-sec { padding: 4rem 1.5rem; }
+    .share-sec { padding: 4rem 1.5rem; }
+    .gift-sec { padding: 4rem 1.5rem; }
+    .cta-sec { padding: 4rem 1.5rem; }
+  }
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eyebrow">&amp;LAB TOKYO 2015 — 2025</span>
+  <h1 class="hero-title">
+    <span>10th Anniversary</span>
+    ありがとう、10年。
+  </h1>
+  <p class="hero-sub">
+    受講してくださったみなさんへ、感謝を込めて。<br />
+    あなたの声と写真を、記念ページに刻ませてください。
+  </p>
+  <span class="hero-deadline">📅 募集締め切り：2025年8月15日</span>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="/choco-real/07-step-beginner.jpg" alt="ローチョコレートレッスンの様子" loading="lazy" />
+  </div>
+  <div class="photo-strip-item">
+    <img src="/choco-real/08-step-intermediate.jpg" alt="カラフルチョコレート" loading="lazy" />
+  </div>
+  <div class="photo-strip-item">
+    <img src="/choco-real/12-junior-student.jpg" alt="受講生の笑顔" loading="lazy" />
+  </div>
+  <div class="photo-strip-item">
+    <img src="/choco-real/11-online-lesson.jpg" alt="オンラインレッスン" loading="lazy" />
+  </div>
+</div>
+
+<!-- MESSAGE -->
+<div class="message-sec">
+  <span class="message-eyebrow">From Chie</span>
+  <div class="message-text">
+    <p>気づけば、&LAB TOKYOは今年で10周年を迎えます。</p>
+    <p>正直、ここまで続けてこられたのは、レッスンに来てくださったみなさんのおかげです。本当に、ありがとうございます。</p>
+    <p>10年という節目に、受講してくださった方々の声を集めた記念ページを作りたいと思いました。「先生ってどんな人?」「なぜ受講しようと思ったの?」「受講してどう変わった?」そんなことを、あなたの言葉で教えてもらえたら嬉しいです。</p>
+    <p>レッスン中の写真や、日常で作ったお料理の写真も大歓迎。どんな小さなひとことでも構いません。あなたの声が、次の10年の糧になります。</p>
+  </div>
+  <p class="message-sign">— 安藤 千英</p>
+</div>
+
+<!-- WHAT TO SHARE -->
+<section class="share-sec">
+  <div class="share-inner">
+    <span class="share-eyebrow">Share Your Story</span>
+    <h2 class="share-title">教えてほしいこと</h2>
+    <div class="share-grid">
+      <div class="share-card">
+        <span class="share-card-label">About You</span>
+        <p class="share-card-title">あなたのこと</p>
+        <ul class="share-list">
+          <li>名前（ニックネームOK）</li>
+          <li>居住地・出身地（都道府県/国）</li>
+          <li>受講した年・講座名</li>
+        </ul>
+      </div>
+      <div class="share-card">
+        <span class="share-card-label">About the LAB</span>
+        <p class="share-card-title">先生・LABについて</p>
+        <ul class="share-list">
+          <li>先生の印象・好きなところ</li>
+          <li>&LAB TOKYOを一言で表すと？</li>
+          <li>&LABを知ったきっかけ</li>
+        </ul>
+      </div>
+      <div class="share-card">
+        <span class="share-card-label">Your Experience</span>
+        <p class="share-card-title">受講体験・変化</p>
+        <ul class="share-list">
+          <li>受講しようと思った理由</li>
+          <li>受講してどう変わった？</li>
+          <li>今も続けていること</li>
+          <li>お気に入りのレシピ</li>
+        </ul>
+      </div>
+      <div class="share-card">
+        <span class="share-card-label">Photo</span>
+        <p class="share-card-title">写真（任意）</p>
+        <ul class="share-list">
+          <li>レッスン中・作品の写真</li>
+          <li>日常での発酵・ローフード生活</li>
+        </ul>
+      </div>
+      <div class="share-card">
+        <span class="share-card-label">Message</span>
+        <p class="share-card-title">10周年へのメッセージ</p>
+        <ul class="share-list">
+          <li>10周年へのお祝いの言葉</li>
+          <li>次の10年への期待</li>
+          <li>安藤先生へのひとこと</li>
+          <li>受講前の自分へ贈る一言</li>
+        </ul>
+      </div>
+      <div class="share-card">
+        <span class="share-card-label">Map</span>
+        <p class="share-card-title">どこから参加？</p>
+        <ul class="share-list">
+          <li>国内外の居住地を地図で表示</li>
+          <li>世界中からの参加者を可視化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT -->
+<div class="gift-sec">
+  <span class="gift-badge">🎁 特別ギフト</span>
+  <h2 class="gift-title">ご参加いただいた方の中から<br />抽選で5名様にギフトをお届けします</h2>
+  <p class="gift-note">
+    内容は後日発表します。お楽しみに！<br />
+    当選者の方には、8月下旬にメールにてご連絡します。
+  </p>
+</div>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <span class="cta-eyebrow">Join Us</span>
+  <h2 class="cta-title">あなたの声を、聞かせてください。</h2>
+  <p class="cta-deadline">募集締め切り：2025年8月15日（金）</p>
+  <a href="#form" class="cta-btn">フォームに回答する</a>
+  <p class="cta-note">所要時間：約5〜10分 ／ 写真投稿は任意です</p>
+</section>
+
+</Layout>
