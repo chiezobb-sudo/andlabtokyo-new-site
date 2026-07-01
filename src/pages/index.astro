@@ -655,6 +655,7 @@ import Layout from '../layouts/Layout.astro';
   .sp-br { display: none; }
   .entry-card { grid-template-columns: 1fr; }
   .entry-img { aspect-ratio: 16/9; order: -1; }
+  .voices-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .hero {
@@ -683,6 +684,8 @@ import Layout from '../layouts/Layout.astro';
   .about-statement { text-align: center; }
   .about-concept { text-align: center; }
   .about-credit { margin-top: 2rem; }
+  .voices-sec { padding: 4rem 1.5rem; }
+  .voices-grid { grid-template-columns: 1fr; }
   .entries-sec { padding: 0 1.5rem 4.5rem; }
   .entries-grid { grid-template-columns: 1fr; }
   .courses-sec { padding: 4.5rem 0; }
@@ -721,8 +724,8 @@ import Layout from '../layouts/Layout.astro';
       あなたの本来の輝きを取り戻す。
     </p>
     <div class="hero-cta-group">
-      <a href="/experiencelessons" class="hero-cta">体験レッスンを見る</a>
-      <a href="/listofcourses" class="hero-cta hero-cta--outline">講座一覧を見る</a>
+      <a href="/listofcourses" class="hero-cta">講座を詳しく見る</a>
+      <a href="/contact" class="hero-cta hero-cta--outline">個別相談・お問い合わせ</a>
     </div>
 
     <div class="scroll-indicator">
@@ -976,6 +979,38 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
+<!-- ===== VOICES ===== -->
+<section class="voices-sec">
+  <div class="voices-inner">
+    <span class="voices-eyebrow">Voices</span>
+    <h2 class="voices-title">受講生の声</h2>
+    <p class="voices-lead">ライフスタイルもペースも違う、それぞれの受講スタイル。</p>
+    <div class="voices-grid">
+      <div class="voice-item">
+        <p class="voice-quote">「子育てもひと段落。これからの自分磨きと、将来の夢を叶えるために受講しました。」</p>
+        <p class="voice-attr">— 40代・主婦</p>
+      </div>
+      <div class="voice-item">
+        <p class="voice-quote">「昼間はカフェ運営があるため、夜間の受講で対応していただきました。」</p>
+        <p class="voice-attr">— カフェオーナー</p>
+      </div>
+      <div class="voice-item">
+        <p class="voice-quote">「家族のお世話の合間の時間で、オンラインで学べたことが大きかったです。」</p>
+        <p class="voice-attr">— 30代・介護中</p>
+      </div>
+      <div class="voice-item">
+        <p class="voice-quote">「子供が小さいのでオンラインで学びました。自分のペースで進められて助かりました。」</p>
+        <p class="voice-attr">— 子育て中のママ</p>
+      </div>
+      <div class="voice-item">
+        <p class="voice-quote">「まとまった休みを利用して対面受講しました！集中して学べて充実していました。」</p>
+        <p class="voice-attr">— 会社員</p>
+      </div>
+    </div>
+    <a href="/listofcourses" class="voices-cta">講座の詳細を見る →</a>
+  </div>
+</section>
+
 <!-- ===== NEWSLETTER TEASER ===== -->
 <section class="nl-teaser-section">
   <div class="nl-teaser-inner">
@@ -987,6 +1022,75 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <style>
+/* ===== VOICES ===== */
+.voices-sec {
+  padding: 5rem 4rem;
+  background: var(--linen-2);
+}
+.voices-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.voices-eyebrow {
+  display: block;
+  font-family: var(--f-sans);
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1rem;
+}
+.voices-title {
+  font-family: var(--f-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: .8rem;
+}
+.voices-lead {
+  font-family: var(--f-sans);
+  font-size: .85rem;
+  color: var(--ink-3);
+  margin-bottom: 2.5rem;
+}
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.voice-item {
+  background: #fff;
+  border-radius: 4px;
+  padding: 1.8rem;
+  border-top: 2px solid var(--amber);
+}
+.voice-quote {
+  font-family: var(--f-serif);
+  font-size: .92rem;
+  line-height: 1.9;
+  color: var(--ink);
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.voice-attr {
+  font-family: var(--f-sans);
+  font-size: .75rem;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.voices-cta {
+  font-family: var(--f-sans);
+  font-size: .82rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: .2rem;
+  letter-spacing: .06em;
+  transition: opacity .2s;
+}
+.voices-cta:hover { opacity: .6; }
+
 .nl-teaser-section {
   padding: 5rem 5vw;
   background: var(--sumi);
