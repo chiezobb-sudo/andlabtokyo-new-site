@@ -1,5 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { client } from '../../lib/microcms';
+import type { Course } from '../../lib/microcms';
+
+// microCMSから講座データを取得（最初の1件）
+let cmsData: Course | null = null;
+try {
+  const res = await client.getList<Course>({ endpoint: 'courses', queries: { limit: 1 } });
+  cmsData = res.contents[0] ?? null;
+} catch (e) {
+  // CMSが取得できない場合はフォールバック
+}
 
 const heroImage = "https://static.wixstatic.com/media/857257_379c3e3dce8046929166f5d2c1e24b5f~mv2.jpg";
 const instructorImage = "https://static.wixstatic.com/media/857257_6a244d3ac66044b9a091293c8e91cd03~mv2.jpg/v1/fill/w_580,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/chieando_edited_edited.jpg";
@@ -127,6 +138,16 @@ const courseJsonLd = {
       font-family: var(--f-serif); font-size: clamp(1.9rem, 4.5vw, 3.2rem);
       font-weight: 300; color: #fff; line-height: 1.3; letter-spacing: .06em; margin-bottom: 1rem;
     }
+    /* microCMS band */
+    .cms-band { background: #f0f4ff; border-top: 3px solid var(--amber); padding: 3rem 5vw; }
+    .cms-inner { max-width: 800px; margin: 0 auto; }
+    .cms-label { display: inline-block; background: var(--amber); color: #fff; font-family: var(--f-sans); font-size: .68rem; letter-spacing: .16em; padding: .3rem 1rem; border-radius: 2rem; margin-bottom: 1rem; }
+    .cms-title { font-family: var(--f-serif); font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 300; color: var(--sumi); margin-bottom: 1rem; }
+    .cms-desc { font-family: var(--f-sans); font-size: .95rem; line-height: 1.9; color: #555; margin-bottom: 1.5rem; }
+    .cms-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .cms-price { font-family: var(--f-sans); font-size: .9rem; font-weight: 700; color: var(--amber); }
+    .cms-schedule { font-family: var(--f-sans); font-size: .85rem; color: #777; white-space: pre-line; }
+
     .hero-sub {
       font-family: var(--f-sans); font-size: clamp(.85rem, 1.4vw, 1rem);
       color: rgba(255,255,255,.82); line-height: 1.9; max-width: 580px; margin-bottom: 2rem;
@@ -391,6 +412,20 @@ const courseJsonLd = {
       <a href="#apply-form" class="hero-cta">お申し込みはこちら →</a>
     </div>
   </div>
+
+  {cmsData && (
+    <section class="cms-band">
+      <div class="cms-inner">
+        <span class="cms-label">microCMS管理中</span>
+        <h2 class="cms-title">{cmsData.title}</h2>
+        <p class="cms-desc">{cmsData.description}</p>
+        <div class="cms-meta">
+          {cmsData.price && <span class="cms-price">{cmsData.price}</span>}
+          {cmsData.schedule && <span class="cms-schedule">{cmsData.schedule}</span>}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- こんな方に -->
   <section class="bg-linen">
