@@ -418,7 +418,7 @@ const courseJsonLd = {
       <div class="cms-inner">
         <span class="cms-label">microCMS管理中</span>
         <h2 class="cms-title">{cmsData.title}</h2>
-        <p class="cms-desc">{cmsData.description}</p>
+        <div class="cms-desc" set:html={cmsData.description} />
         <div class="cms-meta">
           {cmsData.price && <span class="cms-price">{cmsData.price}</span>}
           {cmsData.schedule && <span class="cms-schedule">{cmsData.schedule}</span>}
