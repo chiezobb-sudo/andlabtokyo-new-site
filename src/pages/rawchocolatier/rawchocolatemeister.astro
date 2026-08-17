@@ -25,30 +25,45 @@ const galleryImages = [
 ];
 
 const features = [
-  { num: "01", title: "体系的なテキスト", body: "ローチョコの歴史・栄養・テンパリングを網羅した公式テキストで、確実に基礎が身につきます。" },
-  { num: "02", title: "少人数制・直接指導", body: "テンパリングのコツと技術を講師が直接指導。疑問をその場で解決できる環境です。" },
-  { num: "03", title: "30種類以上のレシピ", body: "アイス・ドリンク・カカオアレンジまで網羅。アレンジ力が自然と身につきます。" },
-  { num: "04", title: "オリジナルレシピ力", body: "基本からアレンジまで学び、自分だけのレシピが作れる創作力を培います。" },
-  { num: "05", title: "ヘルシー素材", body: "カカオ・ナッツなど美容食材を活用。自分にも地球にも優しいスイーツを学べます。" },
+  {
+    num: "01",
+    title: "定義から教えます",
+    body: "ローチョコレートは「生のカカオ」ではありません。高温焙煎（110〜150℃）をしないカカオを使うことが定義です。「48℃以下」と言えない理由も含め、正確な知識を基礎から学びます。",
+  },
+  {
+    num: "02",
+    title: "発酵を知らないと、ローは語れません",
+    body: "カカオ豆は発酵段階で豆の温度が50℃を超えます。菌が生きて働いた結果の熱です。この事実を知っていることが、素材を正確に理解する出発点になります。",
+  },
+  {
+    num: "03",
+    title: "素材を見分ける目を養います",
+    body: "「カカオパウダー」と「ココアパウダー」は別物です。重曹テストで判別できるようになるなど、市販素材を正確に読み解く実践的なスキルを身につけます。",
+  },
+  {
+    num: "04",
+    title: "衛生も、正面から学びます",
+    body: "カカオは屋外で発酵・乾燥され、完全な無菌状態ではありません。低温殺菌の意味と温度の根拠、リスクと向き合い方を正確に学びます。",
+  },
 ];
 
 const steps = [
   {
-    level: "初級", label: "基礎", price: "¥16,500（税別）",
+    level: "初級", label: "BASIC", price: "¥25,000（税別）",
     image: "/choco-real/07-step-beginner.jpg",
-    goal: "ローチョコレートの基本を理解し、テンパリングを習得する",
-    contents: ["ローチョコレートとは？歴史と栄養", "カカオバター・カカオパウダーの特徴", "基本のテンパリングと成功のポイント"],
+    goal: "ローチョコレートの正確な定義と素材知識を学び、テンパリングを習得する",
+    contents: ["ローチョコレートの定義と高温焙煎の違い", "カカオバター・カカオパウダーの特徴", "基本のテンパリングと成功のポイント"],
     recipes: ["基本のローチョコレート", "パレ（フラワーチョコほかアレンジ）", "チョコレートカバーフルーツ", "スパイシーチョコレート", "アマンドショコラ　ほか"],
   },
   {
-    level: "中級", label: "応用", price: "¥30,000（税別）",
+    level: "中級", label: "INTERMEDIATE", price: "¥35,000（税別）",
     image: "/choco-real/08-step-intermediate.jpg",
     goal: "ホワイトチョコレート・ナッツバターを使った応用技術を習得する",
     contents: ["ホワイトチョコレートの基本", "ナッツバターの作り方", "成形技術の応用（トリュフなど）"],
     recipes: ["カラフルチョコレート（マーメイド・地球チョコ）", "ジャンドゥーヤ", "パヴェドジュネーブ（生チョコ）", "チョコレートトリュフ", "ローキャラメル　ほか"],
   },
   {
-    level: "上級", label: "発展", price: "¥33,500（税別）",
+    level: "上級", label: "ADVANCE", price: "¥43,000（税別）",
     image: "/choco-real/09-step-advanced.jpg",
     goal: "ガナッシュ・ボンボンショコラなど本格技術とオリジナル創作力を習得する",
     contents: ["ガナッシュ・ボンボンショコラの製法", "基本の型取り・デコレーション技術", "カカオ素材の代用・応用テクニック"],
@@ -92,7 +107,7 @@ const courseJsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
   "name": "ローチョコレートマイスター養成講座",
-  "description": "商標登録済みの本物のローチョコレート技術が学べる唯一の資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。",
+  "description": "「高温焙煎をしないカカオ」を定義から学べる国内唯一の認定資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。",
   "provider": { "@type": "EducationalOrganization", "name": "&LAB TOKYO", "sameAs": "https://www.andlabtokyo.com" },
   "hasCourseInstance": steps.map(s => ({
     "@type": "CourseInstance",
@@ -110,7 +125,7 @@ const courseJsonLd = {
 
 <Layout
   title="ローチョコレートマイスター養成講座"
-  description="商標登録済みの本物のローチョコレート技術が学べる唯一の資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。東京・渋谷、オンラインでも受講可能。"
+  description="「高温焙煎をしないカカオ」を定義から学べる国内唯一の認定資格講座。初級〜上級の3ステップで、趣味からプロ志向まで対応。東京・渋谷、オンラインでも受講可能。"
   ogImage={heroImage}
 >
   <Fragment slot="head">
@@ -406,7 +421,7 @@ const courseJsonLd = {
       <span class="hero-badge">商標登録済み ／ 国内唯一の認定資格</span>
       <h1 class="hero-title">ローチョコレート<br/>マイスター養成講座</h1>
       <p class="hero-sub">
-        本物のローチョコレート技術を体系的に学べる唯一のプログラム。<br/>
+        「高温焙煎をしないカカオ」——ローチョコレートを定義から正確に学べる唯一のプログラム。<br/>
         初級〜上級の3ステップで、趣味からプロ志向まで確実に身につきます。
       </p>
       <a href="#apply-form" class="hero-cta">お申し込みはこちら →</a>
@@ -443,12 +458,11 @@ const courseJsonLd = {
   <section>
     <div class="section-inner">
       <span class="eyebrow">Features</span>
-      <h2 class="sec-title">ローチョコレートマイスター講座<br/>5つの特徴</h2>
+      <h2 class="sec-title">ローチョコレートマイスター講座<br/>4つの学びの柱</h2>
       <div class="divider"></div>
       <p class="sec-lead">
-        「健康」「趣味」「仕事」──目的はさまざまですが、共通するのは
-        <em>ローチョコレートをもっと深く学びたい</em>という気持ちです。
-        この講座は、そんなあなたをしっかりサポートする体系的プログラムです。
+        「なぜそうなのか」を知っていること──それが、教える力にも、販売する自信にもつながります。
+        この講座では、定義・素材・発酵・衛生の4つを正確な知識として学びます。
       </p>
       <div class="features-grid">
         {features.map(f => (
@@ -521,6 +535,53 @@ const courseJsonLd = {
     </div>
   </section>
 
+  <!-- 受講料一覧 -->
+  <section>
+    <div class="section-inner">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="sec-title">受講料一覧</h2>
+      <div class="divider"></div>
+      <p class="sec-lead">すべて税別表示。初級から順に受講でき、各ステップ単体での受講も可能です。</p>
+      <table style="width:100%; border-collapse:collapse; margin-top:2rem; font-family:var(--f-sans); font-size:.9rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--amber);">
+            <th style="text-align:left; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em; width:6em;">レベル</th>
+            <th style="text-align:left; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em;">講座名</th>
+            <th style="text-align:right; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em;">受講料（税別）</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { label: "BASIC", name: "初級講座", price: "¥25,000" },
+            { label: "INTERMEDIATE", name: "中級講座", price: "¥35,000" },
+            { label: "ADVANCE", name: "上級講座", price: "¥43,000" },
+          ].map(row => (
+            <tr style="border-bottom:1px solid #e8e4dc;">
+              <td style="padding:.8rem 1rem; color:var(--amber); font-size:.72rem; letter-spacing:.1em; font-weight:700;">{row.label}</td>
+              <td style="padding:.8rem 1rem; color:#333;">{row.name}</td>
+              <td style="padding:.8rem 1rem; text-align:right; color:#333; font-weight:600;">{row.price}</td>
+            </tr>
+          ))}
+          <tr style="border-bottom:1px solid #e8e4dc; background:#f7f4ef;">
+            <td style="padding:.8rem 1rem; color:#999; font-size:.72rem; letter-spacing:.1em;"></td>
+            <td style="padding:.8rem 1rem; color:#555;">ローチョコレートマイスター® 3ステップ合計</td>
+            <td style="padding:.8rem 1rem; text-align:right; color:var(--amber); font-weight:700;">¥103,000</td>
+          </tr>
+          <tr style="border-bottom:1px solid #e8e4dc;">
+            <td style="padding:.8rem 1rem; color:var(--amber); font-size:.72rem; letter-spacing:.1em; font-weight:700;">PRO</td>
+            <td style="padding:.8rem 1rem; color:#333;">ジュニアローショコラティエ養成講座</td>
+            <td style="padding:.8rem 1rem; text-align:right; color:#333; font-weight:600;">¥85,000</td>
+          </tr>
+          <tr style="background:#fdf8ee;">
+            <td style="padding:1rem 1rem; color:#999; font-size:.72rem; letter-spacing:.1em;"></td>
+            <td style="padding:1rem 1rem; color:#555; font-weight:700;">全課程合計</td>
+            <td style="padding:1rem 1rem; text-align:right; color:var(--sumi); font-weight:700;">¥188,000（税込¥206,800）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- 受講形式 -->
   <section>
     <div class="section-inner">
@@ -587,7 +648,7 @@ const courseJsonLd = {
       <p class="sec-lead">
         3ステップ講座修了後、<strong>教える・販売する・広める</strong>ためのインストラクター講座へ進めます。
       </p>
-      <p style="display:inline-block; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; letter-spacing:.08em; padding:.35rem 1rem; border-radius:2rem; margin-bottom:1.5rem;">認定料 ¥80,000（税別）</p>
+      <p style="display:inline-block; border:1px solid var(--amber); color:var(--amber); font-family:var(--f-sans); font-size:.8rem; letter-spacing:.08em; padding:.35rem 1rem; border-radius:2rem; margin-bottom:1.5rem;">PRO · 受講料 ¥85,000（税別）</p>
       <div class="junior-thumb">
         <img src="/choco-real/12-junior-student.jpg" alt="ジュニアローショコラティエ養成講座修了生" loading="lazy" />
       </div>
