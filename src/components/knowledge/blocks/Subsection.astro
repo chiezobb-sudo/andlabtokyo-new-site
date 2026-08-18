@@ -1,0 +1,15 @@
+---
+const { block } = Astro.props;
+---
+<div class="sub">
+  <h3 class="sub__h" data-reveal>{block.heading}</h3>
+  <div class="kb-body" data-reveal style="--reveal-delay:80ms" set:html={block.richText} />
+</div>
+
+<style>
+  .sub { margin: 0 0 var(--gap-block); }
+  .sub__h {
+    font-size: var(--fs-h3); font-weight: 500; line-height: 1.7;
+    letter-spacing: .04em; margin: 0 0 1.3em; max-width: 26em;
+  }
+</style>

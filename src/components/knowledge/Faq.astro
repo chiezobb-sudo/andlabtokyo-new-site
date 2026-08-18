@@ -1,0 +1,28 @@
+---
+import type { Faq } from '../../lib/microcms';
+const { items } = Astro.props as { items: Faq[] };
+---
+<section class="faq" id="faq">
+  <p class="label" data-reveal>Q &amp; A</p>
+  <h2 class="faq__h" data-reveal style="--reveal-delay:80ms">よくある質問</h2>
+  <dl class="faq__list">
+    {items.map((f, i) => (
+      <div class="faq__item" data-reveal style={`--reveal-delay:${Math.min(i, 6) * 70}ms`}>
+        <dt>{f.question}</dt>
+        <dd class="kb-body" set:html={f.answer} />
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .faq { margin: 0 0 var(--gap-section); scroll-margin-top: 4rem; }
+  .faq__h { font-size: var(--fs-h2); font-weight: 500; letter-spacing: .05em; margin: 1.4rem 0 clamp(2rem, 4vw, 3.4rem); }
+  .faq__list { margin: 0; width: min(100%, 46rem); }
+  .faq__item { border-top: 1px solid var(--line); padding: 2.2rem 0; }
+  .faq__item:last-child { border-bottom: 1px solid var(--line); }
+  dt { font-size: 1rem; font-weight: 500; letter-spacing: .03em; line-height: 1.9; margin-bottom: 1.1em; }
+  dd { margin: 0; }
+  dd :global(p) { font-size: .94rem; line-height: 2.2; margin: 0 0 1.2em; }
+  dd :global(p:last-child) { margin-bottom: 0; }
+</style>

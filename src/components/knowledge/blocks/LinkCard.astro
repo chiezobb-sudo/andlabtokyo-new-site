@@ -1,0 +1,26 @@
+---
+const { block } = Astro.props;
+const href = block.target ? `/knowledge/${block.target.id}` : block.externalUrl;
+const external = !block.target && /^https?:\/\//.test(block.externalUrl ?? '');
+---
+<p class="lc" data-reveal>
+  <a href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+    <span class="lc__text">{block.label}</span>
+    <span class="lc__arrow" aria-hidden="true"></span>
+  </a>
+</p>
+
+<style>
+  .lc { margin: var(--gap-block) 0; }
+  .lc a {
+    display: inline-flex; align-items: center; gap: 1.4rem;
+    padding: 1.2em 0; color: var(--ink); text-decoration: none;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    min-width: min(100%, 30rem);
+    transition: color .5s var(--ease);
+  }
+  .lc__text { font-size: .95rem; letter-spacing: .04em; }
+  .lc__arrow { margin-left: auto; width: 2.6rem; height: 1px; background: var(--gold); transition: width .55s var(--ease); }
+  .lc a:hover { color: var(--accent); }
+  .lc a:hover .lc__arrow { width: 3.6rem; }
+</style>

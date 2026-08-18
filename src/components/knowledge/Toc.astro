@@ -1,0 +1,37 @@
+---
+import type { TocItem } from '../../lib/toc';
+const { items } = Astro.props as { items: TocItem[] };
+---
+{items.length > 0 && (
+  <nav class="toc" aria-label="目次">
+    <p class="label toc__label">Contents</p>
+    <ol class="toc__list">
+      {items.map((it, i) => (
+        <li>
+          <a href={`#${it.id}`}>
+            <span class="toc__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="toc__text">{it.label}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  /* 目次に h タグは使わない。見出し階層を汚さないため */
+  .toc { max-width: var(--measure); margin: 0 0 var(--gap-section); border-top: 1px solid var(--line); padding-top: 2.2rem; }
+  .toc__label { margin-bottom: 2rem; }
+  .toc__list { list-style: none; margin: 0; padding: 0; }
+  .toc__list li + li { margin-top: .1rem; }
+  .toc__list a {
+    display: grid; grid-template-columns: 3.2rem 1fr; align-items: baseline;
+    padding: .85em 0; color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .5s var(--ease), color .5s var(--ease);
+  }
+  .toc__list a:hover { border-bottom-color: var(--line); }
+  .toc__num { font-family: var(--font-en); font-size: .82rem; letter-spacing: .1em; color: var(--gold); }
+  .toc__text { font-size: .96rem; line-height: 1.85; }
+  .toc__list a:hover .toc__text { color: var(--accent); }
+</style>

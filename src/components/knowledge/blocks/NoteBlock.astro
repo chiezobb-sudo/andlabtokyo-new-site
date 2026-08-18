@@ -1,0 +1,14 @@
+---
+const { block } = Astro.props;
+---
+<p class="note" data-reveal>{block.text}</p>
+
+<style>
+  .note {
+    font-family: var(--font-ui); font-weight: 300;
+    font-size: .8rem; line-height: 2; letter-spacing: .04em;
+    color: var(--ink-faint);
+    border-left: 1px solid var(--line); padding-left: 1.4em;
+    width: min(100%, 40rem); margin: var(--gap-block) 0;
+  }
+</style>

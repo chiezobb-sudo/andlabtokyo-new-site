@@ -28,6 +28,7 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
 <!doctype html>
 <html lang={lang}>
   <head>
+  <script is:inline>document.documentElement.classList.add('js')</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
@@ -51,7 +52,7 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet" />
     <!-- JSON-LD -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"&LAB TOKYO","url":"https://www.andlabtokyo.com","logo":"https://www.andlabtokyo.com/logo-wide.svg","description":"発酵とローフードのクロス理論に基づくプレミアムスクール。東京・渋谷（表参道）。","address":{"@type":"PostalAddress","streetAddress":"5-2-11 Jingumae, Shibuya-ku","addressLocality":"渋谷区","addressRegion":"東京都","postalCode":"150-0001","addressCountry":"JP"},"founder":{"@type":"Person","name":"安藤千英"},"sameAs":["https://www.instagram.com/chie_andlab/"]}</script>
     <slot name="head" />
@@ -66,6 +67,29 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       :root {
         --bg:    #FAFAF8;
         --ink:   #1C1C1A;
+
+        /* ── knowledge セクション用トークン（Base.astro由来）── */
+        --paper:      #faf9f5;
+        --paper-deep: #f3f0e8;
+        --ink-soft:   #6b5f57;
+        --ink-faint:  #9a9089;
+        --line:       #e5ddd0;
+        --accent:     #5c2b2e;
+        --gold:       #a68a6d;
+        --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+        --font-en: "EB Garamond", "Shippori Mincho", serif;
+        --font-ui: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+        --fs-label:  0.72rem;
+        --fs-body:   1.0rem;
+        --fs-lead:   clamp(1.02rem, 0.55vw + 0.9rem, 1.22rem);
+        --fs-h3:     clamp(1.12rem, 0.7vw + 1rem, 1.35rem);
+        --fs-h2:     clamp(1.55rem, 2.1vw + 1rem, 2.35rem);
+        --fs-h1:     clamp(2.05rem, 4.6vw + 0.6rem, 4.15rem);
+        --gap-block:   clamp(3.2rem, 6vw, 6.5rem);
+        --gap-section: clamp(5rem, 11vw, 11rem);
+        --measure: 34rem;
+        --ease: cubic-bezier(.16, 1, .3, 1);
+        --dur: .95s;
         /* extended palette for pages */
         --f-serif: 'Noto Serif JP', serif;
         --f-sans:  'Noto Sans JP', sans-serif;
@@ -400,6 +424,43 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       }
 
       /* ================================================
+         KNOWLEDGE SECTION STYLES（Base.astro由来）
+      ================================================ */
+      .label {
+        font-family: var(--font-ui);
+        font-size: var(--fs-label);
+        font-weight: 400;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin: 0;
+      }
+
+      .js [data-reveal] {
+        opacity: 0;
+        transform: translate3d(0, 26px, 0);
+        transition:
+          opacity var(--dur) var(--ease),
+          transform var(--dur) var(--ease);
+        transition-delay: var(--reveal-delay, 0ms);
+        will-change: opacity, transform;
+      }
+      .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] { opacity: 1; transform: none; transition: none; }
+      }
+
+      .kb-body { max-width: var(--measure); }
+      .kb-body p { font-size: var(--fs-body); line-height: 2.35; margin: 0 0 1.9em; letter-spacing: .02em; }
+      .kb-body p:last-child { margin-bottom: 0; }
+      .kb-body strong { font-weight: 600; }
+      .kb-body a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: .1em; transition: border-color .4s var(--ease); }
+      .kb-body a:hover { border-bottom-color: var(--ink); }
+      .kb-body ul, .kb-body ol { line-height: 2.3; padding-left: 1.3em; margin: 0 0 1.9em; }
+      .kb-body li { margin-bottom: .5em; }
+
+      /* ================================================
          RESPONSIVE
       ================================================ */
       @media (min-width: 1024px) {
@@ -678,5 +739,37 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
     <!-- Benchmark Email: newsletter popup -->
     <script async src="https://forms.us.benchmarksend.com/assets/embed.js"></script>
     <div data-bme-form-id="YlZ5_TnJYTz5pSMoZDpzU"></div>
+
+    <!-- [data-reveal] IntersectionObserver（knowledge セクション用） -->
+    <script is:inline>
+      (() => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const targets = document.querySelectorAll('[data-reveal]');
+        if (reduce || !('IntersectionObserver' in window)) {
+          targets.forEach((el) => el.classList.add('is-in'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('is-in');
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
+        );
+        // 初回：すでに画面内にあるものは即座に表示する
+      // （observer の発火を待つと、ファーストビューが一瞬空になる）
+      targets.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95 && r.bottom > 0) {
+          el.classList.add('is-in');
+        } else {
+          io.observe(el);
+        }
+      });
+      })();
+    </script>
   </body>
 </html>

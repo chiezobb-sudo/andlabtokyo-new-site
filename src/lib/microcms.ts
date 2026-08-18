@@ -1,10 +1,12 @@
 import { createClient } from 'microcms-js-sdk';
 
+// ── 既存ページ用クライアント（rawchocolatemeister等で直接使用）──
 export const client = createClient({
   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: import.meta.env.MICROCMS_API_KEY,
 });
 
+// ── 既存ページで使用中の型 ──
 export type Course = {
   id: string;
   title: string;
@@ -13,3 +15,74 @@ export type Course = {
   schedule: string;
   heroImage?: { url: string };
 };
+
+// ── knowledge / price セクション型 ──
+export type MicroCMSImage = { url: string; width: number; height: number };
+
+export type Knowledge = {
+  id: string;
+  title: string;
+  eyebrow?: string;
+  lead: string;
+  heroImage: MicroCMSImage;
+  heroImageAlt?: string;
+  body: string;  // richEditorV2 → HTML文字列
+  seoTitle?: string;
+  seoDescription: string;
+  ogImage?: MicroCMSImage;
+  noindex?: boolean;
+  faq?: { question: string; answer: string }[];
+  // 記事末尾のCTA（講座LPへの導線）。料金は書かない
+  ctaHeading?: string;
+  ctaText?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  publishedAt: string;
+  revisedAt: string;
+};
+
+export type Price = {
+  id: string;
+  courseKey: string;
+  label: string;
+  amount: number;
+  taxIncluded?: number;
+  note?: string;
+  sortOrder?: number;
+};
+
+// ── CMS未接続でもビルドが通るフォールバック付きクライアント ──
+const domain = import.meta.env.MICROCMS_SERVICE_DOMAIN;
+const key = import.meta.env.MICROCMS_API_KEY;
+export const cmsReady = Boolean(domain && key);
+const safeClient = cmsReady ? client : null;
+
+export async function getKnowledgeList(): Promise<Knowledge[]> {
+  if (!safeClient) {
+    const { dummyKnowledgeList } = await import('./dummy');
+    return dummyKnowledgeList;
+  }
+  const res = await safeClient.getList<Knowledge>({ endpoint: 'knowledge', queries: { limit: 100 } });
+  return res.contents;
+}
+
+export async function getKnowledge(contentId: string): Promise<Knowledge> {
+  if (!safeClient) {
+    const { dummyKnowledgeList } = await import('./dummy');
+    const hit = dummyKnowledgeList.find((a) => a.id === contentId);
+    if (!hit) throw new Error(`dummy article not found: ${contentId}`);
+    return hit;
+  }
+  return safeClient.getListDetail<Knowledge>({ endpoint: 'knowledge', contentId });
+}
+
+export async function getPrices(): Promise<Price[]> {
+  if (!safeClient) {
+    const { dummyPrices } = await import('./dummy');
+    return dummyPrices;
+  }
+  const res = await safeClient.getList<Price>({ endpoint: 'price', queries: { limit: 100 } });
+  return res.contents;
+}
+
+export const yen = (n: number) => `¥${n.toLocaleString('ja-JP')}`;

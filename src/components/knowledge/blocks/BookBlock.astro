@@ -1,0 +1,26 @@
+---
+const { block } = Astro.props;
+---
+<div class="book" data-reveal>
+  {block.cover && <img class="book__cover" src={block.cover.url} alt="" width="128" loading="lazy" />}
+  <div class="book__body">
+    <p class="book__title">{block.title}</p>
+    {block.author && <p class="book__author">{block.author}</p>}
+    {block.comment && <p class="book__comment">{block.comment}</p>}
+    {block.url && <p class="book__link"><a href={block.url} target="_blank" rel="noopener">くわしく見る</a></p>}
+  </div>
+</div>
+
+<style>
+  .book {
+    display: flex; gap: clamp(1.4rem, 3vw, 2.6rem); align-items: flex-start;
+    border-top: 1px solid var(--line); padding: 2.4rem 0;
+    width: min(100%, 46rem); margin: 0;
+  }
+  .book__cover { flex: none; width: 7rem; }
+  .book__title { font-size: 1.02rem; letter-spacing: .04em; margin: 0 0 .5em; }
+  .book__author { font-family: var(--font-ui); font-size: .78rem; letter-spacing: .1em; color: var(--ink-faint); margin: 0 0 1.2em; }
+  .book__comment { font-size: .92rem; line-height: 2.1; margin: 0; }
+  .book__link { margin: 1.2em 0 0; }
+  .book__link a { font-family: var(--font-ui); font-size: .8rem; letter-spacing: .1em; color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+</style>

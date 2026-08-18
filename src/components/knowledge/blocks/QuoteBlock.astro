@@ -1,0 +1,29 @@
+---
+const { block } = Astro.props;
+---
+<figure class="quote" data-reveal>
+  <blockquote>{block.text}</blockquote>
+  <figcaption>出典：{block.source}</figcaption>
+</figure>
+
+<style>
+  /* 効能・研究の記述はここにしか置かない。
+     引用であることが、読む前に見た目で分かる形にしている */
+  .quote {
+    margin: var(--gap-block) 0;
+    padding: clamp(2rem, 4vw, 3.2rem) clamp(1.6rem, 4vw, 3.2rem);
+    background: var(--paper-deep);
+    width: min(100%, 46rem);
+    position: relative;
+  }
+  .quote::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent);
+  }
+  .quote blockquote {
+    margin: 0; font-size: .98rem; line-height: 2.3; letter-spacing: .02em; color: var(--ink);
+  }
+  .quote figcaption {
+    font-family: var(--font-ui); font-size: .76rem; letter-spacing: .1em;
+    color: var(--ink-soft); margin-top: 1.8em;
+  }
+</style>

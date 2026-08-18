@@ -1,0 +1,39 @@
+---
+import type { Knowledge } from '../../lib/microcms';
+const { article, url } = Astro.props as { article: Knowledge; url: string };
+
+const site = 'https://www.andlabtokyo.com';
+const graph: any[] = [
+  {
+    '@type': 'Article',
+    headline: article.title,
+    description: article.seoDescription,
+    image: (article.ogImage ?? article.heroImage).url,
+    datePublished: article.publishedAt,
+    dateModified: article.revisedAt,
+    author: { '@type': 'Person', name: '安藤千英' },
+    publisher: { '@type': 'Organization', name: '&LAB TOKYO', url: site },
+    mainEntityOfPage: url,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${site}/` },
+      { '@type': 'ListItem', position: 2, name: 'KNOWLEDGE', item: `${site}/knowledge` },
+      { '@type': 'ListItem', position: 3, name: article.title },
+    ],
+  },
+];
+
+if (article.faq?.length) {
+  graph.push({
+    '@type': 'FAQPage',
+    mainEntity: article.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer.replace(/<[^>]+>/g, '').trim() },
+    })),
+  });
+}
+---
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />

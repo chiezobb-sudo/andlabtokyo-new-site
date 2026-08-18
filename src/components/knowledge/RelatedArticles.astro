@@ -1,0 +1,32 @@
+---
+const { items } = Astro.props;
+---
+<section class="rel">
+  <p class="label" data-reveal>Read next</p>
+  <ul class="rel__list">
+    {items.map((a: any, i: number) => (
+      <li data-reveal style={`--reveal-delay:${Math.min(i, 5) * 80}ms`}>
+        <a href={`/knowledge/${a.id}`}>
+          <span class="rel__title">{a.title}</span>
+          <span class="rel__arrow" aria-hidden="true"></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .rel { margin: 0 0 var(--gap-section); width: min(100%, 46rem); }
+  .rel__list { list-style: none; margin: 2rem 0 0; padding: 0; }
+  .rel__list li { border-top: 1px solid var(--line); }
+  .rel__list li:last-child { border-bottom: 1px solid var(--line); }
+  .rel__list a {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.6em 0; color: var(--ink); text-decoration: none;
+    transition: color .5s var(--ease);
+  }
+  .rel__title { font-size: .98rem; line-height: 1.85; letter-spacing: .03em; }
+  .rel__arrow { margin-left: auto; flex: none; width: 2.4rem; height: 1px; background: var(--gold); transition: width .55s var(--ease); }
+  .rel__list a:hover { color: var(--accent); }
+  .rel__list a:hover .rel__arrow { width: 3.4rem; }
+</style>

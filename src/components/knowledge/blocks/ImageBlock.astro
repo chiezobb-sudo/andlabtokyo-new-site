@@ -1,0 +1,20 @@
+---
+const { block } = Astro.props;
+---
+<figure class="fig" data-reveal>
+  <img src={block.image.url} alt={block.alt ?? ''} width={block.image.width} height={block.image.height} loading="lazy" decoding="async" />
+  {block.caption && <figcaption>{block.caption}</figcaption>}
+</figure>
+
+<style>
+  /* 画像は本文の行長を超えて広がる。ここで呼吸が生まれる */
+  .fig { margin: var(--gap-block) 0; }
+  .fig img { width: 100%; }
+  .fig figcaption {
+    font-family: var(--font-ui); font-size: .78rem; letter-spacing: .08em;
+    color: var(--ink-faint); margin-top: 1.1em;
+  }
+  @media (min-width: 60rem) {
+    .fig { width: min(100%, 52rem); }
+  }
+</style>

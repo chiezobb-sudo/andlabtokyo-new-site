@@ -1,0 +1,25 @@
+---
+import Section from './blocks/Section.astro';
+import Subsection from './blocks/Subsection.astro';
+import ImageBlock from './blocks/ImageBlock.astro';
+import TableBlock from './blocks/TableBlock.astro';
+import QuoteBlock from './blocks/QuoteBlock.astro';
+import LinkCard from './blocks/LinkCard.astro';
+import NoteBlock from './blocks/NoteBlock.astro';
+import BookBlock from './blocks/BookBlock.astro';
+import { slugifyHeading } from '../../lib/toc';
+import type { Block } from '../../lib/microcms';
+
+const { body } = Astro.props as { body: Block[] };
+
+const map: Record<string, any> = {
+  section: Section, subsection: Subsection, imageBlock: ImageBlock, tableBlock: TableBlock,
+  quoteBlock: QuoteBlock, linkCard: LinkCard, noteBlock: NoteBlock, bookBlock: BookBlock,
+};
+---
+{body.map((block, i) => {
+  const C = map[block.fieldId];
+  if (!C) return null;
+  const anchor = block.fieldId === 'section' ? slugifyHeading((block as any).heading, i) : undefined;
+  return <C block={block} anchor={anchor} />;
+})}

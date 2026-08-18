@@ -74,16 +74,94 @@ const ARTICLES = [
     slug: 'rawsweets',
     eyebrow: 'ロースイーツとは',
     seoDescription: 'ロースイーツとは何か、普通のスイーツとの違い・使う素材・注意点をわかりやすく解説。&LAB TOKYOが提唱するジェントルスイーツの考え方も紹介。',
-    cta: { heading: 'ロースイーツを学ぶ', text: '初級（ジェントルスイーツ）から、ローパティシエ®まで学べます。', buttonLabel: 'ロースイーツ講座を見る', buttonUrl: '/rawchocolatier/rawsweets' },
+    cta: { heading: 'ロースイーツを学ぶ', text: '初級（ジェントルスイーツ）から、ローパティシエ®まで学べます。', buttonLabel: 'ロースイーツ講座を見る', buttonUrl: '/rawchocolatier/rawpatissier' },
   },
   {
     url: 'https://www.andlabtokyo.com/spirulina',
     slug: 'spirulina',
     eyebrow: 'スピルリナとは',
     seoDescription: 'スピルリナとは何か、栄養素・選び方・摂り方を解説。&LAB TOKYOのスピルリナラボが、科学的根拠に基づいて説明します。',
-    cta: { heading: 'スピルリナを学ぶ', text: 'スピルリナラボでは、食べ方・選び方・活用法を発信しています。', buttonLabel: '詳しく見る', buttonUrl: '/supirurinalab' },
+    cta: { heading: 'スピルリナを使う', text: '実際のレシピを公開しています。', buttonLabel: 'レシピを見る', buttonUrl: 'https://cookpad.com/jp/users/40053501' },
   },
 ];
+
+
+// ---------------------------------------------------------------------------
+// Wix由来のクラス・インラインスタイルを除去する
+//   目的: 新サイト側のCSS（デザイントークン）が効くようにする。
+//   Wixの class="color_36" 等は新サイトに存在せず、style="font-size:23px" は
+//   こちらの指定を上書きしてしまうため、意味のあるもの（太字）だけ残して捨てる。
+// ---------------------------------------------------------------------------
+function sanitizeHtml(html) {
+  if (!html) return html;
+  const $ = load(`<div id="__r">${html}</div>`, null, false);
+
+  // 太字だけは <strong> に変換して残す
+  $('#__r span').each((_, el) => {
+    const st = $(el).attr('style') || '';
+    if (/font-weight\s*:\s*(bold|[6-9]00)/i.test(st)) {
+      $(el).replaceWith(`<strong>${$(el).html() ?? ''}</strong>`);
+    }
+  });
+
+  $('#__r [class]').removeAttr('class');
+  $('#__r [style]').removeAttr('style');
+
+  // 属性のなくなった span を外す（入れ子があるので繰り返す）
+  for (let i = 0; i < 8; i++) {
+    let changed = false;
+    $('#__r span').each((_, el) => {
+      if (Object.keys(el.attribs || {}).length === 0) {
+        $(el).replaceWith($(el).html() ?? '');
+        changed = true;
+      }
+    });
+    if (!changed) break;
+  }
+
+  // 中身のない段落を削除
+  $('#__r p, #__r strong').each((_, el) => {
+    const t = $(el).text().replace(/[\s\u200b\u00a0]/g, '');
+    if (!t && $(el).find('img').length === 0) $(el).remove();
+  });
+
+  return ($('#__r').html() ?? '').trim();
+}
+
+
+// ---------------------------------------------------------------------------
+// Wixの画像を microCMS のメディアへ移す
+//   microCMSの画像フィールドは自前のメディアURLしか受け付けない。
+//   またWixを解約すると画像が消えるため、この移行は必須。
+// ---------------------------------------------------------------------------
+const mediaCache = new Map();
+
+async function uploadToMicroCMS(imageUrl) {
+  if (!imageUrl) return null;
+  if (mediaCache.has(imageUrl)) return mediaCache.get(imageUrl);
+
+  const res = await fetch(imageUrl);
+  if (!res.ok) throw new Error(`画像の取得に失敗 (${res.status}): ${imageUrl}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+
+  // ファイル名は元URLの末尾から。クエリは落とす
+  const name = (imageUrl.split('/').pop() || 'image.jpg').split('?')[0].replace(/[^\w.\-]/g, '_');
+  const type = res.headers.get('content-type') || 'image/jpeg';
+
+  const form = new FormData();
+  form.append('file', new Blob([buf], { type }), name);
+
+  const up = await fetch(`https://${SERVICE_DOMAIN}.microcms-management.io/api/v1/media`, {
+    method: 'POST',
+    headers: { 'X-MICROCMS-API-KEY': WRITE_KEY },
+    body: form,
+  });
+  const json = await up.json();
+  if (!up.ok) throw new Error(`メディアのアップロードに失敗 (${up.status}): ${JSON.stringify(json)}`);
+
+  mediaCache.set(imageUrl, json.url);
+  return json.url;
+}
 
 // ---------------------------------------------------------------------------
 // ユーティリティ
@@ -253,7 +331,7 @@ async function parse(html, meta) {
     // ------------------------------------------------------------------
     // img
     // ------------------------------------------------------------------
-    if (tag === 'img' && !inToc) {
+    if (tag === 'img' && !inToc && leadDone) {
       const src = $el.attr('src') || $el.attr('data-src') || '';
       if (!src || src.startsWith('data:')) continue;
       // ナビゲーションアイコン等の小さい画像は無視
@@ -361,6 +439,58 @@ async function parse(html, meta) {
 }
 
 // ---------------------------------------------------------------------------
+// ブロック配列 → HTML文字列（richEditorV2 用）
+// ---------------------------------------------------------------------------
+function blocksToHtml(blocks) {
+  return blocks.map(b => {
+    switch (b.fieldId) {
+      case 'section':
+        return `<h2>${b.heading}</h2>${b.richText || ''}`;
+      case 'subsection':
+        return `<h3>${b.heading}</h3>${b.richText || ''}`;
+      case 'imageBlock': {
+        const cap = b.caption ? `<figcaption>${b.caption}</figcaption>` : '';
+        return `<figure><img src="${b.image.url}" alt="${b.alt || ''}" />${cap}</figure>`;
+      }
+      case 'linkCard': {
+        const href = b.externalUrl || '#';
+        return `<p><a href="${href}">${b.label}</a></p>`;
+      }
+      case 'quoteBlock':
+        return `<blockquote><p>${b.text}</p><cite>${b.source}</cite></blockquote>`;
+      case 'noteBlock':
+        return `<p class="note">${b.text}</p>`;
+      case 'tableBlock': {
+        const headers = b.header.split(',');
+        const rows = (b.rows || []).map(r => r.cells.split(','));
+        const cap = b.caption ? `<caption>${b.caption}</caption>` : '';
+        const head = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>`;
+        const body = `<tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+        return `<figure><table>${cap}${head}${body}</table></figure>`;
+      }
+      case 'bookBlock':
+        return [
+          '<div class="book-block">',
+          `<strong>${b.title}</strong>`,
+          b.author ? ` ／ ${b.author}` : '',
+          b.comment ? `<p>${b.comment}</p>` : '',
+          '</div>',
+        ].join('');
+      default:
+        return '';
+    }
+  }).filter(Boolean).join('\n');
+}
+
+function faqToHtml(faqs) {
+  if (!faqs.length) return '';
+  const items = faqs.map(f =>
+    `<dt>${f.question}</dt><dd>${f.answer}</dd>`
+  ).join('\n');
+  return `<h2>よくある質問</h2>\n<dl>\n${items}\n</dl>`;
+}
+
+// ---------------------------------------------------------------------------
 // microCMSへの書き込み（PUT = IDを指定して作成 or 更新）
 // ---------------------------------------------------------------------------
 async function postToMicroCMS(slug, payload) {
@@ -403,37 +533,55 @@ async function processArticle(meta) {
 
   const { title, lead, heroImage, blocks, faqItems } = await parse(html, meta);
 
+  const filteredBlocks = blocks.filter(b => {
+    if (b.fieldId === 'section') {
+      if (isEmpty(b.heading)) return false;
+      if (!b.richText && !b.icon && !b.image) return false;
+      const footer = ['&LAB TOKYO', 'SUPPORT', 'サポート', 'お問い合わせ'];
+      if (footer.some(f => b.heading.includes(f))) return false;
+    }
+    return true;
+  });
+
+  let bodyHtml = [
+    blocksToHtml(filteredBlocks),
+    faqToHtml(faqItems),
+  ].filter(Boolean).join('\n');
+
+  bodyHtml = sanitizeHtml(bodyHtml);
+
+  // 冒頭に eyebrow と同じ文が重複していたら落とす
+  if (meta.eyebrow) {
+    const dup = new RegExp(`<p>\\s*(<strong>)?\\s*${meta.eyebrow.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*(</strong>)?\\s*</p>`, 'g');
+    bodyHtml = bodyHtml.replace(dup, '');
+  }
+
+  // 画像を microCMS へ移す（dry-run のときは移さない）
+  let heroImageUrl = heroImage;
+  if (!DRY_RUN && heroImage) {
+    const src = typeof heroImage === 'object' ? heroImage.url : heroImage;
+    heroImageUrl = await uploadToMicroCMS(src);
+    console.log(`  🖼  画像を移しました → ${heroImageUrl}`);
+  }
+
   const payload = {
     title,
     eyebrow: meta.eyebrow,
     lead,
-    heroImage,
+    heroImage: heroImageUrl,
     heroImageAlt: title,
-    body: blocks.filter(b => {
-      // テキストなし・アイコンなし・画像なしのsectionは除外（フッター・CTA混入対策）
-      if (b.fieldId === 'section') {
-        if (isEmpty(b.heading)) return false;
-        if (!b.richText && !b.icon) return false;
-      }
-      // フッター由来の既知キーワードを含む空sectionを除外
-      if (b.fieldId === 'section' && !b.richText) {
-        const footer = ['&LAB TOKYO', 'SUPPORT', 'サポート', 'お問い合わせ'];
-        if (footer.some(f => b.heading.includes(f))) return false;
-      }
-      return true;
-    }),
-    ...(faqItems.length > 0 ? { faq: faqItems } : {}),
-    cta: meta.cta,
+    body: bodyHtml,
     seoTitle: `${title} | &LAB TOKYO`,
     seoDescription: meta.seoDescription,
+    ctaHeading: meta.cta.heading,
+    ctaText: meta.cta.text,
+    ctaLabel: meta.cta.buttonLabel,
+    ctaUrl: meta.cta.buttonUrl,
   };
 
   await postToMicroCMS(meta.slug, payload);
 
-  console.log(`  blocks: ${payload.body.length}件  faq: ${faqItems.length}件`);
-
-  const tables = payload.body.filter(b => b.fieldId === 'tableBlock');
-  if (tables.length) console.log(`  ⚠️  tableBlock ${tables.length}件 → 管理画面で要確認`);
+  console.log(`  body: ${payload.body.length}文字  sections: ${filteredBlocks.filter(b=>b.fieldId==='section').length}件  faq: ${faqItems.length}件`);
 }
 
 // ---------------------------------------------------------------------------

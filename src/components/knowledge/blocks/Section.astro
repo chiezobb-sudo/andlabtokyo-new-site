@@ -1,0 +1,33 @@
+---
+const { block, anchor } = Astro.props;
+---
+<section class="sec" id={anchor}>
+  <h2 class="sec__h" data-reveal>
+    {block.icon && <img class="sec__icon" src={block.icon.url} alt="" width="52" height="52" loading="lazy" />}
+    <span>{block.heading}</span>
+  </h2>
+  <div class="kb-body" data-reveal style="--reveal-delay:90ms" set:html={block.richText} />
+</section>
+
+<style>
+  .sec { margin: 0 0 var(--gap-section); scroll-margin-top: 4rem; }
+  .sec__h {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: var(--font-jp);
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: .04em;
+    margin: 0 0 clamp(1.8rem, 3.5vw, 3rem);
+    max-width: 26em;
+    position: relative;
+  }
+  /* 見出しの左に細い罫。装飾は1本だけに留める */
+  .sec__h::before {
+    content: ""; position: absolute; left: -6vw; top: .8em;
+    width: 3.4vw; max-width: 3rem; height: 1px; background: var(--gold);
+    display: none;
+  }
+  @media (min-width: 60rem) { .sec__h::before { display: block; } }
+  .sec__icon { flex: none; opacity: .9; }
+</style>

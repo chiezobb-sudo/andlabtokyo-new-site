@@ -1,0 +1,28 @@
+---
+const { block } = Astro.props;
+const head = block.header.split(',').map((s: string) => s.trim());
+const rows = block.rows.map((r: { cells: string }) => r.cells.split(',').map((s) => s.trim()));
+---
+<figure class="tbl" data-reveal>
+  {block.caption && <figcaption class="label tbl__cap">{block.caption}</figcaption>}
+  <div class="tbl__scroll">
+    <table>
+      <thead><tr>{head.map((h: string) => <th scope="col">{h}</th>)}</tr></thead>
+      <tbody>{rows.map((r: string[]) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+    </table>
+  </div>
+</figure>
+
+<style>
+  .tbl { margin: var(--gap-block) 0; width: min(100%, 46rem); }
+  .tbl__cap { margin-bottom: 1.6rem; }
+  /* 横長でもページ全体は横スクロールさせない */
+  .tbl__scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th, td { padding: 1.15em 1.2em; text-align: left; border-bottom: 1px solid var(--line); line-height: 1.9; }
+  th {
+    font-family: var(--font-ui); font-weight: 400; font-size: .76rem;
+    letter-spacing: .16em; color: var(--gold); border-bottom-color: var(--gold);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+</style>

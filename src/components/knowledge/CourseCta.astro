@@ -1,0 +1,42 @@
+---
+const { cta } = Astro.props;
+const external = /^https?:\/\//.test(cta.buttonUrl ?? '');
+---
+<aside class="cta">
+  <div class="cta__inner">
+    <p class="label cta__label" data-reveal>Next step</p>
+    <h2 class="cta__h" data-reveal style="--reveal-delay:90ms">{cta.heading}</h2>
+    {cta.text && <p class="cta__text" data-reveal style="--reveal-delay:160ms">{cta.text}</p>}
+    <p data-reveal style="--reveal-delay:230ms">
+      <a class="cta__btn" href={cta.buttonUrl} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+        <span>{cta.buttonLabel}</span>
+        <span class="cta__arrow" aria-hidden="true"></span>
+      </a>
+    </p>
+  </div>
+</aside>
+
+<style>
+  /* 記事に料金は書かない。導線はこのボタンだけ。
+     料金が変わっても記事を触らずに済む */
+  .cta { background: var(--ink); color: #fff; padding: clamp(4.5rem, 11vw, 9rem) 1.2rem; }
+  .cta__inner { width: min(100%, 46rem); margin: 0 auto; text-align: center; }
+  .cta__label { color: rgba(255,255,255,.55); }
+  .cta__h {
+    font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400;
+    letter-spacing: .06em; line-height: 1.6; margin: 1.6rem 0 0;
+  }
+  .cta__text { font-size: .96rem; line-height: 2.3; color: rgba(255,255,255,.78); margin: 1.8rem auto 0; max-width: 30rem; }
+  .cta__btn {
+    display: inline-flex; align-items: center; gap: 1.4rem;
+    margin-top: clamp(2.4rem, 5vw, 3.6rem);
+    padding: 1.25em 2.8em;
+    border: 1px solid rgba(255,255,255,.42);
+    color: #fff; text-decoration: none;
+    font-size: .9rem; letter-spacing: .14em;
+    transition: background .55s var(--ease), border-color .55s var(--ease);
+  }
+  .cta__btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.8); }
+  .cta__arrow { width: 2rem; height: 1px; background: currentColor; transition: width .55s var(--ease); }
+  .cta__btn:hover .cta__arrow { width: 3rem; }
+</style>
