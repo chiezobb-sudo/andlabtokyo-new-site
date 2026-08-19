@@ -86,3 +86,97 @@ export async function getPrices(): Promise<Price[]> {
 }
 
 export const yen = (n: number) => `¥${n.toLocaleString('ja-JP')}`;
+
+// ─────────────────────────────────────────────
+// Page builder types (pages API)
+// ─────────────────────────────────────────────
+
+export type HeroBlock = {
+  fieldId: 'hero';
+  eyebrow?: string;
+  mainCopy: string;
+  accentWord?: string;
+  subCopy?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  ctaLabel2?: string;
+  ctaUrl2?: string;
+  bgImage?: MicroCMSImage;
+};
+
+export type CourseItem = {
+  fieldId: 'courseItem';
+  cat: string;
+  name: string;
+  url: string;
+  theme: 'choco' | 'ferm' | 'raw' | 'workshop' | 'patis';
+};
+
+export type CourseGridBlock = {
+  fieldId: 'courseGrid';
+  label?: string;
+  heading: string;
+  items: CourseItem[];
+};
+
+export type KnowledgeGridBlock = {
+  fieldId: 'knowledgeGrid';
+  label?: string;
+  heading: string;
+  count?: number;
+};
+
+export type ProfileBandBlock = {
+  fieldId: 'profileBand';
+  label?: string;
+  name: string;
+  nameEn?: string;
+  subText?: string;
+  description: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  image?: MicroCMSImage;
+};
+
+export type RichSectionBlock = {
+  fieldId: 'richSection';
+  label?: string;
+  heading?: string;
+  body: string;
+  image?: MicroCMSImage;
+  imagePosition?: 'right' | 'left' | 'none';
+  ctaLabel?: string;
+  ctaUrl?: string;
+};
+
+export type PageBlock =
+  | HeroBlock
+  | CourseGridBlock
+  | KnowledgeGridBlock
+  | ProfileBandBlock
+  | RichSectionBlock;
+
+export type Page = {
+  id: string;
+  slug: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: MicroCMSImage;
+  blocks: PageBlock[];
+};
+
+export async function getPage(slug: string): Promise<Page | null> {
+  if (!safeClient) {
+    const { dummyPages } = await import('./dummy-page');
+    return dummyPages[slug] ?? null;
+  }
+  try {
+    const res = await safeClient.getList<Page>({
+      endpoint: 'pages',
+      queries: { filters: `slug[equals]${slug}`, limit: 1 },
+    });
+    return res.contents[0] ?? null;
+  } catch {
+    return null;
+  }
+}

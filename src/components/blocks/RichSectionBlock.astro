@@ -1,0 +1,121 @@
+---
+import type { RichSectionBlock } from '../../lib/microcms';
+
+interface Props { block: RichSectionBlock }
+const { block: b } = Astro.props;
+
+const hasImage = b.image && b.imagePosition !== 'none';
+const imgRight = b.imagePosition === 'right' || !b.imagePosition;
+---
+
+<section class="rs">
+  <div class={`rs__inner ${hasImage ? 'rs__inner--split' : ''}`}>
+
+    {hasImage && !imgRight && (
+      <div class="rs__img">
+        <img src={b.image!.url + '?w=800'} alt="" width={b.image!.width} height={b.image!.height} loading="lazy" decoding="async" />
+      </div>
+    )}
+
+    <div class="rs__text">
+      {b.label && <p class="rs__label">{b.label}</p>}
+      {b.heading && <h2 class="rs__heading">{b.heading}</h2>}
+      <div class="rs__body" set:html={b.body} />
+      {b.ctaUrl && b.ctaLabel && (
+        <a href={b.ctaUrl} class="rs__cta">{b.ctaLabel}</a>
+      )}
+    </div>
+
+    {hasImage && imgRight && (
+      <div class="rs__img">
+        <img src={b.image!.url + '?w=800'} alt="" width={b.image!.width} height={b.image!.height} loading="lazy" decoding="async" />
+      </div>
+    )}
+
+  </div>
+</section>
+
+<style>
+.rs {
+  background: var(--bg-dark, #141413);
+  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.rs__inner {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.rs__inner--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: center;
+}
+
+.rs__img {
+  overflow: hidden;
+}
+.rs__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rs__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .7rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0 0 1.2rem;
+}
+
+.rs__heading {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .06em;
+  color: rgba(240,236,230,.9);
+  margin: 0 0 2rem;
+}
+
+.rs__body {
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.9rem, 1.2vw, 1rem);
+  line-height: 2.2;
+  color: rgba(240,236,230,.75);
+}
+.rs__body p { margin: 0 0 1.4em; }
+.rs__body h2, .rs__body h3 {
+  color: rgba(240,236,230,.9);
+  font-family: var(--font-jp, serif);
+  font-weight: 400;
+  letter-spacing: .06em;
+  margin: 2em 0 .8em;
+}
+.rs__body a {
+  color: var(--gold, #a68a6d);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(166,138,109,.4);
+}
+
+.rs__cta {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold, #a68a6d);
+  padding-bottom: .2rem;
+  transition: opacity .3s;
+}
+.rs__cta:hover { opacity: .65; }
+
+@media (max-width: 56rem) {
+  .rs__inner--split { grid-template-columns: 1fr; }
+}
+</style>

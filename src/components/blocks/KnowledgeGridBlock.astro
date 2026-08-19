@@ -1,0 +1,160 @@
+---
+import type { KnowledgeGridBlock, Knowledge } from '../../lib/microcms';
+
+interface Props {
+  block: KnowledgeGridBlock;
+  articles: Knowledge[];
+}
+const { block: b, articles } = Astro.props;
+---
+
+<section class="kg">
+  <div class="kg__header">
+    {b.label && <p class="kg__label">{b.label}</p>}
+    <div class="kg__heading-row">
+      <h2 class="kg__heading">{b.heading}</h2>
+      <a href="/knowledge" class="kg__more">すべての記事を見る →</a>
+    </div>
+  </div>
+
+  <div class="kg__grid">
+    {articles.map((a) => (
+      <a href={`/knowledge/${a.id}`} class="kg__card">
+        <div class="kg__card-img">
+          <img
+            src={a.heroImage.url + '?w=600&h=400&fit=crop'}
+            alt={a.heroImageAlt ?? a.title}
+            width="600"
+            height="400"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="kg__card-body">
+          {a.eyebrow && <span class="kg__card-cat">{a.eyebrow}</span>}
+          <h3 class="kg__card-title">{a.title}</h3>
+          <p class="kg__card-lead">{a.lead}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+.kg {
+  background: var(--bg-dark, #141413);
+  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.kg__header {
+  width: min(100%, 80rem);
+  margin: 0 auto clamp(3rem, 5vw, 4.5rem);
+}
+
+.kg__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .7rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0 0 1rem;
+}
+
+.kg__heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.kg__heading {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .06em;
+  color: rgba(240,236,230,.9);
+  margin: 0;
+}
+
+.kg__more {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .78rem;
+  letter-spacing: .1em;
+  color: var(--gold, #a68a6d);
+  text-decoration: none;
+  transition: opacity .3s;
+  white-space: nowrap;
+}
+.kg__more:hover { opacity: .7; }
+
+.kg__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: min(100%, 80rem);
+  margin: 0 auto;
+}
+
+.kg__card {
+  display: block;
+  text-decoration: none;
+  background: var(--sumi, #1C1C1A);
+  transition: filter .3s;
+}
+.kg__card:hover { filter: brightness(1.1); }
+
+.kg__card-img {
+  aspect-ratio: 3/2;
+  overflow: hidden;
+}
+.kg__card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+}
+.kg__card:hover .kg__card-img img { transform: scale(1.06); }
+
+.kg__card-body {
+  padding: 1.8rem 1.6rem 2rem;
+}
+
+.kg__card-cat {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin-bottom: .8rem;
+}
+
+.kg__card-title {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(.95rem, 1.4vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: rgba(240,236,230,.92);
+  line-height: 1.7;
+  margin: 0 0 .8rem;
+}
+
+.kg__card-lead {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .82rem;
+  line-height: 1.9;
+  color: rgba(240,236,230,.52);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 56rem) {
+  .kg__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 36rem) {
+  .kg__grid { grid-template-columns: 1fr; }
+}
+</style>

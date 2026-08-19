@@ -1,0 +1,142 @@
+---
+import type { CourseGridBlock } from '../../lib/microcms';
+
+interface Props { block: CourseGridBlock }
+const { block: b } = Astro.props;
+
+const themeColors: Record<string, { bg: string; accent: string }> = {
+  choco:    { bg: '#1a1109', accent: '#c4943a' },
+  ferm:     { bg: '#091510', accent: '#5e9c5a' },
+  raw:      { bg: '#0d110c', accent: '#7a9e6a' },
+  workshop: { bg: '#10100d', accent: '#a68a6d' },
+  patis:    { bg: '#110e08', accent: '#b89a5a' },
+};
+---
+
+<section class="cg">
+  <div class="cg__header">
+    {b.label && <p class="cg__label">{b.label}</p>}
+    <h2 class="cg__heading">{b.heading}</h2>
+  </div>
+
+  <div class="cg__grid" style={`--cols: ${Math.min(b.items.length, 2)}`}>
+    {b.items.map((item) => {
+      const colors = themeColors[item.theme] ?? themeColors.workshop;
+      return (
+        <a
+          href={item.url}
+          class="cg__tile"
+          style={`--tile-bg: ${colors.bg}; --tile-accent: ${colors.accent};`}
+        >
+          <span class="cg__tile-cat">{item.cat}</span>
+          <span class="cg__tile-name">{item.name}</span>
+          <span class="cg__tile-arrow" aria-hidden="true">→</span>
+        </a>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+.cg {
+  background: var(--sumi, #1C1C1A);
+  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.cg__header {
+  width: min(100%, 74rem);
+  margin: 0 auto clamp(3rem, 5vw, 5rem);
+}
+
+.cg__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .7rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0 0 1rem;
+}
+
+.cg__heading {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .06em;
+  color: rgba(240,236,230,.9);
+  margin: 0;
+}
+
+.cg__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: 2px;
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.cg__tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  min-height: clamp(200px, 28vw, 340px);
+  background: var(--tile-bg, #111);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: filter .4s ease;
+}
+
+.cg__tile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--tile-accent, #a68a6d);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.16,1,.3,1);
+}
+
+.cg__tile:hover { filter: brightness(1.15); }
+.cg__tile:hover::after { transform: scaleX(1); }
+
+.cg__tile-cat {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--tile-accent, #a68a6d);
+  margin-bottom: .8rem;
+}
+
+.cg__tile-name {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: .06em;
+  color: rgba(240,236,230,.92);
+  line-height: 1.5;
+}
+
+.cg__tile-arrow {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 1.1rem;
+  color: var(--tile-accent, #a68a6d);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .3s, transform .3s;
+}
+
+.cg__tile:hover .cg__tile-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 40rem) {
+  .cg__grid { grid-template-columns: 1fr; }
+}
+</style>
