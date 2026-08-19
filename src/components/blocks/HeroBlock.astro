@@ -9,7 +9,7 @@ const mainLines = b.mainCopy.split('\n');
 ---
 
 <section class="hero-blk">
-  {b.bgVideoPath ? (
+  {b.videoUrl ? (
     <div class="hero-blk__media">
       <video
         class="hero-blk__video"
@@ -20,7 +20,7 @@ const mainLines = b.mainCopy.split('\n');
         poster={b.bgImage?.url}
         preload="auto"
       >
-        <source src={b.bgVideoPath} type="video/mp4" />
+        <source src={b.videoUrl} type="video/mp4" />
       </video>
     </div>
   ) : b.bgImage ? (

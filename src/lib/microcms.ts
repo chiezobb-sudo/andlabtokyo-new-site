@@ -102,15 +102,13 @@ export type HeroBlock = {
   ctaLabel2?: string;
   ctaUrl2?: string;
   bgImage?: MicroCMSImage;
-  bgVideoPath?: string;  // 例: /hero-video.mp4
+  videoUrl?: string;  // 例: /hero-video.mp4
 };
 
 export type ConceptBandBlock = {
   fieldId: 'conceptBand';
-  eyebrow?: string;
-  heading: string;
-  body?: string;
-  image?: MicroCMSImage;
+  catchcopy: string;
+  leadText?: string;
 };
 
 export type CourseItem = {
