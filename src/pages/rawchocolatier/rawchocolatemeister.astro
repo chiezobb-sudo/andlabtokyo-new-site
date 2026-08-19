@@ -153,15 +153,23 @@ const courseJsonLd = {
       font-family: var(--f-serif); font-size: clamp(1.9rem, 4.5vw, 3.2rem);
       font-weight: 300; color: #fff; line-height: 1.3; letter-spacing: .06em; margin-bottom: 1rem;
     }
-    /* microCMS band */
-    .cms-band { background: #f0f4ff; border-top: 3px solid var(--amber); padding: 3rem 5vw; }
-    .cms-inner { max-width: 800px; margin: 0 auto; }
-    .cms-label { display: inline-block; background: var(--amber); color: #fff; font-family: var(--f-sans); font-size: .68rem; letter-spacing: .16em; padding: .3rem 1rem; border-radius: 2rem; margin-bottom: 1rem; }
-    .cms-title { font-family: var(--f-serif); font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 300; color: var(--sumi); margin-bottom: 1rem; }
-    .cms-desc { font-family: var(--f-sans); font-size: .95rem; line-height: 1.9; color: #555; margin-bottom: 1.5rem; }
-    .cms-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .cms-price { font-family: var(--f-sans); font-size: .9rem; font-weight: 700; color: var(--amber); }
-    .cms-schedule { font-family: var(--f-sans); font-size: .85rem; color: #777; white-space: pre-line; }
+    /* ── INFO BAND（開催情報） */
+    .info-band { background: #f7f4ef; border-top: 3px solid var(--amber); padding: 0; }
+    .info-band__inner { max-width: 900px; margin: 0 auto; padding: 3.5rem 0; }
+    .info-schedule {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: .4rem 1.4rem; align-items: start;
+      margin-top: 1.6rem;
+    }
+    .info-schedule__key {
+      font-family: var(--f-sans); font-size: .68rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--amber); padding-top: .18em;
+      white-space: nowrap;
+    }
+    .info-schedule__val {
+      font-family: var(--f-sans); font-size: .9rem; color: #444;
+      line-height: 1.85; white-space: pre-line;
+    }
 
     .hero-sub {
       font-family: var(--f-sans); font-size: clamp(.85rem, 1.4vw, 1rem);
@@ -270,20 +278,89 @@ const courseJsonLd = {
     }
     .step-list li::before { content: '— '; color: var(--amber); opacity: .6; }
 
-    /* FORMAT */
-    .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-    .online-feature {
-      display: grid; grid-template-columns: 280px 1fr; gap: 2.2rem; align-items: center;
-      margin-top: 1.5rem; background: #f7f4ef; border-radius: 4px; overflow: hidden;
+    /* ── PRICING テーブル */
+    .pricing-table {
+      width: 100%; border-collapse: collapse;
+      margin-top: 2.4rem;
+      font-family: var(--f-sans);
     }
-    .online-feature-img { height: 100%; min-height: 220px; }
-    .online-feature-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .online-feature-body { padding: 1.8rem 1.8rem 1.8rem 0; }
-    .online-feature-body .format-card-body { margin-top: .3rem; }
-    .format-card { background: #f7f4ef; padding: 1.8rem; border-radius: 4px; }
-    .format-card-label { font-family: var(--f-sans); font-size: .68rem; letter-spacing: .18em; color: var(--amber); margin-bottom: .6rem; }
-    .format-card-title { font-family: var(--f-serif); font-size: 1.05rem; margin-bottom: .5rem; color: #2c2c2a; }
-    .format-card-body { font-family: var(--f-sans); font-size: .84rem; color: #666; line-height: 1.8; }
+    .pricing-table thead tr {
+      border-bottom: 2px solid var(--amber);
+    }
+    .pricing-table th {
+      padding: .85rem 1.1rem;
+      color: var(--amber); font-size: .68rem; letter-spacing: .14em;
+      font-weight: 700; text-align: left;
+    }
+    .pricing-table th:last-child { text-align: right; }
+    .pricing-table td {
+      padding: .85rem 1.1rem;
+      font-size: .9rem; color: #333;
+      border-bottom: 1px solid #e8e4dc;
+      vertical-align: middle;
+    }
+    .pricing-table td:last-child { text-align: right; font-weight: 600; }
+    .pricing-table .row-label {
+      font-size: .68rem; letter-spacing: .1em; color: var(--amber); font-weight: 700;
+    }
+    .pricing-table .row-sub { background: #f7f4ef; }
+    .pricing-table .row-sub td { color: #555; }
+    .pricing-table .row-sub td:last-child { color: var(--amber); font-weight: 700; }
+    .pricing-table .row-total { background: #fdf8ee; }
+    .pricing-table .row-total td { padding: 1rem 1.1rem; color: #555; }
+    .pricing-table .row-total td:last-child { color: var(--sumi); font-size: .95rem; }
+    .pricing-note {
+      font-family: var(--f-sans); font-size: .78rem;
+      color: #999; line-height: 1.85; margin-top: 1.2rem;
+    }
+
+    /* ── FORMAT カード */
+    .format-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.2rem; margin-top: 2.2rem;
+    }
+    .format-card {
+      background: #fff; padding: 2rem 2rem 2rem;
+      border-radius: 6px;
+      border: 1px solid #e8e4dc;
+      border-top: 3px solid var(--amber);
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: box-shadow .2s;
+    }
+    .format-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+    .format-card-label {
+      font-family: var(--f-sans); font-size: .64rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: .55rem; display: block;
+    }
+    .format-card-title {
+      font-family: var(--f-serif); font-size: 1.1rem;
+      font-weight: 400; margin-bottom: .65rem; color: #2c2c2a;
+    }
+    .format-card-body {
+      font-family: var(--f-sans); font-size: .86rem; color: #666; line-height: 1.85;
+    }
+    .online-feature {
+      display: grid; grid-template-columns: 300px 1fr;
+      gap: 0; align-items: stretch;
+      margin-top: 1.4rem;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid #e8e4dc;
+      border-top: 3px solid var(--amber);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .online-feature-img { position: relative; min-height: 240px; }
+    .online-feature-img img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .online-feature-body {
+      padding: 2rem 2.2rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .online-feature-body .format-card-body { margin-top: .4rem; }
 
     /* INSTRUCTOR */
     .instructor-wrap { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start; }
@@ -404,12 +481,15 @@ const courseJsonLd = {
       .junior-grid { grid-template-columns: 1fr; }
       .format-grid { grid-template-columns: 1fr; }
       .online-feature { grid-template-columns: 1fr; }
-      .online-feature-img { min-height: 200px; }
-      .online-feature-body { padding: 1.5rem; }
+      .online-feature-img { min-height: 200px; position: relative; }
+      .online-feature-body { padding: 1.6rem 1.6rem 1.8rem; }
       .step-thumb { width: 100%; height: 200px; }
       .hero-body { padding: 0 5vw 3.5rem; }
       section { padding: 3.5rem 5vw; }
       .sticky-cta-text { display: none; }
+      .pricing-table { font-size: .82rem; }
+      .pricing-table th, .pricing-table td { padding: .7rem .7rem; }
+      .info-band__inner { padding: 3rem 5vw; }
     }
   </style>
 
@@ -428,18 +508,18 @@ const courseJsonLd = {
     </div>
   </div>
 
-  {cmsData && (
-    <section class="cms-band">
-      <div class="cms-inner">
-        <span class="cms-label">microCMS管理中</span>
-        <h2 class="cms-title">{cmsData.title}</h2>
-        <div class="cms-desc" set:html={cmsData.description} />
-        <div class="cms-meta">
-          {cmsData.price && <span class="cms-price">{cmsData.price}</span>}
-          {cmsData.schedule && <span class="cms-schedule">{cmsData.schedule}</span>}
-        </div>
+  {cmsData?.schedule && (
+    <div class="info-band">
+      <div class="info-band__inner">
+        <span class="eyebrow">Schedule</span>
+        <h2 class="sec-title">開催情報</h2>
+        <div class="divider"></div>
+        <dl class="info-schedule">
+          <dt class="info-schedule__key">開催日程</dt>
+          <dd class="info-schedule__val">{cmsData.schedule}</dd>
+        </dl>
       </div>
-    </section>
+    </div>
   )}
 
   <!-- こんな方に -->
@@ -542,43 +622,51 @@ const courseJsonLd = {
       <h2 class="sec-title">受講料一覧</h2>
       <div class="divider"></div>
       <p class="sec-lead">すべて税別表示。初級から順に受講でき、各ステップ単体での受講も可能です。</p>
-      <table style="width:100%; border-collapse:collapse; margin-top:2rem; font-family:var(--f-sans); font-size:.9rem;">
+      <table class="pricing-table">
         <thead>
-          <tr style="border-bottom:2px solid var(--amber);">
-            <th style="text-align:left; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em; width:6em;">レベル</th>
-            <th style="text-align:left; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em;">講座名</th>
-            <th style="text-align:right; padding:.8rem 1rem; color:var(--amber); font-weight:700; letter-spacing:.08em;">受講料（税別）</th>
+          <tr>
+            <th style="width:7em;">レベル</th>
+            <th>講座名</th>
+            <th>受講料（税別）</th>
           </tr>
         </thead>
         <tbody>
-          {[
-            { label: "BASIC", name: "初級講座", price: "¥25,000" },
-            { label: "INTERMEDIATE", name: "中級講座", price: "¥35,000" },
-            { label: "ADVANCE", name: "上級講座", price: "¥43,000" },
-          ].map(row => (
-            <tr style="border-bottom:1px solid #e8e4dc;">
-              <td style="padding:.8rem 1rem; color:var(--amber); font-size:.72rem; letter-spacing:.1em; font-weight:700;">{row.label}</td>
-              <td style="padding:.8rem 1rem; color:#333;">{row.name}</td>
-              <td style="padding:.8rem 1rem; text-align:right; color:#333; font-weight:600;">{row.price}</td>
-            </tr>
-          ))}
-          <tr style="border-bottom:1px solid #e8e4dc; background:#f7f4ef;">
-            <td style="padding:.8rem 1rem; color:#999; font-size:.72rem; letter-spacing:.1em;"></td>
-            <td style="padding:.8rem 1rem; color:#555;">ローチョコレートマイスター® 3ステップ合計</td>
-            <td style="padding:.8rem 1rem; text-align:right; color:var(--amber); font-weight:700;">¥103,000</td>
+          <tr>
+            <td class="row-label">BASIC</td>
+            <td>初級講座</td>
+            <td>¥25,000</td>
           </tr>
-          <tr style="border-bottom:1px solid #e8e4dc;">
-            <td style="padding:.8rem 1rem; color:var(--amber); font-size:.72rem; letter-spacing:.1em; font-weight:700;">PRO</td>
-            <td style="padding:.8rem 1rem; color:#333;">ジュニアローショコラティエ養成講座</td>
-            <td style="padding:.8rem 1rem; text-align:right; color:#333; font-weight:600;">¥85,000</td>
+          <tr>
+            <td class="row-label">INTERMEDIATE</td>
+            <td>中級講座</td>
+            <td>¥35,000</td>
           </tr>
-          <tr style="background:#fdf8ee;">
-            <td style="padding:1rem 1rem; color:#999; font-size:.72rem; letter-spacing:.1em;"></td>
-            <td style="padding:1rem 1rem; color:#555; font-weight:700;">全課程合計</td>
-            <td style="padding:1rem 1rem; text-align:right; color:var(--sumi); font-weight:700;">¥188,000（税込¥206,800）</td>
+          <tr>
+            <td class="row-label">ADVANCE</td>
+            <td>上級講座</td>
+            <td>¥43,000</td>
+          </tr>
+          <tr class="row-sub">
+            <td></td>
+            <td>ローチョコレートマイスター® 3ステップ合計</td>
+            <td>¥103,000</td>
+          </tr>
+          <tr>
+            <td class="row-label">PRO</td>
+            <td>ジュニアローショコラティエ養成講座</td>
+            <td>¥85,000</td>
+          </tr>
+          <tr class="row-total">
+            <td></td>
+            <td style="font-weight:700; color:#333;">全課程合計</td>
+            <td>¥188,000（税込 ¥206,800）</td>
           </tr>
         </tbody>
       </table>
+      <p class="pricing-note">
+        ※ お支払いはクレジットカード決済またはお振込のみ（分割払い不可）。<br/>
+        ※ 各ステップ単体での受講も可能です。ご不明な点はお気軽にお問い合わせください。
+      </p>
     </div>
   </section>
 
@@ -589,19 +677,27 @@ const courseJsonLd = {
       <h2 class="sec-title">対面・オンラインどちらも対応</h2>
       <div class="divider"></div>
       <p class="sec-lead">
-        東京・渋谷（表参道）での対面レッスンのほか、オンラインでも受講可能です。
-        対面はプランA（3日間）・プランB（2日間）から選択いただけます。
+        東京・渋谷（表参道）での対面レッスンのほか、全国・海外からオンラインでも受講可能です。
+        対面はプランA（3日間）・プランB（2日間）からお選びいただけます。
       </p>
       <div class="format-grid">
         <div class="format-card">
-          <p class="format-card-label">PLAN A — 対面</p>
+          <span class="format-card-label">PLAN A — 対面</span>
           <p class="format-card-title">3日間コース</p>
-          <p class="format-card-body">座学（動画視聴）→ 実習3日間<br/>11:00〜15:30</p>
+          <p class="format-card-body">
+            座学（動画視聴）＋ 実習 3日間<br/>
+            時間：11:00〜15:30<br/>
+            場所：東京・渋谷（表参道）
+          </p>
         </div>
         <div class="format-card">
-          <p class="format-card-label">PLAN B — 対面</p>
+          <span class="format-card-label">PLAN B — 対面</span>
           <p class="format-card-title">2日間コース</p>
-          <p class="format-card-body">座学（動画視聴）→ 実習2日間<br/>凝縮カリキュラム対応</p>
+          <p class="format-card-body">
+            座学（動画視聴）＋ 実習 2日間<br/>
+            凝縮カリキュラム対応<br/>
+            場所：東京・渋谷（表参道）
+          </p>
         </div>
       </div>
       <div class="online-feature">
@@ -609,9 +705,11 @@ const courseJsonLd = {
           <img src="/choco-real/11-online-lesson.jpg" alt="オンラインでのローチョコレートレッスンの様子" loading="lazy" />
         </div>
         <div class="online-feature-body">
-          <p class="format-card-label">ONLINE</p>
+          <span class="format-card-label">ONLINE — 全国・海外対応</span>
           <p class="format-card-title">自宅からそのまま受講できます</p>
-          <p class="format-card-body">ビデオ通話で講師と直接やり取りしながら学べるので、地方や海外にお住まいの方、小さなお子さんがいる方でもご自宅で本格的なテンパリング技術を習得できます。</p>
+          <p class="format-card-body">
+            ビデオ通話で講師と直接やり取りしながら学べるので、地方や海外にお住まいの方、小さなお子さんがいる方でもご自宅で本格的なテンパリング技術を習得できます。
+          </p>
         </div>
       </div>
     </div>
