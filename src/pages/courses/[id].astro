@@ -10,221 +10,320 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const c = await getCourse(id!);
 if (!c) return Astro.redirect('/listofcourses');
+
+const hasGallery = c.gallery && c.gallery.length > 0;
 ---
 
 <Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.main_image?.url}>
 <main class="lp">
 
-<!-- ════════════════════════════════
-  1. HERO
-════════════════════════════════ -->
+<!-- ════════════════════════════
+  §1  HERO — CMS
+════════════════════════════ -->
 <section class="hero">
   {c.main_image
     ? <img class="hero__bg"
-        src={`${c.main_image.url}?w=1920&q=85`}
-        alt=""
-        width={c.main_image.width}
-        height={c.main_image.height}
-        fetchpriority="high"
-        decoding="async" />
+        src={`${c.main_image.url}?w=1920&q=85`} alt=""
+        width={c.main_image.width} height={c.main_image.height}
+        fetchpriority="high" decoding="async" />
     : <div class="hero__bg hero__bg--fallback" aria-hidden="true"></div>
   }
   <div class="hero__scrim" aria-hidden="true"></div>
-
   <div class="hero__inner">
-    <p class="hero__eyebrow">COURSE</p>
+    <p class="eyebrow eyebrow--gold hero__pre">COURSE</p>
     <h1 class="hero__title">{c.title}</h1>
     {c.subtitle && <p class="hero__sub">{c.subtitle}</p>}
-    <div class="hero__actions">
+    <div class="hero__btns">
       <a href="#form" class="btn btn--gold">今すぐ申し込む</a>
       <a href="#curriculum" class="btn btn--ghost">カリキュラムを見る</a>
     </div>
   </div>
-
-  <div class="hero__scroll" aria-hidden="true"><span></span></div>
+  <div class="hero__cue" aria-hidden="true"><span></span></div>
 </section>
 
-<!-- ════════════════════════════════
-  2. TARGET（こんな方へ）
-════════════════════════════════ -->
+<!-- ════════════════════════════
+  §2  TARGET — CMS
+════════════════════════════ -->
 {c.target && (
-<section class="target">
-  <div class="target__inner">
-    <header class="sec-header sec-header--center">
+<section class="sec sec--warm target-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
       <p class="eyebrow eyebrow--warm">FOR YOU</p>
-      <h2 class="sec-title sec-title--dark">こんな方へ</h2>
-      <p class="sec-lead">あなたの「学びたい」に、この講座は応えます。</p>
+      <h2 class="sec__title">こんな方へ</h2>
+      <p class="sec__lead">あなたの「学びたい」に、この講座は応えます。</p>
     </header>
-    <div class="target__prose prose prose--target" set:html={c.target} />
+    <div class="prose prose--target" set:html={c.target} />
   </div>
 </section>
 )}
 
-<!-- ════════════════════════════════
-  3. DESCRIPTION（講座について）
-════════════════════════════════ -->
+<!-- ════════════════════════════
+  §3  DESCRIPTION — CMS
+════════════════════════════ -->
 {c.description && (
-<section class="desc">
-  <div class="desc__inner">
-    <div class="desc__layout">
-      <header class="sec-header">
-        <p class="eyebrow">ABOUT</p>
-        <h2 class="sec-title">講座について</h2>
-      </header>
-      <div class="prose prose--light" set:html={c.description} />
+<section class="sec sec--offwhite">
+  <div class="sec__inner">
+    <header class="sec__hd">
+      <p class="eyebrow">ABOUT</p>
+      <h2 class="sec__title sec__title--dark">講座について</h2>
+    </header>
+    <div class="prose prose--desc" set:html={c.description} />
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §4  GALLERY — CMS（gallery[]）
+════════════════════════════ -->
+{hasGallery && (
+<section class="sec sec--dark gallery-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--dim">GALLERY</p>
+      <h2 class="sec__title sec__title--light">講座で作るローチョコレートの世界</h2>
+    </header>
+    <div class="gallery">
+      {c.gallery!.map((img, i) => (
+        <figure class={`gallery__item gallery__item--${(i % 5) + 1}`}>
+          <img
+            src={`${img.url}?w=900&q=85`}
+            alt={`作品 ${i + 1}`}
+            width={img.width}
+            height={img.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      ))}
     </div>
   </div>
 </section>
 )}
 
-<!-- ════════════════════════════════
-  4. CURRICULUM
-════════════════════════════════ -->
+<!-- ════════════════════════════
+  §5  CURRICULUM — CMS（3ステップカード型）
+════════════════════════════ -->
 {c.curriculum && (
-<section class="curr" id="curriculum">
-  <div class="curr__inner">
-    <header class="sec-header">
+<section class="sec sec--white curr-sec" id="curriculum">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
       <p class="eyebrow eyebrow--warm">CURRICULUM</p>
-      <h2 class="sec-title sec-title--dark">カリキュラム</h2>
+      <h2 class="sec__title sec__title--dark">3ステップで確実に身につくカリキュラム</h2>
+      <p class="sec__lead sec__lead--dark">基礎から段階を踏んで、プロレベルの知識と技術を習得します。</p>
     </header>
     <div class="prose prose--curr" set:html={c.curriculum} />
   </div>
 </section>
 )}
 
-<!-- ════════════════════════════════
-  5. ROADMAP（共通・ハードコード）
-════════════════════════════════ -->
-<section class="road">
-  <div class="road__inner">
-    <header class="sec-header sec-header--center">
-      <p class="eyebrow eyebrow--dim">STEP UP</p>
-      <h2 class="sec-title sec-title--light">資格取得までのロードマップ</h2>
-      <p class="road__sub">基礎から着実に積み上げ、協会認定プロへ。</p>
-    </header>
-
-    <ol class="road__list">
-      <li class="road__item">
-        <div class="road__num">01</div>
-        <div class="road__body">
-          <p class="road__tag">BASIC</p>
-          <p class="road__name">初級講座</p>
-          <p class="road__desc">ローフード・発酵の基礎理論、素材の知識、基本レシピを体系的に習得します。</p>
-        </div>
-      </li>
-      <li class="road__item">
-        <div class="road__num">02</div>
-        <div class="road__body">
-          <p class="road__tag">INTERMEDIATE</p>
-          <p class="road__name">中級講座</p>
-          <p class="road__desc">応用技術・食材の組み合わせ・商品化レベルのデザイン性を身につけます。</p>
-        </div>
-      </li>
-      <li class="road__item">
-        <div class="road__num">03</div>
-        <div class="road__body">
-          <p class="road__tag">ADVANCE</p>
-          <p class="road__name">上級講座</p>
-          <p class="road__desc">独自レシピ開発・ブランディング・他者への指導力まで磨き上げます。</p>
-        </div>
-      </li>
-      <li class="road__item road__item--goal">
-        <div class="road__num road__num--cert">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
-            <circle cx="12" cy="8" r="6"/><path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/>
-          </svg>
-        </div>
-        <div class="road__body">
-          <p class="road__tag">CERTIFICATE</p>
-          <p class="road__name">認定資格取得</p>
-          <p class="road__desc">ローショコラティエ協会認定プロとして、教室開業・販売・講師活動が可能に。</p>
-        </div>
-      </li>
-    </ol>
+<!-- ════════════════════════════
+  §6  INSTRUCTOR — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--warm instructor-sec">
+  <div class="sec__inner instructor-sec__layout">
+    <div class="instructor-sec__img-wrap">
+      <div class="instructor-sec__img-bg" aria-hidden="true">
+        <span class="instructor-sec__monogram">CA</span>
+      </div>
+    </div>
+    <div class="instructor-sec__body">
+      <header class="sec__hd">
+        <p class="eyebrow eyebrow--warm">INSTRUCTOR</p>
+        <h2 class="sec__title sec__title--dark">講師紹介</h2>
+      </header>
+      <p class="instructor-sec__name-en">Chie Ando</p>
+      <p class="instructor-sec__name-jp">安藤 千英</p>
+      <p class="instructor-sec__tags">
+        <span class="tag">ELLE gourmet 認定料理家</span>
+        <span class="tag">&LAB TOKYO 主宰</span>
+        <span class="tag">食と哲学のプロデューサー</span>
+      </p>
+      <div class="instructor-sec__bio">
+        <p>ローチョコレート・ロースイーツ・発酵料理の専門家。ELLE gourmet認定料理家として、食と哲学を融合させたユニークなアプローチで、食の本質と身体への深い理解を伝えています。</p>
+        <p>ローショコラティエ協会主宰として、ローチョコレートマイスター®・ローショコラティエ®・ローパティシエ®・発酵創家®の各認定資格を監修。1,000名以上の受講生を輩出し、その哲学は国内外で支持されています。</p>
+      </div>
+      <ul class="instructor-sec__awards">
+        <li>ローチョコレートマイスター® 登録商標取得</li>
+        <li>ローショコラティエ® 登録商標取得</li>
+        <li>発酵創家® 登録商標取得</li>
+        <li>NHK・雑誌・ウェブメディア多数掲載</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════
-  6. INFO（開催情報 & 料金）
-════════════════════════════════ -->
-{(c.schedule || c.price) && (
-<section class="info">
-  <div class="info__inner">
-    <header class="sec-header sec-header--center">
-      <p class="eyebrow eyebrow--warm">INFO</p>
-      <h2 class="sec-title sec-title--dark">開催情報 & 料金</h2>
+<!-- ════════════════════════════
+  §7  VOICES — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--dark voices-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--dim">VOICES</p>
+      <h2 class="sec__title sec__title--light">生徒さんの声</h2>
     </header>
+    <ul class="voices" role="list">
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>チョコレートがこんなに奥深いものだと知らなかった。安藤先生の哲学的な視点から食を学ぶことで、料理への向き合い方が根本から変わりました。認定を取得してから自分のアトリエを開くことができ、今では毎月満席です。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">K.M. さん</p>
+          <p class="voice__attr">ローチョコレートマイスター® 取得／東京都</p>
+        </footer>
+      </li>
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>食と身体の繋がりを科学的かつ哲学的に学べる唯一無二の講座。素材選びから発酵の仕組みまで、「なぜ」を徹底的に教えてくれるので、応用が効く本物の知識が身につきます。仕事にする自信がつきました。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">A.T. さん</p>
+          <p class="voice__attr">発酵創家® 取得／神奈川県</p>
+        </footer>
+      </li>
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>ローフードという言葉のイメージを完全に覆された講座でした。難しそう・ストイックというイメージが、「おいしく・美しく・続けられる」食哲学へ。家族の食生活も変わり、自分自身も健康的になりました。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">Y.S. さん</p>
+          <p class="voice__attr">ローパティシエ® 取得／大阪府</p>
+        </footer>
+      </li>
+    </ul>
+  </div>
+</section>
 
-    <div class="info__grid">
+<!-- ════════════════════════════
+  §8  INFO — CMS（開催情報 & 料金）
+════════════════════════════ -->
+{(c.schedule || c.price) && (
+<section class="sec sec--offwhite info-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">INFO</p>
+      <h2 class="sec__title sec__title--dark">開催情報 & 受講料一覧</h2>
+    </header>
+    <div class="info-grid">
       {c.schedule && (
-        <div class="info__card">
-          <div class="info__card-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <div class="info-card">
+          <div class="info-card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
               <rect x="3" y="4" width="18" height="18" rx="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
           </div>
-          <p class="info__card-label">開催日程</p>
-          <p class="info__card-val">{c.schedule}</p>
+          <p class="info-card__label">開催日程</p>
+          <p class="info-card__val">{c.schedule}</p>
         </div>
       )}
       {c.price && (
-        <div class="info__card info__card--price">
-          <div class="info__card-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <div class="info-card info-card--price">
+          <div class="info-card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
               <line x1="12" y1="1" x2="12" y2="23"/>
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
           </div>
-          <p class="info__card-label">受講料金</p>
-          <p class="info__card-price">{c.price}</p>
-          <p class="info__card-note">
+          <p class="info-card__label">受講料金</p>
+          <p class="info-card__price">{c.price}</p>
+          <p class="info-card__note">
             ※お支払いはクレジットカード決済もしくはお振込のみとなります。<br />
             （分割払いは対応しておりません）
           </p>
         </div>
       )}
     </div>
-
-    <div class="info__cta">
+    <div class="info-sec__cta">
       <a href="#form" class="btn btn--gold btn--lg">このコースに申し込む</a>
     </div>
   </div>
 </section>
 )}
 
-<!-- ════════════════════════════════
-  7. FAQ（アコーディオン）
-════════════════════════════════ -->
+<!-- ════════════════════════════
+  §9  FAQ — CMS（アコーディオン）
+════════════════════════════ -->
 {c.faq && (
-<section class="faq">
-  <div class="faq__inner">
-    <header class="sec-header sec-header--center">
+<section class="sec sec--white faq-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
       <p class="eyebrow eyebrow--warm">FAQ</p>
-      <h2 class="sec-title sec-title--dark">よくあるご質問</h2>
+      <h2 class="sec__title sec__title--dark">よくあるご質問</h2>
     </header>
-    <div class="faq__source" aria-hidden="true" style="display:none" set:html={c.faq} />
+    <div class="faq__src" aria-hidden="true" style="display:none" set:html={c.faq} />
     <dl class="faq__list" id="faqList"></dl>
   </div>
 </section>
 )}
 
-<!-- ════════════════════════════════
-  8. FORM（お申し込み）
-════════════════════════════════ -->
-<section class="form-sec" id="form">
-  <div class="form-sec__inner">
-    <header class="sec-header sec-header--center">
-      <p class="eyebrow eyebrow--dim">APPLY</p>
-      <h2 class="sec-title sec-title--light">お申し込み・お問い合わせ</h2>
-      <p class="form-sec__lead">
-        下記フォームよりご連絡ください。<br />
-        2営業日以内にご返信いたします。
-      </p>
-    </header>
+<!-- ════════════════════════════
+  §10  NEXT STEP — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--dark nextstep-sec">
+  <div class="sec__inner nextstep-sec__inner">
+    <div class="road">
+      <header class="sec__hd sec__hd--center">
+        <p class="eyebrow eyebrow--dim">STEP UP</p>
+        <h2 class="sec__title sec__title--light">次のステップへ</h2>
+        <p class="sec__lead">基礎から着実に積み上げ、協会認定プロへ。</p>
+      </header>
+      <ol class="road__steps">
+        <li class="road__step">
+          <div class="road__num">01</div>
+          <div class="road__body">
+            <p class="road__tag">BASIC</p>
+            <p class="road__name">初級講座</p>
+            <p class="road__desc">基礎理論・素材・基本レシピを体系的に習得</p>
+          </div>
+        </li>
+        <li class="road__step">
+          <div class="road__num">02</div>
+          <div class="road__body">
+            <p class="road__tag">INTERMEDIATE</p>
+            <p class="road__name">中級講座</p>
+            <p class="road__desc">応用技術・商品化レベルのデザイン性を習得</p>
+          </div>
+        </li>
+        <li class="road__step">
+          <div class="road__num">03</div>
+          <div class="road__body">
+            <p class="road__tag">ADVANCE</p>
+            <p class="road__name">上級講座</p>
+            <p class="road__desc">独自開発・ブランディング・指導力を習得</p>
+          </div>
+        </li>
+        <li class="road__step road__step--cert">
+          <div class="road__num road__num--cert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/>
+            </svg>
+          </div>
+          <div class="road__body">
+            <p class="road__tag">CERTIFICATE</p>
+            <p class="road__name">認定資格取得</p>
+            <p class="road__desc">協会認定プロとして教室・販売・講師活動が可能に</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
 
+<!-- ════════════════════════════
+  §11  FORM — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--ink form-sec" id="form">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--dim">APPLY</p>
+      <h2 class="sec__title sec__title--light">お申し込み・お問い合わせ</h2>
+      <p class="form-sec__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
+    </header>
     <form
       class="form-sec__form"
       name={`course-apply-${c.id}`}
@@ -235,51 +334,43 @@ if (!c) return Astro.redirect('/listofcourses');
       <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
       <input type="hidden" name="course" value={c.title} />
 
-      <div class="form-sec__row">
-        <div class="form-sec__field">
-          <label class="form-sec__label" for="f-name">
-            お名前 <span class="req">必須</span>
-          </label>
-          <input class="form-sec__input" type="text" id="f-name" name="name"
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="f-name">お名前 <span class="req">必須</span></label>
+          <input class="form-input" type="text" id="f-name" name="name"
             placeholder="安藤 千英" autocomplete="name" required />
         </div>
-        <div class="form-sec__field">
-          <label class="form-sec__label" for="f-kana">フリガナ</label>
-          <input class="form-sec__input" type="text" id="f-kana" name="kana"
+        <div class="form-field">
+          <label class="form-label" for="f-kana">フリガナ</label>
+          <input class="form-input" type="text" id="f-kana" name="kana"
             placeholder="アンドウ チエ" />
         </div>
       </div>
-
-      <div class="form-sec__row">
-        <div class="form-sec__field">
-          <label class="form-sec__label" for="f-email">
-            メールアドレス <span class="req">必須</span>
-          </label>
-          <input class="form-sec__input" type="email" id="f-email" name="email"
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="f-email">メールアドレス <span class="req">必須</span></label>
+          <input class="form-input" type="email" id="f-email" name="email"
             placeholder="your@email.com" autocomplete="email" required />
         </div>
-        <div class="form-sec__field">
-          <label class="form-sec__label" for="f-tel">電話番号</label>
-          <input class="form-sec__input" type="tel" id="f-tel" name="tel"
+        <div class="form-field">
+          <label class="form-label" for="f-tel">電話番号</label>
+          <input class="form-input" type="tel" id="f-tel" name="tel"
             placeholder="090-0000-0000" autocomplete="tel" />
         </div>
       </div>
-
-      <div class="form-sec__field">
-        <label class="form-sec__label" for="f-schedule">ご希望の日程・時期</label>
-        <input class="form-sec__input" type="text" id="f-schedule" name="schedule"
+      <div class="form-field">
+        <label class="form-label" for="f-when">ご希望の日程・時期</label>
+        <input class="form-input" type="text" id="f-when" name="schedule"
           placeholder="例：9月以降の週末を希望" />
       </div>
-
-      <div class="form-sec__field">
-        <label class="form-sec__label" for="f-msg">お問い合わせ内容</label>
-        <textarea class="form-sec__textarea" id="f-msg" name="message"
+      <div class="form-field">
+        <label class="form-label" for="f-msg">お問い合わせ内容</label>
+        <textarea class="form-textarea" id="f-msg" name="message"
           rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
       </div>
-
-      <div class="form-sec__submit">
+      <div class="form-submit">
         <button class="btn btn--gold btn--lg" type="submit">送信する</button>
-        <p class="form-sec__privacy">
+        <p class="form-privacy">
           送信いただくことで
           <a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
           に同意したものとみなします。
@@ -292,17 +383,14 @@ if (!c) return Astro.redirect('/listofcourses');
 </main>
 </Layout>
 
-<!-- ════════════════════════════════
-  FAQ アコーディオン生成スクリプト
-════════════════════════════════ -->
+<!-- FAQ アコーディオン生成 -->
 <script>
 (function () {
-  const src = document.querySelector('.faq__source');
+  const src = document.querySelector<HTMLElement>('.faq__src');
   const list = document.getElementById('faqList');
   if (!src || !list) return;
 
-  const h2s = src.querySelectorAll('h2');
-  h2s.forEach((h2, i) => {
+  src.querySelectorAll('h2').forEach((h2, i) => {
     const q = h2.textContent?.trim() ?? '';
     const answerNodes: Node[] = [];
     let sib = h2.nextElementSibling;
@@ -312,38 +400,32 @@ if (!c) return Astro.redirect('/listofcourses');
     }
 
     const dt = document.createElement('dt');
-    dt.className = 'faq__q';
+    dt.className = 'faq-q';
     dt.setAttribute('role', 'button');
     dt.setAttribute('tabindex', '0');
     dt.setAttribute('aria-expanded', 'false');
-    dt.setAttribute('aria-controls', `faq-ans-${i}`);
-    dt.innerHTML = `
-      <span class="faq__q-text">${q}</span>
-      <span class="faq__q-icon" aria-hidden="true">
+    dt.setAttribute('aria-controls', `faq-a-${i}`);
+    dt.innerHTML = `<span class="faq-q__text">${q}</span>
+      <span class="faq-q__icon" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
       </span>`;
 
     const dd = document.createElement('dd');
-    dd.className = 'faq__a';
-    dd.id = `faq-ans-${i}`;
-    dd.setAttribute('role', 'region');
-    dd.setAttribute('hidden', '');
+    dd.className = 'faq-a';
+    dd.id = `faq-a-${i}`;
+    dd.hidden = true;
     const inner = document.createElement('div');
-    inner.className = 'faq__a-inner';
+    inner.className = 'faq-a__inner';
     answerNodes.forEach(n => inner.appendChild(n));
     dd.appendChild(inner);
 
-    function toggle() {
+    const toggle = () => {
       const open = dt.getAttribute('aria-expanded') === 'true';
       dt.setAttribute('aria-expanded', String(!open));
-      if (open) {
-        dd.setAttribute('hidden', '');
-      } else {
-        dd.removeAttribute('hidden');
-      }
-    }
+      dd.hidden = open;
+    };
     dt.addEventListener('click', toggle);
     dt.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
@@ -356,135 +438,114 @@ if (!c) return Astro.redirect('/listofcourses');
 </script>
 
 <style>
-/* ══════════════════════════════════════
+/* ═══════════════════════════════════════════
    DESIGN TOKENS
-══════════════════════════════════════ */
+═══════════════════════════════════════════ */
 .lp {
-  --gold:    #a68a6d;
-  --gold-lt: #c4a882;
-  --gold-bg: rgba(166,138,109,.08);
-  --dark:    #141413;
-  --ink:     #1a1917;
-  --muted:   #6b6560;
-  --warm-bg: #f4ede3;
-  --off-bg:  #fafaf8;
-  --line:    rgba(26,25,23,.1);
-  --radius:  0.75rem;
+  --gold:     #a68a6d;
+  --gold-lt:  #c4a882;
+  --gold-dim: rgba(166,138,109,.55);
+  --gold-bg:  rgba(166,138,109,.09);
+  --dark:     #141413;
+  --ink:      #1a1917;
+  --sub:      #3a3835;
+  --muted:    #6b6560;
+  --warm:     #f4ede3;
+  --offwhite: #fafaf8;
+  --line:     rgba(26,25,23,.1);
+  --r:        0.75rem;
 }
 
-/* ══════════════════════════════════════
-   SHARED BUTTONS
-══════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   SHARED: BUTTONS
+═══════════════════════════════════════════ */
 .btn {
   display: inline-block;
   font-family: var(--font-ui, sans-serif);
-  font-size: .82rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 1rem 2.4rem;
+  font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; padding: 1rem 2.6rem;
   border: 1px solid transparent;
-  cursor: pointer;
-  transition: background .3s, color .3s, opacity .3s, border-color .3s;
+  cursor: pointer; transition: opacity .28s, background .28s, border-color .28s, color .28s;
   white-space: nowrap;
 }
-.btn--gold {
-  background: var(--gold);
-  color: #0a0808;
-  border-color: var(--gold);
-}
-.btn--gold:hover { opacity: .8; }
-.btn--ghost {
-  background: transparent;
-  color: rgba(240,236,230,.7);
-  border-color: rgba(240,236,230,.3);
-}
-.btn--ghost:hover {
-  background: rgba(240,236,230,.08);
-  border-color: rgba(240,236,230,.6);
-  color: rgba(240,236,230,.95);
-}
-.btn--lg { padding: 1.2rem 3.2rem; font-size: .88rem; }
+.btn--gold  { background: var(--gold); color: #0a0808; border-color: var(--gold); }
+.btn--gold:hover { opacity: .78; }
+.btn--ghost { background: transparent; color: rgba(240,236,230,.65); border-color: rgba(240,236,230,.28); }
+.btn--ghost:hover { background: rgba(240,236,230,.07); border-color: rgba(240,236,230,.55); color: rgba(240,236,230,.9); }
+.btn--lg { padding: 1.15rem 3.2rem; font-size: .86rem; }
 
-/* ══════════════════════════════════════
-   SHARED SECTION TYPOGRAPHY
-══════════════════════════════════════ */
-.sec-header { margin-bottom: clamp(3rem, 5vw, 5rem); }
-.sec-header--center { text-align: center; }
+/* ═══════════════════════════════════════════
+   SHARED: SECTION SCAFFOLD
+═══════════════════════════════════════════ */
+.sec { padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem); }
+.sec--dark     { background: var(--dark); }
+.sec--ink      { background: #0e0c0b; }
+.sec--warm     { background: var(--warm); }
+.sec--offwhite { background: var(--offwhite); }
+.sec--white    { background: #fff; border-top: 1px solid var(--line); }
 
-.eyebrow {
-  font-family: var(--font-ui, sans-serif);
-  font-size: .62rem;
-  letter-spacing: .38em;
-  text-transform: uppercase;
-  margin: 0 0 .9rem;
-  display: block;
-}
-.eyebrow           { color: var(--gold); }
-.eyebrow--warm     { color: #9a7858; }
-.eyebrow--dim      { color: rgba(240,236,230,.4); }
+.sec__inner { width: min(100%, 78rem); margin: 0 auto; }
 
-.sec-title {
+.sec__hd { margin-bottom: clamp(3rem, 5vw, 5rem); }
+.sec__hd--center { text-align: center; }
+
+.sec__title {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(1.55rem, 3vw, 2.5rem);
-  font-weight: 300;
-  letter-spacing: .08em;
-  line-height: 1.45;
-  margin: 0;
+  font-weight: 300; letter-spacing: .08em; line-height: 1.45; margin: 0;
 }
-.sec-title--dark  { color: var(--ink); }
-.sec-title--light { color: rgba(240,236,230,.93); }
+.sec__title--dark  { color: var(--ink); }
+.sec__title--light { color: rgba(240,236,230,.93); }
 
-.sec-lead {
+.sec__lead {
   font-family: var(--font-jp, sans-serif);
-  font-size: .95rem;
-  font-weight: 300;
-  color: var(--muted);
-  margin: 1rem 0 0;
-  line-height: 1.9;
+  font-size: .93rem; font-weight: 300; line-height: 1.9;
+  color: var(--muted); margin: 1rem 0 0;
 }
+.sec__lead--dark { color: #6b6560; }
 
-/* ══════════════════════════════════════
-   1. HERO
-══════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   SHARED: EYEBROW
+═══════════════════════════════════════════ */
+.eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .4em; text-transform: uppercase;
+  display: block; margin: 0 0 .9rem;
+}
+.eyebrow--gold { color: var(--gold); }
+.eyebrow--warm { color: #9a7858; }
+.eyebrow--dim  { color: rgba(240,236,230,.38); }
+
+/* ═══════════════════════════════════════════
+   §1  HERO
+═══════════════════════════════════════════ */
 .hero {
-  position: relative;
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background: var(--dark);
+  position: relative; min-height: 100svh;
+  display: grid; place-items: center;
+  overflow: hidden; background: var(--dark);
 }
 .hero__bg {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  animation: heroKen 20s cubic-bezier(.16,1,.3,1) forwards;
+  object-fit: cover; object-position: center 30%;
+  animation: heroKen 22s cubic-bezier(.16,1,.3,1) forwards;
 }
-.hero__bg--fallback {
-  background: linear-gradient(135deg, #1c1a18 0%, #2e2720 100%);
-}
-@keyframes heroKen {
-  from { transform: scale(1.06); }
-  to   { transform: scale(1); }
-}
+.hero__bg--fallback { background: linear-gradient(135deg,#1c1a18 0%,#2e2720 100%); }
+@keyframes heroKen { from { transform: scale(1.07); } to { transform: scale(1); } }
+
 .hero__scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(14,10,8,.25) 0%, rgba(14,10,8,.55) 60%, rgba(14,10,8,.78) 100%),
-    linear-gradient(to right,  rgba(14,10,8,.75) 0%, rgba(14,10,8,.35) 55%, transparent 100%);
+    linear-gradient(to right, rgba(10,8,6,.82) 0%, rgba(10,8,6,.5) 50%, rgba(10,8,6,.15) 100%),
+    linear-gradient(to top, rgba(10,8,6,.7) 0%, transparent 55%);
 }
 .hero__inner {
   position: relative; z-index: 1;
   width: min(100% - 3rem, 80rem);
-  padding: clamp(8rem,20vh,16rem) 0 clamp(7rem,14vh,12rem);
-  display: flex; flex-direction: column;
-  align-items: flex-start; gap: 1.6rem;
+  padding: clamp(9rem,20vh,16rem) 0 clamp(7rem,14vh,12rem);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem;
 }
-.hero__eyebrow {
-  font-family: var(--font-ui, sans-serif);
-  font-size: .6rem; letter-spacing: .38em; text-transform: uppercase;
+.hero__pre {
   color: var(--gold); margin: 0;
 }
 .hero__title {
@@ -492,485 +553,550 @@ if (!c) return Astro.redirect('/listofcourses');
   font-size: clamp(2.1rem, 5.8vw, 5rem);
   font-weight: 300; line-height: 1.38; letter-spacing: .07em;
   color: #f2ede7; margin: 0; max-width: 17em;
-  text-shadow: 0 4px 50px rgba(0,0,0,.4);
+  text-shadow: 0 4px 60px rgba(0,0,0,.45);
 }
 .hero__sub {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.98rem, 1.6vw, 1.3rem);
-  font-weight: 300; line-height: 1.9; letter-spacing: .05em;
-  color: rgba(240,236,230,.65); margin: 0; max-width: 30em;
+  font-size: clamp(.97rem, 1.6vw, 1.3rem);
+  font-weight: 300; line-height: 1.95; letter-spacing: .05em;
+  color: rgba(240,236,230,.62); margin: 0; max-width: 30em;
 }
-.hero__actions {
-  display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .5rem;
-}
-.hero__scroll {
-  position: absolute; left: 50%; bottom: 2.2rem;
-  transform: translateX(-50%);
-}
-.hero__scroll span {
+.hero__btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .4rem; }
+.hero__cue { position: absolute; left: 50%; bottom: 2.4rem; transform: translateX(-50%); }
+.hero__cue span {
   display: block; width: 1px; height: 4rem;
-  background: linear-gradient(to bottom, transparent 0%, rgba(166,138,109,.75) 100%);
-  animation: scrollCue 2.6s ease-in-out infinite;
-  transform-origin: top;
+  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.7));
+  animation: scrollPulse 2.6s ease-in-out infinite; transform-origin: top;
 }
-@keyframes scrollCue {
+@keyframes scrollPulse {
   0%   { transform: scaleY(0); opacity: 0; }
   35%  { transform: scaleY(1); opacity: 1; }
   100% { transform: scaleY(1); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__bg { animation: none; }
-  .hero__scroll { display: none; }
+  .hero__cue { display: none; }
 }
 
-/* ══════════════════════════════════════
-   2. TARGET
-══════════════════════════════════════ */
-.target {
-  background: var(--warm-bg);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-}
-.target__inner { width: min(100%, 74rem); margin: 0 auto; }
+/* ═══════════════════════════════════════════
+   §2  TARGET（こんな方へ）
+═══════════════════════════════════════════ */
+.target-sec .sec__inner { max-width: 74rem; }
 
-/* li → カード型 */
-.prose--target :global(ul) {
-  list-style: none;
-  padding: 0;
+/* ═══════════════════════════════════════════
+   §4  GALLERY
+═══════════════════════════════════════════ */
+.gallery-sec .sec__inner { max-width: 90rem; }
+
+.gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 200px;
+  gap: .6rem;
+}
+/* 5パターンのタイル形状を繰り返す */
+.gallery__item { overflow: hidden; border-radius: calc(var(--r) * 0.6); }
+.gallery__item--1 { grid-column: span 5; grid-row: span 2; }
+.gallery__item--2 { grid-column: span 4; grid-row: span 1; }
+.gallery__item--3 { grid-column: span 3; grid-row: span 2; }
+.gallery__item--4 { grid-column: span 4; grid-row: span 1; }
+.gallery__item--5 { grid-column: span 7; grid-row: span 2; }
+
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 1s cubic-bezier(.16,1,.3,1);
+}
+.gallery__item:hover img { transform: scale(1.06); }
+.gallery__item figcaption { display: none; }
+
+/* ═══════════════════════════════════════════
+   §5  CURRICULUM（3ステップカード）
+═══════════════════════════════════════════ */
+.curr-sec .sec__inner { max-width: 80rem; }
+
+/* CSSカウンターでh2をSTEPカードに自動変換 */
+.prose--curr {
+  counter-reset: step;
+}
+.prose--curr :global(h2) {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1.4rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: none;
+  padding: 1.6rem 2rem;
+  margin: 2.4rem 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 500; letter-spacing: .05em;
+  color: var(--ink); line-height: 1.5;
+  position: relative;
+}
+.prose--curr :global(h2)::before {
+  content: "STEP " counter(step, decimal-leading-zero);
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; font-weight: 400;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: #fff;
+  background: var(--gold);
+  padding: .55rem 1rem;
+  white-space: nowrap;
+  align-self: stretch;
+  display: flex; align-items: center;
+  margin: -1.6rem -2rem -1.6rem 0;
+  margin-left: calc(-2rem - 1px);
+  min-width: 7rem;
+  justify-content: center;
+}
+
+/* STEPカード直後のコンテンツ */
+.prose--curr :global(h2) ~ :global(p),
+.prose--curr :global(h2) ~ :global(ul),
+.prose--curr :global(h2) ~ :global(ol) {
+  background: var(--offwhite);
+  border: 1px solid var(--line); border-top: none;
+  padding: 1.4rem 2rem;
   margin: 0;
+}
+.prose--curr :global(ul), .prose--curr :global(ol) { padding-left: 3.5rem; }
+.prose--curr :global(li) { margin-bottom: .55em; }
+
+/* ═══════════════════════════════════════════
+   ▸ PROSE 共通（リッチエディタ全体）
+═══════════════════════════════════════════ */
+.prose {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.93rem, 1.15vw, 1.03rem);
+  font-weight: 300; line-height: 2.15; letter-spacing: .04em;
+  color: var(--sub);
+}
+
+/* strong / b → ブランドゴールド */
+.prose :global(strong),
+.prose :global(b) {
+  font-weight: 600; color: #7a5c35;
+  background: rgba(166,138,109,.1);
+  padding: .04em .22em; border-radius: 3px;
+}
+
+/* 見出し（prose--curr以外） */
+.prose:not(.prose--curr) :global(h2) {
+  font-size: clamp(1.1rem, 1.9vw, 1.45rem); font-weight: 400;
+  color: var(--ink); letter-spacing: .07em; line-height: 1.55;
+  margin: 2.8rem 0 1rem;
+  padding: .9rem 1.3rem;
+  background: var(--gold-bg);
+  border-left: 3px solid var(--gold);
+}
+.prose :global(h3) {
+  font-size: clamp(.98rem, 1.4vw, 1.15rem); font-weight: 400;
+  color: var(--ink); margin: 2rem 0 .75rem;
+}
+
+.prose :global(p)  { margin: 0 0 1.5em; }
+.prose :global(ul),
+.prose :global(ol) { padding-left: 1.7em; margin: 0 0 1.5em; }
+.prose :global(li) { margin-bottom: .55em; }
+.prose :global(li::marker) { color: var(--gold); }
+
+/* ★ 画像 → 角丸・レスポンシブ・横並び考慮 */
+.prose :global(img) {
+  display: block; max-width: 100%; height: auto;
+  border-radius: var(--r);
+  margin: 2em auto;
+  box-shadow: 0 6px 28px rgba(26,25,23,.1);
+}
+.prose :global(figure) {
+  margin: 2em 0; display: flex; flex-direction: column; align-items: center;
+}
+.prose :global(figure img) { margin: 0; }
+.prose :global(figcaption) {
+  font-size: .74rem; color: var(--muted); margin-top: .55rem;
+}
+/* 横並び画像（td内） */
+.prose :global(table) { width: 100%; border-collapse: collapse; margin: 2em 0; }
+.prose :global(td), .prose :global(th) { vertical-align: top; padding: .5rem; }
+.prose :global(td img), .prose :global(th img) {
+  border-radius: calc(var(--r) * 0.6); margin: .3em 0;
+}
+
+/* ターゲットセクション：li → カード */
+.prose--target :global(ul) {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.1rem; margin: 0;
 }
 .prose--target :global(li) {
   background: #fff;
   border: 1px solid rgba(154,120,88,.15);
   border-left: 3px solid var(--gold);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 1.4rem 1.6rem;
-  font-family: var(--font-jp, sans-serif);
-  font-size: .95rem; font-weight: 300; line-height: 1.85;
-  color: #3a3532;
-  position: relative;
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 1.3rem 1.5rem;
+  font-size: .95rem; line-height: 1.85;
+  color: var(--sub); margin: 0;
 }
-.prose--target :global(li)::before { display: none; }
+.prose--target :global(li::marker) { display: none; }
 
-/* ══════════════════════════════════════
-   3. DESCRIPTION
-══════════════════════════════════════ */
-.desc {
-  background: var(--off-bg);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-}
-.desc__inner { width: min(100%, 74rem); margin: 0 auto; }
-.desc__layout { display: flex; flex-direction: column; gap: 0; }
-
-/* ══════════════════════════════════════
-   4. CURRICULUM
-══════════════════════════════════════ */
-.curr {
-  background: #f4ede3;
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-}
-.curr__inner { width: min(100%, 74rem); margin: 0 auto; }
-
-/* ══════════════════════════════════════
-   ▸ PROSE（共通リッチエディタ本文）
-══════════════════════════════════════ */
-.prose {
-  font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.93rem, 1.15vw, 1.03rem);
-  font-weight: 300; line-height: 2.15; letter-spacing: .04em;
-  color: #3a3835;
-}
-.prose--light { color: #3a3835; }
-.prose--curr  { color: #2e2a27; }
-
-/* 見出し */
-.prose :global(h2) {
-  font-size: clamp(1.15rem, 2vw, 1.55rem); font-weight: 400;
-  color: var(--ink); letter-spacing: .07em; line-height: 1.55;
-  margin: 3rem 0 1.1rem;
-  padding: 1.1rem 1.4rem;
-  background: rgba(166,138,109,.07);
-  border-left: 3px solid var(--gold);
-}
-.prose :global(h3) {
-  font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 400;
-  color: var(--ink); letter-spacing: .05em;
-  margin: 2.2rem 0 .8rem;
-}
-
-/* ★ strong / b → ブランドゴールド */
-.prose :global(strong),
-.prose :global(b) {
-  font-weight: 600;
-  color: #8a6840;
-  background: rgba(166,138,109,.09);
-  padding: .05em .2em;
-  border-radius: 2px;
-}
-
-/* 段落・リスト */
-.prose :global(p)  { margin: 0 0 1.5em; }
-.prose :global(ul),
-.prose :global(ol) { padding-left: 1.6em; margin: 0 0 1.5em; }
-.prose :global(li) { margin-bottom: .6em; line-height: 1.9; }
-.prose :global(li::marker) { color: var(--gold); }
-
-/* ★ 画像 → 角丸・レスポンシブ */
-.prose :global(img) {
-  display: block;
-  max-width: 100%; height: auto;
-  border-radius: var(--radius);
-  margin: 2.2em auto;
-  box-shadow: 0 4px 24px rgba(26,25,23,.1);
-}
-/* 横並び画像対応（figure / div が隣接する場合） */
-.prose :global(figure) {
-  margin: 2em 0;
-  display: flex; flex-direction: column; align-items: center;
-}
-.prose :global(figure img) { margin: 0; }
-.prose :global(figcaption) {
-  font-size: .75rem; color: var(--muted);
-  margin-top: .6rem; text-align: center;
-}
-/* div.image-pair や table で横並びにされた画像 */
-.prose :global(table img) {
-  width: 100%; height: auto;
-  border-radius: calc(var(--radius) * 0.6);
-  margin: .4em 0;
-}
-.prose :global(table) {
-  width: 100%; border-collapse: collapse;
-  margin: 2em 0;
-}
-.prose :global(td), .prose :global(th) {
-  vertical-align: top; padding: .5rem;
-}
-
-/* blockquote */
-.prose :global(blockquote) {
-  border-left: 3px solid var(--gold);
-  margin: 2em 0; padding: .9em 1.4em;
-  color: var(--muted); font-style: italic;
-}
-
-/* ══════════════════════════════════════
-   5. ROADMAP
-══════════════════════════════════════ */
-.road {
-  background: var(--dark);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-}
-.road__inner { width: min(100%, 80rem); margin: 0 auto; }
-.road__sub {
-  font-family: var(--font-jp, sans-serif);
-  font-size: .9rem; font-weight: 300;
-  color: rgba(240,236,230,.38);
-  margin: 1rem 0 0; text-align: center;
-}
-
-.road__list {
-  list-style: none; margin: clamp(3rem, 5vw, 5rem) 0 0; padding: 0;
+/* ═══════════════════════════════════════════
+   §6  INSTRUCTOR
+═══════════════════════════════════════════ */
+.instructor-sec .sec__inner { max-width: 78rem; }
+.instructor-sec__layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  position: relative;
-}
-/* 横線コネクター */
-.road__list::before {
-  content: '';
-  position: absolute;
-  top: clamp(2rem, 4vw, 3.2rem);
-  left: calc(12.5% + 1px);
-  right: calc(12.5% + 1px);
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(166,138,109,.3) 10%, rgba(166,138,109,.3) 90%, transparent);
+  grid-template-columns: 1fr 2fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
 }
 
-.road__item {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: 1.2rem; padding: clamp(1.2rem, 2.5vw, 2rem) clamp(.8rem, 1.5vw, 1.4rem);
-  position: relative;
-  transition: background .4s;
-  border-radius: .5rem;
-}
-.road__item:hover {
-  background: rgba(166,138,109,.06);
-}
-.road__item--goal .road__num { background: rgba(166,138,109,.18); }
-
-.road__num {
-  width: clamp(3.2rem, 5vw, 4.4rem);
-  height: clamp(3.2rem, 5vw, 4.4rem);
-  border-radius: 50%;
-  background: rgba(240,236,230,.06);
-  border: 1px solid rgba(166,138,109,.25);
+.instructor-sec__img-wrap { position: sticky; top: 5rem; }
+.instructor-sec__img-bg {
+  aspect-ratio: 3/4;
+  background: linear-gradient(145deg, #e8ddd2 0%, #d4c5b5 100%);
+  border-radius: var(--r);
   display: grid; place-items: center;
+}
+.instructor-sec__monogram {
   font-family: var(--font-ui, sans-serif);
-  font-size: clamp(.9rem, 1.4vw, 1.25rem);
-  letter-spacing: .08em;
-  color: var(--gold);
-  flex-shrink: 0;
-  position: relative; z-index: 1;
+  font-size: clamp(3rem, 6vw, 5rem);
+  letter-spacing: .2em; color: rgba(166,138,109,.5);
+  font-weight: 300;
 }
-.road__num--cert { color: var(--gold); }
-.road__num--cert svg { stroke: var(--gold); }
 
-.road__tag {
+.instructor-sec__body .sec__hd { margin-bottom: 1.5rem; }
+
+.instructor-sec__name-en {
   font-family: var(--font-ui, sans-serif);
-  font-size: .56rem; letter-spacing: .3em; text-transform: uppercase;
-  color: rgba(166,138,109,.65); margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300; letter-spacing: .12em;
+  color: var(--ink); margin: 0;
 }
-.road__name {
+.instructor-sec__name-jp {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.9rem, 1.3vw, 1.08rem); font-weight: 400;
-  color: rgba(240,236,230,.9); margin: 0; letter-spacing: .05em;
+  font-size: .85rem; font-weight: 300;
+  color: var(--muted); margin: .3rem 0 1.4rem;
+  letter-spacing: .12em;
 }
-.road__desc {
+
+.instructor-sec__tags {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-bottom: 1.8rem;
+}
+.tag {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .12em;
+  color: var(--gold); border: 1px solid rgba(166,138,109,.3);
+  padding: .3em .85em; border-radius: 50px;
+}
+
+.instructor-sec__bio {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.7rem, .9vw, .8rem); font-weight: 300;
-  color: rgba(240,236,230,.38); line-height: 1.75; margin: 0;
+  font-size: clamp(.9rem, 1.1vw, .98rem); font-weight: 300;
+  line-height: 2.1; color: var(--sub); margin-bottom: 1.8rem;
 }
-.road__body { display: flex; flex-direction: column; gap: .5rem; }
+.instructor-sec__bio p { margin: 0 0 1.2em; }
 
-/* ══════════════════════════════════════
-   6. INFO
-══════════════════════════════════════ */
-.info {
-  background: var(--off-bg);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+.instructor-sec__awards {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: .65rem;
+  border-top: 1px solid var(--line); padding-top: 1.6rem;
 }
-.info__inner { width: min(100%, 74rem); margin: 0 auto; }
+.instructor-sec__awards li {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .82rem; font-weight: 300;
+  color: var(--muted); padding-left: 1.4rem; position: relative;
+}
+.instructor-sec__awards li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--gold); font-size: .65rem;
+}
 
-.info__grid {
+/* ═══════════════════════════════════════════
+   §7  VOICES
+═══════════════════════════════════════════ */
+.voices-sec .sec__inner { max-width: 90rem; }
+
+.voices {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.voice {
+  background: rgba(240,236,230,.04);
+  border: 1px solid rgba(240,236,230,.09);
+  padding: 2.2rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+  border-radius: calc(var(--r) * 0.5);
+  transition: background .3s;
+}
+.voice:hover { background: rgba(240,236,230,.07); }
+
+.voice__stars {
+  font-size: .85rem; color: var(--gold); letter-spacing: .05em;
+}
+.voice__body {
+  margin: 0; flex: 1;
+}
+.voice__body p {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.85rem, 1vw, .94rem); font-weight: 300;
+  line-height: 2.05; color: rgba(240,236,230,.68);
+  margin: 0;
+}
+
+.voice__footer {}
+.voice__name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .88rem; font-weight: 400;
+  color: rgba(240,236,230,.82); margin: 0;
+}
+.voice__attr {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .1em;
+  color: rgba(240,236,230,.32); margin: .3rem 0 0;
+}
+
+/* ═══════════════════════════════════════════
+   §8  INFO
+═══════════════════════════════════════════ */
+.info-sec .sec__inner { max-width: 74rem; }
+
+.info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3.5rem;
+  gap: 2rem; margin-bottom: 3.5rem;
 }
-
-.info__card {
-  background: #fff;
-  border: 1px solid var(--line);
-  padding: 2.4rem;
+.info-card {
+  background: #fff; border: 1px solid var(--line);
+  padding: 2.4rem; border-radius: .25rem;
   display: flex; flex-direction: column; gap: 1rem;
-  border-radius: .25rem;
   transition: box-shadow .3s;
 }
-.info__card:hover { box-shadow: 0 6px 32px rgba(26,25,23,.08); }
-.info__card--price {
+.info-card:hover { box-shadow: 0 6px 32px rgba(26,25,23,.08); }
+.info-card--price {
   border-color: rgba(166,138,109,.28);
   background: linear-gradient(135deg, #fff 0%, #fdf9f4 100%);
 }
-
-.info__card-icon { color: var(--gold); }
-
-.info__card-label {
+.info-card__icon { color: var(--gold); }
+.info-card__label {
   font-family: var(--font-ui, sans-serif);
-  font-size: .65rem; letter-spacing: .24em; text-transform: uppercase;
+  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
   color: var(--muted); margin: 0;
 }
-.info__card-val {
+.info-card__val {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(.93rem, 1.2vw, 1.04rem);
-  font-weight: 300; line-height: 1.9; color: var(--ink); margin: 0;
+  font-weight: 300; line-height: 1.95; color: var(--ink); margin: 0;
   white-space: pre-line;
 }
-.info__card-price {
+.info-card__price {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .04em;
+  font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .03em;
 }
-.info__card-note {
+.info-card__note {
   font-family: var(--font-jp, sans-serif);
-  font-size: .76rem; line-height: 1.85;
-  color: var(--muted); margin: 0;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
+  font-size: .75rem; line-height: 1.85;
+  color: var(--muted); padding-top: 1rem;
+  border-top: 1px solid var(--line); margin: 0;
 }
 
-.info__cta { display: flex; justify-content: center; }
+.info-sec__cta { display: flex; justify-content: center; }
 
-/* ══════════════════════════════════════
-   7. FAQ
-══════════════════════════════════════ */
-.faq {
-  background: #fff;
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-  border-top: 1px solid var(--line);
-}
-.faq__inner { width: min(100%, 72rem); margin: 0 auto; }
+/* ═══════════════════════════════════════════
+   §9  FAQ
+═══════════════════════════════════════════ */
+.faq-sec .sec__inner { max-width: 72rem; }
 
-.faq__list {
-  display: flex; flex-direction: column; gap: 0;
-}
+.faq__list { display: flex; flex-direction: column; }
 
-.faq__q {
+.faq-q {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.4rem 1.6rem;
-  background: #fafaf8;
-  border: 1px solid var(--line);
-  border-top: none;
-  cursor: pointer;
-  user-select: none;
-  transition: background .3s;
+  gap: 1.4rem; padding: 1.4rem 1.6rem;
+  background: var(--offwhite); border: 1px solid var(--line);
+  border-top: none; cursor: pointer; user-select: none;
+  transition: background .28s;
 }
-.faq__list .faq__q:first-child,
-.faq__q:first-of-type { border-top: 1px solid var(--line); }
-.faq__q:hover { background: var(--gold-bg); }
-.faq__q[aria-expanded="true"] {
-  background: var(--gold-bg);
-  border-bottom-color: transparent;
-}
+.faq__list > .faq-q:first-child { border-top: 1px solid var(--line); }
+.faq-q:hover { background: var(--gold-bg); }
+.faq-q[aria-expanded="true"] { background: var(--gold-bg); border-bottom-color: transparent; }
 
-.faq__q-text {
+.faq-q__text {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.93rem, 1.2vw, 1.05rem);
-  font-weight: 400; line-height: 1.65;
-  color: var(--ink); letter-spacing: .03em;
+  font-size: clamp(.92rem, 1.2vw, 1.04rem); font-weight: 400;
+  line-height: 1.65; color: var(--ink);
 }
-.faq__q-text::before {
+.faq-q__text::before {
   content: 'Q. ';
-  color: var(--gold);
-  font-family: var(--font-ui, sans-serif);
-  font-size: .8em; letter-spacing: .1em;
+  color: var(--gold); font-family: var(--font-ui, sans-serif);
+  font-size: .78em; letter-spacing: .1em;
 }
-
-.faq__q-icon {
+.faq-q__icon {
   flex-shrink: 0; color: var(--gold);
   transition: transform .35s cubic-bezier(.16,1,.3,1);
   display: grid; place-items: center;
 }
-.faq__q[aria-expanded="true"] .faq__q-icon { transform: rotate(180deg); }
+.faq-q[aria-expanded="true"] .faq-q__icon { transform: rotate(180deg); }
 
-.faq__a {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-top: none;
+.faq-a {
+  background: #fff; border: 1px solid var(--line); border-top: none;
 }
-.faq__a[hidden] { display: none; }
-
-.faq__a-inner {
+.faq-a[hidden] { display: none; }
+.faq-a__inner {
   padding: 1.4rem 1.8rem 1.8rem;
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.9rem, 1.1vw, .98rem);
-  font-weight: 300; line-height: 2.1;
-  color: #4a4540;
+  font-size: clamp(.88rem, 1.1vw, .97rem); font-weight: 300;
+  line-height: 2.1; color: #4a4540;
 }
-.faq__a-inner :global(p) { margin: 0 0 .8em; }
-.faq__a-inner :global(p:last-child) { margin-bottom: 0; }
-.faq__a-inner :global(strong),
-.faq__a-inner :global(b) {
-  font-weight: 600; color: #8a6840;
-  background: rgba(166,138,109,.09);
-  padding: .05em .2em; border-radius: 2px;
+.faq-a__inner :global(p) { margin: 0 0 .8em; }
+.faq-a__inner :global(p:last-child) { margin: 0; }
+.faq-a__inner :global(strong),
+.faq-a__inner :global(b) {
+  font-weight: 600; color: #7a5c35;
+  background: rgba(166,138,109,.09); padding: .04em .22em; border-radius: 3px;
 }
-.faq__a-inner :global(img) {
-  max-width: 100%; height: auto;
-  border-radius: var(--radius);
-  margin: 1.2em 0;
+.faq-a__inner :global(img) {
+  max-width: 100%; height: auto; border-radius: var(--r); margin: 1em 0;
 }
 
-/* ══════════════════════════════════════
-   8. FORM
-══════════════════════════════════════ */
-.form-sec {
-  background: var(--dark);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+/* ═══════════════════════════════════════════
+   §10  NEXT STEP（ロードマップ）
+═══════════════════════════════════════════ */
+.nextstep-sec .sec__inner { max-width: 80rem; }
+
+.road__steps {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  margin: clamp(3rem, 5vw, 5rem) 0 0;
+  position: relative;
 }
-.form-sec__inner { width: min(100%, 66rem); margin: 0 auto; }
+.road__steps::before {
+  content: '';
+  position: absolute;
+  top: clamp(1.6rem, 3vw, 2.2rem);
+  left: 12.5%; right: 12.5%; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(166,138,109,.25) 15%, rgba(166,138,109,.25) 85%, transparent);
+}
+.road__step {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 1.1rem; padding: clamp(1rem, 2vw, 1.8rem) clamp(.6rem, 1.2vw, 1.2rem);
+  transition: background .4s; border-radius: .5rem;
+}
+.road__step:hover { background: rgba(166,138,109,.06); }
+.road__step--cert .road__num { background: rgba(166,138,109,.16); }
+
+.road__num {
+  width: clamp(3rem, 5vw, 4.4rem); height: clamp(3rem, 5vw, 4.4rem);
+  border-radius: 50%;
+  background: rgba(240,236,230,.06); border: 1px solid rgba(166,138,109,.22);
+  display: grid; place-items: center;
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.88rem, 1.4vw, 1.2rem); letter-spacing: .08em;
+  color: var(--gold); flex-shrink: 0; position: relative; z-index: 1;
+}
+.road__num--cert svg { stroke: var(--gold); }
+.road__body { display: flex; flex-direction: column; gap: .45rem; }
+.road__tag {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(166,138,109,.6); margin: 0;
+}
+.road__name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.88rem, 1.2vw, 1.05rem); font-weight: 400;
+  color: rgba(240,236,230,.9); margin: 0;
+}
+.road__desc {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.68rem, .9vw, .78rem); font-weight: 300;
+  color: rgba(240,236,230,.35); line-height: 1.75; margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   §11  FORM
+═══════════════════════════════════════════ */
+.form-sec .sec__inner { max-width: 66rem; }
 .form-sec__lead {
   font-family: var(--font-jp, sans-serif);
   font-size: .92rem; font-weight: 300; line-height: 1.85;
-  color: rgba(240,236,230,.45);
-  margin: 1.2rem 0 0; text-align: center;
+  color: rgba(240,236,230,.4); margin: 1.2rem 0 0; text-align: center;
 }
-
 .form-sec__form {
-  background: rgba(240,236,230,.04);
-  border: 1px solid rgba(240,236,230,.1);
+  background: rgba(240,236,230,.04); border: 1px solid rgba(240,236,230,.1);
   padding: clamp(2.5rem, 5vw, 4rem);
   margin-top: clamp(2.8rem, 5vw, 5rem);
   display: flex; flex-direction: column; gap: 1.8rem;
   border-radius: .25rem;
 }
-
-.form-sec__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.4rem;
-}
-
-.form-sec__field { display: flex; flex-direction: column; gap: .55rem; }
-
-.form-sec__label {
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.form-field { display: flex; flex-direction: column; gap: .55rem; }
+.form-label {
   font-family: var(--font-ui, sans-serif);
-  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(240,236,230,.48);
+  font-size: .66rem; letter-spacing: .17em; text-transform: uppercase;
+  color: rgba(240,236,230,.45);
   display: flex; align-items: center; gap: .5rem;
 }
 .req {
-  font-size: .58rem; background: var(--gold);
-  color: #0a0808; padding: .15em .6em;
-  letter-spacing: .1em; border-radius: 2px;
+  font-size: .57rem; background: var(--gold);
+  color: #0a0808; padding: .15em .6em; border-radius: 2px;
 }
-
-.form-sec__input,
-.form-sec__textarea {
-  background: rgba(240,236,230,.06);
-  border: 1px solid rgba(240,236,230,.14);
+.form-input, .form-textarea {
+  background: rgba(240,236,230,.06); border: 1px solid rgba(240,236,230,.13);
   color: rgba(240,236,230,.88);
-  font-family: var(--font-jp, sans-serif);
-  font-size: .95rem; font-weight: 300;
-  padding: .88rem 1.1rem;
-  outline: none;
+  font-family: var(--font-jp, sans-serif); font-size: .95rem; font-weight: 300;
+  padding: .88rem 1.1rem; outline: none; width: 100%; border-radius: .2rem;
   transition: border-color .3s, background .3s;
-  width: 100%;
-  border-radius: .2rem;
 }
-.form-sec__input::placeholder,
-.form-sec__textarea::placeholder { color: rgba(240,236,230,.2); }
-.form-sec__input:focus,
-.form-sec__textarea:focus {
-  border-color: rgba(166,138,109,.55);
-  background: rgba(240,236,230,.09);
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(240,236,230,.18); }
+.form-input:focus, .form-textarea:focus {
+  border-color: rgba(166,138,109,.5); background: rgba(240,236,230,.09);
 }
-.form-sec__textarea { resize: vertical; }
-
-.form-sec__submit {
-  display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
-  padding-top: .4rem;
-}
-.form-sec__privacy {
+.form-textarea { resize: vertical; }
+.form-submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.form-privacy {
   font-family: var(--font-ui, sans-serif);
-  font-size: .66rem; color: rgba(240,236,230,.28); text-align: center;
-  line-height: 1.7;
+  font-size: .65rem; color: rgba(240,236,230,.26); text-align: center;
 }
-.form-sec__privacy a { color: rgba(240,236,230,.42); }
+.form-privacy a { color: rgba(240,236,230,.4); }
 
-/* ══════════════════════════════════════
+/* ═══════════════════════════════════════════
    RESPONSIVE
-══════════════════════════════════════ */
-@media (max-width: 64rem) {
-  .road__list { grid-template-columns: repeat(2, 1fr); }
-  .road__list::before { display: none; }
+═══════════════════════════════════════════ */
+@media (max-width: 72rem) {
+  .instructor-sec__layout { grid-template-columns: 1fr; }
+  .instructor-sec__img-wrap { display: none; }
+  .voices { grid-template-columns: 1fr; gap: 1rem; }
+  .road__steps { grid-template-columns: repeat(2, 1fr); }
+  .road__steps::before { display: none; }
 }
-
+@media (max-width: 56rem) {
+  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; }
+  .gallery__item--1 { grid-column: span 3; }
+  .gallery__item--2 { grid-column: span 3; }
+  .gallery__item--3 { grid-column: span 6; grid-row: span 1; }
+  .gallery__item--4 { grid-column: span 3; }
+  .gallery__item--5 { grid-column: span 3; }
+  .voices { grid-template-columns: 1fr; }
+  .road__steps { grid-template-columns: 1fr; }
+}
 @media (max-width: 48rem) {
-  .road__list { grid-template-columns: 1fr; }
-
   .hero__title { font-size: clamp(1.9rem, 8vw, 3rem); }
-  .hero__actions { flex-direction: column; align-items: flex-start; }
-
-  .form-sec__row { grid-template-columns: 1fr; }
+  .hero__btns { flex-direction: column; align-items: flex-start; }
+  .form-row { grid-template-columns: 1fr; }
   .form-sec__form { padding: 1.8rem; }
-
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .gallery__item--1,
+  .gallery__item--2,
+  .gallery__item--3,
+  .gallery__item--4,
+  .gallery__item--5 { grid-column: span 1; grid-row: span 1; }
   .prose--target :global(ul) { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 36rem) {
-  .info__grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
 }
 </style>

@@ -14,6 +14,7 @@ export type Course = {
   main_image?: MicroCMSImage;
   target?: string;       // richEditor → HTML
   description?: string;  // richEditor → HTML
+  gallery?: MicroCMSImage[];
   curriculum?: string;   // richEditor → HTML
   schedule?: string;
   price?: string;
