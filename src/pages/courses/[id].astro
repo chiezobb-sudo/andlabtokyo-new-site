@@ -23,19 +23,19 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
   §1  HERO — CMS
 ════════════════════════════ -->
 <section
-  class="hero"
+  class={`hero${c.main_image ? ' hero--has-image' : ''}`}
   style={c.main_image
-    ? `background-image: url('${c.main_image.url}?w=1920&q=85')`
+    ? `background-image: url('${c.main_image.url}?w=1920&q=85');`
     : undefined}
 >
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__inner">
-    <p class="eyebrow eyebrow--gold hero__pre">COURSE</p>
+    <p class="eyebrow eyebrow--gold hero__pre">COURSE · &LAB TOKYO</p>
     <h1 class="hero__title">{c.title}</h1>
     {c.subtitle && <p class="hero__sub">{c.subtitle}</p>}
     <div class="hero__btns">
+      <a href="#curriculum" class="btn btn--ghost btn--outline-arrow">講座内容を見る</a>
       <a href="#form" class="btn btn--gold">今すぐ申し込む</a>
-      <a href="#curriculum" class="btn btn--ghost">カリキュラムを見る</a>
     </div>
   </div>
   <div class="hero__cue" aria-hidden="true"><span></span></div>
@@ -262,52 +262,108 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
 </section>
 
 <!-- ════════════════════════════
-  §8  INFO — CMS（開催情報 & 料金）
+  §8  INFO — PRICING + FORMAT（CMS price/schedule + ハードコード）
 ════════════════════════════ -->
-{(c.schedule || c.price) && (
 <section class="sec sec--offwhite info-sec">
   <div class="sec__inner">
-    <header class="sec__hd sec__hd--center">
-      <p class="eyebrow eyebrow--warm">INFO</p>
-      <h2 class="sec__title sec__title--dark">開催情報 & 受講料一覧</h2>
+
+    <!-- ── PRICING ─────────────────── -->
+    <header class="sec__hd">
+      <p class="eyebrow eyebrow--warm">PRICING</p>
+      <h2 class="sec__title sec__title--dark">受講料一覧</h2>
     </header>
-    <div class="info-grid">
+
+    <div class="pricing-panel">
+
+      <!-- CMS price フィールド（リッチテキスト or 生テキスト） -->
+      {c.price && (
+        <div class="pricing-cms">
+          <div class="pricing-cms__body" set:html={c.price} />
+        </div>
+      )}
+
+      <!-- 開催情報（CMS schedule） -->
       {c.schedule && (
-        <div class="info-card">
-          <div class="info-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+        <dl class="pricing-schedule">
+          <dt class="pricing-schedule__key">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2"/>
               <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-          </div>
-          <p class="info-card__label">開催日程</p>
-          <p class="info-card__val">{c.schedule}</p>
-        </div>
+            開催日程
+          </dt>
+          <dd class="pricing-schedule__val">{c.schedule}</dd>
+        </dl>
       )}
-      {c.price && (
-        <div class="info-card info-card--price">
-          <div class="info-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
-          </div>
-          <p class="info-card__label">受講料金</p>
-          <p class="info-card__price">{c.price}</p>
-          <p class="info-card__note">
-            ※お支払いはクレジットカード決済もしくはお振込のみとなります。<br />
-            （分割払いは対応しておりません）
-          </p>
-        </div>
-      )}
+
+      <p class="pricing-note">
+        ※ お支払いはクレジットカード決済またはお振込のみ。分割払いは対応しておりません。<br/>
+        ※ 詳細はお申し込みフォームよりご確認ください。
+      </p>
     </div>
+
+    <!-- ── FORMAT ─────────────────── -->
+    <header class="sec__hd sec--mt-lg">
+      <p class="eyebrow eyebrow--warm">FORMAT</p>
+      <h2 class="sec__title sec__title--dark">受講形式</h2>
+      <p class="sec__lead sec__lead--dark">東京・渋谷（表参道）での対面レッスンのほか、全国・海外からオンラインでも受講可能です。</p>
+    </header>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <div class="format-card__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <span class="format-card__label">PLAN A — 対面</span>
+        <p class="format-card__title">3日間コース</p>
+        <p class="format-card__body">
+          座学（動画視聴）＋ 実習 3日間<br/>
+          時間：11:00〜15:30<br/>
+          場所：東京・渋谷（表参道）
+        </p>
+      </div>
+      <div class="format-card">
+        <div class="format-card__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <span class="format-card__label">PLAN B — 対面</span>
+        <p class="format-card__title">2日間コース</p>
+        <p class="format-card__body">
+          座学（動画視聴）＋ 実習 2日間<br/>
+          凝縮カリキュラム対応<br/>
+          場所：東京・渋谷（表参道）
+        </p>
+      </div>
+      <div class="format-card format-card--online">
+        <div class="format-card__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <span class="format-card__label">ONLINE — 全国・海外対応</span>
+        <p class="format-card__title">自宅からそのまま受講</p>
+        <p class="format-card__body">
+          ビデオ通話で講師と直接やり取り。地方・海外・育児中の方でも、ご自宅で本格的な技術を習得できます。
+        </p>
+      </div>
+    </div>
+
     <div class="info-sec__cta">
       <a href="#form" class="btn btn--gold btn--lg">このコースに申し込む</a>
     </div>
+
   </div>
 </section>
-)}
 
 <!-- ════════════════════════════
   §9  FAQ — CMS（アコーディオン）
@@ -589,64 +645,119 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;        /* テキストを下寄せ（旧サイト風） */
   overflow: hidden;
-  background-color: #141413;
+  /* フォールバック: 画像未設定時 — 深みのある暗トーン */
+  background-color: #100e0c;
+  background-image:
+    radial-gradient(ellipse at 30% 60%, rgba(80,50,20,.35) 0%, transparent 60%),
+    linear-gradient(160deg, #1e1a14 0%, #0a0806 100%);
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 35%;
   background-repeat: no-repeat;
-  /* Ken Burns — background-image set inline via style prop */
-  animation: heroKen 22s cubic-bezier(.16,1,.3,1) forwards;
+}
+/* 画像ありのとき Ken Burns */
+.hero--has-image {
+  animation: heroKen 24s cubic-bezier(.16,1,.3,1) forwards;
 }
 @keyframes heroKen {
-  from { background-size: 107%; }
-  to   { background-size: 100%; }
+  from { background-size: 108% auto; }
+  to   { background-size: 100% auto; }
+}
+
+/* 画像なし時の装飾ライン（旧サイトの星モチーフ代わり） */
+.hero:not(.hero--has-image)::before {
+  content: '';
+  position: absolute; top: 18%; right: 10%;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,138,109,.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .hero__scrim {
   position: absolute; inset: 0;
-  /* 左から暗く、下から暗く — 文字の視認性のみ確保 */
   background:
-    linear-gradient(to right, rgba(8,6,4,.78) 0%, rgba(8,6,4,.45) 45%, rgba(8,6,4,.12) 100%),
-    linear-gradient(to top,   rgba(8,6,4,.72) 0%, rgba(8,6,4,.1) 55%, transparent 100%);
+    linear-gradient(to right, rgba(6,4,2,.72) 0%, rgba(6,4,2,.32) 55%, rgba(6,4,2,.08) 100%),
+    linear-gradient(to top,   rgba(6,4,2,.85) 0%, rgba(6,4,2,.5) 35%, rgba(6,4,2,.1) 70%, transparent 100%);
 }
+
 .hero__inner {
   position: relative; z-index: 1;
   width: min(100% - 3rem, 80rem);
   margin: 0 auto;
-  padding: clamp(10rem, 22vh, 18rem) 0 clamp(8rem, 15vh, 13rem);
+  /* 下寄せで旧サイト風の重厚感 */
+  padding: 0 0 clamp(5rem, 12vh, 9rem);
+  padding-top: clamp(12rem, 30vh, 22rem);
   display: flex; flex-direction: column;
-  align-items: flex-start; gap: 1.8rem;
+  align-items: flex-start; gap: 1.4rem;
 }
-.hero__pre { color: var(--gold); margin: 0; }
+
+.hero__pre {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
+  color: var(--gold); margin: 0;
+  opacity: .9;
+}
+
+/* タイトル — 旧サイトのようにセリフ体・大きく */
 .hero__title {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(2.2rem, 6vw, 5.2rem);
-  font-weight: 300; line-height: 1.36; letter-spacing: .07em;
-  color: #f5f0ea; margin: 0; max-width: 18em;
-  text-shadow: 0 2px 40px rgba(0,0,0,.5), 0 8px 80px rgba(0,0,0,.3);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 300; line-height: 1.25; letter-spacing: .04em;
+  color: #f8f3ec; margin: 0; max-width: 16em;
+  text-shadow:
+    0 2px 20px rgba(0,0,0,.6),
+    0 8px 60px rgba(0,0,0,.4);
 }
+
 .hero__sub {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(1rem, 1.7vw, 1.35rem);
-  font-weight: 300; line-height: 2; letter-spacing: .05em;
-  color: rgba(240,236,230,.68); margin: 0; max-width: 28em;
+  font-size: clamp(.92rem, 1.6vw, 1.22rem);
+  font-weight: 300; line-height: 1.9; letter-spacing: .06em;
+  color: rgba(240,236,226,.62); margin: 0; max-width: 30em;
 }
-.hero__btns { display: flex; flex-wrap: wrap; gap: 1.1rem; margin-top: .6rem; }
 
-.hero__cue { position: absolute; left: 50%; bottom: 2.6rem; transform: translateX(-50%); }
+.hero__btns {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  margin-top: .8rem;
+}
+
+/* アウトライン矢印ボタン（旧サイト「講座内容を見る」風） */
+.btn--outline-arrow {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(240,236,226,.38);
+  color: rgba(240,236,226,.85);
+  backdrop-filter: blur(4px);
+}
+.btn--outline-arrow:hover {
+  background: rgba(255,255,255,.11);
+  border-color: rgba(166,138,109,.65);
+  color: rgba(240,236,226,1);
+}
+
+.hero__cue {
+  position: absolute; left: 50%; bottom: 2.2rem;
+  transform: translateX(-50%);
+}
 .hero__cue span {
-  display: block; width: 1px; height: 4rem;
-  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.65));
-  animation: scrollPulse 2.8s ease-in-out infinite; transform-origin: top;
+  display: block; width: 1px; height: 3.8rem;
+  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.7));
+  animation: scrollPulse 2.8s ease-in-out infinite;
+  transform-origin: top;
 }
 @keyframes scrollPulse {
   0%   { transform: scaleY(0); opacity: 0; }
   35%  { transform: scaleY(1); opacity: 1; }
   100% { transform: scaleY(1); opacity: 0; }
 }
+
+@media (max-width: 640px) {
+  .hero__title { font-size: clamp(2rem, 10vw, 3.2rem); }
+  .hero__btns { flex-direction: column; align-items: flex-start; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .hero { animation: none; }
+  .hero--has-image { animation: none; }
   .hero__cue { display: none; }
 }
 
@@ -1029,51 +1140,149 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
 }
 
 /* ═══════════════════════════════════════════
-   §8  INFO
+   §8  INFO — PRICING + FORMAT
 ═══════════════════════════════════════════ */
-.info-sec .sec__inner { max-width: 74rem; }
+.info-sec .sec__inner { max-width: 78rem; }
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem; margin-bottom: 3.5rem;
+/* セクションヘッダー間マージン */
+.sec--mt-lg { margin-top: clamp(4rem, 8vw, 7rem); }
+
+/* ── PRICING パネル */
+.pricing-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 var(--r) var(--r);
+  padding: clamp(2rem, 4vw, 3rem);
+  display: flex; flex-direction: column; gap: 2rem;
+  box-shadow: 0 4px 28px rgba(26,25,23,.06);
 }
-.info-card {
-  background: #fff; border: 1px solid var(--line);
-  padding: 2.4rem; border-radius: .25rem;
-  display: flex; flex-direction: column; gap: 1rem;
-  transition: box-shadow .3s;
+
+/* CMS price richtext */
+.pricing-cms { }
+.pricing-cms__body {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.95rem, 1.2vw, 1.06rem);
+  font-weight: 300; line-height: 2; letter-spacing: .04em;
+  color: var(--sub);
 }
-.info-card:hover { box-shadow: 0 6px 32px rgba(26,25,23,.08); }
-.info-card--price {
-  border-color: rgba(166,138,109,.28);
-  background: linear-gradient(135deg, #fff 0%, #fdf9f4 100%);
+/* テーブルがCMSから来た場合 */
+.pricing-cms__body :global(table) {
+  width: 100%; border-collapse: collapse;
+  margin: .5rem 0;
 }
-.info-card__icon { color: var(--gold); }
-.info-card__label {
+.pricing-cms__body :global(thead tr) {
+  border-bottom: 2px solid var(--gold);
+}
+.pricing-cms__body :global(th) {
+  padding: .75rem 1rem; text-align: left;
   font-family: var(--font-ui, sans-serif);
-  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--muted); margin: 0;
+  font-size: .65rem; letter-spacing: .14em;
+  color: var(--gold); font-weight: 700;
 }
-.info-card__val {
-  font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.93rem, 1.2vw, 1.04rem);
-  font-weight: 300; line-height: 1.95; color: var(--ink); margin: 0;
-  white-space: pre-line;
+.pricing-cms__body :global(th:last-child) { text-align: right; }
+.pricing-cms__body :global(td) {
+  padding: .8rem 1rem;
+  font-size: clamp(.88rem, 1.1vw, .98rem);
+  color: var(--sub); border-bottom: 1px solid rgba(26,25,23,.07);
+  vertical-align: middle;
 }
-.info-card__price {
-  font-family: var(--font-jp, sans-serif);
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .03em;
+.pricing-cms__body :global(td:last-child) { text-align: right; font-weight: 600; }
+.pricing-cms__body :global(strong) {
+  font-weight: 600; color: #7a5930;
 }
-.info-card__note {
+/* 生テキストの場合は大きく見せる */
+.pricing-cms__body :global(p) {
+  font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+  font-weight: 400; color: var(--ink); letter-spacing: .03em;
+  margin: 0 0 .4rem;
+}
+.pricing-cms__body :global(p + p) {
+  font-size: clamp(.82rem, 1vw, .9rem);
+  font-weight: 300; color: var(--muted); letter-spacing: .04em;
+}
+
+/* 開催日程 */
+.pricing-schedule {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: .6rem 1.2rem; align-items: start;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+.pricing-schedule__key {
+  display: flex; align-items: center; gap: .4rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); padding-top: .2em; white-space: nowrap;
+}
+.pricing-schedule__val {
   font-family: var(--font-jp, sans-serif);
-  font-size: .75rem; line-height: 1.85;
-  color: var(--muted); padding-top: 1rem;
-  border-top: 1px solid var(--line); margin: 0;
+  font-size: clamp(.92rem, 1.15vw, 1.02rem);
+  font-weight: 300; line-height: 1.9; color: var(--sub);
+  white-space: pre-line; margin: 0;
+}
+
+.pricing-note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; line-height: 1.85; color: var(--muted);
+  padding-top: 1.2rem; border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+/* ── FORMAT カード */
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-bottom: 3.5rem;
+}
+.format-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 var(--r) var(--r);
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+  display: flex; flex-direction: column; gap: .8rem;
+  box-shadow: 0 2px 12px rgba(26,25,23,.04);
+  transition: box-shadow .3s, transform .3s;
+}
+.format-card:hover {
+  box-shadow: 0 8px 32px rgba(26,25,23,.1);
+  transform: translateY(-2px);
+}
+.format-card--online {
+  background: linear-gradient(135deg, #fff 0%, #fdf9f4 100%);
+  border-top-color: var(--gold-lt);
+}
+.format-card__icon {
+  color: var(--gold); margin-bottom: .4rem;
+}
+.format-card__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted); display: block;
+}
+.format-card__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 400; color: var(--ink); margin: 0;
+  letter-spacing: .04em;
+}
+.format-card__body {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.84rem, 1.05vw, .94rem);
+  font-weight: 300; line-height: 1.9; color: var(--sub); margin: 0;
 }
 
 .info-sec__cta { display: flex; justify-content: center; }
+
+@media (max-width: 860px) {
+  .format-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .pricing-panel { padding: 1.6rem; }
+  .pricing-schedule { grid-template-columns: 1fr; gap: .4rem; }
+}
 
 /* ═══════════════════════════════════════════
    §9  FAQ
