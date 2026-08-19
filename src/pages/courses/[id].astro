@@ -14,6 +14,40 @@ if (!c) return Astro.redirect('/listofcourses');
 
 const hasGallery = c.gallery && c.gallery.length > 0;
 const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
+
+/* ── ハードコード：4つの学びの柱 ── */
+const features = [
+  {
+    num: "01",
+    title: "定義から教えます",
+    body: "ローチョコレートは「生のカカオ」ではありません。高温焙煎（110〜150℃）をしないカカオを使うことが定義です。「48℃以下」と言えない理由も含め、正確な知識を基礎から学びます。",
+  },
+  {
+    num: "02",
+    title: "発酵を知らないと、ローは語れません",
+    body: "カカオ豆は発酵段階で豆の温度が50℃を超えます。菌が生きて働いた結果の熱です。この事実を知っていることが、素材を正確に理解する出発点になります。",
+  },
+  {
+    num: "03",
+    title: "素材を見分ける目を養います",
+    body: "「カカオパウダー」と「ココアパウダー」は別物です。重曹テストで判別できるようになるなど、市販素材を正確に読み解く実践的なスキルを身につけます。",
+  },
+  {
+    num: "04",
+    title: "衛生も、正面から学びます",
+    body: "カカオは屋外で発酵・乾燥され、完全な無菌状態ではありません。低温殺菌の意味と温度の根拠、リスクと向き合い方を正確に学びます。",
+  },
+];
+
+/* ── ハードコード：ギャラリー画像 ── */
+const galleryImages = [
+  { src: "/choco-real/01-beginner-flatlay.jpg",    caption: "カカオポッドから学ぶ、ローチョコレートの基礎" },
+  { src: "/choco-real/02-beginner-assorted.jpg",   caption: "初級で習得する多彩な成形テクニック" },
+  { src: "/choco-real/03-intermediate-mermaid.jpg",caption: "中級で学ぶマーメイドチョコのアレンジ成形" },
+  { src: "/choco-real/04-intermediate-hearts.jpg", caption: "色とりどりに仕上げるハート型ボンボンショコラ" },
+  { src: "/choco-real/05-advanced-assorted.jpg",   caption: "上級で極める本格ボンボンショコラの数々" },
+  { src: "/choco-real/06-junior-plating.jpg",      caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
+];
 ---
 
 <Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.main_image?.url}>
@@ -22,12 +56,24 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
 <!-- ════════════════════════════
   §1  HERO — CMS
 ════════════════════════════ -->
-<section
-  class={`hero${c.main_image ? ' hero--has-image' : ''}`}
-  style={c.main_image
-    ? `background-image: url('${c.main_image.url}?w=1920&q=85');`
-    : undefined}
->
+<section class="hero">
+  {c.main_image
+    ? (
+      <div class="hero__media">
+        <img
+          class="hero__img"
+          src={`${c.main_image.url}?w=1920&q=85`}
+          alt={c.title}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+    )
+    : (
+      <div class="hero__media hero__media--fallback" aria-hidden="true"></div>
+    )
+  }
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__inner">
     <p class="eyebrow eyebrow--gold hero__pre">COURSE · &LAB TOKYO</p>
@@ -71,6 +117,49 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
   </div>
 </section>
 )}
+
+<!-- ════════════════════════════
+  §3.5  FEATURES — ハードコード（4つの学びの柱）
+════════════════════════════ -->
+<section class="sec features-sec">
+  <div class="sec__inner">
+    <header class="sec__hd">
+      <p class="eyebrow eyebrow--warm">FEATURES</p>
+      <h2 class="sec__title sec__title--dark">4つの学びの柱</h2>
+      <p class="sec__lead sec__lead--dark">「なぜそうなのか」を知っていること——それが、教える力にも、販売する自信にもつながります。</p>
+    </header>
+    <div class="features-grid">
+      {features.map(f => (
+        <div class="feature-card">
+          <span class="feature-num">{f.num}</span>
+          <h3 class="feature-title">{f.title}</h3>
+          <p class="feature-body">{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §3.8  GALLERY — ハードコード（作品写真）
+════════════════════════════ -->
+<section class="sec sec--linen hc-gallery-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">GALLERY</p>
+      <h2 class="sec__title sec__title--dark">講座で作るローチョコレートの世界</h2>
+      <p class="sec__lead">初級〜上級まで、実際にレッスンで仕上げる作品の一部をご紹介します。</p>
+    </header>
+    <div class="hc-gallery-grid">
+      {galleryImages.map(g => (
+        <div class="hc-gallery-item">
+          <img src={g.src} alt={g.caption} loading="lazy" decoding="async" />
+          <div class="hc-gallery-cap"><span>{g.caption}</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
 <!-- ════════════════════════════
   §4  GALLERY — CMS（gallery[]）
@@ -645,85 +734,76 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: flex-end;        /* テキストを下寄せ（旧サイト風） */
+  align-items: flex-end;
   overflow: hidden;
-  /* フォールバック: 画像未設定時 — 深みのある暗トーン */
-  background-color: #100e0c;
-  background-image:
-    radial-gradient(ellipse at 30% 60%, rgba(80,50,20,.35) 0%, transparent 60%),
-    linear-gradient(160deg, #1e1a14 0%, #0a0806 100%);
-  background-size: cover;
-  background-position: center 35%;
-  background-repeat: no-repeat;
-}
-/* 画像ありのとき Ken Burns */
-.hero--has-image {
-  animation: heroKen 24s cubic-bezier(.16,1,.3,1) forwards;
-}
-@keyframes heroKen {
-  from { background-size: 108% auto; }
-  to   { background-size: 100% auto; }
+  background: #100e0c;
 }
 
-/* 画像なし時の装飾ライン（旧サイトの星モチーフ代わり） */
-.hero:not(.hero--has-image)::before {
-  content: '';
-  position: absolute; top: 18%; right: 10%;
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(166,138,109,.12) 0%, transparent 70%);
-  pointer-events: none;
+/* ── 画像エリア（journal と同じ img 方式） */
+.hero__media {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  animation: heroKen 24s cubic-bezier(.16,1,.3,1) forwards;
+  transform-origin: center;
+}
+@keyframes heroKen {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+
+/* 画像なしフォールバック */
+.hero__media--fallback {
+  background:
+    radial-gradient(ellipse at 28% 55%, rgba(90,55,18,.4) 0%, transparent 55%),
+    linear-gradient(155deg, #1e1a12 0%, #0a0806 100%);
 }
 
 .hero__scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to right, rgba(6,4,2,.72) 0%, rgba(6,4,2,.32) 55%, rgba(6,4,2,.08) 100%),
-    linear-gradient(to top,   rgba(6,4,2,.85) 0%, rgba(6,4,2,.5) 35%, rgba(6,4,2,.1) 70%, transparent 100%);
+    linear-gradient(to right, rgba(6,4,2,.75) 0%, rgba(6,4,2,.35) 50%, rgba(6,4,2,.1) 100%),
+    linear-gradient(to top,   rgba(6,4,2,.9)  0%, rgba(6,4,2,.55) 30%, rgba(6,4,2,.1) 65%, transparent 100%);
 }
 
 .hero__inner {
   position: relative; z-index: 1;
   width: min(100% - 3rem, 80rem);
   margin: 0 auto;
-  /* 下寄せで旧サイト風の重厚感 */
-  padding: 0 0 clamp(5rem, 12vh, 9rem);
-  padding-top: clamp(12rem, 30vh, 22rem);
+  padding-top: clamp(12rem, 28vh, 20rem);
+  padding-bottom: clamp(5rem, 12vh, 9rem);
   display: flex; flex-direction: column;
-  align-items: flex-start; gap: 1.4rem;
+  align-items: flex-start; gap: 1.5rem;
 }
 
 .hero__pre {
   font-family: var(--font-ui, sans-serif);
   font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
-  color: var(--gold); margin: 0;
-  opacity: .9;
+  color: var(--gold); margin: 0; opacity: .9;
 }
 
-/* タイトル — 旧サイトのようにセリフ体・大きく */
 .hero__title {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(2.6rem, 7vw, 6rem);
   font-weight: 300; line-height: 1.25; letter-spacing: .04em;
   color: #f8f3ec; margin: 0; max-width: 16em;
-  text-shadow:
-    0 2px 20px rgba(0,0,0,.6),
-    0 8px 60px rgba(0,0,0,.4);
+  text-shadow: 0 2px 24px rgba(0,0,0,.65), 0 8px 64px rgba(0,0,0,.45);
 }
 
 .hero__sub {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(.92rem, 1.6vw, 1.22rem);
   font-weight: 300; line-height: 1.9; letter-spacing: .06em;
-  color: rgba(240,236,226,.62); margin: 0; max-width: 30em;
+  color: rgba(240,236,226,.65); margin: 0; max-width: 30em;
 }
 
-.hero__btns {
-  display: flex; flex-wrap: wrap; gap: 1rem;
-  margin-top: .8rem;
-}
+.hero__btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .6rem; }
 
-/* アウトライン矢印ボタン（旧サイト「講座内容を見る」風） */
 .btn--outline-arrow {
   background: rgba(255,255,255,.06);
   border-color: rgba(240,236,226,.38);
@@ -757,8 +837,86 @@ const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
   .hero__btns { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero--has-image { animation: none; }
+  .hero__img { animation: none; }
   .hero__cue { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   §3.5  FEATURES（4つの学びの柱）
+═══════════════════════════════════════════ */
+.features-sec .sec__inner { max-width: 82rem; }
+.sec--linen { background: #f7f4ef; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.4rem;
+}
+.feature-card {
+  border-top: 1px solid rgba(166,138,109,.35);
+  padding-top: 1.6rem;
+}
+.feature-num {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 2.4rem; letter-spacing: .04em;
+  color: var(--gold); opacity: .45;
+  display: block; margin-bottom: .5rem;
+  line-height: 1;
+}
+.feature-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.98rem, 1.3vw, 1.1rem); font-weight: 400;
+  color: var(--ink); margin: 0 0 .75rem; letter-spacing: .04em;
+}
+.feature-body {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.82rem, 1vw, .9rem); font-weight: 300;
+  color: var(--sub); line-height: 1.95;
+}
+
+/* ═══════════════════════════════════════════
+   §3.8  GALLERY ハードコード
+═══════════════════════════════════════════ */
+.hc-gallery-sec .sec__inner { max-width: 90rem; }
+
+.hc-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.hc-gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: calc(var(--r) * .6);
+}
+.hc-gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 1s cubic-bezier(.16,1,.3,1);
+}
+.hc-gallery-item:hover img { transform: scale(1.06); }
+.hc-gallery-cap {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end;
+  padding: 1.2rem;
+  background: linear-gradient(to top, rgba(10,8,4,.75) 0%, transparent 60%);
+  opacity: 0; transition: opacity .28s;
+}
+.hc-gallery-item:hover .hc-gallery-cap { opacity: 1; }
+.hc-gallery-cap span {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 300;
+  color: rgba(248,243,236,.88); line-height: 1.6;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 760px) {
+  .hc-gallery-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .hc-gallery-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
 }
 
 /* ═══════════════════════════════════════════
