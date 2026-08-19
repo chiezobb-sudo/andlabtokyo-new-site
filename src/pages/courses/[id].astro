@@ -50,7 +50,7 @@ const galleryImages = [
 ];
 ---
 
-<Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.main_image?.url}>
+<Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.heroImage?.url}>
 <main class="lp">
 
 <!-- ════════════════════════════
@@ -58,12 +58,12 @@ const galleryImages = [
 ════════════════════════════ -->
 <section class="hero">
   <div class="hero__media">
-    {c.main_image
+    {c.heroImage
       ? <img
-          src={`${c.main_image.url}?w=1920&q=85`}
+          src={`${c.heroImage.url}?w=1920&q=85`}
           alt={c.title}
-          width={c.main_image.width}
-          height={c.main_image.height}
+          width={c.heroImage.width}
+          height={c.heroImage.height}
           fetchpriority="high"
           decoding="async"
         />

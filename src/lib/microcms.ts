@@ -20,7 +20,7 @@ export type Course = {
   id: string;
   title: string;
   subtitle?: string;
-  main_image?: MicroCMSImage;
+  heroImage?: MicroCMSImage;  // microCMS フィールド名は heroImage
   target?: string;            // richEditor → HTML
   description?: string;       // richEditor → HTML
   gallery?: MicroCMSImage[];
