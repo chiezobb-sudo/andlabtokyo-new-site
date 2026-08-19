@@ -166,17 +166,16 @@ export type Page = {
 };
 
 export async function getPage(slug: string): Promise<Page | null> {
-  if (!safeClient) {
-    const { dummyPages } = await import('./dummy-page');
-    return dummyPages[slug] ?? null;
-  }
+  const { dummyPages } = await import('./dummy-page');
+  if (!safeClient) return dummyPages[slug] ?? null;
   try {
     const res = await safeClient.getList<Page>({
       endpoint: 'pages',
       queries: { filters: `slug[equals]${slug}`, limit: 1 },
     });
-    return res.contents[0] ?? null;
+    // pages API がまだ存在しない・コンテンツが空の場合はダミーにフォールバック
+    return res.contents[0] ?? dummyPages[slug] ?? null;
   } catch {
-    return null;
+    return dummyPages[slug] ?? null;
   }
 }
