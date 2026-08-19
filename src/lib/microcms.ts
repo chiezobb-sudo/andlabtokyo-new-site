@@ -7,18 +7,27 @@ export const client = createClient({
 });
 
 // ── 既存ページで使用中の型 ──
+export type CurriculumItem = {
+  fieldId: string;
+  image?: MicroCMSImage;
+  title: string;
+  price?: string;
+  learnings?: string;  // richEditor → HTML
+  recipes?: string;    // richEditor → HTML
+};
+
 export type Course = {
   id: string;
   title: string;
   subtitle?: string;
   main_image?: MicroCMSImage;
-  target?: string;       // richEditor → HTML
-  description?: string;  // richEditor → HTML
+  target?: string;            // richEditor → HTML
+  description?: string;       // richEditor → HTML
   gallery?: MicroCMSImage[];
-  curriculum?: string;   // richEditor → HTML
+  curriculum_list?: CurriculumItem[];
   schedule?: string;
   price?: string;
-  faq?: string;          // richEditor → HTML
+  faq?: string;               // richEditor → HTML
 };
 
 export async function getCourseList(): Promise<Course[]> {
