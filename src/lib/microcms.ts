@@ -170,6 +170,12 @@ export type SliderAreaBlock = {
   slides: SliderItem[];
 };
 
+export type KnowledgeAreaBlock = {
+  fieldId: 'knowledgeArea';
+  title?: string;
+  subtitle?: string;
+};
+
 export type PageBlock =
   | HeroBlock
   | ConceptBandBlock
@@ -177,7 +183,8 @@ export type PageBlock =
   | KnowledgeGridBlock
   | ProfileBandBlock
   | RichSectionBlock
-  | SliderAreaBlock;
+  | SliderAreaBlock
+  | KnowledgeAreaBlock;
 
 export type Page = {
   id: string;

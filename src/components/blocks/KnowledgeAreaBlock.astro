@@ -1,0 +1,351 @@
+---
+import type { KnowledgeAreaBlock, Knowledge } from '../../lib/microcms';
+
+interface Props {
+  block: KnowledgeAreaBlock;
+  articles: Knowledge[];
+}
+
+const { block: b, articles } = Astro.props;
+const [featured, ...rest] = articles;
+
+function fmtDate(iso: string) {
+  const d = new Date(iso);
+  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+}
+---
+
+{featured && (
+<section class="ka">
+  <div class="ka__inner">
+
+    <!-- ── ヘッダー ── -->
+    <header class="ka__header">
+      <div class="ka__header-left">
+        <p class="ka__eyebrow">{b.title ?? 'KNOWLEDGE'}</p>
+        <h2 class="ka__title">{b.subtitle ?? 'ローフード・発酵の知識'}</h2>
+      </div>
+      <a href="/knowledge" class="ka__all-link">
+        すべての記事を見る
+        <svg width="28" height="1" viewBox="0 0 28 1" aria-hidden="true">
+          <line x1="0" y1="0.5" x2="28" y2="0.5" stroke="currentColor"/>
+        </svg>
+      </a>
+    </header>
+
+    <!-- ── メイングリッド ── -->
+    <div class="ka__grid">
+
+      <!-- 特集記事（左の大カード） -->
+      <a href={`/knowledge/${featured.id}`} class="ka__featured" aria-label={featured.title}>
+        <div class="ka__featured-img">
+          <img
+            src={`${featured.heroImage.url}?w=900&q=85`}
+            alt={featured.heroImageAlt ?? featured.title}
+            width={featured.heroImage.width}
+            height={featured.heroImage.height}
+            loading="eager"
+            decoding="async"
+          />
+          <div class="ka__featured-scrim" aria-hidden="true"></div>
+        </div>
+        <div class="ka__featured-body">
+          {featured.eyebrow && <p class="ka__featured-cat">{featured.eyebrow}</p>}
+          <h3 class="ka__featured-title">{featured.title}</h3>
+          <p class="ka__featured-lead">{featured.lead}</p>
+          <p class="ka__featured-date">{fmtDate(featured.publishedAt)}</p>
+        </div>
+      </a>
+
+      <!-- サブ記事リスト（右カラム） -->
+      {rest.length > 0 && (
+        <ul class="ka__list" role="list">
+          {rest.map((a, i) => (
+            <li class="ka__item">
+              <a href={`/knowledge/${a.id}`} class="ka__item-link">
+                <div class="ka__item-img">
+                  <img
+                    src={`${a.heroImage.url}?w=400&q=80`}
+                    alt={a.heroImageAlt ?? a.title}
+                    width={a.heroImage.width}
+                    height={a.heroImage.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="ka__item-body">
+                  {a.eyebrow && <p class="ka__item-cat">{a.eyebrow}</p>}
+                  <h3 class="ka__item-title">{a.title}</h3>
+                  <p class="ka__item-date">{fmtDate(a.publishedAt)}</p>
+                </div>
+              </a>
+              {i < rest.length - 1 && <div class="ka__item-rule" aria-hidden="true"></div>}
+            </li>
+          ))}
+        </ul>
+      )}
+
+    </div><!-- /.ka__grid -->
+
+    <!-- モバイル用「すべての記事を見る」 -->
+    <div class="ka__mobile-all">
+      <a href="/knowledge" class="ka__all-link-mobile">すべての記事を見る →</a>
+    </div>
+
+  </div>
+</section>
+)}
+
+<style>
+/* ─── セクション ─── */
+.ka {
+  background: var(--bg-dark, #141413);
+  padding: clamp(6rem, 12vw, 11rem) 0 clamp(6rem, 12vw, 11rem);
+}
+
+.ka__inner {
+  width: min(100% - 3rem, 88rem);
+  margin: 0 auto;
+}
+
+/* ─── ヘッダー ─── */
+.ka__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.ka__eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0 0 .75rem;
+}
+
+.ka__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: rgba(240, 236, 230, .9);
+  margin: 0;
+}
+
+.ka__all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(240, 236, 230, .38);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color .35s, gap .35s;
+}
+.ka__all-link svg { flex-shrink: 0; transition: transform .35s; }
+.ka__all-link:hover { color: var(--gold, #a68a6d); gap: 1.4rem; }
+.ka__all-link:hover svg { transform: translateX(4px); }
+
+/* ─── メイングリッド ─── */
+.ka__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+/* ─── 特集（大カード） ─── */
+.ka__featured {
+  display: block;
+  text-decoration: none;
+  outline-offset: 4px;
+}
+
+.ka__featured-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1917;
+}
+.ka__featured-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1s cubic-bezier(.16,1,.3,1);
+}
+.ka__featured:hover .ka__featured-img img { transform: scale(1.04); }
+
+.ka__featured-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,8,7,.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ka__featured-body {
+  padding: 1.8rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.ka__featured-cat {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .66rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0;
+}
+
+.ka__featured-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: .05em;
+  color: rgba(240, 236, 230, .92);
+  margin: 0;
+  transition: color .3s;
+}
+.ka__featured:hover .ka__featured-title { color: #fff; }
+
+.ka__featured-lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.8rem, 1vw, .9rem);
+  font-weight: 300;
+  line-height: 2;
+  color: rgba(240, 236, 230, .45);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ka__featured-date {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .65rem;
+  letter-spacing: .14em;
+  color: rgba(240, 236, 230, .3);
+  margin: 0;
+}
+
+/* ─── サブ記事リスト ─── */
+.ka__list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ka__item { position: relative; }
+
+.ka__item-link {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1.2rem;
+  padding: 1.8rem 0;
+  text-decoration: none;
+  align-items: start;
+  transition: opacity .3s;
+}
+.ka__item-link:hover { opacity: .78; }
+
+.ka__item-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1917;
+  flex-shrink: 0;
+}
+.ka__item-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .8s cubic-bezier(.16,1,.3,1);
+}
+.ka__item-link:hover .ka__item-img img { transform: scale(1.06); }
+
+.ka__item-body {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  padding-top: .1rem;
+}
+
+.ka__item-cat {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0;
+}
+
+.ka__item-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.88rem, 1.1vw, 1rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: .04em;
+  color: rgba(240, 236, 230, .85);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ka__item-date {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  color: rgba(240, 236, 230, .28);
+  margin: 0;
+}
+
+.ka__item-rule {
+  height: 1px;
+  background: rgba(240, 236, 230, .07);
+}
+
+/* ─── モバイル ─── */
+.ka__mobile-all { display: none; }
+
+@media (max-width: 56rem) {
+  .ka__grid {
+    grid-template-columns: 1fr;
+  }
+  .ka__item-link {
+    grid-template-columns: 88px 1fr;
+  }
+  .ka__all-link { display: none; }
+  .ka__mobile-all {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  .ka__all-link-mobile {
+    font-family: var(--font-ui, sans-serif);
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(240, 236, 230, .45);
+    text-decoration: none;
+    transition: color .3s;
+  }
+  .ka__all-link-mobile:hover { color: var(--gold, #a68a6d); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ka__featured-img img,
+  .ka__item-img img { transition: none; }
+}
+</style>

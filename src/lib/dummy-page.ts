@@ -68,6 +68,11 @@ export const dummyPages: Record<string, Page> = {
         count: 3,
       },
       {
+        fieldId: 'knowledgeArea',
+        title: 'KNOWLEDGE',
+        subtitle: 'ローフード・発酵の知識',
+      },
+      {
         fieldId: 'sliderArea',
         slides: [
           {

@@ -8,12 +8,13 @@ import KnowledgeGridBlock from '../components/blocks/KnowledgeGridBlock.astro';
 import ProfileBandBlock from '../components/blocks/ProfileBandBlock.astro';
 import RichSectionBlock from '../components/blocks/RichSectionBlock.astro';
 import SliderAreaBlock from '../components/blocks/SliderAreaBlock.astro';
-import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType, SliderAreaBlock as SliderAreaBlockType } from '../lib/microcms';
+import KnowledgeAreaBlock from '../components/blocks/KnowledgeAreaBlock.astro';
+import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType, SliderAreaBlock as SliderAreaBlockType, KnowledgeAreaBlock as KnowledgeAreaBlockType } from '../lib/microcms';
 
 const page = await getPage('home');
 
-// knowledgeGrid が1つでもあれば記事を取得
-const needsArticles = page?.blocks.some((b) => b.fieldId === 'knowledgeGrid') ?? false;
+// knowledgeGrid または knowledgeArea があれば記事を取得
+const needsArticles = page?.blocks.some((b) => b.fieldId === 'knowledgeGrid' || b.fieldId === 'knowledgeArea') ?? false;
 const allArticles = needsArticles ? await getKnowledgeList() : [];
 ---
 
@@ -34,6 +35,7 @@ const allArticles = needsArticles ? await getKnowledgeList() : [];
     {block.fieldId === 'profileBand'  && <ProfileBandBlock  block={block as ProfileBandBlockType} />}
     {block.fieldId === 'richSection'  && <RichSectionBlock  block={block as RichSectionBlockType} />}
     {block.fieldId === 'sliderArea'   && <SliderAreaBlock   block={block as SliderAreaBlockType} />}
+    {block.fieldId === 'knowledgeArea' && <KnowledgeAreaBlock block={block as KnowledgeAreaBlockType} articles={allArticles.slice(0, 4)} />}
   </>
 ))}
 
