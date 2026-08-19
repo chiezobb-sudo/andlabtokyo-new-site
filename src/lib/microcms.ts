@@ -10,11 +10,28 @@ export const client = createClient({
 export type Course = {
   id: string;
   title: string;
-  description: string;
-  price: string;
-  schedule: string;
-  heroImage?: { url: string };
+  subtitle?: string;
+  main_image?: MicroCMSImage;
+  target?: string;       // richEditor → HTML
+  description?: string;  // richEditor → HTML
+  curriculum?: string;   // richEditor → HTML
+  schedule?: string;
+  price?: string;
+  faq?: string;          // richEditor → HTML
 };
+
+export async function getCourseList(): Promise<Course[]> {
+  if (!safeClient) return [];
+  const res = await safeClient.getList<Course>({ endpoint: 'courses', queries: { limit: 100 } });
+  return res.contents;
+}
+
+export async function getCourse(contentId: string): Promise<Course | null> {
+  if (!safeClient) return null;
+  try {
+    return await safeClient.getListDetail<Course>({ endpoint: 'courses', contentId });
+  } catch { return null; }
+}
 
 // ── knowledge / price セクション型 ──
 export type MicroCMSImage = { url: string; width: number; height: number };

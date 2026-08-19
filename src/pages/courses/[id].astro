@@ -1,0 +1,672 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCourseList, getCourse } from '../../lib/microcms';
+
+export async function getStaticPaths() {
+  const list = await getCourseList();
+  return list.map((c) => ({ params: { id: c.id } }));
+}
+
+const { id } = Astro.params;
+const c = await getCourse(id!);
+if (!c) return Astro.redirect('/listofcourses');
+---
+
+<Layout title={c.title} description={c.subtitle ?? c.title}>
+<main class="lp">
+
+<!-- ═══════════════════════════════════════════
+  1. HERO
+════════════════════════════════════════════ -->
+<section class="lp-hero">
+  {c.main_image
+    ? <img class="lp-hero__bg" src={`${c.main_image.url}?w=1600&q=85`}
+        alt="" width={c.main_image.width} height={c.main_image.height}
+        fetchpriority="high" decoding="async" />
+    : <div class="lp-hero__bg lp-hero__bg--dark" aria-hidden="true"></div>
+  }
+  <div class="lp-hero__scrim" aria-hidden="true"></div>
+  <div class="lp-hero__inner">
+    <p class="lp-hero__eyebrow">COURSE</p>
+    <h1 class="lp-hero__title">{c.title}</h1>
+    {c.subtitle && <p class="lp-hero__sub">{c.subtitle}</p>}
+    <a href="#form" class="lp-hero__cta">今すぐ申し込む</a>
+  </div>
+  <div class="lp-hero__scroll" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  2. TARGET（共感セクション）
+════════════════════════════════════════════ -->
+{c.target && (
+<section class="lp-target">
+  <div class="lp-target__inner">
+    <header class="lp-sec-header lp-sec-header--center">
+      <p class="lp-eyebrow">FOR YOU</p>
+      <h2 class="lp-h2">こんな方へ</h2>
+    </header>
+    <div class="lp-target__body prose-dark" set:html={c.target} />
+  </div>
+</section>
+)}
+
+<!-- ═══════════════════════════════════════════
+  3. DESCRIPTION（講座の魅力）
+════════════════════════════════════════════ -->
+{c.description && (
+<section class="lp-desc">
+  <div class="lp-desc__inner">
+    <header class="lp-sec-header">
+      <p class="lp-eyebrow">ABOUT</p>
+      <h2 class="lp-h2">講座について</h2>
+    </header>
+    <div class="lp-desc__body prose-light" set:html={c.description} />
+  </div>
+</section>
+)}
+
+<!-- ═══════════════════════════════════════════
+  4. CURRICULUM
+════════════════════════════════════════════ -->
+{c.curriculum && (
+<section class="lp-curr">
+  <div class="lp-curr__inner">
+    <header class="lp-sec-header">
+      <p class="lp-eyebrow">CURRICULUM</p>
+      <h2 class="lp-h2">カリキュラム</h2>
+    </header>
+    <div class="lp-curr__body prose-light" set:html={c.curriculum} />
+  </div>
+</section>
+)}
+
+<!-- ═══════════════════════════════════════════
+  5. ROADMAP（共通ステップ図解）
+════════════════════════════════════════════ -->
+<section class="lp-road">
+  <div class="lp-road__inner">
+    <header class="lp-sec-header lp-sec-header--center">
+      <p class="lp-eyebrow lp-eyebrow--light">STEP UP</p>
+      <h2 class="lp-h2 lp-h2--light">資格取得までのロードマップ</h2>
+    </header>
+    <div class="lp-road__steps">
+      <div class="lp-road__step">
+        <div class="lp-road__step-num">01</div>
+        <div class="lp-road__step-body">
+          <p class="lp-road__step-label">BASIC</p>
+          <p class="lp-road__step-name">初級講座</p>
+          <p class="lp-road__step-desc">基礎理論・素材・基本レシピを習得</p>
+        </div>
+      </div>
+      <div class="lp-road__arrow" aria-hidden="true">→</div>
+      <div class="lp-road__step">
+        <div class="lp-road__step-num">02</div>
+        <div class="lp-road__step-body">
+          <p class="lp-road__step-label">INTERMEDIATE</p>
+          <p class="lp-road__step-name">中級講座</p>
+          <p class="lp-road__step-desc">応用技術・デザイン性・販売レベルへ</p>
+        </div>
+      </div>
+      <div class="lp-road__arrow" aria-hidden="true">→</div>
+      <div class="lp-road__step">
+        <div class="lp-road__step-num">03</div>
+        <div class="lp-road__step-body">
+          <p class="lp-road__step-label">ADVANCE</p>
+          <p class="lp-road__step-name">上級講座</p>
+          <p class="lp-road__step-desc">独自開発・ブランディング・指導力</p>
+        </div>
+      </div>
+      <div class="lp-road__arrow" aria-hidden="true">→</div>
+      <div class="lp-road__step lp-road__step--goal">
+        <div class="lp-road__step-num">🎓</div>
+        <div class="lp-road__step-body">
+          <p class="lp-road__step-label">CERTIFICATE</p>
+          <p class="lp-road__step-name">認定資格取得</p>
+          <p class="lp-road__step-desc">協会認定プロとして活動開始</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  6. SCHEDULE & PRICE
+════════════════════════════════════════════ -->
+{(c.schedule || c.price) && (
+<section class="lp-info">
+  <div class="lp-info__inner">
+    <header class="lp-sec-header">
+      <p class="lp-eyebrow">INFO</p>
+      <h2 class="lp-h2">開催情報 & 料金</h2>
+    </header>
+    <div class="lp-info__grid">
+      {c.schedule && (
+        <div class="lp-info__card">
+          <p class="lp-info__card-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            開催日程
+          </p>
+          <p class="lp-info__card-val">{c.schedule}</p>
+        </div>
+      )}
+      {c.price && (
+        <div class="lp-info__card lp-info__card--price">
+          <p class="lp-info__card-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            受講料金
+          </p>
+          <p class="lp-info__card-price">{c.price}</p>
+          <p class="lp-info__card-note">※お支払いはクレジットカード決済もしくはお振込のみとなります。</p>
+        </div>
+      )}
+    </div>
+    <div class="lp-info__cta-wrap">
+      <a href="#form" class="lp-btn lp-btn--primary">このコースに申し込む</a>
+    </div>
+  </div>
+</section>
+)}
+
+<!-- ═══════════════════════════════════════════
+  7. FAQ
+════════════════════════════════════════════ -->
+{c.faq && (
+<section class="lp-faq">
+  <div class="lp-faq__inner">
+    <header class="lp-sec-header lp-sec-header--center">
+      <p class="lp-eyebrow">FAQ</p>
+      <h2 class="lp-h2">よくあるご質問</h2>
+    </header>
+    <div class="lp-faq__body prose-faq" set:html={c.faq} />
+  </div>
+</section>
+)}
+
+<!-- ═══════════════════════════════════════════
+  8. FORM（お申し込みフォーム）
+════════════════════════════════════════════ -->
+<section class="lp-form" id="form">
+  <div class="lp-form__inner">
+    <header class="lp-sec-header lp-sec-header--center">
+      <p class="lp-eyebrow lp-eyebrow--light">APPLY</p>
+      <h2 class="lp-h2 lp-h2--light">お申し込み・お問い合わせ</h2>
+      <p class="lp-form__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
+    </header>
+
+    <form
+      class="lp-form__body"
+      name={`course-apply-${c.id}`}
+      method="POST"
+      data-netlify="true"
+      action="/contact-thanks"
+      novalidate
+    >
+      <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
+      <input type="hidden" name="course" value={c.title} />
+
+      <div class="lp-form__row lp-form__row--2">
+        <div class="lp-form__field">
+          <label class="lp-form__label" for="name">お名前 <span class="req">必須</span></label>
+          <input class="lp-form__input" type="text" id="name" name="name" placeholder="安藤 千英" autocomplete="name" required />
+        </div>
+        <div class="lp-form__field">
+          <label class="lp-form__label" for="kana">フリガナ</label>
+          <input class="lp-form__input" type="text" id="kana" name="kana" placeholder="アンドウ チエ" />
+        </div>
+      </div>
+
+      <div class="lp-form__row lp-form__row--2">
+        <div class="lp-form__field">
+          <label class="lp-form__label" for="email">メールアドレス <span class="req">必須</span></label>
+          <input class="lp-form__input" type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+        </div>
+        <div class="lp-form__field">
+          <label class="lp-form__label" for="tel">電話番号</label>
+          <input class="lp-form__input" type="tel" id="tel" name="tel" placeholder="090-0000-0000" autocomplete="tel" />
+        </div>
+      </div>
+
+      <div class="lp-form__field">
+        <label class="lp-form__label" for="schedule">ご希望の日程・時期</label>
+        <input class="lp-form__input" type="text" id="schedule" name="schedule" placeholder="例：9月以降の週末を希望" />
+      </div>
+
+      <div class="lp-form__field">
+        <label class="lp-form__label" for="message">お問い合わせ内容</label>
+        <textarea class="lp-form__textarea" id="message" name="message" rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
+      </div>
+
+      <div class="lp-form__submit">
+        <button class="lp-btn lp-btn--submit" type="submit">送信する</button>
+        <p class="lp-form__privacy">
+          送信いただくことで<a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+</Layout>
+
+<style>
+/* ══════════════════════════════════════════
+   TOKENS & RESET
+══════════════════════════════════════════ */
+.lp {
+  --lp-gold: var(--gold, #a68a6d);
+  --lp-dark: #141413;
+  --lp-ink:  #1a1917;
+  --lp-mute: #6b6560;
+  --lp-bg:   #fafaf8;
+  --lp-line: rgba(26,25,23,.1);
+}
+
+/* ══════════════════════════════════════════
+   SHARED TYPOGRAPHY HELPERS
+══════════════════════════════════════════ */
+.lp-eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .65rem;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--lp-gold);
+  margin: 0 0 .8rem;
+}
+.lp-eyebrow--light { color: rgba(240,236,230,.55); }
+
+.lp-h2 {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: var(--lp-ink);
+  margin: 0;
+}
+.lp-h2--light { color: rgba(240,236,230,.92); }
+
+.lp-sec-header { margin-bottom: clamp(2.8rem, 5vw, 5rem); }
+.lp-sec-header--center { text-align: center; }
+
+/* ══════════════════════════════════════════
+   1. HERO
+══════════════════════════════════════════ */
+.lp-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--lp-dark);
+}
+.lp-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: heroZoom 18s cubic-bezier(.16,1,.3,1) forwards;
+}
+.lp-hero__bg--dark {
+  background: linear-gradient(135deg, #1a1917 0%, #2a2520 100%);
+}
+@keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1); } }
+.lp-hero__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(14,10,8,.9) 0%, rgba(14,10,8,.6) 45%, rgba(14,10,8,.25) 100%),
+    linear-gradient(to top,   rgba(14,10,8,.7) 0%, transparent 55%);
+}
+.lp-hero__inner {
+  position: relative; z-index: 1;
+  width: min(100% - 3rem, 78rem);
+  margin: 0 auto;
+  padding: clamp(8rem,18vh,14rem) 0 clamp(6rem,12vh,10rem);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.4rem;
+}
+.lp-hero__eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .65rem; letter-spacing: .36em; text-transform: uppercase;
+  color: var(--lp-gold); margin: 0;
+}
+.lp-hero__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(2rem, 5.5vw, 4.8rem);
+  font-weight: 300; line-height: 1.4; letter-spacing: .08em;
+  color: #f0ece6; margin: 0; max-width: 18em;
+  text-shadow: 0 2px 40px rgba(0,0,0,.35);
+  white-space: pre-line;
+}
+.lp-hero__sub {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 300; line-height: 1.8; letter-spacing: .06em;
+  color: rgba(240,236,230,.7); margin: 0; max-width: 28em;
+}
+.lp-hero__cta {
+  display: inline-block; margin-top: .8rem;
+  font-family: var(--font-ui, sans-serif); font-size: .88rem;
+  letter-spacing: .14em; text-decoration: none;
+  background: var(--lp-gold); color: #0a0808;
+  padding: 1.1rem 2.8rem;
+  transition: opacity .3s;
+}
+.lp-hero__cta:hover { opacity: .82; }
+.lp-hero__scroll {
+  position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%);
+}
+.lp-hero__scroll span {
+  display: block; width: 1px; height: 3.6rem;
+  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.8));
+  animation: scrollCue 2.4s ease-in-out infinite; transform-origin: top;
+}
+@keyframes scrollCue {
+  0%  { transform: scaleY(0); opacity: 0; }
+  30% { transform: scaleY(1); opacity: 1; }
+  100%{ transform: scaleY(1); opacity: 0; }
+}
+
+/* ══════════════════════════════════════════
+   2. TARGET
+══════════════════════════════════════════ */
+.lp-target {
+  background: #f5f0e8;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.lp-target__inner {
+  width: min(100%, 72rem); margin: 0 auto;
+}
+.lp-target .lp-eyebrow { color: #8a7055; }
+
+/* ══════════════════════════════════════════
+   3. DESCRIPTION
+══════════════════════════════════════════ */
+.lp-desc {
+  background: var(--lp-bg);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.lp-desc__inner { width: min(100%, 72rem); margin: 0 auto; }
+
+/* ══════════════════════════════════════════
+   4. CURRICULUM
+══════════════════════════════════════════ */
+.lp-curr {
+  background: #fff;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--lp-line);
+}
+.lp-curr__inner { width: min(100%, 72rem); margin: 0 auto; }
+
+/* ══════════════════════════════════════════
+   5. ROADMAP
+══════════════════════════════════════════ */
+.lp-road {
+  background: var(--lp-dark);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.lp-road__inner { width: min(100%, 78rem); margin: 0 auto; }
+
+.lp-road__steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+.lp-road__step {
+  flex: 1;
+  background: rgba(240,236,230,.04);
+  border: 1px solid rgba(166,138,109,.18);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.8rem);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: .8rem; transition: background .3s, border-color .3s;
+}
+.lp-road__step:hover {
+  background: rgba(166,138,109,.08);
+  border-color: rgba(166,138,109,.4);
+}
+.lp-road__step--goal {
+  background: rgba(166,138,109,.1);
+  border-color: rgba(166,138,109,.4);
+}
+
+.lp-road__step-num {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 1.6rem; letter-spacing: .08em;
+  color: var(--lp-gold); line-height: 1;
+}
+
+.lp-road__step-label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--lp-gold); margin: 0;
+}
+.lp-road__step-name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.95rem, 1.3vw, 1.1rem); font-weight: 400;
+  color: rgba(240,236,230,.92); margin: 0; letter-spacing: .06em;
+}
+.lp-road__step-desc {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.72rem, .9vw, .82rem); font-weight: 300;
+  color: rgba(240,236,230,.45); line-height: 1.7; margin: 0;
+}
+
+.lp-road__arrow {
+  flex-shrink: 0; width: 2.5rem; text-align: center;
+  font-size: 1.1rem; color: rgba(166,138,109,.4);
+}
+
+/* ══════════════════════════════════════════
+   6. INFO（開催情報 & 料金）
+══════════════════════════════════════════ */
+.lp-info {
+  background: var(--lp-bg);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.lp-info__inner { width: min(100%, 72rem); margin: 0 auto; }
+
+.lp-info__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.lp-info__card {
+  background: #fff;
+  border: 1px solid var(--lp-line);
+  padding: 2.2rem;
+  display: flex; flex-direction: column; gap: .9rem;
+}
+.lp-info__card--price { border-color: rgba(166,138,109,.3); }
+
+.lp-info__card-label {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--lp-mute); margin: 0;
+}
+.lp-info__card-label svg { color: var(--lp-gold); flex-shrink: 0; }
+
+.lp-info__card-val {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.95rem, 1.2vw, 1.05rem);
+  font-weight: 300; line-height: 1.9; color: var(--lp-ink); margin: 0;
+}
+.lp-info__card-price {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 400; color: var(--lp-ink); margin: 0; letter-spacing: .04em;
+}
+.lp-info__card-note {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .72rem; line-height: 1.7;
+  color: var(--lp-mute); margin: 0;
+  border-top: 1px solid var(--lp-line); padding-top: .8rem;
+}
+
+.lp-info__cta-wrap { display: flex; justify-content: center; }
+
+/* ══════════════════════════════════════════
+   7. FAQ
+══════════════════════════════════════════ */
+.lp-faq {
+  background: #fff;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--lp-line);
+}
+.lp-faq__inner { width: min(100%, 72rem); margin: 0 auto; }
+
+/* ══════════════════════════════════════════
+   8. FORM
+══════════════════════════════════════════ */
+.lp-form {
+  background: var(--lp-dark);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.lp-form__inner { width: min(100%, 64rem); margin: 0 auto; }
+.lp-form__lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .9rem; font-weight: 300;
+  color: rgba(240,236,230,.5); margin: 1.2rem 0 0; text-align: center;
+}
+
+.lp-form__body {
+  background: rgba(240,236,230,.04);
+  border: 1px solid rgba(240,236,230,.1);
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  display: flex; flex-direction: column; gap: 1.8rem;
+}
+
+.lp-form__row { display: flex; gap: 1.5rem; }
+.lp-form__row--2 > * { flex: 1; }
+
+.lp-form__field { display: flex; flex-direction: column; gap: .55rem; }
+
+.lp-form__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(240,236,230,.55); display: flex; align-items: center; gap: .5rem;
+}
+.req {
+  font-size: .58rem; background: var(--lp-gold);
+  color: #0a0808; padding: .15em .55em; letter-spacing: .1em;
+}
+
+.lp-form__input,
+.lp-form__textarea {
+  background: rgba(240,236,230,.06);
+  border: 1px solid rgba(240,236,230,.15);
+  color: rgba(240,236,230,.9);
+  font-family: var(--font-jp, sans-serif);
+  font-size: .95rem; font-weight: 300;
+  padding: .85rem 1.1rem;
+  outline: none;
+  transition: border-color .3s, background .3s;
+  width: 100%;
+}
+.lp-form__input::placeholder,
+.lp-form__textarea::placeholder { color: rgba(240,236,230,.22); }
+.lp-form__input:focus,
+.lp-form__textarea:focus {
+  border-color: rgba(166,138,109,.6);
+  background: rgba(240,236,230,.09);
+}
+.lp-form__textarea { resize: vertical; }
+
+.lp-form__submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.lp-form__privacy {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem; color: rgba(240,236,230,.3); text-align: center;
+}
+.lp-form__privacy a { color: rgba(240,236,230,.45); }
+
+/* ══════════════════════════════════════════
+   SHARED BUTTONS
+══════════════════════════════════════════ */
+.lp-btn {
+  display: inline-block; text-decoration: none;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .85rem; letter-spacing: .16em;
+  padding: 1.1rem 3rem; cursor: pointer; border: none;
+  transition: opacity .3s, background .3s;
+}
+.lp-btn--primary { background: var(--lp-gold); color: #0a0808; }
+.lp-btn--primary:hover { opacity: .82; }
+.lp-btn--submit {
+  background: var(--lp-gold); color: #0a0808;
+  min-width: 200px; font-size: .9rem; padding: 1.2rem 3.5rem;
+}
+.lp-btn--submit:hover { opacity: .82; }
+
+/* ══════════════════════════════════════════
+   PROSE（リッチエディタ本文）
+══════════════════════════════════════════ */
+.prose-light,
+.prose-dark {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.92rem, 1.1vw, 1rem);
+  font-weight: 300; line-height: 2.1; letter-spacing: .04em;
+}
+.prose-light { color: #3a3835; }
+.prose-dark  { color: #3a3532; }
+
+.prose-light :global(h2),
+.prose-dark  :global(h2) {
+  font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 400;
+  letter-spacing: .07em; margin: 2.8rem 0 1.1rem; line-height: 1.55;
+  padding-top: 2.5rem; border-top: 1px solid var(--lp-line);
+}
+.prose-light :global(h2) { color: var(--lp-ink); }
+.prose-dark  :global(h2) { color: #2a2520; border-color: rgba(139,112,80,.15); }
+
+.prose-light :global(h3),
+.prose-dark  :global(h3) { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 400; margin: 2rem 0 .8rem; }
+
+.prose-light :global(p),
+.prose-dark  :global(p) { margin: 0 0 1.5em; }
+.prose-light :global(ul),
+.prose-dark  :global(ul),
+.prose-light :global(ol),
+.prose-dark  :global(ol) { padding-left: 1.5em; margin: 0 0 1.5em; }
+.prose-light :global(li),
+.prose-dark  :global(li) { margin-bottom: .5em; }
+.prose-light :global(strong),
+.prose-dark  :global(strong) { font-weight: 500; }
+.prose-light :global(img),
+.prose-dark  :global(img) { width: 100%; height: auto; display: block; margin: 2em 0; }
+
+/* FAQ用（Q&A ブロック） */
+.prose-faq { font-family: var(--font-jp, sans-serif); font-weight: 300; line-height: 2; color: #3a3835; }
+.prose-faq :global(h2) {
+  font-size: clamp(1rem, 1.5vw, 1.15rem); font-weight: 500;
+  background: rgba(166,138,109,.08); border-left: 3px solid var(--lp-gold);
+  padding: 1rem 1.2rem; margin: 0 0 .5rem; letter-spacing: .05em;
+  color: var(--lp-ink);
+}
+.prose-faq :global(p) { margin: 0 0 2.2rem; padding: 0 .2rem 0 1.4rem; color: var(--lp-mute); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 56rem) {
+  .lp-road__steps { flex-direction: column; gap: 0; }
+  .lp-road__arrow { transform: rotate(90deg); }
+  .lp-road__step { width: 100%; flex-direction: row; text-align: left; gap: 1.2rem; padding: 1.2rem; }
+  .lp-road__step-num { min-width: 2.5rem; }
+  .lp-form__row--2 { flex-direction: column; }
+}
+@media (max-width: 48rem) {
+  .lp-hero__title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .lp-form__body { padding: 1.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-hero__bg { animation: none; }
+  .lp-hero__scroll { display: none; }
+}
+</style>
