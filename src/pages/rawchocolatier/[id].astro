@@ -1,0 +1,2165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCourseList, getCourse } from '../../lib/microcms';
+import type { CurriculumItem } from '../../lib/microcms';
+
+export async function getStaticPaths() {
+  const list = await getCourseList();
+  return list.map((c) => ({ params: { id: c.id } }));
+}
+
+const { id } = Astro.params;
+const c = await getCourse(id!);
+if (!c) return Astro.redirect('/listofcourses');
+
+const hasGallery = c.gallery && c.gallery.length > 0;
+const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
+
+/* ── ハードコード：4つの学びの柱 ── */
+const features = [
+  {
+    num: "01",
+    title: "定義から教えます",
+    body: "ローチョコレートは「生のカカオ」ではありません。高温焙煎（110〜150℃）をしないカカオを使うことが定義です。「48℃以下」と言えない理由も含め、正確な知識を基礎から学びます。",
+  },
+  {
+    num: "02",
+    title: "発酵を知らないと、ローは語れません",
+    body: "カカオ豆は発酵段階で豆の温度が50℃を超えます。菌が生きて働いた結果の熱です。この事実を知っていることが、素材を正確に理解する出発点になります。",
+  },
+  {
+    num: "03",
+    title: "素材を見分ける目を養います",
+    body: "「カカオパウダー」と「ココアパウダー」は別物です。重曹テストで判別できるようになるなど、市販素材を正確に読み解く実践的なスキルを身につけます。",
+  },
+  {
+    num: "04",
+    title: "衛生も、正面から学びます",
+    body: "カカオは屋外で発酵・乾燥され、完全な無菌状態ではありません。低温殺菌の意味と温度の根拠、リスクと向き合い方を正確に学びます。",
+  },
+];
+
+/* ── ハードコード：ギャラリー画像 ── */
+const galleryImages = [
+  { src: "/choco-real/01-beginner-flatlay.jpg",    caption: "カカオポッドから学ぶ、ローチョコレートの基礎" },
+  { src: "/choco-real/02-beginner-assorted.jpg",   caption: "初級で習得する多彩な成形テクニック" },
+  { src: "/choco-real/03-intermediate-mermaid.jpg",caption: "中級で学ぶマーメイドチョコのアレンジ成形" },
+  { src: "/choco-real/04-intermediate-hearts.jpg", caption: "色とりどりに仕上げるハート型ボンボンショコラ" },
+  { src: "/choco-real/05-advanced-assorted.jpg",   caption: "上級で極める本格ボンボンショコラの数々" },
+  { src: "/choco-real/06-junior-plating.jpg",      caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
+];
+---
+
+<Layout
+  title={`${c.title} | 東京・オンライン | ローショコラティエ協会`}
+  description={`東京（渋谷・表参道）とオンラインで受講できる${c.title}。${c.subtitle ?? ''}BASIC・INTERMEDIATE・ADVANCEの3ステップで協会認定プロ（ローチョコレートマイスター®）を目指します。`}
+  ogImage={c.heroImage?.url}
+>
+
+<!-- ── 構造化データ ── -->
+<script type="application/ld+json" set:html={JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": c.title,
+    "description": c.subtitle ?? c.title,
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "ローショコラティエ協会 / &LAB TOKYO",
+      "url": "https://andlabtokyo.biz"
+    },
+    "url": `https://andlabtokyo.biz/rawchocolatier/${c.id}`,
+    "image": c.heroImage?.url,
+    "inLanguage": "ja",
+    "courseMode": ["onsite", "online"],
+    "availableLanguage": "ja",
+    "locationCreated": { "@type": "Place", "name": "東京都渋谷区（表参道）" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://andlabtokyo.biz/" },
+      { "@type": "ListItem", "position": 2, "name": "講座一覧", "item": "https://andlabtokyo.biz/listofcourses" },
+      { "@type": "ListItem", "position": 3, "name": c.title, "item": `https://andlabtokyo.biz/rawchocolatier/${c.id}` }
+    ]
+  }
+])} />
+
+<main class="lp">
+
+<!-- ════════════════════════════
+  §1  HERO — トップページ HeroBlock と同一構造
+════════════════════════════ -->
+<section class="hero">
+  <div class="hero__media">
+    {c.heroImage
+      ? <img
+          src={`${c.heroImage.url}?w=1920&q=85`}
+          alt={c.title}
+          width={c.heroImage.width}
+          height={c.heroImage.height}
+          fetchpriority="high"
+          decoding="async"
+        />
+      : <div class="hero__media-fallback"></div>
+    }
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <p class="hero__eyebrow">COURSE · &LAB TOKYO</p>
+    <h1 class="hero__title">{c.title}</h1>
+    {c.subtitle && <p class="hero__sub">{c.subtitle}</p>}
+    <div class="hero__ctas">
+      <a href="#curriculum" class="hero__cta hero__cta--outline">講座内容を見る</a>
+      <a href="#form" class="hero__cta hero__cta--primary">今すぐ申し込む</a>
+    </div>
+  </div>
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- ════════════════════════════
+  §2  TARGET — CMS
+════════════════════════════ -->
+{c.target && (
+<section class="sec sec--warm target-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">FOR YOU</p>
+      <h2 class="sec__title">こんな方へ</h2>
+      <p class="sec__lead">あなたの「学びたい」に、この講座は応えます。</p>
+    </header>
+    <div class="prose prose--target" set:html={c.target} />
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §3  DESCRIPTION — CMS
+════════════════════════════ -->
+{c.description && (
+<section class="sec sec--offwhite">
+  <div class="sec__inner">
+    <header class="sec__hd">
+      <p class="eyebrow">ABOUT</p>
+      <h2 class="sec__title sec__title--dark">講座について</h2>
+    </header>
+    <div class="prose prose--desc" set:html={c.description} />
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §3.5  FEATURES — ハードコード（4つの学びの柱）
+════════════════════════════ -->
+<section class="sec features-sec">
+  <div class="sec__inner">
+    <header class="sec__hd">
+      <p class="eyebrow eyebrow--warm">FEATURES</p>
+      <h2 class="sec__title sec__title--dark">4つの学びの柱</h2>
+      <p class="sec__lead sec__lead--dark">「なぜそうなのか」を知っていること——それが、教える力にも、販売する自信にもつながります。</p>
+    </header>
+    <div class="features-grid">
+      {features.map(f => (
+        <div class="feature-card">
+          <span class="feature-num">{f.num}</span>
+          <h3 class="feature-title">{f.title}</h3>
+          <p class="feature-body">{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §3.8  GALLERY — ハードコード（作品写真）
+════════════════════════════ -->
+<section class="sec sec--linen hc-gallery-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">GALLERY</p>
+      <h2 class="sec__title sec__title--dark">講座で作るローチョコレートの世界</h2>
+      <p class="sec__lead">初級〜上級まで、実際にレッスンで仕上げる作品の一部をご紹介します。</p>
+    </header>
+    <div class="hc-gallery-grid">
+      {galleryImages.map(g => (
+        <div class="hc-gallery-item">
+          <img src={g.src} alt={g.caption} loading="lazy" decoding="async" />
+          <div class="hc-gallery-cap"><span>{g.caption}</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §4  GALLERY — CMS（gallery[]）
+════════════════════════════ -->
+{hasGallery && (
+<section class="sec sec--dark gallery-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--dim">GALLERY</p>
+      <h2 class="sec__title sec__title--light">講座で作るローチョコレートの世界</h2>
+    </header>
+    <div class="gallery">
+      {c.gallery!.map((img, i) => (
+        <figure class={`gallery__item gallery__item--${(i % 5) + 1}`}>
+          <img
+            src={`${img.url}?w=900&q=85`}
+            alt={`作品 ${i + 1}`}
+            width={img.width}
+            height={img.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §5  CURRICULUM — CMS（curriculum_list 配列カード）
+════════════════════════════ -->
+{hasCurriculum && (
+<section class="sec sec--white curr-sec" id="curriculum">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">CURRICULUM</p>
+      <h2 class="sec__title sec__title--dark">
+        {c.curriculum_list!.length}ステップで確実に身につくカリキュラム
+      </h2>
+      <p class="sec__lead sec__lead--dark">基礎から段階を踏んで、プロレベルの知識と技術を習得します。</p>
+    </header>
+
+    <ol class="curr-list">
+      {c.curriculum_list!.map((item: CurriculumItem, i: number) => (
+        <li class="curr-card">
+          <!-- カード画像 -->
+          <div class="curr-card__img-wrap">
+            {item.image
+              ? <img
+                  class="curr-card__img"
+                  src={`${item.image.url}?w=800&q=85`}
+                  alt={item.title}
+                  width={item.image.width}
+                  height={item.image.height}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              : <div class="curr-card__img-placeholder" aria-hidden="true"></div>
+            }
+            <div class="curr-card__step-badge">
+              <span class="curr-card__step-label">STEP</span>
+              <span class="curr-card__step-num">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          <!-- カード本文 -->
+          <div class="curr-card__body">
+            <div class="curr-card__head">
+              <h3 class="curr-card__title">{item.title}</h3>
+              {item.price && (
+                <p class="curr-card__price">{item.price}</p>
+              )}
+            </div>
+
+            <div class="curr-card__cols">
+              {item.learnings && (
+                <div class="curr-card__col">
+                  <p class="curr-card__col-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    学ぶこと
+                  </p>
+                  <div class="prose prose--curr-list" set:html={item.learnings} />
+                </div>
+              )}
+              {item.recipes && (
+                <div class="curr-card__col">
+                  <p class="curr-card__col-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                      <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/>
+                      <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                    作るレシピ
+                  </p>
+                  <div class="prose prose--curr-list" set:html={item.recipes} />
+                </div>
+              )}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §5.5  NEXT STEP — カリキュラムの直後
+════════════════════════════ -->
+<section class="sec nextstep-sec">
+  <div class="sec__inner nextstep-sec__inner">
+    <div class="road">
+      <header class="sec__hd sec__hd--center">
+        <p class="eyebrow eyebrow--warm">STEP UP</p>
+        <h2 class="sec__title sec__title--dark">次のステップへ</h2>
+        <p class="sec__lead sec__lead--dark">基礎から着実に積み上げ、協会認定プロへ。</p>
+      </header>
+      <ol class="road__steps">
+        <li class="road__step">
+          <div class="road__num">01</div>
+          <div class="road__body">
+            <p class="road__tag">BASIC</p>
+            <p class="road__name">初級講座</p>
+            <p class="road__desc">基礎理論・素材・基本レシピを体系的に習得</p>
+          </div>
+        </li>
+        <li class="road__step">
+          <div class="road__num">02</div>
+          <div class="road__body">
+            <p class="road__tag">INTERMEDIATE</p>
+            <p class="road__name">中級講座</p>
+            <p class="road__desc">応用技術・商品化レベルのデザイン性を習得</p>
+          </div>
+        </li>
+        <li class="road__step">
+          <div class="road__num">03</div>
+          <div class="road__body">
+            <p class="road__tag">ADVANCE</p>
+            <p class="road__name">上級講座</p>
+            <p class="road__desc">独自開発・ブランディング・指導力を習得</p>
+          </div>
+        </li>
+        <li class="road__step road__step--cert">
+          <div class="road__num road__num--cert">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/>
+            </svg>
+          </div>
+          <div class="road__body">
+            <p class="road__tag">PRO</p>
+            <p class="road__name">ジュニアローショコラティエ養成講座</p>
+            <p class="road__desc">ジュニアローショコラティエ養成講座へ進み、協会認定のプロとして教室開講・販売・講師活動を目指します</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §5.6  JUNIOR — ジュニアローショコラティエ養成講座
+════════════════════════════ -->
+<section class="sec junior-sec">
+  <div class="sec__inner junior-inner">
+    <div class="junior-hd">
+      <p class="eyebrow eyebrow--warm">NEXT STEP · PRO COURSE</p>
+      <h2 class="sec__title sec__title--dark">さらにステップアップ<br/>ジュニアローショコラティエ養成講座</h2>
+      <p class="sec__lead sec__lead--dark">3ステップ講座修了後、<strong>教える・販売する・広める</strong>ためのインストラクター講座へ進めます。</p>
+      <p class="junior-price-badge">PRO · 受講料 ¥85,000（税別）</p>
+    </div>
+    <div class="junior-cards">
+      <div class="junior-card">
+        <p class="junior-card__title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+          学べること
+        </p>
+        <ul class="junior-list">
+          <li>ローチョコレートの正しい指導法</li>
+          <li>レッスン開催・自分ブランドの作り方</li>
+          <li>販売の基礎知識（食品表示・価格設定）</li>
+          <li>公式テキスト使用OK（講師専用特典）</li>
+        </ul>
+      </div>
+      <div class="junior-card junior-card--benefit">
+        <p class="junior-card__title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          修了後の特典
+        </p>
+        <ul class="junior-list">
+          <li>年会費<strong>無料</strong></li>
+          <li>「ローチョコレートマイスター®」公式ロゴ使用OK</li>
+          <li>最新版テキスト<strong>無料提供</strong>（追加レシピ掲載）</li>
+          <li>レシピの<strong>商用利用OK</strong></li>
+          <li>SNS集客バックアップ</li>
+        </ul>
+      </div>
+    </div>
+    <p class="junior-note">
+      ※ 受講条件：3ステップ講座の修了者　／　受講期間：1〜3ヶ月　／　開催形式：オンラインまたは対面<br/>
+      ※ 特典は当スクールの理念に基づいた指導を行い、規定の条件を満たす場合に受けることができます。
+    </p>
+    <div class="junior-cta">
+      <a href="#form" class="btn btn--gold btn--lg">プロコースについて問い合わせる</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §6  INSTRUCTOR — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--warm instructor-sec">
+  <div class="sec__inner instructor-sec__layout">
+    <div class="instructor-sec__img-wrap">
+      <img
+        class="instructor-sec__photo"
+        src="/images/chie-ando-instructor.jpg"
+        alt="安藤千英 — &LAB TOKYO 主宰・食と哲学のプロデューサー"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="instructor-sec__body">
+      <header class="sec__hd">
+        <p class="eyebrow eyebrow--warm">INSTRUCTOR</p>
+        <h2 class="sec__title sec__title--dark">講師紹介</h2>
+      </header>
+      <p class="instructor-sec__name-en">Chie Ando</p>
+      <p class="instructor-sec__name-jp">安藤 千英</p>
+      <p class="instructor-sec__tags">
+        <span class="tag">ELLE gourmet 認定料理家</span>
+        <span class="tag">&LAB TOKYO 主宰</span>
+        <span class="tag">食と哲学のプロデューサー</span>
+      </p>
+      <div class="instructor-sec__bio">
+        <p>ローチョコレート・ロースイーツ・発酵料理の専門家。ELLE gourmet認定料理家として、食と哲学を融合させたユニークなアプローチで、食の本質と身体への深い理解を伝えています。</p>
+        <p>ローショコラティエ協会主宰として、ローチョコレートマイスター®・ローショコラティエ®・ローパティシエ®・発酵創家®の各認定資格を監修。1,000名以上の受講生を輩出し、その哲学は国内外で支持されています。</p>
+      </div>
+      <ul class="instructor-sec__awards">
+        <li>ローチョコレートマイスター® 登録商標取得</li>
+        <li>ローショコラティエ® 登録商標取得</li>
+        <li>発酵創家® 登録商標取得</li>
+        <li>NHK・雑誌・ウェブメディア多数掲載</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §7  VOICES — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec sec--dark voices-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--dim">VOICES</p>
+      <h2 class="sec__title sec__title--light">生徒さんの声</h2>
+    </header>
+    <ul class="voices" role="list">
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>チョコレートがこんなに奥深いものだと知らなかった。安藤先生の哲学的な視点から食を学ぶことで、料理への向き合い方が根本から変わりました。認定を取得してから自分のアトリエを開くことができ、今では毎月満席です。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">K.M. さん</p>
+          <p class="voice__attr">ローチョコレートマイスター® 取得／東京都</p>
+        </footer>
+      </li>
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>食と身体の繋がりを科学的かつ哲学的に学べる唯一無二の講座。素材選びから発酵の仕組みまで、「なぜ」を徹底的に教えてくれるので、応用が効く本物の知識が身につきます。仕事にする自信がつきました。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">A.T. さん</p>
+          <p class="voice__attr">発酵創家® 取得／神奈川県</p>
+        </footer>
+      </li>
+      <li class="voice">
+        <div class="voice__stars" aria-label="評価5">★★★★★</div>
+        <blockquote class="voice__body">
+          <p>ローフードという言葉のイメージを完全に覆された講座でした。難しそう・ストイックというイメージが、「おいしく・美しく・続けられる」食哲学へ。家族の食生活も変わり、自分自身も健康的になりました。</p>
+        </blockquote>
+        <footer class="voice__footer">
+          <p class="voice__name">Y.S. さん</p>
+          <p class="voice__attr">ローパティシエ® 取得／大阪府</p>
+        </footer>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §7.5  ASSOCIATION — ローショコラティエ協会について
+════════════════════════════ -->
+<section class="sec sec--white assoc-sec">
+  <div class="sec__inner assoc-inner">
+    <div class="assoc-text">
+      <header class="sec__hd">
+        <p class="eyebrow eyebrow--warm">ASSOCIATION</p>
+        <h2 class="sec__title sec__title--dark">ローショコラティエ協会について</h2>
+      </header>
+      <p class="assoc-lead">
+        ローショコラティエ協会は、食と哲学のプロデューサー・安藤千英が主宰する任意団体です。「食べることは生きること」を核に、ローチョコレート・発酵・ローフードの正確な知識と技術を体系化し、指導者の育成を行っています。
+      </p>
+      <ul class="assoc-marks">
+        <li><span class="assoc-mark__reg">®</span>ローチョコレートマイスター</li>
+        <li><span class="assoc-mark__reg">®</span>ローショコラティエ</li>
+        <li><span class="assoc-mark__reg">®</span>ローパティシエ</li>
+        <li><span class="assoc-mark__reg">®</span>発酵創家</li>
+      </ul>
+      <p class="assoc-note">上記4つの名称はすべて日本国内の登録商標です。認定者は® マークとともに使用することができます。</p>
+    </div>
+    <div class="assoc-img">
+      <img src="/choco-real/06-junior-plating.jpg" alt="ローショコラティエ協会・認定講座" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §7.6  ROADMAP — 2トラック資格図
+════════════════════════════ -->
+<section class="sec roadmap-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">CERTIFICATION PATHWAY</p>
+      <h2 class="sec__title sec__title--dark">資格取得のロードマップ</h2>
+      <p class="sec__lead sec__lead--dark">ロースイーツマイスターから、最高峰グレードへ</p>
+    </header>
+
+    <div class="cmap">
+      <!-- 最高峰 -->
+      <div class="cmap__apex">
+        <p class="cmap__apex-label">GRAND MASTER &middot; 最高峰</p>
+        <p class="cmap__apex-title">ローショコラティエ<span class="cmap__r">®</span></p>
+      </div>
+      <p class="cmap__bridge">▲ 両コースの全課程を修了した方が挑戦できます</p>
+
+      <!-- 2トラック -->
+      <div class="cmap__tracks">
+
+        <!-- Sweets Track -->
+        <div class="cmap__track cmap__track--sweets">
+          <div class="cmap__track-hd">
+            <span class="cmap__track-en">Sweets Track</span>
+            <span class="cmap__track-sep"> | </span>
+            <span class="cmap__track-jp">ロースイーツ</span>
+          </div>
+          <div class="cmap__pro cmap__pro--sweets">
+            <p class="cmap__pro-name">ローパティシエ<span class="cmap__r">®</span></p>
+            <p class="cmap__pro-label">PROFESSIONAL</p>
+          </div>
+          <p class="cmap__up">↑ 課題提出</p>
+          <div class="cmap__box">ローパティシエ®養成講座</div>
+          <p class="cmap__up">↑</p>
+          <div class="cmap__box">ロースイーツマイスター認定</div>
+          <p class="cmap__up">↑</p>
+          <div class="cmap__steps">
+            <p class="cmap__steps-label">3ステップ受講（初級 → 中級 → 上級）</p>
+            <div class="cmap__step-row">
+              <div class="cmap__step"><p class="cmap__step-name">初級</p><p class="cmap__step-sub">ジェントル</p></div>
+              <div class="cmap__step"><p class="cmap__step-name">中級</p><p class="cmap__step-sub">コスメ</p></div>
+              <div class="cmap__step"><p class="cmap__step-name">上級</p><p class="cmap__step-sub">焼かない</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chocolate Track -->
+        <div class="cmap__track cmap__track--choco">
+          <div class="cmap__track-hd">
+            <span class="cmap__track-en">Chocolate Track</span>
+            <span class="cmap__track-sep"> | </span>
+            <span class="cmap__track-jp">ローチョコレート</span>
+          </div>
+          <div class="cmap__pro cmap__pro--choco">
+            <p class="cmap__pro-name">ジュニアローショコラティエ</p>
+            <p class="cmap__pro-label">JUNIOR</p>
+          </div>
+          <p class="cmap__up">↑ 課題提出</p>
+          <div class="cmap__box">ジュニアローショコラティエ養成講座</div>
+          <p class="cmap__up">↑</p>
+          <div class="cmap__box">ローチョコレートマイスター認定</div>
+          <p class="cmap__up">↑</p>
+          <div class="cmap__steps">
+            <p class="cmap__steps-label">3ステップ受講（初級 → 中級 → 上級）</p>
+            <div class="cmap__step-row">
+              <div class="cmap__step"><p class="cmap__step-name">初級</p></div>
+              <div class="cmap__step"><p class="cmap__step-name">中級</p></div>
+              <div class="cmap__step"><p class="cmap__step-name">上級</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="cmap__note">
+        ロースイーツ側は <strong>初級ジェントル → 中級コスメ → 上級焼かない</strong> の3ステップです。<br/>
+        両トラックのマイスター認定 → 養成講座 → プロ認定を経て、最高峰「ローショコラティエ®」へ。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §8  INFO — PRICING + FORMAT（ハードコード）
+════════════════════════════ -->
+<section class="sec info-sec">
+  <div class="sec__inner">
+
+    <!-- ── PRICING ─────────────────── -->
+    <header class="sec__hd">
+      <p class="eyebrow eyebrow--warm">PRICING</p>
+      <h2 class="sec__title sec__title--dark">受講料一覧</h2>
+      <p class="sec__lead sec__lead--dark">すべて税別表示。初級から順に受講でき、各ステップ単体での受講も可能です。</p>
+    </header>
+
+    <div class="pricing-wrap">
+      <div class="pricing-table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th class="col-level">レベル</th>
+              <th class="col-name">講座名</th>
+              <th class="col-price">受講料（税別）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="level-badge level-badge--basic">BASIC</span></td>
+              <td>初級講座</td>
+              <td class="price-cell">¥25,000</td>
+            </tr>
+            <tr>
+              <td><span class="level-badge level-badge--mid">INTERMEDIATE</span></td>
+              <td>中級講座</td>
+              <td class="price-cell">¥35,000</td>
+            </tr>
+            <tr>
+              <td><span class="level-badge level-badge--adv">ADVANCE</span></td>
+              <td>上級講座</td>
+              <td class="price-cell">¥43,000</td>
+            </tr>
+            <tr class="row-subtotal">
+              <td></td>
+              <td>ローチョコレートマイスター® 3ステップ合計</td>
+              <td class="price-cell">¥103,000</td>
+            </tr>
+            <tr>
+              <td><span class="level-badge level-badge--pro">PRO</span></td>
+              <td>ジュニアローショコラティエ養成講座</td>
+              <td class="price-cell">¥85,000</td>
+            </tr>
+            <tr class="row-total">
+              <td></td>
+              <td>全課程合計</td>
+              <td class="price-cell price-cell--total">¥188,000<small>（税込 ¥206,800）</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {c.schedule && (
+        <div class="pricing-schedule">
+          <p class="pricing-schedule__label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            開催日程
+          </p>
+          <p class="pricing-schedule__val">{c.schedule}</p>
+        </div>
+      )}
+
+      <div class="pricing-payment">
+        <p class="pricing-payment__label">ご利用可能なお支払い方法</p>
+        <img
+          class="pricing-payment__img"
+          src="https://static.wixstatic.com/media/857257_3b7282e63925474cbf838fbaf533fd73~mv2.png/v1/fill/w_1428,h_204,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/card.png"
+          alt="ご利用可能なクレジットカード：VISA・MasterCard・American Express・JCB など"
+          loading="lazy"
+          width="714" height="102"
+        />
+      </div>
+      <p class="pricing-note">
+        ※ お支払いはクレジットカード決済またはお振込のみ。分割払いは対応しておりません。<br/>
+        ※ 各ステップ単体での受講も可能です。ご不明な点はお気軽にお問い合わせください。
+      </p>
+    </div>
+
+    <!-- ── FORMAT ─────────────────── -->
+    <header class="sec__hd info-format-hd">
+      <p class="eyebrow eyebrow--warm">FORMAT</p>
+      <h2 class="sec__title sec__title--dark">受講形式</h2>
+      <p class="sec__lead sec__lead--dark">東京・渋谷（表参道）での対面レッスンのほか、全国・海外からオンラインでも受講可能です。</p>
+    </header>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <span class="format-card__badge">PLAN A — 対面</span>
+        <p class="format-card__title">3日間コース</p>
+        <ul class="format-card__list">
+          <li>座学（動画視聴）＋ 実習 3日間</li>
+          <li>時間：11:00〜15:30</li>
+          <li>場所：東京・渋谷（表参道）</li>
+        </ul>
+      </div>
+      <div class="format-card">
+        <span class="format-card__badge">PLAN B — 対面</span>
+        <p class="format-card__title">2日間コース</p>
+        <ul class="format-card__list">
+          <li>座学（動画視聴）＋ 実習 2日間</li>
+          <li>凝縮カリキュラム対応</li>
+          <li>場所：東京・渋谷（表参道）</li>
+        </ul>
+      </div>
+      <div class="format-card format-card--online">
+        <span class="format-card__badge">ONLINE — 全国・海外対応</span>
+        <p class="format-card__title">自宅からそのまま受講</p>
+        <ul class="format-card__list">
+          <li>ビデオ通話で講師と直接やり取り</li>
+          <li>地方・海外・育児中の方も歓迎</li>
+          <li>ご自宅で本格的な技術を習得</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-sec__cta">
+      <a href="#form" class="btn btn--gold btn--lg">このコースに申し込む</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════
+  §9  FAQ — CMS（アコーディオン）
+════════════════════════════ -->
+{c.faq && (
+<section class="sec sec--white faq-sec">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">FAQ</p>
+      <h2 class="sec__title sec__title--dark">よくあるご質問</h2>
+    </header>
+    <div class="faq__src" aria-hidden="true" style="display:none" set:html={c.faq} />
+    <dl class="faq__list" id="faqList"></dl>
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════
+  §11  FORM — ハードコード（共通）
+════════════════════════════ -->
+<section class="sec form-sec" id="form">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">APPLY</p>
+      <h2 class="sec__title sec__title--dark">お申し込み・お問い合わせ</h2>
+      <p class="form-sec__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
+    </header>
+    <form
+      class="form-sec__form"
+      name={`course-apply-${c.id}`}
+      method="POST"
+      data-netlify="true"
+      novalidate
+    >
+      <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
+      <input type="hidden" name="course" value={c.title} />
+
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="f-name">お名前 <span class="req">必須</span></label>
+          <input class="form-input" type="text" id="f-name" name="name"
+            placeholder="安藤 千英" autocomplete="name" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-kana">フリガナ</label>
+          <input class="form-input" type="text" id="f-kana" name="kana"
+            placeholder="アンドウ チエ" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="f-email">メールアドレス <span class="req">必須</span></label>
+          <input class="form-input" type="email" id="f-email" name="email"
+            placeholder="your@email.com" autocomplete="email" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="f-tel">電話番号</label>
+          <input class="form-input" type="tel" id="f-tel" name="tel"
+            placeholder="090-0000-0000" autocomplete="tel" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="f-when">ご希望の日程・時期</label>
+        <input class="form-input" type="text" id="f-when" name="schedule"
+          placeholder="例：9月以降の週末を希望" />
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="f-msg">お問い合わせ内容</label>
+        <textarea class="form-textarea" id="f-msg" name="message"
+          rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
+      </div>
+      <div class="form-submit">
+        <button class="btn btn--gold btn--lg" type="submit">送信する</button>
+        <p class="form-privacy">
+          送信いただくことで
+          <a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
+          に同意したものとみなします。
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+</Layout>
+
+<!-- FAQ アコーディオン生成 -->
+<script>
+(function () {
+  const src = document.querySelector<HTMLElement>('.faq__src');
+  const list = document.getElementById('faqList');
+  if (!src || !list) return;
+
+  src.querySelectorAll('h2').forEach((h2, i) => {
+    const q = h2.textContent?.trim() ?? '';
+    const answerNodes: Node[] = [];
+    let sib = h2.nextElementSibling;
+    while (sib && sib.tagName !== 'H2') {
+      answerNodes.push(sib.cloneNode(true));
+      sib = sib.nextElementSibling;
+    }
+
+    const dt = document.createElement('dt');
+    dt.className = 'faq-q';
+    dt.setAttribute('role', 'button');
+    dt.setAttribute('tabindex', '0');
+    dt.setAttribute('aria-expanded', 'false');
+    dt.setAttribute('aria-controls', `faq-a-${i}`);
+    dt.innerHTML = `<span class="faq-q__text">${q}</span>
+      <span class="faq-q__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </span>`;
+
+    const dd = document.createElement('dd');
+    dd.className = 'faq-a';
+    dd.id = `faq-a-${i}`;
+    dd.hidden = true;
+    const inner = document.createElement('div');
+    inner.className = 'faq-a__inner';
+    answerNodes.forEach(n => inner.appendChild(n));
+    dd.appendChild(inner);
+
+    const toggle = () => {
+      const open = dt.getAttribute('aria-expanded') === 'true';
+      dt.setAttribute('aria-expanded', String(!open));
+      dd.hidden = open;
+    };
+    dt.addEventListener('click', toggle);
+    dt.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    list.appendChild(dt);
+    list.appendChild(dd);
+  });
+})();
+</script>
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+.lp {
+  --gold:     #a68a6d;
+  --gold-lt:  #c4a882;
+  --gold-dim: rgba(166,138,109,.55);
+  --gold-bg:  rgba(166,138,109,.09);
+  --dark:     #141413;
+  --ink:      #1a1917;
+  --sub:      #3a3835;
+  --muted:    #6b6560;
+  --warm:     #f4ede3;
+  --offwhite: #fafaf8;
+  --line:     rgba(26,25,23,.1);
+  --r:        0.75rem;
+}
+
+/* ═══════════════════════════════════════════
+   SHARED: BUTTONS
+═══════════════════════════════════════════ */
+.btn {
+  display: inline-block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none; padding: 1rem 2.6rem;
+  border: 1px solid transparent;
+  cursor: pointer; transition: opacity .28s, background .28s, border-color .28s, color .28s;
+  white-space: nowrap;
+}
+.btn--gold  { background: var(--gold); color: #0a0808; border-color: var(--gold); }
+.btn--gold:hover { opacity: .78; }
+.btn--ghost { background: transparent; color: rgba(240,236,230,.65); border-color: rgba(240,236,230,.28); }
+.btn--ghost:hover { background: rgba(240,236,230,.07); border-color: rgba(240,236,230,.55); color: rgba(240,236,230,.9); }
+.btn--lg { padding: 1.15rem 3.2rem; font-size: .86rem; }
+
+/* ═══════════════════════════════════════════
+   SHARED: SECTION SCAFFOLD
+═══════════════════════════════════════════ */
+.sec { padding: clamp(6rem, 12vw, 11rem) clamp(1.5rem, 5vw, 5rem); }
+.sec--dark     { background: var(--dark); }
+.sec--ink      { background: #0e0c0b; }
+.sec--warm     { background: var(--warm); }
+.sec--offwhite { background: var(--offwhite); }
+.sec--white    { background: #fff; border-top: 1px solid var(--line); }
+
+.sec__inner { width: min(100%, 78rem); margin: 0 auto; }
+
+.sec__hd { margin-bottom: clamp(3.5rem, 6vw, 6rem); }
+.sec__hd--center { text-align: center; }
+
+.sec__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.65rem, 3.2vw, 2.7rem);
+  font-weight: 300; letter-spacing: .09em; line-height: 1.45; margin: 0;
+}
+.sec__title--dark  { color: var(--ink); }
+.sec__title--light { color: rgba(240,236,230,.93); }
+
+.sec__lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.9rem, 1.1vw, 1rem);
+  font-weight: 300; line-height: 2;
+  color: var(--muted); margin: 1.2rem 0 0;
+}
+.sec__lead--dark { color: #6b6560; }
+
+/* ═══════════════════════════════════════════
+   SHARED: EYEBROW
+═══════════════════════════════════════════ */
+.eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .4em; text-transform: uppercase;
+  display: block; margin: 0 0 .9rem;
+}
+.eyebrow--gold { color: var(--gold); }
+.eyebrow--warm { color: #9a7858; }
+.eyebrow--dim  { color: rgba(240,236,230,.38); }
+
+/* ═══════════════════════════════════════════
+   §1  HERO — HeroBlock.astro と同一構造
+═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg-dark, #141413);
+}
+
+.hero__media {
+  position: absolute; inset: 0;
+}
+.hero__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  animation: heroZoom 20s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.07); }
+  to   { transform: scale(1); }
+}
+
+.hero__media-fallback {
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(ellipse at 28% 55%, rgba(90,55,18,.4) 0%, transparent 55%),
+    linear-gradient(155deg, #1e1a12 0%, #0a0806 100%);
+}
+
+.hero__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(20,12,10,.92) 0%, rgba(20,12,10,.2) 100%),
+    linear-gradient(to top, rgba(20,12,10,.6) 0%, transparent 50%);
+}
+
+.hero__inner {
+  position: relative; z-index: 1;
+  width: min(100% - 3rem, 80rem);
+  margin: 0 auto;
+  padding: clamp(8rem, 18vh, 14rem) 0 clamp(6rem, 12vh, 10rem);
+}
+
+.hero__eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
+  color: var(--gold, #a68a6d); margin: 0 0 1.4rem; opacity: .9;
+}
+
+.hero__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 300; line-height: 1.25; letter-spacing: .04em;
+  color: #f8f3ec; margin: 0 0 1.2rem; max-width: 16em;
+  text-shadow: 0 2px 24px rgba(0,0,0,.65), 0 8px 64px rgba(0,0,0,.45);
+}
+
+.hero__sub {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.92rem, 1.6vw, 1.22rem);
+  font-weight: 300; line-height: 1.9; letter-spacing: .06em;
+  color: rgba(240,236,226,.65); margin: 0 0 2.4rem; max-width: 30em;
+}
+
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+.hero__cta {
+  display: inline-flex; align-items: center;
+  padding: .85em 2em;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background .3s, border-color .3s, color .3s;
+}
+.hero__cta--outline {
+  background: rgba(255,255,255,.06);
+  border-color: rgba(240,236,226,.38);
+  color: rgba(240,236,226,.85);
+  backdrop-filter: blur(4px);
+}
+.hero__cta--outline:hover {
+  background: rgba(255,255,255,.11);
+  border-color: rgba(166,138,109,.65);
+  color: #f8f3ec;
+}
+.hero__cta--primary {
+  background: var(--gold, #a68a6d);
+  border-color: var(--gold, #a68a6d);
+  color: #fff;
+}
+.hero__cta--primary:hover {
+  background: #8a6e53;
+  border-color: #8a6e53;
+}
+
+.hero__scroll {
+  position: absolute; left: 50%; bottom: 2.2rem;
+  transform: translateX(-50%);
+}
+.hero__scroll span {
+  display: block; width: 1px; height: 3.8rem;
+  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.7));
+  animation: scrollPulse 2.8s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .hero__title { font-size: clamp(2rem, 10vw, 3.2rem); }
+  .hero__ctas { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__media img { animation: none; }
+  .hero__scroll { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   §3.5  FEATURES（4つの学びの柱）
+═══════════════════════════════════════════ */
+.features-sec .sec__inner { max-width: 82rem; }
+.sec--linen { background: #f7f4ef; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.4rem;
+}
+.feature-card {
+  border-top: 1px solid rgba(166,138,109,.35);
+  padding-top: 1.6rem;
+}
+.feature-num {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 2.4rem; letter-spacing: .04em;
+  color: var(--gold); opacity: .45;
+  display: block; margin-bottom: .5rem;
+  line-height: 1;
+}
+.feature-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.98rem, 1.3vw, 1.1rem); font-weight: 400;
+  color: var(--ink); margin: 0 0 .75rem; letter-spacing: .04em;
+}
+.feature-body {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.82rem, 1vw, .9rem); font-weight: 300;
+  color: var(--sub); line-height: 1.95;
+}
+
+/* ═══════════════════════════════════════════
+   §3.8  GALLERY ハードコード
+═══════════════════════════════════════════ */
+.hc-gallery-sec .sec__inner { max-width: 90rem; }
+
+.hc-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.hc-gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: calc(var(--r) * .6);
+}
+.hc-gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 1s cubic-bezier(.16,1,.3,1);
+}
+.hc-gallery-item:hover img { transform: scale(1.06); }
+.hc-gallery-cap {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end;
+  padding: 1.2rem;
+  background: linear-gradient(to top, rgba(10,8,4,.75) 0%, transparent 60%);
+  opacity: 0; transition: opacity .28s;
+}
+.hc-gallery-item:hover .hc-gallery-cap { opacity: 1; }
+.hc-gallery-cap span {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 300;
+  color: rgba(248,243,236,.88); line-height: 1.6;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 760px) {
+  .hc-gallery-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .hc-gallery-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   §2  TARGET（こんな方へ）
+═══════════════════════════════════════════ */
+.target-sec .sec__inner { max-width: 74rem; }
+
+/* ═══════════════════════════════════════════
+   §4  GALLERY
+═══════════════════════════════════════════ */
+.gallery-sec .sec__inner { max-width: 90rem; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 200px;
+  gap: .6rem;
+}
+/* 5パターンのタイル形状を繰り返す */
+.gallery__item { overflow: hidden; border-radius: calc(var(--r) * 0.6); }
+.gallery__item--1 { grid-column: span 5; grid-row: span 2; }
+.gallery__item--2 { grid-column: span 4; grid-row: span 1; }
+.gallery__item--3 { grid-column: span 3; grid-row: span 2; }
+.gallery__item--4 { grid-column: span 4; grid-row: span 1; }
+.gallery__item--5 { grid-column: span 7; grid-row: span 2; }
+
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 1s cubic-bezier(.16,1,.3,1);
+}
+.gallery__item:hover img { transform: scale(1.06); }
+.gallery__item figcaption { display: none; }
+
+/* ═══════════════════════════════════════════
+   §5  CURRICULUM カードリスト
+═══════════════════════════════════════════ */
+.curr-sec .sec__inner { max-width: 82rem; }
+
+.curr-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 3rem;
+}
+
+/* カード全体 */
+.curr-card {
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 28px rgba(26,25,23,.06);
+  transition: box-shadow .4s;
+}
+.curr-card:hover { box-shadow: 0 10px 48px rgba(26,25,23,.11); }
+
+/* 左：画像エリア */
+.curr-card__img-wrap {
+  position: relative; overflow: hidden;
+  background: #e8ddd2;
+  /* グリッド左列として高さを親に合わせる */
+  min-height: 340px;
+}
+.curr-card__img {
+  /* ラッパーいっぱいに引き伸ばす */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+  transition: transform 1.4s cubic-bezier(.16,1,.3,1);
+}
+.curr-card:hover .curr-card__img { transform: scale(1.06); }
+
+.curr-card__img-placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #e8ddd2 0%, #d4c4b0 100%);
+}
+
+/* STEPバッジ（画像左上） */
+.curr-card__step-badge {
+  position: absolute; top: 0; left: 0;
+  background: var(--gold);
+  padding: .6rem 1.1rem;
+  display: flex; flex-direction: column; align-items: center;
+  line-height: 1;
+}
+.curr-card__step-label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .48rem; letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(10,8,6,.65); margin-bottom: .2rem;
+}
+.curr-card__step-num {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 1.35rem; letter-spacing: .04em; font-weight: 400;
+  color: #0a0808;
+}
+
+/* 右：テキストエリア */
+.curr-card__body {
+  padding: clamp(1.8rem, 3.5vw, 2.8rem);
+  display: flex; flex-direction: column; gap: 1.8rem;
+}
+
+.curr-card__head {
+  display: flex; align-items: baseline;
+  justify-content: space-between; flex-wrap: wrap; gap: .8rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.curr-card__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.15rem, 2vw, 1.55rem); font-weight: 400;
+  letter-spacing: .07em; color: var(--ink); margin: 0;
+}
+.curr-card__price {
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.9rem, 1.3vw, 1.05rem); letter-spacing: .06em;
+  color: var(--gold); margin: 0; white-space: nowrap;
+}
+
+/* 学ぶこと / 作るレシピ 2列 */
+.curr-card__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.curr-card__col-label {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 .85rem;
+}
+.curr-card__col-label svg { color: var(--gold); flex-shrink: 0; }
+
+/* prose--curr-list: リッチエディタの箇条書き専用（洗練版） */
+.prose--curr-list {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.85rem, 1vw, .94rem);
+  font-weight: 300; line-height: 1.95; letter-spacing: .03em;
+  color: var(--sub);
+}
+/* ul/ol → カスタム縦リスト */
+.prose--curr-list :global(ul),
+.prose--curr-list :global(ol) {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0;
+}
+/* li → ゴールド左ボーダー + 上下セパレーター */
+.prose--curr-list :global(li) {
+  padding: .6rem 0 .6rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(26,25,23,.07);
+}
+.prose--curr-list :global(li:first-child) {
+  border-top: 1px solid rgba(26,25,23,.07);
+}
+/* ゴールドドット */
+.prose--curr-list :global(li)::before {
+  content: '';
+  position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%;
+  flex-shrink: 0;
+}
+/* p が直接来る場合も対応 */
+.prose--curr-list :global(p) { margin: 0; }
+/* strong/b */
+.prose--curr-list :global(strong),
+.prose--curr-list :global(b) {
+  font-weight: 500; color: #7a5c35;
+}
+
+/* ═══════════════════════════════════════════
+   ▸ PROSE 共通（リッチエディタ全体）
+═══════════════════════════════════════════ */
+.prose {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.95rem, 1.2vw, 1.06rem);
+  font-weight: 300; line-height: 2.2; letter-spacing: .04em;
+  color: var(--sub);
+}
+
+/* strong / b → ブランドゴールドブラウン */
+.prose :global(strong),
+.prose :global(b) {
+  font-weight: 600;
+  color: #7a5930;
+  background: linear-gradient(to right, rgba(166,138,109,.15), rgba(166,138,109,.06));
+  padding: .05em .28em;
+  border-radius: 3px;
+  border-bottom: 1px solid rgba(166,138,109,.3);
+}
+
+/* 見出し */
+.prose :global(h2) {
+  font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 400;
+  color: var(--ink); letter-spacing: .07em; line-height: 1.55;
+  margin: 3.5rem 0 1.2rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to right, rgba(166,138,109,.1), rgba(166,138,109,.03));
+  border-left: 3px solid var(--gold);
+}
+.prose :global(h3) {
+  font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 400;
+  color: var(--ink); margin: 2.5rem 0 .85rem; letter-spacing: .04em;
+}
+
+.prose :global(p)  { margin: 0 0 1.65em; }
+.prose :global(ul),
+.prose :global(ol) { padding-left: 1.6em; margin: 0 0 1.65em; }
+.prose :global(li) { margin-bottom: .65em; line-height: 2; }
+.prose :global(li::marker) { color: var(--gold); }
+
+/* ★ 画像 → 角丸・レスポンシブ・横並び考慮 */
+.prose :global(img) {
+  display: block; max-width: 100%; height: auto;
+  border-radius: var(--r);
+  margin: 2em auto;
+  box-shadow: 0 6px 28px rgba(26,25,23,.1);
+}
+.prose :global(figure) {
+  margin: 2em 0; display: flex; flex-direction: column; align-items: center;
+}
+.prose :global(figure img) { margin: 0; }
+.prose :global(figcaption) {
+  font-size: .74rem; color: var(--muted); margin-top: .55rem;
+}
+/* 横並び画像（td内） */
+.prose :global(table) { width: 100%; border-collapse: collapse; margin: 2em 0; }
+.prose :global(td), .prose :global(th) { vertical-align: top; padding: .5rem; }
+.prose :global(td img), .prose :global(th img) {
+  border-radius: calc(var(--r) * 0.6); margin: .3em 0;
+}
+
+/* ターゲットセクション：li → FEATURES カードと同一スタイル */
+.prose--target :global(ul) {
+  list-style: none; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.4rem; margin: 2.4rem 0 0;
+  counter-reset: target-counter;
+}
+.prose--target :global(li) {
+  counter-increment: target-counter;
+  border-top: 1px solid rgba(166,138,109,.35);
+  padding-top: 1.6rem;
+  margin: 0;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.82rem, 1vw, .9rem);
+  font-weight: 300;
+  color: var(--sub);
+  line-height: 1.95;
+}
+.prose--target :global(li)::before {
+  content: counter(target-counter, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 2.4rem; letter-spacing: .04em;
+  color: var(--gold); opacity: .45;
+  margin-bottom: .5rem; line-height: 1;
+}
+.prose--target :global(li::marker) { content: none; }
+
+/* ═══════════════════════════════════════════
+   §6  INSTRUCTOR
+═══════════════════════════════════════════ */
+.instructor-sec .sec__inner { max-width: 78rem; }
+.instructor-sec__layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.instructor-sec__img-wrap { position: sticky; top: 5rem; }
+.instructor-sec__photo {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: center top;
+  display: block; border-radius: 4px;
+}
+
+.instructor-sec__body .sec__hd { margin-bottom: 1.5rem; }
+
+.instructor-sec__name-en {
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300; letter-spacing: .12em;
+  color: var(--ink); margin: 0;
+}
+.instructor-sec__name-jp {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .85rem; font-weight: 300;
+  color: var(--muted); margin: .3rem 0 1.4rem;
+  letter-spacing: .12em;
+}
+
+.instructor-sec__tags {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-bottom: 1.8rem;
+}
+.tag {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .12em;
+  color: var(--gold); border: 1px solid rgba(166,138,109,.3);
+  padding: .3em .85em; border-radius: 50px;
+}
+
+.instructor-sec__bio {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.9rem, 1.1vw, .98rem); font-weight: 300;
+  line-height: 2.1; color: var(--sub); margin-bottom: 1.8rem;
+}
+.instructor-sec__bio p { margin: 0 0 1.2em; }
+
+.instructor-sec__awards {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: .65rem;
+  border-top: 1px solid var(--line); padding-top: 1.6rem;
+}
+.instructor-sec__awards li {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .82rem; font-weight: 300;
+  color: var(--muted); padding-left: 1.4rem; position: relative;
+}
+.instructor-sec__awards li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--gold); font-size: .65rem;
+}
+
+/* ═══════════════════════════════════════════
+   §7  VOICES
+═══════════════════════════════════════════ */
+.voices-sec .sec__inner { max-width: 90rem; }
+
+.voices {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.voice {
+  background: rgba(240,236,230,.04);
+  border: 1px solid rgba(240,236,230,.09);
+  padding: 2.2rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+  border-radius: calc(var(--r) * 0.5);
+  transition: background .3s;
+}
+.voice:hover { background: rgba(240,236,230,.07); }
+
+.voice__stars {
+  font-size: .85rem; color: var(--gold); letter-spacing: .05em;
+}
+.voice__body {
+  margin: 0; flex: 1;
+}
+.voice__body p {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.85rem, 1vw, .94rem); font-weight: 300;
+  line-height: 2.05; color: rgba(240,236,230,.68);
+  margin: 0;
+}
+
+.voice__footer {}
+.voice__name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .88rem; font-weight: 400;
+  color: rgba(240,236,230,.82); margin: 0;
+}
+.voice__attr {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .1em;
+  color: rgba(240,236,230,.32); margin: .3rem 0 0;
+}
+
+/* ═══════════════════════════════════════════
+   §7.5  ASSOCIATION
+═══════════════════════════════════════════ */
+.assoc-sec { background: #fff; }
+.assoc-inner {
+  max-width: 80rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem); align-items: center;
+}
+.assoc-text .sec__hd { margin-bottom: 1.6rem; }
+.assoc-lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.92rem, 1.2vw, 1.02rem); font-weight: 300;
+  line-height: 2.1; letter-spacing: .04em;
+  color: var(--sub); margin: 0 0 2rem;
+}
+.assoc-marks {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: .6rem; margin: 0 0 1.4rem;
+}
+.assoc-marks li {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.88rem, 1.1vw, .96rem); font-weight: 300;
+  color: var(--ink);
+}
+.assoc-mark__reg {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; background: var(--gold); color: #fff;
+  padding: .12em .45em; border-radius: 2px; flex-shrink: 0;
+  letter-spacing: .04em;
+}
+.assoc-note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 300; line-height: 1.85;
+  color: var(--muted);
+}
+.assoc-img { border-radius: 4px; overflow: hidden; }
+.assoc-img img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4/3; }
+
+/* ═══════════════════════════════════════════
+   §7.6  ROADMAP — 2トラック資格図 (cmap)
+═══════════════════════════════════════════ */
+.roadmap-sec { background: #f7f4ef; }
+.roadmap-sec .sec__inner { max-width: 72rem; }
+
+.cmap { margin: clamp(2.4rem, 4vw, 3.6rem) 0 0; }
+
+/* 最高峰ボックス */
+.cmap__apex {
+  border: 1.5px solid var(--gold);
+  border-radius: 4px;
+  padding: 1.2rem 2rem;
+  text-align: center;
+  max-width: 28rem; margin: 0 auto;
+  background: #fff;
+}
+.cmap__apex-label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 .4rem;
+}
+.cmap__apex-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.05rem, 2vw, 1.3rem); font-weight: 400;
+  color: var(--ink); margin: 0;
+}
+.cmap__r { font-size: .65em; vertical-align: super; }
+
+/* つなぎテキスト */
+.cmap__bridge {
+  text-align: center;
+  font-family: var(--font-jp, sans-serif);
+  font-size: .72rem; color: var(--sub); margin: .9rem 0 1.4rem;
+}
+
+/* 2カラム */
+.cmap__tracks {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+
+/* 各トラック — 上から下へ flex */
+.cmap__track {
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 0;
+}
+
+/* トラックヘッダー */
+.cmap__track-hd {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem; letter-spacing: .08em;
+  padding: .6rem 1rem; text-align: center;
+  color: #fff; border-radius: 3px 3px 0 0;
+}
+.cmap__track--sweets .cmap__track-hd { background: #8f6070; }
+.cmap__track--choco  .cmap__track-hd { background: #3f2412; }
+.cmap__track-sep { opacity: .5; margin: 0 .3em; }
+
+/* PRO認定ボックス */
+.cmap__pro {
+  padding: .8rem 1rem; text-align: center;
+}
+.cmap__pro--sweets { background: #7a4d5e; }
+.cmap__pro--choco  { background: #301a0c; }
+.cmap__pro-name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.82rem, 1.2vw, .95rem); font-weight: 400;
+  color: #fff; margin: 0 0 .2rem;
+}
+.cmap__pro-label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .55rem; letter-spacing: .2em;
+  color: rgba(255,255,255,.6); margin: 0;
+}
+
+/* 矢印テキスト */
+.cmap__up {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .68rem; color: var(--muted);
+  text-align: center; margin: .4rem 0; line-height: 1;
+}
+
+/* 中間ボックス */
+.cmap__box {
+  border: 1px solid rgba(166,138,109,.35);
+  border-radius: 3px;
+  padding: .65rem 1rem;
+  text-align: center;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.76rem, 1.1vw, .85rem);
+  color: var(--ink); background: #fff;
+}
+
+/* 3ステップエリア */
+.cmap__steps {
+  border: 1.5px dashed rgba(166,138,109,.35);
+  border-radius: 4px;
+  padding: .7rem .7rem .8rem;
+  background: rgba(255,255,255,.5);
+  margin-top: .3rem;
+}
+.cmap__steps-label {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .65rem; color: #a8654a;
+  text-align: center; margin: 0 0 .6rem;
+}
+.cmap__step-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .4rem;
+}
+.cmap__step {
+  border: 1px solid rgba(166,138,109,.3);
+  border-radius: 3px; padding: .5rem .3rem;
+  text-align: center; background: #fff;
+}
+.cmap__step-name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 400;
+  color: var(--ink); margin: 0;
+}
+.cmap__step-sub {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .62rem; color: var(--muted);
+  margin: .15rem 0 0;
+}
+
+/* 下部テキスト */
+.cmap__note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 300; line-height: 1.9;
+  color: var(--sub); text-align: center;
+  margin: 1.8rem 0 0;
+}
+.cmap__note strong { color: var(--ink); font-weight: 400; }
+
+/* ═══════════════════════════════════════════
+   §10.5  JUNIOR
+═══════════════════════════════════════════ */
+.junior-sec { background: #fff; }
+.junior-inner { max-width: 80rem; }
+.junior-hd { max-width: 56rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.junior-hd .sec__title { margin-bottom: .6rem; }
+.junior-price-badge {
+  display: inline-block;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: var(--font-ui, sans-serif);
+  font-size: .78rem; letter-spacing: .1em;
+  padding: .38em 1.2em; border-radius: 2em; margin-top: 1.4rem;
+}
+.junior-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.6rem; margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.junior-card {
+  background: #fdfaf6;
+  border: 1px solid rgba(166,138,109,.18);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: clamp(1.8rem, 3vw, 2.6rem);
+}
+.junior-card--benefit { border-top-color: #c9a87a; }
+.junior-card__title {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.94rem, 1.2vw, 1.06rem); font-weight: 400;
+  color: var(--ink); margin: 0 0 1.4rem;
+  padding-bottom: 1rem; border-bottom: 1px solid rgba(166,138,109,.15);
+}
+.junior-card__title svg { color: var(--gold); flex-shrink: 0; }
+.junior-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.junior-list li {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.86rem, 1.05vw, .95rem); font-weight: 300;
+  color: var(--sub); line-height: 1.8;
+  padding-left: 1.2em; position: relative;
+}
+.junior-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--gold); font-size: .8em; top: .15em;
+}
+.junior-list strong { font-weight: 500; color: var(--ink); }
+.junior-note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .78rem; font-weight: 300; line-height: 1.95;
+  color: var(--muted); margin: 0 0 clamp(2.5rem, 4vw, 3.5rem);
+}
+.junior-cta { display: flex; justify-content: flex-start; }
+
+/* ═══════════════════════════════════════════
+   PRICING — クレジットカード画像
+═══════════════════════════════════════════ */
+.pricing-payment {
+  padding-top: 1.4rem; border-top: 1px solid rgba(26,25,23,.08);
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.pricing-payment__label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin: 0;
+}
+.pricing-payment__img {
+  max-width: 360px; height: auto; display: block;
+  opacity: .85;
+}
+
+/* ═══════════════════════════════════════════
+   §8  INFO — PRICING + FORMAT
+═══════════════════════════════════════════ */
+.info-sec { background: #f7f4ef; }
+.info-sec .sec__inner { max-width: 80rem; }
+
+/* ── PRICING ラッパー */
+.pricing-wrap {
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.18);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: clamp(2rem, 4vw, 3.2rem);
+  display: flex; flex-direction: column; gap: 2rem;
+  box-shadow: 0 4px 32px rgba(26,25,23,.06);
+}
+
+/* ── テーブル */
+.pricing-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pricing-table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--font-jp, sans-serif);
+}
+.pricing-table thead tr {
+  border-bottom: 1.5px solid var(--gold);
+}
+.pricing-table th {
+  padding: .8rem 1.1rem; text-align: left;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .63rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600;
+}
+.pricing-table th.col-price { text-align: right; }
+.pricing-table td {
+  padding: 1rem 1.1rem;
+  font-size: clamp(.88rem, 1.1vw, .96rem);
+  color: var(--sub); border-bottom: 1px solid rgba(26,25,23,.07);
+  vertical-align: middle; line-height: 1.6;
+}
+.price-cell { text-align: right; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* バッジ */
+.level-badge {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .14em;
+  padding: .28em .7em; border-radius: 2em;
+  display: inline-block; white-space: nowrap;
+}
+.level-badge--basic { background: #eef4f0; color: #4a7a5c; }
+.level-badge--mid   { background: #eef1f8; color: #3d5a9a; }
+.level-badge--adv   { background: #f8f0ee; color: #9a4a3d; }
+.level-badge--pro   { background: #fdf5e8; color: #7a5930; }
+
+/* 小計・合計行 */
+.row-subtotal td { background: #fdf9f3; color: var(--muted); font-style: italic; }
+.row-subtotal .price-cell { color: var(--gold); }
+.row-total td {
+  background: #fdf5e8; padding: 1.1rem 1.1rem;
+  font-weight: 700; color: var(--ink);
+  border-bottom: none; border-top: 1.5px solid var(--gold);
+}
+.row-total .price-cell { font-size: clamp(.95rem, 1.3vw, 1.05rem); }
+.row-total .price-cell small { font-size: .78em; font-weight: 400; color: var(--muted); margin-left: .4em; }
+
+/* 開催日程 */
+.pricing-schedule {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding-top: 1.4rem; border-top: 1px solid rgba(26,25,23,.08);
+}
+.pricing-schedule__label {
+  display: flex; align-items: center; gap: .35rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); white-space: nowrap; padding-top: .15em; margin: 0;
+}
+.pricing-schedule__val {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.9rem, 1.1vw, 1rem);
+  font-weight: 300; line-height: 1.9; color: var(--sub);
+  white-space: pre-line; margin: 0;
+}
+
+.pricing-note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .8rem; line-height: 1.9; color: var(--muted);
+  padding-top: 1.4rem; border-top: 1px solid rgba(26,25,23,.08);
+  margin: 0;
+}
+
+/* ── FORMAT ヘッダー間隔 */
+.info-format-hd { margin-top: clamp(4rem, 8vw, 6rem); }
+
+/* ── FORMAT カード */
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+.format-card {
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.18);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1.6rem, 2.5vw, 2.2rem);
+  display: flex; flex-direction: column; gap: 1rem;
+  box-shadow: 0 2px 16px rgba(26,25,23,.04);
+  transition: box-shadow .35s, transform .35s;
+}
+.format-card:hover {
+  box-shadow: 0 10px 36px rgba(26,25,23,.1);
+  transform: translateY(-3px);
+}
+.format-card--online {
+  background: linear-gradient(160deg, #fff 0%, #fdf9f3 100%);
+  border-top-color: #c9a87a;
+}
+.format-card__badge {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); display: block;
+}
+.format-card__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 400; color: var(--ink); margin: 0;
+  letter-spacing: .04em; line-height: 1.5;
+}
+.format-card__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: .55rem;
+}
+.format-card__list li {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.84rem, 1vw, .92rem);
+  font-weight: 300; color: var(--sub); line-height: 1.75;
+  padding-left: 1em; position: relative;
+}
+.format-card__list li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--gold); opacity: .6;
+  font-size: .78em;
+}
+/* (旧 format-card__body 互換は不要なので削除) */
+.format-card__body {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.84rem, 1.05vw, .94rem);
+  font-weight: 300; line-height: 1.9; color: var(--sub); margin: 0;
+}
+
+.info-sec__cta { display: flex; justify-content: center; }
+
+@media (max-width: 860px) {
+  .format-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .pricing-panel { padding: 1.6rem; }
+  .pricing-schedule { grid-template-columns: 1fr; gap: .4rem; }
+}
+
+/* ═══════════════════════════════════════════
+   §9  FAQ
+═══════════════════════════════════════════ */
+.faq-sec .sec__inner { max-width: 72rem; }
+
+.faq__list { display: flex; flex-direction: column; }
+
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.4rem; padding: 1.4rem 1.6rem;
+  background: var(--offwhite); border: 1px solid var(--line);
+  border-top: none; cursor: pointer; user-select: none;
+  transition: background .28s;
+}
+.faq__list > .faq-q:first-child { border-top: 1px solid var(--line); }
+.faq-q:hover { background: var(--gold-bg); }
+.faq-q[aria-expanded="true"] { background: var(--gold-bg); border-bottom-color: transparent; }
+
+.faq-q__text {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.92rem, 1.2vw, 1.04rem); font-weight: 400;
+  line-height: 1.65; color: var(--ink);
+}
+.faq-q__text::before {
+  content: 'Q. ';
+  color: var(--gold); font-family: var(--font-ui, sans-serif);
+  font-size: .78em; letter-spacing: .1em;
+}
+.faq-q__icon {
+  flex-shrink: 0; color: var(--gold);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  display: grid; place-items: center;
+}
+.faq-q[aria-expanded="true"] .faq-q__icon { transform: rotate(180deg); }
+
+.faq-a {
+  background: #fff; border: 1px solid var(--line); border-top: none;
+}
+.faq-a[hidden] { display: none; }
+.faq-a__inner {
+  padding: 1.4rem 1.8rem 1.8rem;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.88rem, 1.1vw, .97rem); font-weight: 300;
+  line-height: 2.1; color: #4a4540;
+}
+.faq-a__inner :global(p) { margin: 0 0 .8em; }
+.faq-a__inner :global(p:last-child) { margin: 0; }
+.faq-a__inner :global(strong),
+.faq-a__inner :global(b) {
+  font-weight: 600; color: #7a5c35;
+  background: rgba(166,138,109,.09); padding: .04em .22em; border-radius: 3px;
+}
+.faq-a__inner :global(img) {
+  max-width: 100%; height: auto; border-radius: var(--r); margin: 1em 0;
+}
+
+/* ═══════════════════════════════════════════
+   §10  NEXT STEP（ロードマップ）
+═══════════════════════════════════════════ */
+.nextstep-sec { background: #fff; }
+.nextstep-sec .sec__inner { max-width: 80rem; }
+
+.road__steps {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin: clamp(3rem, 5vw, 4.5rem) 0 0;
+}
+
+.road__step {
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.18);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 1.2rem;
+  padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1rem, 2vw, 1.6rem);
+  box-shadow: 0 2px 16px rgba(26,25,23,.04);
+  transition: box-shadow .35s, transform .35s;
+}
+.road__step:hover {
+  box-shadow: 0 10px 36px rgba(26,25,23,.1);
+  transform: translateY(-3px);
+}
+.road__step--cert {
+  background: linear-gradient(160deg, #fff 0%, #fdf9f3 100%);
+  border-top-color: #c9a87a;
+}
+
+.road__num {
+  width: clamp(3rem, 5vw, 4rem); height: clamp(3rem, 5vw, 4rem);
+  border-radius: 50%;
+  background: #fdf8f0; border: 1px solid rgba(166,138,109,.28);
+  display: grid; place-items: center;
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.88rem, 1.3vw, 1.1rem); letter-spacing: .08em;
+  color: var(--gold); flex-shrink: 0;
+}
+.road__num--cert { background: #fdf5e8; }
+.road__num--cert svg { stroke: var(--gold); }
+
+.road__body { display: flex; flex-direction: column; gap: .5rem; }
+.road__tag {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold); opacity: .7; margin: 0;
+}
+.road__name {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.92rem, 1.2vw, 1.05rem); font-weight: 400;
+  color: var(--ink); margin: 0; letter-spacing: .04em;
+}
+.road__desc {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.74rem, .9vw, .82rem); font-weight: 300;
+  color: var(--sub); line-height: 1.8; margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   §11  FORM
+═══════════════════════════════════════════ */
+.form-sec { background: #f7f4ef; }
+.form-sec .sec__inner { max-width: 66rem; }
+.form-sec__lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .92rem; font-weight: 300; line-height: 1.85;
+  color: var(--sub); margin: 1rem 0 0; text-align: center;
+}
+.form-sec__form {
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.16);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 8px 8px;
+  padding: clamp(2.4rem, 5vw, 4rem);
+  margin-top: clamp(2.4rem, 5vw, 4rem);
+  display: flex; flex-direction: column; gap: 1.8rem;
+  box-shadow: 0 4px 32px rgba(26,25,23,.06);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.form-field { display: flex; flex-direction: column; gap: .55rem; }
+.form-label {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .66rem; letter-spacing: .17em; text-transform: uppercase;
+  color: var(--sub);
+  display: flex; align-items: center; gap: .5rem;
+}
+.req {
+  font-size: .57rem; background: var(--gold);
+  color: #fff; padding: .18em .65em; border-radius: 2px; letter-spacing: .06em;
+}
+.form-input, .form-textarea {
+  background: #fdfaf6; border: 1px solid rgba(166,138,109,.25);
+  color: var(--ink);
+  font-family: var(--font-jp, sans-serif); font-size: .95rem; font-weight: 300;
+  padding: .88rem 1.1rem; outline: none; width: 100%; border-radius: 4px;
+  transition: border-color .3s, background .3s, box-shadow .3s;
+}
+.form-input::placeholder, .form-textarea::placeholder {
+  color: rgba(26,25,23,.22);
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(166,138,109,.1);
+}
+.form-textarea { resize: vertical; }
+.form-submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; margin-top: .6rem; }
+.form-privacy {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .65rem; color: var(--muted); text-align: center;
+}
+.form-privacy a { color: var(--gold); text-underline-offset: 3px; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 72rem) {
+  .instructor-sec__layout { grid-template-columns: 1fr; }
+  .instructor-sec__img-wrap { display: none; }
+  .voices { grid-template-columns: 1fr; gap: 1rem; }
+  .road__steps { grid-template-columns: repeat(2, 1fr); }
+  .assoc-inner { grid-template-columns: 1fr; }
+  .assoc-img { display: none; }
+  .cmap__tracks { grid-template-columns: 1fr; gap: 2rem; }
+  .junior-cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 56rem) {
+  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; }
+  .gallery__item--1 { grid-column: span 3; }
+  .gallery__item--2 { grid-column: span 3; }
+  .gallery__item--3 { grid-column: span 6; grid-row: span 1; }
+  .gallery__item--4 { grid-column: span 3; }
+  .gallery__item--5 { grid-column: span 3; }
+  .voices { grid-template-columns: 1fr; }
+  .road__steps { grid-template-columns: 1fr; }
+  /* カリキュラムカード: 縦積み */
+  .curr-card { grid-template-columns: 1fr; }
+  .curr-card__img-wrap { min-height: 240px; }
+  .curr-card__cols { grid-template-columns: 1fr; gap: 1.4rem; }
+}
+@media (max-width: 48rem) {
+  .hero__title { font-size: clamp(1.9rem, 8vw, 3rem); }
+  .hero__ctas { flex-direction: column; align-items: flex-start; }
+  .format-grid { grid-template-columns: 1fr; }
+  .pricing-schedule { flex-direction: column; gap: .5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-sec__form { padding: 1.8rem; }
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .gallery__item--1,
+  .gallery__item--2,
+  .gallery__item--3,
+  .gallery__item--4,
+  .gallery__item--5 { grid-column: span 1; grid-row: span 1; }
+  .prose--target :global(ul) { grid-template-columns: 1fr; }
+  .curr-card__img-wrap { min-height: 200px; }
+}
+@media (max-width: 36rem) {
+  .info-grid { grid-template-columns: 1fr; }
+}
+</style>

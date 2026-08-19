@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/courses/:id",
+      "destination": "/rawchocolatier/:id",
+      "permanent": true
+    }
+  ]
+}
