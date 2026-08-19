@@ -487,13 +487,13 @@ const galleryImages = [
 <!-- ════════════════════════════
   §10  NEXT STEP — ハードコード（共通）
 ════════════════════════════ -->
-<section class="sec sec--dark nextstep-sec">
+<section class="sec nextstep-sec">
   <div class="sec__inner nextstep-sec__inner">
     <div class="road">
       <header class="sec__hd sec__hd--center">
-        <p class="eyebrow eyebrow--dim">STEP UP</p>
-        <h2 class="sec__title sec__title--light">次のステップへ</h2>
-        <p class="sec__lead">基礎から着実に積み上げ、協会認定プロへ。</p>
+        <p class="eyebrow eyebrow--warm">STEP UP</p>
+        <h2 class="sec__title sec__title--dark">次のステップへ</h2>
+        <p class="sec__lead sec__lead--dark">基礎から着実に積み上げ、協会認定プロへ。</p>
       </header>
       <ol class="road__steps">
         <li class="road__step">
@@ -541,11 +541,11 @@ const galleryImages = [
 <!-- ════════════════════════════
   §11  FORM — ハードコード（共通）
 ════════════════════════════ -->
-<section class="sec sec--ink form-sec" id="form">
+<section class="sec form-sec" id="form">
   <div class="sec__inner">
     <header class="sec__hd sec__hd--center">
-      <p class="eyebrow eyebrow--dim">APPLY</p>
-      <h2 class="sec__title sec__title--light">お申し込み・お問い合わせ</h2>
+      <p class="eyebrow eyebrow--warm">APPLY</p>
+      <h2 class="sec__title sec__title--dark">お申し込み・お問い合わせ</h2>
       <p class="form-sec__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
     </header>
     <form
@@ -1548,102 +1548,119 @@ const galleryImages = [
 /* ═══════════════════════════════════════════
    §10  NEXT STEP（ロードマップ）
 ═══════════════════════════════════════════ */
+.nextstep-sec { background: #fff; }
 .nextstep-sec .sec__inner { max-width: 80rem; }
 
 .road__steps {
   list-style: none; padding: 0;
   display: grid; grid-template-columns: repeat(4, 1fr);
-  margin: clamp(3rem, 5vw, 5rem) 0 0;
-  position: relative;
+  gap: 1.4rem;
+  margin: clamp(3rem, 5vw, 4.5rem) 0 0;
 }
-.road__steps::before {
-  content: '';
-  position: absolute;
-  top: clamp(1.6rem, 3vw, 2.2rem);
-  left: 12.5%; right: 12.5%; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(166,138,109,.25) 15%, rgba(166,138,109,.25) 85%, transparent);
-}
+
 .road__step {
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.18);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: 1.1rem; padding: clamp(1rem, 2vw, 1.8rem) clamp(.6rem, 1.2vw, 1.2rem);
-  transition: background .4s; border-radius: .5rem;
+  gap: 1.2rem;
+  padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1rem, 2vw, 1.6rem);
+  box-shadow: 0 2px 16px rgba(26,25,23,.04);
+  transition: box-shadow .35s, transform .35s;
 }
-.road__step:hover { background: rgba(166,138,109,.06); }
-.road__step--cert .road__num { background: rgba(166,138,109,.16); }
+.road__step:hover {
+  box-shadow: 0 10px 36px rgba(26,25,23,.1);
+  transform: translateY(-3px);
+}
+.road__step--cert {
+  background: linear-gradient(160deg, #fff 0%, #fdf9f3 100%);
+  border-top-color: #c9a87a;
+}
 
 .road__num {
-  width: clamp(3rem, 5vw, 4.4rem); height: clamp(3rem, 5vw, 4.4rem);
+  width: clamp(3rem, 5vw, 4rem); height: clamp(3rem, 5vw, 4rem);
   border-radius: 50%;
-  background: rgba(240,236,230,.06); border: 1px solid rgba(166,138,109,.22);
+  background: #fdf8f0; border: 1px solid rgba(166,138,109,.28);
   display: grid; place-items: center;
   font-family: var(--font-ui, sans-serif);
-  font-size: clamp(.88rem, 1.4vw, 1.2rem); letter-spacing: .08em;
-  color: var(--gold); flex-shrink: 0; position: relative; z-index: 1;
+  font-size: clamp(.88rem, 1.3vw, 1.1rem); letter-spacing: .08em;
+  color: var(--gold); flex-shrink: 0;
 }
+.road__num--cert { background: #fdf5e8; }
 .road__num--cert svg { stroke: var(--gold); }
-.road__body { display: flex; flex-direction: column; gap: .45rem; }
+
+.road__body { display: flex; flex-direction: column; gap: .5rem; }
 .road__tag {
   font-family: var(--font-ui, sans-serif);
   font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
-  color: rgba(166,138,109,.6); margin: 0;
+  color: var(--gold); opacity: .7; margin: 0;
 }
 .road__name {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.88rem, 1.2vw, 1.05rem); font-weight: 400;
-  color: rgba(240,236,230,.9); margin: 0;
+  font-size: clamp(.92rem, 1.2vw, 1.05rem); font-weight: 400;
+  color: var(--ink); margin: 0; letter-spacing: .04em;
 }
 .road__desc {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.68rem, .9vw, .78rem); font-weight: 300;
-  color: rgba(240,236,230,.35); line-height: 1.75; margin: 0;
+  font-size: clamp(.74rem, .9vw, .82rem); font-weight: 300;
+  color: var(--sub); line-height: 1.8; margin: 0;
 }
 
 /* ═══════════════════════════════════════════
    §11  FORM
 ═══════════════════════════════════════════ */
+.form-sec { background: #f7f4ef; }
 .form-sec .sec__inner { max-width: 66rem; }
 .form-sec__lead {
   font-family: var(--font-jp, sans-serif);
   font-size: .92rem; font-weight: 300; line-height: 1.85;
-  color: rgba(240,236,230,.4); margin: 1.2rem 0 0; text-align: center;
+  color: var(--sub); margin: 1rem 0 0; text-align: center;
 }
 .form-sec__form {
-  background: rgba(240,236,230,.04); border: 1px solid rgba(240,236,230,.1);
-  padding: clamp(2.5rem, 5vw, 4rem);
-  margin-top: clamp(2.8rem, 5vw, 5rem);
+  background: #fff;
+  border: 1px solid rgba(166,138,109,.16);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 8px 8px;
+  padding: clamp(2.4rem, 5vw, 4rem);
+  margin-top: clamp(2.4rem, 5vw, 4rem);
   display: flex; flex-direction: column; gap: 1.8rem;
-  border-radius: .25rem;
+  box-shadow: 0 4px 32px rgba(26,25,23,.06);
 }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
 .form-field { display: flex; flex-direction: column; gap: .55rem; }
 .form-label {
   font-family: var(--font-ui, sans-serif);
   font-size: .66rem; letter-spacing: .17em; text-transform: uppercase;
-  color: rgba(240,236,230,.45);
+  color: var(--sub);
   display: flex; align-items: center; gap: .5rem;
 }
 .req {
   font-size: .57rem; background: var(--gold);
-  color: #0a0808; padding: .15em .6em; border-radius: 2px;
+  color: #fff; padding: .18em .65em; border-radius: 2px; letter-spacing: .06em;
 }
 .form-input, .form-textarea {
-  background: rgba(240,236,230,.06); border: 1px solid rgba(240,236,230,.13);
-  color: rgba(240,236,230,.88);
+  background: #fdfaf6; border: 1px solid rgba(166,138,109,.25);
+  color: var(--ink);
   font-family: var(--font-jp, sans-serif); font-size: .95rem; font-weight: 300;
-  padding: .88rem 1.1rem; outline: none; width: 100%; border-radius: .2rem;
-  transition: border-color .3s, background .3s;
+  padding: .88rem 1.1rem; outline: none; width: 100%; border-radius: 4px;
+  transition: border-color .3s, background .3s, box-shadow .3s;
 }
-.form-input::placeholder, .form-textarea::placeholder { color: rgba(240,236,230,.18); }
+.form-input::placeholder, .form-textarea::placeholder {
+  color: rgba(26,25,23,.22);
+}
 .form-input:focus, .form-textarea:focus {
-  border-color: rgba(166,138,109,.5); background: rgba(240,236,230,.09);
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(166,138,109,.1);
 }
 .form-textarea { resize: vertical; }
-.form-submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.form-submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; margin-top: .6rem; }
 .form-privacy {
   font-family: var(--font-ui, sans-serif);
-  font-size: .65rem; color: rgba(240,236,230,.26); text-align: center;
+  font-size: .65rem; color: var(--muted); text-align: center;
 }
-.form-privacy a { color: rgba(240,236,230,.4); }
+.form-privacy a { color: var(--gold); text-underline-offset: 3px; }
 
 /* ═══════════════════════════════════════════
    RESPONSIVE
@@ -1653,7 +1670,6 @@ const galleryImages = [
   .instructor-sec__img-wrap { display: none; }
   .voices { grid-template-columns: 1fr; gap: 1rem; }
   .road__steps { grid-template-columns: repeat(2, 1fr); }
-  .road__steps::before { display: none; }
 }
 @media (max-width: 56rem) {
   .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; }
