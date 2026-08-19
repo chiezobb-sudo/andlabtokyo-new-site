@@ -1161,28 +1161,34 @@ const galleryImages = [
   border-radius: calc(var(--r) * 0.6); margin: .3em 0;
 }
 
-/* ターゲットセクション：li → カード */
+/* ターゲットセクション：li → FEATURES カードと同一スタイル */
 .prose--target :global(ul) {
   list-style: none; padding: 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.2rem; margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.4rem; margin: 2.4rem 0 0;
+  counter-reset: target-counter;
 }
 .prose--target :global(li) {
-  background: #fff;
-  border: 1px solid rgba(154,120,88,.14);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 var(--r) var(--r) 0;
-  padding: 1.5rem 1.8rem;
-  font-size: clamp(.93rem, 1.1vw, 1rem);
-  line-height: 1.9; color: var(--sub); margin: 0;
-  box-shadow: 0 2px 12px rgba(26,25,23,.05);
-  transition: box-shadow .3s, border-left-color .3s;
+  counter-increment: target-counter;
+  border-top: 1px solid rgba(166,138,109,.35);
+  padding-top: 1.6rem;
+  margin: 0;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.82rem, 1vw, .9rem);
+  font-weight: 300;
+  color: var(--sub);
+  line-height: 1.95;
 }
-.prose--target :global(li:hover) {
-  box-shadow: 0 6px 24px rgba(26,25,23,.1);
-  border-left-color: var(--gold-lt);
+.prose--target :global(li)::before {
+  content: counter(target-counter, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 2.4rem; letter-spacing: .04em;
+  color: var(--gold); opacity: .45;
+  margin-bottom: .5rem; line-height: 1;
 }
-.prose--target :global(li::marker) { display: none; }
+.prose--target :global(li::marker) { content: none; }
 
 /* ═══════════════════════════════════════════
    §6  INSTRUCTOR
