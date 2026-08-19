@@ -221,87 +221,6 @@ const galleryImages = [
 )}
 
 <!-- ════════════════════════════
-  §5  CURRICULUM — CMS（curriculum_list 配列カード）
-════════════════════════════ -->
-{hasCurriculum && (
-<section class="sec sec--white curr-sec" id="curriculum">
-  <div class="sec__inner">
-    <header class="sec__hd sec__hd--center">
-      <p class="eyebrow eyebrow--warm">CURRICULUM</p>
-      <h2 class="sec__title sec__title--dark">
-        {c.curriculum_list!.length}ステップで確実に身につくカリキュラム
-      </h2>
-      <p class="sec__lead sec__lead--dark">基礎から段階を踏んで、プロレベルの知識と技術を習得します。</p>
-    </header>
-
-    <ol class="curr-list">
-      {c.curriculum_list!.map((item: CurriculumItem, i: number) => (
-        <li class="curr-card">
-          <!-- カード画像 -->
-          <div class="curr-card__img-wrap">
-            {item.image
-              ? <img
-                  class="curr-card__img"
-                  src={`${item.image.url}?w=800&q=85`}
-                  alt={item.title}
-                  width={item.image.width}
-                  height={item.image.height}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              : <div class="curr-card__img-placeholder" aria-hidden="true"></div>
-            }
-            <div class="curr-card__step-badge">
-              <span class="curr-card__step-label">STEP</span>
-              <span class="curr-card__step-num">{String(i + 1).padStart(2, '0')}</span>
-            </div>
-          </div>
-
-          <!-- カード本文 -->
-          <div class="curr-card__body">
-            <div class="curr-card__head">
-              <h3 class="curr-card__title">{item.title}</h3>
-              {item.price && (
-                <p class="curr-card__price">{item.price}</p>
-              )}
-            </div>
-
-            <div class="curr-card__cols">
-              {item.learnings && (
-                <div class="curr-card__col">
-                  <p class="curr-card__col-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                    </svg>
-                    学ぶこと
-                  </p>
-                  <div class="prose prose--curr-list" set:html={item.learnings} />
-                </div>
-              )}
-              {item.recipes && (
-                <div class="curr-card__col">
-                  <p class="curr-card__col-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-                      <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/>
-                      <line x1="14" y1="1" x2="14" y2="4"/>
-                    </svg>
-                    作るレシピ
-                  </p>
-                  <div class="prose prose--curr-list" set:html={item.recipes} />
-                </div>
-              )}
-            </div>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </div>
-</section>
-)}
-
-<!-- ════════════════════════════
   §5.5  NEXT STEP — カリキュラムの直後
 ════════════════════════════ -->
 <section class="sec nextstep-sec">
@@ -309,7 +228,7 @@ const galleryImages = [
     <div class="road">
       <header class="sec__hd sec__hd--center">
         <p class="eyebrow eyebrow--warm">STEP UP</p>
-        <h2 class="sec__title sec__title--dark">次のステップへ</h2>
+        <h2 class="sec__title sec__title--dark">ステップアップで学ぶ</h2>
         <p class="sec__lead sec__lead--dark">基礎から着実に積み上げ、協会認定プロへ。</p>
       </header>
       <ol class="road__steps">
@@ -406,6 +325,87 @@ const galleryImages = [
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════
+  §5  CURRICULUM — CMS（curriculum_list 配列カード）
+════════════════════════════ -->
+{hasCurriculum && (
+<section class="sec sec--white curr-sec" id="curriculum">
+  <div class="sec__inner">
+    <header class="sec__hd sec__hd--center">
+      <p class="eyebrow eyebrow--warm">CURRICULUM</p>
+      <h2 class="sec__title sec__title--dark">
+        {c.curriculum_list!.length}ステップで確実に身につくカリキュラム
+      </h2>
+      <p class="sec__lead sec__lead--dark">基礎から段階を踏んで、プロレベルの知識と技術を習得します。</p>
+    </header>
+
+    <ol class="curr-list">
+      {c.curriculum_list!.map((item: CurriculumItem, i: number) => (
+        <li class="curr-card">
+          <!-- カード画像 -->
+          <div class="curr-card__img-wrap">
+            {item.image
+              ? <img
+                  class="curr-card__img"
+                  src={`${item.image.url}?w=800&q=85`}
+                  alt={item.title}
+                  width={item.image.width}
+                  height={item.image.height}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              : <div class="curr-card__img-placeholder" aria-hidden="true"></div>
+            }
+            <div class="curr-card__step-badge">
+              <span class="curr-card__step-label">STEP</span>
+              <span class="curr-card__step-num">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          <!-- カード本文 -->
+          <div class="curr-card__body">
+            <div class="curr-card__head">
+              <h3 class="curr-card__title">{item.title}</h3>
+              {item.price && (
+                <p class="curr-card__price">{item.price}</p>
+              )}
+            </div>
+
+            <div class="curr-card__cols">
+              {item.learnings && (
+                <div class="curr-card__col">
+                  <p class="curr-card__col-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    学ぶこと
+                  </p>
+                  <div class="prose prose--curr-list" set:html={item.learnings} />
+                </div>
+              )}
+              {item.recipes && (
+                <div class="curr-card__col">
+                  <p class="curr-card__col-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                      <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/>
+                      <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                    作るレシピ
+                  </p>
+                  <div class="prose prose--curr-list" set:html={item.recipes} />
+                </div>
+              )}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+)}
 
 <!-- ════════════════════════════
   §6  INSTRUCTOR — ハードコード（共通）
