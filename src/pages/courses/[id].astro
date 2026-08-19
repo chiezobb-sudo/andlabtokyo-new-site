@@ -50,7 +50,42 @@ const galleryImages = [
 ];
 ---
 
-<Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.heroImage?.url}>
+<Layout
+  title={`${c.title} | 東京・オンライン | ローショコラティエ協会`}
+  description={`東京（渋谷・表参道）とオンラインで受講できる${c.title}。${c.subtitle ?? ''}BASIC・INTERMEDIATE・ADVANCEの3ステップで協会認定プロ（ローチョコレートマイスター®）を目指します。`}
+  ogImage={c.heroImage?.url}
+>
+
+<!-- ── 構造化データ ── -->
+<script type="application/ld+json" set:html={JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": c.title,
+    "description": c.subtitle ?? c.title,
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "ローショコラティエ協会 / &LAB TOKYO",
+      "url": "https://andlabtokyo.biz"
+    },
+    "url": `https://andlabtokyo.biz/courses/${c.id}`,
+    "image": c.heroImage?.url,
+    "inLanguage": "ja",
+    "courseMode": ["onsite", "online"],
+    "availableLanguage": "ja",
+    "locationCreated": { "@type": "Place", "name": "東京都渋谷区（表参道）" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://andlabtokyo.biz/" },
+      { "@type": "ListItem", "position": 2, "name": "講座一覧", "item": "https://andlabtokyo.biz/listofcourses" },
+      { "@type": "ListItem", "position": 3, "name": c.title, "item": `https://andlabtokyo.biz/courses/${c.id}` }
+    ]
+  }
+])} />
+
 <main class="lp">
 
 <!-- ════════════════════════════
@@ -272,9 +307,13 @@ const galleryImages = [
 <section class="sec sec--warm instructor-sec">
   <div class="sec__inner instructor-sec__layout">
     <div class="instructor-sec__img-wrap">
-      <div class="instructor-sec__img-bg" aria-hidden="true">
-        <span class="instructor-sec__monogram">CA</span>
-      </div>
+      <img
+        class="instructor-sec__photo"
+        src="/images/chie-ando-instructor.jpg"
+        alt="安藤千英 — &LAB TOKYO 主宰・食と哲学のプロデューサー"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
     <div class="instructor-sec__body">
       <header class="sec__hd">
@@ -1375,17 +1414,10 @@ const galleryImages = [
 }
 
 .instructor-sec__img-wrap { position: sticky; top: 5rem; }
-.instructor-sec__img-bg {
-  aspect-ratio: 3/4;
-  background: linear-gradient(145deg, #e8ddd2 0%, #d4c5b5 100%);
-  border-radius: var(--r);
-  display: grid; place-items: center;
-}
-.instructor-sec__monogram {
-  font-family: var(--font-ui, sans-serif);
-  font-size: clamp(3rem, 6vw, 5rem);
-  letter-spacing: .2em; color: rgba(166,138,109,.5);
-  font-weight: 300;
+.instructor-sec__photo {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: center top;
+  display: block; border-radius: 4px;
 }
 
 .instructor-sec__body .sec__hd { margin-bottom: 1.5rem; }

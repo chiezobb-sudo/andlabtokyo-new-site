@@ -19,7 +19,7 @@ const {
   lang = "ja",
 } = Astro.props;
 
-const siteUrl = "https://www.andlabtokyo.com";
+const siteUrl = "https://andlabtokyo.biz";
 const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
 const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`;
