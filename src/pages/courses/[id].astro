@@ -54,37 +54,33 @@ const galleryImages = [
 <main class="lp">
 
 <!-- ════════════════════════════
-  §1  HERO — CMS
+  §1  HERO — トップページ HeroBlock と同一構造
 ════════════════════════════ -->
 <section class="hero">
-  {c.main_image
-    ? (
-      <div class="hero__media">
-        <img
-          class="hero__img"
+  <div class="hero__media">
+    {c.main_image
+      ? <img
           src={`${c.main_image.url}?w=1920&q=85`}
           alt={c.title}
-          loading="eager"
-          decoding="async"
+          width={c.main_image.width}
+          height={c.main_image.height}
           fetchpriority="high"
+          decoding="async"
         />
-      </div>
-    )
-    : (
-      <div class="hero__media hero__media--fallback" aria-hidden="true"></div>
-    )
-  }
+      : <div class="hero__media-fallback"></div>
+    }
+  </div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__inner">
-    <p class="eyebrow eyebrow--gold hero__pre">COURSE · &LAB TOKYO</p>
+    <p class="hero__eyebrow">COURSE · &LAB TOKYO</p>
     <h1 class="hero__title">{c.title}</h1>
     {c.subtitle && <p class="hero__sub">{c.subtitle}</p>}
-    <div class="hero__btns">
-      <a href="#curriculum" class="btn btn--ghost btn--outline-arrow">講座内容を見る</a>
-      <a href="#form" class="btn btn--gold">今すぐ申し込む</a>
+    <div class="hero__ctas">
+      <a href="#curriculum" class="hero__cta hero__cta--outline">講座内容を見る</a>
+      <a href="#form" class="hero__cta hero__cta--primary">今すぐ申し込む</a>
     </div>
   </div>
-  <div class="hero__cue" aria-hidden="true"><span></span></div>
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
 </section>
 
 <!-- ════════════════════════════
@@ -728,37 +724,33 @@ const galleryImages = [
 .eyebrow--dim  { color: rgba(240,236,230,.38); }
 
 /* ═══════════════════════════════════════════
-   §1  HERO
+   §1  HERO — HeroBlock.astro と同一構造
 ═══════════════════════════════════════════ */
 .hero {
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   overflow: hidden;
-  background: #100e0c;
+  background: var(--bg-dark, #141413);
 }
 
-/* ── 画像エリア（journal と同じ img 方式） */
 .hero__media {
   position: absolute; inset: 0;
-  overflow: hidden;
 }
-.hero__img {
+.hero__media img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  display: block;
-  animation: heroKen 24s cubic-bezier(.16,1,.3,1) forwards;
-  transform-origin: center;
+  object-position: center top;
+  animation: heroZoom 20s cubic-bezier(.16,1,.3,1) forwards;
 }
-@keyframes heroKen {
-  from { transform: scale(1.08); }
+@keyframes heroZoom {
+  from { transform: scale(1.07); }
   to   { transform: scale(1); }
 }
 
-/* 画像なしフォールバック */
-.hero__media--fallback {
+.hero__media-fallback {
+  width: 100%; height: 100%;
   background:
     radial-gradient(ellipse at 28% 55%, rgba(90,55,18,.4) 0%, transparent 55%),
     linear-gradient(155deg, #1e1a12 0%, #0a0806 100%);
@@ -767,31 +759,28 @@ const galleryImages = [
 .hero__scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to right, rgba(6,4,2,.75) 0%, rgba(6,4,2,.35) 50%, rgba(6,4,2,.1) 100%),
-    linear-gradient(to top,   rgba(6,4,2,.9)  0%, rgba(6,4,2,.55) 30%, rgba(6,4,2,.1) 65%, transparent 100%);
+    linear-gradient(to right, rgba(20,12,10,.92) 0%, rgba(20,12,10,.2) 100%),
+    linear-gradient(to top, rgba(20,12,10,.6) 0%, transparent 50%);
 }
 
 .hero__inner {
   position: relative; z-index: 1;
   width: min(100% - 3rem, 80rem);
   margin: 0 auto;
-  padding-top: clamp(12rem, 28vh, 20rem);
-  padding-bottom: clamp(5rem, 12vh, 9rem);
-  display: flex; flex-direction: column;
-  align-items: flex-start; gap: 1.5rem;
+  padding: clamp(8rem, 18vh, 14rem) 0 clamp(6rem, 12vh, 10rem);
 }
 
-.hero__pre {
+.hero__eyebrow {
   font-family: var(--font-ui, sans-serif);
   font-size: .62rem; letter-spacing: .38em; text-transform: uppercase;
-  color: var(--gold); margin: 0; opacity: .9;
+  color: var(--gold, #a68a6d); margin: 0 0 1.4rem; opacity: .9;
 }
 
 .hero__title {
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(2.6rem, 7vw, 6rem);
   font-weight: 300; line-height: 1.25; letter-spacing: .04em;
-  color: #f8f3ec; margin: 0; max-width: 16em;
+  color: #f8f3ec; margin: 0 0 1.2rem; max-width: 16em;
   text-shadow: 0 2px 24px rgba(0,0,0,.65), 0 8px 64px rgba(0,0,0,.45);
 }
 
@@ -799,28 +788,46 @@ const galleryImages = [
   font-family: var(--font-jp, sans-serif);
   font-size: clamp(.92rem, 1.6vw, 1.22rem);
   font-weight: 300; line-height: 1.9; letter-spacing: .06em;
-  color: rgba(240,236,226,.65); margin: 0; max-width: 30em;
+  color: rgba(240,236,226,.65); margin: 0 0 2.4rem; max-width: 30em;
 }
 
-.hero__btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .6rem; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
 
-.btn--outline-arrow {
+.hero__cta {
+  display: inline-flex; align-items: center;
+  padding: .85em 2em;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background .3s, border-color .3s, color .3s;
+}
+.hero__cta--outline {
   background: rgba(255,255,255,.06);
   border-color: rgba(240,236,226,.38);
   color: rgba(240,236,226,.85);
   backdrop-filter: blur(4px);
 }
-.btn--outline-arrow:hover {
+.hero__cta--outline:hover {
   background: rgba(255,255,255,.11);
   border-color: rgba(166,138,109,.65);
-  color: rgba(240,236,226,1);
+  color: #f8f3ec;
+}
+.hero__cta--primary {
+  background: var(--gold, #a68a6d);
+  border-color: var(--gold, #a68a6d);
+  color: #fff;
+}
+.hero__cta--primary:hover {
+  background: #8a6e53;
+  border-color: #8a6e53;
 }
 
-.hero__cue {
+.hero__scroll {
   position: absolute; left: 50%; bottom: 2.2rem;
   transform: translateX(-50%);
 }
-.hero__cue span {
+.hero__scroll span {
   display: block; width: 1px; height: 3.8rem;
   background: linear-gradient(to bottom, transparent, rgba(166,138,109,.7));
   animation: scrollPulse 2.8s ease-in-out infinite;
@@ -834,11 +841,11 @@ const galleryImages = [
 
 @media (max-width: 640px) {
   .hero__title { font-size: clamp(2rem, 10vw, 3.2rem); }
-  .hero__btns { flex-direction: column; align-items: flex-start; }
+  .hero__ctas { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero__img { animation: none; }
-  .hero__cue { display: none; }
+  .hero__media img { animation: none; }
+  .hero__scroll { display: none; }
 }
 
 /* ═══════════════════════════════════════════
@@ -1624,7 +1631,7 @@ const galleryImages = [
 }
 @media (max-width: 48rem) {
   .hero__title { font-size: clamp(1.9rem, 8vw, 3rem); }
-  .hero__btns { flex-direction: column; align-items: flex-start; }
+  .hero__ctas { flex-direction: column; align-items: flex-start; }
   .form-row { grid-template-columns: 1fr; }
   .form-sec__form { padding: 1.8rem; }
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
