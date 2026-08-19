@@ -1,0 +1,108 @@
+---
+import type { ConceptBandBlock } from '../../lib/microcms';
+
+interface Props { block: ConceptBandBlock }
+const { block: b } = Astro.props;
+---
+
+<section class="cb">
+  <div class="cb__inner">
+    {b.eyebrow && (
+      <p class="cb__eyebrow">
+        <span class="cb__eyebrow-line" aria-hidden="true"></span>
+        {b.eyebrow}
+        <span class="cb__eyebrow-line" aria-hidden="true"></span>
+      </p>
+    )}
+
+    <h2 class="cb__heading">{b.heading}</h2>
+
+    {b.body && <p class="cb__body">{b.body}</p>}
+
+    {b.image && (
+      <div class="cb__img">
+        <img
+          src={b.image.url + '?w=1200'}
+          alt=""
+          width={b.image.width}
+          height={b.image.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.cb {
+  background: var(--bg-dark, #141413);
+  padding: clamp(7rem, 14vw, 14rem) clamp(1.5rem, 5vw, 5rem);
+  text-align: center;
+}
+
+.cb__inner {
+  width: min(100%, 58rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+/* ── eyebrow：両側に細い線 ── */
+.cb__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .7rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0;
+}
+.cb__eyebrow-line {
+  display: block;
+  flex: 1;
+  max-width: 4rem;
+  height: 1px;
+  background: var(--gold, #a68a6d);
+  opacity: .5;
+}
+
+/* ── メインのコンセプト文 ── */
+.cb__heading {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.9rem, 5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: .1em;
+  color: rgba(240, 236, 230, .92);
+  margin: 0;
+  /* 句読点で自然に折り返す */
+  text-wrap: balance;
+}
+
+/* ── サブテキスト ── */
+.cb__body {
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.9rem, 1.2vw, 1.05rem);
+  line-height: 2.4;
+  color: rgba(240, 236, 230, .52);
+  margin: 0;
+  max-width: 36em;
+}
+
+/* ── 画像（任意） ── */
+.cb__img {
+  width: min(100%, 44rem);
+  margin-top: 1rem;
+}
+.cb__img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: .85;
+}
+</style>

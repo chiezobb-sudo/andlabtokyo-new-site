@@ -2,11 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { getPage, getKnowledgeList } from '../lib/microcms';
 import HeroBlock from '../components/blocks/HeroBlock.astro';
+import ConceptBandBlock from '../components/blocks/ConceptBandBlock.astro';
 import CourseGridBlock from '../components/blocks/CourseGridBlock.astro';
 import KnowledgeGridBlock from '../components/blocks/KnowledgeGridBlock.astro';
 import ProfileBandBlock from '../components/blocks/ProfileBandBlock.astro';
 import RichSectionBlock from '../components/blocks/RichSectionBlock.astro';
-import type { HeroBlock as HeroBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType } from '../lib/microcms';
+import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType } from '../lib/microcms';
 
 const page = await getPage('home');
 
@@ -26,6 +27,7 @@ const allArticles = needsArticles ? await getKnowledgeList() : [];
 {page?.blocks.map((block) => (
   <>
     {block.fieldId === 'hero'         && <HeroBlock        block={block as HeroBlockType} />}
+    {block.fieldId === 'conceptBand'  && <ConceptBandBlock  block={block as ConceptBandBlockType} />}
     {block.fieldId === 'courseGrid'   && <CourseGridBlock   block={block as CourseGridBlockType} />}
     {block.fieldId === 'knowledgeGrid'&& <KnowledgeGridBlock block={block as KnowledgeGridBlockType} articles={allArticles.slice(0, (block as KnowledgeGridBlockType).count ?? 3)} />}
     {block.fieldId === 'profileBand'  && <ProfileBandBlock  block={block as ProfileBandBlockType} />}

@@ -19,6 +19,13 @@ export const dummyPages: Record<string, Page> = {
         ctaUrl: '/listofcourses',
         ctaLabel2: '個別相談・お問い合わせ',
         ctaUrl2: '/contact',
+        bgVideoPath: '/hero-video.mp4',
+      },
+      {
+        fieldId: 'conceptBand',
+        eyebrow: 'Our Philosophy',
+        heading: '発酵とローフードの交差点で、\n食の哲学を育てる。',
+        body: '酵素が生きている食材と、微生物の叡智。ふたつの力が交わるとき、身体は本来の知性を取り戻す。',
       },
       {
         fieldId: 'courseGrid',

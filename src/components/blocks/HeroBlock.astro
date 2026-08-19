@@ -9,11 +9,25 @@ const mainLines = b.mainCopy.split('\n');
 ---
 
 <section class="hero-blk">
-  {b.bgImage && (
+  {b.bgVideoPath ? (
+    <div class="hero-blk__media">
+      <video
+        class="hero-blk__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster={b.bgImage?.url}
+        preload="auto"
+      >
+        <source src={b.bgVideoPath} type="video/mp4" />
+      </video>
+    </div>
+  ) : b.bgImage ? (
     <div class="hero-blk__media">
       <img src={b.bgImage.url} alt="" width={b.bgImage.width} height={b.bgImage.height} fetchpriority="high" decoding="async" />
     </div>
-  )}
+  ) : null}
   <div class="hero-blk__scrim" aria-hidden="true"></div>
 
   <div class="hero-blk__inner">
@@ -71,6 +85,11 @@ const mainLines = b.mainCopy.split('\n');
   object-fit: cover;
   object-position: center top;
   animation: heroZoom 20s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-blk__video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 @keyframes heroZoom {
   from { transform: scale(1.07); }
