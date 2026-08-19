@@ -12,238 +12,277 @@ const c = await getCourse(id!);
 if (!c) return Astro.redirect('/listofcourses');
 ---
 
-<Layout title={c.title} description={c.subtitle ?? c.title}>
+<Layout title={c.title} description={c.subtitle ?? c.title} ogImage={c.main_image?.url}>
 <main class="lp">
 
-<!-- ═══════════════════════════════════════════
+<!-- ════════════════════════════════
   1. HERO
-════════════════════════════════════════════ -->
-<section class="lp-hero">
+════════════════════════════════ -->
+<section class="hero">
   {c.main_image
-    ? <img class="lp-hero__bg" src={`${c.main_image.url}?w=1600&q=85`}
-        alt="" width={c.main_image.width} height={c.main_image.height}
-        fetchpriority="high" decoding="async" />
-    : <div class="lp-hero__bg lp-hero__bg--dark" aria-hidden="true"></div>
+    ? <img class="hero__bg"
+        src={`${c.main_image.url}?w=1920&q=85`}
+        alt=""
+        width={c.main_image.width}
+        height={c.main_image.height}
+        fetchpriority="high"
+        decoding="async" />
+    : <div class="hero__bg hero__bg--fallback" aria-hidden="true"></div>
   }
-  <div class="lp-hero__scrim" aria-hidden="true"></div>
-  <div class="lp-hero__inner">
-    <p class="lp-hero__eyebrow">COURSE</p>
-    <h1 class="lp-hero__title">{c.title}</h1>
-    {c.subtitle && <p class="lp-hero__sub">{c.subtitle}</p>}
-    <a href="#form" class="lp-hero__cta">今すぐ申し込む</a>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow">COURSE</p>
+    <h1 class="hero__title">{c.title}</h1>
+    {c.subtitle && <p class="hero__sub">{c.subtitle}</p>}
+    <div class="hero__actions">
+      <a href="#form" class="btn btn--gold">今すぐ申し込む</a>
+      <a href="#curriculum" class="btn btn--ghost">カリキュラムを見る</a>
+    </div>
   </div>
-  <div class="lp-hero__scroll" aria-hidden="true"><span></span></div>
+
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-  2. TARGET（共感セクション）
-════════════════════════════════════════════ -->
+<!-- ════════════════════════════════
+  2. TARGET（こんな方へ）
+════════════════════════════════ -->
 {c.target && (
-<section class="lp-target">
-  <div class="lp-target__inner">
-    <header class="lp-sec-header lp-sec-header--center">
-      <p class="lp-eyebrow">FOR YOU</p>
-      <h2 class="lp-h2">こんな方へ</h2>
+<section class="target">
+  <div class="target__inner">
+    <header class="sec-header sec-header--center">
+      <p class="eyebrow eyebrow--warm">FOR YOU</p>
+      <h2 class="sec-title sec-title--dark">こんな方へ</h2>
+      <p class="sec-lead">あなたの「学びたい」に、この講座は応えます。</p>
     </header>
-    <div class="lp-target__body prose-dark" set:html={c.target} />
+    <div class="target__prose prose prose--target" set:html={c.target} />
   </div>
 </section>
 )}
 
-<!-- ═══════════════════════════════════════════
-  3. DESCRIPTION（講座の魅力）
-════════════════════════════════════════════ -->
+<!-- ════════════════════════════════
+  3. DESCRIPTION（講座について）
+════════════════════════════════ -->
 {c.description && (
-<section class="lp-desc">
-  <div class="lp-desc__inner">
-    <header class="lp-sec-header">
-      <p class="lp-eyebrow">ABOUT</p>
-      <h2 class="lp-h2">講座について</h2>
-    </header>
-    <div class="lp-desc__body prose-light" set:html={c.description} />
-  </div>
-</section>
-)}
-
-<!-- ═══════════════════════════════════════════
-  4. CURRICULUM
-════════════════════════════════════════════ -->
-{c.curriculum && (
-<section class="lp-curr">
-  <div class="lp-curr__inner">
-    <header class="lp-sec-header">
-      <p class="lp-eyebrow">CURRICULUM</p>
-      <h2 class="lp-h2">カリキュラム</h2>
-    </header>
-    <div class="lp-curr__body prose-light" set:html={c.curriculum} />
-  </div>
-</section>
-)}
-
-<!-- ═══════════════════════════════════════════
-  5. ROADMAP（共通ステップ図解）
-════════════════════════════════════════════ -->
-<section class="lp-road">
-  <div class="lp-road__inner">
-    <header class="lp-sec-header lp-sec-header--center">
-      <p class="lp-eyebrow lp-eyebrow--light">STEP UP</p>
-      <h2 class="lp-h2 lp-h2--light">資格取得までのロードマップ</h2>
-    </header>
-    <div class="lp-road__steps">
-      <div class="lp-road__step">
-        <div class="lp-road__step-num">01</div>
-        <div class="lp-road__step-body">
-          <p class="lp-road__step-label">BASIC</p>
-          <p class="lp-road__step-name">初級講座</p>
-          <p class="lp-road__step-desc">基礎理論・素材・基本レシピを習得</p>
-        </div>
-      </div>
-      <div class="lp-road__arrow" aria-hidden="true">→</div>
-      <div class="lp-road__step">
-        <div class="lp-road__step-num">02</div>
-        <div class="lp-road__step-body">
-          <p class="lp-road__step-label">INTERMEDIATE</p>
-          <p class="lp-road__step-name">中級講座</p>
-          <p class="lp-road__step-desc">応用技術・デザイン性・販売レベルへ</p>
-        </div>
-      </div>
-      <div class="lp-road__arrow" aria-hidden="true">→</div>
-      <div class="lp-road__step">
-        <div class="lp-road__step-num">03</div>
-        <div class="lp-road__step-body">
-          <p class="lp-road__step-label">ADVANCE</p>
-          <p class="lp-road__step-name">上級講座</p>
-          <p class="lp-road__step-desc">独自開発・ブランディング・指導力</p>
-        </div>
-      </div>
-      <div class="lp-road__arrow" aria-hidden="true">→</div>
-      <div class="lp-road__step lp-road__step--goal">
-        <div class="lp-road__step-num">🎓</div>
-        <div class="lp-road__step-body">
-          <p class="lp-road__step-label">CERTIFICATE</p>
-          <p class="lp-road__step-name">認定資格取得</p>
-          <p class="lp-road__step-desc">協会認定プロとして活動開始</p>
-        </div>
-      </div>
+<section class="desc">
+  <div class="desc__inner">
+    <div class="desc__layout">
+      <header class="sec-header">
+        <p class="eyebrow">ABOUT</p>
+        <h2 class="sec-title">講座について</h2>
+      </header>
+      <div class="prose prose--light" set:html={c.description} />
     </div>
   </div>
 </section>
+)}
 
-<!-- ═══════════════════════════════════════════
-  6. SCHEDULE & PRICE
-════════════════════════════════════════════ -->
-{(c.schedule || c.price) && (
-<section class="lp-info">
-  <div class="lp-info__inner">
-    <header class="lp-sec-header">
-      <p class="lp-eyebrow">INFO</p>
-      <h2 class="lp-h2">開催情報 & 料金</h2>
+<!-- ════════════════════════════════
+  4. CURRICULUM
+════════════════════════════════ -->
+{c.curriculum && (
+<section class="curr" id="curriculum">
+  <div class="curr__inner">
+    <header class="sec-header">
+      <p class="eyebrow eyebrow--warm">CURRICULUM</p>
+      <h2 class="sec-title sec-title--dark">カリキュラム</h2>
     </header>
-    <div class="lp-info__grid">
+    <div class="prose prose--curr" set:html={c.curriculum} />
+  </div>
+</section>
+)}
+
+<!-- ════════════════════════════════
+  5. ROADMAP（共通・ハードコード）
+════════════════════════════════ -->
+<section class="road">
+  <div class="road__inner">
+    <header class="sec-header sec-header--center">
+      <p class="eyebrow eyebrow--dim">STEP UP</p>
+      <h2 class="sec-title sec-title--light">資格取得までのロードマップ</h2>
+      <p class="road__sub">基礎から着実に積み上げ、協会認定プロへ。</p>
+    </header>
+
+    <ol class="road__list">
+      <li class="road__item">
+        <div class="road__num">01</div>
+        <div class="road__body">
+          <p class="road__tag">BASIC</p>
+          <p class="road__name">初級講座</p>
+          <p class="road__desc">ローフード・発酵の基礎理論、素材の知識、基本レシピを体系的に習得します。</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__num">02</div>
+        <div class="road__body">
+          <p class="road__tag">INTERMEDIATE</p>
+          <p class="road__name">中級講座</p>
+          <p class="road__desc">応用技術・食材の組み合わせ・商品化レベルのデザイン性を身につけます。</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__num">03</div>
+        <div class="road__body">
+          <p class="road__tag">ADVANCE</p>
+          <p class="road__name">上級講座</p>
+          <p class="road__desc">独自レシピ開発・ブランディング・他者への指導力まで磨き上げます。</p>
+        </div>
+      </li>
+      <li class="road__item road__item--goal">
+        <div class="road__num road__num--cert">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+            <circle cx="12" cy="8" r="6"/><path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/>
+          </svg>
+        </div>
+        <div class="road__body">
+          <p class="road__tag">CERTIFICATE</p>
+          <p class="road__name">認定資格取得</p>
+          <p class="road__desc">ローショコラティエ協会認定プロとして、教室開業・販売・講師活動が可能に。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+  6. INFO（開催情報 & 料金）
+════════════════════════════════ -->
+{(c.schedule || c.price) && (
+<section class="info">
+  <div class="info__inner">
+    <header class="sec-header sec-header--center">
+      <p class="eyebrow eyebrow--warm">INFO</p>
+      <h2 class="sec-title sec-title--dark">開催情報 & 料金</h2>
+    </header>
+
+    <div class="info__grid">
       {c.schedule && (
-        <div class="lp-info__card">
-          <p class="lp-info__card-label">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        <div class="info__card">
+          <div class="info__card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-            開催日程
-          </p>
-          <p class="lp-info__card-val">{c.schedule}</p>
+          </div>
+          <p class="info__card-label">開催日程</p>
+          <p class="info__card-val">{c.schedule}</p>
         </div>
       )}
       {c.price && (
-        <div class="lp-info__card lp-info__card--price">
-          <p class="lp-info__card-label">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        <div class="info__card info__card--price">
+          <div class="info__card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
-            受講料金
+          </div>
+          <p class="info__card-label">受講料金</p>
+          <p class="info__card-price">{c.price}</p>
+          <p class="info__card-note">
+            ※お支払いはクレジットカード決済もしくはお振込のみとなります。<br />
+            （分割払いは対応しておりません）
           </p>
-          <p class="lp-info__card-price">{c.price}</p>
-          <p class="lp-info__card-note">※お支払いはクレジットカード決済もしくはお振込のみとなります。</p>
         </div>
       )}
     </div>
-    <div class="lp-info__cta-wrap">
-      <a href="#form" class="lp-btn lp-btn--primary">このコースに申し込む</a>
+
+    <div class="info__cta">
+      <a href="#form" class="btn btn--gold btn--lg">このコースに申し込む</a>
     </div>
   </div>
 </section>
 )}
 
-<!-- ═══════════════════════════════════════════
-  7. FAQ
-════════════════════════════════════════════ -->
+<!-- ════════════════════════════════
+  7. FAQ（アコーディオン）
+════════════════════════════════ -->
 {c.faq && (
-<section class="lp-faq">
-  <div class="lp-faq__inner">
-    <header class="lp-sec-header lp-sec-header--center">
-      <p class="lp-eyebrow">FAQ</p>
-      <h2 class="lp-h2">よくあるご質問</h2>
+<section class="faq">
+  <div class="faq__inner">
+    <header class="sec-header sec-header--center">
+      <p class="eyebrow eyebrow--warm">FAQ</p>
+      <h2 class="sec-title sec-title--dark">よくあるご質問</h2>
     </header>
-    <div class="lp-faq__body prose-faq" set:html={c.faq} />
+    <div class="faq__source" aria-hidden="true" style="display:none" set:html={c.faq} />
+    <dl class="faq__list" id="faqList"></dl>
   </div>
 </section>
 )}
 
-<!-- ═══════════════════════════════════════════
-  8. FORM（お申し込みフォーム）
-════════════════════════════════════════════ -->
-<section class="lp-form" id="form">
-  <div class="lp-form__inner">
-    <header class="lp-sec-header lp-sec-header--center">
-      <p class="lp-eyebrow lp-eyebrow--light">APPLY</p>
-      <h2 class="lp-h2 lp-h2--light">お申し込み・お問い合わせ</h2>
-      <p class="lp-form__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
+<!-- ════════════════════════════════
+  8. FORM（お申し込み）
+════════════════════════════════ -->
+<section class="form-sec" id="form">
+  <div class="form-sec__inner">
+    <header class="sec-header sec-header--center">
+      <p class="eyebrow eyebrow--dim">APPLY</p>
+      <h2 class="sec-title sec-title--light">お申し込み・お問い合わせ</h2>
+      <p class="form-sec__lead">
+        下記フォームよりご連絡ください。<br />
+        2営業日以内にご返信いたします。
+      </p>
     </header>
 
     <form
-      class="lp-form__body"
+      class="form-sec__form"
       name={`course-apply-${c.id}`}
       method="POST"
       data-netlify="true"
-      action="/contact-thanks"
       novalidate
     >
       <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
       <input type="hidden" name="course" value={c.title} />
 
-      <div class="lp-form__row lp-form__row--2">
-        <div class="lp-form__field">
-          <label class="lp-form__label" for="name">お名前 <span class="req">必須</span></label>
-          <input class="lp-form__input" type="text" id="name" name="name" placeholder="安藤 千英" autocomplete="name" required />
+      <div class="form-sec__row">
+        <div class="form-sec__field">
+          <label class="form-sec__label" for="f-name">
+            お名前 <span class="req">必須</span>
+          </label>
+          <input class="form-sec__input" type="text" id="f-name" name="name"
+            placeholder="安藤 千英" autocomplete="name" required />
         </div>
-        <div class="lp-form__field">
-          <label class="lp-form__label" for="kana">フリガナ</label>
-          <input class="lp-form__input" type="text" id="kana" name="kana" placeholder="アンドウ チエ" />
-        </div>
-      </div>
-
-      <div class="lp-form__row lp-form__row--2">
-        <div class="lp-form__field">
-          <label class="lp-form__label" for="email">メールアドレス <span class="req">必須</span></label>
-          <input class="lp-form__input" type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required />
-        </div>
-        <div class="lp-form__field">
-          <label class="lp-form__label" for="tel">電話番号</label>
-          <input class="lp-form__input" type="tel" id="tel" name="tel" placeholder="090-0000-0000" autocomplete="tel" />
+        <div class="form-sec__field">
+          <label class="form-sec__label" for="f-kana">フリガナ</label>
+          <input class="form-sec__input" type="text" id="f-kana" name="kana"
+            placeholder="アンドウ チエ" />
         </div>
       </div>
 
-      <div class="lp-form__field">
-        <label class="lp-form__label" for="schedule">ご希望の日程・時期</label>
-        <input class="lp-form__input" type="text" id="schedule" name="schedule" placeholder="例：9月以降の週末を希望" />
+      <div class="form-sec__row">
+        <div class="form-sec__field">
+          <label class="form-sec__label" for="f-email">
+            メールアドレス <span class="req">必須</span>
+          </label>
+          <input class="form-sec__input" type="email" id="f-email" name="email"
+            placeholder="your@email.com" autocomplete="email" required />
+        </div>
+        <div class="form-sec__field">
+          <label class="form-sec__label" for="f-tel">電話番号</label>
+          <input class="form-sec__input" type="tel" id="f-tel" name="tel"
+            placeholder="090-0000-0000" autocomplete="tel" />
+        </div>
       </div>
 
-      <div class="lp-form__field">
-        <label class="lp-form__label" for="message">お問い合わせ内容</label>
-        <textarea class="lp-form__textarea" id="message" name="message" rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
+      <div class="form-sec__field">
+        <label class="form-sec__label" for="f-schedule">ご希望の日程・時期</label>
+        <input class="form-sec__input" type="text" id="f-schedule" name="schedule"
+          placeholder="例：9月以降の週末を希望" />
       </div>
 
-      <div class="lp-form__submit">
-        <button class="lp-btn lp-btn--submit" type="submit">送信する</button>
-        <p class="lp-form__privacy">
-          送信いただくことで<a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。
+      <div class="form-sec__field">
+        <label class="form-sec__label" for="f-msg">お問い合わせ内容</label>
+        <textarea class="form-sec__textarea" id="f-msg" name="message"
+          rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
+      </div>
+
+      <div class="form-sec__submit">
+        <button class="btn btn--gold btn--lg" type="submit">送信する</button>
+        <p class="form-sec__privacy">
+          送信いただくことで
+          <a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
+          に同意したものとみなします。
         </p>
       </div>
     </form>
@@ -253,420 +292,685 @@ if (!c) return Astro.redirect('/listofcourses');
 </main>
 </Layout>
 
+<!-- ════════════════════════════════
+  FAQ アコーディオン生成スクリプト
+════════════════════════════════ -->
+<script>
+(function () {
+  const src = document.querySelector('.faq__source');
+  const list = document.getElementById('faqList');
+  if (!src || !list) return;
+
+  const h2s = src.querySelectorAll('h2');
+  h2s.forEach((h2, i) => {
+    const q = h2.textContent?.trim() ?? '';
+    const answerNodes: Node[] = [];
+    let sib = h2.nextElementSibling;
+    while (sib && sib.tagName !== 'H2') {
+      answerNodes.push(sib.cloneNode(true));
+      sib = sib.nextElementSibling;
+    }
+
+    const dt = document.createElement('dt');
+    dt.className = 'faq__q';
+    dt.setAttribute('role', 'button');
+    dt.setAttribute('tabindex', '0');
+    dt.setAttribute('aria-expanded', 'false');
+    dt.setAttribute('aria-controls', `faq-ans-${i}`);
+    dt.innerHTML = `
+      <span class="faq__q-text">${q}</span>
+      <span class="faq__q-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </span>`;
+
+    const dd = document.createElement('dd');
+    dd.className = 'faq__a';
+    dd.id = `faq-ans-${i}`;
+    dd.setAttribute('role', 'region');
+    dd.setAttribute('hidden', '');
+    const inner = document.createElement('div');
+    inner.className = 'faq__a-inner';
+    answerNodes.forEach(n => inner.appendChild(n));
+    dd.appendChild(inner);
+
+    function toggle() {
+      const open = dt.getAttribute('aria-expanded') === 'true';
+      dt.setAttribute('aria-expanded', String(!open));
+      if (open) {
+        dd.setAttribute('hidden', '');
+      } else {
+        dd.removeAttribute('hidden');
+      }
+    }
+    dt.addEventListener('click', toggle);
+    dt.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    list.appendChild(dt);
+    list.appendChild(dd);
+  });
+})();
+</script>
+
 <style>
-/* ══════════════════════════════════════════
-   TOKENS & RESET
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
 .lp {
-  --lp-gold: var(--gold, #a68a6d);
-  --lp-dark: #141413;
-  --lp-ink:  #1a1917;
-  --lp-mute: #6b6560;
-  --lp-bg:   #fafaf8;
-  --lp-line: rgba(26,25,23,.1);
+  --gold:    #a68a6d;
+  --gold-lt: #c4a882;
+  --gold-bg: rgba(166,138,109,.08);
+  --dark:    #141413;
+  --ink:     #1a1917;
+  --muted:   #6b6560;
+  --warm-bg: #f4ede3;
+  --off-bg:  #fafaf8;
+  --line:    rgba(26,25,23,.1);
+  --radius:  0.75rem;
 }
 
-/* ══════════════════════════════════════════
-   SHARED TYPOGRAPHY HELPERS
-══════════════════════════════════════════ */
-.lp-eyebrow {
+/* ══════════════════════════════════════
+   SHARED BUTTONS
+══════════════════════════════════════ */
+.btn {
+  display: inline-block;
   font-family: var(--font-ui, sans-serif);
-  font-size: .65rem;
-  letter-spacing: .36em;
+  font-size: .82rem;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--lp-gold);
-  margin: 0 0 .8rem;
+  text-decoration: none;
+  padding: 1rem 2.4rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .3s, color .3s, opacity .3s, border-color .3s;
+  white-space: nowrap;
 }
-.lp-eyebrow--light { color: rgba(240,236,230,.55); }
+.btn--gold {
+  background: var(--gold);
+  color: #0a0808;
+  border-color: var(--gold);
+}
+.btn--gold:hover { opacity: .8; }
+.btn--ghost {
+  background: transparent;
+  color: rgba(240,236,230,.7);
+  border-color: rgba(240,236,230,.3);
+}
+.btn--ghost:hover {
+  background: rgba(240,236,230,.08);
+  border-color: rgba(240,236,230,.6);
+  color: rgba(240,236,230,.95);
+}
+.btn--lg { padding: 1.2rem 3.2rem; font-size: .88rem; }
 
-.lp-h2 {
+/* ══════════════════════════════════════
+   SHARED SECTION TYPOGRAPHY
+══════════════════════════════════════ */
+.sec-header { margin-bottom: clamp(3rem, 5vw, 5rem); }
+.sec-header--center { text-align: center; }
+
+.eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  margin: 0 0 .9rem;
+  display: block;
+}
+.eyebrow           { color: var(--gold); }
+.eyebrow--warm     { color: #9a7858; }
+.eyebrow--dim      { color: rgba(240,236,230,.4); }
+
+.sec-title {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
   font-weight: 300;
   letter-spacing: .08em;
-  color: var(--lp-ink);
+  line-height: 1.45;
   margin: 0;
 }
-.lp-h2--light { color: rgba(240,236,230,.92); }
+.sec-title--dark  { color: var(--ink); }
+.sec-title--light { color: rgba(240,236,230,.93); }
 
-.lp-sec-header { margin-bottom: clamp(2.8rem, 5vw, 5rem); }
-.lp-sec-header--center { text-align: center; }
+.sec-lead {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 1rem 0 0;
+  line-height: 1.9;
+}
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    1. HERO
-══════════════════════════════════════════ */
-.lp-hero {
+══════════════════════════════════════ */
+.hero {
   position: relative;
   min-height: 100svh;
-  display: flex;
-  align-items: center;
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  background: var(--lp-dark);
+  background: var(--dark);
 }
-.lp-hero__bg {
-  position: absolute;
-  inset: 0;
+.hero__bg {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center;
-  animation: heroZoom 18s cubic-bezier(.16,1,.3,1) forwards;
+  object-position: center 30%;
+  animation: heroKen 20s cubic-bezier(.16,1,.3,1) forwards;
 }
-.lp-hero__bg--dark {
-  background: linear-gradient(135deg, #1a1917 0%, #2a2520 100%);
+.hero__bg--fallback {
+  background: linear-gradient(135deg, #1c1a18 0%, #2e2720 100%);
 }
-@keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1); } }
-.lp-hero__scrim {
+@keyframes heroKen {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
+}
+.hero__scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to right, rgba(14,10,8,.9) 0%, rgba(14,10,8,.6) 45%, rgba(14,10,8,.25) 100%),
-    linear-gradient(to top,   rgba(14,10,8,.7) 0%, transparent 55%);
+    linear-gradient(to bottom, rgba(14,10,8,.25) 0%, rgba(14,10,8,.55) 60%, rgba(14,10,8,.78) 100%),
+    linear-gradient(to right,  rgba(14,10,8,.75) 0%, rgba(14,10,8,.35) 55%, transparent 100%);
 }
-.lp-hero__inner {
+.hero__inner {
   position: relative; z-index: 1;
-  width: min(100% - 3rem, 78rem);
-  margin: 0 auto;
-  padding: clamp(8rem,18vh,14rem) 0 clamp(6rem,12vh,10rem);
-  display: flex; flex-direction: column; align-items: flex-start; gap: 1.4rem;
+  width: min(100% - 3rem, 80rem);
+  padding: clamp(8rem,20vh,16rem) 0 clamp(7rem,14vh,12rem);
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 1.6rem;
 }
-.lp-hero__eyebrow {
+.hero__eyebrow {
   font-family: var(--font-ui, sans-serif);
-  font-size: .65rem; letter-spacing: .36em; text-transform: uppercase;
-  color: var(--lp-gold); margin: 0;
+  font-size: .6rem; letter-spacing: .38em; text-transform: uppercase;
+  color: var(--gold); margin: 0;
 }
-.lp-hero__title {
+.hero__title {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(2rem, 5.5vw, 4.8rem);
-  font-weight: 300; line-height: 1.4; letter-spacing: .08em;
-  color: #f0ece6; margin: 0; max-width: 18em;
-  text-shadow: 0 2px 40px rgba(0,0,0,.35);
-  white-space: pre-line;
+  font-size: clamp(2.1rem, 5.8vw, 5rem);
+  font-weight: 300; line-height: 1.38; letter-spacing: .07em;
+  color: #f2ede7; margin: 0; max-width: 17em;
+  text-shadow: 0 4px 50px rgba(0,0,0,.4);
 }
-.lp-hero__sub {
+.hero__sub {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  font-weight: 300; line-height: 1.8; letter-spacing: .06em;
-  color: rgba(240,236,230,.7); margin: 0; max-width: 28em;
+  font-size: clamp(.98rem, 1.6vw, 1.3rem);
+  font-weight: 300; line-height: 1.9; letter-spacing: .05em;
+  color: rgba(240,236,230,.65); margin: 0; max-width: 30em;
 }
-.lp-hero__cta {
-  display: inline-block; margin-top: .8rem;
-  font-family: var(--font-ui, sans-serif); font-size: .88rem;
-  letter-spacing: .14em; text-decoration: none;
-  background: var(--lp-gold); color: #0a0808;
-  padding: 1.1rem 2.8rem;
-  transition: opacity .3s;
+.hero__actions {
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-top: .5rem;
 }
-.lp-hero__cta:hover { opacity: .82; }
-.lp-hero__scroll {
-  position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%);
+.hero__scroll {
+  position: absolute; left: 50%; bottom: 2.2rem;
+  transform: translateX(-50%);
 }
-.lp-hero__scroll span {
-  display: block; width: 1px; height: 3.6rem;
-  background: linear-gradient(to bottom, transparent, rgba(166,138,109,.8));
-  animation: scrollCue 2.4s ease-in-out infinite; transform-origin: top;
+.hero__scroll span {
+  display: block; width: 1px; height: 4rem;
+  background: linear-gradient(to bottom, transparent 0%, rgba(166,138,109,.75) 100%);
+  animation: scrollCue 2.6s ease-in-out infinite;
+  transform-origin: top;
 }
 @keyframes scrollCue {
-  0%  { transform: scaleY(0); opacity: 0; }
-  30% { transform: scaleY(1); opacity: 1; }
-  100%{ transform: scaleY(1); opacity: 0; }
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg { animation: none; }
+  .hero__scroll { display: none; }
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    2. TARGET
-══════════════════════════════════════════ */
-.lp-target {
-  background: #f5f0e8;
+══════════════════════════════════════ */
+.target {
+  background: var(--warm-bg);
   padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
 }
-.lp-target__inner {
-  width: min(100%, 72rem); margin: 0 auto;
-}
-.lp-target .lp-eyebrow { color: #8a7055; }
+.target__inner { width: min(100%, 74rem); margin: 0 auto; }
 
-/* ══════════════════════════════════════════
-   3. DESCRIPTION
-══════════════════════════════════════════ */
-.lp-desc {
-  background: var(--lp-bg);
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+/* li → カード型 */
+.prose--target :global(ul) {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin: 0;
 }
-.lp-desc__inner { width: min(100%, 72rem); margin: 0 auto; }
-
-/* ══════════════════════════════════════════
-   4. CURRICULUM
-══════════════════════════════════════════ */
-.lp-curr {
+.prose--target :global(li) {
   background: #fff;
-  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-  border-top: 1px solid var(--lp-line);
+  border: 1px solid rgba(154,120,88,.15);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.4rem 1.6rem;
+  font-family: var(--font-jp, sans-serif);
+  font-size: .95rem; font-weight: 300; line-height: 1.85;
+  color: #3a3532;
+  position: relative;
 }
-.lp-curr__inner { width: min(100%, 72rem); margin: 0 auto; }
+.prose--target :global(li)::before { display: none; }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
+   3. DESCRIPTION
+══════════════════════════════════════ */
+.desc {
+  background: var(--off-bg);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.desc__inner { width: min(100%, 74rem); margin: 0 auto; }
+.desc__layout { display: flex; flex-direction: column; gap: 0; }
+
+/* ══════════════════════════════════════
+   4. CURRICULUM
+══════════════════════════════════════ */
+.curr {
+  background: #f4ede3;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+}
+.curr__inner { width: min(100%, 74rem); margin: 0 auto; }
+
+/* ══════════════════════════════════════
+   ▸ PROSE（共通リッチエディタ本文）
+══════════════════════════════════════ */
+.prose {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.93rem, 1.15vw, 1.03rem);
+  font-weight: 300; line-height: 2.15; letter-spacing: .04em;
+  color: #3a3835;
+}
+.prose--light { color: #3a3835; }
+.prose--curr  { color: #2e2a27; }
+
+/* 見出し */
+.prose :global(h2) {
+  font-size: clamp(1.15rem, 2vw, 1.55rem); font-weight: 400;
+  color: var(--ink); letter-spacing: .07em; line-height: 1.55;
+  margin: 3rem 0 1.1rem;
+  padding: 1.1rem 1.4rem;
+  background: rgba(166,138,109,.07);
+  border-left: 3px solid var(--gold);
+}
+.prose :global(h3) {
+  font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 400;
+  color: var(--ink); letter-spacing: .05em;
+  margin: 2.2rem 0 .8rem;
+}
+
+/* ★ strong / b → ブランドゴールド */
+.prose :global(strong),
+.prose :global(b) {
+  font-weight: 600;
+  color: #8a6840;
+  background: rgba(166,138,109,.09);
+  padding: .05em .2em;
+  border-radius: 2px;
+}
+
+/* 段落・リスト */
+.prose :global(p)  { margin: 0 0 1.5em; }
+.prose :global(ul),
+.prose :global(ol) { padding-left: 1.6em; margin: 0 0 1.5em; }
+.prose :global(li) { margin-bottom: .6em; line-height: 1.9; }
+.prose :global(li::marker) { color: var(--gold); }
+
+/* ★ 画像 → 角丸・レスポンシブ */
+.prose :global(img) {
+  display: block;
+  max-width: 100%; height: auto;
+  border-radius: var(--radius);
+  margin: 2.2em auto;
+  box-shadow: 0 4px 24px rgba(26,25,23,.1);
+}
+/* 横並び画像対応（figure / div が隣接する場合） */
+.prose :global(figure) {
+  margin: 2em 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.prose :global(figure img) { margin: 0; }
+.prose :global(figcaption) {
+  font-size: .75rem; color: var(--muted);
+  margin-top: .6rem; text-align: center;
+}
+/* div.image-pair や table で横並びにされた画像 */
+.prose :global(table img) {
+  width: 100%; height: auto;
+  border-radius: calc(var(--radius) * 0.6);
+  margin: .4em 0;
+}
+.prose :global(table) {
+  width: 100%; border-collapse: collapse;
+  margin: 2em 0;
+}
+.prose :global(td), .prose :global(th) {
+  vertical-align: top; padding: .5rem;
+}
+
+/* blockquote */
+.prose :global(blockquote) {
+  border-left: 3px solid var(--gold);
+  margin: 2em 0; padding: .9em 1.4em;
+  color: var(--muted); font-style: italic;
+}
+
+/* ══════════════════════════════════════
    5. ROADMAP
-══════════════════════════════════════════ */
-.lp-road {
-  background: var(--lp-dark);
+══════════════════════════════════════ */
+.road {
+  background: var(--dark);
   padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
 }
-.lp-road__inner { width: min(100%, 78rem); margin: 0 auto; }
-
-.lp-road__steps {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin-top: clamp(2.5rem, 4vw, 4rem);
+.road__inner { width: min(100%, 80rem); margin: 0 auto; }
+.road__sub {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .9rem; font-weight: 300;
+  color: rgba(240,236,230,.38);
+  margin: 1rem 0 0; text-align: center;
 }
 
-.lp-road__step {
-  flex: 1;
-  background: rgba(240,236,230,.04);
-  border: 1px solid rgba(166,138,109,.18);
-  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.8rem);
+.road__list {
+  list-style: none; margin: clamp(3rem, 5vw, 5rem) 0 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+/* 横線コネクター */
+.road__list::before {
+  content: '';
+  position: absolute;
+  top: clamp(2rem, 4vw, 3.2rem);
+  left: calc(12.5% + 1px);
+  right: calc(12.5% + 1px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(166,138,109,.3) 10%, rgba(166,138,109,.3) 90%, transparent);
+}
+
+.road__item {
   display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: .8rem; transition: background .3s, border-color .3s;
+  gap: 1.2rem; padding: clamp(1.2rem, 2.5vw, 2rem) clamp(.8rem, 1.5vw, 1.4rem);
+  position: relative;
+  transition: background .4s;
+  border-radius: .5rem;
 }
-.lp-road__step:hover {
-  background: rgba(166,138,109,.08);
-  border-color: rgba(166,138,109,.4);
+.road__item:hover {
+  background: rgba(166,138,109,.06);
 }
-.lp-road__step--goal {
-  background: rgba(166,138,109,.1);
-  border-color: rgba(166,138,109,.4);
-}
+.road__item--goal .road__num { background: rgba(166,138,109,.18); }
 
-.lp-road__step-num {
+.road__num {
+  width: clamp(3.2rem, 5vw, 4.4rem);
+  height: clamp(3.2rem, 5vw, 4.4rem);
+  border-radius: 50%;
+  background: rgba(240,236,230,.06);
+  border: 1px solid rgba(166,138,109,.25);
+  display: grid; place-items: center;
   font-family: var(--font-ui, sans-serif);
-  font-size: 1.6rem; letter-spacing: .08em;
-  color: var(--lp-gold); line-height: 1;
+  font-size: clamp(.9rem, 1.4vw, 1.25rem);
+  letter-spacing: .08em;
+  color: var(--gold);
+  flex-shrink: 0;
+  position: relative; z-index: 1;
 }
+.road__num--cert { color: var(--gold); }
+.road__num--cert svg { stroke: var(--gold); }
 
-.lp-road__step-label {
+.road__tag {
   font-family: var(--font-ui, sans-serif);
-  font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
-  color: var(--lp-gold); margin: 0;
+  font-size: .56rem; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(166,138,109,.65); margin: 0;
 }
-.lp-road__step-name {
+.road__name {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.95rem, 1.3vw, 1.1rem); font-weight: 400;
-  color: rgba(240,236,230,.92); margin: 0; letter-spacing: .06em;
+  font-size: clamp(.9rem, 1.3vw, 1.08rem); font-weight: 400;
+  color: rgba(240,236,230,.9); margin: 0; letter-spacing: .05em;
 }
-.lp-road__step-desc {
+.road__desc {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.72rem, .9vw, .82rem); font-weight: 300;
-  color: rgba(240,236,230,.45); line-height: 1.7; margin: 0;
+  font-size: clamp(.7rem, .9vw, .8rem); font-weight: 300;
+  color: rgba(240,236,230,.38); line-height: 1.75; margin: 0;
 }
+.road__body { display: flex; flex-direction: column; gap: .5rem; }
 
-.lp-road__arrow {
-  flex-shrink: 0; width: 2.5rem; text-align: center;
-  font-size: 1.1rem; color: rgba(166,138,109,.4);
-}
-
-/* ══════════════════════════════════════════
-   6. INFO（開催情報 & 料金）
-══════════════════════════════════════════ */
-.lp-info {
-  background: var(--lp-bg);
+/* ══════════════════════════════════════
+   6. INFO
+══════════════════════════════════════ */
+.info {
+  background: var(--off-bg);
   padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
 }
-.lp-info__inner { width: min(100%, 72rem); margin: 0 auto; }
+.info__inner { width: min(100%, 74rem); margin: 0 auto; }
 
-.lp-info__grid {
+.info__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
-.lp-info__card {
+
+.info__card {
   background: #fff;
-  border: 1px solid var(--lp-line);
-  padding: 2.2rem;
-  display: flex; flex-direction: column; gap: .9rem;
+  border: 1px solid var(--line);
+  padding: 2.4rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: .25rem;
+  transition: box-shadow .3s;
 }
-.lp-info__card--price { border-color: rgba(166,138,109,.3); }
+.info__card:hover { box-shadow: 0 6px 32px rgba(26,25,23,.08); }
+.info__card--price {
+  border-color: rgba(166,138,109,.28);
+  background: linear-gradient(135deg, #fff 0%, #fdf9f4 100%);
+}
 
-.lp-info__card-label {
-  display: flex; align-items: center; gap: .5rem;
+.info__card-icon { color: var(--gold); }
+
+.info__card-label {
   font-family: var(--font-ui, sans-serif);
-  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--lp-mute); margin: 0;
+  font-size: .65rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--muted); margin: 0;
 }
-.lp-info__card-label svg { color: var(--lp-gold); flex-shrink: 0; }
-
-.lp-info__card-val {
+.info__card-val {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.95rem, 1.2vw, 1.05rem);
-  font-weight: 300; line-height: 1.9; color: var(--lp-ink); margin: 0;
+  font-size: clamp(.93rem, 1.2vw, 1.04rem);
+  font-weight: 300; line-height: 1.9; color: var(--ink); margin: 0;
+  white-space: pre-line;
 }
-.lp-info__card-price {
+.info__card-price {
   font-family: var(--font-jp, sans-serif);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 400; color: var(--lp-ink); margin: 0; letter-spacing: .04em;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 400; color: var(--ink); margin: 0; letter-spacing: .04em;
 }
-.lp-info__card-note {
-  font-family: var(--font-ui, sans-serif);
-  font-size: .72rem; line-height: 1.7;
-  color: var(--lp-mute); margin: 0;
-  border-top: 1px solid var(--lp-line); padding-top: .8rem;
+.info__card-note {
+  font-family: var(--font-jp, sans-serif);
+  font-size: .76rem; line-height: 1.85;
+  color: var(--muted); margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
 }
 
-.lp-info__cta-wrap { display: flex; justify-content: center; }
+.info__cta { display: flex; justify-content: center; }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    7. FAQ
-══════════════════════════════════════════ */
-.lp-faq {
+══════════════════════════════════════ */
+.faq {
   background: #fff;
   padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
-  border-top: 1px solid var(--lp-line);
+  border-top: 1px solid var(--line);
 }
-.lp-faq__inner { width: min(100%, 72rem); margin: 0 auto; }
+.faq__inner { width: min(100%, 72rem); margin: 0 auto; }
 
-/* ══════════════════════════════════════════
+.faq__list {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.faq__q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.4rem 1.6rem;
+  background: #fafaf8;
+  border: 1px solid var(--line);
+  border-top: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background .3s;
+}
+.faq__list .faq__q:first-child,
+.faq__q:first-of-type { border-top: 1px solid var(--line); }
+.faq__q:hover { background: var(--gold-bg); }
+.faq__q[aria-expanded="true"] {
+  background: var(--gold-bg);
+  border-bottom-color: transparent;
+}
+
+.faq__q-text {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.93rem, 1.2vw, 1.05rem);
+  font-weight: 400; line-height: 1.65;
+  color: var(--ink); letter-spacing: .03em;
+}
+.faq__q-text::before {
+  content: 'Q. ';
+  color: var(--gold);
+  font-family: var(--font-ui, sans-serif);
+  font-size: .8em; letter-spacing: .1em;
+}
+
+.faq__q-icon {
+  flex-shrink: 0; color: var(--gold);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  display: grid; place-items: center;
+}
+.faq__q[aria-expanded="true"] .faq__q-icon { transform: rotate(180deg); }
+
+.faq__a {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: none;
+}
+.faq__a[hidden] { display: none; }
+
+.faq__a-inner {
+  padding: 1.4rem 1.8rem 1.8rem;
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.9rem, 1.1vw, .98rem);
+  font-weight: 300; line-height: 2.1;
+  color: #4a4540;
+}
+.faq__a-inner :global(p) { margin: 0 0 .8em; }
+.faq__a-inner :global(p:last-child) { margin-bottom: 0; }
+.faq__a-inner :global(strong),
+.faq__a-inner :global(b) {
+  font-weight: 600; color: #8a6840;
+  background: rgba(166,138,109,.09);
+  padding: .05em .2em; border-radius: 2px;
+}
+.faq__a-inner :global(img) {
+  max-width: 100%; height: auto;
+  border-radius: var(--radius);
+  margin: 1.2em 0;
+}
+
+/* ══════════════════════════════════════
    8. FORM
-══════════════════════════════════════════ */
-.lp-form {
-  background: var(--lp-dark);
+══════════════════════════════════════ */
+.form-sec {
+  background: var(--dark);
   padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem);
 }
-.lp-form__inner { width: min(100%, 64rem); margin: 0 auto; }
-.lp-form__lead {
+.form-sec__inner { width: min(100%, 66rem); margin: 0 auto; }
+.form-sec__lead {
   font-family: var(--font-jp, sans-serif);
-  font-size: .9rem; font-weight: 300;
-  color: rgba(240,236,230,.5); margin: 1.2rem 0 0; text-align: center;
+  font-size: .92rem; font-weight: 300; line-height: 1.85;
+  color: rgba(240,236,230,.45);
+  margin: 1.2rem 0 0; text-align: center;
 }
 
-.lp-form__body {
+.form-sec__form {
   background: rgba(240,236,230,.04);
   border: 1px solid rgba(240,236,230,.1);
   padding: clamp(2.5rem, 5vw, 4rem);
-  margin-top: clamp(2.5rem, 4vw, 4rem);
+  margin-top: clamp(2.8rem, 5vw, 5rem);
   display: flex; flex-direction: column; gap: 1.8rem;
+  border-radius: .25rem;
 }
 
-.lp-form__row { display: flex; gap: 1.5rem; }
-.lp-form__row--2 > * { flex: 1; }
+.form-sec__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
 
-.lp-form__field { display: flex; flex-direction: column; gap: .55rem; }
+.form-sec__field { display: flex; flex-direction: column; gap: .55rem; }
 
-.lp-form__label {
+.form-sec__label {
   font-family: var(--font-ui, sans-serif);
-  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(240,236,230,.55); display: flex; align-items: center; gap: .5rem;
+  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(240,236,230,.48);
+  display: flex; align-items: center; gap: .5rem;
 }
 .req {
-  font-size: .58rem; background: var(--lp-gold);
-  color: #0a0808; padding: .15em .55em; letter-spacing: .1em;
+  font-size: .58rem; background: var(--gold);
+  color: #0a0808; padding: .15em .6em;
+  letter-spacing: .1em; border-radius: 2px;
 }
 
-.lp-form__input,
-.lp-form__textarea {
+.form-sec__input,
+.form-sec__textarea {
   background: rgba(240,236,230,.06);
-  border: 1px solid rgba(240,236,230,.15);
-  color: rgba(240,236,230,.9);
+  border: 1px solid rgba(240,236,230,.14);
+  color: rgba(240,236,230,.88);
   font-family: var(--font-jp, sans-serif);
   font-size: .95rem; font-weight: 300;
-  padding: .85rem 1.1rem;
+  padding: .88rem 1.1rem;
   outline: none;
   transition: border-color .3s, background .3s;
   width: 100%;
+  border-radius: .2rem;
 }
-.lp-form__input::placeholder,
-.lp-form__textarea::placeholder { color: rgba(240,236,230,.22); }
-.lp-form__input:focus,
-.lp-form__textarea:focus {
-  border-color: rgba(166,138,109,.6);
+.form-sec__input::placeholder,
+.form-sec__textarea::placeholder { color: rgba(240,236,230,.2); }
+.form-sec__input:focus,
+.form-sec__textarea:focus {
+  border-color: rgba(166,138,109,.55);
   background: rgba(240,236,230,.09);
 }
-.lp-form__textarea { resize: vertical; }
+.form-sec__textarea { resize: vertical; }
 
-.lp-form__submit { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
-.lp-form__privacy {
+.form-sec__submit {
+  display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  padding-top: .4rem;
+}
+.form-sec__privacy {
   font-family: var(--font-ui, sans-serif);
-  font-size: .68rem; color: rgba(240,236,230,.3); text-align: center;
+  font-size: .66rem; color: rgba(240,236,230,.28); text-align: center;
+  line-height: 1.7;
 }
-.lp-form__privacy a { color: rgba(240,236,230,.45); }
+.form-sec__privacy a { color: rgba(240,236,230,.42); }
 
-/* ══════════════════════════════════════════
-   SHARED BUTTONS
-══════════════════════════════════════════ */
-.lp-btn {
-  display: inline-block; text-decoration: none;
-  font-family: var(--font-ui, sans-serif);
-  font-size: .85rem; letter-spacing: .16em;
-  padding: 1.1rem 3rem; cursor: pointer; border: none;
-  transition: opacity .3s, background .3s;
-}
-.lp-btn--primary { background: var(--lp-gold); color: #0a0808; }
-.lp-btn--primary:hover { opacity: .82; }
-.lp-btn--submit {
-  background: var(--lp-gold); color: #0a0808;
-  min-width: 200px; font-size: .9rem; padding: 1.2rem 3.5rem;
-}
-.lp-btn--submit:hover { opacity: .82; }
-
-/* ══════════════════════════════════════════
-   PROSE（リッチエディタ本文）
-══════════════════════════════════════════ */
-.prose-light,
-.prose-dark {
-  font-family: var(--font-jp, sans-serif);
-  font-size: clamp(.92rem, 1.1vw, 1rem);
-  font-weight: 300; line-height: 2.1; letter-spacing: .04em;
-}
-.prose-light { color: #3a3835; }
-.prose-dark  { color: #3a3532; }
-
-.prose-light :global(h2),
-.prose-dark  :global(h2) {
-  font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 400;
-  letter-spacing: .07em; margin: 2.8rem 0 1.1rem; line-height: 1.55;
-  padding-top: 2.5rem; border-top: 1px solid var(--lp-line);
-}
-.prose-light :global(h2) { color: var(--lp-ink); }
-.prose-dark  :global(h2) { color: #2a2520; border-color: rgba(139,112,80,.15); }
-
-.prose-light :global(h3),
-.prose-dark  :global(h3) { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 400; margin: 2rem 0 .8rem; }
-
-.prose-light :global(p),
-.prose-dark  :global(p) { margin: 0 0 1.5em; }
-.prose-light :global(ul),
-.prose-dark  :global(ul),
-.prose-light :global(ol),
-.prose-dark  :global(ol) { padding-left: 1.5em; margin: 0 0 1.5em; }
-.prose-light :global(li),
-.prose-dark  :global(li) { margin-bottom: .5em; }
-.prose-light :global(strong),
-.prose-dark  :global(strong) { font-weight: 500; }
-.prose-light :global(img),
-.prose-dark  :global(img) { width: 100%; height: auto; display: block; margin: 2em 0; }
-
-/* FAQ用（Q&A ブロック） */
-.prose-faq { font-family: var(--font-jp, sans-serif); font-weight: 300; line-height: 2; color: #3a3835; }
-.prose-faq :global(h2) {
-  font-size: clamp(1rem, 1.5vw, 1.15rem); font-weight: 500;
-  background: rgba(166,138,109,.08); border-left: 3px solid var(--lp-gold);
-  padding: 1rem 1.2rem; margin: 0 0 .5rem; letter-spacing: .05em;
-  color: var(--lp-ink);
-}
-.prose-faq :global(p) { margin: 0 0 2.2rem; padding: 0 .2rem 0 1.4rem; color: var(--lp-mute); }
-
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width: 56rem) {
-  .lp-road__steps { flex-direction: column; gap: 0; }
-  .lp-road__arrow { transform: rotate(90deg); }
-  .lp-road__step { width: 100%; flex-direction: row; text-align: left; gap: 1.2rem; padding: 1.2rem; }
-  .lp-road__step-num { min-width: 2.5rem; }
-  .lp-form__row--2 { flex-direction: column; }
+══════════════════════════════════════ */
+@media (max-width: 64rem) {
+  .road__list { grid-template-columns: repeat(2, 1fr); }
+  .road__list::before { display: none; }
 }
+
 @media (max-width: 48rem) {
-  .lp-hero__title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
-  .lp-form__body { padding: 1.8rem; }
+  .road__list { grid-template-columns: 1fr; }
+
+  .hero__title { font-size: clamp(1.9rem, 8vw, 3rem); }
+  .hero__actions { flex-direction: column; align-items: flex-start; }
+
+  .form-sec__row { grid-template-columns: 1fr; }
+  .form-sec__form { padding: 1.8rem; }
+
+  .prose--target :global(ul) { grid-template-columns: 1fr; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .lp-hero__bg { animation: none; }
-  .lp-hero__scroll { display: none; }
+
+@media (max-width: 36rem) {
+  .info__grid { grid-template-columns: 1fr; }
 }
 </style>
