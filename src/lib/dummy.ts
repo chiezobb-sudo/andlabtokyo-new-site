@@ -1,4 +1,4 @@
-import type { Knowledge, Price } from './microcms';
+import type { Knowledge, Journal, Price } from './microcms';
 
 const hero = { url: '/dummy/hero.jpg', width: 1600, height: 900 };
 
@@ -26,6 +26,36 @@ export const dummyKnowledgeList: Knowledge[] = [
     seoDescription: '（ダミー）',
     publishedAt: '2026-01-01T00:00:00.000Z',
     revisedAt: '2026-01-01T00:00:00.000Z',
+  },
+];
+
+export const dummyJournalList: Journal[] = [
+  {
+    id: 'raw-chocolate-recipe',
+    title: '自宅でできる！ローチョコレートの基本レシピ',
+    thumbnail: hero,
+    content: '<h2 id="sec-1-材料">材料</h2><p>カカオパウダー、カカオバター、メープルシロップ。</p><h2 id="sec-2-作り方">作り方</h2><p>45℃以下で溶かし合わせ、型に流し込んで冷やし固める。</p>',
+    category: 'レシピ',
+    publishedAt: '2026-08-01T00:00:00.000Z',
+    revisedAt: '2026-08-01T00:00:00.000Z',
+  },
+  {
+    id: 'fermentation-basics',
+    title: '発酵の基礎知識：腸内環境と免疫の深い関係',
+    thumbnail: hero,
+    content: '<h2>発酵食品とは</h2><p>微生物の働きで変化した食品。</p><h2>腸内フローラ</h2><p>多様な菌が住む生態系。</p>',
+    category: 'コラム',
+    publishedAt: '2026-08-10T00:00:00.000Z',
+    revisedAt: '2026-08-10T00:00:00.000Z',
+  },
+  {
+    id: 'living-food-morning',
+    title: '朝のリビングフードルーティン。体が変わる7つの習慣',
+    thumbnail: hero,
+    content: '<h2>起床直後の水</h2><p>白湯またはレモン水で消化器を目覚めさせる。</p><h2>グリーンスムージー</h2><p>葉野菜と果物で酵素補給。</p>',
+    category: 'コラム',
+    publishedAt: '2026-08-15T00:00:00.000Z',
+    revisedAt: '2026-08-15T00:00:00.000Z',
   },
 ];
 

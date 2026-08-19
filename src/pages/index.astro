@@ -9,13 +9,18 @@ import ProfileBandBlock from '../components/blocks/ProfileBandBlock.astro';
 import RichSectionBlock from '../components/blocks/RichSectionBlock.astro';
 import SliderAreaBlock from '../components/blocks/SliderAreaBlock.astro';
 import KnowledgeAreaBlock from '../components/blocks/KnowledgeAreaBlock.astro';
-import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType, SliderAreaBlock as SliderAreaBlockType, KnowledgeAreaBlock as KnowledgeAreaBlockType } from '../lib/microcms';
+import JournalAreaBlock from '../components/blocks/JournalAreaBlock.astro';
+import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType, SliderAreaBlock as SliderAreaBlockType, KnowledgeAreaBlock as KnowledgeAreaBlockType, JournalAreaBlock as JournalAreaBlockType } from '../lib/microcms';
+import { getJournalList } from '../lib/microcms';
 
 const page = await getPage('home');
 
 // knowledgeGrid または knowledgeArea があれば記事を取得
 const needsArticles = page?.blocks.some((b) => b.fieldId === 'knowledgeGrid' || b.fieldId === 'knowledgeArea') ?? false;
 const allArticles = needsArticles ? await getKnowledgeList() : [];
+// journalArea があれば journal 記事を取得
+const needsJournal = page?.blocks.some((b) => b.fieldId === 'journalArea') ?? false;
+const journalArticles = needsJournal ? await getJournalList() : [];
 ---
 
 <Layout
@@ -36,6 +41,7 @@ const allArticles = needsArticles ? await getKnowledgeList() : [];
     {block.fieldId === 'richSection'  && <RichSectionBlock  block={block as RichSectionBlockType} />}
     {block.fieldId === 'sliderArea'   && <SliderAreaBlock   block={block as SliderAreaBlockType} />}
     {block.fieldId === 'knowledgeArea' && <KnowledgeAreaBlock block={block as KnowledgeAreaBlockType} articles={allArticles.slice(0, 4)} />}
+    {block.fieldId === 'journalArea'   && <JournalAreaBlock   block={block as JournalAreaBlockType}   articles={journalArticles.slice(0, 3)} />}
   </>
 ))}
 

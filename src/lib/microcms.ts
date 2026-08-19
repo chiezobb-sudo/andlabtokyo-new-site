@@ -87,6 +87,35 @@ export async function getPrices(): Promise<Price[]> {
 
 export const yen = (n: number) => `¥${n.toLocaleString('ja-JP')}`;
 
+export type Journal = {
+  id: string;
+  title: string;
+  thumbnail?: MicroCMSImage;
+  content: string;  // richEditor → HTML文字列
+  category?: string;
+  publishedAt: string;
+  revisedAt: string;
+};
+
+export async function getJournalList(): Promise<Journal[]> {
+  if (!safeClient) {
+    const { dummyJournalList } = await import('./dummy');
+    return dummyJournalList;
+  }
+  const res = await safeClient.getList<Journal>({ endpoint: 'journal', queries: { limit: 100 } });
+  return res.contents;
+}
+
+export async function getJournal(contentId: string): Promise<Journal> {
+  if (!safeClient) {
+    const { dummyJournalList } = await import('./dummy');
+    const hit = dummyJournalList.find((a) => a.id === contentId);
+    if (!hit) throw new Error(`dummy journal not found: ${contentId}`);
+    return hit;
+  }
+  return safeClient.getListDetail<Journal>({ endpoint: 'journal', contentId });
+}
+
 // ─────────────────────────────────────────────
 // Page builder types (pages API)
 // ─────────────────────────────────────────────
@@ -176,6 +205,12 @@ export type KnowledgeAreaBlock = {
   subtitle?: string;
 };
 
+export type JournalAreaBlock = {
+  fieldId: 'journalArea';
+  title?: string;
+  subtitle?: string;
+};
+
 export type PageBlock =
   | HeroBlock
   | ConceptBandBlock
@@ -184,7 +219,8 @@ export type PageBlock =
   | ProfileBandBlock
   | RichSectionBlock
   | SliderAreaBlock
-  | KnowledgeAreaBlock;
+  | KnowledgeAreaBlock
+  | JournalAreaBlock;
 
 export type Page = {
   id: string;

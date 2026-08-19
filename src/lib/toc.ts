@@ -5,6 +5,17 @@ export const slugifyHeading = (s: string, i: number) =>
 
 export type TocItem = { id: string; label: string };
 
+/** h2 タグに id 属性を付与した HTML を返す（目次アンカーリンク用） */
+export function injectHeadingIds(body: string): string {
+  let i = 0;
+  return body.replace(/<h2([^>]*)>(.*?)<\/h2>/gis, (_, attrs, inner) => {
+    const label = inner.replace(/<[^>]+>/g, '').trim();
+    const id = slugifyHeading(label, i++);
+    const cleanAttrs = attrs.replace(/\s*id="[^"]*"/g, '');
+    return `<h2${cleanAttrs} id="${id}">${inner}</h2>`;
+  });
+}
+
 /** richEditorV2（HTML文字列）から h2 タグを抽出して目次を生成する */
 export const buildToc = (body: string): TocItem[] => {
   const items: TocItem[] = [];

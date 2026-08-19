@@ -1,0 +1,269 @@
+---
+import type { JournalAreaBlock, Journal } from '../../lib/microcms';
+
+interface Props {
+  block: JournalAreaBlock;
+  articles: Journal[];
+}
+
+const { block: b, articles } = Astro.props;
+
+function fmtDate(iso: string) {
+  const d = new Date(iso);
+  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+}
+---
+
+{articles.length > 0 && (
+<section class="ja">
+  <div class="ja__inner">
+
+    <!-- ── ヘッダー ── -->
+    <header class="ja__header">
+      <div class="ja__header-left">
+        <p class="ja__eyebrow">{b.title ?? 'JOURNAL'}</p>
+        <h2 class="ja__title">{b.subtitle ?? 'レシピ & コラム'}</h2>
+      </div>
+      <a href="/journal" class="ja__all-link">
+        すべての記事を見る
+        <svg width="28" height="1" viewBox="0 0 28 1" aria-hidden="true">
+          <line x1="0" y1="0.5" x2="28" y2="0.5" stroke="currentColor"/>
+        </svg>
+      </a>
+    </header>
+
+    <!-- ── 3列カードグリッド ── -->
+    <ul class="ja__grid" role="list">
+      {articles.map((a) => (
+        <li class="ja__card">
+          <a href={`/journal/${a.id}`} class="ja__card-link">
+
+            <!-- サムネイル -->
+            <div class="ja__card-thumb">
+              {a.thumbnail
+                ? <img
+                    src={`${a.thumbnail.url}?w=640&q=85`}
+                    alt={a.title}
+                    width={a.thumbnail.width}
+                    height={a.thumbnail.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                : <div class="ja__card-placeholder" aria-hidden="true"></div>
+              }
+            </div>
+
+            <!-- テキスト -->
+            <div class="ja__card-body">
+              <div class="ja__card-meta">
+                {a.category && <span class="ja__card-cat">{a.category}</span>}
+                <time class="ja__card-date" datetime={a.publishedAt}>{fmtDate(a.publishedAt)}</time>
+              </div>
+              <h3 class="ja__card-title">{a.title}</h3>
+              <span class="ja__card-cta" aria-hidden="true">
+                Read more
+                <svg width="16" height="1" viewBox="0 0 16 1" aria-hidden="true">
+                  <line x1="0" y1="0.5" x2="16" y2="0.5" stroke="currentColor"/>
+                </svg>
+              </span>
+            </div>
+
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- モバイル用「すべての記事を見る」 -->
+    <div class="ja__mobile-all">
+      <a href="/journal" class="ja__mobile-link">すべての記事を見る →</a>
+    </div>
+
+  </div>
+</section>
+)}
+
+<style>
+/* ─── セクション ─── */
+.ja {
+  background: #ffffff;
+  padding: clamp(6rem, 11vw, 10rem) 0 clamp(6rem, 11vw, 10rem);
+}
+
+.ja__inner {
+  width: min(100% - 3rem, 88rem);
+  margin: 0 auto;
+}
+
+/* ─── ヘッダー ─── */
+.ja__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.ja__eyebrow {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  margin: 0 0 .75rem;
+}
+
+.ja__title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: #1a1917;
+  margin: 0;
+}
+
+.ja__all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(26, 25, 23, .38);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color .35s, gap .35s;
+}
+.ja__all-link svg { flex-shrink: 0; transition: transform .35s; }
+.ja__all-link:hover { color: var(--gold, #a68a6d); gap: 1.4rem; }
+.ja__all-link:hover svg { transform: translateX(4px); }
+
+/* ─── 3列グリッド ─── */
+.ja__grid {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+/* ─── カード ─── */
+.ja__card-link {
+  display: block;
+  text-decoration: none;
+  outline-offset: 4px;
+}
+
+.ja__card-thumb {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f0ede8;
+  margin-bottom: 1.4rem;
+}
+.ja__card-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .9s cubic-bezier(.16,1,.3,1);
+}
+.ja__card-link:hover .ja__card-thumb img { transform: scale(1.05); }
+
+.ja__card-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #ede8e0 0%, #e0dbd4 100%);
+}
+
+.ja__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+}
+
+.ja__card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ja__card-cat {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  background: rgba(166,138,109,.08);
+  padding: .25em .8em;
+  border: 1px solid rgba(166,138,109,.25);
+}
+
+.ja__card-date {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .12em;
+  color: rgba(26,25,23,.35);
+}
+
+.ja__card-title {
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.95rem, 1.3vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: .04em;
+  color: #1a1917;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color .3s;
+}
+.ja__card-link:hover .ja__card-title { color: #6b6560; }
+
+.ja__card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(26,25,23,.38);
+  margin-top: .2rem;
+  transition: color .3s, gap .3s;
+}
+.ja__card-link:hover .ja__card-cta {
+  color: var(--gold, #a68a6d);
+  gap: .9rem;
+}
+
+/* ─── モバイル ─── */
+.ja__mobile-all { display: none; }
+
+@media (max-width: 56rem) {
+  .ja__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 36rem) {
+  .ja__grid { grid-template-columns: 1fr; }
+  .ja__all-link { display: none; }
+  .ja__mobile-all {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  .ja__mobile-link {
+    font-family: var(--font-ui, sans-serif);
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(26,25,23,.45);
+    text-decoration: none;
+    transition: color .3s;
+  }
+  .ja__mobile-link:hover { color: var(--gold, #a68a6d); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ja__card-thumb img { transition: none; }
+}
+</style>

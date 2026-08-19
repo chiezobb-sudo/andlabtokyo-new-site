@@ -96,6 +96,11 @@ export const dummyPages: Record<string, Page> = {
         ],
       },
       {
+        fieldId: 'journalArea',
+        title: 'JOURNAL',
+        subtitle: 'レシピ & コラム',
+      },
+      {
         fieldId: 'profileBand',
         label: 'ABOUT',
         name: '安藤 千英',
