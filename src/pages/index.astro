@@ -7,7 +7,8 @@ import CourseGridBlock from '../components/blocks/CourseGridBlock.astro';
 import KnowledgeGridBlock from '../components/blocks/KnowledgeGridBlock.astro';
 import ProfileBandBlock from '../components/blocks/ProfileBandBlock.astro';
 import RichSectionBlock from '../components/blocks/RichSectionBlock.astro';
-import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType } from '../lib/microcms';
+import SliderAreaBlock from '../components/blocks/SliderAreaBlock.astro';
+import type { HeroBlock as HeroBlockType, ConceptBandBlock as ConceptBandBlockType, CourseGridBlock as CourseGridBlockType, KnowledgeGridBlock as KnowledgeGridBlockType, ProfileBandBlock as ProfileBandBlockType, RichSectionBlock as RichSectionBlockType, SliderAreaBlock as SliderAreaBlockType } from '../lib/microcms';
 
 const page = await getPage('home');
 
@@ -32,6 +33,7 @@ const allArticles = needsArticles ? await getKnowledgeList() : [];
     {block.fieldId === 'knowledgeGrid'&& <KnowledgeGridBlock block={block as KnowledgeGridBlockType} articles={allArticles.slice(0, (block as KnowledgeGridBlockType).count ?? 3)} />}
     {block.fieldId === 'profileBand'  && <ProfileBandBlock  block={block as ProfileBandBlockType} />}
     {block.fieldId === 'richSection'  && <RichSectionBlock  block={block as RichSectionBlockType} />}
+    {block.fieldId === 'sliderArea'   && <SliderAreaBlock   block={block as SliderAreaBlockType} />}
   </>
 ))}
 

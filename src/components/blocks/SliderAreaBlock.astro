@@ -1,0 +1,353 @@
+---
+import type { SliderAreaBlock } from '../../lib/microcms';
+
+interface Props { block: SliderAreaBlock }
+const { block: b } = Astro.props;
+const slides = b.slides ?? [];
+const uid = `slider-${Math.random().toString(36).slice(2, 7)}`;
+---
+
+{slides.length > 0 && (
+<section class="sl" id={uid} aria-label="スライダー">
+  <div class="sl__track" aria-live="polite">
+    {slides.map((s, i) => (
+      <div class={`sl__slide${i === 0 ? ' is-active' : ''}`} aria-hidden={i !== 0} data-index={i}>
+
+        {/* メディア層 */}
+        <div class="sl__media">
+          {s.videoUrl
+            ? <video class="sl__video" autoplay muted loop playsinline poster={s.image?.url} preload="auto">
+                <source src={s.videoUrl} type="video/mp4" />
+              </video>
+            : s.image
+              ? <img class="sl__img" src={`${s.image.url}?w=1600&q=80`} alt={s.title ?? ''} width={s.image.width} height={s.image.height} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+              : null
+          }
+        </div>
+
+        {/* スクリム */}
+        <div class="sl__scrim" aria-hidden="true"></div>
+
+        {/* テキスト */}
+        <div class="sl__body">
+          {s.title && <h2 class="sl__title">{s.title}</h2>}
+          {s.text  && <p  class="sl__text">{s.text}</p>}
+          {s.url   && (
+            <a href={s.url} class="sl__cta">
+              <span>詳しく見る</span>
+              <svg width="20" height="2" viewBox="0 0 20 2" aria-hidden="true"><line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1"/></svg>
+            </a>
+          )}
+        </div>
+
+      </div>
+    ))}
+  </div>
+
+  {/* ナビ：ドット */}
+  {slides.length > 1 && (
+    <nav class="sl__dots" aria-label="スライド切り替え">
+      {slides.map((s, i) => (
+        <button
+          class={`sl__dot${i === 0 ? ' is-active' : ''}`}
+          data-target={i}
+          aria-label={`スライド ${i + 1}`}
+          aria-current={i === 0}
+          type="button"
+        ></button>
+      ))}
+    </nav>
+  )}
+
+  {/* ナビ：前後矢印 */}
+  {slides.length > 1 && (
+    <div class="sl__arrows" aria-hidden="true">
+      <button class="sl__arrow sl__arrow--prev" type="button" aria-label="前のスライド">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="sl__arrow sl__arrow--next" type="button" aria-label="次のスライド">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+          <polyline points="9 6 15 12 9 18"/>
+        </svg>
+      </button>
+    </div>
+  )}
+
+  {/* カウンター */}
+  {slides.length > 1 && (
+    <div class="sl__counter" aria-hidden="true">
+      <span class="sl__counter-cur">01</span>
+      <span class="sl__counter-sep">—</span>
+      <span class="sl__counter-total">{String(slides.length).padStart(2, '0')}</span>
+    </div>
+  )}
+</section>
+)}
+
+<style>
+/* ─── コンテナ ─── */
+.sl {
+  position: relative;
+  background: var(--bg-dark, #141413);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ─── トラック / スライド ─── */
+.sl__track {
+  position: relative;
+  width: 100%;
+  height: clamp(520px, 80svh, 900px);
+}
+
+.sl__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s cubic-bezier(.4, 0, .2, 1);
+  pointer-events: none;
+}
+.sl__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── メディア ─── */
+.sl__media {
+  position: absolute;
+  inset: 0;
+}
+.sl__img,
+.sl__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+/* 非アクティブスライドの画像は僅かにスケールアップ、アクティブ時に戻る演出 */
+.sl__slide .sl__img { transform: scale(1.04); transition: transform 1.4s cubic-bezier(.16,1,.3,1), opacity 1.1s cubic-bezier(.4,0,.2,1); }
+.sl__slide.is-active .sl__img { transform: scale(1); }
+
+/* ─── スクリム ─── */
+.sl__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,  rgba(14,10,8,.88) 0%, rgba(14,10,8,.55) 45%, rgba(14,10,8,.2) 100%),
+    linear-gradient(to top,    rgba(14,10,8,.65) 0%, transparent 55%);
+}
+
+/* ─── テキスト ─── */
+.sl__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(3rem, 8vw, 7rem) clamp(2rem, 8vw, 8rem) clamp(5rem, 10vw, 9rem);
+  max-width: 54rem;
+}
+
+.sl__slide .sl__title,
+.sl__slide .sl__text,
+.sl__slide .sl__cta {
+  opacity: 0;
+  transform: translateY(1.2rem);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1);
+}
+.sl__slide.is-active .sl__title { opacity: 1; transform: none; transition-delay: .4s; }
+.sl__slide.is-active .sl__text  { opacity: 1; transform: none; transition-delay: .6s; }
+.sl__slide.is-active .sl__cta   { opacity: 1; transform: none; transition-delay: .8s; }
+
+.sl__title {
+  font-family: var(--font-jp, serif);
+  font-size: clamp(1.8rem, 4.5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: .1em;
+  color: #f0ece6;
+  margin: 0 0 1.6rem;
+  text-shadow: 0 2px 40px rgba(0,0,0,.5);
+  text-wrap: balance;
+}
+
+.sl__text {
+  font-family: var(--font-ui, sans-serif);
+  font-size: clamp(.82rem, 1.1vw, 1rem);
+  line-height: 2.2;
+  color: rgba(240, 236, 230, .62);
+  margin: 0 0 2.4rem;
+  max-width: 28em;
+}
+
+.sl__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .75rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold, #a68a6d);
+  width: fit-content;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid rgba(166,138,109,.35);
+  transition: gap .3s, border-color .3s;
+}
+.sl__cta:hover {
+  gap: 1.6rem;
+  border-color: var(--gold, #a68a6d);
+}
+
+/* ─── ドット ─── */
+.sl__dots {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .7rem;
+  z-index: 10;
+}
+.sl__dot {
+  width: 20px;
+  height: 2px;
+  background: rgba(240,236,230,.3);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background .4s, width .4s;
+}
+.sl__dot.is-active {
+  background: var(--gold, #a68a6d);
+  width: 40px;
+}
+
+/* ─── 矢印 ─── */
+.sl__arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  pointer-events: none;
+  z-index: 10;
+}
+.sl__arrow {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,20,19,.4);
+  border: 1px solid rgba(166,138,109,.2);
+  color: rgba(240,236,230,.7);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background .3s, border-color .3s, color .3s;
+}
+.sl__arrow:hover {
+  background: rgba(20,20,19,.7);
+  border-color: var(--gold, #a68a6d);
+  color: var(--gold, #a68a6d);
+}
+.sl__arrow svg { width: 1.2rem; height: 1.2rem; }
+
+/* ─── カウンター ─── */
+.sl__counter {
+  position: absolute;
+  right: clamp(2rem, 5vw, 5rem);
+  bottom: 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-ui, sans-serif);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  color: rgba(240,236,230,.4);
+  z-index: 10;
+}
+.sl__counter-cur { color: var(--gold, #a68a6d); }
+.sl__counter-sep { opacity: .4; }
+
+/* ─── レスポンシブ ─── */
+@media (max-width: 48rem) {
+  .sl__body {
+    padding: 2rem 1.5rem 5rem;
+    max-width: 100%;
+  }
+  .sl__scrim {
+    background: rgba(14,10,8,.65);
+  }
+  .sl__arrows { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl__slide,
+  .sl__slide .sl__img,
+  .sl__slide .sl__title,
+  .sl__slide .sl__text,
+  .sl__slide .sl__cta { transition: none; }
+}
+</style>
+
+<script define:vars={{ uid, total: slides.length, autoInterval: 6000 }}>
+(function () {
+  if (total <= 1) return;
+
+  const root    = document.getElementById(uid);
+  if (!root) return;
+
+  const slideEls = root.querySelectorAll('.sl__slide');
+  const dotEls   = root.querySelectorAll('.sl__dot');
+  const curEl    = root.querySelector('.sl__counter-cur');
+  let current    = 0;
+  let timer;
+
+  function goTo(n) {
+    slideEls[current].classList.remove('is-active');
+    slideEls[current].setAttribute('aria-hidden', 'true');
+    dotEls[current].classList.remove('is-active');
+    dotEls[current].removeAttribute('aria-current');
+
+    current = (n + total) % total;
+
+    slideEls[current].classList.add('is-active');
+    slideEls[current].setAttribute('aria-hidden', 'false');
+    dotEls[current].classList.add('is-active');
+    dotEls[current].setAttribute('aria-current', 'true');
+    if (curEl) curEl.textContent = String(current + 1).padStart(2, '0');
+  }
+
+  function startTimer() {
+    timer = setInterval(() => goTo(current + 1), autoInterval);
+  }
+  function stopTimer() { clearInterval(timer); }
+
+  root.querySelector('.sl__arrow--next')?.addEventListener('click', () => { stopTimer(); goTo(current + 1); startTimer(); });
+  root.querySelector('.sl__arrow--prev')?.addEventListener('click', () => { stopTimer(); goTo(current - 1); startTimer(); });
+
+  dotEls.forEach((dot, i) => {
+    dot.addEventListener('click', () => { stopTimer(); goTo(i); startTimer(); });
+  });
+
+  root.addEventListener('mouseenter', stopTimer);
+  root.addEventListener('mouseleave', startTimer);
+
+  // タッチスワイプ
+  let touchX = 0;
+  root.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  root.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) { stopTimer(); goTo(dx < 0 ? current + 1 : current - 1); startTimer(); }
+  }, { passive: true });
+
+  startTimer();
+})();
+</script>

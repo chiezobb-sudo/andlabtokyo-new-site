@@ -68,6 +68,29 @@ export const dummyPages: Record<string, Page> = {
         count: 3,
       },
       {
+        fieldId: 'sliderArea',
+        slides: [
+          {
+            fieldId: 'sliderItem',
+            title: 'ローチョコレートで、\n身体の知性を目覚めさせる。',
+            text: 'カカオ本来の酵素と栄養を損なわない、48℃以下の製法。',
+            url: '/rawchocolatemeister',
+          },
+          {
+            fieldId: 'sliderItem',
+            title: '発酵の叡智が、\n細胞を再設計する。',
+            text: '微生物の働きを借りて、腸から、免疫から、本来の健康を取り戻す。',
+            url: '/fermentation',
+          },
+          {
+            fieldId: 'sliderItem',
+            title: 'ローパティシエの技術で、\n美しさを食べる。',
+            text: '砂糖・乳製品・グルテンフリー。素材の力だけで生まれる本物の甘さ。',
+            url: '/rawfood',
+          },
+        ],
+      },
+      {
         fieldId: 'profileBand',
         label: 'ABOUT',
         name: '安藤 千英',

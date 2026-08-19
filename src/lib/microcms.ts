@@ -156,13 +156,28 @@ export type RichSectionBlock = {
   ctaUrl?: string;
 };
 
+export type SliderItem = {
+  fieldId: 'sliderItem';
+  image?: MicroCMSImage;
+  title?: string;
+  text?: string;
+  url?: string;
+  videoUrl?: string;
+};
+
+export type SliderAreaBlock = {
+  fieldId: 'sliderArea';
+  slides: SliderItem[];
+};
+
 export type PageBlock =
   | HeroBlock
   | ConceptBandBlock
   | CourseGridBlock
   | KnowledgeGridBlock
   | ProfileBandBlock
-  | RichSectionBlock;
+  | RichSectionBlock
+  | SliderAreaBlock;
 
 export type Page = {
   id: string;
