@@ -52,7 +52,7 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet" />
     <!-- JSON-LD -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"&LAB TOKYO","url":"https://www.andlabtokyo.com","logo":"https://www.andlabtokyo.com/logo-wide.svg","description":"発酵とローフードのクロス理論に基づくプレミアムスクール。東京・渋谷（表参道）。","address":{"@type":"PostalAddress","streetAddress":"5-2-11 Jingumae, Shibuya-ku","addressLocality":"渋谷区","addressRegion":"東京都","postalCode":"150-0001","addressCountry":"JP"},"founder":{"@type":"Person","name":"安藤千英"},"sameAs":["https://www.instagram.com/chie_andlab/"]}</script>
     <slot name="head" />
@@ -76,9 +76,9 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
         --line:       #e5ddd0;
         --accent:     #5c2b2e;
         --gold:       #a68a6d;
-        --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
-        --font-en: "EB Garamond", "Shippori Mincho", serif;
-        --font-ui: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+        --font-jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic Medium", sans-serif;
+        --font-en: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+        --font-ui: "Montserrat", "Noto Sans JP", "Hiragino Sans", sans-serif;
         --fs-label:  0.72rem;
         --fs-body:   1.0rem;
         --fs-lead:   clamp(1.02rem, 0.55vw + 0.9rem, 1.22rem);
@@ -114,7 +114,7 @@ const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`
       body {
         background: var(--bg);
         color: var(--ink);
-        font-family: 'Noto Serif JP', serif;
+        font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic Medium', sans-serif;
         line-height: 1.8;
         -webkit-font-smoothing: antialiased;
       }

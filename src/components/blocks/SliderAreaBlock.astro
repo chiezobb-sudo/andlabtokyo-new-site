@@ -162,8 +162,8 @@ const slides = b.slides ?? [];
 
 /* ─── カード ─── */
 .sl__card {
-  /* PC: 3枚 */
-  flex: 0 0 calc((100vw - 2 * clamp(1.5rem,6vw,6rem) - 2 * clamp(1rem,1.5vw,1.5rem)) / 3);
+  /* PC: 2枚 */
+  flex: 0 0 calc((100vw - 2 * clamp(1.5rem,6vw,6rem) - clamp(1rem,1.5vw,1.5rem)) / 2);
   scroll-snap-align: start;
   min-width: 220px;
 }
@@ -293,20 +293,12 @@ const slides = b.slides ?? [];
 }
 
 /* ─── レスポンシブ ─── */
-@media (max-width: 64rem) {
-  /* タブレット: 2枚 */
-  .sl__card {
-    flex: 0 0 calc((100vw - 2 * clamp(1.5rem,6vw,6rem) - clamp(1rem,1.5vw,1.5rem)) / 2);
-  }
-}
-
 @media (max-width: 48rem) {
-  /* スマホ: 1.5枚（0.5枚が右端に見切れる） */
+  /* スマホ: 1枚（画面幅いっぱい） */
   .sl__card {
-    flex: 0 0 76vw;
+    flex: 0 0 calc(100vw - 2 * 1.5rem);
   }
   .sl__all-link { display: none; }
-  /* スマホは"全ての講座を見る"を別の位置に */
   .sl__section-title { font-size: 1.4rem; }
   .sl__progress { display: block; }
 }

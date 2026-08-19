@@ -14,8 +14,8 @@ const { block: b } = Astro.props;
 
 <style>
 .cb {
-  background: var(--bg-dark, #141413);
-  padding: clamp(8rem, 16vw, 16rem) clamp(1.5rem, 5vw, 5rem);
+  background: #ffffff;
+  padding: clamp(5rem, 9vw, 8rem) clamp(1.5rem, 5vw, 5rem);
   text-align: center;
 }
 
@@ -25,34 +25,35 @@ const { block: b } = Astro.props;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(2.4rem, 4vw, 3.6rem);
+  gap: clamp(1.8rem, 3vw, 2.6rem);
 }
 
 .cb__catchcopy {
-  font-family: var(--font-jp, serif);
-  font-size: clamp(1.9rem, 5vw, 3.8rem);
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(1.7rem, 4.2vw, 3.2rem);
   font-weight: 300;
-  line-height: 1.8;
-  letter-spacing: .12em;
-  color: rgba(240, 236, 230, .92);
+  line-height: 1.75;
+  letter-spacing: .08em;
+  color: #1a1917;
   margin: 0;
   text-wrap: balance;
   white-space: pre-line;
 }
 
 .cb__lead {
-  font-family: var(--font-ui, sans-serif);
-  font-size: clamp(.9rem, 1.2vw, 1.05rem);
-  line-height: 2.6;
-  color: rgba(240, 236, 230, .48);
+  font-family: var(--font-jp, sans-serif);
+  font-size: clamp(.88rem, 1.1vw, 1rem);
+  font-weight: 300;
+  line-height: 2.4;
+  color: #6b6560;
   margin: 0;
   max-width: 34em;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
 }
 
 @media (max-width: 48rem) {
   .cb__catchcopy {
-    letter-spacing: .08em;
+    letter-spacing: .05em;
   }
 }
 </style>
