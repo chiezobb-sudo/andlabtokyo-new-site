@@ -21,6 +21,7 @@ const features = [
     num: "01",
     title: "定義から教えます",
     body: "ローチョコレートは「生のカカオ」ではありません。高温焙煎（110〜150℃）をしないカカオを使うことが定義です。「48℃以下」と言えない理由も含め、正確な知識を基礎から学びます。",
+    link: { href: "/rawchocolatier/rawchocolate", label: "ローチョコレートの定義について詳しく読む" },
   },
   {
     num: "02",
@@ -165,6 +166,9 @@ const galleryImages = [
           <span class="feature-num">{f.num}</span>
           <h3 class="feature-title">{f.title}</h3>
           <p class="feature-body">{f.body}</p>
+          {f.link && (
+            <a href={f.link.href} class="feature-link">{f.link.label} →</a>
+          )}
         </div>
       ))}
     </div>
@@ -429,19 +433,20 @@ const galleryImages = [
       <p class="instructor-sec__name-en">Chie Ando</p>
       <p class="instructor-sec__name-jp">安藤 千英</p>
       <p class="instructor-sec__tags">
-        <span class="tag">ELLE gourmet 認定料理家</span>
-        <span class="tag">&LAB TOKYO 主宰</span>
-        <span class="tag">食と哲学のプロデューサー</span>
+        <span class="tag">料理家・著者</span>
+        <span class="tag">ELLE gourmet 公認クリエイター</span>
+        <span class="tag">ローショコラティエ協会 代表</span>
       </p>
       <div class="instructor-sec__bio">
-        <p>ローチョコレート・ロースイーツ・発酵料理の専門家。ELLE gourmet認定料理家として、食と哲学を融合させたユニークなアプローチで、食の本質と身体への深い理解を伝えています。</p>
-        <p>ローショコラティエ協会主宰として、ローチョコレートマイスター®・ローショコラティエ®・ローパティシエ®・発酵創家®の各認定資格を監修。1,000名以上の受講生を輩出し、その哲学は国内外で支持されています。</p>
+        <p>1973年福岡生まれ。割烹料理屋の長女として育ち、食に囲まれた幼少期を送る。第3子の火傷をきっかけに「食が持つ癒やしの力」に目覚め、ローフードと発酵の道を本格的に究める。自身も体年齢マイナス6歳を実現。</p>
+        <p>ローショコラティエ協会を主宰し、ローチョコレートマイスター®をはじめとする4つの登録商標を取得。科学的根拠にもとづいた講座で、教える力と販売する自信を持つ認定プロを育てている。</p>
       </div>
       <ul class="instructor-sec__awards">
-        <li>ローチョコレートマイスター® 登録商標取得</li>
-        <li>ローショコラティエ® 登録商標取得</li>
-        <li>発酵創家® 登録商標取得</li>
-        <li>NHK・雑誌・ウェブメディア多数掲載</li>
+        <li>ELLE gourmet 公認クリエイター</li>
+        <li>ビーガンアワード 7年連続ノミネート</li>
+        <li>著書『&RAW LIVING Step1 ─ ローフードの教科書』</li>
+        <li>テレビ朝日「グッド！モーニング」出演、雑誌・Web媒体等 メディア出演多数</li>
+        <li>ローチョコレートマイスター® 等、4つの商標登録を取得</li>
       </ul>
     </div>
   </div>
@@ -1111,6 +1116,13 @@ const galleryImages = [
   font-size: clamp(.82rem, 1vw, .9rem); font-weight: 300;
   color: var(--sub); line-height: 1.95;
 }
+.feature-link {
+  display: inline-block; margin-top: .8rem;
+  font-size: .78rem; font-weight: 400; letter-spacing: .04em;
+  color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.feature-link:hover { border-color: var(--gold); }
 
 /* ═══════════════════════════════════════════
    §3.8  GALLERY ハードコード
