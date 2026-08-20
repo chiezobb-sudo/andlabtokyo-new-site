@@ -4,33 +4,44 @@ import type { CourseGridBlock } from '../../lib/microcms';
 interface Props { block: CourseGridBlock }
 const { block: b } = Astro.props;
 
-const themeColors: Record<string, { bg: string; accent: string }> = {
-  choco:    { bg: '#1a1109', accent: '#c4943a' },
-  ferm:     { bg: '#091510', accent: '#5e9c5a' },
-  raw:      { bg: '#0d110c', accent: '#7a9e6a' },
-  workshop: { bg: '#10100d', accent: '#a68a6d' },
-  patis:    { bg: '#110e08', accent: '#b89a5a' },
+const themeMap: Record<string, { img: string; accent: string }> = {
+  choco:    { img: '/images/edu-chocolate.jpg',    accent: '#c4943a' },
+  ferm:     { img: '/images/edu-fermentation.jpg', accent: '#5e9c5a' },
+  raw:      { img: '/images/edu-rawfood.jpg',      accent: '#7a9e6a' },
+  patis:    { img: '/images/edu-creative.jpg',     accent: '#b89a5a' },
+  workshop: { img: '/images/edu-rawfood.jpg',      accent: '#a68a6d' },
 };
 ---
 
 <section class="cg">
   <div class="cg__header">
     {b.label && <p class="cg__label">{b.label}</p>}
-    <h2 class="cg__heading">{b.heading}</h2>
+    <div class="cg__heading-row">
+      <h2 class="cg__heading">{b.heading}</h2>
+      <a href="/listofcourses" class="cg__all">全ての講座を見る <span aria-hidden="true">——</span></a>
+    </div>
   </div>
 
-  <div class="cg__grid" style={`--cols: ${Math.min(b.items.length, 2)}`}>
+  <div class="cg__grid">
     {b.items.map((item) => {
-      const colors = themeColors[item.theme] ?? themeColors.workshop;
+      const t = themeMap[item.theme] ?? themeMap.workshop;
       return (
         <a
           href={item.url}
-          class="cg__tile"
-          style={`--tile-bg: ${colors.bg}; --tile-accent: ${colors.accent};`}
+          class="cg__panel"
+          style={`--accent: ${t.accent}; --img: url('${t.img}');`}
         >
-          <span class="cg__tile-cat">{item.cat}</span>
-          <span class="cg__tile-name">{item.name}</span>
-          <span class="cg__tile-arrow" aria-hidden="true">→</span>
+          <div class="cg__panel-img" />
+          <div class="cg__panel-body">
+            <p class="cg__panel-cat">{item.cat}</p>
+            <p class="cg__panel-name">{item.name}</p>
+            <span class="cg__panel-btn" aria-hidden="true">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                <circle cx="22" cy="22" r="21" stroke="currentColor" stroke-width="1"/>
+                <path d="M17 22h10M23 18l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
         </a>
       );
     })}
@@ -39,104 +50,142 @@ const themeColors: Record<string, { bg: string; accent: string }> = {
 
 <style>
 .cg {
-  background: var(--sumi, #1C1C1A);
-  padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+  background: #111;
+  padding: clamp(4rem, 7vw, 7rem) 0 0;
 }
 
 .cg__header {
-  width: min(100%, 74rem);
-  margin: 0 auto clamp(3rem, 5vw, 5rem);
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  margin-bottom: clamp(2rem, 3vw, 3rem);
 }
 
 .cg__label {
   font-family: var(--font-ui, sans-serif);
-  font-size: .7rem;
+  font-size: .68rem;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: var(--gold, #a68a6d);
-  margin: 0 0 1rem;
+  margin: 0 0 .8rem;
+}
+
+.cg__heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .cg__heading {
   font-family: var(--font-jp, serif);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 300;
   letter-spacing: .06em;
   color: rgba(240,236,230,.9);
   margin: 0;
 }
 
+.cg__all {
+  font-family: var(--font-ui, sans-serif);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  color: rgba(240,236,230,.5);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .25s;
+}
+.cg__all:hover { color: var(--gold, #a68a6d); }
+
+/* ── パネルグリッド ── */
 .cg__grid {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 2), 1fr);
-  gap: 2px;
-  width: min(100%, 74rem);
-  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
 }
 
-.cg__tile {
+.cg__panel {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 4 / 3;
+  background: #1a1109;
+}
+
+/* 写真レイヤー */
+.cg__panel-img {
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: center;
+  transition: transform .7s cubic-bezier(.16,1,.3,1), opacity .4s;
+  opacity: .75;
+}
+.cg__panel:hover .cg__panel-img {
+  transform: scale(1.05);
+  opacity: .9;
+}
+
+/* グラデーションオーバーレイ */
+.cg__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.75) 0%,
+    rgba(0,0,0,.25) 50%,
+    rgba(0,0,0,.05) 100%
+  );
+}
+
+/* テキストボディ */
+.cg__panel-body {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(2rem, 4vw, 3.5rem);
-  min-height: clamp(200px, 28vw, 340px);
-  background: var(--tile-bg, #111);
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: filter .4s ease;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.cg__tile::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--tile-accent, #a68a6d);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .4s cubic-bezier(.16,1,.3,1);
-}
-
-.cg__tile:hover { filter: brightness(1.15); }
-.cg__tile:hover::after { transform: scaleX(1); }
-
-.cg__tile-cat {
+.cg__panel-cat {
   font-family: var(--font-ui, sans-serif);
-  font-size: .68rem;
-  letter-spacing: .2em;
+  font-size: .65rem;
+  letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--tile-accent, #a68a6d);
-  margin-bottom: .8rem;
+  color: var(--accent, #a68a6d);
+  margin: 0 0 .6rem;
 }
 
-.cg__tile-name {
+.cg__panel-name {
   font-family: var(--font-jp, serif);
-  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
   font-weight: 300;
   letter-spacing: .06em;
-  color: rgba(240,236,230,.92);
+  color: rgba(255,255,255,.95);
   line-height: 1.5;
+  margin: 0 0 1.2rem;
 }
 
-.cg__tile-arrow {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 1.1rem;
-  color: var(--tile-accent, #a68a6d);
+.cg__panel-btn {
+  display: block;
+  width: 44px;
+  color: var(--accent, #a68a6d);
   opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity .3s, transform .3s;
+  transform: translateY(8px);
+  transition: opacity .35s, transform .35s;
 }
-
-.cg__tile:hover .cg__tile-arrow {
+.cg__panel:hover .cg__panel-btn {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
+/* モバイル */
 @media (max-width: 40rem) {
   .cg__grid { grid-template-columns: 1fr; }
+  .cg__panel { aspect-ratio: 3 / 2; }
+  .cg__panel-btn { opacity: 1; transform: none; }
 }
 </style>
