@@ -23,54 +23,43 @@ const slides = b.slides ?? [];
     </div>
   </header>
 
-  <!-- ── スクロールカルーセル ── -->
-  <div class="sl__viewport" tabindex="0" role="region" aria-label="講座一覧スライダー">
-    <ul class="sl__track" role="list">
-      {slides.map((s, i) => (
-        <li class="sl__card" role="listitem">
-          <a href={s.url ?? '#'} class="sl__card-inner" tabindex="0">
+  <!-- ── 2カラムグリッド ── -->
+  <div class="sl__grid">
+    {slides.map((s, i) => (
+      <a href={s.url ?? '#'} class="sl__panel">
+        <!-- メディア -->
+        <div class="sl__panel-media">
+          {s.videoUrl
+            ? <video class="sl__panel-video" autoplay muted loop playsinline
+                poster={s.image?.url} preload="auto">
+                <source src={s.videoUrl} type="video/mp4" />
+              </video>
+            : s.image
+              ? <img class="sl__panel-img"
+                  src={`${s.image.url}?w=1200&q=85`}
+                  alt={s.title ?? ''}
+                  width={s.image.width}
+                  height={s.image.height}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async" />
+              : <div class="sl__panel-placeholder" aria-hidden="true"></div>
+          }
+          <div class="sl__panel-scrim" aria-hidden="true"></div>
+        </div>
 
-            <!-- メディア -->
-            <div class="sl__card-media">
-              {s.videoUrl
-                ? <video class="sl__card-video" autoplay muted loop playsinline
-                    poster={s.image?.url} preload="auto">
-                    <source src={s.videoUrl} type="video/mp4" />
-                  </video>
-                : s.image
-                  ? <img class="sl__card-img"
-                      src={`${s.image.url}?w=900&q=85`}
-                      alt={s.title ?? ''}
-                      width={s.image.width}
-                      height={s.image.height}
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      decoding="async" />
-                  : <div class="sl__card-placeholder" aria-hidden="true"></div>
-              }
-              <div class="sl__card-scrim" aria-hidden="true"></div>
-            </div>
-
-            <!-- テキスト -->
-            <div class="sl__card-body">
-              {s.text && <p class="sl__card-text">{s.text}</p>}
-              {s.title && <h3 class="sl__card-title">{s.title}</h3>}
-              <span class="sl__card-cta" aria-hidden="true">
-                詳しく見る
-                <svg width="18" height="1" viewBox="0 0 18 1" aria-hidden="true">
-                  <line x1="0" y1="0.5" x2="18" y2="0.5" stroke="currentColor"/>
-                </svg>
-              </span>
-            </div>
-
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
-
-  <!-- ── プログレスバー（モバイル） ── -->
-  <div class="sl__progress" aria-hidden="true">
-    <div class="sl__progress-bar"></div>
+        <!-- テキスト -->
+        <div class="sl__panel-body">
+          {s.text && <p class="sl__panel-text">{s.text}</p>}
+          {s.title && <h3 class="sl__panel-title">{s.title}</h3>}
+          <span class="sl__panel-btn" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="21" stroke="currentColor" stroke-width="1"/>
+              <path d="M17 22h10M23 18l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+    ))}
   </div>
 
 </section>
@@ -137,170 +126,103 @@ const slides = b.slides ?? [];
 }
 .sl__all-link:hover svg { transform: translateX(4px); }
 
-/* ─── ビューポート（横スクロール） ─── */
-.sl__viewport {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  cursor: grab;
-}
-.sl__viewport:active { cursor: grabbing; }
-.sl__viewport::-webkit-scrollbar { display: none; }
-
-/* ─── トラック ─── */
-.sl__track {
-  display: flex;
-  gap: clamp(1rem, 1.5vw, 1.5rem);
-  padding: 0 clamp(1.5rem, 6vw, 6rem);
-  /* 末尾にも余白（最後のカードがぴったりくっつかないように） */
-  padding-right: clamp(1.5rem, 6vw, 6rem);
-  list-style: none;
-  margin: 0;
-  /* scroll-padding は viewport 側に効かせる */
+/* ─── 2カラムグリッド ─── */
+.sl__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
 }
 
-/* ─── カード ─── */
-.sl__card {
-  /* PC: 2枚 */
-  flex: 0 0 calc((100vw - 2 * clamp(1.5rem,6vw,6rem) - clamp(1rem,1.5vw,1.5rem)) / 2);
-  scroll-snap-align: start;
-  min-width: 220px;
-}
-
-.sl__card-inner {
-  display: block;
-  text-decoration: none;
-  outline-offset: 4px;
-  /* カードの縦比 */
-  aspect-ratio: 3 / 4;
+.sl__panel {
   position: relative;
+  display: block;
   overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 4 / 3;
   background: #1a1917;
 }
 
-/* ─── メディア層 ─── */
-.sl__card-media {
+/* ─── メディア ─── */
+.sl__panel-media {
   position: absolute;
   inset: 0;
 }
 
-.sl__card-img,
-.sl__card-video {
+.sl__panel-img,
+.sl__panel-video {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 1s cubic-bezier(.16,1,.3,1);
+  transition: transform .8s cubic-bezier(.16,1,.3,1);
 }
-.sl__card-inner:hover .sl__card-img,
-.sl__card-inner:hover .sl__card-video {
-  transform: scale(1.05);
-}
+.sl__panel:hover .sl__panel-img,
+.sl__panel:hover .sl__panel-video { transform: scale(1.05); }
 
-.sl__card-placeholder {
+.sl__panel-placeholder {
   width: 100%; height: 100%;
   background: linear-gradient(135deg, #1e1c1a 0%, #2a2723 100%);
 }
 
-.sl__card-scrim {
+.sl__panel-scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(10,8,7,.92) 0%,
-    rgba(10,8,7,.55) 40%,
-    rgba(10,8,7,.1)  70%,
-    transparent      100%
+    rgba(10,8,7,.88) 0%,
+    rgba(10,8,7,.45) 45%,
+    rgba(10,8,7,.05) 100%
   );
-  transition: opacity .4s;
-}
-.sl__card-inner:hover .sl__card-scrim {
-  opacity: .85;
 }
 
 /* ─── テキスト ─── */
-.sl__card-body {
+.sl__panel-body {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: clamp(1.4rem, 2.5vw, 2rem);
+  inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: .6rem;
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.sl__card-text {
+.sl__panel-text {
   font-family: var(--font-ui, sans-serif);
   font-size: clamp(.68rem, .9vw, .78rem);
-  line-height: 2;
+  line-height: 1.9;
   letter-spacing: .06em;
-  color: rgba(240, 236, 230, .48);
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  transition: color .3s;
-}
-.sl__card-inner:hover .sl__card-text {
-  color: rgba(240, 236, 230, .65);
+  color: rgba(240,236,230,.5);
+  margin: 0 0 .5rem;
 }
 
-.sl__card-title {
+.sl__panel-title {
   font-family: var(--font-jp, serif);
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
   font-weight: 300;
   line-height: 1.6;
-  letter-spacing: .1em;
-  color: rgba(240, 236, 230, .95);
-  margin: 0;
-  text-shadow: 0 2px 20px rgba(0,0,0,.4);
+  letter-spacing: .08em;
+  color: rgba(240,236,230,.95);
+  margin: 0 0 1.2rem;
   white-space: pre-line;
 }
 
-.sl__card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: .7rem;
-  font-family: var(--font-ui, sans-serif);
-  font-size: .65rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
+.sl__panel-btn {
+  display: block;
+  width: 44px;
   color: var(--gold, #a68a6d);
-  margin-top: .4rem;
   opacity: 0;
-  transform: translateY(.4rem);
-  transition: opacity .35s, transform .35s;
+  transform: translateY(8px);
+  transition: opacity .3s, transform .3s;
 }
-.sl__card-inner:hover .sl__card-cta,
-.sl__card-inner:focus-visible .sl__card-cta {
-  opacity: 1;
-  transform: none;
-}
-
-/* ─── プログレスバー（モバイルのみ表示） ─── */
-.sl__progress {
-  display: none;
-  height: 1px;
-  background: rgba(26,25,23,.1);
-  margin: 2rem clamp(1.5rem, 6vw, 6rem) 0;
-}
-.sl__progress-bar {
-  height: 100%;
-  background: var(--gold, #a68a6d);
-  width: 33%;
-  transition: width .2s;
-}
+.sl__panel:hover .sl__panel-btn { opacity: 1; transform: translateY(0); }
 
 /* ─── レスポンシブ ─── */
 @media (max-width: 48rem) {
-  /* スマホ: 1枚（画面幅いっぱい） */
-  .sl__card {
-    flex: 0 0 calc(100vw - 2 * 1.5rem);
-  }
+  .sl__grid { grid-template-columns: 1fr; }
+  .sl__panel { aspect-ratio: 3 / 2; }
+  .sl__panel-btn { opacity: 1; transform: none; }
   .sl__all-link { display: none; }
   .sl__section-title { font-size: 1.4rem; }
-  .sl__progress { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -310,38 +232,3 @@ const slides = b.slides ?? [];
 }
 </style>
 
-<script>
-(function () {
-  const viewports = document.querySelectorAll<HTMLElement>('.sl__viewport');
-
-  viewports.forEach(vp => {
-    const track    = vp.querySelector<HTMLElement>('.sl__track');
-    const bar      = vp.closest('.sl')?.querySelector<HTMLElement>('.sl__progress-bar');
-
-    /* ── プログレスバー更新 ── */
-    function updateBar() {
-      if (!bar) return;
-      const ratio = vp.scrollLeft / (vp.scrollWidth - vp.clientWidth);
-      bar.style.width = `${Math.round(ratio * 100)}%`;
-    }
-    vp.addEventListener('scroll', updateBar, { passive: true });
-
-    /* ── マウスドラッグ ── */
-    let isDown = false, startX = 0, scrollLeft = 0;
-    vp.addEventListener('mousedown', e => {
-      isDown = true;
-      startX = e.pageX - vp.offsetLeft;
-      scrollLeft = vp.scrollLeft;
-    });
-    document.addEventListener('mouseup',   () => { isDown = false; });
-    document.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - vp.offsetLeft;
-      vp.scrollLeft = scrollLeft - (x - startX);
-    });
-
-    updateBar();
-  });
-})();
-</script>
