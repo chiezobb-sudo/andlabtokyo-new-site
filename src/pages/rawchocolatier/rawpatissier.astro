@@ -387,7 +387,8 @@ const allLevels = [...d.levels];
 
       <!-- 卒業課題 -->
       <h3 class="sub-head sub-head--light">{d.pro.graduation.title}</h3>
-      <p class="prose--light" style="margin-bottom:26px"><span class="grad-lead">{d.pro.graduation.lead}</span></p>
+      <p class="grad-lead">{d.pro.graduation.lead}</p>
+      <h4 class="grad-task">{d.pro.graduation.task1Title}</h4>
       <div class="grads">
         {d.pro.graduation.items.map((g) => (
           <div class="grad">
@@ -396,6 +397,9 @@ const allLevels = [...d.levels];
           </div>
         ))}
       </div>
+      <p class="note note--light">{d.pro.graduation.task1Note}</p>
+      <h4 class="grad-task">{d.pro.graduation.task2Title}</h4>
+      <ul class="dots dots--light">{d.pro.graduation.task2.map((t) => <li>{t}</li>)}</ul>
 
       <!-- 別冊テキスト -->
       <div class="book book--dark">
@@ -754,7 +758,8 @@ const allLevels = [...d.levels];
   .rg h4 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
 
   /* ══ 卒業課題 ══ */
-  .grad-lead { display: block; font-size: 15px; line-height: 2; color: #D8D0C6; max-width: 46em; }
+  .grad-lead { font-size: 15px; line-height: 2; color: #D8D0C6; max-width: 46em; margin: 0 0 28px; }
+  .grad-task { font-size: 14px; font-weight: 700; letter-spacing: .04em; color: var(--amber-l); margin: 34px 0 16px; }
   .grads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 8px; }
   .grad { border: 1px solid rgba(198,161,91,.35); padding: 24px 22px; }
   .grad h4 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--amber-l); margin: 0 0 10px; }
