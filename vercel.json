@@ -1,24 +1,74 @@
 {
   "redirects": [
-    { "source": "/courses/:id", "destination": "/rawchocolatier/:id", "permanent": true },
-
-    { "source": "/press-media", "destination": "/media", "permanent": true },
-    { "source": "/alllesson", "destination": "/listofcourses", "permanent": true },
-    { "source": "/rawfoodtriallesson", "destination": "/experiencelessons", "permanent": true },
-    { "source": "/lesson-reserve", "destination": "/contact", "permanent": true },
-    { "source": "/rawchocolatier/rawchocolatieraboutchocolatierchocolatierassociation", "destination": "/rawchocolatier/about-association", "permanent": true },
-
-    { "source": "/blank-1", "destination": "/blog", "permanent": true },
-    { "source": "/blank-1/categories/:name*", "destination": "/blog", "permanent": true },
-    { "source": "/blank-2", "destination": "/", "permanent": true },
-
-    { "source": "/item", "destination": "/shop", "permanent": true },
-    { "source": "/product-page/:slug*", "destination": "/shop", "permanent": true },
-
-    { "source": "/members", "destination": "/contact", "permanent": true },
-    { "source": "/payment-request-page", "destination": "/contact", "permanent": true },
-    { "source": "/inquiry-services-page", "destination": "/contact", "permanent": true },
-
-    { "source": "/abouthummingtree", "destination": "/", "permanent": true }
+    {
+      "source": "/courses/:id",
+      "destination": "/rawchocolatier/:id",
+      "permanent": true
+    },
+    {
+      "source": "/press-media",
+      "destination": "/media",
+      "permanent": true
+    },
+    {
+      "source": "/alllesson",
+      "destination": "/listofcourses",
+      "permanent": true
+    },
+    {
+      "source": "/lesson-reserve",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatier/rawchocolatieraboutchocolatierchocolatierassociation",
+      "destination": "/rawchocolatier/about-association",
+      "permanent": true
+    },
+    {
+      "source": "/blank-1",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blank-1/categories/:name*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blank-2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/item",
+      "destination": "/shop",
+      "permanent": true
+    },
+    {
+      "source": "/product-page/:slug*",
+      "destination": "/shop",
+      "permanent": true
+    },
+    {
+      "source": "/members",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/payment-request-page",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/inquiry-services-page",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/abouthummingtree",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }

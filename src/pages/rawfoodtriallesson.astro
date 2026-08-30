@@ -1,0 +1,298 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL, mailtoFor } from '../lib/forms';
+
+// Wix /rawfoodtriallesson の内容を移設（2026-08-30）。URLは Wix と同一に保つ。
+const HERO   = '/images/wix/857257_f821dd1a7785486482e0be1e150e8de8-6274dc97.png';
+const SMOOTHIE = '/images/wix/857257_c9e19dac8f0445e1b085a48ddf698d8d-2847ae62.jpg';
+const SWEETS   = '/images/wix/857257_e2dfb18536bd4bc69f69b77f558a068b-61f4d91d.jpg';
+const DEMO     = '/images/wix/857257_f63e77ac597f44fb9f27b507dbab3e40-e2f4d1a3.jpg';
+const TEATIME  = '/images/wix/857257_5c3ba66b896948d89e5a96fac50450da-0088cd9c.jpg';
+
+const badges = ['Vegan Friendly', '手ぶらOK', '初心者歓迎', '少人数制 最大4名', '約2.5〜3時間'];
+
+const menu = [
+  { no: '01', eye: 'Opening',  title: '季節のスムージーで\nウェルカムタイム', img: SMOOTHIE,
+    body: 'リラックスしながらローフードの考え方や食材のお話をお聞きします。座談形式でアットホームな雰囲気でスタート。' },
+  { no: '02', eye: 'Hands-on', title: 'ロースイーツ実習\n（季節のメニュー）', img: SWEETS,
+    body: 'ブリスボール・ローチョコレート・ロースイーツミニカップなど、季節に応じたメニューを実際に手作りします。火を使わないから安全で簡単。' },
+  { no: '03', eye: 'Demo',     title: 'プチデモ＆試食', img: DEMO,
+    body: '講師によるデモンストレーション形式で、アサイーボウルやスプラウトサラダなどリビングフードメニューを試食。「からだにやさしい食」を体感します。' },
+  { no: '04', eye: 'Closing',  title: 'プチティータイム＆\n質疑応答', img: TEATIME,
+    body: 'レッスンの締めくくりはお茶を楽しみながらのリラックスタイム。本講座のご案内やご質問も気軽にどうぞ。勧誘は一切ありませんのでご安心ください。' },
+];
+
+const forWho = [
+  'ローフードや発酵食、リビングフードに興味があるが、何から始めればよいかわからない',
+  '健康的な食生活を始めたいが、難しいことは苦手',
+  'アンチエイジング・腸活・免疫力アップに関心がある',
+  '砂糖不使用・乳製品不使用のスイーツが食べてみたい',
+  'ローフードマイスター資格に興味があり、まず雰囲気を確かめたい',
+  '料理が苦手な方・初心者の方でも気軽に参加したい',
+];
+
+const steps = [
+  { n: '1', t: 'お問い合わせ・お申し込み', b: '下記のフォームよりご希望の日程・人数をお送りください。' },
+  { n: '2', t: '日程調整',                 b: 'ご希望に合わせて日程を調整します。少人数制のため、柔軟に対応可能です。' },
+  { n: '3', t: 'お支払い',                 b: '日程確定後、受講料をお支払いください。クレジットカード対応。' },
+  { n: '4', t: 'レッスン当日',             b: '渋谷区神宮前（外苑前駅徒歩約5分）へお越しください。動きやすい服装でどうぞ。エプロン・材料・道具はすべてご用意します。' },
+];
+
+const info = [
+  ['開催地',   '東京都渋谷区神宮前（外苑前駅 徒歩約5分）※お申し込み後に詳細をご案内します'],
+  ['定員',     '最小1名〜最大5名（少人数制）'],
+  ['対象',     '初心者の方大歓迎。発酵・腸活に興味のある方ならどなたでも'],
+  ['持ち物',   'エプロンのみ。材料・道具はすべてご用意します'],
+  ['食物制限', '全コースビーガン対応。アレルギーはお申し込み時にご相談ください'],
+  ['お支払い', 'クレジットカード（JCB / Visa / Mastercard / Amex）／ 銀行振込'],
+  ['注意',     'トライアルレッスンはお一人様1回限りとなります'],
+];
+
+const mailBody = [
+  'ローフード体験レッスンに申し込みます。',
+  '',
+  'お名前：',
+  'お電話番号：',
+  '希望日 第一希望：',
+  '希望日 第二希望：',
+  '希望日 第三希望：',
+  '参加人数：',
+  'ビーガン対応：希望する / 希望しない',
+  'アレルギー・ご要望：',
+].join('\n');
+---
+
+<Layout
+  title="ローフード体験レッスン 渋谷｜腸活・トライアルレッスン｜&LAB TOKYO"
+  description="東京・渋谷（外苑前）のローフード体験レッスン。¥15,000（税込）・手ぶらOK・少人数制。ロースイーツ実習とリビングフードの試食で、腸活とアンチエイジングの入口を体験できます。初心者歓迎。"
+  canonical="https://www.andlabtokyo.com/rawfoodtriallesson"
+  ogImage={HERO}
+>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
+  --amber: #C6A15B; --amber-d: #A8865A;
+  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
+  --divider: rgba(243,238,229,0.12);
+  --fh: 'Cormorant Garamond', serif;
+}
+body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
+
+/* hero */
+.hero { margin-top: 44px; position: relative; height: 72vh; min-height: 480px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.25) 58%, rgba(0,0,0,.15) 100%); }
+.hero-body { position: relative; z-index: 1; padding: 0 24px 54px; max-width: 900px; margin: 0 auto; width: 100%; }
+.eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(28px, 4.6vw, 50px); font-weight: 700; color: #fff; line-height: 1.28; margin-bottom: 18px; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,.88); line-height: 1.9; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.badges span { font-size: 12px; letter-spacing: .04em; color: var(--ink-2); border: 1px solid rgba(198,161,91,.5); border-radius: 999px; padding: 6px 14px; background: rgba(0,0,0,.28); }
+
+.sec { padding: 76px 24px; }
+.sec.alt { background: var(--bg-2); }
+.inner { max-width: 900px; margin: 0 auto; }
+.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 10px; }
+h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 26px; line-height: 1.35; }
+p { line-height: 2; }
+.lead p + p { margin-top: 1.4em; }
+
+.price { margin-top: 34px; padding: 22px 24px; border: 1px solid rgba(198,161,91,.42); border-radius: 4px; background: rgba(198,161,91,.06); display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.price b { font-size: clamp(26px, 4vw, 36px); color: var(--amber); font-weight: 700; letter-spacing: .01em; }
+.price small { font-size: 13px; color: var(--ink-3); }
+
+/* menu */
+.steps { display: grid; gap: 28px; }
+.step { display: grid; grid-template-columns: 260px 1fr; gap: 26px; align-items: center; background: var(--bg-card); border: 1px solid var(--divider); border-radius: 4px; overflow: hidden; }
+.step img { width: 100%; height: 100%; min-height: 190px; object-fit: cover; display: block; }
+.step-body { padding: 26px 28px 26px 0; }
+.step-no { font-family: var(--fh); font-size: 12px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; }
+.step h3 { font-size: 19px; font-weight: 700; color: var(--ink); margin: 8px 0 12px; line-height: 1.5; white-space: pre-line; }
+.step p { font-size: 14.5px; color: var(--ink-2); line-height: 1.95; }
+
+/* for who */
+ul.who { list-style: none; display: grid; gap: 12px; }
+ul.who li { position: relative; padding-left: 30px; line-height: 1.9; font-size: 15px; }
+ul.who li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--amber); font-weight: 700; }
+
+/* join */
+.joins { display: grid; gap: 20px; counter-reset: j; }
+.join { display: grid; grid-template-columns: 46px 1fr; gap: 18px; align-items: start; }
+.join .n { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(198,161,91,.55); color: var(--amber); display: grid; place-items: center; font-family: var(--fh); font-size: 17px; }
+.join h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.join p { font-size: 14.5px; color: var(--ink-3); line-height: 1.9; }
+
+/* info */
+dl.info { display: grid; grid-template-columns: 108px 1fr; gap: 0; border-top: 1px solid var(--divider); }
+dl.info dt { padding: 16px 0; font-size: 14px; color: var(--amber-d); border-bottom: 1px solid var(--divider); }
+dl.info dd { padding: 16px 0; font-size: 14.5px; line-height: 1.9; border-bottom: 1px solid var(--divider); }
+.note { margin-top: 26px; font-size: 14px; color: var(--ink-3); line-height: 1.9; }
+
+/* form */
+.formwrap { background: var(--bg-card); border: 1px solid var(--divider); border-radius: 4px; padding: 34px 30px; }
+.fg { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.f { display: flex; flex-direction: column; gap: 7px; }
+.f.wide { grid-column: 1 / -1; }
+label { font-size: 13px; color: var(--ink-3); }
+label .req { color: var(--amber); margin-left: 4px; }
+input, select, textarea { background: var(--bg); border: 1px solid var(--divider); border-radius: 3px; color: var(--ink-2); padding: 11px 12px; font-size: 15px; font-family: inherit; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(198,161,91,.6); }
+textarea { min-height: 118px; resize: vertical; }
+.radios { display: flex; gap: 20px; padding-top: 4px; }
+.radios label { display: flex; align-items: center; gap: 7px; color: var(--ink-2); font-size: 15px; }
+.radios input { width: auto; }
+.btn { display: inline-block; margin-top: 26px; background: var(--amber); color: #221C17; border: none; border-radius: 3px; padding: 15px 40px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: .02em; text-decoration: none; }
+.btn:hover { background: #D4B06A; }
+
+.fallback { border: 1px solid rgba(198,161,91,.42); background: rgba(198,161,91,.06); border-radius: 4px; padding: 30px 28px; }
+.fallback h3 { font-size: 17px; color: var(--ink); margin-bottom: 12px; font-weight: 700; }
+.fallback p { font-size: 14.5px; color: var(--ink-2); }
+.fallback .mail { color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(198,161,91,.5); }
+
+@media (max-width: 720px) {
+  .step { grid-template-columns: 1fr; }
+  .step img { min-height: 210px; }
+  .step-body { padding: 0 22px 26px; }
+  .fg { grid-template-columns: 1fr; }
+  dl.info { grid-template-columns: 1fr; }
+  dl.info dt { padding-bottom: 0; border-bottom: none; }
+  dl.info dd { padding-top: 6px; }
+}
+</style>
+
+<section class="hero">
+  <img src={HERO} alt="ローフード体験レッスンの様子" />
+  <div class="hero-body">
+    <span class="eye">Rawfood Trial Lesson</span>
+    <h1>生きた食で、<br />からだを整える。</h1>
+    <p class="hero-sub">
+      渋谷・外苑前 &amp;LAB TOKYO｜ローフード体験レッスン<br />
+      初めての方でも安心・手ぶらでOK
+    </p>
+    <div class="badges">{badges.map((b) => <span>{b}</span>)}</div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="inner lead">
+    <span class="sec-eye">Trial Lesson</span>
+    <h2>ローフード・リビングフードって<br />どんな食べ方？</h2>
+    <p>ローフードとは、48℃以下の熱を加えない「生きた食」のこと。酵素・ビタミン・ミネラルをそのまま摂れるため、腸活・アンチエイジング・免疫力アップに効果的とされています。</p>
+    <p>このトライアルレッスンでは、ロースイーツ作りを実習しながら、ローフードの考え方・食材の選び方・発酵との関係まで、楽しく体験できます。難しい知識は不要。「食べてみたい」という好奇心だけで大丈夫です。</p>
+    <div class="price">
+      <b>¥15,000</b><small>（税込）／ お一人様1回限り</small>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="inner">
+    <span class="sec-eye">Lesson Menu</span>
+    <h2>当日の内容</h2>
+    <div class="steps">
+      {menu.map((m) => (
+        <article class="step">
+          <img src={m.img} alt={m.title.replace('\n', '')} loading="lazy" />
+          <div class="step-body">
+            <span class="step-no">{m.eye} — {m.no}</span>
+            <h3>{m.title}</h3>
+            <p>{m.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="inner">
+    <span class="sec-eye">For Who</span>
+    <h2>こんな方におすすめです</h2>
+    <ul class="who">{forWho.map((w) => <li>{w}</li>)}</ul>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="inner">
+    <span class="sec-eye">How To Join</span>
+    <h2>ご参加の流れ</h2>
+    <div class="joins">
+      {steps.map((s) => (
+        <div class="join">
+          <div class="n">{s.n}</div>
+          <div>
+            <h3>{s.t}</h3>
+            <p>{s.b}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="inner">
+    <span class="sec-eye">Info</span>
+    <h2>レッスン詳細</h2>
+    <dl class="info">
+      {info.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+    </dl>
+    <p class="note">✦ プライベートレッスン・グループ貸し切りも承ります。まずはお問い合わせください。</p>
+  </div>
+</section>
+
+<section class="sec alt" id="apply">
+  <div class="inner">
+    <span class="sec-eye">Reservation</span>
+    <h2>お申し込み</h2>
+
+    {isFormLive ? (
+      <div class="formwrap">
+        <form action={FORM_ENDPOINT} method="POST">
+          <input type="hidden" name="_subject" value="【体験レッスン】お申し込み" />
+          <input type="hidden" name="フォーム" value="ローフード体験レッスン" />
+          <div class="fg">
+            <div class="f"><label for="last">姓<span class="req">*</span></label><input id="last" name="姓" required /></div>
+            <div class="f"><label for="first">名<span class="req">*</span></label><input id="first" name="名" required /></div>
+            <div class="f wide"><label for="email">メールアドレス<span class="req">*</span></label><input id="email" type="email" name="メールアドレス" required /></div>
+            <div class="f wide"><label for="tel">お電話番号</label><input id="tel" type="tel" name="電話番号" /></div>
+            <div class="f"><label for="d1">希望日 第一希望<span class="req">*</span></label><input id="d1" type="date" name="希望日1" required /></div>
+            <div class="f"><label for="d2">希望日 第二希望</label><input id="d2" type="date" name="希望日2" /></div>
+            <div class="f"><label for="d3">希望日 第三希望</label><input id="d3" type="date" name="希望日3" /></div>
+            <div class="f"><label for="n">参加人数<span class="req">*</span></label>
+              <select id="n" name="参加人数" required>
+                <option value="1">1名</option><option value="2">2名</option>
+                <option value="3">3名</option><option value="4">4名</option><option value="5">5名</option>
+              </select>
+            </div>
+            <div class="f wide"><label>ビーガン対応<span class="req">*</span></label>
+              <div class="radios">
+                <label><input type="radio" name="ビーガン対応" value="希望する" required />希望する</label>
+                <label><input type="radio" name="ビーガン対応" value="希望しない" />希望しない</label>
+              </div>
+            </div>
+            <div class="f wide"><label for="msg">メッセージ・ご質問等（アレルギーなどご要望があればこちらへ）</label><textarea id="msg" name="メッセージ"></textarea></div>
+          </div>
+          <button class="btn" type="submit">お申し込みを送信する →</button>
+        </form>
+      </div>
+    ) : (
+      <div class="fallback">
+        <h3>お申し込みはメールで承っています</h3>
+        <p>
+          下記より、ご希望の日程（第三希望まで）・参加人数・ビーガン対応の要否・アレルギーの有無をお知らせください。<br />
+          折り返し、日程のご相談とお支払い方法をご案内します。
+        </p>
+        <p style="margin-top:14px">
+          <a class="mail" href={CONTACT_EMAIL ? `mailto:${CONTACT_EMAIL}` : '#'}>{CONTACT_EMAIL}</a>
+        </p>
+        <a class="btn" href={mailtoFor('【体験レッスン】お申し込み', mailBody)}>メールでお申し込み →</a>
+      </div>
+    )}
+  </div>
+</section>
+
+</Layout>

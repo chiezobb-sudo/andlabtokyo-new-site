@@ -19,7 +19,9 @@ const {
   lang = "ja",
 } = Astro.props;
 
-const siteUrl = "https://andlabtokyo.biz";
+// astro.config.mjs の site を単一の出所にする。
+// ここに直書きすると解約済みドメインを指し続ける事故が起きる（実際 .biz を指していた）。
+const siteUrl = (Astro.site ?? new URL("https://www.andlabtokyo.com")).origin;
 const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
 const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`;
