@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout
-  title="発酵体験レッスン | 塩麹・甘酒・ビーガンキムチ | &LAB TOKYO"
-  description="渋谷・&LAB TOKYOで開催する発酵体験レッスン。塩麹・甘酒・ビーガンキムチを手作りで学べる初心者向け体験講座。"
+  title="発酵体験レッスン 渋谷｜塩麹・甘酒・ビーガンキムチ・味噌｜&LAB TOKYO"
+  description="東京・渋谷の発酵体験レッスン。塩麹¥13,000／甘酒¥14,000／ビーガンキムチ¥13,500／味噌¥15,000（すべて税込）。単発参加OK・お持ち帰りあり・ビーガン対応。ELLE gourmet公認料理家が少人数で直接指導します。"
   canonical="https://www.andlabtokyo.com/trial-fermentation"
 >
 <style>
@@ -26,11 +26,18 @@ body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', 
 h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); margin-bottom: 24px; }
 .rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
 .body-text { font-size: 15px; color: var(--ink-2); line-height: 1.9; margin-bottom: 14px; }
-.lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 28px; }
-.lesson { background: var(--bg-card); padding: 28px; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 2px; margin-top: 28px; }
+.lesson { background: var(--bg-card); padding: 24px 20px; display: flex; flex-direction: column; }
+.lesson .lesson-price { margin-top: auto; padding-top: 16px; }
 .lesson-icon { font-size: 32px; margin-bottom: 12px; }
 .lesson h3 { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .lesson p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+.lesson-tag { display: inline-block; font-family: var(--fh); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); border: 1px solid rgba(198,161,91,.45); border-radius: 999px; padding: 3px 10px; margin-bottom: 14px; }
+.lesson-spec { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 5px; }
+.lesson-spec li { font-size: 12.5px; color: var(--ink-3); padding-left: 13px; position: relative; line-height: 1.6; }
+.lesson-spec li::before { content: "—"; position: absolute; left: 0; color: var(--amber-d); }
+.lesson-price { margin-top: 16px; font-size: 22px; font-weight: 700; color: var(--amber); }
+.lesson-price small { font-size: 12px; font-weight: 400; color: var(--ink-3); margin-left: 4px; }
 .info-box { background: var(--bg-card); padding: 28px; margin-top: 28px; }
 .info-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--divider); font-size: 14px; }
 .info-row:last-child { border-bottom: none; }
@@ -45,32 +52,69 @@ h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); m
 <section class="hero">
   <span class="hero-eye">Fermentation Trial</span>
   <h1>発酵体験レッスン</h1>
-  <p class="hero-sub">塩麹・甘酒・ビーガンキムチ——発酵の不思議と美味しさを、手作りで体験。</p>
+  <p class="hero-sub">塩麹・甘酒・ビーガンキムチ・味噌——4種類の発酵体験から、お好みで選べます。</p>
 </section>
 
 <section class="sec" style="background: var(--bg);">
   <div class="inner">
     <span class="sec-eye">About</span>
-    <h2>発酵の世界への<br>はじめの一歩</h2>
+    <h2>4種類の発酵体験から<br>お好みで選べます</h2>
     <div class="rule"></div>
     <p class="body-text">発酵食品は腸内環境の改善・免疫力アップ・栄養の吸収率向上など、身体にうれしい効果が期待できます。本講座では、日本の伝統発酵食を中心に、初心者でも気軽に体験できる内容をご用意しています。</p>
-    <p class="body-text">作った発酵食品はお持ち帰りいただけます。自宅でそのまま活用できるレシピもお渡しします。</p>
+    <p class="body-text">それぞれ単発の体験レッスンとしてご参加いただけます。「まず1つ試してみたい」という方から「全部制覇したい」という方まで、自分のペースで学べます。ELLE gourmet公認料理家・安藤千英が少人数で直接指導します。作った発酵食品はお持ち帰りいただけます。</p>
 
     <div class="lessons">
       <div class="lesson">
+        <span class="lesson-tag">Bestseller</span>
         <div class="lesson-icon">🌾</div>
-        <h3>塩麹</h3>
-        <p>お米の麹と塩で作るシンプルな発酵調味料。お肉・魚・野菜を漬けるだけで旨味が倍増。</p>
+        <h3>はじめての<br />塩麹 手作り体験</h3>
+        <p>発酵の基本「塩麹」を一から手作り。麹菌の働きや腸活効果を理論から学び、実際に仕込みます。材料は米麹・塩・水の3つだけ。</p>
+        <ul class="lesson-spec">
+          <li>約1.5時間 / 初心者〜</li>
+          <li>塩麹をお持ち帰り</li>
+          <li>ビーガン対応</li>
+          <li>塩麹を使った軽めのランチ作り</li>
+        </ul>
+        <p class="lesson-price">¥13,000 <small>税込</small></p>
       </div>
       <div class="lesson">
+        <span class="lesson-tag">Popular</span>
         <div class="lesson-icon">🍚</div>
-        <h3>甘酒</h3>
-        <p>飲む点滴とも呼ばれる甘酒。砂糖不使用で米の自然な甘みだけで作る発酵ドリンク。</p>
+        <h3>利き麹＆<br />甘酒 手作り体験</h3>
+        <p>「飲む点滴」甘酒の種類と違いを飲み比べ。米・玄米のほか黒麹などの違いを体感した後、米麹から手作りします。砂糖不使用。</p>
+        <ul class="lesson-spec">
+          <li>約2時間 / 初心者〜</li>
+          <li>甘酒をお持ち帰り</li>
+          <li>ビーガン対応</li>
+          <li>麹を使った軽めのランチ作り</li>
+        </ul>
+        <p class="lesson-price">¥14,000 <small>税込</small></p>
       </div>
       <div class="lesson">
+        <span class="lesson-tag">Most Unique</span>
         <div class="lesson-icon">🥬</div>
-        <h3>ビーガンキムチ</h3>
-        <p>動物性食材を使わないプラントベースのキムチ。旨味は発酵と野菜だけで実現。</p>
+        <h3>ビーガンキムチ<br />手作り体験</h3>
+        <p>魚介・動物性食品を一切使わない本格ビーガンキムチ。昆布・干し椎茸など植物性出汁だけで深い味わいに。都内でここだけ。</p>
+        <ul class="lesson-spec">
+          <li>約2時間 / 初心者〜</li>
+          <li>キムチをお持ち帰り</li>
+          <li>完全植物性</li>
+          <li>軽めの薬膳ランチ作り</li>
+        </ul>
+        <p class="lesson-price">¥13,500 <small>税込</small></p>
+      </div>
+      <div class="lesson">
+        <span class="lesson-tag">Advanced</span>
+        <div class="lesson-icon">🫙</div>
+        <h3>本格味噌<br />手作り体験</h3>
+        <p>通常の米味噌のほか、豆味噌・豆板醤など上級発酵調味料もご希望に応じて選べます。仕込みから熟成の仕組みまで深く学べます。</p>
+        <ul class="lesson-spec">
+          <li>約2.5時間 / 初心者〜上級</li>
+          <li>仕込み味噌をお持ち帰り</li>
+          <li>ビーガン対応</li>
+          <li>アレンジ味噌を使ったMISOランチ</li>
+        </ul>
+        <p class="lesson-price">¥15,000 <small>税込</small></p>
       </div>
     </div>
   </div>
@@ -84,7 +128,7 @@ h2 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 700; color: var(--ink); m
     <div class="info-box">
       <div class="info-row"><span class="info-label">場所</span><span class="info-val">渋谷・&LAB TOKYO</span></div>
       <div class="info-row"><span class="info-label">対象</span><span class="info-val">初心者・発酵食に興味がある方どなたでも</span></div>
-      <div class="info-row"><span class="info-label">内容</span><span class="info-val">塩麹・甘酒・ビーガンキムチのいずれか（当日選択可）</span></div>
+      <div class="info-row"><span class="info-label">内容</span><span class="info-val">塩麹・甘酒・ビーガンキムチ・味噌から1つお選びいただけます</span></div>
       <div class="info-row"><span class="info-label">持ち帰り</span><span class="info-val">当日作った発酵食品をお持ち帰りいただけます</span></div>
     </div>
   </div>
