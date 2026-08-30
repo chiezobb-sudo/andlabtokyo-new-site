@@ -48,11 +48,10 @@ const jsonLd = {
       image: `${site}${d.hero.image}`,
       inLanguage: 'ja',
       teaches: [
-        '五つの固め方（凍らせる・とろみ・油脂で固める・すりつぶす・吸わせる）',
+        '五つの固め方（凍らせる・とろみ・固める・すりつぶす・吸わせる）',
         '砂糖・乳製品・小麦を使わない甘味料の選び方と、その判断基準',
         'ナッツフリーへの置き換えとアレルゲンの考え方',
         '三つのかたち（型で抜く・層にする・絞る）とナッツの浸水・乾燥',
-        '割合で覚えるレシピ設計（クラスト＝ナッツ2〜4：デーツ1）',
         'アンチエイジング理論（酸化・糖化／AGE・油の選び方）',
         '焼かない焼き菓子 ― 低温乾燥で香ばしさと食感を設計する技術',
         '焼かないスポンジ・クリーム・絞りのデコレーション',
@@ -356,7 +355,7 @@ const allLevels = [...d.levels];
   ))}
 
   <!-- ══════════ PRO ══════════ -->
-  <section class="sec sec--dark" id="pro">
+  <section class="sec sec--accent" id="pro">
     <div class="inner">
       <header class="level-head">
         <span class="eyebrow eyebrow--gold">{d.pro.eyebrow}</span>
@@ -669,7 +668,7 @@ const allLevels = [...d.levels];
   .sec { padding: 92px 32px; }
   .sec--linen { background: var(--linen); }
   .sec--cream { background: var(--cream); }
-  .sec--dark  { background: var(--sumi); }
+  .sec--accent{ background: #EFE7D9; }
   .inner { max-width: 1080px; margin: 0 auto; }
   .inner--narrow { max-width: 780px; }
 
@@ -679,7 +678,7 @@ const allLevels = [...d.levels];
     color: var(--amber); margin-bottom: 14px;
   }
   .eyebrow--light { color: #F0DCC0; text-shadow: 0 1px 10px rgba(0,0,0,.55); }
-  .eyebrow--gold  { color: var(--amber-l); }
+  .eyebrow--gold  { color: var(--amber); }
 
   .sec-head, .level-head { margin-bottom: 44px; }
   h2 {
@@ -688,15 +687,15 @@ const allLevels = [...d.levels];
     font-weight: 600; line-height: 1.5; color: var(--ink);
     margin: 0 0 18px; text-wrap: balance;
   }
-  .sec--dark h2 { color: #F7F2EA; }
+  .sec--accent h2 { color: var(--ink); }
   .sec-lead { font-size: 16px; line-height: 2; color: var(--ink-2); max-width: 46em; margin: 0; }
-  .sec--dark .sec-lead { color: #D8D0C6; }
+  .sec--accent .sec-lead { color: var(--ink-2); }
 
   .prose p { font-size: 16px; line-height: 2.05; color: var(--ink-2); margin: 0 0 20px; }
-  .prose--light p { color: #D8D0C6; }
+  .prose--light p { color: var(--ink-2); }
 
   .note { font-size: 14px; line-height: 1.95; color: var(--ink-3); margin: 28px 0 0; }
-  .note--light { color: #A79C8F; }
+  .note--light { color: var(--ink-3); }
   .sig-name { font-size: 14px; color: var(--ink-3); margin-top: 12px; }
 
   /* ══ シンの3つの意味 ══ */
@@ -734,23 +733,22 @@ const allLevels = [...d.levels];
 
   /* ══ 公式テキスト ══ */
   .book { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; background: #fff; border: 1px solid var(--line); padding: 36px; margin-bottom: 52px; }
-  .book--dark { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14); margin-top: 46px; }
+  .book--dark { margin-top: 46px; }
   .book-cover { margin: 0; }
   .book-cover img { width: 100%; height: auto; display: block; box-shadow: 0 10px 34px rgba(34,28,23,.28); }
   .book-kicker { display: block; font-family: var(--fh); font-size: 11px; letter-spacing: .3em; color: var(--amber); margin-bottom: 10px; }
-  .book--dark .book-kicker { color: var(--amber-l); }
+
   .book-body h3 { font-family: var(--fm); font-size: 21px; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
-  .book--dark .book-body h3 { color: #F7F2EA; }
+
   .book-sub { font-family: var(--fh); font-size: 16px; font-style: italic; color: var(--ink-3); margin: 0 0 6px; }
   .book-spec { font-size: 13px; color: var(--ink-2); margin: 0 0 26px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-  .book--dark .book-sub { color: #A79C8F; }
-  .book--dark .book-spec { color: #C9C0B6; border-bottom-color: rgba(255,255,255,.14); }
+
   .book-body h4 { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--ink-3); margin: 0 0 14px; }
-  .book--dark .book-body h4 { color: var(--amber-l); }
+
   .chapters { list-style: none; margin: 0; padding: 0; }
   .chapters li { font-size: 14px; line-height: 1.9; color: var(--ink-2); padding: 7px 0; border-bottom: 1px dotted var(--line); }
   .chapters li:last-child { border-bottom: 0; }
-  .book--dark .chapters li { color: #D8D0C6; border-bottom-color: rgba(255,255,255,.1); }
+
 
   /* ══ 掲載レシピ ══ */
   .recipe-groups { margin-bottom: 52px; }
@@ -758,21 +756,20 @@ const allLevels = [...d.levels];
   .rg h4 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
 
   /* ══ 卒業課題 ══ */
-  .grad-lead { font-size: 15px; line-height: 2; color: #D8D0C6; max-width: 46em; margin: 0 0 28px; }
-  .grad-task { font-size: 14px; font-weight: 700; letter-spacing: .04em; color: var(--amber-l); margin: 34px 0 16px; }
+  .grad-lead { font-size: 15px; line-height: 2; color: var(--ink-2); max-width: 46em; margin: 0 0 28px; }
+  .grad-task { font-size: 14px; font-weight: 700; letter-spacing: .04em; color: var(--amber); margin: 34px 0 16px; }
   .grads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 8px; }
-  .grad { border: 1px solid rgba(198,161,91,.35); padding: 24px 22px; }
-  .grad h4 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--amber-l); margin: 0 0 10px; }
-  .grad p { font-size: 13px; line-height: 1.9; color: #C9C0B6; margin: 0; }
+  .grad { background: #fff; border: 1px solid var(--line); border-top: 2px solid var(--amber-l); padding: 24px 22px; }
+  .grad h4 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
+  .grad p { font-size: 13px; line-height: 1.9; color: var(--ink-2); margin: 0; }
 
-  .ticks--light li { color: #E8E1D8; }
-  .ticks--light li::before { border-right-color: var(--amber-l); border-bottom-color: var(--amber-l); }
+  .ticks--light li { color: var(--ink-2); }
 
   /* ══ 認定ステップ ══ */
   .routes { display: grid; gap: 12px; }
-  .route { background: rgba(255,255,255,.05); border-left: 2px solid var(--amber-l); padding: 20px 24px; }
-  .route-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--amber-l); margin-bottom: 8px; }
-  .route p { font-size: 14px; line-height: 1.95; color: #D8D0C6; margin: 0; }
+  .route { background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--amber); padding: 20px 24px; }
+  .route-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--amber); margin-bottom: 8px; }
+  .route p { font-size: 14px; line-height: 1.95; color: var(--ink-2); margin: 0; }
 
   .inline-link { margin-top: 30px; }
   .inline-link a {
@@ -845,7 +842,7 @@ const allLevels = [...d.levels];
     font-family: 'Noto Sans JP', sans-serif;
     background: var(--amber); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .08em;
   }
-  .theme-badge--gold { background: var(--amber-l); color: #221C17; }
+  .theme-badge--gold { background: var(--amber); color: #fff; }
 
   .level-top { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; margin-bottom: 56px; }
   .price-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--amber); padding: 28px 26px; }
@@ -854,11 +851,7 @@ const allLevels = [...d.levels];
   .price-card__price small { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-style: normal; color: var(--ink-3); margin-left: 6px; }
   .price-card__specs { list-style: none; margin: 18px 0 0; padding: 0; }
   .price-card__specs li { font-size: 13px; color: var(--ink-2); line-height: 2; }
-  .price-card--gold { background: rgba(255,255,255,.06); border-color: rgba(198,161,91,.4); border-top-color: var(--amber-l); margin: 40px 0; }
-  .price-card--gold .price-card__label { color: #A79C8F; }
-  .price-card--gold .price-card__price { color: var(--amber-l); }
-  .price-card--gold .price-card__price small,
-  .price-card--gold .price-card__specs li { color: #C9C0B6; }
+  .price-card--gold { margin: 40px 0; }
 
   .ticks { list-style: none; margin: 0; padding: 0; }
   .ticks li { position: relative; padding-left: 26px; font-size: 15px; line-height: 2.05; color: var(--ink-2); margin-bottom: 6px; }
@@ -868,7 +861,7 @@ const allLevels = [...d.levels];
   .ticks--2col li { break-inside: avoid; }
 
   .sub-head { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0 0 22px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-  .sub-head--light { color: #F7F2EA; border-bottom-color: rgba(255,255,255,.15); margin-top: 46px; }
+  .sub-head--light { color: var(--ink); border-bottom-color: var(--line); margin-top: 46px; }
 
   /* ══ 写真グリッド：どんなものを作るのか ══ */
   .gallery { display: grid; gap: 14px; margin-bottom: 56px; }
@@ -884,17 +877,16 @@ const allLevels = [...d.levels];
   .dots li { position: relative; padding-left: 18px; font-size: 14.5px; line-height: 1.95; color: var(--ink-2); margin-bottom: 8px; }
   .dots li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber-l); }
   .dots--muted li { font-size: 13.5px; color: var(--ink-3); }
-  .dots--light li { color: #C9C0B6; }
-  .dots--light li::before { background: var(--amber-l); }
+  .dots--light li { color: var(--ink-2); }
 
   .outcomes { background: #fff; border: 1px solid var(--line); padding: 34px 32px; }
   .outcomes h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 20px; }
 
   /* ══ PRO ══ */
   .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 44px; }
-  .col h3 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--amber-l); margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .col h3 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--amber); margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
   .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
-  .chips li { border: 1px solid rgba(198,161,91,.42); color: #E4DCD2; font-size: 13.5px; padding: 9px 18px; border-radius: 999px; }
+  .chips li { border: 1px solid rgba(168,121,74,.45); background: #fff; color: var(--ink-2); font-size: 13.5px; padding: 9px 18px; border-radius: 999px; }
 
   /* ══ VOICES ══ */
   .voices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
