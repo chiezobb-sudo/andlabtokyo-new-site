@@ -4,7 +4,7 @@ description: "衝撃的なネーミングもさることながら、この常習
 リピートしてしまうおいしさ！
 大葉が沢山出回る時期にはぜひ作り置きしておきたい一品！"
 date: "2020-05-31"
-image: "https://static.wixstatic.com/media/857257_39edb363e0434aa78f7680f1bf72a630~mv2.jpg/v1/fill/w_960,h_960,al_c,q_85/857257_39edb363e0434aa78f7680f1bf72a630~mv2.jpg"
+image: "/images/wix/857257_39edb363e0434aa78f7680f1bf72a630-6b558114.jpg"
 category: "レシピ"
 ---
 

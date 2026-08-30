@@ -2,7 +2,7 @@
 title: "ローフードマストアイテム！道具と参考書リンク集"
 description: "さあ！実際にローフードを始めると、いったい何が必要なの？今回はローフードのマストアイテム！道具編をご紹介します。"
 date: "2024-05-08"
-image: "https://static.wixstatic.com/media/857257_bca9989d7fb84aea82880c92f26d0013~mv2.jpg/v1/fill/w_2500,h_1666,al_c/857257_bca9989d7fb84aea82880c92f26d0013~mv2.jpg"
+image: "/images/wix/857257_bca9989d7fb84aea82880c92f26d0013-55e7ce09.jpg"
 category: "レシピ"
 ---
 

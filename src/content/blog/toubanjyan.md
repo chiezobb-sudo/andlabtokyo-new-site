@@ -3,7 +3,7 @@ title: "簡単！2つの自家製豆板醤"
 description: "米麹で作る豆板醤と
 種麹で作る2つの豆板醤"
 date: "2020-06-14"
-image: "https://static.wixstatic.com/media/857257_5a23b963049345858b06917330f6bbd0~mv2.jpg/v1/fill/w_1000,h_752,al_c,q_85,usm_0.66_1.00_0.01/857257_5a23b963049345858b06917330f6bbd0~mv2.jpg"
+image: "/images/wix/857257_5a23b963049345858b06917330f6bbd0-2455bc00.jpg"
 category: "レシピ"
 ---
 

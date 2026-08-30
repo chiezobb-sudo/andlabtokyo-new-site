@@ -2,7 +2,7 @@
 title: "®️Raw chocolatier ローショコラティエ商標登録"
 description: "お知らせ4月に設立いたしましたローショコラティエ協会ローチョコレートマイスター講座をはじめローパティシエ養成講座、さらに最高峰グレードローショコラティエの育成を行なっております。https://www.rawchocolatier.org そしてこの度、特許庁より®️Raw chocolatier 「ローショコラティエ"
 date: "2022-07-07"
-image: "https://static.wixstatic.com/media/857257_b7c9c459bfaa4b22b92fdf9054cf2250~mv2.jpg/v1/fill/w_1000,h_563,al_c,q_85,usm_0.66_1.00_0.01/857257_b7c9c459bfaa4b22b92fdf9054cf2250~mv2.jpg"
+image: "/images/wix/857257_b7c9c459bfaa4b22b92fdf9054cf2250-fdfc4c62.jpg"
 category: "レシピ"
 ---
 

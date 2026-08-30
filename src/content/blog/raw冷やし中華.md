@@ -2,7 +2,7 @@
 title: "RAW冷やし中華"
 description: "ベジヌードルを使ったヘルシー冷やし中華！"
 date: "2020-04-20"
-image: "https://static.wixstatic.com/media/857257_c5b5b8874d564534a18d24d1eff9bcf6~mv2.jpg/v1/fill/w_800,h_800,al_c,q_85/857257_c5b5b8874d564534a18d24d1eff9bcf6~mv2.jpg"
+image: "/images/wix/857257_c5b5b8874d564534a18d24d1eff9bcf6-b231c923.jpg"
 category: "レシピ"
 ---
 

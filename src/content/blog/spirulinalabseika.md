@@ -2,7 +2,7 @@
 title: "スピルリナLAB活動成果〜健康寿命を伸ばそう！"
 description: "2016年のスクール開講以来、厚生労働省の「スマートライフプロジェクト」に参加しています。これは、国民の健康をサポートする目的で行なわれているもので、主に食事、運動、禁煙、健診を軸に「健康寿命を伸ばそう」がスローガンの国民運動です。はじめは個人的な参加でしたが、スクール開講を機に同プロジェクトの活動をカリキュラムにおい"
 date: "2022-08-10"
-image: "https://static.wixstatic.com/media/857257_90a6c3a233ee4e36b9c0ce9fcee5b9e0~mv2.jpg/v1/fill/w_1000,h_751,al_c,q_85,usm_0.66_1.00_0.01/857257_90a6c3a233ee4e36b9c0ce9fcee5b9e0~mv2.jpg"
+image: "/images/wix/857257_90a6c3a233ee4e36b9c0ce9fcee5b9e0-e88840e7.jpg"
 category: "レシピ"
 ---
 

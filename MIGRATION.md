@@ -174,4 +174,54 @@ Chocolate Bonbons_edited.jpg     → rawchocolatier top
 
 ---
 
-*最終更新：2026-06-09 by Claude*
+---
+
+## 🔴 2026-08-30 実施：Wix CDN 依存の切り離し（移行の最重要ステップ）
+
+**背景**：この Astro サイトは、ビルドした146ページのうち **143ページが `static.wixstatic.com` の画像を直接読んでいた**。
+つまり `.com` を Vercel に向けても見た目は Wix にぶら下がったままで、Wix を解約した瞬間に画像が全部消える状態だった。
+
+**実施内容**
+
+1. ソース／ビルド出力から Wix CDN の画像URLを全抽出 → **ユニーク78URL**
+2. Wix が生きているうちに **72枚をダウンロード** → `public/images/wix/`
+3. 残り6枚は **Wix 本番でも 403**＝既に壊れていた。本番Wixページから正しい画像を特定して差し替え
+4. 巨大画像（最大11.2MB）を幅2000px上限に最適化 → **合計 約75MB → 13.1MB**
+5. `src/` 全体の参照を `/images/wix/...` に書き換え（**73ファイル・82箇所**）
+
+**結果**：Wix CDN を参照するページ **143 → 0**。壊れたローカル画像参照も **0**。
+検証：20ページ・画像102点すべて HTTP 200（dev サーバ実測）。
+
+### 併せて直した「既に壊れていた画像」
+
+| 場所 | 壊れていたURL | 差し替え先 | 根拠 |
+|---|---|---|---|
+| `Layout.astro`（全ページのファビコン） | `745f65_5f8a0988...png`（**別Wixアカウントの画像**・恒久的に403） | `/favicon.ico`（リポジトリに既存） | 既存ファビコンを指すよう修正。`type` も `image/x-icon` に訂正 |
+| `rawchocolatier/index.astro` ヒーロー＋OG | `media/rawchocolatier.jpg` | `/images/wix/rawchocolatier-hero.jpg` | 本番Wix `/rawchocolatier` の実画像 |
+| `spirulina.astro` ヒーロー＋OG | `ChatGPT Image...png` | `/images/wix/spirulina-hero.jpg` | 本番Wix `/spirulina` の実画像 |
+| `fermentedfood.astro` | `33638654_6271...n.jpg` | `/images/wix/fermentedfood-hero.jpg` | 本番Wix `/fermentedfood` の実画像 |
+| `koji-fermentation-experience-tokyo.astro` | `10798628320_IMG_0607...jpg` | `/images/wix/koji-hero.jpg` | 本番Wix の実画像 |
+| `brand.astro` | `/images/about/profile-chie-ando.jpg`（ファイル無し） | `/images/chie-ando-instructor.jpg` | 既存のポートレート |
+
+### ⚠️ 私の判断で画像を選んだ箇所（Chie の確認が要る・6件）
+
+適切な元画像が特定できず、既存素材から用途に合うものを当てた。**気に入らなければ差し替える。**
+
+| ページ | 枠 | 当てた画像 |
+|---|---|---|
+| `listofcourses` | ローフードマイスター ステップ2 | `/rawfood-lesson.jpg` |
+| `listofcourses` | ローフードマイスター ステップ3・講師養成 | `/lesson-scene.jpg` |
+| `listofcourses` | ローショコラティエ プロ養成 | `/prog-chocolate.jpg` |
+| `brand` | 体験レッスン | `/images/wix/koji-hero.jpg` |
+| `brand` | ローパティシエ | `/raw-bark.jpg` |
+| `brand` | プロフェッショナル資格 | `/hacco-koji.jpg` |
+| `experiencelessons` | 体験レッスンの様子 | `/images/wix/koji-hero.jpg` |
+
+### 注意
+
+- `src/pages/_knowledge-old.astro` は先頭が `_` でルーティングされない**死にファイル**。Wix CDN 参照が残っているが出力されない。公開前に `sample.astro` とあわせて削除推奨（**Chie 確認後**）
+- **このドキュメントの上部の表（2026-06-09 作成）は古い。** 「❌未着手」と書かれているページの多くは既に存在する。実態はビルド出力（146ページ）で確認すること
+
+---
+
+*最終更新：2026-08-30 by Claude（2026-06-09版の表は古い）*

@@ -6,7 +6,7 @@ description: "スピルリナLABとは
 ディーアイシー ライフテック社による
 共同プロジェクト"
 date: "2020-06-05"
-image: "https://static.wixstatic.com/media/857257_7fd7f2eaaaf743fe9b3de143d9b48172~mv2.jpg/v1/fill/w_1000,h_668,al_c,q_85,usm_0.66_1.00_0.01/857257_7fd7f2eaaaf743fe9b3de143d9b48172~mv2.jpg"
+image: "/images/wix/857257_7fd7f2eaaaf743fe9b3de143d9b48172-3a7d6b15.jpg"
 category: "レシピ"
 ---
 

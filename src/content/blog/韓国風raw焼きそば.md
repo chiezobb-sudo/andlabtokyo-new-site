@@ -2,7 +2,7 @@
 title: "韓国風RAW焼きそば"
 description: "海藻麺を使用したヘルシーな焼かない焼きそば"
 date: "2020-04-19"
-image: "https://static.wixstatic.com/media/a27d24_6f21a2425bc14218b9d55b606b166cb3~mv2.jpg/v1/fill/w_960,h_960,al_c,q_85/a27d24_6f21a2425bc14218b9d55b606b166cb3~mv2.jpg"
+image: "/images/wix/a27d24_6f21a2425bc14218b9d55b606b166cb3-25710a5b.jpg"
 category: "レシピ"
 ---
 

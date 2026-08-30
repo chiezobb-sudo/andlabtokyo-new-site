@@ -2,7 +2,7 @@
 title: "ギルトフリーRawチョコレートケーキ"
 description: "焼かないローチョコレートケーキは栄養価が高く、身体も大満足！"
 date: "2020-04-20"
-image: "https://static.wixstatic.com/media/a27d24_dbbcdd108aff45b4af522d1560eb75d9~mv2.jpg/v1/fill/w_800,h_800,al_c,q_85/a27d24_dbbcdd108aff45b4af522d1560eb75d9~mv2.jpg"
+image: "/images/wix/a27d24_dbbcdd108aff45b4af522d1560eb75d9-caed9e23.jpg"
 category: "レシピ"
 ---
 

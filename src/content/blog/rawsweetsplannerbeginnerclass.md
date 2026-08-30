@@ -11,7 +11,7 @@ description: "コスメティックスイーツ！
 
 コスメスイーツはそんな特別な美容液のようなスイーツ"
 date: "2020-08-14"
-image: "https://static.wixstatic.com/media/857257_a03871951057418f9fec61b74eec16fa~mv2.jpg/v1/fill/w_1000,h_667,al_c,q_85,usm_0.66_1.00_0.01/857257_a03871951057418f9fec61b74eec16fa~mv2.jpg"
+image: "/images/wix/857257_a03871951057418f9fec61b74eec16fa-2058905b.jpg"
 category: "レシピ"
 ---
 

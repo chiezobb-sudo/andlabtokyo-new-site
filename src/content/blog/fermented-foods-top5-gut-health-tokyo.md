@@ -2,7 +2,7 @@
 title: "腸活に本当に効く発酵食品トップ5｜渋谷の発酵料理教室&LAB TOKYO"
 description: "「腸活」という言葉をよく聞くけれど、結局どの発酵食品が本当に効くの？そんな疑問にお答えします。渋谷・外苑前で発酵料理教室を主宰する安藤千英が、実際に講座でも教えている「腸活に本当に効く発酵食品トップ5」を徹底解説します。"
 date: "2026-04-26"
-image: "https://static.wixstatic.com/media/857257_216d2753f0684c57a317c5fb071a1fa4~mv2.jpg/v1/fill/w_1000,h_751,al_c,q_85,usm_0.66_1.00_0.01/857257_216d2753f0684c57a317c5fb071a1fa4~mv2.jpg"
+image: "/images/wix/857257_216d2753f0684c57a317c5fb071a1fa4-bda53ac9.jpg"
 category: "お知らせ"
 ---
 

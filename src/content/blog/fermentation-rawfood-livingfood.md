@@ -2,7 +2,7 @@
 title: "「発酵はわかるけど、ローフードって意識高い系？」と思っていた方へ"
 description: "「ローフードって意識高い系？」そんな声をよく聞きます。でも実は、発酵とローフードはどちらも&quot;生きた食べ物＝リビングフード&quot;でつながっています。東京・渋谷で20年以上ローフードと発酵を研究してきた料理家・安藤千英が、その考え方と始め方をお伝えします。"
 date: "2026-04-22"
-image: "https://static.wixstatic.com/media/857257_7fc7d63bfe1240edb2bfbde20c134ebb~mv2.jpg/v1/fill/w_1000,h_753,al_c,q_85,usm_0.66_1.00_0.01/857257_7fc7d63bfe1240edb2bfbde20c134ebb~mv2.jpg"
+image: "/images/wix/857257_7fc7d63bfe1240edb2bfbde20c134ebb-b18e6cbc.jpg"
 category: "レシピ"
 ---
 

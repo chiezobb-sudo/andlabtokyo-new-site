@@ -4,7 +4,7 @@ description: "先日、東京アラートが解除され新しい生活様式の
 東京都知事からの発表のとおり、当スクールでも自粛から自衛へとステップします。
 そのため、スクールと皆様の連携が必要となりますのでご確認くださいませ。"
 date: "2020-06-13"
-image: "https://static.wixstatic.com/media/7e20db048cba763a447d7610911b6fa2.png"
+image: "/images/wix/7e20db048cba763a447d7610911b6fa2-fbc1709a.png"
 category: "お知らせ"
 ---
 

@@ -2,7 +2,7 @@
 title: "安藤千英 FOX掲載~ Kuvings"
 description: "このたび、アメリカのFOX系列ニュース「WFXR」にて、安藤千英 愛用ブランド Kuvings（クビンス） の取り組みが紹介されました。「Kuvingsは、私のローフードの旅における欠かせないパートナー」"
 date: "2025-08-20"
-image: "https://static.wixstatic.com/media/857257_4115abe75a0841f696627e5330eab2bf~mv2.jpg/v1/fill/w_800,h_800,al_c,q_85/857257_4115abe75a0841f696627e5330eab2bf~mv2.jpg"
+image: "/images/wix/857257_4115abe75a0841f696627e5330eab2bf-b2c03046.jpg"
 category: "レシピ"
 ---
 

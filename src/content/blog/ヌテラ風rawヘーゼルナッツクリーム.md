@@ -2,7 +2,7 @@
 title: "ヌテラ風RAWヘーゼルナッツクリーム"
 description: "これなら罪悪感なくたっぷりいただける！栄養価の非常に高いヘーゼルナッツを使ったクリーム"
 date: "2020-04-20"
-image: "https://static.wixstatic.com/media/857257_44c40d80fbc946b5be675ebf37144e2b~mv2.jpg/v1/fill/w_576,h_434,al_c,lg_1,q_80/857257_44c40d80fbc946b5be675ebf37144e2b~mv2.jpg"
+image: "/images/wix/857257_44c40d80fbc946b5be675ebf37144e2b-6580d9d2.jpg"
 category: "レシピ"
 ---
 

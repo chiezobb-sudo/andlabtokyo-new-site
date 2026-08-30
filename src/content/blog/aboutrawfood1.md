@@ -3,7 +3,7 @@ title: "ローフードとは"
 description: "ローフードとは直訳するとRAW=生の・FOOD=食べ物という意味です。
 これらは、酵素が生きている(Living)食べ物(Foods)リビングフードのことをさします。"
 date: "2023-01-12"
-image: "https://static.wixstatic.com/media/857257_7f662b1d45b24717b31f24935b019702~mv2.jpg/v1/fill/w_1000,h_667,al_c,q_85,usm_0.66_1.00_0.01/857257_7f662b1d45b24717b31f24935b019702~mv2.jpg"
+image: "/images/wix/857257_7f662b1d45b24717b31f24935b019702-96aa3d8d.jpg"
 category: "レシピ"
 ---
 

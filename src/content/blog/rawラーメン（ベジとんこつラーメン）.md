@@ -2,7 +2,7 @@
 title: "RAWラーメン（ベジとんこつラーメン）"
 description: "一度食べたら癖になる！ヘルシーベジとんこつラーメン！"
 date: "2020-04-20"
-image: "https://static.wixstatic.com/media/857257_ca16e62f02bb47e19f86ab30521e8dd6~mv2.jpg/v1/fill/w_700,h_525,al_c,q_85/857257_ca16e62f02bb47e19f86ab30521e8dd6~mv2.jpg"
+image: "/images/wix/857257_ca16e62f02bb47e19f86ab30521e8dd6-0152e8e6.jpg"
 category: "レシピ"
 ---
 

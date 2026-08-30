@@ -11,7 +11,7 @@ description: "焼かない焼き菓子
 
 想像力を最大限に引き出しイメージを形にする"
 date: "2020-08-15"
-image: "https://static.wixstatic.com/media/857257_68989dde57fa4b69b9ff98c6845d921f~mv2.jpg/v1/fill/w_667,h_1000,al_c,q_85,usm_0.66_1.00_0.01/857257_68989dde57fa4b69b9ff98c6845d921f~mv2.jpg"
+image: "/images/wix/857257_68989dde57fa4b69b9ff98c6845d921f-2a9d6c40.jpg"
 category: "レシピ"
 ---
 

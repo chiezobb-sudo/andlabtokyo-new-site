@@ -6,7 +6,7 @@ description: "Raw chocolate meister ローチョコレートマイスターと�
 
 ローチョコレートとは"
 date: "2022-01-23"
-image: "https://static.wixstatic.com/media/857257_da871a01356c4a7b8cd87bee0d413667~mv2.jpg/v1/fill/w_1000,h_1000,al_c,q_85,usm_0.66_1.00_0.01/857257_da871a01356c4a7b8cd87bee0d413667~mv2.jpg"
+image: "/images/wix/857257_da871a01356c4a7b8cd87bee0d413667-697460d2.jpg"
 category: "レシピ"
 ---
 
