@@ -60,6 +60,15 @@ const jsonLd = {
         '卒業課題によるオリジナルレシピの開発',
       ],
       educationalCredentialAwarded: 'ローパティシエ®（ローショコラティエ協会 認定資格）',
+      datePublished: d.dates.published,
+      dateModified: d.dates.modified,
+      author: { '@id': `${site}/instructor-chie-ando#person` },
+      review: d.voices.items.map((v) => ({
+        '@type': 'Review',
+        reviewBody: v.body,
+        author: { '@type': 'Person', name: v.who },
+        itemReviewed: { '@id': `${url}#course` },
+      })),
       provider: {
         '@type': 'EducationalOrganization',
         name: '&LAB TOKYO',
@@ -91,6 +100,18 @@ const jsonLd = {
           name: 'オンラインレッスン（全国・海外から受講可）',
         },
       ],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site}/instructor-chie-ando#person`,
+      name: d.instructor.name,
+      alternateName: d.instructor.nameEn,
+      jobTitle: d.instructor.role,
+      url: `${site}${d.instructor.linkHref}`,
+      image: `${site}${d.instructor.image}`,
+      worksFor: { '@type': 'EducationalOrganization', name: '&LAB TOKYO', url: site },
+      knowsAbout: ['ロースイーツ', 'ローフード', '発酵', 'ローチョコレート', 'リビングフード'],
+      sameAs: ['https://www.instagram.com/chie_andlab/'],
     },
     {
       '@type': 'FAQPage',
@@ -444,6 +465,25 @@ const allLevels = [...d.levels];
     </div>
   </section>
 
+  <!-- ══════════ INSTRUCTOR（誰が教えるのか＝E-E-A-T） ══════════ -->
+  <section class="sec sec--cream" id="instructor">
+    <div class="inner">
+      <div class="teacher">
+        <figure class="teacher-photo">
+          <img src={d.instructor.image} alt={d.instructor.imageAlt} loading="lazy" decoding="async" width="900" height="1349" />
+        </figure>
+        <div class="teacher-body">
+          <span class="eyebrow">{d.instructor.eyebrow}</span>
+          <h2>{d.instructor.title}</h2>
+          <p class="teacher-role">{d.instructor.role}</p>
+          {d.instructor.body.map((t) => <p class="teacher-text">{t}</p>)}
+          <ul class="creds">{d.instructor.credentials.map((c) => <li>{c}</li>)}</ul>
+          <p class="inline-link"><a href={d.instructor.linkHref}>{d.instructor.linkLabel} →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════ VOICES ══════════ -->
   <section class="sec sec--linen">
     <div class="inner">
@@ -587,6 +627,10 @@ const allLevels = [...d.levels];
       <ul class="notes">
         {d.pricing.notes.map((n) => <li>{n}</li>)}
       </ul>
+      <p class="updated">
+        <time datetime={d.dates.modified}>{d.dates.label}</time>
+        <span>この料金は上記時点のものです。</span>
+      </p>
     </div>
   </section>
 
@@ -1060,6 +1104,25 @@ const allLevels = [...d.levels];
   .access-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
   .access-tags li { font-size: 12px; color: var(--amber); border: 1px solid rgba(168,121,74,.35); border-radius: 999px; padding: 6px 12px; }
   @media (max-width: 700px) { .access { grid-template-columns: 1fr; } }
+
+  /* ══ 講師 ══ */
+  .teacher { display: grid; grid-template-columns: 300px 1fr; gap: 44px; align-items: start; }
+  .teacher-photo { margin: 0; }
+  .teacher-photo img { width: 100%; height: auto; display: block; }
+  .teacher-role { font-size: 13.5px; letter-spacing: .04em; color: var(--amber); margin: 0 0 22px; }
+  .teacher-text { font-size: 15px; line-height: 2.05; color: var(--ink-2); margin: 0 0 16px; }
+  .creds { list-style: none; margin: 24px 0 0; padding: 22px 0 0; border-top: 1px solid var(--line); }
+  .creds li { position: relative; padding-left: 18px; font-size: 13.5px; line-height: 1.95; color: var(--ink-2); margin-bottom: 7px; }
+  .creds li::before { content: ''; position: absolute; left: 2px; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber-l); }
+
+  /* ══ 更新日 ══ */
+  .updated { margin: 22px 0 0; font-size: 12.5px; color: var(--ink-3); }
+  .updated time { color: var(--ink-2); font-weight: 500; margin-right: 10px; }
+
+  @media (max-width: 760px) {
+    .teacher { grid-template-columns: 1fr; gap: 26px; }
+    .teacher-photo { max-width: 260px; }
+  }
 
   .next-step { text-align: center; }
   .next-step .sec-lead { margin: 0 auto 30px; }
