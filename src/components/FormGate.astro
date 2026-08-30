@@ -1,0 +1,83 @@
+---
+/**
+ * フォームの共通ラッパー。
+ *
+ * 送信先（PUBLIC_FORM_ENDPOINT）が設定されているときだけ <form> を描画する。
+ * 未設定のときはフォームを一切出さず、メールでの導線に差し替える。
+ *
+ * なぜこうするか:
+ *   2026-08-30 の移行調査で、サイト上の 6 つのフォームが全て「送信しても
+ *   どこにも届かない」状態になっていた（ダミーID・置換忘れ・Netlify専用属性・
+ *   静的ページへのPOST）。見た目は動くので、申込が消えても誰も気づかない。
+ *   「動かないフォームを出すくらいなら、出さない」方が損失が小さい。
+ *
+ * 使い方:
+ *   <FormGate subject="【ローフードマイスター】お申し込み" class="form-grid">
+ *     ...入力欄と送信ボタン...
+ *   </FormGate>
+ */
+import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL, mailtoFor } from '../lib/forms';
+
+interface Props {
+  /** 通知メールの件名。どのフォームから来たか判別できる文言にする */
+  subject: string;
+  /** フォーム未設定時、メール本文に差し込むひな形 */
+  mailBody?: string;
+  /** 未設定時に出す案内文 */
+  fallbackNote?: string;
+  class?: string;
+  name?: string;
+}
+
+const {
+  subject,
+  mailBody = '',
+  fallbackNote = 'ご希望の内容をお書き添えのうえ、下記アドレスまでご連絡ください。折り返しご案内いたします。',
+  class: className,
+  name,
+} = Astro.props;
+---
+
+{isFormLive ? (
+  <form action={FORM_ENDPOINT} method="POST" class={className} name={name}>
+    <input type="hidden" name="_subject" value={subject} />
+    <slot />
+  </form>
+) : (
+  <div class="formgate-fallback">
+    <p class="formgate-fallback__note">{fallbackNote}</p>
+    <p class="formgate-fallback__mail">
+      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+    </p>
+    <a class="formgate-fallback__btn" href={mailtoFor(subject, mailBody)}>メールで送る →</a>
+  </div>
+)}
+
+<style>
+  .formgate-fallback {
+    border: 1px solid rgba(198, 161, 91, 0.42);
+    background: rgba(198, 161, 91, 0.06);
+    border-radius: 4px;
+    padding: 30px 28px;
+  }
+  .formgate-fallback__note { line-height: 1.9; margin: 0 0 14px; }
+  .formgate-fallback__mail { margin: 0 0 20px; }
+  .formgate-fallback__mail a {
+    color: #C6A15B;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(198, 161, 91, 0.5);
+    font-size: 17px;
+  }
+  .formgate-fallback__btn {
+    display: inline-block;
+    background: #C6A15B;
+    color: #221C17;
+    border-radius: 3px;
+    padding: 14px 34px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .formgate-fallback__btn:hover { background: #D4B06A; }
+</style>

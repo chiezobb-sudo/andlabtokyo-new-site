@@ -48,6 +48,7 @@ const galleryImages = [
   { src: "/choco-real/05-advanced-assorted.jpg",   caption: "上級で極める本格ボンボンショコラの数々" },
   { src: "/choco-real/06-junior-plating.jpg",      caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
 ];
+import FormGate from '../../components/FormGate.astro';
 ---
 
 <Layout
@@ -761,12 +762,10 @@ const galleryImages = [
       <h2 class="sec__title sec__title--dark">お申し込み・お問い合わせ</h2>
       <p class="form-sec__lead">下記フォームよりご連絡ください。2営業日以内にご返信いたします。</p>
     </header>
-    <form
+    <FormGate
+      subject={`【講座申込】${c.title}`}
       class="form-sec__form"
       name={`course-apply-${c.id}`}
-      method="POST"
-      data-netlify="true"
-      novalidate
     >
       <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
       <input type="hidden" name="course" value={c.title} />
@@ -813,7 +812,7 @@ const galleryImages = [
           に同意したものとみなします。
         </p>
       </div>
-    </form>
+    </FormGate>
   </div>
 </section>
 

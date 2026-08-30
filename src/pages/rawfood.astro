@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import FormGate from '../components/FormGate.astro';
 ---
 <Layout
   title="ローフードとは？効果・始め方・注意点を専門家が解説｜&LAB東京"
@@ -502,10 +503,7 @@ html,
         <h2 class="form-title">ローフードの世界へ、<br />あなたの一歩をお待ちしています。</h2>
         <p class="form-note">ご希望のコース・受講スタイルをお選びの上、フォームからご送信ください。<br />3日以内にご連絡いたします。</p>
       </div>
-      <!-- TODO: action を実際の Formspree ID に変更してください
-           例: action="https://formspree.io/f/xxxx"
-           設定後、info@andlabtokyo.com に通知 + 自動返信が届きます -->
-      <form class="cf" action="https://formspree.io/f/REPLACE_ID" method="POST">
+      <FormGate subject="【ローフード】お申し込み・ご相談" class="cf">
 
         <div class="f">
           <label for="course">希望コース<span class="r">*</span></label>
@@ -569,7 +567,7 @@ html,
         <button type="submit" class="btn-sub">&LAB TOKYOの世界を体験する</button>
         <p class="form-bottom">3日以内にご返信いたします。入会費・登録費は一切ありません。</p>
 
-      </form>
+      </FormGate>
     </div>
   </div>
 </section>

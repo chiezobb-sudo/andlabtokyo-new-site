@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import FormGate from '../../components/FormGate.astro';
 ---
 <Layout
   title="ロースイーツ講座 お申し込み | &LAB TOKYO"
@@ -87,7 +88,7 @@ select { appearance: none; cursor: pointer; }
     <h2>申し込みフォーム</h2>
     <div class="rule"></div>
 
-    <form name="rawsweets-application" method="POST" data-netlify="true" action="/contact-thanks">
+    <FormGate subject="【ロースイーツ／ローチョコ】お申し込み" name="rawsweets-application">
       <input type="hidden" name="form-name" value="rawsweets-application" />
 
       <div class="row">
@@ -160,7 +161,7 @@ select { appearance: none; cursor: pointer; }
       <button type="submit" class="submit-btn">送信する</button>
 
       <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信がない場合は <a href="mailto:info@andlabtokyo.com" style="color:var(--amber)">info@andlabtokyo.com</a> へ直接ご連絡ください。</p>
-    </form>
+    </FormGate>
   </div>
 </section>
 </Layout>

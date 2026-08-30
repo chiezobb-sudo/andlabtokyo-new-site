@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import FormGate from '../components/FormGate.astro';
 ---
 <Layout
   title="ローフード教室 渋谷｜JLBA認定 資格取得・酵素料理・プラントベース｜&LAB TOKYO"
@@ -1073,7 +1074,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="inner">
     <span class="eyebrow" style="text-align:center;display:block">Application</span>
     <h2 class="form-title">ローフードマイスター お申し込み</h2>
-    <form class="form-grid" name="rawfood-application" method="POST" action="/contact">
+    <FormGate subject="【ローフードマイスター】お申し込み" class="form-grid" name="rawfood-application">
       <div class="form-group">
         <label class="form-label">姓<span class="req">*</span></label>
         <input class="form-input" type="text" name="lastName" required placeholder="山田" />
@@ -1121,7 +1122,7 @@ import Layout from '../layouts/Layout.astro';
         <label class="form-label">ご質問・ご要望など</label>
         <textarea class="form-textarea" name="message" placeholder="お気軽にご記入ください"></textarea>
       </div>
-    </form>
+    </FormGate>
     <button type="submit" class="form-submit">送信</button>
     <p class="form-note">
       ※ お支払いはクレジットカード決済のみとなります（分割払いは対応しておりません）<br>
