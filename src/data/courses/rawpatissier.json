@@ -277,14 +277,19 @@
       ],
       "photos": [
         {
+          "src": "/images/rawpatissier/inter-choc-cake.jpg",
+          "alt": "ココアをふった基本のローチョコレートケーキ。いちごとビオラを飾って",
+          "caption": "基本のローチョコレートケーキ"
+        },
+        {
           "src": "/images/rawpatissier/inter-layer-cake.jpg",
           "alt": "いちごを飾った2層のレイヤーローケーキ",
           "caption": "基本のレイヤーローケーキ（2層）"
         },
         {
           "src": "/images/rawpatissier/inter-spirulina-cake.jpg",
-          "alt": "ブルーベリーを敷きつめた青いスピルリナのローケーキ",
-          "caption": "植物色素を使ったローケーキ"
+          "alt": "リナブルーで青く染めたローケーキにブルーベリーを敷きつめたところ",
+          "caption": "リナブルー（ブルースピルリナ）のローケーキ"
         },
         {
           "src": "/images/rawpatissier/inter-pudding.jpg",
