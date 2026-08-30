@@ -69,6 +69,96 @@
       "source": "/abouthummingtree",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/15min-chocolate",
+      "destination": "/rawchocolatier/15min-chocolate",
+      "permanent": true
+    },
+    {
+      "source": "/about-association",
+      "destination": "/rawchocolatier/about-association",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/rawchocolatier/faq",
+      "permanent": true
+    },
+    {
+      "source": "/information",
+      "destination": "/rawchocolatier/information",
+      "permanent": true
+    },
+    {
+      "source": "/kidsveganpatissier",
+      "destination": "/rawchocolatier/kidsveganpatissier",
+      "permanent": true
+    },
+    {
+      "source": "/nutfreerawsweets",
+      "destination": "/rawchocolatier/nutfreerawsweets",
+      "permanent": true
+    },
+    {
+      "source": "/online-lesson",
+      "destination": "/rawchocolatier/online-lesson",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolate",
+      "destination": "/rawchocolatier/rawchocolate",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolateconcierge",
+      "destination": "/rawchocolatier/rawchocolateconcierge",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatemeister",
+      "destination": "/rawchocolatier/rawchocolatemeister",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatier-course",
+      "destination": "/rawchocolatier/rawchocolatier-course",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatier-online-advanced",
+      "destination": "/rawchocolatier/rawchocolatier-online-advanced",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatier-online-beginner",
+      "destination": "/rawchocolatier/rawchocolatier-online-beginner",
+      "permanent": true
+    },
+    {
+      "source": "/rawchocolatier-online-intermediate",
+      "destination": "/rawchocolatier/rawchocolatier-online-intermediate",
+      "permanent": true
+    },
+    {
+      "source": "/rawpatissier",
+      "destination": "/rawchocolatier/rawpatissier",
+      "permanent": true
+    },
+    {
+      "source": "/rawpatissier-online-beginner",
+      "destination": "/rawchocolatier/rawpatissier-online-beginner",
+      "permanent": true
+    },
+    {
+      "source": "/rawsweets-application",
+      "destination": "/rawchocolatier/rawsweets-application",
+      "permanent": true
+    },
+    {
+      "source": "/whatrawsweets",
+      "destination": "/rawchocolatier/whatrawsweets",
+      "permanent": true
     }
   ]
 }
