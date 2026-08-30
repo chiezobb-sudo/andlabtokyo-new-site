@@ -390,10 +390,13 @@ const allLevels = [...d.levels];
       <h4 class="grad-task">{d.pro.graduation.task1Title}</h4>
       <div class="grads">
         {d.pro.graduation.items.map((g) => (
-          <div class="grad">
-            <h4>{g.name}</h4>
-            <p>{g.body}</p>
-          </div>
+          <figure class="grad">
+            <img src={g.image} alt={g.imageAlt} loading="lazy" decoding="async" />
+            <figcaption>
+              <h4>{g.name}</h4>
+              <p>{g.body}</p>
+            </figcaption>
+          </figure>
         ))}
       </div>
       <p class="note note--light">{d.pro.graduation.task1Note}</p>
@@ -758,8 +761,10 @@ const allLevels = [...d.levels];
   /* ══ 卒業課題 ══ */
   .grad-lead { font-size: 15px; line-height: 2; color: var(--ink-2); max-width: 46em; margin: 0 0 28px; }
   .grad-task { font-size: 14px; font-weight: 700; letter-spacing: .04em; color: var(--amber); margin: 34px 0 16px; }
-  .grads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 8px; }
-  .grad { background: #fff; border: 1px solid var(--line); border-top: 2px solid var(--amber-l); padding: 24px 22px; }
+  .grads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 8px; }
+  .grad { background: #fff; border: 1px solid var(--line); margin: 0; overflow: hidden; min-width: 0; }
+  .grad img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: #EDE8E0; }
+  .grad figcaption { padding: 20px 20px 22px; border-top: 2px solid var(--amber-l); }
   .grad h4 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
   .grad p { font-size: 13px; line-height: 1.9; color: var(--ink-2); margin: 0; }
 
@@ -942,7 +947,8 @@ const allLevels = [...d.levels];
 
   /* ══ レスポンシブ ══ */
   @media (max-width: 900px) {
-    .cards-4, .principles, .steps-4, .cols-3, .voices, .grads { grid-template-columns: repeat(2, 1fr); }
+    .cards-4, .principles, .steps-4, .cols-3, .voices { grid-template-columns: repeat(2, 1fr); }
+    .grads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .sig-grid--5 { grid-template-columns: repeat(3, 1fr); }
     .shin-grid { grid-template-columns: 1fr; }
     .book { grid-template-columns: 190px 1fr; gap: 28px; padding: 28px; }
@@ -957,7 +963,8 @@ const allLevels = [...d.levels];
     .sec { padding: 64px 20px; }
     .hero { height: auto; min-height: 0; max-height: none; padding-top: 58vw; }
     .hero-body { padding: 0 20px 40px; }
-    .cards-4, .principles, .steps-4, .cols-3, .voices, .facts-grid, .grads { grid-template-columns: 1fr; }
+    .cards-4, .principles, .steps-4, .cols-3, .voices, .facts-grid { grid-template-columns: 1fr; }
+    .grads { grid-template-columns: minmax(0, 1fr); }
     .sig-grid--3, .sig-grid--5 { grid-template-columns: repeat(2, 1fr); }
     .fact { border-left: 0; border-top: 1px solid rgba(255,255,255,.13); }
     .fact:first-child { border-top: 0; }

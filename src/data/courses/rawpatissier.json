@@ -418,9 +418,9 @@
           "caption": "絞りのデコレーション／NYカップケーキ"
         },
         {
-          "src": "/images/rawpatissier/adv-plating.jpg",
-          "alt": "いちごとチュイルを添えて皿に盛りつけたロースイーツ",
-          "caption": "デコレーションと盛りつけ"
+          "src": "/images/rawpatissier/adv-pancake.jpg",
+          "alt": "ベリーとクリームを重ねた、乾燥機で作るローパンケーキ",
+          "caption": "ローパンケーキ"
         },
         {
           "src": "/images/rawpatissier/adv-crumble.jpg",
@@ -643,19 +643,27 @@
       "items": [
         {
           "name": "Rawオペラ",
-          "body": "チョコ・コーヒー・アーモンドを幾層にも重ねた王道レイヤーケーキ。"
+          "body": "チョコ・コーヒー・アーモンドを幾層にも重ねた王道レイヤーケーキ。",
+          "image": "/images/rawpatissier/grad-opera.jpg",
+          "imageAlt": "チョコ・コーヒー・アーモンドを4層に重ねたRawオペラの断面"
         },
         {
           "name": "Rawりんごのシブースト",
-          "body": "キャラメリゼ・カスタード・クラストを、焼かずに再現する繊細な一品。"
+          "body": "キャラメリゼ・カスタード・クラストを、焼かずに再現する繊細な一品。",
+          "image": "/images/rawpatissier/grad-chiboust.jpg",
+          "imageAlt": "キャラメリゼ風りんごとシブーストクリームを重ねたRawりんごのシブースト"
         },
         {
           "name": "Rawサントノレ風",
-          "body": "リング状クラストにプチシュー、中心にホイップ。アシェットデセール仕立て。"
+          "body": "リング状クラストにプチシュー、中心にホイップ。アシェットデセール仕立て。",
+          "image": "/images/rawpatissier/grad-sthonore.jpg",
+          "imageAlt": "いちごとホイップを皿に描いたRawサントノレ風のアシェットデセール"
         },
         {
           "name": "自由創作",
-          "body": "オリジナルのロースイーツを制作する。あなたの世界観で。"
+          "body": "オリジナルのロースイーツを制作する。あなたの世界観で。",
+          "image": "/images/rawpatissier/grad-free.jpg",
+          "imageAlt": "いちごとチュイルを添えて皿に盛りつけたオリジナルのロースイーツ"
         }
       ],
       "task1Note": "写真は全体・断面・盛り付けの3枚以上を提出します。",
