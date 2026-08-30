@@ -724,9 +724,99 @@
   "pathway": {
     "eyebrow": "CERTIFICATION PATHWAY",
     "title": "資格取得のロードマップ",
-    "lead": "ロースイーツマイスターから最高峰グレードへ",
-    "image": "/images/rawpatissier/roadmap.jpg",
-    "imageAlt": "ローショコラティエ協会の資格取得ロードマップ。チョコレートトラックとスイーツトラックの2本立て"
+    "lead": "ロースイーツマイスターから、最高峰グレードへ。各ステップから、それぞれの講座ページへ進めます。",
+    "top": {
+      "kicker": "GRAND MASTER · 最高峰",
+      "name": "ローショコラティエ®",
+      "href": "/rawchocolatier/rawchocolatier-course",
+      "note": "▲ 両コースの全課程を修了した方が挑戦できます"
+    },
+    "tracks": [
+      {
+        "tone": "sweets",
+        "label": "Sweets Track ｜ ロースイーツ",
+        "goal": {
+          "name": "ローパティシエ®",
+          "en": "PROFESSIONAL",
+          "current": true
+        },
+        "steps": [
+          {
+            "arrow": "↑ 課題提出",
+            "label": "ローパティシエ®養成講座",
+            "href": "#pro"
+          },
+          {
+            "arrow": "↑",
+            "label": "ロースイーツマイスター認定"
+          }
+        ],
+        "base": {
+          "title": "3ステップ受講（初級 → 中級 → 上級）",
+          "items": [
+            {
+              "name": "初級",
+              "sub": "ジェントル",
+              "href": "#basic"
+            },
+            {
+              "name": "中級",
+              "sub": "コスメ",
+              "href": "#intermediate"
+            },
+            {
+              "name": "上級",
+              "sub": "焼かない",
+              "href": "#advance"
+            }
+          ]
+        }
+      },
+      {
+        "tone": "chocolate",
+        "label": "Chocolate Track ｜ ローチョコレート",
+        "goal": {
+          "name": "ジュニアローショコラティエ",
+          "en": "JUNIOR",
+          "href": "/rawchocolatier/rawchocolatier-course"
+        },
+        "steps": [
+          {
+            "arrow": "↑ 課題提出",
+            "label": "ジュニアローショコラティエ養成講座",
+            "href": "/rawchocolatier/rawchocolatier-course"
+          },
+          {
+            "arrow": "↑",
+            "label": "ローチョコレートマイスター認定"
+          },
+          {
+            "arrow": "↑",
+            "label": "ローチョコレートマイスター",
+            "sub": "理論編・技能編",
+            "href": "/rawchocolatier/rawchocolatemeister",
+            "strong": true
+          }
+        ],
+        "base": {
+          "title": "↑ 任意",
+          "dashed": true,
+          "items": [
+            {
+              "name": "ローチョコレート 1デイワークショップ",
+              "sub": "入口・任意（参加しなくてもマイスターへ進めます）",
+              "href": "/rawchocolatier/15min-chocolate",
+              "wide": true
+            }
+          ]
+        }
+      }
+    ],
+    "notes": [
+      "ロースイーツ側は 初級ジェントル → 中級コスメ → 上級焼かない の3ステップです。",
+      "ローチョコレート側は 全3回（理論編・技能編テキスト）。入口の1デイワークショップは任意です。",
+      "両トラックのマイスター認定 → 養成講座 → プロ認定を経て、最高峰「ローショコラティエ®」へ。"
+    ]
   },
   "association": {
     "eyebrow": "ASSOCIATION",
