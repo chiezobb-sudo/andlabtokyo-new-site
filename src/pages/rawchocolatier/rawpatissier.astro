@@ -1,194 +1,779 @@
 ---
+/**
+ * ローパティシエ®養成講座
+ *
+ * 本文・写真の指定は src/data/courses/rawpatissier.json にある。
+ * このファイルは「見た目」だけを持つ。文言の修正は JSON 側を触れば済む。
+ */
 import Layout from '../../layouts/Layout.astro';
----
-<Layout
-  title="ローパティシエ® 養成講座 | &LAB TOKYO"
-  description="植物性・砂糖不使用のローお菓子を教えるプロへ。ローパティシエ®認定資格取得コース。東京・表参道、オンライン受講可。"
-  canonical="https://www.andlabtokyo.com/rawchocolatier/rawpatissier"
-  ogImage="/images/wix/857257_121b4903b8d34b3a8044ca879a55498d-79b1c08e.jpg"
->
+import FormGate from '../../components/FormGate.astro';
+import d from '../../data/courses/rawpatissier.json';
 
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #1A1715; --bg-2: #1E1B19; --bg-card: #24211E; --bg-dark: #110E0B;
-  --amber: #A8865A; --amber-d: #A8865A;
-  --ink: #FAF5EC; --ink-2: #F3EEE5; --ink-3: #C0B6A8;
-  --divider: rgba(243,238,229,0.12);
-  --fh: 'Cormorant Garamond', serif;
-}
-body { background: var(--bg); color: var(--ink-2); font-family: 'Noto Sans JP', sans-serif; }
-.hero { margin-top: 44px; position: relative; height: 65vh; min-height: 440px; overflow: hidden; display: flex; align-items: flex-end; }
-.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
-.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
-.hero-body { position: relative; z-index: 1; padding: 0 24px 52px; max-width: 860px; margin: 0 auto; width: 100%; }
-.hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
-.hero h1 { font-size: clamp(26px, 4vw, 46px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 16px; }
-.hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; }
-.sec { padding: 72px 24px; }
-.inner { max-width: 860px; margin: 0 auto; }
-.sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
-h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.35; }
-.rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 32px; }
-.body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
-.steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
-.step { background: var(--bg-card); padding: 32px; display: grid; grid-template-columns: 56px 1fr auto; gap: 20px; align-items: start; }
-.step-num { font-family: var(--fh); font-size: 44px; color: var(--amber); font-style: italic; line-height: 1; opacity: .6; }
-.step h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.step p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
-.step-price { font-family: var(--fh); font-size: 24px; color: var(--amber); font-style: italic; white-space: nowrap; text-align: right; flex-shrink: 0; }
-.step-price small { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-style: normal; color: var(--ink-3); margin-top: 4px; }
-.cert-sec { background: var(--bg-dark); }
-.cert-box { background: var(--bg-card); border: 1px solid rgba(198,161,91,0.35); padding: 40px; margin-top: 32px; }
-.cert-box h3 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
-.cert-box p { font-size: 14px; color: var(--ink-3); line-height: 1.85; margin-bottom: 12px; }
-.cert-price { font-family: var(--fh); font-size: 44px; color: var(--amber); font-style: italic; margin-top: 20px; }
-.cert-note { font-size: 12.5px; color: var(--ink-3); line-height: 1.95; margin-top: 18px; }
-.cert-price small { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-style: normal; color: var(--ink-3); margin-left: 8px; }
-.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-top: 32px; }
-.feat { background: var(--bg-card); padding: 24px; }
-.feat h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.feat p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-.formats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 32px; }
-.format { background: var(--bg-card); padding: 28px; }
-.format h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
-.format p { font-size: 14px; color: var(--ink-3); line-height: 1.8; }
-.cta-sec { text-align: center; padding: 80px 24px; background: var(--bg); }
-.cta-sec h2 { font-size: clamp(20px, 3vw, 30px); font-weight: 700; color: var(--ink); margin-bottom: 12px; }
-.cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 36px; }
-.btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 980px; text-decoration: none; transition: background .2s; }
-.btn-primary:hover { background: var(--amber-d); color: #fff; }
-@media (max-width: 640px) {
-  .step { grid-template-columns: 1fr; }
-  .step-price { text-align: left; }
-  .formats { grid-template-columns: 1fr; }
-}
+const site = 'https://www.andlabtokyo.com';
+const url = `${site}/rawchocolatier/rawpatissier`;
+
+/** 改行入りの見出しを <br> に */
+const br = (s: string) => s.split('\n').join('<br>');
+
+/** 構造化データ ── 検索とAI（生成エンジン）の両方に、事実をそのまま渡す */
+const offers = [
+  ...d.levels.map((l) => ({
+    '@type': 'Offer',
+    name: `${l.step.split('· ')[1]} · ${l.label}講座`,
+    price: l.price.replace(/[^0-9]/g, ''),
+    priceCurrency: 'JPY',
+    category: '税別',
+    availability: 'https://schema.org/InStock',
+  })),
+  {
+    '@type': 'Offer',
+    name: 'PRO · ローパティシエ® 養成講座',
+    price: d.pro.price.replace(/[^0-9]/g, ''),
+    priceCurrency: 'JPY',
+    category: '税別',
+    availability: 'https://schema.org/InStock',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Course',
+      '@id': `${url}#course`,
+      name: 'ローパティシエ®養成講座',
+      alternateName: 'ロースイーツマイスター講座',
+      description: d.summary,
+      url,
+      image: `${site}${d.hero.image}`,
+      inLanguage: 'ja',
+      teaches: [
+        'ロースイーツの基礎（混ぜて冷やす技法・5つの固め方）',
+        '砂糖・乳製品・小麦を使わない甘味料の選び方',
+        'ナッツフリーへの置き換えとアレルゲンの考え方',
+        'ローケーキ・レイヤーケーキ・ナッツクラストの技術',
+        '焼かない焼き菓子（多層構成・絞りのデコレーション）',
+        'ロースイーツを教えるための指導力とレシピ開発',
+      ],
+      educationalCredentialAwarded: 'ローパティシエ®（ローショコラティエ協会 認定資格）',
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: '&LAB TOKYO',
+        url: site,
+        sameAs: 'https://www.instagram.com/chie_andlab/',
+      },
+      offers,
+      hasCourseInstance: [
+        {
+          '@type': 'CourseInstance',
+          courseMode: 'onsite',
+          name: '対面レッスン（東京・表参道）',
+          location: {
+            '@type': 'Place',
+            name: '&LAB TOKYO',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '神宮前5-2-11',
+              addressLocality: '渋谷区',
+              addressRegion: '東京都',
+              postalCode: '150-0001',
+              addressCountry: 'JP',
+            },
+          },
+        },
+        {
+          '@type': 'CourseInstance',
+          courseMode: 'online',
+          name: 'オンラインレッスン（全国・海外から受講可）',
+        },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: d.faq.items.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${site}/` },
+        { '@type': 'ListItem', position: 2, name: 'ローショコラティエ協会', item: `${site}/rawchocolatier` },
+        { '@type': 'ListItem', position: 3, name: 'ローパティシエ®養成講座', item: url },
+      ],
+    },
+  ],
+};
+
+const allLevels = [...d.levels];
+---
+
+<Layout
+  title={d.meta.title}
+  description={d.meta.description}
+  canonical={url}
+  ogImage={d.meta.ogImage}
+  type="article"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <img src={d.hero.image} alt={d.hero.imageAlt} width="2000" height="1125" fetchpriority="high" />
+    <div class="hero-veil"></div>
+    <div class="hero-body">
+      <span class="eyebrow eyebrow--light">{d.hero.eyebrow}</span>
+      <h1>
+        <span set:html={br(d.hero.title)} />
+        <span class="h1-sub">{d.hero.subtitle}</span>
+      </h1>
+      <p class="hero-lead">{d.hero.lead}</p>
+      <a href={d.hero.ctaHref} class="btn btn--solid">{d.hero.ctaLabel}</a>
+    </div>
+  </section>
+
+  <!-- 事実の帯：検索でもAIでも、まずここが読まれる -->
+  <section class="facts">
+    <dl class="facts-grid">
+      {d.hero.facts.map((f) => (
+        <div class="fact">
+          <dt>{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- ══════════ WHAT IS RAW SWEETS ══════════ -->
+  <section class="sec sec--linen">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.whatIs.eyebrow}</span>
+        <h2 set:html={br(d.whatIs.title)} />
+        <p class="sec-lead">{d.whatIs.lead}</p>
+      </header>
+      <div class="cards-4">
+        {d.whatIs.cards.map((c) => (
+          <div class="card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="inline-link">
+        <a href={d.whatIs.linkHref}>{d.whatIs.linkLabel} →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════ CONCEPT · シン・リビングフード ══════════ -->
+  <section class="sec sec--cream">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.concept.eyebrow}</span>
+        <h2 set:html={br(d.concept.title)} />
+        <p class="sec-lead">{d.concept.lead}</p>
+      </header>
+      <div class="prose">
+        {d.concept.body.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="formula">
+        <span class="formula-label">{d.concept.formulaLabel}</span>
+        <p class="formula-body">{d.concept.formula}</p>
+      </div>
+      <div class="principles">
+        {d.concept.principles.map((p) => (
+          <div class="principle">
+            <span class="principle-no">{p.no}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="note">{d.concept.note}</p>
+      <p class="signature">{d.concept.signature}</p>
+    </div>
+  </section>
+
+  <!-- ══════════ ROADMAP ══════════ -->
+  <section class="sec sec--linen" id="curriculum">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.roadmap.eyebrow}</span>
+        <h2 set:html={br(d.roadmap.title)} />
+        <p class="sec-lead">{d.roadmap.lead}</p>
+      </header>
+      <div class="steps-4">
+        {allLevels.map((l) => (
+          <a class="step-card" href={`#${l.id}`}>
+            <span class="step-no">{l.no}｜{l.label}</span>
+            <h3>{l.theme}</h3>
+            <p>{l.lead.slice(0, 58)}…</p>
+            <span class="step-price">{l.price}<small>税別</small></span>
+            <span class="step-more">詳しく見る →</span>
+          </a>
+        ))}
+        <a class="step-card step-card--pro" href="#pro">
+          <span class="step-no">{d.pro.no}｜{d.pro.label}</span>
+          <h3>{d.pro.theme}</h3>
+          <p>{d.pro.lead[0].slice(0, 58)}…</p>
+          <span class="step-price">{d.pro.price}<small>税別</small></span>
+          <span class="step-more">詳しく見る →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 各級の詳細 ══════════ -->
+  {allLevels.map((l, i) => (
+    <section class={`sec level ${i % 2 === 0 ? 'sec--cream' : 'sec--linen'}`} id={l.id}>
+      <div class="inner">
+        <header class="level-head">
+          <span class="eyebrow">{l.step}</span>
+          <h2>
+            <span class="theme-badge">{l.label}｜{l.theme}</span>
+            <span set:html={br(l.headline)} />
+          </h2>
+          <p class="sec-lead">{l.lead}</p>
+        </header>
+
+        <div class="level-top">
+          <ul class="ticks">
+            {l.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+          <div class="price-card">
+            <span class="price-card__label">{l.label}講座 受講料</span>
+            <span class="price-card__price">{l.price}<small>（{l.priceNote}）</small></span>
+            <ul class="price-card__specs">
+              {l.specs.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <!-- どんなものを作るのか、写真で -->
+        <h3 class="sub-head">この講座で作るもの</h3>
+        <div class={`gallery gallery--${l.photos.length}`}>
+          {l.photos.map((p) => (
+            <figure class="shot">
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              <figcaption>{p.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div class="lists-2">
+          <div class="list-box">
+            <h3>{l.recipesTitle}</h3>
+            <ul class="dots">{l.recipes.map((r) => <li>{r}</li>)}</ul>
+          </div>
+          <div class="list-box">
+            <h3>{l.textbookTitle}</h3>
+            <ul class="dots dots--muted">{l.textbook.map((r) => <li>{r}</li>)}</ul>
+          </div>
+        </div>
+
+        <div class="outcomes">
+          <h3>{l.outcomesTitle}</h3>
+          <ul class="ticks ticks--2col">
+            {l.outcomes.map((o) => <li>{o}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ══════════ PRO ══════════ -->
+  <section class="sec sec--dark" id="pro">
+    <div class="inner">
+      <header class="level-head">
+        <span class="eyebrow eyebrow--gold">{d.pro.eyebrow}</span>
+        <span class="theme-badge theme-badge--gold">{d.pro.no}｜{d.pro.label}</span>
+        <h2>{d.pro.title}</h2>
+        <p class="sec-lead">{d.pro.subtitle}</p>
+      </header>
+      <div class="prose prose--light">
+        {d.pro.lead.map((p) => <p>{p}</p>)}
+      </div>
+
+      <div class="cols-3">
+        {d.pro.columns.map((c) => (
+          <div class="col">
+            <h3>{c.title}</h3>
+            <ul class="dots dots--light">{c.items.map((i2) => <li>{i2}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="price-card price-card--gold">
+        <span class="price-card__label">PRO · ローパティシエ® 養成講座</span>
+        <span class="price-card__price">{d.pro.price}<small>（{d.pro.priceNote}）</small></span>
+        <ul class="price-card__specs">
+          {d.pro.specs.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+
+      <h3 class="sub-head sub-head--light">{d.pro.forWhomTitle}</h3>
+      <ul class="chips">
+        {d.pro.forWhom.map((w) => <li>{w}</li>)}
+      </ul>
+      <p class="note note--light">{d.pro.nextNote}</p>
+    </div>
+  </section>
+
+  <!-- ══════════ VOICES ══════════ -->
+  <section class="sec sec--linen">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.voices.eyebrow}</span>
+        <h2>{d.voices.title}</h2>
+        <p class="sec-lead">{d.voices.lead}</p>
+      </header>
+      <div class="voices">
+        {d.voices.items.map((v) => (
+          <blockquote class="voice">
+            <p>{v.body}</p>
+            <cite>{v.who}</cite>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PATHWAY ══════════ -->
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.pathway.eyebrow}</span>
+        <h2>{d.pathway.title}</h2>
+        <p class="sec-lead">{d.pathway.lead}</p>
+      </header>
+      <figure class="pathway">
+        <img src={d.pathway.image} alt={d.pathway.imageAlt} loading="lazy" decoding="async" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════ ASSOCIATION ══════════ -->
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.association.eyebrow}</span>
+        <h2>{d.association.title}</h2>
+        <p class="sec-lead">{d.association.subtitle}</p>
+      </header>
+      <div class="prose">
+        {d.association.body.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="benefits">
+        <h3>{d.association.benefitsTitle}</h3>
+        <ul class="ticks ticks--2col">
+          {d.association.benefits.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+      <p class="inline-link">
+        <a href={d.association.linkHref}>{d.association.linkLabel} →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════ PRICING ══════════ -->
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.pricing.eyebrow}</span>
+        <h2>{d.pricing.title}</h2>
+        <p class="sec-lead">{d.pricing.lead}</p>
+      </header>
+      <table class="pricing">
+        <tbody>
+          {d.pricing.rows.map((r) => (
+            <tr>
+              <th scope="row">{r.name}</th>
+              <td>{r.price}<small>税別</small></td>
+            </tr>
+          ))}
+          <tr class="pricing__total">
+            <th scope="row">{d.pricing.totalLabel}</th>
+            <td>{d.pricing.total}<small>{d.pricing.totalNote}</small></td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="notes">
+        {d.pricing.notes.map((n) => <li>{n}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════ FAQ ══════════ -->
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.faq.eyebrow}</span>
+        <h2>{d.faq.title}</h2>
+      </header>
+      <div class="faq">
+        {d.faq.items.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ NEXT STEP ══════════ -->
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow next-step">
+      <span class="eyebrow">{d.next.eyebrow}</span>
+      <h2>{d.next.title}</h2>
+      <p class="sec-lead">{d.next.body}</p>
+      <a href={d.next.linkHref} class="btn btn--outline">{d.next.linkLabel}</a>
+    </div>
+  </section>
+
+  <!-- ══════════ ENTRY ══════════ -->
+  <section class="sec sec--linen" id="entry">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.cta.eyebrow}</span>
+        <h2>{d.cta.title}</h2>
+        <p class="sec-lead">{d.cta.body}</p>
+      </header>
+      <FormGate
+        subject="【ローパティシエ®養成講座】お申し込み・ご相談"
+        mailBody={'お名前：\nご希望コース（初級／中級／上級／プロ養成）：\nご希望の受講形式（対面／オンライン）：\n希望日程（第一〜第三希望）：\nご質問：\n'}
+        class="form-grid"
+      >
+        <label>お名前<span>*</span><input type="text" name="name" required /></label>
+        <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
+        <label>お電話番号<input type="tel" name="tel" /></label>
+        <label>ご希望コース<span>*</span>
+          <select name="course" required>
+            <option value="">選択してください</option>
+            <option>BASIC・初級講座</option>
+            <option>INTERMEDIATE・中級講座</option>
+            <option>ADVANCE・上級講座</option>
+            <option>PRO・ローパティシエ®養成講座</option>
+            <option>全課程</option>
+            <option>まだ決めていない／相談したい</option>
+          </select>
+        </label>
+        <label>ご希望の受講形式
+          <select name="mode">
+            <option value="">選択してください</option>
+            <option>対面（東京・表参道）</option>
+            <option>オンライン</option>
+          </select>
+        </label>
+        <label>希望日程（第一希望）<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
+        <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
+        <button type="submit" class="btn btn--solid">送信する</button>
+      </FormGate>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  body { background: #FAF9F6; }
 </style>
 
-<section class="hero">
-  <img src="/images/wix/857257_121b4903b8d34b3a8044ca879a55498d-79b1c08e.jpg" alt="ローパティシエ養成講座" />
-  <div class="hero-body">
-    <span class="hero-eye">Raw Patissier</span>
-    <h1>ローパティシエ®<br>養成講座</h1>
-    <p class="hero-sub">植物性・砂糖不使用のローお菓子を、プロとして教える力を身につける。</p>
-  </div>
-</section>
+<style>
+  /* ── このページのトーン。黒基調をやめ、明るいリネン地に統一する ── */
+  .hero, .facts, .sec {
+    --linen:  #FAF9F6;
+    --cream:  #F6F2EA;
+    --ink:    #221F1C;   /* 見出し。薄い文字をやめ、しっかり読める濃さに */
+    --ink-2:  #3D3934;   /* 本文 */
+    --ink-3:  #6E6862;   /* 補助。#8C8C8A より濃くしてコントラストを確保 */
+    --amber:  #A8794A;
+    --amber-l:#C6A15B;
+    --line:   rgba(34,31,28,0.12);
+    --sumi:   #221C17;
+    --fh:     'Cormorant Garamond', serif;
+    --fm:     'Shippori Mincho', 'Noto Serif JP', serif;
+  }
 
-<section class="sec" style="background: var(--bg);">
-  <div class="inner">
-    <span class="sec-eye">About</span>
-    <h2>ローお菓子を「教える」<br>プロフェッショナルへ</h2>
-    <div class="rule"></div>
-    <p class="body-text">ローパティシエ®養成講座は、植物性・砂糖不使用・乳製品不使用のローお菓子を教えるための認定資格プログラムです。BASIC・ADVANCE・PROの3ステップで、レシピ力・指導力・ブランディング力を段階的に習得します。</p>
-    <p class="body-text">修了後は「ローパティシエ®認定インストラクター」として、ご自身の教室やオンラインサロンでローお菓子を教えることができます。</p>
-  </div>
-</section>
+  /* ══ HERO ══ */
+  .hero {
+    /* main 側に padding-top:73px（ヘッダー分）が既にある。ここで足すと二重に空く */
+    position: relative;
+    height: 66vh;
+    min-height: 520px;
+    max-height: 720px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+  /* 文字が乗る左下だけを確実に暗く落とす。全面を暗くしないので写真は明るいまま */
+  .hero-veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, rgba(28,22,18,.86) 0%, rgba(28,22,18,.55) 34%, rgba(28,22,18,.06) 68%, transparent 100%),
+      linear-gradient(to right, rgba(28,22,18,.55) 0%, rgba(28,22,18,.12) 52%, transparent 78%);
+  }
+  .hero-body { position: relative; z-index: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 32px 56px; }
+  .hero h1 {
+    font-family: var(--fm);
+    font-size: clamp(28px, 4.2vw, 52px);
+    font-weight: 600;
+    line-height: 1.42;
+    color: #fff;
+    margin: 0 0 20px;
+    text-wrap: balance;
+    text-shadow: 0 2px 20px rgba(0,0,0,.42);
+  }
+  .hero-lead {
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 2;
+    color: rgba(255,255,255,.94);
+    max-width: 40em;
+    margin: 0 0 30px;
+    text-shadow: 0 1px 12px rgba(0,0,0,.5);
+  }
 
-<section class="sec" style="background: var(--bg-2);">
-  <div class="inner">
-    <span class="sec-eye">Curriculum</span>
-    <h2>3ステップ・カリキュラム</h2>
-    <div class="rule"></div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div>
-          <h3>BASIC · 初級講座</h3>
-          <p>シュガーフリー・乳製品不使用・グルテンフリー。ナッツフリーを中心に、特別な道具を使わず作れます。植物性ミルク・チアプディング・フルーツソルベの基本、甘味料の選び方（メープル／デーツ／ドライフルーツ）、ナッツフリーへの置き換えとアレルゲンの考え方。当日作るレシピ8種。</p>
-        </div>
-        <div class="step-price">¥44,000<small>税別・テキスト代込み<br />1日集中 / 対面・オンライン両対応</small></div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div>
-          <h3>INTERMEDIATE · 中級講座</h3>
-          <p>初級で「代用・ナッツを使わない」技術を身につけたら、中級ではナッツを使ったロースイーツへ。基本のローチョコレートケーキ／レイヤーケーキ（2層）、各種プラントベースミルク・ナッツクラスト、カラフル植物色素・フルーツゲルの応用、季節のロースイーツへの変換。全20レシピ。</p>
-        </div>
-        <div class="step-price">¥60,000<small>税別・テキスト代込み<br />1日集中 / 対面・オンライン両対応</small></div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div>
-          <h3>ADVANCE · 上級講座</h3>
-          <p>「焼かない焼き菓子」というローフード独自の世界を深掘り。自家製バニラエクストラクト・各種クリーム、Rawクッキー／パンケーキ／チーズケーキ、多層構成・絞りのデコレーション。カフェや販売に耐えるクオリティへ。卒業課題でオリジナルレシピを開発します。</p>
-        </div>
-        <div class="step-price">¥90,000<small>税別・テキスト代込み<br />全4日間 / 対面・オンライン両対応</small></div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div>
-          <h3>PRO · ローパティシエ® 養成講座</h3>
-          <p>ロースイーツのプロとして活動するための養成講座。認定後は最新レシピテキストの提供と協会ロゴの使用が可能になります。年会費無料。修了後は、さらに上の資格（ジュニアローショコラティエ → ローショコラティエ®）へ進めます。</p>
-        </div>
-        <div class="step-price">¥100,000<small>税別<br />年会費無料</small></div>
-      </div>
-    </div>
-  </div>
-</section>
+  /* ══ 事実の帯 ══ */
+  .facts { background: var(--sumi); padding: 0 32px; }
+  .facts-grid {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .fact { padding: 26px 22px; border-left: 1px solid rgba(255,255,255,.13); }
+  .fact:first-child { border-left: 0; }
+  .fact dt { font-size: 11px; letter-spacing: .16em; color: var(--amber-l); margin-bottom: 8px; }
+  .fact dd { font-size: 15px; color: #F2EDE6; line-height: 1.6; font-weight: 500; }
 
-<section class="sec cert-sec">
-  <div class="inner">
-    <span class="sec-eye">Certification</span>
-    <h2>ローパティシエ® 認定資格</h2>
-    <div class="rule"></div>
-    <div class="cert-box">
-      <h3>全課程 修了後、認定資格が取得できます</h3>
-      <p>認定後はロゴ使用権・教授権・最新テキスト更新・マーケティングサポートが含まれます。ご自身の教室・オンラインサロン・カフェなどで活動できます。</p>
-      <p>「ローパティシエ®」は商標登録済みの称号です。修了者のみが使用できる資格です。</p>
-      <div class="cert-price">¥294,000<small>全課程合計（税別） / 税込 ¥323,400</small></div>
-      <p class="cert-note">※ 表示価格はすべて税別です。別途消費税がかかります。<br />※ 教材費・テキスト代が含まれています。<br />※ お支払いはクレジットカード決済もしくはお振込のみです（分割払いは対応しておりません）。<br />※ オンラインの場合は、材料をご自身でご準備いただきます。<br />※ 料金・内容は予告なく変更される場合があります。</p>
-    </div>
-  </div>
-</section>
+  /* ══ セクション共通 ══ */
+  .sec { padding: 92px 32px; }
+  .sec--linen { background: var(--linen); }
+  .sec--cream { background: var(--cream); }
+  .sec--dark  { background: var(--sumi); }
+  .inner { max-width: 1080px; margin: 0 auto; }
+  .inner--narrow { max-width: 780px; }
 
-<section class="sec" style="background: var(--bg-2);">
-  <div class="inner">
-    <span class="sec-eye">Features</span>
-    <h2>このコースの特徴</h2>
-    <div class="rule"></div>
-    <div class="features">
-      <div class="feat">
-        <h4>完全植物性レシピ</h4>
-        <p>砂糖・乳製品・小麦不使用。アレルギー対応・ヴィーガン対応のお菓子を学ぶ。</p>
-      </div>
-      <div class="feat">
-        <h4>オリジナルテキスト付き</h4>
-        <p>豊富なレシピと理論を収録したオリジナルテキスト付き。</p>
-      </div>
-      <div class="feat">
-        <h4>少人数制</h4>
-        <p>1〜4名の少人数で、丁寧に個別サポートします。</p>
-      </div>
-      <div class="feat">
-        <h4>修了後サポート</h4>
-        <p>認定後もマーケティングサポート・コミュニティへの参加が継続。</p>
-      </div>
-    </div>
-  </div>
-</section>
+  .eyebrow {
+    display: block; font-family: var(--fh);
+    font-size: 12px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 14px;
+  }
+  .eyebrow--light { color: #F0DCC0; text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+  .eyebrow--gold  { color: var(--amber-l); }
 
-<section class="sec" style="background: var(--bg);">
-  <div class="inner">
-    <span class="sec-eye">How to Join</span>
-    <h2>受講形式</h2>
-    <div class="rule"></div>
-    <div class="formats">
-      <div class="format">
-        <h4>対面レッスン</h4>
-        <p>東京・表参道のスタジオで。少人数制・集中形式。道具はすべてご用意しています。</p>
-      </div>
-      <div class="format">
-        <h4>オンラインレッスン</h4>
-        <p>全国・海外からご受講可能。材料はご自身でご用意いただきます。</p>
-      </div>
-    </div>
-  </div>
-</section>
+  .sec-head, .level-head { margin-bottom: 44px; }
+  h2 {
+    font-family: var(--fm);
+    font-size: clamp(24px, 2.9vw, 38px);
+    font-weight: 600; line-height: 1.5; color: var(--ink);
+    margin: 0 0 18px; text-wrap: balance;
+  }
+  .sec--dark h2 { color: #F7F2EA; }
+  .sec-lead { font-size: 16px; line-height: 2; color: var(--ink-2); max-width: 46em; margin: 0; }
+  .sec--dark .sec-lead { color: #D8D0C6; }
 
-<section class="cta-sec">
-  <h2>ローパティシエ®への道へ</h2>
-  <p>お申し込み・ご質問はコンタクトフォームから</p>
-  <a href="/contact" class="btn-primary">お問い合わせ・お申し込み</a>
-</section>
+  .prose p { font-size: 16px; line-height: 2.05; color: var(--ink-2); margin: 0 0 20px; }
+  .prose--light p { color: #D8D0C6; }
 
-</Layout>
+  .note { font-size: 14px; line-height: 1.95; color: var(--ink-3); margin: 28px 0 0; }
+  .note--light { color: #A79C8F; }
+  .signature { font-size: 14px; color: var(--ink-3); margin-top: 12px; }
+
+  .inline-link { margin-top: 30px; }
+  .inline-link a {
+    font-size: 15px; color: var(--amber); text-decoration: none;
+    border-bottom: 1px solid rgba(168,121,74,.4); padding-bottom: 3px;
+  }
+  .inline-link a:hover { border-bottom-color: var(--amber); }
+
+  /* ══ ボタン ══ */
+  .btn {
+    display: inline-block; padding: 15px 40px; font-size: 15px; font-weight: 700;
+    text-decoration: none; border-radius: 2px; letter-spacing: .05em; cursor: pointer;
+    border: 0; font-family: inherit;
+  }
+  .btn--solid { background: var(--amber-l); color: #221C17; }
+  .btn--solid:hover { background: #D6B472; }
+  .btn--outline { background: transparent; color: var(--amber); border: 1px solid var(--amber); }
+  .btn--outline:hover { background: var(--amber); color: #fff; }
+
+  /* ══ 4枚カード ══ */
+  .cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .card { background: #fff; padding: 34px 28px; border-top: 2px solid var(--amber-l); }
+  .card h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
+  .card p { font-size: 14px; line-height: 1.95; color: var(--ink-2); margin: 0; }
+
+  /* ══ シン・リビングフード ══ */
+  .formula { text-align: center; margin: 46px 0; padding: 34px 24px; background: #fff; border: 1px solid var(--line); }
+  .formula-label { display: block; font-family: var(--fh); font-size: 11px; letter-spacing: .3em; color: var(--amber); margin-bottom: 12px; }
+  .formula-body { font-family: var(--fm); font-size: clamp(17px, 2.1vw, 24px); color: var(--ink); margin: 0; line-height: 1.6; }
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 8px; }
+  .principle { border-top: 1px solid var(--line); padding-top: 20px; }
+  .principle-no { font-family: var(--fh); font-size: 13px; letter-spacing: .2em; color: var(--amber); }
+  .principle h3 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--ink); margin: 8px 0 10px; }
+  .principle p { font-size: 13.5px; line-height: 1.95; color: var(--ink-2); margin: 0; }
+
+  /* ══ 4ステップ ══ */
+  .steps-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step-card {
+    display: flex; flex-direction: column; gap: 10px;
+    background: #fff; border: 1px solid var(--line); padding: 28px 24px 24px;
+    text-decoration: none; transition: border-color .2s, transform .2s;
+  }
+  .step-card:hover { border-color: var(--amber-l); transform: translateY(-3px); }
+  .step-card--pro { background: var(--sumi); border-color: var(--sumi); }
+  .step-no { font-size: 12px; letter-spacing: .14em; color: var(--amber); }
+  .step-card--pro .step-no { color: var(--amber-l); }
+  .step-card h3 { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0; }
+  .step-card--pro h3 { color: #F7F2EA; }
+  .step-card p { font-size: 13px; line-height: 1.85; color: var(--ink-2); margin: 0; flex: 1; }
+  .step-card--pro p { color: #C9C0B6; }
+  .step-price { font-family: var(--fh); font-size: 25px; font-style: italic; color: var(--amber); }
+  .step-price small { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-style: normal; color: var(--ink-3); margin-left: 6px; }
+  .step-card--pro .step-price { color: var(--amber-l); }
+  .step-card--pro .step-price small { color: #A79C8F; }
+  .step-more { font-size: 12px; color: var(--amber); letter-spacing: .06em; }
+  .step-card--pro .step-more { color: var(--amber-l); }
+
+  /* ══ 各級 ══ */
+  .h1-sub {
+    display: block; margin-top: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: clamp(12px, 1.1vw, 15px); font-weight: 400; letter-spacing: .08em;
+    color: rgba(255,255,255,.9);
+  }
+
+  .theme-badge {
+    display: inline-block; margin-bottom: 16px; padding: 7px 18px;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--amber); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+  }
+  .theme-badge--gold { background: var(--amber-l); color: #221C17; }
+
+  .level-top { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; margin-bottom: 56px; }
+  .price-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--amber); padding: 28px 26px; }
+  .price-card__label { display: block; font-size: 12px; letter-spacing: .1em; color: var(--ink-3); margin-bottom: 10px; }
+  .price-card__price { display: block; font-family: var(--fh); font-size: 40px; font-style: italic; color: var(--amber); line-height: 1; }
+  .price-card__price small { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-style: normal; color: var(--ink-3); margin-left: 6px; }
+  .price-card__specs { list-style: none; margin: 18px 0 0; padding: 0; }
+  .price-card__specs li { font-size: 13px; color: var(--ink-2); line-height: 2; }
+  .price-card--gold { background: rgba(255,255,255,.06); border-color: rgba(198,161,91,.4); border-top-color: var(--amber-l); margin: 40px 0; }
+  .price-card--gold .price-card__label { color: #A79C8F; }
+  .price-card--gold .price-card__price { color: var(--amber-l); }
+  .price-card--gold .price-card__price small,
+  .price-card--gold .price-card__specs li { color: #C9C0B6; }
+
+  .ticks { list-style: none; margin: 0; padding: 0; }
+  .ticks li { position: relative; padding-left: 26px; font-size: 15px; line-height: 2.05; color: var(--ink-2); margin-bottom: 6px; }
+  /* チェックマーク（矢印に見えないよう縦長にする） */
+  .ticks li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 6px; height: 11px; border-right: 1.7px solid var(--amber); border-bottom: 1.7px solid var(--amber); transform: rotate(42deg); }
+  .ticks--2col { columns: 2; column-gap: 40px; }
+  .ticks--2col li { break-inside: avoid; }
+
+  .sub-head { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0 0 22px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .sub-head--light { color: #F7F2EA; border-bottom-color: rgba(255,255,255,.15); margin-top: 46px; }
+
+  /* ══ 写真グリッド：どんなものを作るのか ══ */
+  .gallery { display: grid; gap: 14px; margin-bottom: 56px; }
+  .gallery--3 { grid-template-columns: repeat(3, 1fr); }
+  .gallery--4 { grid-template-columns: repeat(4, 1fr); }
+  .shot { margin: 0; }
+  .shot img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; background: #EDE8E0; }
+  .shot figcaption { font-size: 13px; line-height: 1.7; color: var(--ink-2); margin-top: 10px; }
+
+  .lists-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-bottom: 52px; }
+  .list-box h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 16px; }
+  .dots { list-style: none; margin: 0; padding: 0; }
+  .dots li { position: relative; padding-left: 18px; font-size: 14.5px; line-height: 1.95; color: var(--ink-2); margin-bottom: 8px; }
+  .dots li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber-l); }
+  .dots--muted li { font-size: 13.5px; color: var(--ink-3); }
+  .dots--light li { color: #C9C0B6; }
+  .dots--light li::before { background: var(--amber-l); }
+
+  .outcomes { background: #fff; border: 1px solid var(--line); padding: 34px 32px; }
+  .outcomes h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 20px; }
+
+  /* ══ PRO ══ */
+  .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 44px; }
+  .col h3 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--amber-l); margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
+  .chips li { border: 1px solid rgba(198,161,91,.42); color: #E4DCD2; font-size: 13.5px; padding: 9px 18px; border-radius: 999px; }
+
+  /* ══ VOICES ══ */
+  .voices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .voice { background: #fff; border: 1px solid var(--line); padding: 30px 28px; margin: 0; position: relative; }
+  .voice::before { content: '“'; position: absolute; top: 8px; left: 18px; font-family: var(--fh); font-size: 46px; color: rgba(198,161,91,.5); line-height: 1; }
+  .voice p { font-size: 14px; line-height: 2; color: var(--ink-2); margin: 14px 0 16px; }
+  .voice cite { font-style: normal; font-size: 12px; letter-spacing: .1em; color: var(--amber); }
+
+  .pathway img { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+
+  .benefits { margin-top: 40px; background: #fff; border: 1px solid var(--line); padding: 32px; }
+  .benefits h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 20px; }
+
+  /* ══ 料金表 ══ */
+  .pricing { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); }
+  .pricing th, .pricing td { padding: 20px 24px; border-bottom: 1px solid var(--line); text-align: left; }
+  .pricing th { font-size: 15px; font-weight: 500; color: var(--ink-2); }
+  .pricing td { text-align: right; font-family: var(--fh); font-size: 26px; font-style: italic; color: var(--amber); white-space: nowrap; }
+  .pricing td small { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-style: normal; color: var(--ink-3); margin-top: 2px; }
+  .pricing__total th { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .pricing__total td { font-size: 34px; color: var(--ink); }
+  .pricing__total th, .pricing__total td { border-bottom: 0; background: #FBF7F0; }
+  .notes { list-style: none; margin: 22px 0 0; padding: 0; }
+  .notes li { font-size: 12.5px; line-height: 1.95; color: var(--ink-3); padding-left: 16px; position: relative; }
+  .notes li::before { content: '※'; position: absolute; left: 0; }
+
+  /* ══ FAQ ══ */
+  .faq details { background: #fff; border: 1px solid var(--line); margin-bottom: 10px; }
+  .faq summary { cursor: pointer; list-style: none; padding: 22px 54px 22px 26px; font-size: 15.5px; font-weight: 500; color: var(--ink); position: relative; line-height: 1.7; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--amber); font-weight: 300; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 0 26px 24px; font-size: 14.5px; line-height: 2.05; color: var(--ink-2); margin: 0; }
+
+  .next-step { text-align: center; }
+  .next-step .sec-lead { margin: 0 auto 30px; }
+
+  /* ══ フォーム ══ */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 22px; }
+  .form-grid :global(label) { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
+  .form-grid :global(label.full) { grid-column: 1 / -1; }
+  .form-grid :global(label span) { color: #B4553E; margin-left: 3px; }
+  .form-grid :global(input),
+  .form-grid :global(select),
+  .form-grid :global(textarea) {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: #fff; border: 1px solid var(--line); padding: 13px 14px; border-radius: 2px;
+  }
+  .form-grid :global(input:focus),
+  .form-grid :global(select:focus),
+  .form-grid :global(textarea:focus) { outline: 2px solid rgba(198,161,91,.55); outline-offset: 1px; }
+  .form-grid :global(button) { grid-column: 1 / -1; justify-self: start; }
+
+  /* ══ レスポンシブ ══ */
+  @media (max-width: 900px) {
+    .cards-4, .principles, .steps-4, .cols-3, .voices { grid-template-columns: repeat(2, 1fr); }
+    .level-top, .lists-2, .form-grid { grid-template-columns: 1fr; }
+    .gallery--3, .gallery--4 { grid-template-columns: repeat(2, 1fr); }
+    .facts-grid { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(3) { border-left: 0; }
+    .ticks--2col { columns: 1; }
+  }
+  @media (max-width: 560px) {
+    .sec { padding: 64px 20px; }
+    .hero { height: auto; min-height: 0; max-height: none; padding-top: 58vw; }
+    .hero-body { padding: 0 20px 40px; }
+    .cards-4, .principles, .steps-4, .cols-3, .voices, .facts-grid { grid-template-columns: 1fr; }
+    .fact { border-left: 0; border-top: 1px solid rgba(255,255,255,.13); }
+    .fact:first-child { border-top: 0; }
+    .gallery--3, .gallery--4 { grid-template-columns: repeat(2, 1fr); }
+    .lists-2 { gap: 32px; }
+    .outcomes, .benefits { padding: 26px 22px; }
+    .pricing th, .pricing td { padding: 16px 14px; }
+    .pricing td { font-size: 22px; }
+    .pricing__total td { font-size: 26px; }
+  }
+</style>
