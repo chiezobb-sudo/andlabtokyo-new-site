@@ -1,182 +1,666 @@
 ---
+/**
+ * 発酵プランナー養成講座
+ *
+ * 本文は Wix の /fermentation からそのまま移設している。
+ * このURLは 3か月 193クリック・3,217表示（サイト3位）で、文言が検索を取っている。
+ * よって文章は変えず、見た目だけ新サイトの体裁に揃える方針（Chie 指示）。
+ *
+ * 文言・写真の指定は src/data/courses/fermentation.json。
+ */
 import Layout from '../layouts/Layout.astro';
----
-<Layout
-  title="発酵とは｜体験レッスン・発酵プランナー資格 | &LAB TOKYO 東京・渋谷"
-  canonical="https://www.andlabtokyo.com/fermentation"
-  ogImage="/images/wix/857257_88d688321f8a46ae9d8342a97f059ecc-fca5033b.jpg"
->
+import FormGate from '../components/FormGate.astro';
+import d from '../data/courses/fermentation.json';
 
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    
-    
-    .hero { margin-top: 44px; position: relative; height: 70vh; min-height: 480px; overflow: hidden; display: flex; align-items: flex-end; }
-    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 60%, transparent 100%); }
-    .hero-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
-    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 14px; }
-    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.7; }
-    .btn-primary { display: inline-block; background: var(--amber); color: #1d1d1f; font-size: 15px; font-weight: 700; padding: 13px 28px; border-radius: 980px; text-decoration: none; transition: background .2s; }
-    .btn-primary:hover { background: var(--amber-d); color: #fff; }
-    .btn-outline { display: inline-block; border: 1.5px solid rgba(255,255,255,.5); color: rgba(255,255,255,.85); font-size: 14px; padding: 12px 24px; border-radius: 980px; text-decoration: none; margin-left: 12px; }
-    .sec { padding: 72px 22px; }
-    .inner { max-width: 860px; margin: 0 auto; }
-    .sec-eye { font-family: var(--fh); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber-d); display: block; margin-bottom: 8px; }
-    h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; color: var(--ink); margin-bottom: 24px; line-height: 1.3; }
-    .body-text { font-size: 16px; color: var(--ink-2); line-height: 1.9; margin-bottom: 16px; }
-    .rule { width: 36px; height: 2px; background: var(--amber); margin: 20px 0 28px; }
-    .what-sec { background: var(--bg-2); }
-    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-    .what-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; }
-    .what-points { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
-    .what-points li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-2); }
-    .what-points li::before { content: '✓'; color: var(--amber-d); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-    .whom-sec { background: var(--bg); }
-    .whom-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; margin-top: 32px; }
-    .whom-item { background: var(--bg-2); padding: 24px; }
-    .whom-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .whom-item p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-    .curriculum-sec { background: var(--bg-2); }
-    .steps { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
-    .step { background: var(--bg); padding: 24px 28px; display: flex; gap: 24px; }
-    .step-num { font-family: var(--fh); font-size: 32px; color: var(--bg-dark); opacity: .15; font-style: italic; flex-shrink: 0; line-height: 1; }
-    .step h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .step p { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-    .faq-sec { background: var(--bg); }
-    .faqs { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
-    .faq { border-bottom: 1px solid var(--divider); padding: 20px 0; }
-    .faq-q { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
-    .faq-q::before { content: 'Q. '; color: var(--amber-d); }
-    .faq-a { font-size: 14px; color: var(--ink-2); line-height: 1.8; padding-left: 20px; }
-    .pricing-sec { background: var(--bg-dark); color: #fff; }
-    .pricing-sec .sec-eye { color: var(--amber); }
-    .pricing-sec h2 { color: #fff; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 32px; }
-    .pricing-card { background: rgba(255,255,255,.06); padding: 28px 24px; border-top: 2px solid rgba(198,161,91,.4); }
-    .pricing-card h4 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .pricing-price { font-size: 24px; font-weight: 700; color: var(--amber); margin-bottom: 12px; }
-    .pricing-card p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.7; }
-    .cta-sec { background: var(--bg); text-align: center; padding: 72px 22px; }
-    .cta-sec h2 { color: var(--ink); margin-bottom: 14px; }
-    .cta-sec p { font-size: 15px; color: var(--ink-3); margin-bottom: 28px; }
-    .btn-dark { display: inline-block; background: var(--ink); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 980px; text-decoration: none; }
-    .cta-note { margin-top: 12px; font-size: 12px; color: var(--ink-3); }
-    
-    
-    @media (max-width: 680px) {
-      .what-grid { grid-template-columns: 1fr; gap: 32px; }
-      .whom-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
+const site = 'https://www.andlabtokyo.com';
+const url = `${site}/fermentation`;
+const br = (s: string) => s.split('\n').join('<br>');
+
+const offers = [
+  ...d.levels.map((l) => ({
+    '@type': 'Offer',
+    name: `${l.title}`,
+    price: l.price.replace(/[^0-9]/g, ''),
+    priceCurrency: 'JPY',
+    category: '税別',
+    availability: 'https://schema.org/InStock',
+  })),
+  {
+    '@type': 'Offer',
+    name: d.soka.title,
+    price: d.soka.price.replace(/[^0-9]/g, ''),
+    priceCurrency: 'JPY',
+    category: '税別',
+    availability: 'https://schema.org/InStock',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Course',
+      '@id': `${url}#course`,
+      name: '発酵プランナー養成講座',
+      description: d.summary,
+      url,
+      image: `${site}${d.hero.image}`,
+      inLanguage: 'ja',
+      teaches: [
+        '発酵の基本と歴史（日本と世界の発酵文化）',
+        '微生物（麹菌・酵母・乳酸菌）の働き',
+        '発酵調味料の基礎と応用（塩麹・甘麹・もろみ醤油）',
+        '麹づくりの基礎（種付け・培養・温度管理）',
+        '酸・糖・塩による発酵制御',
+        '世界の発酵文化と保存食',
+        'うま味のメカニズムと酵素の働き',
+        '黒麹・白麹の比較と温度管理',
+        '酵母・乳酸菌の共生理論',
+        '発酵講座の開講方法（集客・講座設計・SNS活用）',
+      ],
+      educationalCredentialAwarded: '発酵プランナー／発酵創家®（&LAB TOKYO 認定）',
+      datePublished: d.dates.published,
+      dateModified: d.dates.modified,
+      author: { '@id': `${site}/instructor-chie-ando#person` },
+      provider: { '@type': 'EducationalOrganization', name: '&LAB TOKYO', url: site },
+      offers,
+      review: d.voices.items.map((v) => ({
+        '@type': 'Review',
+        reviewBody: v.body,
+        author: { '@type': 'Person', name: v.who },
+        itemReviewed: { '@id': `${url}#course` },
+      })),
+      hasCourseInstance: [
+        {
+          '@type': 'CourseInstance',
+          courseMode: 'onsite',
+          name: '対面レッスン（東京・表参道）',
+          location: {
+            '@type': 'Place',
+            name: '&LAB TOKYO',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '神宮前',
+              addressLocality: '渋谷区',
+              addressRegion: '東京都',
+              addressCountry: 'JP',
+            },
+          },
+        },
+        { '@type': 'CourseInstance', courseMode: 'online', name: 'オンラインレッスン' },
+      ],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site}/instructor-chie-ando#person`,
+      name: '安藤 千英',
+      jobTitle: 'ELLE gourmet 認定クリエイター／発酵創家®',
+      url: `${site}/instructor-chie-ando`,
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      mainEntity: d.faq.items.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${site}/` },
+        { '@type': 'ListItem', position: 2, name: '発酵プランナー養成講座', item: url },
+      ],
+    },
+  ],
+};
+---
+
+<Layout title={d.meta.title} description={d.meta.description} canonical={url} ogImage={d.meta.ogImage} type="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <img src={d.hero.image} alt={d.hero.imageAlt} width="2000" height="1115" fetchpriority="high" />
+    <div class="hero-veil"></div>
+    <div class="hero-body">
+      <span class="eyebrow eyebrow--light">{d.hero.eyebrow}</span>
+      <h1>
+        <span set:html={br(d.hero.title)} />
+        <span class="h1-sub">{d.hero.subtitle}</span>
+      </h1>
+      <p class="hero-lead">{d.hero.lead}</p>
+      <ul class="hero-steps">{d.hero.steps.map((s) => <li>{s}</li>)}</ul>
+      <a href={d.hero.ctaHref} class="btn btn--solid">{d.hero.ctaLabel}</a>
+    </div>
+  </section>
+
+  <section class="facts">
+    <dl class="facts-grid">
+      {d.hero.facts.map((f) => (
+        <div class="fact"><dt>{f.label}</dt><dd>{f.value}</dd></div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- ══ FOR YOU ══ -->
+  <section class="sec sec--linen">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.forYou.eyebrow}</span>
+        <h2>{d.forYou.title}</h2>
+      </header>
+      <div class="cards-3">
+        {d.forYou.cards.map((c) => (
+          <div class="card">
+            <span class="card-en">{c.en}</span>
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="pull">{d.forYou.note}</p>
+    </div>
+  </section>
+
+  <!-- ══ カリキュラム ══ -->
+  <section class="sec sec--cream" id="curriculum">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.curriculum.eyebrow}</span>
+        <h2>{d.curriculum.title}</h2>
+        <p class="sec-lead">{d.curriculum.lead}</p>
+      </header>
+      <p class="flow">{d.curriculum.flow}</p>
+      <div class="steps-4">
+        {d.curriculum.steps.map((s) => (
+          <a class="step-card" href={s.href}>
+            <span class="step-no">{s.no}</span>
+            <h3>{s.label}</h3>
+            <span class="step-verb">{s.verb}</span>
+            <p>{s.body}</p>
+            <span class="step-price">{s.price}<small>税別</small></span>
+            <span class="step-more">詳しく見る →</span>
+          </a>
+        ))}
+      </div>
+      <p class="note">{d.curriculum.note}</p>
+    </div>
+  </section>
+
+  <!-- ══ 各ステップ ══ -->
+  {d.levels.map((l, i) => (
+    <section class={`sec level ${i % 2 === 0 ? 'sec--linen' : 'sec--cream'}`} id={l.id}>
+      <div class="inner">
+        <header class="level-head">
+          <span class="eyebrow">{l.step}</span>
+          <h2>
+            <span class="theme-badge">{l.label}</span>
+            <span class="h2-text">{l.title}</span>
+          </h2>
+          <p class="verb">{l.verb}</p>
+          <p class="sec-lead">{l.lead}</p>
+        </header>
+
+        <div class="level-top">
+          <div class="two">
+            <div class="list-box">
+              <h3>学べること</h3>
+              <ul class="ticks">{l.learn.map((x) => <li>{x}</li>)}</ul>
+            </div>
+            <div class="list-box">
+              <h3>実習レシピ例</h3>
+              <ul class="dots">{l.recipes.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          </div>
+          <div class="price-card">
+            <span class="price-card__label">{l.label}講座 受講料</span>
+            <span class="price-card__price">{l.price}<small>（{l.priceNote}）</small></span>
+            <ul class="price-card__specs">
+              {l.specs.map((s) => <li>{s}</li>)}
+              <li>{l.priceExtra}</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="theme">{l.theme}</p>
+
+        <div class={`gallery gallery--${l.photos.length}`}>
+          {l.photos.map((p) => (
+            <figure class="shot">
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              <figcaption>{p.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div class="after">
+          <h3>修了後には</h3>
+          <p>{l.after}</p>
+        </div>
+
+        <div class="lunch">
+          <h3 class="sub-head">{l.lunchTitle}</h3>
+          <p class="lunch-lead">{l.lunchLead}</p>
+          <ul class="dots dots--2col">{l.lunch.map((x) => <li>{x}</li>)}</ul>
+        </div>
+
+        <div class="book">
+          <figure class="book-cover">
+            <img src={l.book.cover} alt={l.book.coverAlt} loading="lazy" decoding="async" />
+          </figure>
+          <div class="book-body">
+            <span class="book-kicker">TEXTBOOK</span>
+            <h3>{l.book.title}</h3>
+            <p>{l.book.spec}</p>
+            {l.onlineNote && <p class="online-note">※ {l.onlineNote}</p>}
+          </div>
+        </div>
+
+        <div class="outcomes">
+          <h3>{l.label}講座はこんな方に</h3>
+          <ul class="ticks ticks--2col">{l.forWhom.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ══ 短期集中 ══ -->
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <div class="intensive">
+        <h2>{d.intensive.title}</h2>
+        <p class="sec-lead">{d.intensive.body}</p>
+        <div class="intensive-price">
+          <span class="was">{d.intensive.regular}<small>{d.intensive.regularNote}</small></span>
+          <span class="now">{d.intensive.price}<small>{d.intensive.priceNote}</small></span>
+        </div>
+        <p class="note">{d.intensive.extra}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 発酵創家® ══ -->
+  <section class="sec sec--accent" id="soka">
+    <div class="inner">
+      <header class="level-head">
+        <span class="eyebrow">{d.soka.step}</span>
+        <h2>
+          <span class="theme-badge">師範</span>
+          <span class="h2-text">{d.soka.title}</span>
+        </h2>
+        <p class="verb">{d.soka.verb}</p>
+        <p class="sec-lead">{d.soka.lead}</p>
+      </header>
+      <div class="cols-2">
+        {d.soka.columns.map((c) => (
+          <div class="col">
+            <h3>{c.title}</h3>
+            <ul class="ticks">{c.items.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <div class="two two--gap">
+        <div class="list-box">
+          <h3>{d.soka.learnTitle}</h3>
+          <ul class="dots">{d.soka.learn.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div class="list-box">
+          <h3>{d.soka.afterTitle}</h3>
+          <ul class="ticks">{d.soka.after.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+      <div class="price-card">
+        <span class="price-card__label">師範講座 受講料</span>
+        <span class="price-card__price">{d.soka.price}<small>（{d.soka.priceNote}）</small></span>
+        <ul class="price-card__specs">{d.soka.specs.map((s) => <li>{s}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 講師 ══ -->
+  <section class="sec sec--cream">
+    <div class="inner">
+      <div class="teacher">
+        <figure class="teacher-photo">
+          <img src={d.instructor.image} alt={d.instructor.imageAlt} loading="lazy" decoding="async" width="900" height="900" />
+        </figure>
+        <div class="teacher-body">
+          <span class="eyebrow">{d.instructor.eyebrow}</span>
+          <h2>{d.instructor.title}</h2>
+          <p class="teacher-text">{d.instructor.body}</p>
+          <div class="vegan">
+            <h3>{d.vegan.title}</h3>
+            <p>{d.vegan.body}</p>
+          </div>
+          <p class="inline-link"><a href={d.instructor.linkHref}>{d.instructor.linkLabel} →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 受講生の声 ══ -->
+  <section class="sec sec--linen">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">{d.voices.eyebrow}</span>
+        <h2>{d.voices.title}</h2>
+      </header>
+      <div class="voices">
+        {d.voices.items.map((v) => (
+          <blockquote class="voice"><p>{v.body}</p><cite>{v.who}</cite></blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 受講方法 ══ -->
+  <section class="sec sec--cream" id="access">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.access.eyebrow}</span>
+        <h2>{d.access.title}</h2>
+        <p class="sec-lead">{d.access.lead}</p>
+      </header>
+      <div class="access">
+        {d.access.items.map((a) => (
+          <div class="access-card">
+            <h3>{a.title}</h3>
+            <p>{a.body}</p>
+            <ul class="access-tags">{a.tags.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 料金 ══ -->
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.pricing.eyebrow}</span>
+        <h2>{d.pricing.title}</h2>
+      </header>
+      <table class="pricing">
+        <tbody>
+          {d.pricing.rows.map((r) => (
+            <tr>
+              <th scope="row">{r.name}{r.note && <small>{r.note}</small>}</th>
+              <td>{r.price}<small>税別</small></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <ul class="notes">{d.pricing.notes.map((n) => <li>{n}</li>)}</ul>
+      <p class="updated"><time datetime={d.dates.modified}>{d.dates.label}</time><span>この料金は上記時点のものです。</span></p>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.faq.eyebrow}</span>
+        <h2>{d.faq.title}</h2>
+      </header>
+      <div class="faq">
+        {d.faq.items.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 申し込み ══ -->
+  <section class="sec sec--linen" id="entry">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">{d.cta.eyebrow}</span>
+        <h2>{d.cta.title}</h2>
+        <p class="sec-lead">{d.cta.body}</p>
+      </header>
+      <FormGate
+        subject="【発酵プランナー養成講座】お申し込み・ご相談"
+        mailBody={'お名前：\nご希望のステップ（基礎／中級／上級／師範／短期集中）：\nご希望の受講形式（対面／オンライン）：\n希望日程：\nご質問：\n'}
+        class="form-grid"
+      >
+        <label>お名前<span>*</span><input type="text" name="name" required /></label>
+        <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
+        <label>お電話番号<input type="tel" name="tel" /></label>
+        <label>ご希望のステップ<span>*</span>
+          <select name="course" required>
+            <option value="">選択してください</option>
+            <option>Step 1｜基礎（ベーシック）</option>
+            <option>Step 2｜中級（アドバンス）</option>
+            <option>Step 3｜上級（マスター）</option>
+            <option>Step 4｜発酵創家®（師範）</option>
+            <option>短期集中（基礎＋中級・3日間）</option>
+            <option>まだ決めていない／相談したい</option>
+          </select>
+        </label>
+        <label>ご希望の受講形式
+          <select name="mode">
+            <option value="">選択してください</option>
+            <option>対面（東京・表参道）</option>
+            <option>オンライン</option>
+          </select>
+        </label>
+        <label>希望日程<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
+        <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
+        <button type="submit" class="btn btn--solid">送信する</button>
+      </FormGate>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  body { background: #FAF9F6; }
 </style>
 
-<section class="hero">
-    <img src="/images/wix/857257_88d688321f8a46ae9d8342a97f059ecc-fca5033b.jpg" alt="発酵・甘麹" />
-    <div class="hero-body">
-      <span class="hero-eye">Fermentation / Hacco LAB</span>
-      <h1>発酵で、腸から<br />美しさを醸す。</h1>
-      <p class="hero-sub">
-        麹・味噌・醤油。日本が誇る発酵の知恵を、<br />
-        現代の暮らしと美意識に融合させるラボです。
-      </p>
-      <a href="/contact" class="btn-primary">&LAB TOKYOの世界を体験する</a>
-      <a href="#what" class="btn-outline">発酵とは</a>
-    </div>
-  </section>
+<style>
+  .hero, .facts, .sec {
+    --linen:#FAF9F6; --cream:#F6F2EA; --accent:#EFE7D9;
+    --ink:#221F1C; --ink-2:#3D3934; --ink-3:#6E6862;
+    --amber:#A8794A; --amber-l:#C6A15B;
+    --line:rgba(34,31,28,0.12); --sumi:#221C17;
+    --fh:'Cormorant Garamond',serif; --fm:'Shippori Mincho','Noto Serif JP',serif;
+  }
 
-  <section class="sec what-sec" id="what">
-    <div class="inner">
-      <div class="what-grid">
-        <div class="what-img">
-          <img src="/koji.jpg" alt="麹 発酵" />
-        </div>
-        <div>
-          <span class="sec-eye">What is Fermentation</span>
-          <h2>発酵とは</h2>
-          <div class="rule"></div>
-          <p class="body-text">
-            発酵とは、微生物（麹・乳酸菌・酵母など）が食材を分解し、
-            より栄養価が高く・消化しやすく・美味しい状態に変化させるプロセスです。
-          </p>
-          <p class="body-text">
-            日本には古来より、麹・味噌・醤油・甘酒・ぬか漬けなど豊かな発酵文化があります。
-            &LAB TOKYOでは、その深い知恵を現代の暮らしと美意識に合わせて再解釈します。
-          </p>
-          <ul class="what-points">
-            <li>腸内環境が整い、免疫力が高まる</li>
-            <li>栄養素の吸収率が向上する</li>
-            <li>美肌・体重管理・老化予防への効果</li>
-            <li>日本の伝統食文化への深い理解</li>
-            <li>自分でつくる喜びと生活への定着</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  /* HERO */
+  .hero { position: relative; height: 74vh; min-height: 560px; max-height: 780px; display: flex; align-items: flex-end; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+  .hero-veil { position: absolute; inset: 0; background:
+      linear-gradient(to top, rgba(28,22,18,.78) 0%, rgba(28,22,18,.46) 34%, rgba(28,22,18,.06) 70%, transparent 100%),
+      linear-gradient(to right, rgba(28,22,18,.4) 0%, rgba(28,22,18,.1) 52%, transparent 78%); }
+  .hero-body { position: relative; z-index: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 32px 56px; }
+  .hero h1 { font-family: var(--fm); font-size: clamp(30px, 4.6vw, 56px); font-weight: 600; line-height: 1.4; color: #fff; margin: 0 0 18px; text-shadow: 0 2px 18px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.35); }
+  .h1-sub { display: block; margin-top: 14px; font-family: 'Noto Sans JP', sans-serif; font-size: clamp(13px, 1.2vw, 16px); font-weight: 400; letter-spacing: .08em; color: rgba(255,255,255,.94); }
+  .hero-lead { font-size: clamp(14px, 1.15vw, 16px); line-height: 2; color: rgba(255,255,255,.94); max-width: 38em; margin: 0 0 22px; text-shadow: 0 1px 10px rgba(0,0,0,.65); }
+  .hero-steps { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; }
+  .hero-steps li { font-size: 12px; letter-spacing: .06em; color: #fff; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 7px 15px; backdrop-filter: blur(4px); }
 
-  <section class="sec whom-sec">
-    <div class="inner">
-      <span class="sec-eye">For Whom</span>
-      <h2>こんな方におすすめです</h2>
-      <div class="whom-grid">
-        <div class="whom-item"><h4>腸内環境を整えたい方</h4><p>便秘・肌荒れ・免疫力低下を食事から改善したい方に。</p></div>
-        <div class="whom-item"><h4>日本の食文化を深く学びたい方</h4><p>麹・味噌・醤油の仕組みを理解し、実際に作れるようになりたい方に。</p></div>
-        <div class="whom-item"><h4>発酵を仕事・活動に活かしたい方</h4><p>発酵プランナーとして活動したい、レストランや教室で発酵を取り入れたい方に。</p></div>
-        <div class="whom-item"><h4>海外からでも学びたい方</h4><p>オンラインで日本の発酵文化を英語・中国語でも学べます。</p></div>
-      </div>
-    </div>
-  </section>
+  /* 事実の帯 */
+  .facts { background: var(--sumi); padding: 0 32px; }
+  .facts-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .fact { padding: 26px 22px; border-left: 1px solid rgba(255,255,255,.13); }
+  .fact:first-child { border-left: 0; }
+  .fact dt { font-size: 11px; letter-spacing: .16em; color: var(--amber-l); margin-bottom: 8px; }
+  .fact dd { font-size: 15px; color: #F2EDE6; line-height: 1.6; font-weight: 500; }
 
-  <section class="sec curriculum-sec">
-    <div class="inner">
-      <span class="sec-eye">Curriculum</span>
-      <h2>カリキュラム</h2>
-      <div class="steps">
-        <div class="step"><span class="step-num">01</span><div><h4>発酵体験レッスン（1Day）</h4><p>塩麹・甘酒・ビーガンキムチ・味噌から1つ選んで手作り。発酵の世界への入口。¥13,000〜（税込）</p></div></div>
-        <div class="step"><span class="step-num">02</span><div><h4>発酵プランナー基礎講座（BASIC）</h4><p>1日集中。発酵の基本と歴史、麹菌・酵母・乳酸菌の働き、塩麹・甘麹・もろみ醤油など発酵調味料の基礎と応用。¥39,500（税別）</p></div></div>
-        <div class="step"><span class="step-num">03</span><div><h4>発酵プランナー中級講座（ADVANCE）</h4><p>3日集中。麹の種付け・培養・温度管理。自家製味噌・豆板醤・ビーガンキムチ・発酵あんこ。¥120,000（税別）</p></div></div>
-        <div class="step"><span class="step-num">04</span><div><h4>発酵プランナー上級講座（MASTERCLASS）</h4><p>うま味のメカニズムと酵素の働き、黒麹・白麹の比較、酵母と乳酸菌の共生理論。オリジナルの発酵レシピを創作できるように。¥120,000（税別）</p></div></div>
-        <div class="step"><span class="step-num">05</span><div><h4>発酵プランナー師範講座</h4><p>オリジナルカリキュラムで課題に取り組み、単発レッスンを開催できるように。『発酵創家読本』プレゼント。¥100,000</p></div></div>
-        <div class="step"><span class="step-num">06</span><div><h4>Umami &amp; Koji LAB（国際コース）</h4><p>英語対応。海外からの受講生向けに、UMAMIと麹のメカニズムを国際的な視点で解説。</p></div></div>
-      </div>
-    </div>
-  </section>
+  /* セクション共通 */
+  .sec { padding: 92px 32px; }
+  .sec--linen { background: var(--linen); }
+  .sec--cream { background: var(--cream); }
+  .sec--accent { background: var(--accent); }
+  .inner { max-width: 1080px; margin: 0 auto; }
+  .inner--narrow { max-width: 780px; }
+  .eyebrow { display: block; font-family: var(--fh); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+  .eyebrow--light { color: #F0DCC0; text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+  .sec-head, .level-head { margin-bottom: 44px; }
+  h2 { font-family: var(--fm); font-size: clamp(24px, 2.9vw, 38px); font-weight: 600; line-height: 1.5; color: var(--ink); margin: 0 0 18px; text-wrap: balance; }
+  .h2-text { display: block; }
+  .sec-lead { font-size: 16px; line-height: 2; color: var(--ink-2); max-width: 46em; margin: 0; }
+  .verb { font-family: var(--fm); font-size: 18px; color: var(--amber); margin: 0 0 14px; }
+  .note { font-size: 13.5px; line-height: 1.95; color: var(--ink-3); margin: 26px 0 0; }
+  .pull { font-family: var(--fm); font-size: clamp(19px, 2.4vw, 27px); color: var(--ink); text-align: center; margin: 44px 0 0; }
+  .flow { font-size: 14px; letter-spacing: .06em; color: var(--amber); margin: 0 0 28px; }
+  .theme { font-size: 14px; color: var(--ink-3); margin: 0 0 24px; padding-left: 14px; border-left: 2px solid var(--amber-l); }
+  .inline-link { margin-top: 26px; }
+  .inline-link a { font-size: 15px; color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(168,121,74,.4); padding-bottom: 3px; }
 
-  <section class="sec pricing-sec">
-    <div class="inner">
-      <span class="sec-eye">Pricing</span>
-      <h2>料金・形式</h2>
-      <div class="pricing-grid">
-        <div class="pricing-card"><h4>発酵体験レッスン（1Day）</h4><p class="pricing-price">¥13,000〜</p><p>税込／塩麹・甘酒・ビーガンキムチ・味噌<br />所要時間：約1.5〜2.5時間<br />対面（渋谷）／入会費・登録費なし</p></div>
-        <div class="pricing-card"><h4>基礎講座（BASIC）</h4><p class="pricing-price">¥39,500</p><p>税別／テキスト代別途 ¥5,000<br />1日集中講座<br />オンライン開催も可</p></div>
-        <div class="pricing-card"><h4>中級講座（ADVANCE）</h4><p class="pricing-price">¥120,000</p><p>税別／テキスト代別途 ¥5,000<br />3日集中講座<br />オンライン開催も可（発酵機が必要）</p></div>
-        <div class="pricing-card"><h4>上級講座（MASTERCLASS）</h4><p class="pricing-price">¥120,000</p><p>税別／テキスト代別途 ¥5,000<br />オンライン開催も可（発酵機が必要）</p></div>
-        <div class="pricing-card"><h4>師範講座</h4><p class="pricing-price">¥100,000</p><p>オリジナルカリキュラムで課題に取り組みます<br />単発レッスンが開催できるように<br />『発酵創家読本』プレゼント</p></div>
-        <div class="pricing-card"><h4>基礎＋中級 短期集中3日間</h4><p class="pricing-price">¥150,000</p><p>税別／通常 ¥159,500 のところ集中講座割引<br />テキスト代別途 ¥10,000（基礎・中級2冊分）<br />麹を育てるため3日間連続での受講</p></div>
-      </div>
-    </div>
-  </section>
+  .btn { display: inline-block; padding: 15px 40px; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 2px; letter-spacing: .05em; cursor: pointer; border: 0; font-family: inherit; }
+  .btn--solid { background: var(--amber-l); color: #221C17; }
+  .btn--solid:hover { background: #D6B472; }
 
-  <section class="sec faq-sec">
-    <div class="inner">
-      <span class="sec-eye">FAQ</span>
-      <h2>よくあるご質問</h2>
-      <div class="faqs">
-        <div class="faq"><p class="faq-q">発酵の知識がゼロでも大丈夫ですか？</p><p class="faq-a">はい、基礎から丁寧にお伝えします。体験レッスンは知識ゼロの方を前提に設計しています。</p></div>
-        <div class="faq"><p class="faq-q">自宅で発酵食品を作り続けられますか？</p><p class="faq-a">はい。レッスン後も実践できるよう、道具・材料の入手方法から継続のコツまでお伝えします。</p></div>
-        <div class="faq"><p class="faq-q">英語対応はありますか？</p><p class="faq-a">Umami &amp; Koji LABは英語対応しています。海外からの参加者も多数います。</p></div>
-        <div class="faq"><p class="faq-q">発酵プランナー資格とはどのような資格ですか？</p><p class="faq-a">発酵食品の知識・調理技術・指導力を証明する認定資格です。取得後、発酵の専門家として活動できます。</p></div>
-      </div>
-    </div>
-  </section>
+  /* FOR YOU */
+  .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .card { background: #fff; padding: 36px 30px; border-top: 2px solid var(--amber-l); }
+  .card-en { display: block; font-family: var(--fh); font-size: 11px; letter-spacing: .24em; color: var(--amber); margin-bottom: 12px; }
+  .card h3 { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
+  .card p { font-size: 14.5px; line-height: 2; color: var(--ink-2); margin: 0; }
 
-  <section class="cta-sec">
-    <h2>発酵の世界へ、まず一歩。</h2>
-    <p>東京・渋谷またはオンラインで、あなたのペースで。<br />入会費・登録費は一切ありません。</p>
-    <a href="/contact" class="btn-dark">&LAB TOKYOの世界を体験する</a>
-    <p class="cta-note">3日以内にご返信いたします</p>
-  </section>
+  /* 4ステップ */
+  .steps-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+  .step-card { display: flex; flex-direction: column; gap: 9px; background: #fff; border: 1px solid var(--line); padding: 26px 22px 22px; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .step-card:hover { border-color: var(--amber-l); transform: translateY(-3px); }
+  .step-no { font-family: var(--fh); font-size: 12px; letter-spacing: .16em; color: var(--amber); }
+  .step-card h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0; }
+  .step-verb { font-size: 13px; color: var(--amber); }
+  .step-card p { font-size: 13px; line-height: 1.85; color: var(--ink-2); margin: 0; flex: 1; }
+  .step-price { font-family: var(--fh); font-size: 24px; font-style: italic; color: var(--amber); }
+  .step-price small { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-style: normal; color: var(--ink-3); margin-left: 6px; }
+  .step-more { font-size: 12px; color: var(--amber); letter-spacing: .06em; }
 
-</Layout>
+  /* 各ステップ */
+  .theme-badge { display: inline-block; margin-bottom: 16px; padding: 7px 18px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .08em; background: var(--amber); color: #fff; }
+  .level-top { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; margin-bottom: 40px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .two--gap { margin-top: 40px; }
+  .list-box h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 16px; }
+
+  .price-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--amber); padding: 28px 26px; }
+  .price-card__label { display: block; font-size: 12px; letter-spacing: .1em; color: var(--ink-3); margin-bottom: 10px; }
+  .price-card__price { display: block; font-family: var(--fh); font-size: 38px; font-style: italic; color: var(--amber); line-height: 1; }
+  .price-card__price small { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-style: normal; color: var(--ink-3); margin-left: 6px; }
+  .price-card__specs { list-style: none; margin: 18px 0 0; padding: 0; }
+  .price-card__specs li { font-size: 13px; color: var(--ink-2); line-height: 2; }
+
+  .ticks { list-style: none; margin: 0; padding: 0; }
+  .ticks li { position: relative; padding-left: 26px; font-size: 15px; line-height: 2.05; color: var(--ink-2); margin-bottom: 6px; }
+  .ticks li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 6px; height: 11px; border-right: 1.7px solid var(--amber); border-bottom: 1.7px solid var(--amber); transform: rotate(42deg); }
+  .ticks--2col { columns: 2; column-gap: 40px; }
+  .ticks--2col li { break-inside: avoid; }
+  .dots { list-style: none; margin: 0; padding: 0; }
+  .dots li { position: relative; padding-left: 18px; font-size: 14.5px; line-height: 1.95; color: var(--ink-2); margin-bottom: 8px; }
+  .dots li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber-l); }
+  .dots--2col { columns: 2; column-gap: 40px; }
+  .dots--2col li { break-inside: avoid; }
+
+  .sub-head { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+
+  .gallery { display: grid; gap: 14px; margin-bottom: 40px; }
+  .gallery--2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .shot { margin: 0; }
+  .shot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: #EDE8E0; }
+  .shot figcaption { font-size: 13px; line-height: 1.7; color: var(--ink-2); margin-top: 10px; }
+
+  .after { background: #fff; border-left: 3px solid var(--amber); padding: 26px 28px; margin-bottom: 40px; }
+  .after h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
+  .after p { font-size: 15px; line-height: 2; color: var(--ink-2); margin: 0; }
+
+  .lunch { margin-bottom: 40px; }
+  .lunch-lead { font-size: 14.5px; line-height: 2; color: var(--ink-2); margin: 0 0 20px; max-width: 46em; }
+
+  .book { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; background: #fff; border: 1px solid var(--line); padding: 32px; margin-bottom: 40px; }
+  .book-cover { margin: 0; }
+  .book-cover img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(34,28,23,.24); }
+  .book-kicker { display: block; font-family: var(--fh); font-size: 11px; letter-spacing: .3em; color: var(--amber); margin-bottom: 10px; }
+  .book-body h3 { font-family: var(--fm); font-size: 19px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
+  .book-body p { font-size: 14.5px; line-height: 2; color: var(--ink-2); margin: 0 0 12px; }
+  .online-note { font-size: 13px; color: var(--ink-3); }
+
+  .outcomes { background: #fff; border: 1px solid var(--line); padding: 32px; }
+  .outcomes h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 18px; }
+
+  /* 短期集中 */
+  .intensive { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--amber-l); padding: 40px 38px; }
+  .intensive h2 { font-size: clamp(20px, 2.3vw, 27px); }
+  .intensive-price { display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap; margin-top: 26px; }
+  .was { font-family: var(--fh); font-size: 24px; color: var(--ink-3); text-decoration: line-through; }
+  .was small, .now small { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 11.5px; text-decoration: none; color: var(--ink-3); margin-top: 4px; }
+  .now { font-family: var(--fh); font-size: 42px; font-style: italic; color: var(--amber); }
+
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .col h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--amber); margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+  /* 講師 */
+  .teacher { display: grid; grid-template-columns: 300px 1fr; gap: 44px; align-items: start; }
+  .teacher-photo { margin: 0; }
+  .teacher-photo img { width: 100%; height: auto; display: block; }
+  .teacher-text { font-size: 15px; line-height: 2.05; color: var(--ink-2); margin: 0 0 26px; }
+  .vegan { background: #fff; border: 1px solid var(--line); padding: 24px 26px; }
+  .vegan h3 { font-family: var(--fm); font-size: 16px; font-weight: 600; color: var(--ink); margin: 0 0 10px; }
+  .vegan p { font-size: 14px; line-height: 1.95; color: var(--ink-2); margin: 0; }
+
+  .voices { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+  .voice { background: #fff; border: 1px solid var(--line); padding: 28px 24px; margin: 0; position: relative; }
+  .voice::before { content: '“'; position: absolute; top: 6px; left: 16px; font-family: var(--fh); font-size: 44px; color: rgba(198,161,91,.5); line-height: 1; }
+  .voice p { font-size: 13.5px; line-height: 2; color: var(--ink-2); margin: 14px 0 14px; }
+  .voice cite { font-style: normal; font-size: 12px; letter-spacing: .1em; color: var(--amber); }
+
+  .access { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .access-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--amber); padding: 28px 26px; }
+  .access-card h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
+  .access-card p { font-size: 14.5px; line-height: 2; color: var(--ink-2); margin: 0 0 18px; }
+  .access-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+  .access-tags li { font-size: 12px; color: var(--amber); border: 1px solid rgba(168,121,74,.35); border-radius: 999px; padding: 6px 12px; }
+
+  .pricing { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); }
+  .pricing th, .pricing td { padding: 20px 24px; border-bottom: 1px solid var(--line); text-align: left; }
+  .pricing th { font-size: 15px; font-weight: 500; color: var(--ink-2); }
+  .pricing th small { display: block; font-size: 11.5px; color: var(--ink-3); margin-top: 4px; }
+  .pricing td { text-align: right; font-family: var(--fh); font-size: 26px; font-style: italic; color: var(--amber); white-space: nowrap; }
+  .pricing td small { display: block; font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-style: normal; color: var(--ink-3); margin-top: 2px; }
+  .pricing tr:last-child th, .pricing tr:last-child td { border-bottom: 0; }
+  .notes { list-style: none; margin: 22px 0 0; padding: 0; }
+  .notes li { font-size: 12.5px; line-height: 1.95; color: var(--ink-3); padding-left: 16px; position: relative; }
+  .notes li::before { content: '※'; position: absolute; left: 0; }
+  .updated { margin: 22px 0 0; font-size: 12.5px; color: var(--ink-3); }
+  .updated time { color: var(--ink-2); font-weight: 500; margin-right: 10px; }
+
+  .faq details { background: #fff; border: 1px solid var(--line); margin-bottom: 10px; }
+  .faq summary { cursor: pointer; list-style: none; padding: 22px 54px 22px 26px; font-size: 15.5px; font-weight: 500; color: var(--ink); position: relative; line-height: 1.7; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--amber); font-weight: 300; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 0 26px 24px; font-size: 14.5px; line-height: 2.05; color: var(--ink-2); margin: 0; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 22px; }
+  .form-grid :global(label) { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
+  .form-grid :global(label.full) { grid-column: 1 / -1; }
+  .form-grid :global(label span) { color: #B4553E; margin-left: 3px; }
+  .form-grid :global(input), .form-grid :global(select), .form-grid :global(textarea) { font-family: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); padding: 13px 14px; border-radius: 2px; }
+  .form-grid :global(button) { grid-column: 1 / -1; justify-self: start; }
+
+  @media (max-width: 900px) {
+    .cards-3, .steps-4, .voices { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .level-top, .two, .cols-2, .access, .form-grid, .book, .teacher { grid-template-columns: 1fr; gap: 28px; }
+    .book-cover, .teacher-photo { max-width: 220px; }
+  }
+  @media (max-width: 560px) {
+    .sec { padding: 64px 20px; }
+    .hero { height: auto; min-height: 0; max-height: none; padding-top: 62vw; }
+    .hero-body { padding: 0 20px 40px; }
+    .cards-3, .steps-4, .voices, .facts-grid, .gallery--2 { grid-template-columns: 1fr; }
+    .fact { border-left: 0; border-top: 1px solid rgba(255,255,255,.13); }
+    .fact:first-child { border-top: 0; }
+    .ticks--2col, .dots--2col { columns: 1; }
+    .outcomes, .book, .intensive { padding: 26px 22px; }
+    .pricing th, .pricing td { padding: 16px 14px; }
+    .pricing td { font-size: 22px; }
+  }
+</style>
