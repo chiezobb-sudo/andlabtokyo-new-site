@@ -5,46 +5,116 @@
     "description": "ローショコラティエ協会の公式サイト。ローチョコレートマイスター®・ローパティシエ®・ローショコラティエ®など、商標登録済みの資格講座を開設しています。東京・表参道／オンライン受講可。運営 &LAB TOKYO（安藤千英）。",
     "ogImage": "/images/association/hero.jpg"
   },
-  "dates": { "published": "2026-06-09", "modified": "2026-08-31", "label": "最終更新：2026年8月31日" },
+  "dates": {
+    "published": "2026-06-09",
+    "modified": "2026-08-31",
+    "label": "最終更新：2026年8月31日"
+  },
   "summary": "ローショコラティエ協会は、&LAB TOKYO（安藤千英）が運営する任意団体で、ローチョコレートとロースイーツの資格講座を開設しています。認定講座は、ローチョコレートマイスター®、ローショコラティエ®、ローパティシエ®、ジェントルスイーツ（ナッツフリー）、カカオ味噌講座、ローチョコレートコンシェルジュの6つ。すべてのレッスンはオンラインでも受講でき、ヴィーガン対応です。予約はお問い合わせフォームからのフレキシブル予約制です。",
-
   "blocks": [
-    { "type": "hero",
+    {
+      "type": "hero",
       "eyebrow": "RAW CHOCOLATIER ASSOCIATION",
       "title": "ローショコラティエ協会\n公式サイト",
       "subtitle": "運営　&LAB TOKYO",
       "lead": "ローショコラティエ協会へようこそ。当協会は、ロースイーツを極め、さらにローチョコレートの魅力と作る品質、クオリティにこだわった技術を伝えるために資格講座を開設しています。",
-      "image": "/images/association/hero.jpg", "imageW": 2000, "imageH": 1286,
+      "image": "/images/association/hero.jpg",
+      "imageW": 2000,
+      "imageH": 1286,
       "imageAlt": "ベリーを飾ったローチョコレートケーキ",
-      "badges": ["商標登録済みの資格", "全レッスン オンライン可", "全レッスン ヴィーガン対応"],
-      "ctaLabel": "認定講座を見る", "ctaHref": "#courses" },
-
-    { "type": "facts", "items": [
-      { "label": "認定講座", "value": "6コース" },
-      { "label": "運営", "value": "&LAB TOKYO（安藤千英）" },
-      { "label": "受講形式", "value": "東京・表参道／オンライン" },
-      { "label": "予約", "value": "フレキシブル予約制" } ] },
-
-    { "type": "catalog", "tone": "linen", "id": "courses",
+      "badges": [
+        "商標登録済みの資格",
+        "全レッスン オンライン可",
+        "全レッスン ヴィーガン対応"
+      ],
+      "ctaLabel": "認定講座を見る",
+      "ctaHref": "#courses"
+    },
+    {
+      "type": "facts",
+      "items": [
+        {
+          "label": "認定講座",
+          "value": "6コース"
+        },
+        {
+          "label": "運営",
+          "value": "&LAB TOKYO（安藤千英）"
+        },
+        {
+          "label": "受講形式",
+          "value": "東京・表参道／オンライン"
+        },
+        {
+          "label": "予約",
+          "value": "フレキシブル予約制"
+        }
+      ]
+    },
+    {
+      "type": "catalog",
+      "tone": "linen",
+      "id": "courses",
       "eyebrow": "CERTIFICATION",
       "title": "認定講座",
       "lead": "当協会の認定講座とライセンスについて。",
       "items": [
-        { "en": "RAW CHOCOLATE MEISTER", "title": "ローチョコレートマイスター®", "body": "ローチョコレートの基礎・応用・発展。理論編と技術編で体系的に学びます。",
-          "image": "/images/association/meister.jpg", "imageAlt": "型に流したローチョコレートのボンボン", "href": "/rawchocolatier/rawchocolatemeister" },
-        { "en": "RAW CHOCOLATIER", "title": "ローショコラティエ®", "body": "Rawで作るスイーツ＆チョコレートのプロフェッショナル。最高峰の称号です。",
-          "image": "/images/association/chocolatier.jpg", "imageAlt": "並べられたローチョコレート", "href": "/rawchocolatier/rawchocolatier-course" },
-        { "en": "RAW PÂTISSIER", "title": "ローパティシエ®", "body": "ロースイーツの基礎・応用・発展。初級・中級・上級・プロの4ステップ。",
-          "image": "/images/association/patissier.jpg", "imageAlt": "ベリーを飾ったローケーキ", "href": "/rawchocolatier/rawpatissier" },
-        { "en": "GENTLE RAW SWEETS", "title": "ジェントルスイーツ", "body": "ナッツフリー・アレルギーにも対応できるロースイーツ。初級講座に統合されています。",
-          "image": "/images/association/gentle.jpg", "imageAlt": "花を飾ったやさしい色合いのロースイーツ", "href": "/rawchocolatier/nutfreerawsweets" },
-        { "en": "CACAO MISO", "title": "カカオ味噌講座", "body": "カカオ豆を使用したオリジナル味噌づくり。発酵とカカオが出会う講座です。",
-          "image": "/images/association/cacao-miso.jpg", "imageAlt": "カカオ豆と発酵の材料", "href": "/fermentation/cacao-miso" },
-        { "en": "RAW CHOCOLATE CONCIERGE", "title": "ローチョコレートコンシェルジュ", "body": "ビーンズトゥバーチョコレート体験。作る人ではなく、伝える人へ。",
-          "image": "/images/association/concierge.jpg", "imageAlt": "カカオ豆から仕上げたローチョコレート", "href": "/rawchocolatier/rawchocolateconcierge" } ],
-      "linkLabel": "レッスンのお申し込みはこちらから", "linkHref": "/contact" },
-
-    { "type": "prose", "tone": "cream", "wide": true,
+        {
+          "en": "RAW CHOCOLATE MEISTER",
+          "title": "ローチョコレートマイスター®",
+          "body": "ローチョコレートの基礎・応用・発展。理論編と技術編で体系的に学びます。",
+          "image": "/images/association/meister.jpg",
+          "imageAlt": "型に流したローチョコレートのボンボン",
+          "href": "/rawchocolatier/rawchocolatemeister"
+        },
+        {
+          "en": "RAW CHOCOLATIER",
+          "title": "ローショコラティエ®",
+          "body": "Rawで作るスイーツ＆チョコレートのプロフェッショナル。最高峰の称号です。",
+          "image": "/images/association/chocolatier.jpg",
+          "imageAlt": "並べられたローチョコレート",
+          "href": "/rawchocolatier/rawchocolatier-course"
+        },
+        {
+          "en": "RAW PÂTISSIER",
+          "title": "ローパティシエ®",
+          "body": "ロースイーツの基礎・応用・発展。初級・中級・上級・プロの4ステップ。",
+          "image": "/images/association/patissier.jpg",
+          "imageAlt": "ベリーを飾ったローケーキ",
+          "href": "/rawchocolatier/rawpatissier"
+        },
+        {
+          "en": "GENTLE RAW SWEETS",
+          "title": "ジェントルスイーツ",
+          "body": "ナッツフリー・アレルギーにも対応できるロースイーツ。初級講座に統合されています。",
+          "image": "/images/association/gentle.jpg",
+          "imageAlt": "花を飾ったやさしい色合いのロースイーツ",
+          "href": "/rawchocolatier/nutfreerawsweets"
+        },
+        {
+          "en": "CACAO MISO",
+          "title": "カカオ味噌講座",
+          "body": "カカオ豆を使用したオリジナル味噌づくり。発酵とカカオが出会う講座です。",
+          "image": "/images/association/cacao-miso.jpg",
+          "imageAlt": "カカオ豆と発酵の材料",
+          "href": "/fermentation/cacao-miso"
+        },
+        {
+          "en": "RAW CHOCOLATE CONCIERGE",
+          "title": "ローチョコレートコンシェルジュ",
+          "body": "ビーンズトゥバーチョコレート体験。作る人ではなく、伝える人へ。",
+          "image": "/images/association/concierge.jpg",
+          "imageAlt": "カカオ豆から仕上げたローチョコレート",
+          "href": "/rawchocolatier/rawchocolateconcierge"
+        }
+      ],
+      "linkLabel": "レッスンのお申し込みはこちらから",
+      "linkHref": "/contact"
+    },
+    {
+      "type": "prose",
+      "tone": "cream",
+      "wide": true,
       "eyebrow": "WHAT'S RAW CHOCOLATE",
       "title": "ローチョコレートとは",
       "body": [
@@ -53,71 +123,195 @@
         "白砂糖や乳製品を一切使わず、未精製の自然な甘さだけで仕上げる。それは単なるヴィーガンや美容目的という枠を超えた、誰もが心から感動できるプロ品質の味覚です。",
         "&LAB TOKYO では、ローチョコレートを「ただ美味しいスイーツ」で終わらせません。カカオの生態、発酵のメカニズム、そして緻密な温度管理の理論まで。レシピに依存しない本物の知識と技術を、東京・表参道とオンラインで体系的にお伝えします。"
       ],
-      "linkLabel": "ローチョコレートとは、をもっと詳しく読む", "linkHref": "/rawchocolatier/rawchocolate" },
-
-    { "type": "cards", "tone": "linen",
-      "eyebrow": "CACAO",
-      "title": "カカオという素材",
+      "linkLabel": "ローチョコレートとは、をもっと詳しく読む",
+      "linkHref": "/rawchocolatier/rawchocolate"
+    },
+    {
+      "type": "cards",
+      "tone": "linen",
+      "eyebrow": "WHY",
+      "title": "「食べる美容液」と呼ばれる理由。",
       "items": [
-        { "en": "POLYPHENOL", "title": "抗酸化成分を含む", "body": "カカオには、抗酸化作用をもつポリフェノールが多く含まれます。ポリフェノールは熱に弱いとされるため、私たちは高温焙煎をしない製法を選んでいます。" },
-        { "en": "FERMENTED", "title": "発酵から生まれる", "body": "カカオ豆は、収穫後に発酵の工程を経て、あの香りになります。チョコレートは、もともと発酵食品でもあります。" },
-        { "en": "UNREFINED", "title": "未精製の甘さで", "body": "白砂糖も乳製品も使いません。メープル、デーツ、ココナッツシュガーなど、素材がもともと持っている甘さだけで仕上げます。" } ],
-      "note": "「食べる美容液」と呼ばれるのは、その素材の力と、一粒で満ちる濃さから。" },
-
-    { "type": "news", "tone": "cream",
+        {
+          "en": "NOT ROASTED",
+          "title": "カカオは、果実だった。",
+          "body": "発酵を経て生まれる果実。私たちが避けているのは、110〜150℃の高温焙煎だけです。焼かなければ、果実だったころの香りが残ります。"
+        },
+        {
+          "en": "NO SUGAR",
+          "title": "甘いものを、あきらめない。",
+          "body": "白砂糖も乳製品も使いません。メープル、デーツ、ココナッツシュガー。素材がもともと持っている甘さだけで、ここまで来られます。"
+        },
+        {
+          "en": "ONE PIECE",
+          "title": "一粒で、満ちる。",
+          "body": "カカオには、抗酸化作用をもつポリフェノールが含まれます。濃いから、少しで足りる。「食べる美容液」と呼ばれるのは、そこからです。"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "tone": "cream",
       "eyebrow": "NEWS",
       "title": "お知らせ",
       "items": [
-        { "date": "2026.08.15", "text": "ローチョコレートマイスター講座 リニューアルのお知らせ" },
-        { "date": "2026.08.15", "text": "ローパティシエ講座 リニューアルのお知らせ" },
-        { "date": "2025.10.03", "text": "ローチョコレートマイスター認定インストラクターからの名称変更と、ローパティシエクラス編成のお知らせ" },
-        { "date": "2025.10.03", "text": "材料費高騰による価格変更のお知らせ" },
-        { "date": "2025.07.20", "text": "雑誌 veggy（ベジィ）vol.101 / 2025年8月号 掲載" },
-        { "date": "2025.06.18", "text": "書籍『&RAW LIVING』発売" } ] },
-
-    { "type": "catalog", "tone": "linen",
+        {
+          "date": "2026.08.15",
+          "text": "ローチョコレートマイスター講座 リニューアルのお知らせ"
+        },
+        {
+          "date": "2026.08.15",
+          "text": "ローパティシエ講座 リニューアルのお知らせ"
+        },
+        {
+          "date": "2025.10.03",
+          "text": "ローチョコレートマイスター認定インストラクターからの名称変更と、ローパティシエクラス編成のお知らせ"
+        },
+        {
+          "date": "2025.10.03",
+          "text": "材料費高騰による価格変更のお知らせ"
+        },
+        {
+          "date": "2025.07.20",
+          "text": "雑誌 veggy（ベジィ）vol.101 / 2025年8月号 掲載"
+        },
+        {
+          "date": "2025.06.18",
+          "text": "書籍『&RAW LIVING』発売"
+        }
+      ]
+    },
+    {
+      "type": "catalog",
+      "tone": "linen",
       "eyebrow": "ALSO",
       "title": "気軽に体験できるレッスン",
       "items": [
-        { "en": "15 MINUTES", "title": "賞味期限15分のチョコレート", "body": "できたてでしか味わえない、15分だけのローチョコレート。",
-          "image": "/images/association/15min.jpg", "imageAlt": "仕上げたばかりのローチョコレート", "href": "/rawchocolatier/15min-chocolate" },
-        { "en": "FOR KIDS", "title": "キッズビーガンパティシエ", "body": "子どもたちが自分の手で作る、砂糖を使わないお菓子の時間。",
-          "image": "/images/association/kids.jpg", "imageAlt": "コック帽をかぶって料理をする子どもたち", "href": "/rawchocolatier/kidsveganpatissier" },
-        { "en": "ONLINE", "title": "オンラインレッスンについて", "body": "全国・海外から受講できます。進め方と必要な道具をご案内します。",
-          "image": "/images/association/tempering.jpg", "imageAlt": "テンパリング作業の様子", "href": "/rawchocolatier/online-lesson" } ] },
-
-    { "type": "spec", "tone": "cream",
+        {
+          "en": "15 MINUTES",
+          "title": "賞味期限15分のチョコレート",
+          "body": "できたてでしか味わえない、15分だけのローチョコレート。",
+          "image": "/images/association/15min.jpg",
+          "imageAlt": "仕上げたばかりのローチョコレート",
+          "href": "/rawchocolatier/15min-chocolate"
+        },
+        {
+          "en": "FOR KIDS",
+          "title": "キッズビーガンパティシエ",
+          "body": "子どもたちが自分の手で作る、砂糖を使わないお菓子の時間。",
+          "image": "/images/association/kids.jpg",
+          "imageAlt": "コック帽をかぶって料理をする子どもたち",
+          "href": "/rawchocolatier/kidsveganpatissier"
+        },
+        {
+          "en": "ONLINE",
+          "title": "オンラインレッスンについて",
+          "body": "全国・海外から受講できます。進め方と必要な道具をご案内します。",
+          "image": "/images/association/tempering.jpg",
+          "imageAlt": "テンパリング作業の様子",
+          "href": "/rawchocolatier/online-lesson"
+        }
+      ]
+    },
+    {
+      "type": "spec",
+      "tone": "cream",
       "eyebrow": "RESERVE",
       "title": "予約と受講方法",
       "rows": [
-        { "k": "ご予約", "v": "お問い合わせフォームからお願いします。レッスンの日程はフレキシブル予約となりますので、ご希望の日程を何日かピックアップしていただき、調整のうえご案内となります。" },
-        { "k": "受講方法", "v": "対面もしくはオンライン受講。受講の前に座学講座をご受講いただき、レッスン当日は実技に集中します。" },
-        { "k": "会場", "v": "東京都渋谷区神宮前。神宮前・表参道・青山・千駄ヶ谷からアクセスできます。詳しい会場はお申し込み後にご案内いたします。" },
-        { "k": "お食事対応", "v": "全てのレッスンがヴィーガン対応です。" } ] },
-
-    { "type": "catalog", "tone": "linen",
+        {
+          "k": "ご予約",
+          "v": "お問い合わせフォームからお願いします。レッスンの日程はフレキシブル予約となりますので、ご希望の日程を何日かピックアップしていただき、調整のうえご案内となります。"
+        },
+        {
+          "k": "受講方法",
+          "v": "対面もしくはオンライン受講。受講の前に座学講座をご受講いただき、レッスン当日は実技に集中します。"
+        },
+        {
+          "k": "会場",
+          "v": "東京都渋谷区神宮前。神宮前・表参道・青山・千駄ヶ谷からアクセスできます。詳しい会場はお申し込み後にご案内いたします。"
+        },
+        {
+          "k": "お食事対応",
+          "v": "全てのレッスンがヴィーガン対応です。"
+        }
+      ]
+    },
+    {
+      "type": "catalog",
+      "tone": "linen",
       "eyebrow": "KNOWLEDGE",
       "title": "知る・学ぶ",
       "items": [
-        { "en": "WHAT'S RAW CHOCOLATE", "title": "ローチョコレートとは", "body": "高温焙煎をしないという選択。カカオの生態と製法から。",
-          "image": "/images/association/bean.jpg", "imageAlt": "カカオ豆とローチョコレート", "href": "/rawchocolatier/rawchocolate" },
-        { "en": "WHAT'S RAW SWEETS", "title": "ロースイーツとは", "body": "体に優しい、砂糖・小麦粉不使用のスイーツ。",
-          "image": "/images/association/patissier.jpg", "imageAlt": "ベリーのローケーキ", "href": "/rawchocolatier/whatrawsweets" },
-        { "en": "ASSOCIATION", "title": "協会概要・商標について", "body": "ローショコラティエ協会の成り立ちと、登録商標について。",
-          "image": "/images/association/chocolatier.jpg", "imageAlt": "並べられたローチョコレート", "href": "/rawchocolatier/about-association" } ] },
-
-    { "type": "faq", "tone": "cream", "items": [
-      { "q": "ローショコラティエ協会とは何ですか？", "a": "&LAB TOKYO（安藤千英）が運営する任意団体で、ローチョコレートとロースイーツの認定資格の名称および認定制度の呼称です。法人ではありません。ローショコラティエ®・ローチョコレートマイスター®・ローパティシエ®は登録商標です。" },
-      { "q": "どの講座から始めればよいですか？", "a": "ロースイーツが初めての方はロースイーツマイスター初級（ジェントルスイーツ）、ローチョコレートに興味がある方はローチョコレートコンシェルジュか賞味期限15分のチョコレートの体験から始める方が多いです。どちらの道からでも、最終的にローショコラティエ®を目指せます。" },
-      { "q": "予約はどうすればよいですか？", "a": "お問い合わせフォームからご連絡ください。フレキシブル予約制のため、ご希望の日程を何日かお知らせいただき、調整のうえご案内します。" },
-      { "q": "オンラインでも受講できますか？", "a": "全てのレッスンがオンラインで受講可能です。受講の前に座学講座を受けていただき、レッスン当日は実技に集中する形です。オンラインの場合、材料はご自身でご準備いただきます。" },
-      { "q": "ヴィーガンやアレルギーに対応していますか？", "a": "全てのレッスンがヴィーガン対応です。アレルギーについては、お申し込み後のヒアリングでお伺いし、可能な範囲で代用レシピをご用意します。ナッツフリーに特化した内容はジェントルスイーツで学べます。" } ] },
-
-    { "type": "cta", "tone": "linen",
+        {
+          "en": "WHAT'S RAW CHOCOLATE",
+          "title": "ローチョコレートとは",
+          "body": "高温焙煎をしないという選択。カカオの生態と製法から。",
+          "image": "/images/association/bean.jpg",
+          "imageAlt": "カカオ豆とローチョコレート",
+          "href": "/rawchocolatier/rawchocolate"
+        },
+        {
+          "en": "WHAT'S RAW SWEETS",
+          "title": "ロースイーツとは",
+          "body": "体に優しい、砂糖・小麦粉不使用のスイーツ。",
+          "image": "/images/association/patissier.jpg",
+          "imageAlt": "ベリーのローケーキ",
+          "href": "/rawchocolatier/whatrawsweets"
+        },
+        {
+          "en": "ASSOCIATION",
+          "title": "協会概要・商標について",
+          "body": "ローショコラティエ協会の成り立ちと、登録商標について。",
+          "image": "/images/association/chocolatier.jpg",
+          "imageAlt": "並べられたローチョコレート",
+          "href": "/rawchocolatier/about-association"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "tone": "cream",
+      "items": [
+        {
+          "q": "ローショコラティエ協会とは何ですか？",
+          "a": "&LAB TOKYO（安藤千英）が運営する任意団体で、ローチョコレートとロースイーツの認定資格の名称および認定制度の呼称です。法人ではありません。ローショコラティエ®・ローチョコレートマイスター®・ローパティシエ®は登録商標です。"
+        },
+        {
+          "q": "どの講座から始めればよいですか？",
+          "a": "ロースイーツが初めての方はロースイーツマイスター初級（ジェントルスイーツ）、ローチョコレートに興味がある方はローチョコレートコンシェルジュか賞味期限15分のチョコレートの体験から始める方が多いです。どちらの道からでも、最終的にローショコラティエ®を目指せます。"
+        },
+        {
+          "q": "予約はどうすればよいですか？",
+          "a": "お問い合わせフォームからご連絡ください。フレキシブル予約制のため、ご希望の日程を何日かお知らせいただき、調整のうえご案内します。"
+        },
+        {
+          "q": "オンラインでも受講できますか？",
+          "a": "全てのレッスンがオンラインで受講可能です。受講の前に座学講座を受けていただき、レッスン当日は実技に集中する形です。オンラインの場合、材料はご自身でご準備いただきます。"
+        },
+        {
+          "q": "ヴィーガンやアレルギーに対応していますか？",
+          "a": "全てのレッスンがヴィーガン対応です。アレルギーについては、お申し込み後のヒアリングでお伺いし、可能な範囲で代用レシピをご用意します。ナッツフリーに特化した内容はジェントルスイーツで学べます。"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "tone": "linen",
       "title": "レッスンのお申し込み・ご相談",
       "body": "ご希望の日程を何日かお知らせください。調整のうえご案内いたします。",
       "subject": "【ローショコラティエ協会】レッスンお申し込み・ご相談",
       "mailBody": "お名前：\nご希望の講座：\nご希望の受講形式（対面／オンライン）：\n希望日程（3つほど）：\nご質問：\n",
-      "options": ["ローチョコレートマイスター®", "ローショコラティエ®", "ローパティシエ®", "ジェントルスイーツ（ナッツフリー）", "カカオ味噌講座", "ローチョコレートコンシェルジュ", "賞味期限15分のチョコレート", "キッズビーガンパティシエ"] }
+      "options": [
+        "ローチョコレートマイスター®",
+        "ローショコラティエ®",
+        "ローパティシエ®",
+        "ジェントルスイーツ（ナッツフリー）",
+        "カカオ味噌講座",
+        "ローチョコレートコンシェルジュ",
+        "賞味期限15分のチョコレート",
+        "キッズビーガンパティシエ"
+      ]
+    }
   ]
 }
