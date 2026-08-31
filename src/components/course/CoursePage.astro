@@ -1,0 +1,369 @@
+---
+/**
+ * 講座ページの共通テンプレート（ブロック型）
+ *
+ * data.blocks に並べた順で描画する。以降の講座ページは
+ * 「Wix の文章を JSON に入れて、このコンポーネントに渡すだけ」で作れる。
+ *
+ * 使えるブロック:
+ *   hero / facts / cards / steps / level / gallery / prose / spec
+ *   pricing / voices / instructor / access / faq / next / cta
+ *
+ * 配色・字の濃さは src/styles/course.css に集約（黒背景は使わない）。
+ */
+import FormGate from '../FormGate.astro';
+import '../../styles/course.css';
+
+const { data: d } = Astro.props as { data: any };
+const br = (s: string) => (s ?? '').split('\n').join('<br>');
+const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
+---
+
+{d.blocks.map((b: any, bi: number) => {
+  const cls = b.tone ? `sec--${b.tone}` : tone(bi);
+
+  if (b.type === 'hero') return (
+    <section class="hero">
+      <img src={b.image} alt={b.imageAlt} width={b.imageW ?? 2000} height={b.imageH ?? 1200} fetchpriority="high" />
+      <div class="hero-veil"></div>
+      <div class="hero-body">
+        {b.eyebrow && <span class="eyebrow eyebrow--light">{b.eyebrow}</span>}
+        <h1>
+          <span set:html={br(b.title)} />
+          {b.subtitle && <span class="h1-sub">{b.subtitle}</span>}
+        </h1>
+        {b.lead && <p class="hero-lead">{b.lead}</p>}
+        {b.badges && <ul class="hero-steps">{b.badges.map((x: string) => <li>{x}</li>)}</ul>}
+        {b.ctaLabel && <a href={b.ctaHref} class="btn btn--solid">{b.ctaLabel}</a>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'facts') return (
+    <section class="facts">
+      <dl class="facts-grid">
+        {b.items.map((f: any) => (<div class="fact"><dt>{f.label}</dt><dd>{f.value}</dd></div>))}
+      </dl>
+    </section>
+  );
+
+  if (b.type === 'cards') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class="cards-3">
+          {b.items.map((c: any) => (
+            <div class="card">
+              {c.en && <span class="card-en">{c.en}</span>}
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
+        {b.note && <p class="pull">{b.note}</p>}
+        {b.linkHref && <p class="inline-link"><a href={b.linkHref}>{b.linkLabel} →</a></p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'steps') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class={b.items.length === 3 ? 'steps-3' : 'steps-4'}>
+          {b.items.map((s: any) => (
+            <a class="step-card" href={s.href}>
+              <span class="step-no">{s.no}</span>
+              <h3>{s.label}</h3>
+              {s.verb && <span class="step-verb">{s.verb}</span>}
+              <p>{s.body}</p>
+              {s.price && <span class="step-price">{s.price}<small>税別</small></span>}
+              <span class="step-more">詳しく見る →</span>
+            </a>
+          ))}
+        </div>
+        {b.note && <p class="note">{b.note}</p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'level') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="level-head">
+          {b.step && <span class="eyebrow">{b.step}</span>}
+          <h2>
+            {b.badge && <span class="theme-badge">{b.badge}</span>}
+            <span class="h2-text" set:html={br(b.title)} />
+          </h2>
+          {b.verb && <p class="verb">{b.verb}</p>}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+
+        {(b.lists || b.price) && (
+          <div class="level-top">
+            <div class={b.lists && b.lists.length > 1 ? 'two' : ''}>
+              {(b.lists ?? []).map((l: any) => (
+                <div class="list-box">
+                  <h3>{l.title}</h3>
+                  <ul class={l.style === 'tick' ? 'ticks' : 'dots'}>{l.items.map((x: string) => <li>{x}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+            {b.price && (
+              <div class="price-card">
+                <span class="price-card__label">{b.priceLabel}</span>
+                <span class="price-card__price">{b.price}<small>（{b.priceNote ?? '税別'}）</small></span>
+                <ul class="price-card__specs">{(b.specs ?? []).map((s: string) => <li>{s}</li>)}</ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        {b.theme && <p class="theme">{b.theme}</p>}
+
+        {b.photos && (
+          <div class={`gallery gallery--${b.photos.length}`}>
+            {b.photos.map((p: any) => (
+              <figure class="shot">
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+                {p.caption && <figcaption>{p.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+
+        {b.after && (
+          <div class="after"><h3>{b.afterTitle ?? '修了後には'}</h3><p>{b.after}</p></div>
+        )}
+
+        {b.boxes && (
+          <div class="two">
+            {b.boxes.map((o: any) => (
+              <div class="outcomes">
+                <h3>{o.title}</h3>
+                <ul class={o.style === 'dot' ? 'dots' : 'ticks'}>{o.items.map((x: string) => <li>{x}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'gallery') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class={`gallery gallery--${b.photos.length}`}>
+          {b.photos.map((p: any) => (
+            <figure class="shot">
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              {p.caption && <figcaption>{p.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  if (b.type === 'prose') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class={b.wide ? 'inner' : 'inner inner--narrow'}>
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+        </header>
+        {(b.body ?? []).map((p: string) => <p class="prose-p">{p}</p>)}
+        {b.list && <ul class="ticks">{b.list.map((x: string) => <li>{x}</li>)}</ul>}
+        {b.note && <p class="note">{b.note}</p>}
+        {b.linkHref && <p class="inline-link"><a href={b.linkHref}>{b.linkLabel} →</a></p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'spec') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <table class="spec">
+          <tbody>{b.rows.map((r: any) => (<tr><th scope="row">{r.k}</th><td>{r.v}</td></tr>))}</tbody>
+        </table>
+        {b.note && <p class="note">{b.note}</p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'pricing') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          <h2>{b.title}</h2>
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <table class="pricing">
+          <tbody>
+            {b.rows.map((r: any) => (
+              <tr class={r.total ? 'pricing__total' : undefined}>
+                <th scope="row">{r.name}{r.note && <small>{r.note}</small>}</th>
+                <td>{r.price}<small>{r.priceNote ?? '税別'}</small></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {b.sets && (
+          <div class="sets">
+            {b.sets.map((s: any) => (
+              <div class="set">
+                <h3>{s.name}</h3><p>{s.body}</p>
+                <p class="set-price">{s.regular && <span class="was">{s.regular}</span>}<span class="now">{s.price}<small>税別</small></span></p>
+              </div>
+            ))}
+          </div>
+        )}
+        {b.notes && <ul class="notes">{b.notes.map((n: string) => <li>{n}</li>)}</ul>}
+        {d.dates && <p class="updated"><time datetime={d.dates.modified}>{d.dates.label}</time><span>この料金は上記時点のものです。</span></p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'voices') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          <h2>{b.title}</h2>
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class="voices">
+          {b.items.map((v: any) => (<blockquote class="voice"><p>{v.body}</p><cite>{v.who}</cite></blockquote>))}
+        </div>
+        {b.note && <p class="note">{b.note}</p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'instructor') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <div class="teacher">
+          <figure class="teacher-photo">
+            <img src={b.image} alt={b.imageAlt} loading="lazy" decoding="async" width="900" height="900" />
+          </figure>
+          <div class="teacher-body">
+            <span class="eyebrow">{b.eyebrow ?? 'INSTRUCTOR'}</span>
+            <h2>{b.title}</h2>
+            {b.role && <p class="teacher-role">{b.role}</p>}
+            {(b.body ?? []).map((p: string) => <p class="teacher-text">{p}</p>)}
+            {b.credentials && <ul class="creds">{b.credentials.map((c: string) => <li>{c}</li>)}</ul>}
+            <p class="inline-link"><a href={b.linkHref ?? '/instructor-chie-ando'}>{b.linkLabel ?? '安藤千英のプロフィールを見る'} →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (b.type === 'access') return (
+    <section class={`sec ${cls}`} id={b.id ?? 'access'}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          <span class="eyebrow">{b.eyebrow ?? 'HOW TO JOIN'}</span>
+          <h2>{b.title}</h2>
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class="access">
+          {b.items.map((a: any) => (
+            <div class="access-card">
+              <h3>{a.title}</h3><p>{a.body}</p>
+              <ul class="access-tags">{a.tags.map((t: string) => <li>{t}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  if (b.type === 'faq') return (
+    <section class={`sec ${cls}`} id={b.id ?? 'faq'}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          <span class="eyebrow">{b.eyebrow ?? 'FAQ'}</span>
+          <h2>{b.title ?? 'よくあるご質問'}</h2>
+        </header>
+        <div class="faq">
+          {b.items.map((f: any, i: number) => (
+            <details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  if (b.type === 'next') return (
+    <section class={`sec ${cls}`}>
+      <div class="inner inner--narrow next-step">
+        {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+        <h2>{b.title}</h2>
+        <p class="sec-lead">{b.body}</p>
+        <a href={b.linkHref} class="btn btn--outline">{b.linkLabel}</a>
+      </div>
+    </section>
+  );
+
+  if (b.type === 'cta') return (
+    <section class={`sec ${cls}`} id="entry">
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          <span class="eyebrow">{b.eyebrow ?? 'ENTRY FORM'}</span>
+          <h2>{b.title}</h2>
+          {b.body && <p class="sec-lead">{b.body}</p>}
+        </header>
+        <FormGate subject={b.subject} mailBody={b.mailBody ?? ''} class="form-grid">
+          <label>お名前<span>*</span><input type="text" name="name" required /></label>
+          <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
+          <label>お電話番号<input type="tel" name="tel" /></label>
+          <label>ご希望の講座<span>*</span>
+            <select name="course" required>
+              <option value="">選択してください</option>
+              {(b.options ?? []).map((o: string) => <option>{o}</option>)}
+              <option>まだ決めていない／相談したい</option>
+            </select>
+          </label>
+          <label>ご希望の受講形式
+            <select name="mode">
+              <option value="">選択してください</option>
+              <option>対面（東京・表参道）</option>
+              <option>オンライン</option>
+            </select>
+          </label>
+          <label>希望日程<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
+          <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn btn--solid">送信する</button>
+        </FormGate>
+      </div>
+    </section>
+  );
+
+  return null;
+})}
+
+<style is:global>
+  body { background: #FAF9F6; }
+</style>
