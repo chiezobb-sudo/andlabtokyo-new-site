@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/raw-sweets",
+      "destination": "/rawchocolatier/whatrawsweets",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge/rawsweets",
+      "destination": "/rawchocolatier/whatrawsweets",
+      "permanent": true
+    },
+    {
       "source": "/courses/:id",
       "destination": "/rawchocolatier/:id",
       "permanent": true

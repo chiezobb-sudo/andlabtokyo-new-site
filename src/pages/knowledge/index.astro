@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { knowledgeHref } from '../../lib/knowledge-routes';
 import { getKnowledgeList } from '../../lib/microcms';
 
 const articles = await getKnowledgeList();
@@ -21,7 +22,7 @@ const articles = await getKnowledgeList();
     <ul class="hub__list">
       {articles.map((a, i) => (
         <li class="card" data-reveal style={`--reveal-delay:${Math.min(i, 6) * 90}ms`}>
-          <a href={`/knowledge/${a.id}`}>
+          <a href={knowledgeHref(a.id)}>
             <span class="card__media">
               <img src={a.heroImage.url} alt="" width="640" height="400" loading="lazy" decoding="async" />
             </span>
