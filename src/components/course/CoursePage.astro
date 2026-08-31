@@ -70,6 +70,48 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
     </section>
   );
 
+  if (b.type === 'catalog') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class="catalog">
+          {b.items.map((c: any) => (
+            <a class="cat-card" href={c.href}>
+              <figure class="cat-photo"><img src={c.image} alt={c.imageAlt ?? c.title} loading="lazy" decoding="async" /></figure>
+              <div class="cat-body">
+                <span class="cat-en">{c.en}</span>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+                <span class="step-more">詳しく見る →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        {b.linkHref && <p class="inline-link"><a href={b.linkHref}>{b.linkLabel} →</a></p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'news') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          <h2>{b.title}</h2>
+        </header>
+        <ol class="news">
+          {b.items.map((n: any) => (
+            <li><time>{n.date}</time><span>{n.text}</span></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+
   if (b.type === 'steps') return (
     <section class={`sec ${cls}`} id={b.id}>
       <div class="inner">
