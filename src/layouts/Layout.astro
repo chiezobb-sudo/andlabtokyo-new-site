@@ -24,7 +24,11 @@ const {
 const siteUrl = (Astro.site ?? new URL("https://www.andlabtokyo.com")).origin;
 const canonicalUrl = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
-const fullTitle = title.includes("&LAB TOKYO") ? title : `${title} | &LAB TOKYO`;
+// Wix 由来のタイトルには「＆LAB東京」「&LAB東京」など全角・和名の表記ゆれがある。
+// "&LAB TOKYO" だけを見ていると、すでにブランド名が入っているのに
+// もう一度足してしまい「… | 料理教室＆LAB東京 | &LAB TOKYO」になる。
+const hasBrand = /&LAB\s*TOKYO|[&＆]\s*LAB\s*東京/i.test(title);
+const fullTitle = hasBrand ? title : `${title} | &LAB TOKYO`;
 ---
 
 <!doctype html>
