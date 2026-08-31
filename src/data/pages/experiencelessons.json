@@ -1,0 +1,122 @@
+{
+  "_editNote": "本文は Wix の /experiencelessons からそのまま移設。文言と写真の指定はこのファイルだけを触れば安全です。",
+  "meta": {
+    "title": "東京のローフード・発酵体験レッスン｜&LAB TOKYO",
+    "description": "&LAB TOKYOの体験レッスンは、ローフード・発酵・ロースイーツを「食べるだけ」ではなく「作る」ことで深く理解するプログラムです。少人数制・初心者歓迎・持ち物不要。UMAMI & KOJI LAB は英語対応。東京・渋谷（表参道）。",
+    "ogImage": "/images/experience/plate.jpg"
+  },
+  "dates": { "published": "2026-05-20", "modified": "2026-08-31", "label": "最終更新：2026年8月31日" },
+  "summary": "&LAB TOKYO の体験レッスンは、ローフード・発酵・ロースイーツを「食べるだけ」ではなく「作る」ことで深く理解するプログラムです。少人数制のアットホームな環境で、初心者の方も持ち物なしでご参加いただけます。トライアルレッスン「ローフード」「発酵」、そして英語対応の UMAMI & KOJI LAB をご用意しています。",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "EXPERIENCE LESSONS",
+      "title": "まず、体験する",
+      "subtitle": "東京のローフード・発酵体験レッスン",
+      "lead": "&LAB TOKYOの世界を、はじめての方でも安心して体験できるプログラムをご用意しています。ローフード・発酵・インバウンド体験から、あなたに合ったレッスンをお選びください。",
+      "image": "/images/experience/plate.jpg",
+      "imageW": 806,
+      "imageH": 537,
+      "imageAlt": "体験レッスンで作るローフードのプレート",
+      "badges": ["少人数制", "初心者歓迎", "持ち物不要"],
+      "ctaLabel": "体験レッスンを見る",
+      "ctaHref": "#lessons"
+    },
+    {
+      "type": "prose",
+      "id": "about",
+      "eyebrow": "EXPERIENCE LESSONS",
+      "title": "&LAB TOKYOの体験レッスンについて",
+      "body": [
+        "&LAB TOKYOの体験レッスンは、ローフード・発酵・ロースイーツを「食べるだけ」ではなく「作る」ことで深く理解するプログラムです。少人数制のアットホームな環境で、安心して体験いただけます。"
+      ],
+      "list": [
+        "少人数制 ─ 丁寧なサポート",
+        "初心者歓迎 ─ 持ち物不要",
+        "UMAMI & KOJI LAB は英語対応・海外の方OK"
+      ]
+    },
+    {
+      "type": "catalog",
+      "id": "lessons",
+      "eyebrow": "LINE UP",
+      "title": "体験レッスン一覧",
+      "lead": "一回完結。教室の雰囲気や講座の内容を、実際に手を動かしながら体験できます。",
+      "items": [
+        {
+          "en": "RAW FOOD",
+          "title": "トライアルレッスン「ローフード」",
+          "body": "包丁とまな板から始める、ローフードのはじめの一歩。作って、食べて、体で覚えるレッスンです。",
+          "href": "/rawfoodtriallesson",
+          "image": "/images/experience/plate.jpg",
+          "imageAlt": "トライアルレッスンで作るローフードのプレート"
+        },
+        {
+          "en": "FERMENTATION",
+          "title": "トライアルレッスン「発酵」",
+          "body": "塩麹・甘麹など、暮らしにすぐ使える発酵調味料から。麹のしくみにふれる一日です。",
+          "href": "/trial-fermentation",
+          "image": "/images/experience/amazake.jpg",
+          "imageAlt": "発酵の体験レッスンで作る甘麹"
+        },
+        {
+          "en": "FOR INTERNATIONAL GUESTS",
+          "title": "UMAMI & KOJI LAB",
+          "body": "英語で行う、麹の体験プログラム。種麹の植えつけから顕微鏡での観察まで、3時間半のプライベートセッション。",
+          "href": "/koji-fermentation-experience-tokyo",
+          "image": "/images/experience/koji.jpg",
+          "imageAlt": "UMAMI & KOJI LAB で麹を仕込む様子"
+        }
+      ],
+      "linkHref": "/alllesson",
+      "linkLabel": "全講座一覧を見る"
+    },
+    {
+      "type": "prose",
+      "id": "international",
+      "eyebrow": "INFORMATION",
+      "title": "International Guests",
+      "body": [
+        "&LAB TOKYO welcomes visitors from overseas who are interested in Japanese food culture.",
+        "Our programs introduce the philosophy of raw food, fermentation, and traditional Japanese ingredients through hands-on experience.",
+        "English guidance is available for the UMAMI & KOJI LAB program."
+      ],
+      "linkHref": "/koji-fermentation-experience-tokyo",
+      "linkLabel": "UMAMI & KOJI LAB"
+    },
+    {
+      "type": "prose",
+      "id": "kaigai",
+      "title": "海外からお越しの方へ",
+      "body": [
+        "&LAB TOKYOでは、日本の食文化や発酵に興味を持つ海外のお客様にも体験プログラムをご案内しています。",
+        "ローフード・発酵・麹など、日本の食文化を五感で体験するプログラムをご用意しています。",
+        "UMAMI & KOJI LABは英語でのご案内にも対応しています。"
+      ]
+    },
+    {
+      "type": "faq",
+      "id": "faq",
+      "title": "Frequently Asked Questions",
+      "items": [
+        { "q": "料理の経験がなくても大丈夫ですか？", "a": "はい、まったく問題ありません。初めての方を対象としたプログラムですので、丁寧にご説明しながら進めます。" },
+        { "q": "持ち物は必要ですか？", "a": "エプロン・材料・道具はすべてご用意しています。動きやすい服装でお越しください。" },
+        { "q": "英語での参加は可能ですか？", "a": "UMAMI & KOJI LAB は英語対応しています。海外からのお客様も多くご参加いただいています。" },
+        { "q": "体験後に定期コースに進むことはできますか？", "a": "はい。体験レッスン後にご興味をもっていただいた方向けに、各種認定コース・継続クラスをご案内しています。" }
+      ]
+    },
+    {
+      "type": "cta",
+      "tone": "cream",
+      "title": "体験レッスンのお申し込み・ご相談",
+      "body": "ご希望のレッスンと日程をお書き添えください。For international guests: some programs are available with English guidance. Please feel free to contact us.",
+      "subject": "【体験レッスン】お申し込み・ご相談",
+      "mailBody": "お名前：\nご希望のレッスン：\n希望日程：\nご質問：\n",
+      "options": [
+        "トライアルレッスン「ローフード」",
+        "トライアルレッスン「発酵」",
+        "UMAMI & KOJI LAB（英語対応・麹の体験）"
+      ]
+    }
+  ]
+}

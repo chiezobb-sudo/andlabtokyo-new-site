@@ -229,6 +229,20 @@ const L = {
     </section>
   );
 
+  if (b.type === 'toc') return (
+    <nav class={`sec ${cls} toc-sec`} aria-label={b.title ?? '目次'}>
+      <div class="inner inner--narrow">
+        <span class="eyebrow">{b.eyebrow ?? 'CONTENTS'}</span>
+        <h2 class="toc-title">{b.title ?? '目次'}</h2>
+        <ol class="toc">
+          {b.items.map((t: any) => (
+            <li><a href={`#${t.id}`}>{t.label}</a>{t.note && <span>{t.note}</span>}</li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+  );
+
   if (b.type === 'video') return (
     <section class={`sec ${cls}`} id={b.id}>
       <div class="inner inner--narrow">
@@ -436,6 +450,7 @@ const L = {
         <h2>{b.title}</h2>
         <p class="sec-lead">{b.body}</p>
         <a href={b.linkHref} class="btn btn--outline">{b.linkLabel}</a>
+        {b.note && <p class="note">{b.note}</p>}
       </div>
     </section>
   );

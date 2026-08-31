@@ -235,3 +235,13 @@
 .program-item h3 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 10px; line-height: 1.6; }
 .program-item p { font-size: 14.5px; line-height: 2; color: var(--ink-2); margin: 0; }
 @media (max-width: 560px) { .program-item { padding-left: 48px; } .program-item::before { font-size: 21px; top: 28px; } }
+
+/* ══ 目次 ══ */
+.toc-sec { padding-top: 56px; padding-bottom: 56px; }
+.toc-title { font-family: var(--fm); font-size: 20px; font-weight: 600; color: var(--ink); margin: 6px 0 20px; }
+.toc { list-style: none; counter-reset: toc; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc li { counter-increment: toc; border-bottom: 1px solid var(--line); }
+.toc a { display: block; padding: 15px 0 15px 42px; position: relative; font-size: 15px; line-height: 1.7; color: var(--ink-2); text-decoration: none; transition: color .2s; }
+.toc a::before { content: counter(toc, decimal-leading-zero); position: absolute; left: 0; top: 16px; font-family: var(--fh); font-size: 14px; font-style: italic; color: var(--amber-l); }
+.toc a:hover { color: var(--amber); }
+.toc span { display: block; padding: 0 0 14px 42px; margin-top: -6px; font-size: 13px; line-height: 1.75; color: var(--ink-3); }
