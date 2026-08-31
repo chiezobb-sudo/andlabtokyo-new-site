@@ -8,6 +8,7 @@
  */
 export const CUSTOM_ROUTES: Record<string, string> = {
   rawsweets: '/rawchocolatier/whatrawsweets',
+  spirulina: '/spirulina',   // 3か月 215クリック / 24,676表示（表示回数はサイト最大）
 };
 
 /** ナレッジ記事の公開URLを返す */

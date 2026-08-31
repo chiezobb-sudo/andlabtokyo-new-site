@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/knowledge/spirulina",
+      "destination": "/spirulina",
+      "permanent": true
+    },
+    {
       "source": "/raw-sweets",
       "destination": "/rawchocolatier/whatrawsweets",
       "permanent": true
