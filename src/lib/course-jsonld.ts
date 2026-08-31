@@ -20,10 +20,16 @@ type Args = {
   onsite?: boolean;
   published?: string;
   modified?: string;
+  /** 'en' を渡すと言語・税表記・パンくずを英語にする（麹体験ページ用） */
+  lang?: 'ja' | 'en';
+  /** 価格の税表記。既定は日本語ページの「税別」 */
+  taxLabel?: string;
 };
 
 export function courseJsonLd(a: Args) {
   const url = `${SITE}${a.path}`;
+  const en = a.lang === 'en';
+  const taxLabel = a.taxLabel ?? (en ? 'Tax included' : '税別');
   const num = (s: string) => s.replace(/[^0-9]/g, '');
   const instances: any[] = [];
   if (a.onsite !== false) instances.push({
@@ -40,7 +46,7 @@ export function courseJsonLd(a: Args) {
     description: a.description,
     url,
     image: a.image.startsWith('http') ? a.image : `${SITE}${a.image}`,
-    inLanguage: 'ja',
+    inLanguage: en ? 'en' : 'ja',
     ...(a.teaches?.length ? { teaches: a.teaches } : {}),
     ...(a.credential ? { educationalCredentialAwarded: a.credential } : {}),
     ...(a.published ? { datePublished: a.published } : {}),
@@ -49,7 +55,7 @@ export function courseJsonLd(a: Args) {
     provider: { '@type': 'EducationalOrganization', name: '&LAB TOKYO', url: SITE },
     ...(a.offers?.length ? { offers: a.offers.map((o) => ({
       '@type': 'Offer', name: o.name, price: num(o.price), priceCurrency: 'JPY',
-      category: '税別', availability: 'https://schema.org/InStock',
+      category: taxLabel, availability: 'https://schema.org/InStock',
     })) } : {}),
     ...(a.reviews?.length ? { review: a.reviews.map((r) => ({
       '@type': 'Review', reviewBody: r.body,
@@ -60,8 +66,10 @@ export function courseJsonLd(a: Args) {
   }, {
     '@type': 'Person',
     '@id': `${SITE}/instructor-chie-ando#person`,
-    name: '安藤 千英',
-    jobTitle: 'ローフード国際プロデューサー／ELLE gourmet 認定クリエイター',
+    name: en ? 'Chie Ando' : '安藤 千英',
+    jobTitle: en
+      ? 'Chef, author and international raw food producer'
+      : 'ローフード国際プロデューサー／ELLE gourmet 認定クリエイター',
     url: `${SITE}/instructor-chie-ando`,
   }];
 
@@ -72,7 +80,7 @@ export function courseJsonLd(a: Args) {
 
   graph.push({
     '@type': 'BreadcrumbList',
-    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE}/` },
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: en ? 'Home' : 'ホーム', item: `${SITE}/` },
       ...(a.breadcrumb ?? [{ name: a.name }]).map((b, i) => ({
         '@type': 'ListItem', position: i + 2, name: b.name, ...(b.path ? { item: `${SITE}${b.path}` } : {}),
       }))],

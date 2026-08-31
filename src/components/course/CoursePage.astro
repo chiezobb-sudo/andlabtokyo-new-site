@@ -17,6 +17,34 @@ import '../../styles/course.css';
 const { data: d } = Astro.props as { data: any };
 const br = (s: string) => (s ?? '').split('\n').join('<br>');
 const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
+
+// 英語ページ（麹体験など）用のラベル。data.lang === 'en' で切り替わる。
+const EN = d.lang === 'en';
+const L = {
+  more:     EN ? 'Learn more →' : '詳しく見る →',
+  taxEx:    EN ? '' : '税別',
+  updated:  EN ? 'Prices as of this date.' : 'この料金は上記時点のものです。',
+  faqTitle: EN ? 'Frequently asked questions' : 'よくあるご質問',
+  name:     EN ? 'Name' : 'お名前',
+  email:    EN ? 'Email' : 'メールアドレス',
+  tel:      EN ? 'Phone' : 'お電話番号',
+  course:   EN ? 'Which experience' : 'ご希望の講座',
+  select:   EN ? 'Please select' : '選択してください',
+  mode:     EN ? 'In person or online' : 'ご希望の受講形式',
+  onsite:   EN ? 'In person (Jingumae, Shibuya)' : '対面（東京・表参道）',
+  online:   EN ? 'Online' : 'オンライン',
+  date:     EN ? 'Preferred date' : '希望日程',
+  datePh:   EN ? 'e.g. mid-October, weekdays' : '例：10月中旬の平日',
+  msg:      EN ? 'Message / questions' : 'お問い合わせ・ご質問',
+  undecided:EN ? "I'm not sure yet — please advise" : 'まだ決めていない／相談したい',
+  submit:   EN ? 'Send' : '送信する',
+  guests:   EN ? 'Number of guests' : 'ご参加人数',
+  vegan:    EN ? 'Vegan option' : 'ビーガン対応',
+  yes:      EN ? 'Yes, please' : '希望する',
+  no:       EN ? 'No, thank you' : '希望しない',
+  date2:    EN ? 'Preferred date — 2nd choice' : '希望日程（第二希望）',
+  date3:    EN ? 'Preferred date — 3rd choice' : '希望日程（第三希望）',
+};
 ---
 
 {d.blocks.map((b: any, bi: number) => {
@@ -86,7 +114,7 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
                 <span class="cat-en">{c.en}</span>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
-                <span class="step-more">詳しく見る →</span>
+                <span class="step-more">{L.more}</span>
               </div>
             </a>
           ))}
@@ -127,8 +155,8 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
               <h3>{s.label}</h3>
               {s.verb && <span class="step-verb">{s.verb}</span>}
               <p>{s.body}</p>
-              {s.price && <span class="step-price">{s.price}<small>税別</small></span>}
-              <span class="step-more">詳しく見る →</span>
+              {s.price && <span class="step-price">{s.price}<small>{L.taxEx}</small></span>}
+              <span class="step-more">{L.more}</span>
             </a>
           ))}
         </div>
@@ -163,7 +191,7 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
             {b.price && (
               <div class="price-card">
                 <span class="price-card__label">{b.priceLabel}</span>
-                <span class="price-card__price">{b.price}<small>（{b.priceNote ?? '税別'}）</small></span>
+                <span class="price-card__price">{b.price}<small>{b.priceNote ? `（${b.priceNote}）` : (L.taxEx && `（${L.taxEx}）`)}</small></span>
                 <ul class="price-card__specs">{(b.specs ?? []).map((s: string) => <li>{s}</li>)}</ul>
               </div>
             )}
@@ -197,6 +225,49 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
             ))}
           </div>
         )}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'video') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <div class="video">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${b.youtube}`}
+            title={b.videoTitle ?? b.title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        {b.note && <p class="note">{b.note}</p>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'program') return (
+    <section class={`sec ${cls}`} id={b.id}>
+      <div class="inner inner--narrow">
+        <header class="sec-head">
+          {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+          {b.title && <h2 set:html={br(b.title)} />}
+          {b.lead && <p class="sec-lead">{b.lead}</p>}
+        </header>
+        <ol class="program">
+          {b.items.map((s: any) => (
+            <li class="program-item">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+        </ol>
+        {b.note && <p class="note">{b.note}</p>}
       </div>
     </section>
   );
@@ -265,7 +336,7 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
             {b.rows.map((r: any) => (
               <tr class={r.total ? 'pricing__total' : undefined}>
                 <th scope="row">{r.name}{r.note && <small>{r.note}</small>}</th>
-                <td>{r.price}<small>{r.priceNote ?? '税別'}</small></td>
+                <td>{r.price}<small>{r.priceNote ?? L.taxEx}</small></td>
               </tr>
             ))}
           </tbody>
@@ -275,13 +346,13 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
             {b.sets.map((s: any) => (
               <div class="set">
                 <h3>{s.name}</h3><p>{s.body}</p>
-                <p class="set-price">{s.regular && <span class="was">{s.regular}</span>}<span class="now">{s.price}<small>税別</small></span></p>
+                <p class="set-price">{s.regular && <span class="was">{s.regular}</span>}<span class="now">{s.price}<small>{L.taxEx}</small></span></p>
               </div>
             ))}
           </div>
         )}
         {b.notes && <ul class="notes">{b.notes.map((n: string) => <li>{n}</li>)}</ul>}
-        {d.dates && <p class="updated"><time datetime={d.dates.modified}>{d.dates.label}</time><span>この料金は上記時点のものです。</span></p>}
+        {d.dates && <p class="updated"><time datetime={d.dates.modified}>{d.dates.label}</time><span>{L.updated}</span></p>}
       </div>
     </section>
   );
@@ -347,7 +418,7 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
       <div class="inner inner--narrow">
         <header class="sec-head">
           <span class="eyebrow">{b.eyebrow ?? 'FAQ'}</span>
-          <h2>{b.title ?? 'よくあるご質問'}</h2>
+          <h2>{b.title ?? L.faqTitle}</h2>
         </header>
         <div class="faq">
           {b.items.map((f: any, i: number) => (
@@ -378,26 +449,47 @@ const tone = (i: number) => (i % 2 === 0 ? 'sec--linen' : 'sec--cream');
           {b.body && <p class="sec-lead">{b.body}</p>}
         </header>
         <FormGate subject={b.subject} mailBody={b.mailBody ?? ''} class="form-grid">
-          <label>お名前<span>*</span><input type="text" name="name" required /></label>
-          <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
-          <label>お電話番号<input type="tel" name="tel" /></label>
-          <label>ご希望の講座<span>*</span>
+          <label>{L.name}<span>*</span><input type="text" name="name" required /></label>
+          <label>{L.email}<span>*</span><input type="email" name="email" required /></label>
+          <label>{L.tel}<input type="tel" name="tel" /></label>
+          <label>{L.course}<span>*</span>
             <select name="course" required>
-              <option value="">選択してください</option>
+              <option value="">{L.select}</option>
               {(b.options ?? []).map((o: string) => <option>{o}</option>)}
-              <option>まだ決めていない／相談したい</option>
+              <option>{L.undecided}</option>
             </select>
           </label>
-          <label>ご希望の受講形式
-            <select name="mode">
-              <option value="">選択してください</option>
-              <option>対面（東京・表参道）</option>
-              <option>オンライン</option>
-            </select>
-          </label>
-          <label>希望日程<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
-          <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
-          <button type="submit" class="btn btn--solid">送信する</button>
+          {b.guests && (
+            <label>{L.guests}<span>*</span>
+              <select name="guests" required>
+                <option value="">{L.select}</option>
+                {b.guests.map((g: string) => <option>{g}</option>)}
+              </select>
+            </label>
+          )}
+          {!b.noMode && (
+            <label>{L.mode}
+              <select name="mode">
+                <option value="">{L.select}</option>
+                <option>{L.onsite}</option>
+                <option>{L.online}</option>
+              </select>
+            </label>
+          )}
+          <label>{L.date}<input type="text" name="date1" placeholder={b.datePlaceholder ?? L.datePh} /></label>
+          {b.extraDates && <label>{L.date2}<input type="text" name="date2" placeholder={b.datePlaceholder ?? L.datePh} /></label>}
+          {b.extraDates && <label>{L.date3}<input type="text" name="date3" placeholder={b.datePlaceholder ?? L.datePh} /></label>}
+          {b.vegan && (
+            <label>{L.vegan}
+              <select name="vegan">
+                <option value="">{L.select}</option>
+                <option>{L.yes}</option>
+                <option>{L.no}</option>
+              </select>
+            </label>
+          )}
+          <label class="full">{L.msg}<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn btn--solid">{L.submit}</button>
         </FormGate>
       </div>
     </section>

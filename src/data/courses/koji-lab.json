@@ -1,0 +1,239 @@
+{
+  "_editNote": "本文は Wix の /koji-fermentation-experience-tokyo からそのまま移設（2026-08-31 時点の実ページが正・2026-08-22 のメモより新しい）。英語ページなので lang: en。文言と写真の指定はこのファイルだけを触れば安全です。",
+  "lang": "en",
+  "meta": {
+    "title": "麹 料理教室 東京 - Discover Koji Fermentation at &LAB TOKYO",
+    "description": "A private, hands-on koji fermentation experience in a modern Tokyo home. Sow the spores yourself, meet four molds under the microscope, cook lunch with Chie Ando, and take home rice koji, an aged soy sauce kit and a signed textbook. English / Japanese / Chinese. From ¥65,000 per person.",
+    "ogImage": "/images/koji/hero.jpg"
+  },
+  "dates": {
+    "published": "2026-06-20",
+    "modified": "2026-08-31",
+    "label": "Updated 31 August 2026"
+  },
+  "summary": "UMAMI & KOJI LAB is a private, hands-on koji fermentation experience held in chef and author Chie Ando's Jingumae kitchen in Shibuya, Tokyo. Over about three and a half hours, guests inoculate steamed rice with tane-koji by hand, see koji-no-hana alive under a microscope, taste amazake, shio-koji and shoyu-koji side by side, and cook lunch with the seasonings. Sessions run in English with a bilingual assistant, are private for one to four guests, and can be prepared fully vegan. Every guest goes home with rice koji, an aged soy sauce kit, koji grains and a signed textbook. From ¥65,000 per person, tax included.",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrow": "SHIBUYA, TOKYO · HANDS-ON EXPERIENCE",
+      "title": "Koji Fermentation\nExperience in Tokyo",
+      "subtitle": "UMAMI & KOJI LAB",
+      "lead": "A hands-on fermentation experience in a modern Tokyo home.",
+      "image": "/images/koji/hero.jpg",
+      "imageW": 2000,
+      "imageH": 1506,
+      "imageAlt": "Bowls of rice koji, koji grains and freshly made amazake on a table in a Tokyo kitchen",
+      "badges": ["English / Japanese / Chinese", "Vegan-friendly", "Private, max 4 guests"],
+      "ctaLabel": "RESERVE YOUR SEAT",
+      "ctaHref": "#entry"
+    },
+    {
+      "type": "facts",
+      "items": [
+        { "label": "Languages", "value": "English / Japanese / Chinese" },
+        { "label": "Duration", "value": "Approx. 3.5 hours" },
+        { "label": "Group size", "value": "Private, max 4 guests" },
+        { "label": "From", "value": "¥65,000 per person" }
+      ]
+    },
+    {
+      "type": "prose",
+      "id": "what-is-koji",
+      "eyebrow": "SHIBUYA, TOKYO · HANDS-ON EXPERIENCE",
+      "title": "What is Koji?",
+      "body": [
+        "Koji is Japan's national mold — the quiet soul behind miso, soy sauce, sake, and mirin. For over 1,000 years, it has lived in Japanese homes, transforming humble ingredients into something profound. Now, it lives in ours.",
+        "Koji is the heart of Japanese fermentation culture. It is used in many traditional foods.",
+        "Koji doesn't just ferment food. It ferments time itself.",
+        "In this intimate session, chef and author Chie Ando opens her Jingumae kitchen to share the science, the craft, and the living culture that makes Japanese food unlike anything else on earth."
+      ]
+    },
+    {
+      "type": "video",
+      "id": "watch",
+      "eyebrow": "WATCH",
+      "title": "Step Inside the Kitchen",
+      "youtube": "WMsXZfqLLrI",
+      "videoTitle": "One minute on koji — UMAMI & KOJI LAB, Tokyo",
+      "lead": "One minute on koji itself — not on the lesson, not on us. Rice becoming sweetness, salt becoming depth, time becoming nourishment: a thousand years of careful hands, still at work in a modern Tokyo home.",
+      "note": "On the day, a second film is waiting for you — a full explanation, narrated in English, that takes you far deeper into the world of koji and fermentation."
+    },
+    {
+      "type": "program",
+      "id": "program",
+      "eyebrow": "PROGRAM",
+      "title": "Three and a half hours, step by step",
+      "lead": "Serious fermentation, in a kitchen the size of yours. Everything below happens with your own hands — and all of it fits inside one book you take home, so none of it stops when you leave.",
+      "items": [
+        {
+          "title": "Watch first, touch second",
+          "body": "Before anything else, a film — narrated in English. What koji actually is, what fermentation does, how it meets your gut microbiome, and how the seasonings you're about to make are made."
+        },
+        {
+          "title": "Meet four molds, not one",
+          "body": "Yellow, black, white and red koji, side by side. One family, four different organisms, four completely different flavours. Most people in Japan have only ever met the yellow one."
+        },
+        {
+          "title": "Sow the spores yourself",
+          "body": "You'll inoculate steamed rice with tane-koji — the seed spores — with your own hands. This is the step that turns rice into koji, and almost nobody outside a brewery has ever done it."
+        },
+        {
+          "title": "Koji-no-hana, under the microscope",
+          "body": "Koji-no-hana — \"the flower of koji\" — is the white bloom that opens as the mold matures. You'll see it alive, magnified, with your own eyes. Not a diagram. The organism itself. This is the part everyone reaches for their phone."
+        },
+        {
+          "title": "Four seasonings, demonstrated",
+          "body": "Shio-koji, ama-koji, shoyu-koji — and shoyu itself. Each one made in front of you, start to finish. You don't rush through them here: you go home with sealed koji and a soy sauce kit, and make all four in your own kitchen, at your own pace."
+        },
+        {
+          "title": "The tasting",
+          "body": "Amazake, black-koji amazake, shio-koji and shoyu-koji, tasted side by side. The two amazake begin as the same rice. They taste nothing alike — and neither contains a grain of sugar. This is the one that surprises everybody."
+        },
+        {
+          "title": "Cook lunch, and learn to cook it again",
+          "body": "We make lunch together using the seasonings you've just met — taught slowly enough that you can repeat it at home, not just eat it here."
+        },
+        {
+          "title": "Miso is not one thing",
+          "body": "Climate, water and local culture have produced dozens of misos across Japan, and they barely resemble one another. You'll taste the difference rather than read about it."
+        },
+        {
+          "title": "The rare shelf",
+          "body": "Chie's own cacao koji — made nowhere else in the world — alongside a run of ferments most people in Japan have never encountered."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "id": "in-the-kitchen",
+      "eyebrow": "IN THE KITCHEN",
+      "title": "What it actually looks like",
+      "photos": [
+        { "src": "/images/koji/koji-hands.jpg", "alt": "Two hands holding freshly bloomed rice koji", "caption": "Rice koji, still warm from the incubator." },
+        { "src": "/images/koji/microscope2.jpg", "alt": "A guest looking at koji through a microscope on the kitchen table", "caption": "Koji-no-hana, alive and magnified." },
+        { "src": "/images/koji/spores.jpg", "alt": "Tane-koji seed spores in a ceramic dish", "caption": "Tane-koji — the seed spores you sow yourself." },
+        { "src": "/images/koji/seasonings.jpg", "alt": "Shio-koji, shoyu-koji and a bottle of aged soy sauce on a dark table", "caption": "Shio-koji, ama-koji, shoyu-koji — and shoyu itself." },
+        { "src": "/images/koji/lunch.jpg", "alt": "A lunch of koji-seasoned dishes served on a tray in a Tokyo kitchen", "caption": "Lunch, cooked together with the seasonings you've just met." },
+        { "src": "/images/koji/guests.jpg", "alt": "Two guests at the table during a koji fermentation session", "caption": "Private, max four guests — no strangers join your group." }
+      ]
+    },
+    {
+      "type": "prose",
+      "id": "take-it-home",
+      "eyebrow": "TAKE IT HOME",
+      "title": "Your fermentation journey continues",
+      "body": [
+        "That is rather the point. You start it here, on this counter, and open it twelve months from now in your own kitchen. One afternoon in Tokyo, a year of it afterwards — and everything you need is in the one book you carry out the door."
+      ],
+      "list": [
+        "RICE KOJI — sealed, ready to make shio-koji and amazake at home",
+        "AGED SOY SAUCE — a kit that keeps working for months in your own kitchen",
+        "KOJI GRAINS — to keep going after the first batch",
+        "TEXTBOOK INCLUDED — signed, and the whole session is in it"
+      ]
+    },
+    {
+      "type": "gallery",
+      "photos": [
+        { "src": "/images/koji/kit.jpg", "alt": "The take-home kit: rice koji, aged soy sauce and koji grains in a wooden box" },
+        { "src": "/images/koji/takehome.jpg", "alt": "Sealed packs of koji and fermentation ingredients on the kitchen table" },
+        { "src": "/images/koji/textbook.jpg", "alt": "The English koji and fermentation textbook, open on the table" }
+      ]
+    },
+    {
+      "type": "prose",
+      "id": "dietary",
+      "eyebrow": "DIETARY",
+      "title": "Plant-based friendly. Naturally.",
+      "body": ["Every session can be prepared fully vegan — just let us know when you book."],
+      "list": ["VEGAN", "GLUTEN-FREE OPTION", "NUT-FREE", "SOY-FREE OPTION"],
+      "note": "Please write any allergies or special requests in the reservation form and we will confirm what we can prepare for you."
+    },
+    {
+      "type": "spec",
+      "id": "details",
+      "eyebrow": "JINGUMAE, SHIBUYA",
+      "title": "Details",
+      "rows": [
+        { "k": "Languages", "v": "English / Japanese / Chinese" },
+        { "k": "Duration", "v": "Approx. 3.5 hours" },
+        { "k": "Group size", "v": "Private, max 4 guests" },
+        { "k": "Location", "v": "&LAB TOKYO — Jingumae, Shibuya-ku, Tokyo. The full address is sent with your booking confirmation." },
+        { "k": "Includes", "v": "Lunch, all tastings, rice koji, an aged soy sauce kit, koji grains and a signed textbook for every guest." },
+        { "k": "Bookings close", "v": "4 days before the session — your koji needs three days to grow." }
+      ]
+    },
+    {
+      "type": "pricing",
+      "id": "pricing",
+      "eyebrow": "RESERVE",
+      "title": "Book Your Experience",
+      "lead": "Private session · 1–4 guests · 3.5 hours. From ¥65,000 per person. Better together — every guest you add lowers the price for everyone.",
+      "rows": [
+        { "name": "1 guest", "note": "¥100,000 total", "price": "¥100,000", "priceNote": "per person" },
+        { "name": "2 guests", "note": "¥160,000 total", "price": "¥80,000", "priceNote": "per person" },
+        { "name": "3–4 guests", "note": "¥195,000–260,000 total · best value", "price": "¥65,000", "priceNote": "per person", "total": true }
+      ],
+      "notes": [
+        "Prices above are per person. Tax included. The session is private — no strangers join your group.",
+        "A starter kit and a signed textbook are included for every guest.",
+        "Every session runs in English with a bilingual assistant working alongside Chie for the full 3.5 hours — included in the price above, at no extra charge.",
+        "Consumption tax (10%) applies to all experiences and is included in the listed price. Tax-free shopping exemptions do not apply to services provided in Japan."
+      ]
+    },
+    {
+      "type": "spec",
+      "id": "cancellation",
+      "eyebrow": "YOUR KOJI STARTS GROWING BEFORE YOU ARRIVE",
+      "title": "Booking & cancellation",
+      "lead": "Your session is held for your group alone. From the moment you book, the date closes to everyone else, a bilingual assistant is scheduled, and ingredients are ordered in for you specifically. Three days before you arrive, your koji is sown — and it cannot be paused, reused, or moved to another date.",
+      "rows": [
+        { "k": "Reservations close", "v": "4 days before the session" },
+        { "k": "30 days or more before", "v": "Free — full refund" },
+        { "k": "29–15 days before", "v": "30% charged" },
+        { "k": "14–8 days before", "v": "50%" },
+        { "k": "7–5 days before", "v": "80%" },
+        { "k": "Within 4 days, or no-show", "v": "100%" }
+      ],
+      "note": "We're sorry to be strict about this one. By the time we're inside that window, your koji is already growing — and it only grows once. Full terms are shown again when you book."
+    },
+    {
+      "type": "faq",
+      "id": "faq",
+      "title": "Frequently asked questions",
+      "items": [
+        { "q": "What language is the session held in?", "a": "Every session runs in English, with a bilingual assistant working alongside Chie for the full 3.5 hours at no extra charge. Japanese and Chinese are also spoken." },
+        { "q": "How long does it take, and how many people join?", "a": "About 3.5 hours. Every session is private for one to four guests — no strangers join your group." },
+        { "q": "Can the session be made vegan, or work around allergies?", "a": "Yes. Every session can be prepared fully vegan, and gluten-free and soy-free options are available. The session is nut-free. Please tell us when you book so we can prepare for you." },
+        { "q": "What do I take home?", "a": "Rice koji, an aged soy sauce kit, koji grains and a signed textbook — one set for every guest. The whole session is written up in the book, so you can make all four seasonings again in your own kitchen." },
+        { "q": "How much does it cost?", "a": "From ¥65,000 per person, tax included. One guest is ¥100,000, two guests are ¥80,000 each, and three to four guests are ¥65,000 each. Every guest you add lowers the price for everyone." },
+        { "q": "How late can I book?", "a": "Reservations close four days before the session, because your koji is sown three days before you arrive and needs that time to grow." },
+        { "q": "What is the cancellation policy?", "a": "Free up to 30 days before. 30% from 29–15 days before, 50% from 14–8 days, 80% from 7–5 days, and 100% within 4 days or for a no-show. Once your koji has been sown it cannot be paused, reused, or moved to another date." },
+        { "q": "Where is it held?", "a": "At &LAB TOKYO in Jingumae, Shibuya-ku, Tokyo — a private home kitchen. The full address is sent with your booking confirmation." }
+      ]
+    },
+    {
+      "type": "cta",
+      "tone": "cream",
+      "eyebrow": "RESERVE YOUR SEAT",
+      "title": "Reserve your seat",
+      "body": "Bookings close 4 days before your session — your koji needs three days to grow. Please write here if you have any allergies or special requests. We'll reply within three business days to confirm your date.",
+      "subject": "【UMAMI & KOJI LAB】Reservation request / 麹体験のご予約",
+      "mailBody": "Name:\nNumber of guests:\nPreferred date (1st):\nPreferred date (2nd):\nPreferred date (3rd):\nVegan option (yes/no):\nAllergies or special requests:\n",
+      "noMode": true,
+      "extraDates": true,
+      "vegan": true,
+      "datePlaceholder": "e.g. 14 October 2026",
+      "guests": ["1 guest — ¥100,000", "2 guests — ¥80,000 each", "3 guests — ¥65,000 each", "4 guests — ¥65,000 each"],
+      "options": ["UMAMI & KOJI LAB — koji fermentation experience (3.5 hours)"]
+    },
+    {
+      "type": "next",
+      "eyebrow": "FOR JAPANESE SPEAKERS",
+      "title": "発酵をもっと深く学びたい方へ",
+      "body": "麹のしくみから発酵調味料、開講の仕方までを体系的に学ぶ講座を、日本語で開いています。",
+      "linkHref": "/fermentation",
+      "linkLabel": "発酵プランナー養成講座を見る"
+    }
+  ]
+}
