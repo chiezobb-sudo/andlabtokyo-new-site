@@ -1,6 +1,26 @@
 {
   "redirects": [
     {
+      "source": "/brand",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge",
+      "destination": "/knoweledge",
+      "permanent": true
+    },
+    {
+      "source": "/listofcourses",
+      "destination": "/alllesson",
+      "permanent": true
+    },
+    {
+      "source": "/media",
+      "destination": "/press-media",
+      "permanent": true
+    },
+    {
       "source": "/knowledge/rawchocolate",
       "destination": "/rawchocolatier/rawchocolate",
       "permanent": true
@@ -33,16 +53,6 @@
     {
       "source": "/courses/:id",
       "destination": "/rawchocolatier/:id",
-      "permanent": true
-    },
-    {
-      "source": "/press-media",
-      "destination": "/media",
-      "permanent": true
-    },
-    {
-      "source": "/alllesson",
-      "destination": "/listofcourses",
       "permanent": true
     },
     {

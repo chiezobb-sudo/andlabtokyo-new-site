@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 const c = await getCourse(id!);
-if (!c) return Astro.redirect('/listofcourses');
+if (!c) return Astro.redirect('/alllesson');
 
 const hasGallery = c.gallery && c.gallery.length > 0;
 const hasCurriculum = c.curriculum_list && c.curriculum_list.length > 0;
@@ -813,7 +813,7 @@ import FormGate from '../../components/FormGate.astro';
         <button class="btn btn--gold btn--lg" type="submit">送信する</button>
         <p class="form-privacy">
           送信いただくことで
-          <a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
+          <a href="/privacypolicy" target="_blank" rel="noopener">プライバシーポリシー</a>
           に同意したものとみなします。
         </p>
       </div>

@@ -1,0 +1,46 @@
+---
+/**
+ * プライバシーポリシー
+ * Wix と同じURLで公開する（URLは1本も変えない方針）。
+ * 本文は src/data/legal/privacypolicy.json。文言の修正はそちらだけを触れば済む。
+ */
+import Layout from '../layouts/Layout.astro';
+import d from '../data/legal/privacypolicy.json';
+
+const url = 'https://www.andlabtokyo.com/privacypolicy';
+---
+<Layout title={d.meta.title} description={d.meta.description} canonical={url}>
+  <main class="doc">
+    <nav class="crumb" aria-label="パンくず"><a href="/">ホーム</a><span>／</span>{d.title}</nav>
+    <h1>{d.title}</h1>
+    {d.sections.map((s) => (
+      <section class="art">
+        {s.h && <h2>{s.h}</h2>}
+        {s.p.map((p) => <p>{p}</p>)}
+      </section>
+    ))}
+  </main>
+</Layout>
+
+<style is:global>
+  body { background: #FAF9F6; }
+</style>
+
+<style>
+  .doc {
+    --ink:#221F1C; --ink-2:#3D3934; --ink-3:#6E6862;
+    --amber:#A8794A; --line:rgba(34,31,28,0.12);
+    --fm:'Shippori Mincho','Noto Serif JP',serif; --fh:'Cormorant Garamond',serif;
+    max-width: 760px; margin: 0 auto; padding: clamp(96px,12vw,150px) 24px clamp(72px,9vw,120px);
+  }
+  .crumb { font-family: var(--fh); font-size: 12px; letter-spacing: .12em; color: var(--ink-3); margin: 0 0 clamp(28px,4vw,44px); }
+  .crumb a { color: var(--ink-3); text-decoration: none; }
+  .crumb a:hover { color: var(--ink); }
+  .crumb span { margin: 0 .6em; }
+  h1 { font-family: var(--fm); font-size: clamp(26px,3.4vw,40px); font-weight: 600; line-height: 1.5; color: var(--ink); margin: 0 0 clamp(36px,5vw,56px); padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .art { margin-bottom: 40px; }
+  h2 { font-family: var(--fm); font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 16px; padding-left: 14px; border-left: 3px solid var(--amber); }
+  .art p { font-size: 15px; line-height: 2.1; color: var(--ink-2); margin: 0 0 14px; }
+  .art p:last-child { margin-bottom: 0; }
+  @media (max-width: 560px) { .art p { font-size: 14.5px; } }
+</style>

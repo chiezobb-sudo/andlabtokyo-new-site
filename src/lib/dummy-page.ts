@@ -16,7 +16,7 @@ export const dummyPages: Record<string, Page> = {
         subCopy:
           '酵素と微生物の力を借りて、腸から、細胞から、ほんとうの美しさを育む。',
         ctaLabel: '講座を詳しく見る',
-        ctaUrl: '/listofcourses',
+        ctaUrl: '/alllesson',
         ctaLabel2: '個別相談・お問い合わせ',
         ctaUrl2: '/contact',
         videoUrl: '/hero-video.mp4',
