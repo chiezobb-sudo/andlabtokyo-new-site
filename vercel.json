@@ -1,6 +1,21 @@
 {
   "redirects": [
     {
+      "source": "/knowledge/rawchocolate",
+      "destination": "/rawchocolatier/rawchocolate",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge/livingfood",
+      "destination": "/livingfood",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge/rawfood",
+      "destination": "/rawfood",
+      "permanent": true
+    },
+    {
       "source": "/knowledge/spirulina",
       "destination": "/spirulina",
       "permanent": true

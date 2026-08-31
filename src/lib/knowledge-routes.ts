@@ -7,6 +7,9 @@
  * 記事は元のURLで出し、/knowledge/<id> は 301 で寄せる。
  */
 export const CUSTOM_ROUTES: Record<string, string> = {
+  rawchocolate: '/rawchocolatier/rawchocolate',   // 3か月 13クリック / 1,863表示
+  livingfood: '/livingfood',   // 3か月 8クリック / 546表示
+  rawfood: '/rawfood',   // 3か月 10クリック / 1,746表示
   rawsweets: '/rawchocolatier/whatrawsweets',
   spirulina: '/spirulina',   // 3か月 215クリック / 24,676表示（表示回数はサイト最大）
 };
