@@ -8,11 +8,15 @@
  *   フォームが複数あること自体は正しい。役割が違うので統合しない。
  *
  * Wix 版（/contact）にあった問題をここで潰している:
- *   - ご住所が必須だった（レッスンの問い合わせに住所は要らない・最大の離脱要因）
- *   - 電話番号が必須だった（海外からの問い合わせが実際に来ている）
+ *   - 電話番号が必須だった（海外からの問い合わせが実際に来ている）→ 任意に
  *   - お問い合わせ種別が「任意」で、受信箱で仕分けできなかった → 先頭・必須にした
  *   - 「お名前（性）」の誤字 → （姓）
  *   - 迷子の白文字リンク2つが本文に重なっていた → 持ち込まない
+ *
+ * ご住所と会社名について（2026-09-05 方針転換・Chie 判断）:
+ *   当初は離脱要因として外したが、業者からの一方的な営業が増えており、
+ *   「入口を少し狭くして質を上げる」ほうが実情に合うと判断して必須に戻した。
+ *   会社名は個人の方が詰まらないよう「個人」と書けることを例示している。
  *
  * 種別を先頭に置いているのは、通知メールの冒頭に用件が出るようにするため。
  */
@@ -119,7 +123,7 @@ const jsonLd = {
         class="form-grid"
       >
         <label class="full">ご用件<span>*</span>
-          <select name="subject_type" required>
+          <select name="ご用件" required>
             <option value="">選択してください</option>
             <option>講座について相談したい</option>
             <option>体験レッスンを予約したい</option>
@@ -130,43 +134,44 @@ const jsonLd = {
           </select>
         </label>
 
-        <label>お名前<span>*</span><input type="text" name="name" required placeholder="山田 花子" /></label>
+        <label>お名前<span>*</span><input type="text" name="お名前" required placeholder="山田 花子" /></label>
         <label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" /></label>
-        <label>お電話番号（任意）<input type="tel" name="tel" placeholder="090-0000-0000" /></label>
-        <label>会社名・団体名（任意）<input type="text" name="company" /></label>
+        <label>お電話番号（任意）<input type="tel" name="お電話番号" placeholder="090-0000-0000" /></label>
+        <label class="full">ご住所<span>*</span><input type="text" name="ご住所" required placeholder="東京都渋谷区神宮前0-0-0" /></label>
+        <label>会社名・団体名<span>*</span><input type="text" name="会社名・団体名" required placeholder="個人の方は「個人」とご記入ください" /></label>
 
         <label class="full">ご興味のある分野（任意・いくつでも）
           <div class="choice-grid">
-            <label class="choice"><input type="checkbox" name="field" value="ローフード" />ローフード</label>
-            <label class="choice"><input type="checkbox" name="field" value="発酵・麹" />発酵・麹</label>
-            <label class="choice"><input type="checkbox" name="field" value="ロースイーツ・ローチョコレート" />ロースイーツ・ローチョコレート</label>
-            <label class="choice"><input type="checkbox" name="field" value="UMAMI &amp; KOJI LAB（英語）" />UMAMI &amp; KOJI LAB（英語）</label>
+            <label class="choice"><input type="checkbox" name="ご興味のある分野" value="ローフード" />ローフード</label>
+            <label class="choice"><input type="checkbox" name="ご興味のある分野" value="発酵・麹" />発酵・麹</label>
+            <label class="choice"><input type="checkbox" name="ご興味のある分野" value="ロースイーツ・ローチョコレート" />ロースイーツ・ローチョコレート</label>
+            <label class="choice"><input type="checkbox" name="ご興味のある分野" value="UMAMI &amp; KOJI LAB（英語）" />UMAMI &amp; KOJI LAB（英語）</label>
           </div>
         </label>
 
         <label>ご希望の受講形式（任意）
-          <select name="mode">
+          <select name="ご希望の受講形式">
             <option value="">選択してください</option>
             <option>対面（東京・神宮前）</option>
             <option>オンライン</option>
             <option>どちらでも可</option>
           </select>
         </label>
-        <label>ご希望の日程（任意）<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
+        <label>ご希望の日程（任意）<input type="text" name="ご希望の日程" placeholder="例：10月中旬の平日" /></label>
 
         <label class="full">お問い合わせ内容<span>*</span>
-          <textarea name="message" rows="6" required placeholder="ご質問、ご希望の日程、アレルギーなど、お書き添えください。"></textarea>
+          <textarea name="お問い合わせ内容" rows="6" required placeholder="ご質問、ご希望の日程、アレルギーなど、お書き添えください。"></textarea>
         </label>
 
         <label class="full consent">
-          <input type="checkbox" name="privacy" required />
+          <input type="checkbox" name="個人情報の取り扱いに同意" required />
           <span><a href="/privacypolicy">個人情報の取り扱い</a>に同意します。いただいた情報は、お問い合わせへのご返信にのみ使用します。</span>
         </label>
 
         <button type="submit" class="btn btn--solid">送信する</button>
       </FormGate>
 
-      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認ください。届いていないことがありますので、そのときはお手数ですが、もう一度このフォームからお送りください。</p>
+      <p class="note">送信後、受付の確認メールを自動でお送りします。数分たっても届かない場合は、迷惑メールフォルダをご確認ください。ご返信は3営業日以内に、&LAB TOKYO よりお送りします。</p>
     </div>
   </section>
 

@@ -44,6 +44,8 @@ const L = {
   no:       EN ? 'No, thank you' : '希望しない',
   date2:    EN ? 'Preferred date — 2nd choice' : '希望日程（第二希望）',
   date3:    EN ? 'Preferred date — 3rd choice' : '希望日程（第三希望）',
+  address:  EN ? 'Address' : 'ご住所',
+  addressPh:EN ? 'City, Country' : '東京都渋谷区神宮前0-0-0',
 };
 ---
 
@@ -487,11 +489,12 @@ const L = {
           {b.body && <p class="sec-lead">{b.body}</p>}
         </header>
         <FormGate subject={b.subject} mailBody={b.mailBody ?? ''} class="form-grid">
-          <label>{L.name}<span>*</span><input type="text" name="name" required /></label>
+          <label>{L.name}<span>*</span><input type="text" name={EN ? "name" : "お名前"} required /></label>
           <label>{L.email}<span>*</span><input type="email" name="email" required /></label>
-          <label>{L.tel}<input type="tel" name="tel" /></label>
+          <label class="full">{L.address}<span>*</span><input type="text" name={EN ? "address" : "ご住所"} required placeholder={L.addressPh} /></label>
+          <label>{L.tel}<input type="tel" name={EN ? "tel" : "お電話番号"} /></label>
           <label>{L.course}<span>*</span>
-            <select name="course" required>
+            <select name={EN ? "course" : "ご希望の講座"} required>
               <option value="">{L.select}</option>
               {(b.options ?? []).map((o: string) => <option>{o}</option>)}
               <option>{L.undecided}</option>
@@ -499,7 +502,7 @@ const L = {
           </label>
           {b.guests && (
             <label>{L.guests}<span>*</span>
-              <select name="guests" required>
+              <select name={EN ? "guests" : "ご参加人数"} required>
                 <option value="">{L.select}</option>
                 {b.guests.map((g: string) => <option>{g}</option>)}
               </select>
@@ -507,26 +510,26 @@ const L = {
           )}
           {!b.noMode && (
             <label>{L.mode}
-              <select name="mode">
+              <select name={EN ? "mode" : "ご希望の受講形式"}>
                 <option value="">{L.select}</option>
                 <option>{L.onsite}</option>
                 <option>{L.online}</option>
               </select>
             </label>
           )}
-          <label>{L.date}<input type="text" name="date1" placeholder={b.datePlaceholder ?? L.datePh} /></label>
-          {b.extraDates && <label>{L.date2}<input type="text" name="date2" placeholder={b.datePlaceholder ?? L.datePh} /></label>}
-          {b.extraDates && <label>{L.date3}<input type="text" name="date3" placeholder={b.datePlaceholder ?? L.datePh} /></label>}
+          <label>{L.date}<input type="text" name={EN ? "date1" : "ご希望の日程"} placeholder={b.datePlaceholder ?? L.datePh} /></label>
+          {b.extraDates && <label>{L.date2}<input type="text" name={EN ? "date2" : "ご希望の日程2"} placeholder={b.datePlaceholder ?? L.datePh} /></label>}
+          {b.extraDates && <label>{L.date3}<input type="text" name={EN ? "date3" : "ご希望の日程3"} placeholder={b.datePlaceholder ?? L.datePh} /></label>}
           {b.vegan && (
             <label>{L.vegan}
-              <select name="vegan">
+              <select name={EN ? "vegan" : "ビーガン対応"}>
                 <option value="">{L.select}</option>
                 <option>{L.yes}</option>
                 <option>{L.no}</option>
               </select>
             </label>
           )}
-          <label class="full">{L.msg}<textarea name="message" rows="5"></textarea></label>
+          <label class="full">{L.msg}<textarea name={EN ? "message" : "お問い合わせ内容"} rows="5"></textarea></label>
           <button type="submit" class="btn btn--solid">{L.submit}</button>
         </FormGate>
       </div>
