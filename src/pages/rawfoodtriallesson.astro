@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { FORM_ENDPOINT, isFormLive } from '../lib/forms';
-import MailLink from '../components/MailLink.astro';
+import FormGate from '../components/FormGate.astro';
+import ApplyFields from '../components/ApplyFields.astro';
+import '../styles/course.css';
 
 // Wix /rawfoodtriallesson の内容を移設（2026-08-30）。URLは Wix と同一に保つ。
 const HERO   = '/images/wix/857257_f821dd1a7785486482e0be1e150e8de8-6274dc97.png';
@@ -250,49 +251,24 @@ textarea { min-height: 118px; resize: vertical; }
     <span class="sec-eye">Reservation</span>
     <h2>お申し込み</h2>
 
-    {isFormLive ? (
-      <div class="formwrap">
-        <form action={FORM_ENDPOINT} method="POST">
-          <input type="hidden" name="_subject" value="【体験レッスン】お申し込み" />
-          <input type="hidden" name="フォーム" value="ローフード体験レッスン" />
-          <div class="fg">
-            <div class="f"><label for="last">姓<span class="req">*</span></label><input id="last" name="姓" required /></div>
-            <div class="f"><label for="first">名<span class="req">*</span></label><input id="first" name="名" required /></div>
-            <div class="f wide"><label for="email">メールアドレス<span class="req">*</span></label><input id="email" type="email" name="メールアドレス" required /></div>
-            <div class="f wide"><label for="tel">お電話番号</label><input id="tel" type="tel" name="電話番号" /></div>
-            <div class="f"><label for="d1">希望日 第一希望<span class="req">*</span></label><input id="d1" type="date" name="希望日1" required /></div>
-            <div class="f"><label for="d2">希望日 第二希望</label><input id="d2" type="date" name="希望日2" /></div>
-            <div class="f"><label for="d3">希望日 第三希望</label><input id="d3" type="date" name="希望日3" /></div>
-            <div class="f"><label for="n">参加人数<span class="req">*</span></label>
-              <select id="n" name="参加人数" required>
-                <option value="1">1名</option><option value="2">2名</option>
-                <option value="3">3名</option><option value="4">4名</option><option value="5">5名</option>
-              </select>
-            </div>
-            <div class="f wide"><label>ビーガン対応<span class="req">*</span></label>
-              <div class="radios">
-                <label><input type="radio" name="ビーガン対応" value="希望する" required />希望する</label>
-                <label><input type="radio" name="ビーガン対応" value="希望しない" />希望しない</label>
-              </div>
-            </div>
-            <div class="f wide"><label for="msg">メッセージ・ご質問等（アレルギーなどご要望があればこちらへ）</label><textarea id="msg" name="メッセージ"></textarea></div>
-          </div>
-          <button class="btn" type="submit">お申し込みを送信する →</button>
-        </form>
-      </div>
-    ) : (
-      <div class="fallback">
-        <h3>お申し込みはメールで承っています</h3>
-        <p>
-          下記より、ご希望の日程（第三希望まで）・参加人数・ビーガン対応の要否・アレルギーの有無をお知らせください。<br />
-          折り返し、日程のご相談とお支払い方法をご案内します。
-        </p>
-        <p style="margin-top:14px">
-          <MailLink class="mail" subject="【体験レッスン】お申し込み" />
-        </p>
-        <MailLink class="btn" subject="【体験レッスン】お申し込み" />
-      </div>
-    )}
+    <FormGate subject="【体験レッスン】お申し込み" class="form-grid" name="rawfood-trial">
+      <input type="hidden" name="フォーム" value="ローフード体験レッスン" />
+      <ApplyFields fixedCourse="トライアルレッスン「ローフード」" askMode={false} extraDates={true}>
+        <label>ご参加人数<span>*</span>
+          <select name="ご参加人数" required>
+            <option value="">選択してください</option>
+            <option>1名</option><option>2名</option><option>3名</option>
+            <option>4名</option><option>5名</option>
+          </select>
+        </label>
+        <label class="full">ビーガン対応<span>*</span>
+          <span class="choice-grid">
+            <label class="choice"><input type="radio" name="ビーガン対応" value="希望する" required />希望する</label>
+            <label class="choice"><input type="radio" name="ビーガン対応" value="希望しない" />希望しない</label>
+          </span>
+        </label>
+      </ApplyFields>
+    </FormGate>
   </div>
 </section>
 

@@ -50,7 +50,8 @@ const galleryImages = [
   { src: "/choco-real/06-junior-plating.jpg",      caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
 ];
 import FormGate from '../../components/FormGate.astro';
-import { TALLY_BY_COURSE } from '../../lib/tally';
+import ApplyFields from '../../components/ApplyFields.astro';
+import '../../styles/course.css';
 ---
 
 <Layout
@@ -770,55 +771,10 @@ import { TALLY_BY_COURSE } from '../../lib/tally';
     </header>
     <FormGate
       subject={`【講座申込】${c.title}`}
-      tally={TALLY_BY_COURSE[c.id]}
-      class="form-sec__form"
+      class="form-grid"
       name={`course-apply-${c.id}`}
     >
-      <input type="hidden" name="form-name" value={`course-apply-${c.id}`} />
-      <input type="hidden" name="course" value={c.title} />
-
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="f-name">お名前 <span class="req">必須</span></label>
-          <input class="form-input" type="text" id="f-name" name="name"
-            placeholder="山田 花子" autocomplete="name" required />
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="f-kana">フリガナ</label>
-          <input class="form-input" type="text" id="f-kana" name="kana"
-            placeholder="アンドウ チエ" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="f-email">メールアドレス <span class="req">必須</span></label>
-          <input class="form-input" type="email" id="f-email" name="email"
-            placeholder="your@email.com" autocomplete="email" required />
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="f-tel">電話番号</label>
-          <input class="form-input" type="tel" id="f-tel" name="tel"
-            placeholder="090-0000-0000" autocomplete="tel" />
-        </div>
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="f-when">ご希望の日程・時期</label>
-        <input class="form-input" type="text" id="f-when" name="schedule"
-          placeholder="例：9月以降の週末を希望" />
-      </div>
-      <div class="form-field">
-        <label class="form-label" for="f-msg">お問い合わせ内容</label>
-        <textarea class="form-textarea" id="f-msg" name="message"
-          rows="5" placeholder="ご質問・ご要望などをご記入ください。"></textarea>
-      </div>
-      <div class="form-submit">
-        <button class="btn btn--gold btn--lg" type="submit">送信する</button>
-        <p class="form-privacy">
-          送信いただくことで
-          <a href="/privacypolicy" target="_blank" rel="noopener">プライバシーポリシー</a>
-          に同意したものとみなします。
-        </p>
-      </div>
+      <ApplyFields fixedCourse={c.title} askMode={true} />
     </FormGate>
   </div>
 </section>

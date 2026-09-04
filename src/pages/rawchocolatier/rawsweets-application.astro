@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import FormGate from '../../components/FormGate.astro';
+import ApplyFields from '../../components/ApplyFields.astro';
+import '../../styles/course.css';
 ---
 <Layout
   title="ロースイーツ講座 お申し込み | &LAB TOKYO"
@@ -88,79 +90,16 @@ select { appearance: none; cursor: pointer; }
     <h2>申し込みフォーム</h2>
     <div class="rule"></div>
 
-    <FormGate subject="【ロースイーツ／ローチョコ】お申し込み" name="rawsweets-application">
-      <input type="hidden" name="form-name" value="rawsweets-application" />
-
-      <div class="row">
-        <div class="form-group">
-          <label>姓 <span class="req">*</span></label>
-          <input type="text" name="last_name" required placeholder="山田" />
-        </div>
-        <div class="form-group">
-          <label>名 <span class="req">*</span></label>
-          <input type="text" name="first_name" required placeholder="千英" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>メールアドレス <span class="req">*</span></label>
-        <input type="email" name="email" required placeholder="info@example.com" />
-      </div>
-
-      <div class="form-group">
-        <label>電話番号</label>
-        <input type="tel" name="phone" placeholder="090-0000-0000" />
-      </div>
-
-      <div class="form-group">
-        <label>住所</label>
-        <input type="text" name="address" placeholder="東京都渋谷区" />
-      </div>
-
-      <div class="form-group">
-        <label>お申し込み希望講座 <span class="req">*</span></label>
-        <select name="course" required>
-          <option value="">選択してください</option>
-          <option>ロースイーツマイスター</option>
-          <option>ローチョコレートマイスター</option>
-          <option>ローショコラティエ</option>
-          <option>ローパティシエ養成講座</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>受講形式</label>
-        <select name="format">
-          <option value="">選択してください</option>
-          <option>対面</option>
-          <option>オンライン</option>
-          <option>どちらでも可</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>第1希望日</label>
-        <input type="text" name="date1" placeholder="例：2026年7月中旬の平日" />
-      </div>
-
-      <div class="form-group">
-        <label>第2希望日</label>
-        <input type="text" name="date2" placeholder="例：2026年8月上旬の土日" />
-      </div>
-
-      <div class="form-group">
-        <label>第3希望日</label>
-        <input type="text" name="date3" placeholder="例：2026年8月中旬以降でも可" />
-      </div>
-
-      <div class="form-group">
-        <label>その他、可能な日程・ご質問</label>
-        <textarea name="message" placeholder="ご質問やご要望があればご記入ください。"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn">送信する</button>
-
-      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信が届かない場合は、迷惑メールフォルダをご確認のうえ、もう一度このフォームからお送りください。</p>
+    <FormGate subject="【ロースイーツ／ローチョコ】お申し込み" class="form-grid" name="rawsweets-application">
+      <ApplyFields
+        courses={[
+          'ロースイーツマイスター',
+          'ローチョコレートマイスター',
+          'ローショコラティエ',
+          'ローパティシエ養成講座',
+        ]}
+        extraDates={true}
+      />
     </FormGate>
   </div>
 </section>

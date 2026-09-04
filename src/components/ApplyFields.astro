@@ -1,0 +1,85 @@
+---
+/**
+ * 申し込み・お問い合わせフォームの共通入力欄。
+ *
+ * なぜ共通化したか（2026-09-05）:
+ *   講座ごとにフォームの作りがばらばらで、見た目も必須項目も揃っていなかった。
+ *   4ページが独自マークアップで、course.css の .form-grid が効いていなかった。
+ *   ここに集約したので、項目を足すときはこのファイルだけ直せば全ページに反映される。
+ *
+ * 必須の考え方（Chie 判断）:
+ *   氏名・メール・電話・住所を必須にする。入口は狭くなるが、
+ *   業者からの一方的な営業や冷やかしが減るほうが実情に合う。
+ *   会社名は総合窓口だけ必須（個人の方は「個人」と記入）。
+ *
+ * 項目名を日本語にしているのは、通知メールと自動返信メールで
+ * そのまま見出しになるため。email だけは Formspark が返信先と
+ * 自動返信の宛先判定に使うので英語のまま変えない。
+ */
+interface Props {
+  /** 講座の選択肢。空なら講座の選択欄を出さない */
+  courses?: string[];
+  /** 講座名が1つに決まっているページ（選択させず hidden で送る） */
+  fixedCourse?: string;
+  /** 受講形式（対面／オンライン）を聞くか */
+  askMode?: boolean;
+  /** 希望日を3つ聞くか（体験レッスンなど） */
+  extraDates?: boolean;
+  /** 会社名・団体名を必須で聞くか（総合窓口のみ） */
+  askCompany?: boolean;
+}
+const { courses = [], fixedCourse, askMode = true, extraDates = false, askCompany = false } = Astro.props;
+---
+{fixedCourse && <input type="hidden" name="ご希望の講座" value={fixedCourse} />}
+
+<label>お名前<span>*</span><input type="text" name="お名前" required placeholder="山田 花子" autocomplete="name" /></label>
+<label>ふりがな<input type="text" name="ふりがな" placeholder="やまだ はなこ" /></label>
+
+<label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" autocomplete="email" /></label>
+<label>お電話番号<span>*</span><input type="tel" name="お電話番号" required placeholder="090-0000-0000" autocomplete="tel" /></label>
+
+<label class="full">ご住所<span>*</span><input type="text" name="ご住所" required placeholder="東京都渋谷区神宮前0-0-0" autocomplete="street-address" /></label>
+
+{askCompany && (
+  <label class="full">会社名・団体名<span>*</span>
+    <input type="text" name="会社名・団体名" required placeholder="個人の方は「個人」とご記入ください" />
+  </label>
+)}
+
+{courses.length > 0 && (
+  <label class="full">ご希望の講座<span>*</span>
+    <select name="ご希望の講座" required>
+      <option value="">選択してください</option>
+      {courses.map((c) => <option>{c}</option>)}
+      <option>まだ決めていない／相談したい</option>
+    </select>
+  </label>
+)}
+
+{askMode && (
+  <label>ご希望の受講形式<span>*</span>
+    <select name="ご希望の受講形式" required>
+      <option value="">選択してください</option>
+      <option>対面（東京・神宮前）</option>
+      <option>オンライン</option>
+      <option>どちらでも可</option>
+    </select>
+  </label>
+)}
+
+<label>ご希望の日程<span>*</span><input type="text" name="ご希望の日程" required placeholder="例：10月中旬の平日" /></label>
+{extraDates && <label>ご希望の日程（第二希望）<input type="text" name="ご希望の日程2" placeholder="例：10月下旬の土日" /></label>}
+{extraDates && <label>ご希望の日程（第三希望）<input type="text" name="ご希望の日程3" /></label>}
+
+<slot />
+
+<label class="full">ご質問・ご要望
+  <textarea name="お問い合わせ内容" rows="5" placeholder="アレルギーやご要望があればこちらへ。"></textarea>
+</label>
+
+<label class="full consent">
+  <input type="checkbox" name="個人情報の取り扱いに同意" required />
+  <span><a href="/privacypolicy">個人情報の取り扱い</a>に同意します。いただいた情報は、お問い合わせへのご返信とご受講のご案内にのみ使用します。</span>
+</label>
+
+<button type="submit" class="btn btn--solid">送信する</button>
