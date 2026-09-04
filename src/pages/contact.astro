@@ -17,6 +17,8 @@
  *   当初は離脱要因として外したが、業者からの一方的な営業が増えており、
  *   「入口を少し狭くして質を上げる」ほうが実情に合うと判断して必須に戻した。
  *   会社名は個人の方が詰まらないよう「個人」と書けることを例示している。
+ *   電話番号も同じ理由で必須（2026-09-05）。申し込む意思のある方には
+ *   きちんと記入してもらい、業者にも同じ基準を求める。
  *
  * 種別を先頭に置いているのは、通知メールの冒頭に用件が出るようにするため。
  */
@@ -136,7 +138,7 @@ const jsonLd = {
 
         <label>お名前<span>*</span><input type="text" name="お名前" required placeholder="山田 花子" /></label>
         <label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" /></label>
-        <label>お電話番号（任意）<input type="tel" name="お電話番号" placeholder="090-0000-0000" /></label>
+        <label>お電話番号<span>*</span><input type="tel" name="お電話番号" required placeholder="090-0000-0000" /></label>
         <label class="full">ご住所<span>*</span><input type="text" name="ご住所" required placeholder="東京都渋谷区神宮前0-0-0" /></label>
         <label>会社名・団体名<span>*</span><input type="text" name="会社名・団体名" required placeholder="個人の方は「個人」とご記入ください" /></label>
 

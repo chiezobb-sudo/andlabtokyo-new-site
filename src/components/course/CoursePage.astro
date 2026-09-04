@@ -492,7 +492,7 @@ const L = {
           <label>{L.name}<span>*</span><input type="text" name={EN ? "name" : "お名前"} required /></label>
           <label>{L.email}<span>*</span><input type="email" name="email" required /></label>
           <label class="full">{L.address}<span>*</span><input type="text" name={EN ? "address" : "ご住所"} required placeholder={L.addressPh} /></label>
-          <label>{L.tel}<input type="tel" name={EN ? "tel" : "お電話番号"} /></label>
+          <label>{L.tel}<span>*</span><input type="tel" name={EN ? "tel" : "お電話番号"} required /></label>
           <label>{L.course}<span>*</span>
             <select name={EN ? "course" : "ご希望の講座"} required>
               <option value="">{L.select}</option>
