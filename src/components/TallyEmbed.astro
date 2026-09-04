@@ -3,68 +3,48 @@
  * Tally フォームの埋め込み。
  *
  * ページ内にそのまま入力欄が出る形（別タブに飛ばさない）。
- * 高さは dynamicHeight で中身に合わせて伸びる。
  *
- * 埋め込みスクリプトは Tally が提供しているものをそのまま読む。
- * 1ページに複数置いても embed.js は1回だけ読み込まれる（is:inline + 同一src）。
+ * 実装メモ（2026-09-05・実機で確認）:
+ *   Tally 公式の「data-tally-src + embed.js + Tally.loadEmbeds()」方式は、
+ *   このサイトでは src が入らず iframe が空のまま表示された。
+ *   loadEmbeds() を手で呼んでも同じ（loading="lazy" の有無も無関係）。
+ *   src を直接入れると Tally.FormLoaded が飛んできて正常に描画されるため、
+ *   JS を使わず素の iframe にしている。壊れる余地が少ない。
+ *
+ *   代わりに自動リサイズ（dynamicHeight）は使えないので、高さは height で指定する。
+ *   フォームが伸びた場合は iframe 内でスクロールする。
+ *   項目を増やしたときは height を見直すこと。
  */
 interface Props {
   /** tally.so/r/XXXXXX の XXXXXX */
   id: string;
   /** iframe のタイトル（スクリーンリーダー用） */
   title?: string;
-  /** 読み込み前に確保する高さ */
-  minHeight?: number;
+  /** 表示する高さ(px)。フォームの項目数に合わせる */
+  height?: number;
 }
-const { id, title = 'お申し込みフォーム', minHeight = 520 } = Astro.props;
-const src = `https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+const { id, title = 'お申し込みフォーム', height = 900 } = Astro.props;
+const src = `https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1`;
 ---
 <div class="tally-wrap">
   <iframe
-    data-tally-src={src}
-    loading="lazy"
+    src={src}
     width="100%"
-    height={minHeight}
+    height={height}
+    loading="lazy"
     frameborder="0"
     marginheight="0"
     marginwidth="0"
     title={title}
   ></iframe>
-  <noscript>
-    <p class="tally-noscript">
-      フォームの表示には JavaScript が必要です。
-      <a href={`https://tally.so/r/${id}`} target="_blank" rel="noopener">別ページでフォームを開く →</a>
-    </p>
-  </noscript>
 </div>
-<script is:inline>
-  /* Tally 公式の初期化。embed.js を読むだけでは data-tally-src が src に移らず、
-     iframe が空のままになる（実際に空で出た）。読み込み後に loadEmbeds を呼ぶ。
-     スクリプトが落ちた場合も、data-tally-src を直接 src に入れて表示させる。 */
-  (function () {
-    var d = document,
-        w = 'https://tally.so/widgets/embed.js',
-        v = function () {
-          if (typeof Tally !== 'undefined') { Tally.loadEmbeds(); return; }
-          d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(function (e) {
-            e.src = e.dataset.tallySrc;
-          });
-        };
-    if (typeof Tally !== 'undefined') { v(); return; }
-    if (d.querySelector('script[src="' + w + '"]') == null) {
-      var s = d.createElement('script');
-      s.src = w; s.onload = v; s.onerror = v;
-      d.body.appendChild(s);
-    } else {
-      d.addEventListener('DOMContentLoaded', v);
-      window.addEventListener('load', v);
-    }
-  })();
-</script>
+<p class="tally-alt">
+  うまく表示されない場合は <a href={`https://tally.so/r/${id}`} target="_blank" rel="noopener">別ページでフォームを開く →</a>
+</p>
 
 <style>
   .tally-wrap { background: #fff; border: 1px solid rgba(198,161,91,.28); border-radius: 4px; overflow: hidden; }
   .tally-wrap iframe { display: block; width: 100%; border: 0; }
-  .tally-noscript { padding: 24px; font-size: 14px; line-height: 1.9; color: #3D3934; }
-  .tally-noscript a { color: #A8794A; }
+  .tally-alt { margin: 12px 0 0; font-size: 12.5px; line-height: 1.8; color: #6E6862; }
+  .tally-alt a { color: #A8794A; }
 </style>
