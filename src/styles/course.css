@@ -171,15 +171,71 @@
   .next-step { text-align: center; }
   .next-step .sec-lead { margin: 0 auto 30px; }
 
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 22px; }
-  .form-grid > label { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
+  /* ── フォーム ──
+     箱を並べると「入力画面」に見えて、本文の明朝体から浮く。
+     設問は明朝体、入力欄は下線だけにして、読みものの続きとして読めるようにする。 */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px 32px; }
+  /* label を block にしておく。flex にすると「＊」が別行に落ちる。 */
+  .form-grid > label { display: block; }
   .form-grid > label.full { grid-column: 1 / -1; }
-  /* .choice / .consent の中の label は行として並べる（縦積みにしない） */
-  .form-grid .choice, .form-grid .consent { flex-direction: row; align-items: center; }
-    .form-grid > label > span:first-of-type { color: #B4553E; margin-left: 3px; }
-  .form-grid .choice span, .form-grid .consent span { color: inherit; margin-left: 0; }
-  .form-grid input, .form-grid select, .form-grid textarea { font-family: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); padding: 13px 14px; border-radius: 2px; }
-  .form-grid button { grid-column: 1 / -1; justify-self: start; }
+  .form-grid > label > input,
+  .form-grid > label > select,
+  .form-grid > label > textarea,
+  .form-grid > label > .choice-grid,
+  .form-grid > label > .consent { margin-top: 11px; }
+
+  /* 設問 */
+  .form-grid > label { font-family: var(--fm); font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: .02em; }
+  .form-grid > label > span:first-of-type { color: var(--amber); margin-left: 6px; font-size: 11px; letter-spacing: .1em; vertical-align: 2px; }
+
+  /* 入力欄：下線だけ */
+  .form-grid input[type="text"],
+  .form-grid input[type="email"],
+  .form-grid input[type="tel"],
+  .form-grid select,
+  .form-grid textarea {
+    font-family: 'Noto Sans JP', sans-serif; font-size: 15px; color: var(--ink);
+    background: transparent; border: 0; border-bottom: 1px solid rgba(110,104,98,.34);
+    padding: 10px 2px; border-radius: 0; width: 100%;
+    transition: border-color .2s, background .2s;
+  }
+  .form-grid input::placeholder, .form-grid textarea::placeholder { color: rgba(110,104,98,.5); }
+  .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus {
+    outline: 0; border-bottom-color: var(--amber); border-bottom-width: 2px; padding-bottom: 9px;
+  }
+  .form-grid select { -webkit-appearance: none; appearance: none; cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--amber) 50%), linear-gradient(135deg, var(--amber) 50%, transparent 50%);
+    background-position: calc(100% - 11px) 19px, calc(100% - 6px) 19px;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 26px; }
+  .form-grid textarea { border: 1px solid rgba(110,104,98,.28); padding: 14px; min-height: 130px; resize: vertical; }
+  .form-grid textarea:focus { border-color: var(--amber); border-width: 1px; padding: 14px; }
+
+  /* 選択肢：枠ではなく丸と余白で見せる */
+  .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin-top: 2px; }
+  .form-grid .choice, .form-grid .consent {
+    display: flex; align-items: flex-start; gap: 11px; flex-direction: row;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: 400;
+    line-height: 1.8; color: var(--ink-2); cursor: pointer; padding: 0; background: none; border: 0;
+  }
+  .form-grid .choice span, .form-grid .consent span { color: inherit; margin-left: 0; font-size: inherit; letter-spacing: normal; vertical-align: baseline; }
+  .form-grid .choice input, .form-grid .consent input {
+    -webkit-appearance: none; appearance: none; width: 16px; height: 16px; flex: 0 0 auto; margin-top: 3px;
+    border: 1px solid rgba(110,104,98,.5); background: #fff; cursor: pointer; padding: 0; position: relative;
+    transition: border-color .15s;
+  }
+  .form-grid .choice input[type="radio"], .form-grid .consent input[type="radio"] { border-radius: 50%; }
+  .form-grid .choice input:hover, .form-grid .consent input:hover { border-color: var(--amber); }
+  .form-grid .choice input:checked, .form-grid .consent input:checked { border-color: var(--amber); }
+  .form-grid .choice input[type="radio"]:checked::after, .form-grid .consent input[type="radio"]:checked::after {
+    content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--amber);
+  }
+  .form-grid .choice input[type="checkbox"]:checked::after, .form-grid .consent input[type="checkbox"]:checked::after {
+    content: ''; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px;
+    border-right: 1.7px solid var(--amber); border-bottom: 1.7px solid var(--amber); transform: rotate(42deg);
+  }
+  .form-grid .consent { align-items: flex-start; }
+
+  .form-grid button { grid-column: 1 / -1; justify-self: start; margin-top: 6px; min-width: 260px; text-align: center; }
 
   @media (max-width: 900px) {
     .cards-3, .steps-3, .voices, .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }

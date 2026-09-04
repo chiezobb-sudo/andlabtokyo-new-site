@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "andlab-verify",
-      "autoPort": true,
-      "runtimeExecutable": "/Users/chie/.nvm/versions/node/v22.22.3/bin/node",
-      "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "dev"],
-      "port": 4331
+      "name": "andlab-dist",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "dist", "-l", "4399", "--no-clipboard"],
+      "port": 4399
     }
   ]
 }
