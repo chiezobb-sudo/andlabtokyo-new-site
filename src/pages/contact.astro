@@ -1,131 +1,210 @@
 ---
+/**
+ * お問い合わせ（総合窓口）
+ *
+ * 位置づけ（2026-09-04・Chie と確認）:
+ *   各講座ページのフォーム = 「その講座に決めている人」の申し込み口
+ *   このページ            = 「まだ決めていない人」と「取材・企業・書籍」の総合窓口
+ *   フォームが複数あること自体は正しい。役割が違うので統合しない。
+ *
+ * Wix 版（/contact）にあった問題をここで潰している:
+ *   - ご住所が必須だった（レッスンの問い合わせに住所は要らない・最大の離脱要因）
+ *   - 電話番号が必須だった（海外からの問い合わせが実際に来ている）
+ *   - お問い合わせ種別が「任意」で、受信箱で仕分けできなかった → 先頭・必須にした
+ *   - 「お名前（性）」の誤字 → （姓）
+ *   - 迷子の白文字リンク2つが本文に重なっていた → 持ち込まない
+ *
+ * 種別を先頭に置いているのは、通知メールの冒頭に用件が出るようにするため。
+ */
 import Layout from '../layouts/Layout.astro';
 import FormGate from '../components/FormGate.astro';
+import '../styles/course.css';
+
+const url = 'https://www.andlabtokyo.com/contact';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': `${url}#page`,
+      name: 'お問い合わせ',
+      url,
+      inLanguage: 'ja',
+      about: { '@id': 'https://www.andlabtokyo.com/#org' },
+    },
+    {
+      '@type': 'EducationalOrganization',
+      '@id': 'https://www.andlabtokyo.com/#org',
+      name: '&LAB TOKYO',
+      url: 'https://www.andlabtokyo.com',
+      email: 'info@andlabtokyo.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '神宮前',
+        addressLocality: '渋谷区',
+        addressRegion: '東京都',
+        addressCountry: 'JP',
+      },
+      availableLanguage: ['ja', 'en'],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://www.andlabtokyo.com/' },
+        { '@type': 'ListItem', position: 2, name: 'お問い合わせ' },
+      ],
+    },
+  ],
+};
 ---
 <Layout
-  title="お問い合わせ・体験レッスン予約 | &LAB TOKYO"
-  canonical="https://www.andlabtokyo.com/contact"
+  title="お問い合わせ｜ローフード・発酵・ローチョコレート講座 | &LAB TOKYO"
+  description="&LAB TOKYO へのお問い合わせ窓口です。講座のご相談、体験レッスンのご予約、企業コラボ・商品監修、取材・メディア、書籍に関するご相談はこちらから。東京・渋谷（神宮前）。3営業日以内にご返信します。"
+  canonical={url}
+  ogImage="/images/koji/guests.jpg"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    
-    
-    
-    .page{padding-top:52px;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 52px);}
-    .page-left{background:var(--sumi);padding:6rem 5vw;display:flex;flex-direction:column;justify-content:center;position:sticky;top:52px;height:calc(100vh - 52px);overflow:hidden;}
-    .page-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(169,209,89,.06) 0%,transparent 65%);}
-    .left-content{position:relative;z-index:1;}
-    .left-eye{font-family:var(--f-sans);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:1.4rem;}
-    .left-h1{font-family:var(--f-serif);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;letter-spacing:.1em;color:#F4F2EE;line-height:1.6;margin-bottom:1.4rem;}
-    .left-rule{width:28px;height:1px;background:rgba(244,242,238,.2);margin:1.8rem 0;}
-    .left-desc{font-size:.9rem;color:rgba(244,242,238,.5);line-height:2;margin-bottom:2.5rem;}
-    .left-meta{display:flex;flex-direction:column;gap:.8rem;}
-    .left-meta-item{display:flex;gap:.8rem;align-items:center;font-size:.82rem;color:rgba(244,242,238,.45);}
-    .left-meta-item::before{content:'—';color:var(--green);flex-shrink:0;}
-    .page-right{background:var(--linen);padding:5rem 4vw 4rem;}
-    .form-wrap{max-width:520px;margin:0 auto;}
-    .form-title{font-family:var(--f-serif);font-size:1.5rem;font-weight:400;letter-spacing:.08em;color:var(--ink);margin-bottom:.6rem;}
-    .form-sub{font-size:.88rem;color:var(--ink-3);margin-bottom:3rem;line-height:1.8;}
-    form{display:flex;flex-direction:column;gap:1.4rem;}
-    .field{display:flex;flex-direction:column;gap:.5rem;}
-    label{font-size:.8rem;font-weight:500;color:var(--ink-2);letter-spacing:.04em;}
-    label .req{color:var(--green-d);margin-left:3px;}
-    input[type="text"],input[type="email"],input[type="tel"],textarea,select{width:100%;padding:.85rem 1rem;background:var(--linen-2);border:1px solid var(--divider);border-radius:0;color:var(--ink);font-family:var(--f-sans);font-size:.92rem;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;}
-    input:focus,textarea:focus,select:focus{border-color:var(--green-d);background:#fff;}
-    textarea{min-height:130px;resize:vertical;}
-    .program-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.4rem;}
-    .program-item{display:flex;align-items:center;gap:.6rem;background:var(--linen-2);border:1px solid var(--divider);padding:.75rem 1rem;cursor:pointer;transition:border-color .2s,background .2s;font-size:.85rem;color:var(--ink-2);}
-    .program-item:hover{border-color:var(--green-d);background:#fff;}
-    .program-item input[type="checkbox"]{width:15px;height:15px;border:1px solid var(--divider);background:transparent;padding:0;flex-shrink:0;accent-color:var(--green-d);}
-    /* ━━ メルマガチェックボックス ━━
-       将来: name="newsletter" value="yes" を参照して
-       Brevo/Mailchimp APIでリスト自動登録を実装すること */
-    .newsletter-field{margin-top:.4rem;padding:1.2rem;background:rgba(169,209,89,.06);border:1px solid rgba(169,209,89,.2);}
-    .newsletter-label{display:flex;align-items:flex-start;gap:.8rem;cursor:pointer;font-size:.88rem;color:var(--ink-2);line-height:1.6;}
-    .newsletter-label input[type="checkbox"]{width:16px;height:16px;border:1px solid var(--divider);background:transparent;padding:0;flex-shrink:0;margin-top:2px;accent-color:var(--green-d);}
-    .newsletter-label strong{color:var(--ink);font-weight:700;}
-    .newsletter-note{margin-top:.6rem;font-size:.75rem;color:var(--ink-3);padding-left:24px;line-height:1.6;}
-    .submit{width:100%;padding:1.1rem;background:var(--sumi);color:#F4F2EE;font-family:var(--f-sans);font-size:.9rem;font-weight:700;letter-spacing:.08em;border:none;border-radius:0;cursor:pointer;transition:background .2s;}
-    .submit:hover{background:var(--sumi-2);}
-    .form-note{font-size:.78rem;color:var(--ink-3);text-align:center;line-height:1.7;}
-    .privacy-check{display:flex;align-items:flex-start;gap:.7rem;font-size:.82rem;color:var(--ink-3);line-height:1.6;cursor:pointer;}
-    .privacy-check input[type="checkbox"]{width:15px;height:15px;padding:0;flex-shrink:0;margin-top:2px;accent-color:var(--green-d);}
-    
-    
-    @media(max-width:768px){.page{grid-template-columns:1fr;}.page-left{position:static;height:auto;padding:4rem 1.5rem;}.page-right{padding:3rem 1.5rem;}.program-grid{grid-template-columns:1fr;}}
-</style>
+  <section class="hero hero--short">
+    <img src="/images/koji/guests.jpg" alt="&LAB TOKYO のキッチンでレッスンを受ける様子" width="1200" height="845" fetchpriority="high" />
+    <div class="hero-veil"></div>
+    <div class="hero-body">
+      <span class="eyebrow eyebrow--light">CONTACT</span>
+      <h1>お問い合わせ</h1>
+      <p class="hero-lead">講座のご相談から、取材・企業のご依頼まで。どのご用件もこのページから承ります。</p>
+    </div>
+  </section>
 
-<div class="page">
-    <div class="page-left">
-      <div class="left-content">
-        <span class="left-eye">LABへの入口</span>
-        <h1 class="left-h1">まずは体験レッスンから、<br />&LAB TOKYOの世界へ。</h1>
-        <div class="left-rule"></div>
-        <p class="left-desc">ここは、単なる料理教室ではありません。<br />細胞から整える食の知恵と美意識に触れる、<br />あなた自身の再生への入口です。</p>
-        <div class="left-meta">
-          <div class="left-meta-item">神宮前、表参道、青山、千駄ヶ谷よりアクセス</div>
-          <div class="left-meta-item">東京都渋谷区神宮前</div>
-          <div class="left-meta-item">少人数制（1〜4名）</div>
-          <div class="left-meta-item">¥8,000〜 入会費なし</div>
-          <div class="left-meta-item">詳しいレッスン会場はお申し込み後にご案内いたします。</div>
-          <div class="left-meta-item">3日以内にご返信いたします</div>
+  <section class="sec sec--linen">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="eyebrow">WHERE TO START</span>
+        <h2>ご用件に合わせて、3つの入口があります</h2>
+        <p class="sec-lead">受けたい講座が決まっている方は、その講座のページからお申し込みいただくのが一番早く進みます。迷っている段階の方と、お仕事のご相談は、このページの窓口へどうぞ。</p>
+      </header>
+      <div class="routes">
+        <a class="route" href="/alllesson">
+          <span class="route-en">01 — APPLY</span>
+          <h3>受ける講座が決まっている</h3>
+          <p>各講座ページに、その講座専用のお申し込みフォームがあります。日程や受講形式まで一度で伝わるので、やりとりが少なく済みます。</p>
+          <span class="route-more">全講座一覧から探す →</span>
+        </a>
+        <a class="route" href="/experiencelessons">
+          <span class="route-en">02 — TRY FIRST</span>
+          <h3>まず一度、体験したい</h3>
+          <p>一回完結の体験レッスンをご用意しています。持ち物は不要、はじめての方が対象です。</p>
+          <span class="route-more">体験レッスンを見る →</span>
+        </a>
+        <div class="route route--here">
+          <span class="route-en">03 — ASK</span>
+          <h3>相談したい・お仕事の依頼</h3>
+          <p>どの講座が合うか分からない方、企業コラボ・商品監修、取材、書籍についてのご相談は、下のフォームからお願いします。</p>
+          <span class="route-more">↓ このページのフォームへ</span>
         </div>
       </div>
     </div>
-    <div class="page-right">
-      <div class="form-wrap">
-        <h2 class="form-title">お問い合わせ</h2>
-        <p class="form-sub">体験レッスンのご予約・ご質問はこちらからどうぞ。<br />内容を確認後、3日以内にご連絡いたします。</p>
-        <FormGate subject="【お問い合わせ】サイトフォーム">
-          <div class="field">
-            <label for="name">お名前<span class="req">*</span></label>
-            <input type="text" id="name" name="name" required placeholder="山田 花子" />
+  </section>
+
+  <section class="sec sec--cream" id="form">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">CONTACT FORM</span>
+        <h2>お問い合わせフォーム</h2>
+        <p class="sec-lead">3営業日以内にご返信します。入会費・登録費はありません。</p>
+      </header>
+
+      <FormGate
+        subject="【&LAB TOKYO】お問い合わせ（総合窓口）"
+        mailBody={'ご用件：\nお名前：\nメールアドレス：\nお電話番号（任意）：\nご興味のある分野：\nお問い合わせ内容：\n'}
+        class="form-grid"
+      >
+        <label class="full">ご用件<span>*</span>
+          <select name="subject_type" required>
+            <option value="">選択してください</option>
+            <option>講座について相談したい</option>
+            <option>体験レッスンを予約したい</option>
+            <option>企業コラボ・商品監修のご依頼</option>
+            <option>取材・メディアのご依頼</option>
+            <option>書籍について</option>
+            <option>その他</option>
+          </select>
+        </label>
+
+        <label>お名前<span>*</span><input type="text" name="name" required placeholder="安藤 千英" /></label>
+        <label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" /></label>
+        <label>お電話番号（任意）<input type="tel" name="tel" placeholder="090-0000-0000" /></label>
+        <label>会社名・団体名（任意）<input type="text" name="company" /></label>
+
+        <label class="full">ご興味のある分野（任意・いくつでも）
+          <div class="choice-grid">
+            <label class="choice"><input type="checkbox" name="field" value="ローフード" />ローフード</label>
+            <label class="choice"><input type="checkbox" name="field" value="発酵・麹" />発酵・麹</label>
+            <label class="choice"><input type="checkbox" name="field" value="ロースイーツ・ローチョコレート" />ロースイーツ・ローチョコレート</label>
+            <label class="choice"><input type="checkbox" name="field" value="UMAMI &amp; KOJI LAB（英語）" />UMAMI &amp; KOJI LAB（英語）</label>
           </div>
-          <div class="field">
-            <label for="email">メールアドレス<span class="req">*</span></label>
-            <input type="email" id="email" name="email" required placeholder="example@email.com" />
-          </div>
-          <div class="field">
-            <label for="tel">お電話番号（任意）</label>
-            <input type="tel" id="tel" name="tel" placeholder="090-0000-0000" />
-          </div>
-          <div class="field">
-            <label>ご興味のあるプログラム</label>
-            <div class="program-grid">
-              <label class="program-item"><input type="checkbox" name="program" value="rawfood" />🌿 ローフード</label>
-              <label class="program-item"><input type="checkbox" name="program" value="fermentation" />🍶 発酵 / Hacco LAB</label>
-              <label class="program-item"><input type="checkbox" name="program" value="raw-sweets" />🍫 ロースイーツ</label>
-              <label class="program-item"><input type="checkbox" name="program" value="umami-lab" />✨ UMAMI &amp; KOJI LAB</label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="format">ご希望の受講形式</label>
-            <select id="format" name="format">
-              <option value="">選択してください</option>
-              <option value="tokyo-onsite">東京・渋谷（対面）</option>
-              <option value="online">オンライン</option>
-              <option value="either">どちらでも可</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="message">ご質問・ご要望（任意）</label>
-            <textarea id="message" name="message" placeholder="ご自由にお書きください。体験レッスンの希望日程などもここに。"></textarea>
-          </div>
-          <div class="field">
-            <p class="newsletter-note">※ メルマガもご希望の方は、<a href="/newsletter">メールマガジンページ</a>からご登録ください。</p>
-          </div>
-          <div class="field">
-            <label class="privacy-check">
-              <input type="checkbox" name="privacy" required />
-              個人情報の取り扱いについて同意します。お問い合わせへの返信目的にのみ使用します。
-            </label>
-          </div>
-          <button type="submit" class="submit">&LAB TOKYOの世界を体験する</button>
-          <p class="form-note">3日以内にご返信いたします。<br />入会費・登録費は一切ありません。</p>
-        </FormGate>
+        </label>
+
+        <label>ご希望の受講形式（任意）
+          <select name="mode">
+            <option value="">選択してください</option>
+            <option>対面（東京・神宮前）</option>
+            <option>オンライン</option>
+            <option>どちらでも可</option>
+          </select>
+        </label>
+        <label>ご希望の日程（任意）<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
+
+        <label class="full">お問い合わせ内容<span>*</span>
+          <textarea name="message" rows="6" required placeholder="ご質問、ご希望の日程、アレルギーなど、お書き添えください。"></textarea>
+        </label>
+
+        <label class="full consent">
+          <input type="checkbox" name="privacy" required />
+          <span><a href="/privacypolicy">個人情報の取り扱い</a>に同意します。いただいた情報は、お問い合わせへのご返信にのみ使用します。</span>
+        </label>
+
+        <button type="submit" class="btn btn--solid">送信する</button>
+      </FormGate>
+
+      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認のうえ、<a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a> まで直接ご連絡ください。</p>
+    </div>
+  </section>
+
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">FOR INTERNATIONAL GUESTS</span>
+        <h2>In English</h2>
+      </header>
+      <div class="en-note">
+        <h3>You can write to us in English.</h3>
+        <p>Please use the form above — it reaches us the same way. Tell us your preferred dates and the number of guests, and we will reply within three business days.</p>
+        <p>Our koji fermentation experience runs in English: <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>. You can also email us directly at <a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a>.</p>
       </div>
     </div>
-  </div>
+  </section>
 
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow">
+      <header class="sec-head">
+        <span class="eyebrow">ACCESS</span>
+        <h2>教室について</h2>
+      </header>
+      <table class="spec">
+        <tbody>
+          <tr><th scope="row">教室</th><td>&LAB TOKYO（ローフード発酵LAB東京／ローショコラティエ協会 本部）</td></tr>
+          <tr><th scope="row">場所</th><td>東京都渋谷区神宮前<br />表参道・青山・千駄ヶ谷からもアクセスできます。詳しい会場はお申し込み後にご案内します。</td></tr>
+          <tr><th scope="row">クラス</th><td>少人数制</td></tr>
+          <tr><th scope="row">対応言語</th><td>日本語／英語（UMAMI &amp; KOJI LAB は英語で開催）</td></tr>
+          <tr><th scope="row">返信</th><td>3営業日以内</td></tr>
+          <tr><th scope="row">メール</th><td><a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <style is:global>
+    body { background: #FAF9F6; }
+  </style>
 </Layout>

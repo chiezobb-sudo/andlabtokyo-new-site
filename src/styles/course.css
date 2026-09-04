@@ -245,3 +245,34 @@
 .toc a::before { content: counter(toc, decimal-leading-zero); position: absolute; left: 0; top: 16px; font-family: var(--fh); font-size: 14px; font-style: italic; color: var(--amber-l); }
 .toc a:hover { color: var(--amber); }
 .toc span { display: block; padding: 0 0 14px 42px; margin-top: -6px; font-size: 13px; line-height: 1.75; color: var(--ink-3); }
+
+/* ══ 短いヒーロー（問い合わせなど、本題を早く見せたいページ） ══ */
+.hero--short { height: 42vh; min-height: 300px; max-height: 420px; }
+@media (max-width: 560px) { .hero--short { height: auto; min-height: 0; max-height: none; padding-top: 52vw; } }
+
+/* ══ 問い合わせの入口カード ══ */
+.routes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.route { display: flex; flex-direction: column; gap: 10px; background: #fff; border: 1px solid var(--line); padding: 26px 24px 24px; text-decoration: none; transition: border-color .2s, transform .2s; }
+a.route:hover { border-color: var(--amber-l); transform: translateY(-3px); }
+.route-en { font-family: var(--fh); font-size: 11px; letter-spacing: .2em; color: var(--amber); }
+.route h3 { font-family: var(--fm); font-size: 17px; font-weight: 600; color: var(--ink); margin: 0; line-height: 1.6; }
+.route p { font-size: 13.5px; line-height: 1.9; color: var(--ink-2); margin: 0; flex: 1; }
+.route-more { font-size: 12.5px; letter-spacing: .04em; color: var(--amber); }
+.route--here { background: var(--accent); border-color: var(--amber-l); }
+@media (max-width: 900px) { .routes { grid-template-columns: 1fr; } }
+
+/* ══ フォームの補助 ══ */
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.choice { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); padding: 12px 14px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; transition: border-color .2s; }
+.choice:hover { border-color: var(--amber-l); }
+.choice input { width: 15px; height: 15px; flex: 0 0 auto; accent-color: var(--amber); padding: 0; }
+.consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.85; color: var(--ink-2); cursor: pointer; }
+.consent input { width: 15px; height: 15px; flex: 0 0 auto; margin-top: 3px; accent-color: var(--amber); padding: 0; }
+.consent a { color: var(--amber); }
+@media (max-width: 560px) { .choice-grid { grid-template-columns: 1fr; } }
+
+/* ══ 英語の案内 ══ */
+.en-note { background: var(--accent); border-left: 2px solid var(--amber-l); padding: 22px 26px; }
+.en-note h3 { font-family: var(--fh); font-size: 16px; letter-spacing: .06em; color: var(--ink); margin: 0 0 10px; }
+.en-note p { font-size: 13.5px; line-height: 1.95; color: var(--ink-2); margin: 0 0 8px; }
+.en-note a { color: var(--amber); }
