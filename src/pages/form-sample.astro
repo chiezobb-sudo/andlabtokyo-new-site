@@ -1,0 +1,81 @@
+---
+/**
+ * 【比較用・検索には出さない】
+ * Tally のフォーム（ODgokM）と同じ項目を、サイトのデザインで組んだもの。
+ * フォント（Shippori Mincho）・配色・余白が本文と揃うかを見るためのページ。
+ *
+ * 判断がついたら消すこと。
+ */
+import Layout from '../layouts/Layout.astro';
+import TallyEmbed from '../components/TallyEmbed.astro';
+import { TALLY } from '../lib/tally';
+import '../styles/course.css';
+---
+<Layout title="フォーム比較（社内確認用）" noindex={true}>
+  <section class="sec sec--linen">
+    <div class="inner inner--narrow">
+      <span class="eyebrow">SAMPLE A</span>
+      <h2>サイトのデザインで組んだ場合</h2>
+      <p class="sec-lead">見出しは明朝体、本文と同じ配色。ページの続きとして読めます。「Made with Tally」も出ません。</p>
+
+      <form class="form-grid" onsubmit="event.preventDefault();alert('これは見た目の確認用です。送信はしません。');">
+        <label>お名前<span>*</span><input type="text" name="name" required placeholder="安藤 千英" /></label>
+        <label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" /></label>
+        <label>電話番号<input type="tel" name="tel" placeholder="090-0000-0000" /></label>
+        <label>希望コース<span>*</span>
+          <select name="course" required>
+            <option value="">選択してください</option>
+            <option>初級</option>
+            <option>中級（初級修了者限定）</option>
+            <option>上級（初級・中級修了者限定）</option>
+          </select>
+        </label>
+
+        <label class="full">受講条件の確認<span>*</span>
+          <span class="consent">
+            <input type="checkbox" name="agree" required />
+            <span>受講条件を理解しました（中級は初級修了、上級は初級・中級修了が必要です）</span>
+          </span>
+        </label>
+
+        <label class="full">ジュニア養成講座（インストラクター資格・¥80,000）への参加<span>*</span>
+          <span class="choice-grid">
+            <label class="choice"><input type="radio" name="junior" value="yes" required />希望する（3ステップ修了後に受講）</label>
+            <label class="choice"><input type="radio" name="junior" value="no" />今回は希望しない</label>
+          </span>
+        </label>
+
+        <label class="full">希望受講形式<span>*</span>
+          <span class="choice-grid">
+            <label class="choice"><input type="radio" name="mode" value="onsite" required />対面（東京・渋谷）</label>
+            <label class="choice"><input type="radio" name="mode" value="online" />オンライン</label>
+          </span>
+        </label>
+
+        <label>希望日程・時期<span>*</span><input type="text" name="date1" required placeholder="例：10月中旬の平日" /></label>
+        <label>どこでお知りになりましたか<span>*</span>
+          <select name="source" required>
+            <option value="">選択してください</option>
+            <option>Instagram</option>
+            <option>検索</option>
+            <option>ご紹介</option>
+            <option>書籍</option>
+            <option>その他</option>
+          </select>
+        </label>
+
+        <label class="full">ご質問・備考<textarea name="message" rows="5"></textarea></label>
+        <button type="submit" class="btn btn--solid">お申し込みを送信する</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec sec--cream">
+    <div class="inner inner--narrow">
+      <span class="eyebrow">SAMPLE B</span>
+      <h2>今の Tally 埋め込み</h2>
+      <p class="sec-lead">項目もロジックも良いのですが、フォントが Noto Sans JP の太さ800で固定です。右下に「Made with Tally」が出ます。どちらも無料プランでは変えられません。</p>
+      <TallyEmbed id={TALLY.rawchocolatemeister} title="ローチョコレートマイスター養成講座 お申し込みフォーム" height={900} />
+    </div>
+  </section>
+</Layout>
