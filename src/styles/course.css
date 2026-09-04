@@ -172,11 +172,14 @@
   .next-step .sec-lead { margin: 0 auto 30px; }
 
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 22px; }
-  .form-grid :global(label) { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
-  .form-grid :global(label.full) { grid-column: 1 / -1; }
-  .form-grid :global(label span) { color: #B4553E; margin-left: 3px; }
-  .form-grid :global(input), .form-grid :global(select), .form-grid :global(textarea) { font-family: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); padding: 13px 14px; border-radius: 2px; }
-  .form-grid :global(button) { grid-column: 1 / -1; justify-self: start; }
+  .form-grid > label { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-2); }
+  .form-grid > label.full { grid-column: 1 / -1; }
+  /* .choice / .consent の中の label は行として並べる（縦積みにしない） */
+  .form-grid .choice, .form-grid .consent { flex-direction: row; align-items: center; }
+    .form-grid > label > span:first-of-type { color: #B4553E; margin-left: 3px; }
+  .form-grid .choice span, .form-grid .consent span { color: inherit; margin-left: 0; }
+  .form-grid input, .form-grid select, .form-grid textarea { font-family: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--line); padding: 13px 14px; border-radius: 2px; }
+  .form-grid button { grid-column: 1 / -1; justify-self: start; }
 
   @media (max-width: 900px) {
     .cards-3, .steps-3, .voices, .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
