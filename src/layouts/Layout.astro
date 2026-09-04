@@ -745,6 +745,26 @@ const fullTitle = hasBrand ? title : `${title} | &LAB TOKYO`;
       });
     </script>
 
+    <!-- tawk.to: 訪問者のリアルタイム把握＋チャット
+         いま誰がどのページを見ているか、どこから来たか、国・地域が分かる。
+         Wix で見えていた「新規サイト訪問者」の通知に相当する。
+         設定は https://dashboard.tawk.to の Admin から変更できる。
+         async で読むので、ページの表示速度には影響しない。 -->
+    <script is:inline>
+      (function () {
+        var Tawk_API = window.Tawk_API || {};
+        window.Tawk_API = Tawk_API;
+        window.Tawk_LoadStart = new Date();
+        var s1 = document.createElement('script'),
+            s0 = document.getElementsByTagName('script')[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/6a9b58d5d862ed3449e5587a/1k1nd60k9';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+
     <!-- Benchmark Email: newsletter popup -->
     <script async src="https://forms.us.benchmarksend.com/assets/embed.js"></script>
     <div data-bme-form-id="YlZ5_TnJYTz5pSMoZDpzU"></div>
