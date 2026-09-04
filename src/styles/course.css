@@ -341,3 +341,16 @@ a.route:hover { border-color: var(--amber-l); transform: translateY(-3px); }
 .en-note p { font-size: 13.5px; line-height: 1.95; color: var(--ink-2); margin: 0 0 8px; }
 .en-note a { color: var(--amber); }
 .ml-amber { color: var(--amber); }
+
+/* ══ 見出し（写真に重ねない） ══ */
+.masthead { padding-top: 96px; padding-bottom: 64px; }
+.masthead h1 { font-family: var(--fm); font-size: clamp(28px, 4vw, 46px); font-weight: 600; line-height: 1.5; color: var(--ink); margin: 0 0 22px; letter-spacing: .01em; }
+.masthead-lead { font-size: clamp(15px, 1.3vw, 17px); line-height: 2.1; color: var(--ink-2); max-width: 34em; margin: 0; }
+.masthead-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; }
+.masthead-tags li { font-size: 12px; letter-spacing: .06em; color: var(--amber); border: 1px solid rgba(198,161,91,.5); border-radius: 999px; padding: 7px 15px; }
+@media (max-width: 560px) { .masthead { padding-top: 64px; padding-bottom: 44px; } }
+
+/* ══ 写真帯（文字を載せない） ══ */
+.band { margin: 0; }
+.band img { display: block; width: 100%; height: clamp(240px, 38vw, 460px); object-fit: cover; object-position: center 55%; background: #EDE8E0; }
+.band figcaption { max-width: 1080px; margin: 0 auto; padding: 12px 32px 0; font-size: 12.5px; line-height: 1.8; color: var(--ink-3); }

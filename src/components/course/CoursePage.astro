@@ -229,6 +229,29 @@ const L = {
     </section>
   );
 
+  if (b.type === 'masthead') return (
+    /* 写真の上に文字を重ねない見出し。
+       /alllesson で暗幕ごしの白文字が読みにくいという指摘を受けて追加した。
+       写真は band ブロックで独立して見せる。 */
+    <section class={`sec ${cls} masthead`}>
+      <div class="inner">
+        {b.eyebrow && <span class="eyebrow">{b.eyebrow}</span>}
+        <h1 set:html={br(b.title)} />
+        {b.lead && <p class="masthead-lead">{b.lead}</p>}
+        {b.badges && <ul class="masthead-tags">{b.badges.map((x: string) => <li>{x}</li>)}</ul>}
+      </div>
+    </section>
+  );
+
+  if (b.type === 'band') return (
+    /* 文字を載せない写真帯。読みやすさを保ったまま画で見せるためのもの。 */
+    <figure class="band">
+      <img src={b.image} alt={b.imageAlt} width={b.imageW ?? 1800} height={b.imageH ?? 1200}
+        loading={b.eager ? undefined : 'lazy'} fetchpriority={b.eager ? 'high' : undefined} decoding="async" />
+      {b.caption && <figcaption>{b.caption}</figcaption>}
+    </figure>
+  );
+
   if (b.type === 'toc') return (
     <nav class={`sec ${cls} toc-sec`} aria-label={b.title ?? '目次'}>
       <div class="inner inner--narrow">
