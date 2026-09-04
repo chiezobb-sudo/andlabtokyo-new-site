@@ -10,6 +10,7 @@
  */
 import Layout from '../layouts/Layout.astro';
 import FormGate from '../components/FormGate.astro';
+import ApplyFields from '../components/ApplyFields.astro';
 import d from '../data/courses/rawfood-meister.json';
 
 const site = 'https://www.andlabtokyo.com';
@@ -396,33 +397,18 @@ const jsonLd = {
       </header>
       <FormGate
         subject="【ローフードマイスター養成講座】お申し込み・ご相談"
-        mailBody={'お名前：\nご希望の級（2級／準1級／1級／セット）：\nご希望の受講形式（対面／オンライン）：\n希望日程（第一〜第三希望）：\nご質問：\n'}
         class="form-grid"
       >
-        <label>お名前<span>*</span><input type="text" name="name" required /></label>
-        <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
-        <label>お電話番号<input type="tel" name="tel" /></label>
-        <label>ご希望講座<span>*</span>
-          <select name="course" required>
-            <option value="">選択してください</option>
-            <option>ローフードマイスター2級</option>
-            <option>ローフードマイスター準1級</option>
-            <option>ローフードマイスター1級</option>
-            <option>3ステップ 全コースセット</option>
-            <option>2級＋準1級 2ステップ</option>
-            <option>まだ決めていない／相談したい</option>
-          </select>
-        </label>
-        <label>ご希望の受講形式
-          <select name="mode">
-            <option value="">選択してください</option>
-            <option>対面（東京・表参道）</option>
-            <option>オンライン</option>
-          </select>
-        </label>
-        <label>レッスン希望日<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
-        <label class="full">ご質問、ご要望などお気軽に<textarea name="message" rows="5"></textarea></label>
-        <button type="submit" class="btn btn--solid">送信する</button>
+        <ApplyFields
+          courses={[
+          'ローフードマイスター2級',
+          'ローフードマイスター準1級',
+          'ローフードマイスター1級',
+          '3ステップ 全コースセット',
+          '2級＋準1級 2ステップ',
+          ]}
+          extraDates={true}
+        />
       </FormGate>
     </div>
   </section>

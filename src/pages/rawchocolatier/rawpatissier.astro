@@ -7,6 +7,7 @@
  */
 import Layout from '../../layouts/Layout.astro';
 import FormGate from '../../components/FormGate.astro';
+import ApplyFields from '../../components/ApplyFields.astro';
 import d from '../../data/courses/rawpatissier.json';
 
 const site = 'https://www.andlabtokyo.com';
@@ -672,33 +673,18 @@ const allLevels = [...d.levels];
       </header>
       <FormGate
         subject="【ローパティシエ®養成講座】お申し込み・ご相談"
-        mailBody={'お名前：\nご希望コース（初級／中級／上級／プロ養成）：\nご希望の受講形式（対面／オンライン）：\n希望日程（第一〜第三希望）：\nご質問：\n'}
         class="form-grid"
       >
-        <label>お名前<span>*</span><input type="text" name="name" required /></label>
-        <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
-        <label>お電話番号<input type="tel" name="tel" /></label>
-        <label>ご希望コース<span>*</span>
-          <select name="course" required>
-            <option value="">選択してください</option>
-            <option>BASIC・初級講座</option>
-            <option>INTERMEDIATE・中級講座</option>
-            <option>ADVANCE・上級講座</option>
-            <option>PRO・ローパティシエ®養成講座</option>
-            <option>全課程</option>
-            <option>まだ決めていない／相談したい</option>
-          </select>
-        </label>
-        <label>ご希望の受講形式
-          <select name="mode">
-            <option value="">選択してください</option>
-            <option>対面（東京・表参道）</option>
-            <option>オンライン</option>
-          </select>
-        </label>
-        <label>希望日程（第一希望）<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
-        <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
-        <button type="submit" class="btn btn--solid">送信する</button>
+        <ApplyFields
+          courses={[
+          'BASIC・初級講座',
+          'INTERMEDIATE・中級講座',
+          'ADVANCE・上級講座',
+          'PRO・ローパティシエ®養成講座',
+          '全課程',
+          ]}
+          extraDates={true}
+        />
       </FormGate>
     </div>
   </section>

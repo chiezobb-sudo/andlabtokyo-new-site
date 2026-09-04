@@ -10,6 +10,7 @@
  */
 import Layout from '../layouts/Layout.astro';
 import FormGate from '../components/FormGate.astro';
+import ApplyFields from '../components/ApplyFields.astro';
 import d from '../data/courses/fermentation.json';
 
 const site = 'https://www.andlabtokyo.com';
@@ -425,33 +426,18 @@ const jsonLd = {
       </header>
       <FormGate
         subject="【発酵プランナー養成講座】お申し込み・ご相談"
-        mailBody={'お名前：\nご希望のステップ（基礎／中級／上級／師範／短期集中）：\nご希望の受講形式（対面／オンライン）：\n希望日程：\nご質問：\n'}
         class="form-grid"
       >
-        <label>お名前<span>*</span><input type="text" name="name" required /></label>
-        <label>メールアドレス<span>*</span><input type="email" name="email" required /></label>
-        <label>お電話番号<input type="tel" name="tel" /></label>
-        <label>ご希望のステップ<span>*</span>
-          <select name="course" required>
-            <option value="">選択してください</option>
-            <option>Step 1｜基礎（ベーシック）</option>
-            <option>Step 2｜中級（アドバンス）</option>
-            <option>Step 3｜上級（マスター）</option>
-            <option>Step 4｜発酵創家®（師範）</option>
-            <option>短期集中（基礎＋中級・3日間）</option>
-            <option>まだ決めていない／相談したい</option>
-          </select>
-        </label>
-        <label>ご希望の受講形式
-          <select name="mode">
-            <option value="">選択してください</option>
-            <option>対面（東京・表参道）</option>
-            <option>オンライン</option>
-          </select>
-        </label>
-        <label>希望日程<input type="text" name="date1" placeholder="例：10月中旬の平日" /></label>
-        <label class="full">お問い合わせ・ご質問<textarea name="message" rows="5"></textarea></label>
-        <button type="submit" class="btn btn--solid">送信する</button>
+        <ApplyFields
+          courses={[
+          'Step 1｜基礎（ベーシック）',
+          'Step 2｜中級（アドバンス）',
+          'Step 3｜上級（マスター）',
+          'Step 4｜発酵創家®（師範）',
+          '短期集中（基礎＋中級・3日間）',
+          ]}
+          extraDates={true}
+        />
       </FormGate>
     </div>
   </section>
