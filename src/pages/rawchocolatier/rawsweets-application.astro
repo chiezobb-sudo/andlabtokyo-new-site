@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import MailLink from '../../components/MailLink.astro';
 import FormGate from '../../components/FormGate.astro';
 ---
 <Layout
@@ -160,7 +161,7 @@ select { appearance: none; cursor: pointer; }
 
       <button type="submit" class="submit-btn">送信する</button>
 
-      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信がない場合は <a href="mailto:info@andlabtokyo.com" style="color:var(--amber)">info@andlabtokyo.com</a> へ直接ご連絡ください。</p>
+      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信がない場合は <MailLink class="ml-amber" /> へ直接ご連絡ください。</p>
     </FormGate>
   </div>
 </section>

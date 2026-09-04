@@ -1,0 +1,27 @@
+---
+/**
+ * メールアドレスのリンク。
+ *
+ * アドレスをビルド後のHTMLに文字列として残さない（収集ボット対策）。
+ * ユーザー名とドメインを別々の data 属性で渡し、表示時にJSで組み立てる。
+ * JSが無効な環境では「メールでのお問い合わせ」というリンク文言のまま、
+ * クリックしても何も起きない代わりに、フォームへの導線を併記しておくこと。
+ */
+import { CONTACT_EMAIL } from '../lib/forms';
+const [u, d] = CONTACT_EMAIL.split('@');
+interface Props { subject?: string; class?: string }
+const { subject, class: className } = Astro.props;
+---
+<a class:list={['ml-mail', className]} href="#" data-u={u} data-d={d} data-s={subject}>メールアドレスを表示</a>
+<script is:inline>
+  (function () {
+    var at = String.fromCharCode(64);
+    document.querySelectorAll('.ml-mail').forEach(function (a) {
+      if (a.dataset.done) return;
+      a.dataset.done = '1';
+      var addr = a.dataset.u + at + a.dataset.d;
+      a.textContent = addr;
+      a.setAttribute('href', 'mailto:' + addr + (a.dataset.s ? '?subject=' + encodeURIComponent(a.dataset.s) : ''));
+    });
+  })();
+</script>

@@ -276,3 +276,4 @@ a.route:hover { border-color: var(--amber-l); transform: translateY(-3px); }
 .en-note h3 { font-family: var(--fh); font-size: 16px; letter-spacing: .06em; color: var(--ink); margin: 0 0 10px; }
 .en-note p { font-size: 13.5px; line-height: 1.95; color: var(--ink-2); margin: 0 0 8px; }
 .en-note a { color: var(--amber); }
+.ml-amber { color: var(--amber); }

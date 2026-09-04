@@ -16,7 +16,10 @@
  *     ...入力欄と送信ボタン...
  *   </FormGate>
  */
-import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL, mailtoFor } from '../lib/forms';
+import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL } from '../lib/forms';
+
+// アドレスをビルド後のHTMLに文字列として残さないため、@ の前後で分けて渡す。
+const [MAIL_USER, MAIL_DOMAIN] = CONTACT_EMAIL.split('@');
 
 interface Props {
   /** 通知メールの件名。どのフォームから来たか判別できる文言にする */
@@ -47,10 +50,28 @@ const {
   <div class="formgate-fallback">
     <p class="formgate-fallback__note">{fallbackNote}</p>
     <p class="formgate-fallback__mail">
-      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      <a class="fg-mail" href="#" data-u={MAIL_USER} data-d={MAIL_DOMAIN}>メールアドレスを表示</a>
     </p>
-    <a class="formgate-fallback__btn" href={mailtoFor(subject, mailBody)}>メールで送る →</a>
+    <a class="formgate-fallback__btn fg-mail-btn" href="#" data-u={MAIL_USER} data-d={MAIL_DOMAIN} data-s={subject} data-b={mailBody}>メールで送る →</a>
   </div>
+  <script is:inline>
+    /* アドレスをHTMLに直書きしない（収集ボット対策）。
+       ユーザー・ドメインを分けて持たせ、表示時に組み立てる。 */
+    (function () {
+      var at = String.fromCharCode(64);
+      document.querySelectorAll('.fg-mail').forEach(function (a) {
+        var addr = a.dataset.u + at + a.dataset.d;
+        a.textContent = addr;
+        a.setAttribute('href', 'mailto:' + addr);
+      });
+      document.querySelectorAll('.fg-mail-btn').forEach(function (a) {
+        var addr = a.dataset.u + at + a.dataset.d;
+        var q = 'subject=' + encodeURIComponent(a.dataset.s || '');
+        if (a.dataset.b) q += '&body=' + encodeURIComponent(a.dataset.b);
+        a.setAttribute('href', 'mailto:' + addr + '?' + q);
+      });
+    })();
+  </script>
 )}
 
 <style>

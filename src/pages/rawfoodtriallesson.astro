@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL, mailtoFor } from '../lib/forms';
+import { FORM_ENDPOINT, isFormLive } from '../lib/forms';
+import MailLink from '../components/MailLink.astro';
 
 // Wix /rawfoodtriallesson の内容を移設（2026-08-30）。URLは Wix と同一に保つ。
 const HERO   = '/images/wix/857257_f821dd1a7785486482e0be1e150e8de8-6274dc97.png';
@@ -287,9 +288,9 @@ textarea { min-height: 118px; resize: vertical; }
           折り返し、日程のご相談とお支払い方法をご案内します。
         </p>
         <p style="margin-top:14px">
-          <a class="mail" href={CONTACT_EMAIL ? `mailto:${CONTACT_EMAIL}` : '#'}>{CONTACT_EMAIL}</a>
+          <MailLink class="mail" subject="【体験レッスン】お申し込み" />
         </p>
-        <a class="btn" href={mailtoFor('【体験レッスン】お申し込み', mailBody)}>メールでお申し込み →</a>
+        <MailLink class="btn" subject="【体験レッスン】お申し込み" />
       </div>
     )}
   </div>

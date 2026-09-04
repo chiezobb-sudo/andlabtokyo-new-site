@@ -18,6 +18,7 @@
  */
 import Layout from '../layouts/Layout.astro';
 import FormGate from '../components/FormGate.astro';
+import MailLink from '../components/MailLink.astro';
 import '../styles/course.css';
 
 const url = 'https://www.andlabtokyo.com/contact';
@@ -38,7 +39,6 @@ const jsonLd = {
       '@id': 'https://www.andlabtokyo.com/#org',
       name: '&LAB TOKYO',
       url: 'https://www.andlabtokyo.com',
-      email: 'info@andlabtokyo.com',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '神宮前',
@@ -167,7 +167,7 @@ const jsonLd = {
         <button type="submit" class="btn btn--solid">送信する</button>
       </FormGate>
 
-      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認のうえ、<a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a> まで直接ご連絡ください。</p>
+      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認のうえ、<MailLink /> まで直接ご連絡ください。</p>
     </div>
   </section>
 
@@ -180,7 +180,7 @@ const jsonLd = {
       <div class="en-note">
         <h3>You can write to us in English.</h3>
         <p>Please use the form above — it reaches us the same way. Tell us your preferred dates and the number of guests, and we will reply within three business days.</p>
-        <p>Our koji fermentation experience runs in English: <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>. You can also email us directly at <a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a>.</p>
+        <p>Our koji fermentation experience runs in English: <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>. You can also email us directly at <MailLink />.</p>
       </div>
     </div>
   </section>
@@ -198,7 +198,7 @@ const jsonLd = {
           <tr><th scope="row">クラス</th><td>少人数制</td></tr>
           <tr><th scope="row">対応言語</th><td>日本語／英語（UMAMI &amp; KOJI LAB は英語で開催）</td></tr>
           <tr><th scope="row">返信</th><td>3営業日以内</td></tr>
-          <tr><th scope="row">メール</th><td><a href="mailto:info@andlabtokyo.com">info@andlabtokyo.com</a></td></tr>
+          <tr><th scope="row">メール</th><td><MailLink /></td></tr>
         </tbody>
       </table>
     </div>
