@@ -188,6 +188,11 @@
   .form-grid > label { font-family: var(--fm); font-size: 15px; font-weight: 500; color: var(--ink); letter-spacing: .02em; }
   .form-grid > label > span:first-of-type { color: var(--amber); margin-left: 6px; font-size: 11px; letter-spacing: .1em; vertical-align: 2px; }
 
+  /* 英語ページ（麹体験など）は、和文用の Shippori Mincho ではなく
+     サイトの欧文セリフ（Cormorant Garamond）に。小さく見えるので少し大きく。 */
+  :root:lang(en) .form-grid > label,
+  html[lang="en"] .form-grid > label { font-family: var(--fh); font-size: 17px; letter-spacing: .03em; }
+
   /* 入力欄：下線だけ */
   .form-grid input[type="text"],
   .form-grid input[type="email"],
