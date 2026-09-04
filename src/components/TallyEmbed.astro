@@ -37,7 +37,30 @@ const src = `https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBac
     </p>
   </noscript>
 </div>
-<script is:inline src="https://tally.so/widgets/embed.js"></script>
+<script is:inline>
+  /* Tally 公式の初期化。embed.js を読むだけでは data-tally-src が src に移らず、
+     iframe が空のままになる（実際に空で出た）。読み込み後に loadEmbeds を呼ぶ。
+     スクリプトが落ちた場合も、data-tally-src を直接 src に入れて表示させる。 */
+  (function () {
+    var d = document,
+        w = 'https://tally.so/widgets/embed.js',
+        v = function () {
+          if (typeof Tally !== 'undefined') { Tally.loadEmbeds(); return; }
+          d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(function (e) {
+            e.src = e.dataset.tallySrc;
+          });
+        };
+    if (typeof Tally !== 'undefined') { v(); return; }
+    if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement('script');
+      s.src = w; s.onload = v; s.onerror = v;
+      d.body.appendChild(s);
+    } else {
+      d.addEventListener('DOMContentLoaded', v);
+      window.addEventListener('load', v);
+    }
+  })();
+</script>
 
 <style>
   .tally-wrap { background: #fff; border: 1px solid rgba(198,161,91,.28); border-radius: 4px; overflow: hidden; }
