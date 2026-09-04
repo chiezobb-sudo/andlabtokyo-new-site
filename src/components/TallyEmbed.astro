@@ -1,0 +1,47 @@
+---
+/**
+ * Tally フォームの埋め込み。
+ *
+ * ページ内にそのまま入力欄が出る形（別タブに飛ばさない）。
+ * 高さは dynamicHeight で中身に合わせて伸びる。
+ *
+ * 埋め込みスクリプトは Tally が提供しているものをそのまま読む。
+ * 1ページに複数置いても embed.js は1回だけ読み込まれる（is:inline + 同一src）。
+ */
+interface Props {
+  /** tally.so/r/XXXXXX の XXXXXX */
+  id: string;
+  /** iframe のタイトル（スクリーンリーダー用） */
+  title?: string;
+  /** 読み込み前に確保する高さ */
+  minHeight?: number;
+}
+const { id, title = 'お申し込みフォーム', minHeight = 520 } = Astro.props;
+const src = `https://tally.so/embed/${id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+---
+<div class="tally-wrap">
+  <iframe
+    data-tally-src={src}
+    loading="lazy"
+    width="100%"
+    height={minHeight}
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title={title}
+  ></iframe>
+  <noscript>
+    <p class="tally-noscript">
+      フォームの表示には JavaScript が必要です。
+      <a href={`https://tally.so/r/${id}`} target="_blank" rel="noopener">別ページでフォームを開く →</a>
+    </p>
+  </noscript>
+</div>
+<script is:inline src="https://tally.so/widgets/embed.js"></script>
+
+<style>
+  .tally-wrap { background: #fff; border: 1px solid rgba(198,161,91,.28); border-radius: 4px; overflow: hidden; }
+  .tally-wrap iframe { display: block; width: 100%; border: 0; }
+  .tally-noscript { padding: 24px; font-size: 14px; line-height: 1.9; color: #3D3934; }
+  .tally-noscript a { color: #A8794A; }
+</style>

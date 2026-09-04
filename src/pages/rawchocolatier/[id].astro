@@ -50,6 +50,7 @@ const galleryImages = [
   { src: "/choco-real/06-junior-plating.jpg",      caption: "ジュニア講座で学ぶ、お店レベルのプレーティング" },
 ];
 import FormGate from '../../components/FormGate.astro';
+import { TALLY_BY_COURSE } from '../../lib/tally';
 ---
 
 <Layout
@@ -769,6 +770,7 @@ import FormGate from '../../components/FormGate.astro';
     </header>
     <FormGate
       subject={`【講座申込】${c.title}`}
+      tally={TALLY_BY_COURSE[c.id]}
       class="form-sec__form"
       name={`course-apply-${c.id}`}
     >

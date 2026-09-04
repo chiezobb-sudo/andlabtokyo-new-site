@@ -17,6 +17,7 @@
  *   </FormGate>
  */
 import { FORM_ENDPOINT, isFormLive, CONTACT_EMAIL } from '../lib/forms';
+import TallyEmbed from './TallyEmbed.astro';
 
 // アドレスをビルド後のHTMLに文字列として残さないため、@ の前後で分けて渡す。
 const [MAIL_USER, MAIL_DOMAIN] = CONTACT_EMAIL.split('@');
@@ -24,6 +25,13 @@ const [MAIL_USER, MAIL_DOMAIN] = CONTACT_EMAIL.split('@');
 interface Props {
   /** 通知メールの件名。どのフォームから来たか判別できる文言にする */
   subject: string;
+  /**
+   * Tally のフォームID（tally.so/r/XXXXXX の XXXXXX）。
+   * 渡すと、そのページに Tally のフォームをそのまま埋め込む。
+   * Chie が Tally 側で項目を編集できるので、講座が変わっても開発を待たなくていい。
+   * src/lib/tally.ts の TALLY から渡すこと。
+   */
+  tally?: string;
   /** フォーム未設定時、メール本文に差し込むひな形 */
   mailBody?: string;
   /** 未設定時に出す案内文 */
@@ -34,6 +42,7 @@ interface Props {
 
 const {
   subject,
+  tally,
   mailBody = '',
   fallbackNote = 'ご希望の内容をお書き添えのうえ、下記アドレスまでご連絡ください。折り返しご案内いたします。',
   class: className,
@@ -41,7 +50,11 @@ const {
 } = Astro.props;
 ---
 
-{isFormLive ? (
+{tally ? (
+  /* Tally のフォームがあるページは、それをそのまま埋め込む（最優先）。
+     入力欄がページ内に出るので、メールに飛ばさずその場で送れる。 */
+  <TallyEmbed id={tally} title={subject} />
+) : isFormLive ? (
   <form action={FORM_ENDPOINT} method="POST" class={className} name={name}>
     <input type="hidden" name="_subject" value={subject} />
     <slot />
