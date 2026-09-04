@@ -748,6 +748,65 @@ const fullTitle = hasBrand ? title : `${title} | &LAB TOKYO`;
     <!-- Benchmark Email: newsletter popup -->
     <script async src="https://forms.us.benchmarksend.com/assets/embed.js"></script>
     <div data-bme-form-id="YlZ5_TnJYTz5pSMoZDpzU"></div>
+    <style is:global>
+      /* ── ニュースレターのポップアップを目立たなくする ──
+         既定では画面全体を黒い幕で覆い、520×635 の箱を中央に出す。
+         トップの見出しやフォームの入力中にかぶさって邪魔になるため、
+         右下の小さなカードに変えている（Chie 指示 2026-09-05）。
+
+         中身は Benchmark 側の iframe なので内部は触れない。
+         そのため幅を縮めるのではなく transform で全体を縮小している
+         （幅だけ縮めると中の文字が折り返して崩れる）。
+
+         Benchmark 側でクラス名が変わると効かなくなる。
+         その場合はポップアップが元の全画面表示に戻るだけで、
+         サイトが壊れることはない。 */
+      .bme-popup-overlay {
+        background: transparent !important;
+        pointer-events: none !important;
+        backdrop-filter: none !important;
+      }
+      .bme-popup-wrapper {
+        pointer-events: auto !important;
+        inset: auto 22px 22px auto !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 343px !important;
+        height: 419px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        border: 1px solid rgba(198, 161, 91, 0.4) !important;
+        box-shadow: 0 12px 44px rgba(34, 28, 23, 0.15) !important;
+        background: rgba(250, 249, 246, 0.82) !important;
+        backdrop-filter: blur(12px) !important;
+        opacity: 0.96 !important;
+        transition: opacity 0.25s;
+      }
+      .bme-popup-wrapper:hover { opacity: 1 !important; }
+      .bme-popup-content { width: 343px !important; height: 419px !important; overflow: hidden !important; }
+      .bme-popup-content iframe {
+        width: 520px !important;
+        height: 635px !important;
+        transform: scale(0.66) !important;
+        transform-origin: top left !important;
+        border: 0 !important;
+      }
+      .bme-popup-close {
+        width: 26px !important;
+        height: 26px !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        border-radius: 50% !important;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14) !important;
+        z-index: 5 !important;
+      }
+      /* 画面の狭い端末では、はみ出さないようさらに小さく */
+      @media (max-width: 420px) {
+        .bme-popup-wrapper { inset: auto 12px 12px auto !important; width: 291px !important; height: 356px !important; }
+        .bme-popup-content { width: 291px !important; height: 356px !important; }
+        .bme-popup-content iframe { transform: scale(0.56) !important; }
+      }
+    </style>
 
     <!-- [data-reveal] IntersectionObserver（knowledge セクション用） -->
     <script is:inline>
