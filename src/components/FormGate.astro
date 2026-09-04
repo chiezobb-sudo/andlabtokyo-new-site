@@ -55,10 +55,66 @@ const {
      入力欄がページ内に出るので、メールに飛ばさずその場で送れる。 */
   <TallyEmbed id={tally} title={subject} />
 ) : isFormLive ? (
-  <form action={FORM_ENDPOINT} method="POST" class={className} name={name}>
+  <form action={FORM_ENDPOINT} method="POST" class={className} name={name} data-formgate>
     <input type="hidden" name="_subject" value={subject} />
+    {/* JSが無効なときの保険。Formspark既定の完了ページに飛ぶが、
+        送信内容がURLに載らないよう _append を false にしておく。 */}
+    <input type="hidden" name="_append" value="false" />
+    {/* ハニーポット：人には見えない囮の欄。ボットだけが埋めるので、
+        値が入っていた送信は Formspark 側で破棄される（件数も減らない）。 */}
+    <div class="fg-hp" aria-hidden="true">
+      <label>この欄は入力しないでください
+        <input type="text" name="_honeypot" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
     <slot />
   </form>
+  <div class="fg-done" hidden>
+    <p class="fg-done__title"></p>
+    <p class="fg-done__body"></p>
+  </div>
+  <script is:inline>
+    /* 送信はページ内で完結させる（別サイトの完了ページに飛ばさない）。
+       JSが動かない環境では通常のPOSTにフォールバックする。 */
+    (function () {
+      document.querySelectorAll('form[data-formgate]').forEach(function (f) {
+        if (f.dataset.bound) return;
+        f.dataset.bound = '1';
+        var done = f.parentElement.querySelector('.fg-done');
+        var btn = f.querySelector('button[type=submit], button:not([type])');
+        var en = (document.documentElement.lang || 'ja').indexOf('en') === 0;
+        f.addEventListener('submit', function (e) {
+          if (!f.checkValidity()) return;      // ブラウザ標準の必須チェックに任せる
+          e.preventDefault();
+          var label = btn ? btn.textContent : '';
+          if (btn) { btn.disabled = true; btn.textContent = en ? 'Sending…' : '送信中…'; }
+          fetch(f.action, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(f).entries())),
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error(r.status);
+              f.hidden = true;
+              done.hidden = false;
+              done.querySelector('.fg-done__title').textContent = en
+                ? 'Thank you — your message has been sent.'
+                : '送信しました。ありがとうございます。';
+              done.querySelector('.fg-done__body').textContent = en
+                ? 'We will reply within three business days. If you do not hear from us, please check your spam folder.'
+                : '3営業日以内にご返信いたします。返信が届かない場合は、迷惑メールフォルダをご確認ください。';
+              done.scrollIntoView({ block: 'center' });
+            })
+            .catch(function () {
+              if (btn) { btn.disabled = false; btn.textContent = label; }
+              alert(en
+                ? 'Sorry, the message could not be sent. Please try again, or email us directly.'
+                : '送信できませんでした。お手数ですが、時間をおいて再度お試しいただくか、メールでご連絡ください。');
+            });
+        });
+      });
+    })();
+  </script>
 ) : (
   <div class="formgate-fallback">
     <p class="formgate-fallback__note">{fallbackNote}</p>
@@ -88,6 +144,14 @@ const {
 )}
 
 <style>
+  /* ハニーポット：画面にも読み上げにも出さない。display:none だと
+     一部のボットに見抜かれるため、位置を飛ばして隠す。 */
+  .fg-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .fg-done { border: 1px solid rgba(198, 161, 91, 0.5); background: rgba(198, 161, 91, 0.07); padding: 32px 30px; border-radius: 4px; }
+  .fg-done__title { font-family: 'Shippori Mincho', serif; font-size: 18px; color: #221F1C; margin: 0 0 10px; }
+  .fg-done__body { font-size: 14px; line-height: 1.95; color: #3D3934; margin: 0; }
+
   .formgate-fallback {
     border: 1px solid rgba(198, 161, 91, 0.42);
     background: rgba(198, 161, 91, 0.06);
