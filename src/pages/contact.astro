@@ -18,7 +18,6 @@
  */
 import Layout from '../layouts/Layout.astro';
 import FormGate from '../components/FormGate.astro';
-import MailLink from '../components/MailLink.astro';
 import '../styles/course.css';
 
 const url = 'https://www.andlabtokyo.com/contact';
@@ -62,12 +61,12 @@ const jsonLd = {
   title="お問い合わせ｜ローフード・発酵・ローチョコレート講座 | &LAB TOKYO"
   description="&LAB TOKYO へのお問い合わせ窓口です。講座のご相談、体験レッスンのご予約、企業コラボ・商品監修、取材・メディア、書籍に関するご相談はこちらから。東京・渋谷（神宮前）。3営業日以内にご返信します。"
   canonical={url}
-  ogImage="/images/koji/guests.jpg"
+  ogImage="/images/contact/hero.jpg"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
   <section class="hero hero--short">
-    <img src="/images/koji/guests.jpg" alt="&LAB TOKYO のキッチンでレッスンを受ける様子" width="1200" height="845" fetchpriority="high" />
+    <img src="/images/contact/hero.jpg" alt="エディブルフラワーを添えたローフードのサラダ" width="1800" height="719" fetchpriority="high" />
     <div class="hero-veil"></div>
     <div class="hero-body">
       <span class="eyebrow eyebrow--light">CONTACT</span>
@@ -131,7 +130,7 @@ const jsonLd = {
           </select>
         </label>
 
-        <label>お名前<span>*</span><input type="text" name="name" required placeholder="安藤 千英" /></label>
+        <label>お名前<span>*</span><input type="text" name="name" required placeholder="山田 花子" /></label>
         <label>メールアドレス<span>*</span><input type="email" name="email" required placeholder="example@email.com" /></label>
         <label>お電話番号（任意）<input type="tel" name="tel" placeholder="090-0000-0000" /></label>
         <label>会社名・団体名（任意）<input type="text" name="company" /></label>
@@ -167,7 +166,7 @@ const jsonLd = {
         <button type="submit" class="btn btn--solid">送信する</button>
       </FormGate>
 
-      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認のうえ、<MailLink /> まで直接ご連絡ください。</p>
+      <p class="note">送信後、自動返信は行っていません。3営業日を過ぎても返信が届かない場合は、迷惑メールフォルダをご確認ください。届いていないことがありますので、そのときはお手数ですが、もう一度このフォームからお送りください。</p>
     </div>
   </section>
 
@@ -180,7 +179,7 @@ const jsonLd = {
       <div class="en-note">
         <h3>You can write to us in English.</h3>
         <p>Please use the form above — it reaches us the same way. Tell us your preferred dates and the number of guests, and we will reply within three business days.</p>
-        <p>Our koji fermentation experience runs in English: <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>. You can also email us directly at <MailLink />.</p>
+        <p>Our koji fermentation experience runs in English: <a href="/koji-fermentation-experience-tokyo">UMAMI &amp; KOJI LAB</a>.</p>
       </div>
     </div>
   </section>
@@ -198,7 +197,6 @@ const jsonLd = {
           <tr><th scope="row">クラス</th><td>少人数制</td></tr>
           <tr><th scope="row">対応言語</th><td>日本語／英語（UMAMI &amp; KOJI LAB は英語で開催）</td></tr>
           <tr><th scope="row">返信</th><td>3営業日以内</td></tr>
-          <tr><th scope="row">メール</th><td><MailLink /></td></tr>
         </tbody>
       </table>
     </div>

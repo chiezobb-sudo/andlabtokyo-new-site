@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import MailLink from '../../components/MailLink.astro';
 import FormGate from '../../components/FormGate.astro';
 ---
 <Layout
@@ -95,7 +94,7 @@ select { appearance: none; cursor: pointer; }
       <div class="row">
         <div class="form-group">
           <label>姓 <span class="req">*</span></label>
-          <input type="text" name="last_name" required placeholder="安藤" />
+          <input type="text" name="last_name" required placeholder="山田" />
         </div>
         <div class="form-group">
           <label>名 <span class="req">*</span></label>
@@ -161,7 +160,7 @@ select { appearance: none; cursor: pointer; }
 
       <button type="submit" class="submit-btn">送信する</button>
 
-      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信がない場合は <MailLink class="ml-amber" /> へ直接ご連絡ください。</p>
+      <p class="note">送信後、2営業日以内にご連絡いたします。<br>返信が届かない場合は、迷惑メールフォルダをご確認のうえ、もう一度このフォームからお送りください。</p>
     </FormGate>
   </div>
 </section>
