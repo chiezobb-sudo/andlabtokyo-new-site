@@ -745,6 +745,68 @@ const fullTitle = hasBrand ? title : `${title} | &LAB TOKYO`;
       });
     </script>
 
+    <!-- ── ヒーローの統一（2026-09-05・Chie 指示）──
+         「全ページのデザインがバラバラ」への対処。
+         36ページが各自の <style> で .hero を定義しており、
+         course.css を直しても上書きされて効かなかった。
+         1ページずつ直すと取りこぼすので、ここで全ページに効かせる。
+
+         基準はトップページのヒーロー：
+           ・写真は画面いっぱい（100svh）
+           ・見出しは明朝の細字、中央寄せ、大きすぎない
+           ・スマホでは高さを落として本文が覗くようにする
+
+         各ページの <style> は Astro のスコープ付きで詳細度が高いため、
+         ここでは !important で上書きしている。
+         将来、各ページの .hero 定義を消せば !important も外せる。 -->
+    <style is:global>
+      .hero:not(.hero--short) {
+        position: relative !important;
+        min-height: 100svh !important;
+        height: auto !important;
+        max-height: 900px !important;
+        display: flex !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        padding-top: 0 !important;
+      }
+      .hero:not(.hero--short) > img,
+      .hero:not(.hero--short) .hero-bg img {
+        position: absolute !important; inset: 0 !important;
+        width: 100% !important; height: 100% !important;
+        object-fit: cover !important;
+      }
+      .hero .hero-body,
+      .hero .hero-inner,
+      .hero .hero-content {
+        position: relative !important; z-index: 1 !important;
+        width: 100% !important; max-width: 900px !important;
+        margin: 0 auto !important; padding: 0 32px !important;
+        text-align: center !important;
+      }
+      .hero h1 {
+        font-family: 'Shippori Mincho', 'Noto Serif JP', serif !important;
+        font-size: clamp(26px, 3.4vw, 44px) !important;
+        font-weight: 300 !important;
+        line-height: 1.62 !important;
+        letter-spacing: .04em !important;
+        margin: 0 0 20px !important;
+      }
+      .hero .hero-lead,
+      .hero .hero-sub,
+      .hero p {
+        max-width: 34em !important;
+        margin-left: auto !important; margin-right: auto !important;
+      }
+      .hero ul, .hero .hero-steps, .hero .hero-tags {
+        justify-content: center !important;
+      }
+      @media (max-width: 560px) {
+        .hero:not(.hero--short) { min-height: 78svh !important; max-height: none !important; }
+        .hero .hero-body, .hero .hero-inner, .hero .hero-content { padding: 0 20px !important; }
+      }
+    </style>
+
     <!-- tawk.to: 訪問者のリアルタイム把握＋チャット
          いま誰がどのページを見ているか、どこから来たか、国・地域が分かる。
          Wix で見えていた「新規サイト訪問者」の通知に相当する。
