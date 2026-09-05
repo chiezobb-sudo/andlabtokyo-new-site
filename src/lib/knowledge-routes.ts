@@ -12,6 +12,7 @@ export const CUSTOM_ROUTES: Record<string, string> = {
   rawfood: '/rawfood',   // 3か月 10クリック / 1,746表示
   rawsweets: '/rawchocolatier/whatrawsweets',
   spirulina: '/spirulina',   // 3か月 215クリック / 24,676表示（表示回数はサイト最大）
+  fermentation: '/fermentedfood',   // ヘッダーの KNOWLEDGE メニューがこのURLを指している
 };
 
 /** ナレッジ記事の公開URLを返す */

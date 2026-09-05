@@ -1,5 +1,6 @@
 ---
 import type { KnowledgeAreaBlock, Knowledge } from '../../lib/microcms';
+import { knowledgeHref } from '../../lib/knowledge-routes';
 
 interface Props {
   block: KnowledgeAreaBlock;
@@ -37,7 +38,7 @@ function fmtDate(iso: string) {
     <div class="ka__grid">
 
       <!-- 特集記事（左の大カード） -->
-      <a href={`/knowledge/${featured.id}`} class="ka__featured" aria-label={featured.title}>
+      <a href={knowledgeHref(featured.id)} class="ka__featured" aria-label={featured.title}>
         <div class="ka__featured-img">
           <img
             src={`${featured.heroImage.url}?w=900&q=85`}
@@ -62,7 +63,7 @@ function fmtDate(iso: string) {
         <ul class="ka__list" role="list">
           {rest.map((a, i) => (
             <li class="ka__item">
-              <a href={`/knowledge/${a.id}`} class="ka__item-link">
+              <a href={knowledgeHref(a.id)} class="ka__item-link">
                 <div class="ka__item-img">
                   <img
                     src={`${a.heroImage.url}?w=400&q=80`}
