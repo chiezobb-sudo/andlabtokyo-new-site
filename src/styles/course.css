@@ -15,16 +15,17 @@
     --fh:'Cormorant Garamond',serif; --fm:'Shippori Mincho','Noto Serif JP',serif;
   }
 
-  .hero { position: relative; height: 74vh; min-height: 560px; max-height: 780px; display: flex; align-items: flex-end; overflow: hidden; }
+  /* トップページのヒーローと大きさ・字面を揃えている（Chie 指示 2026-09-05）。
+     文字は中央寄せ、サイズは控えめに。スマホでは高さを落として本文が覗くようにする。 */
+  .hero { position: relative; min-height: 100svh; max-height: 900px; display: flex; align-items: center; overflow: hidden; }
   .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 46%; }
   .hero-veil { position: absolute; inset: 0; background:
-      linear-gradient(to top, rgba(28,22,18,.80) 0%, rgba(28,22,18,.48) 34%, rgba(28,22,18,.08) 70%, transparent 100%),
-      linear-gradient(to right, rgba(28,22,18,.44) 0%, rgba(28,22,18,.12) 52%, transparent 78%); }
-  .hero-body { position: relative; z-index: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 32px 56px; }
-  .hero h1 { font-family: var(--fm); font-size: clamp(30px, 4.6vw, 56px); font-weight: 600; line-height: 1.4; color: #fff; margin: 0 0 18px; text-shadow: 0 2px 18px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.35); }
+      linear-gradient(to bottom, rgba(28,22,18,.34) 0%, rgba(28,22,18,.46) 42%, rgba(28,22,18,.52) 100%); }
+  .hero-body { position: relative; z-index: 1; width: 100%; max-width: 900px; margin: 0 auto; padding: 0 32px; text-align: center; }
+  .hero h1 { font-family: var(--fm); font-size: clamp(26px, 3.4vw, 44px); font-weight: 300; line-height: 1.62; letter-spacing: .04em; color: #fff; margin: 0 0 20px; text-shadow: 0 2px 18px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.35); }
   .h1-sub { display: block; margin-top: 14px; font-family: 'Noto Sans JP', sans-serif; font-size: clamp(13px, 1.2vw, 16px); font-weight: 400; letter-spacing: .08em; color: rgba(255,255,255,.94); }
-  .hero-lead { font-size: clamp(14px, 1.15vw, 16px); line-height: 2; color: rgba(255,255,255,.94); max-width: 38em; margin: 0 0 22px; text-shadow: 0 1px 10px rgba(0,0,0,.65); }
-  .hero-steps { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; }
+  .hero-lead { font-size: clamp(13.5px, 1.05vw, 15.5px); line-height: 2.05; color: rgba(255,255,255,.94); max-width: 34em; margin: 0 auto 24px; text-shadow: 0 1px 10px rgba(0,0,0,.65); }
+  .hero-steps { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 28px; padding: 0; }
   .hero-steps li { font-size: 12px; letter-spacing: .06em; color: #fff; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 7px 15px; backdrop-filter: blur(4px); }
 
   .facts { background: var(--sumi); padding: 0 32px; }
@@ -249,8 +250,8 @@
   }
   @media (max-width: 560px) {
     .sec { padding: 64px 20px; }
-    .hero { height: auto; min-height: 0; max-height: none; padding-top: 66vw; }
-    .hero-body { padding: 0 20px 40px; }
+    .hero { min-height: 78svh; max-height: none; padding-top: 0; }
+    .hero-body { padding: 0 20px; }
     .cards-3, .steps-3, .voices, .facts-grid, .stats, .gallery--2 { grid-template-columns: 1fr; }
     .gallery--3, .gallery--4, .gallery--5, .gallery--6 { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .fact { border-left: 0; border-top: 1px solid rgba(255,255,255,.13); }
@@ -311,8 +312,8 @@
 .toc span { display: block; padding: 0 0 14px 42px; margin-top: -6px; font-size: 13px; line-height: 1.75; color: var(--ink-3); }
 
 /* ══ 短いヒーロー（問い合わせなど、本題を早く見せたいページ） ══ */
-.hero--short { height: 42vh; min-height: 300px; max-height: 420px; }
-@media (max-width: 560px) { .hero--short { height: auto; min-height: 0; max-height: none; padding-top: 52vw; } }
+.hero--short { min-height: 46svh; max-height: 460px; }
+@media (max-width: 560px) { .hero--short { min-height: 42svh; max-height: none; } }
 
 /* ══ 問い合わせの入口カード ══ */
 .routes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
@@ -354,3 +355,26 @@ a.route:hover { border-color: var(--amber-l); transform: translateY(-3px); }
 .band { margin: 0; }
 .band img { display: block; width: 100%; height: clamp(240px, 38vw, 460px); object-fit: cover; object-position: center 55%; background: #EDE8E0; }
 .band figcaption { max-width: 1080px; margin: 0 auto; padding: 12px 32px 0; font-size: 12.5px; line-height: 1.8; color: var(--ink-3); }
+
+/* ══ 追従する申し込みボタン ══
+   講座ページはLP構成で縦に長いため、読んでいる途中どこからでも
+   申し込みフォームへ行けるようにする（Chie 指示 2026-09-05）。
+   ヒーローを抜けてから出る。フォームまで来たら引っ込む。 */
+.cta-float {
+  position: fixed; right: 22px; bottom: 22px; z-index: 60;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 15px 26px; border-radius: 999px;
+  background: var(--amber); color: #fff; text-decoration: none;
+  font-size: 14.5px; font-weight: 700; letter-spacing: .04em;
+  box-shadow: 0 8px 28px rgba(34,28,23,.28);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .3s, transform .3s, visibility .3s;
+}
+.cta-float.is-on { opacity: 1; visibility: visible; transform: none; }
+.cta-float:hover { background: #96683F; }
+.cta-float::after { content: '→'; font-weight: 400; }
+/* チャットのウィジェットと重ならないよう、少し左に寄せる */
+@media (min-width: 561px) { .cta-float { right: 96px; } }
+@media (max-width: 560px) {
+  .cta-float { left: 16px; right: 16px; bottom: 16px; justify-content: center; padding: 15px 20px; }
+}

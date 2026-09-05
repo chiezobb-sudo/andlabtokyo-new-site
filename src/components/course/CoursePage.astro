@@ -539,6 +539,28 @@ const L = {
   return null;
 })}
 
+{/* 縦に長いページでも、どこからでも申し込みに行けるようにする追従ボタン。
+    フォーム（#entry）があるページにだけ出す。 */}
+{d.blocks.some((b: any) => b.type === 'cta') && (
+  <a href="#entry" class="cta-float" id="ctaFloat">{EN ? 'Reserve a seat' : 'お申し込み・ご相談'}</a>
+)}
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('ctaFloat');
+    if (!btn) return;
+    var form = document.getElementById('entry');
+    var hero = document.querySelector('.hero');
+    function update() {
+      var pastHero = hero ? window.scrollY > hero.offsetHeight * 0.7 : window.scrollY > 400;
+      var atForm = form && form.getBoundingClientRect().top < window.innerHeight * 0.9;
+      btn.classList.toggle('is-on', pastHero && !atForm);
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  })();
+</script>
+
 <style is:global>
   body { background: #FAF9F6; }
 </style>
